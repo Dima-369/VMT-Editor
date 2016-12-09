@@ -94,6 +94,7 @@
         <file alias="quoteParameters">Misc/quotes_required.txt</file>
         <file alias="defaultShaders">Misc/default_shader_settings.txt</file>
         <file alias="allowedShaderGroups">Misc/allowed_shadergroups.txt</file>
+        <file alias="vmt_parameters">Misc/vmt_parameters.txt</file>
     </qresource>
     <qresource prefix="/surfaces">
         <file alias="alienSwarm">Misc/surfaceprops_alienswarm.txt</file>
