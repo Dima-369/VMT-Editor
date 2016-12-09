@@ -1,0 +1,18 @@
+LightmappedGeneric?1?0
+UnlitGeneric?1?0
+VertexLitGeneric?1?0
+WorldVertexTransition?1?0?1
+Decal?1
+DecalModulate?1
+Patch?1
+Refract?1
+Sprite?1
+UnlitTwoTexture?1
+Water?1?10
+Cable?0
+Infected?0
+Modulate?0
+MonitorScreen?0
+Predator?0
+Shattered Glass?0
+SpriteCard?0

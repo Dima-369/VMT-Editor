@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ColorDialog</class>
+ <widget class="QDialog" name="ColorDialog">
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>324</width>
+    <height>170</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>324</width>
+    <height>173</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Choose Color</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="2">
+    <widget class="QSpinBox" name="spinBox_red">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="minimum">
+      <number>-512</number>
+     </property>
+     <property name="maximum">
+      <number>512</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Green</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>As Float:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>As Integer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QSpinBox" name="spinBox_green">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="minimum">
+      <number>-512</number>
+     </property>
+     <property name="maximum">
+      <number>512</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Blue</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="QSpinBox" name="spinBox_blue">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="minimum">
+      <number>-512</number>
+     </property>
+     <property name="maximum">
+      <number>512</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_red">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>4</number>
+     </property>
+     <property name="minimum">
+      <double>-2.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>2.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.005000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="3">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_green">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>4</number>
+     </property>
+     <property name="minimum">
+      <double>-2.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>2.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.005000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="4">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_blue">
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="decimals">
+      <number>4</number>
+     </property>
+     <property name="minimum">
+      <double>-2.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>2.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.005000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="5">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="5">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Red</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPlainTextEdit" name="plainTextEdit_colorPreview">
+     <property name="maximumSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="6">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string> Preview is capped at 0 and 255 per each color component</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>5</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>284</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_red</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_green</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_blue</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_red</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>99</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_green</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>178</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_blue</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>updateColorPreview()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_red</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_green</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>172</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_blue</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_red</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedDoubleSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>38</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_green</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedDoubleSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_blue</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>ColorDialog</receiver>
+   <slot>editedDoubleSpinBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateColorPreview()</slot>
+  <slot>editedSpinBox()</slot>
+  <slot>editedDoubleSpinBox()</slot>
+ </slots>
+</ui>

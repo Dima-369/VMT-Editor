@@ -1,0 +1,5 @@
+Ammo_Pickup
+Ice_Noslide
+Snow_Noslide
+Steam_Pipe
+Stim_Prop

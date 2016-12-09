@@ -1,0 +1,18 @@
+LightmappedGeneric
+{
+	$basetexture "park/floor/concrete_panel01"
+	$bumpmap "park/floor/concrete_panel01n"
+	$surfaceprop Concrete
+	
+	$normalmapalphaenvmapmask 1
+	
+	$phong 1
+	$phongexponent 5
+                $phongMaskContrastBrightness "[.5 8]"
+                $phongAmount "[.6 .5 .4 1.0]"
+	$envmaplightscale 0.5
+
+	$detail "park/floor/concrete_panel01_detail"
+	$detailscale 4
+	$detailblendfactor 0.5
+}

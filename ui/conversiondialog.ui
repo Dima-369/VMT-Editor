@@ -1,0 +1,3094 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConversionDialog</class>
+ <widget class="QDialog" name="ConversionDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>963</width>
+    <height>358</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>9</pointsize>
+    <kerning>true</kerning>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Convert Images to VTF</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+	font: 9pt &quot;Segoe UI&quot;;
+    color: silver;
+    background-color: #333;
+   
+}
+
+QWidget
+{
+	font: 9pt &quot;Segoe UI&quot;;
+    color: silver;
+}
+
+QGroupBox {
+    border: 1px solid #333;
+    margin-top: 6px;
+	padding: 4px;
+} 
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+	bottom: 1px;
+	padding-left: 5px;
+    padding-right: 5px;	
+}
+
+QWidget:disabled
+{
+  color: #505050;
+    
+}
+
+QLineEdit
+{
+    background-color: #222;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #555;
+        color: silver;
+}
+
+GLWidget {
+	border: 0px solid #555;
+}
+
+QLineEdit
+{
+    background-color: #222;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #222;
+    color: silver;
+}
+
+QLineEdit:disabled
+{
+    background-color: #333;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #333;
+    color: silver;
+}
+
+QScrollBar:horizontal
+{
+    height: 15px;
+    margin: 0px 15px 0px 15px;
+    border: 0px ;
+    background-color: #222;
+}
+
+QScrollBar::handle:horizontal
+{
+    background-color: #333;
+    min-width: 5px;
+   }
+
+QScrollBar::sub-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrollrt.png);
+    width: 15px;
+    height: 15px;
+	background-color:  #222;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrolllf.png);
+    height: 15px;
+    width: 15px;
+	background-color:  #222;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+}
+
+/* Vertical scroll bar, works fine */
+
+
+QScrollBar:vertical
+{
+    background-color:  #222;
+    width: 15px;
+    margin: 15px 0 15px 0;
+    border: 0px solid #222;
+    
+}
+
+QScrollBar::handle:vertical
+{
+    background-color: #333;
+    min-height: 5px;
+   
+}
+
+QScrollBar::sub-line:vertical
+{
+    border-image: url(:/qss_icons/rc/scrollup.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+   
+    border-image: url(:/qss_icons/rc/scrolldn.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+{
+
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}
+
+/* Different edits */
+
+QTextEdit
+{
+    background-color: #222;
+    color: silver;
+    border: 1px solid #222;
+}
+
+QPlainTextEdit
+{
+    background-color: #222;
+    color: silver;
+    border: 0px solid #555;
+	border-radius: 0px;
+}
+
+/* Suspicious stuff 
+
+QHeaderView::section
+{
+    background-color: #3A3939;
+    color: silver;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c;
+}
+
+/* */
+
+
+QCheckBox:disabled
+{
+    color: #505050;
+}
+
+QSizeGrip {
+    image: url(:/qss_icons/rc/sizegrip.png);
+    width: 12px;
+    height: 12px;
+}
+
+/* Separators and shit */
+
+QMainWindow::separator
+{
+    background-color: #333;
+    color: white;
+    padding-left: 4px;
+    spacing: 2px;
+    border: 0px dashed #3A3939;
+}
+
+QMainWindow::separator:hover
+{
+    color: white;
+    padding-left: 4px;
+    border: 0px solid #3A3939;
+    spacing: 2px;
+}
+
+/* Radio buttons */
+
+
+QRadioButton::indicator:checked, QRadioButton::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 5px;
+}
+
+
+
+QRadioButton::indicator:checked
+{
+    background-color: qradialgradient(
+    cx: 0.5, cy: 0.5,
+    fx: 0.5, fy: 0.5,
+    radius: 1.0,
+    stop: 0.2 #888,
+    stop: 0.3 #222
+    );
+}
+
+QRadioButton::indicator
+{
+    border-radius: 7px;
+    width: 9px;
+    height: 9px;
+}
+
+
+QRadioButton::indicator:hover, QCheckBox::indicator:hover
+{
+	background-color: #151515;
+    border: 1px solid #151515;
+}
+
+QCheckBox::indicator{
+    color: #b1b1b1;
+    background-color: #222;
+    border: 1px solid #222;
+    width: 11px;
+    height: 11px;
+}
+
+QRadioButton::indicator:checked:hover
+{
+    background-color: qradialgradient(
+    cx: 0.5, cy: 0.5,
+    fx: 0.5, fy: 0.5,
+    radius: 1.0,
+    stop: 0.2 #888,
+    stop: 0.3 #151515
+    );
+}
+
+QCheckBox::indicator:checked
+{
+    image:url(:/qss_icons/rc/checkbox.png);
+}
+
+QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
+{
+    border: 1px solid #222;
+}
+
+QFrame
+{
+    border-radius: 0px;
+}
+
+/* what is this 
+
+QStackedWidget
+{
+    border: none;
+}
+
+/* toolbar, do we use toolbar? */
+
+QToolBar {
+    border: 0px solid #393838;
+    background: 1px solid #333;
+    font-weight: bold;
+}
+
+QToolBar::handle:horizontal {
+    image: url(:/qss_icons/rc/Hmovetoolbar.png);
+}
+QToolBar::handle:vertical {
+    image: url(:/qss_icons/rc/Vmovetoolbar.png);
+}
+QToolBar::separator:horizontal {
+    image: url(:/qss_icons/rc/Hsepartoolbar.png);
+}
+QToolBar::separator:vertical {
+    image: url(:/qss_icons/rc/Vsepartoolbars.png);
+}
+
+/* Buttons, both are the same */
+
+
+QToolButton
+{
+    color: silver;
+    background-color: #333;
+    border-width: 1px;
+    border-color: #333;
+    border-style: solid;
+ 	padding: 2px;
+    height: 19px;
+}
+
+QToolButton:disabled
+{
+    background-color:#333;
+    border-width: 1px;
+    border-color: #333;
+    border-style: solid;
+  	padding: 2px;
+    color: #3A3939;
+}
+
+QToolButton:hover
+{
+    background-color:#222;
+	border-color: #222;
+}
+
+
+QPushButton
+{
+    color: silver;
+    background-color: #282828;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
+    padding-top: 5px;
+	min-width: 65px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QPushButton:disabled
+{
+    background-color:#505050;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+	min-width: 65px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QPushButton:focus
+{
+	background-color: #2e3844;
+	border-color: #2e3844;
+}
+
+QPushButton:hover
+{
+    background-color: #151515;
+	border-color: #151515
+}
+
+QComboBox
+{
+    selection-background-color: #222;
+    background-color: #222;
+    border-style: solid;
+    border: 1px solid #222;
+    border-radius: 0px;
+    padding: 2px;
+	padding-left: 4px;
+	outline: 0;
+}
+
+/* Make stuff light up on hover */
+
+
+QComboBox:hover,QAbstractSpinBox:hover,QLineEdit:hover,QAbstractView:hover,QTreeView:hover
+{
+	background-color: #151515;
+	border-color: #151515;
+    color: silver;
+}
+
+QTextEdit:hover
+{	
+	border-color: #151515;
+	background-color: #151515;
+}
+
+QComboBox:on
+{
+    background-color: #222;
+    padding-top: 2px;
+    padding-left: 4px;
+    selection-background-color: #4a4a4a;
+}
+
+/* No idea */
+
+
+QComboBox QAbstractItemView
+{
+    background-color: #222;
+    border-radius: 0px;
+    border: 1px solid #222;
+    selection-background-color: #2e3844;
+	outline: 0;
+	
+}
+
+QComboBox::drop-down
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+	padding: 4px;
+    border-left-width: 0px;
+    border-left-color: darkgray;
+    border-left-style: solid;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+QComboBox::down-arrow
+{
+    image: url(:/qss_icons/rc/gopen.png);
+}
+
+QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
+QComboBox::down-arrow:focus
+{
+    image: url(:/qss_icons/rc/gopen.png);
+}
+
+QPushButton:pressed
+{
+    background-color: #111;
+}
+
+/* Spinboxes */
+
+QAbstractSpinBox {
+    padding-top: 0px;
+    padding-bottom: 0px;
+	min-height:  21px;
+    border: 1px solid #222;
+    background-color: #222;
+    color: silver;
+}
+
+QAbstractSpinBox:up-button
+{
+    background-color: #333;
+	 border: 0px solid #333;  
+	width: 20px;
+	subcontrol-position: top right;
+}
+
+QAbstractSpinBox:down-button
+{
+    background-color: #333;
+    width: 20px;
+	 border: 0px solid #333;
+    subcontrol-position: bottom right;
+}
+
+QAbstractSpinBox:up-button:disabled
+{
+    background-color: #333;
+	 border: 0px solid #333;  
+	width: 20px;
+	subcontrol-position: top right;
+}
+
+QAbstractSpinBox:down-button:disabled
+{
+    background-color: #333;
+    width: 20px;
+	 border: 0px solid #333;
+    subcontrol-position: bottom right;
+}
+
+QAbstractSpinBox::up-arrow,QAbstractSpinBox::up-arrow:disabled,QAbstractSpinBox::up-arrow:off {
+    image: url(:/qss_icons/rc/up_arrow_disabled.png);
+    width: 20px;
+    height: 10px;
+}
+
+QAbstractSpinBox::up-arrow:hover
+{
+    background-color: #444;
+}
+
+
+QAbstractSpinBox::down-arrow,QAbstractSpinBox::down-arrow:disabled,QAbstractSpinBox::down-arrow:off
+{
+    image: url(:/qss_icons/rc/down_arrow_disabled.png);
+    width: 20px;
+    height: 10px;
+}
+QAbstractSpinBox::down-arrow:hover
+{
+    background-color: #444;
+}
+
+
+QLabel
+{
+    border: 0px solid black;
+}
+
+/* Dock widgets */
+
+QDockWidget
+{
+    color: silver;
+    titlebar-close-icon: url(:/qss_icons/rc/close.png);
+    titlebar-normal-icon: url(:/qss_icons/rc/undock.png);
+}
+
+QDockWidget::title
+{
+    border: 0px solid #404040;
+    border-bottom: #444;
+    text-align: left;
+    spacing: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 0px;
+    background-color: #404040;
+    background-image: none;
+    padding-left: 10px;
+}
+
+
+QDockWidget {
+    border: 0px solid lightgray;
+    titlebar-close-icon: url(:/qss_icons/rc/close.png);
+    titlebar-normal-icon: url(:/qss_icons/rc/undock.png);
+}
+
+QDockWidget::close-button, QDockWidget::float-button {
+    border: 0px solid transparent;
+    border-radius: 0px;
+    background: transparent;
+    icon-size: 10px;
+}
+
+QDockWidget::close-button:hover, QDockWidget::float-button:hover {
+    background: #3A3939;
+}
+
+QDockWidget::close-button:pressed, QDockWidget::float-button:pressed {
+    padding: 1px -1px -1px 1px;
+}
+
+/* We don't grow trees here 
+
+QTreeView, QListView, QTableView
+{
+    border: 1px solid #3A3939;
+    background-color: #201F1F;
+}
+
+QTreeView:branch:selected, QTreeView:branch:hover
+{
+    background: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+    image: url(:/qss_icons/rc/branch_closed.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings {
+    image: url(:/qss_icons/rc/branch_open.png);
+}
+
+QTreeView::branch:has-children:!has-siblings:closed:hover,
+QTreeView::branch:closed:has-children:has-siblings:hover {
+    image: url(:/qss_icons/rc/branch_closed-on.png);
+    }
+
+QTreeView::branch:open:has-children:!has-siblings:hover,
+QTreeView::branch:open:has-children:has-siblings:hover {
+    image: url(:/qss_icons/rc/branch_open-on.png);
+    }
+
+/* slider horizontal, works */
+
+
+QSlider::groove:horizontal {
+    border: 1px solid #222;
+    height: 5px;
+    background: #222;
+    margin: 2px 0;
+    
+}
+
+QSlider:selected, QTabBar:tab:selected {
+    border: 0px;
+     
+}
+
+QSlider::handle:horizontal {
+    background: #666;
+    border: 1px solid #666;
+    width: 5px;
+    height: 14px;
+    margin: -4px 0;
+  
+}
+
+QSlider::handle:horizontal:disabled {
+    background: #444;
+    border: 1px solid #444;
+    width: 6px;
+    height: 14px;
+    margin: -4px 0;
+  
+}
+
+
+/* Slider vertical, doesn't work */
+
+QSlider::groove:vertical {
+    border: 1px solid #3A3939;
+    width: 8px;
+    background: #201F1F;
+    margin: 0 0px;
+    border-radius: 0px;
+}
+
+QSlider::handle:vertical {
+    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.0 silver,
+      stop: 0.2 #a8a8a8, stop: 1 #727272);
+    border: 1px solid #3A3939;
+    width: 14px;
+    height: 14px;
+    margin: 0 -4px;
+    border-radius: 0px;
+}
+
+QScrollBar:horizontal
+{
+    height: 15px;
+    margin: 0px 15px 0px 15px;
+    border: 0px ;
+    background-color: #222;
+}
+
+QScrollBar::handle:horizontal
+{
+    background-color: #333;
+    min-width: 5px;
+   }
+
+QScrollBar::handle:horizontal:hover
+{
+    background-color: #303030;
+    min-width: 5px;
+   }
+
+
+QScrollBar::sub-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrollrt.png);
+    width: 15px;
+    height: 15px;
+	background-color:  #222;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrolllf.png);
+    height: 15px;
+    width: 15px;
+	background-color:  #222;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+}
+
+/* Vertical scroll bar, works fine */
+
+
+QScrollBar:vertical
+{
+    background-color:  #222;
+    width: 15px;
+    margin: 15px 0 15px 0;
+    border: 0px solid #222;
+    
+}
+
+QScrollBar::handle:vertical
+{
+    background-color: #333;
+    min-height: 5px;
+}
+
+QScrollBar::handle:vertical:hover
+{
+    background-color: #303030;
+    min-height: 5px;
+}
+
+QScrollBar::sub-line:vertical
+{
+    border-image: url(:/qss_icons/rc/scrollup.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+   
+    border-image: url(:/qss_icons/rc/scrolldn.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+{
+
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" rowspan="5">
+    <widget class="QListWidget" name="listWidget_textures">
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+background-color: #222;
+border: 1px solid #222;
+}</string>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_convert">
+       <property name="minimumSize">
+        <size>
+         <width>77</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Convert</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="0">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushButton_browseImage">
+       <property name="minimumSize">
+        <size>
+         <width>77</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_removeImage">
+       <property name="minimumSize">
+        <size>
+         <width>77</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButton_clearList">
+       <property name="minimumSize">
+        <size>
+         <width>77</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clear List</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>4</number>
+     </property>
+     <item>
+      <widget class="QRadioButton" name="radioButton_ask">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ask if file already exists</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_overwrite">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Overwrite if file already exists</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_skip">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Skip if file already exists</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1" rowspan="6">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>550</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>80</red>
+           <green>80</green>
+           <blue>80</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Button">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>80</red>
+           <green>80</green>
+           <blue>80</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>80</red>
+           <green>80</green>
+           <blue>80</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Base">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="Window">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QScrollArea .QWidget {
+    background-color: #404040;
+}
+
+QTabBar::tab {
+    color: #b1b1b1;
+    border: 1px solid #404040;
+    border-bottom-style: solid;
+    background-color: #222;
+    padding-left: 17px;
+    padding-right: 17px;
+    padding-top: 4px;
+	left: -1px;
+    padding-bottom: 4px;
+    
+}
+
+ QTabWidget::tab-bar {
+    left: 0px;
+	background-color: #333;
+ }
+
+QTabWidget::pane {
+    border: 1px solid #404040;
+	background-color: #404040;
+    top: -1 px;	
+}
+
+QTabWidget {
+   	background-color: #333;
+}
+
+
+QTabBar::tab:last:selected
+{
+    margin-right: 0px; /* the last selected tab has nothing to overlap with on the right */
+}
+
+QTabBar::tab:first:selected
+{
+   margin-left: 0px; /* the last selected tab has nothing to overlap with on the right */
+}
+
+QTabBar::tab:last:!selected
+{
+   margin-right: 0px; /* the last selected tab has nothing to overlap with on the right */
+}
+
+QTabBar::tab:first:!selected
+{
+  margin-left: 0px; /* the last selected tab has nothing to overlap with on the right */
+}
+
+QTabBar::tab:!selected
+{
+    color: #b1b1b1;  
+    margin-top: 0px;
+	margin-bottom: 3px;	
+	border: 1px solid #333;
+	background-color: #252525;
+	border-bottom-style: 1px solid #505050;
+	
+}
+
+QTabBar::tab:selected
+{
+    color: #b1b1b1;  
+    margin-top: 0px;
+	margin-bottom: 3px;	
+	border: 1px solid #333;
+	background-color: #404040;
+	border-bottom-style: 1px solid #505050;
+	
+}
+
+QTabBar::tab:!selected:hover
+{
+    background-color: #363636;
+}
+
+/* BUTTONS */ 
+
+QToolButton
+{
+    color: silver;
+    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,
+    stop: 0 #333, stop: 1 #404040);
+    border-width: 1px;
+    border-color: #555;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QToolButton:disabled
+{
+    background-color:#505050;
+    border-width: 1px;
+    border-color: #555;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QToolButton:hover
+{
+    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,
+    stop: 0 #444, stop: 1 #505050);
+}
+
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Output formats</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Non-alpha textures:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_noAlphaTextures">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>DXT1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ABGR 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>I8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>IA 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>A8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ARGB 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 4444</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT1 one bit alpha</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UV 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVWQ 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616F</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVLX 8888</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Textures with alpha:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_alphaTextures">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>DXT5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ABGR 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>I8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>IA 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>A8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ARGB 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 4444</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT1 one bit alpha</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UV 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVWQ 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616F</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVLX 8888</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Resize</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Resize to specific height:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_resizeMethod">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Nearest Power of 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Biggest Power of 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Smallest Power of 2</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QSpinBox" name="spinBox_specificHeight">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>65536</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Resize filter:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_resizeToPowerOfTwo">
+         <property name="text">
+          <string>Resize to a power of 2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBox_resizeSharpenFilter">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Negative</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Lighter</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Darker</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>More Contrast</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Less Contrast</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Smoothen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Medium</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Strong</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Find Edges</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Contour</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Detect Edges</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Detect Eges - Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Emboss</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Mean Removal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Unsharp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>XSharpen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Warpsharp</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBox_resizeFilter">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Triangle</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Point</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Box</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Quadratic</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Cubic</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Catrom</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Mitchell</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Gaussian</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sinc</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Bessel</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hanning</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hamming</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Blackman</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kaiser</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Resize sharpen filter:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Resize to specific width:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QSpinBox" name="spinBox_specificWidth">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>65536</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Resize method:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>3000</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Clamp size</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Maximum width:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="spinBox_maximumWidth">
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <number>65536</number>
+            </property>
+            <property name="value">
+             <number>4096</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Maximum height:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_maximumHeight">
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <number>65536</number>
+            </property>
+            <property name="value">
+             <number>4096</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>160</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Normal map</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="checkBox_convertToNormalMap">
+         <property name="text">
+          <string>Convert to normal map</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Generation kernel:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_generationKernel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>3x3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4x</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>5x5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>7x7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>9x9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DUDV</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Height calculation:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBox_heightCalculation">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Average RGB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Alpha</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Biased RGB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Red</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Green</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Blue</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Max RGB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Colorspace</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Alpha result:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBox_alphaResult">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>White</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>No change</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Black</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_15">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Scale:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_normalMapScale">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="value">
+          <double>2.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QCheckBox" name="checkBox_wrapForTiledTextures">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Wrap for tiled textures</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Mipmaps</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="checkBox_disableMipmaps">
+         <property name="text">
+          <string>Disable Mipmaps</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Filter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_mipmapFilter">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Box</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Point</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Triangle</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Quadratic</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Cubic</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Catrom</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Mitchell</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Gaussian</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sinc</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Bessel</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hanning</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hamming</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Blackman</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kaiser</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Sharpen filter:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBox_mipmapSharpenFilter">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Negative</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Lighter</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Darker</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>More Contrast</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Less Contrast</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Smoothen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Medium</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Strong</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Find Edges</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Contour</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Detect Edges</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Detect Eges - Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Emboss</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Mean Removal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Unsharp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>XSharpen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Warpsharp</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Miscellaneous</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="checkBox_gammaCorrection">
+         <property name="text">
+          <string>Gamma correction:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Engine bump mapping scale:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_bumpMappingScale">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBox_reflectivity">
+         <property name="text">
+          <string>Calculate reflectivity</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_gammaCorrection">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="value">
+          <double>2.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBox_thumbnailImage">
+         <property name="text">
+          <string>Generate thumbnail image</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>150</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>Flags</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_pointsample">
+         <property name="text">
+          <string>Pointsample</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="checkBox_trilinear">
+         <property name="text">
+          <string>Trilinear</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_clamps">
+         <property name="text">
+          <string>Clamps</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBox_clampt">
+         <property name="text">
+          <string>Clampt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBox_anisotropic">
+         <property name="text">
+          <string>Anisotropic</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="checkBox_hintDXT5">
+         <property name="text">
+          <string>Hint DXT5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBox_normal">
+         <property name="text">
+          <string>Normal</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBox_noMIP">
+         <property name="text">
+          <string>No MIP</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="checkBox_noLOD">
+         <property name="text">
+          <string>No LOD</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="checkBox_minMIP">
+         <property name="text">
+          <string>Min MIP</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBox_depthRendertarget">
+         <property name="text">
+          <string>Depth rendertarget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QCheckBox" name="checkBox_noDebugOverride">
+         <property name="text">
+          <string>No debug override</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="checkBox_singleCopy">
+         <property name="text">
+          <string>Single copy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBox_noDepthbuffer">
+         <property name="text">
+          <string>No depth buffer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="checkBox_clampU">
+         <property name="text">
+          <string>Clamp U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="checkBox_vertexTexture">
+         <property name="text">
+          <string>Vertex texture</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="checkBox_ssbump">
+         <property name="text">
+          <string>SSBump</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QCheckBox" name="checkBox_border">
+         <property name="text">
+          <string>Border</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="checkBox_rendertarget">
+         <property name="text">
+          <string>Rendertarget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkBox_procedural">
+         <property name="text">
+          <string>Procedural</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>checkBox_gammaCorrection</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_gammaCorrection</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>559</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>641</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_generationKernel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>707</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>707</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_heightCalculation</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>685</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>685</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_alphaResult</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>662</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>664</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_normalMapScale</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>641</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>644</x>
+     <y>159</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_12</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>623</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_13</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>591</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_14</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>609</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_15</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>629</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_convertToNormalMap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_wrapForTiledTextures</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>355</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>341</x>
+     <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_disableMipmaps</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_10</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>583</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_disableMipmaps</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_11</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>586</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>559</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_disableMipmaps</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_mipmapFilter</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>686</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>687</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_disableMipmaps</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_mipmapSharpenFilter</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>654</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

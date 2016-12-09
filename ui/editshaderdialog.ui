@@ -1,0 +1,1697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditShaderDialog</class>
+ <widget class="QDialog" name="EditShaderDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>660</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Edit Custom Shaders</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+	font: 9pt &quot;Segoe UI&quot;;
+    color: silver;
+    background-color: #404040;
+   
+}
+
+QGroupBox {
+    border: 1px solid #333;
+    margin-top: 6px;
+	padding: 4px;
+} 
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+	bottom: 1px;
+	padding-left: 5px;
+    padding-right: 5px;	
+}
+
+QWidget:disabled
+{
+  color: #505050;
+    
+}
+
+QLineEdit
+{
+    background-color: #222;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #555;
+        color: silver;
+}
+
+GLWidget {
+	border: 0px solid #555;
+}
+
+QLineEdit
+{
+    background-color: #222;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #222;
+    color: silver;
+}
+
+QLineEdit:disabled
+{
+    background-color: #333;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #333;
+    color: silver;
+}
+
+QScrollBar:horizontal
+{
+    height: 15px;
+    margin: 0px 15px 0px 15px;
+    border: 0px ;
+    background-color: #222;
+}
+
+QScrollBar::handle:horizontal
+{
+    background-color: #333;
+    min-width: 5px;
+   }
+
+QScrollBar::sub-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrollrt.png);
+    width: 15px;
+    height: 15px;
+	background-color:  #222;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrolllf.png);
+    height: 15px;
+    width: 15px;
+	background-color:  #222;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+}
+
+/* Vertical scroll bar, works fine */
+
+
+QScrollBar:vertical
+{
+    background-color:  #222;
+    width: 15px;
+    margin: 15px 0 15px 0;
+    border: 0px solid #222;
+    
+}
+
+QScrollBar::handle:vertical
+{
+    background-color: #333;
+    min-height: 5px;
+   
+}
+
+QScrollBar::sub-line:vertical
+{
+    border-image: url(:/qss_icons/rc/scrollup.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+   
+    border-image: url(:/qss_icons/rc/scrolldn.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+{
+
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+{
+    background-color:  #333;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}
+
+/* Different edits */
+
+QTextEdit
+{
+    background-color: #222;
+    color: silver;
+    border: 1px solid #222;
+}
+
+QPlainTextEdit
+{
+    background-color: #222;
+    color: silver;
+    border: 0px solid #555;
+	border-radius: 0px;
+}
+
+/* Suspicious stuff 
+
+QHeaderView::section
+{
+    background-color: #3A3939;
+    color: silver;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c;
+}
+
+/* */
+
+
+QCheckBox:disabled
+{
+    color: #505050;
+}
+
+QSizeGrip {
+    image: url(:/qss_icons/rc/sizegrip.png);
+    width: 12px;
+    height: 12px;
+}
+
+/* Separators and shit */
+
+QMainWindow::separator
+{
+    background-color: #333;
+    color: white;
+    padding-left: 4px;
+    spacing: 2px;
+    border: 0px dashed #3A3939;
+}
+
+QMainWindow::separator:hover
+{
+    color: white;
+    padding-left: 4px;
+    border: 0px solid #3A3939;
+    spacing: 2px;
+}
+
+/* Radio buttons */
+
+
+QRadioButton::indicator:checked, QRadioButton::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 5px;
+}
+
+
+
+QRadioButton::indicator:checked
+{
+    background-color: qradialgradient(
+    cx: 0.5, cy: 0.5,
+    fx: 0.5, fy: 0.5,
+    radius: 1.0,
+    stop: 0.2 #888,
+    stop: 0.3 #222
+    );
+}
+
+QRadioButton::indicator
+{
+    border-radius: 7px;
+    width: 9px;
+    height: 9px;
+}
+
+
+QRadioButton::indicator:hover, QCheckBox::indicator:hover
+{
+	background-color: #151515;
+    border: 1px solid #151515;
+}
+
+QCheckBox::indicator{
+    color: #b1b1b1;
+    background-color: #222;
+    border: 1px solid #222;
+    width: 11px;
+    height: 11px;
+}
+
+QRadioButton::indicator:checked:hover
+{
+    background-color: qradialgradient(
+    cx: 0.5, cy: 0.5,
+    fx: 0.5, fy: 0.5,
+    radius: 1.0,
+    stop: 0.2 #888,
+    stop: 0.3 #151515
+    );
+}
+
+QCheckBox::indicator:checked
+{
+    image:url(:/qss_icons/rc/checkbox.png);
+}
+
+QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
+{
+    border: 1px solid #222;
+}
+
+QFrame
+{
+    border-radius: 0px;
+}
+
+/* what is this 
+
+QStackedWidget
+{
+    border: none;
+}
+
+/* toolbar, do we use toolbar? */
+
+QToolBar {
+    border: 0px solid #393838;
+    background: 1px solid #333;
+    font-weight: bold;
+}
+
+QToolBar::handle:horizontal {
+    image: url(:/qss_icons/rc/Hmovetoolbar.png);
+}
+QToolBar::handle:vertical {
+    image: url(:/qss_icons/rc/Vmovetoolbar.png);
+}
+QToolBar::separator:horizontal {
+    image: url(:/qss_icons/rc/Hsepartoolbar.png);
+}
+QToolBar::separator:vertical {
+    image: url(:/qss_icons/rc/Vsepartoolbars.png);
+}
+
+/* Buttons, both are the same */
+
+
+QToolButton
+{
+    color: silver;
+    background-color: #333;
+    border-width: 1px;
+    border-color: #333;
+    border-style: solid;
+ 	padding: 2px;
+    height: 19px;
+}
+
+QToolButton:disabled
+{
+    background-color:#333;
+    border-width: 1px;
+    border-color: #333;
+    border-style: solid;
+  	padding: 2px;
+    color: #3A3939;
+}
+
+QToolButton:hover
+{
+    background-color:#222;
+	border-color: #222;
+}
+
+
+QPushButton
+{
+    color: silver;
+    background-color: #282828;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
+    padding-top: 5px;
+	min-width: 65px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QPushButton:disabled
+{
+    background-color:#505050;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+	min-width: 65px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QPushButton:focus
+{
+	background-color: #2e3844;
+	border-color: #2e3844;
+}
+
+QPushButton:hover
+{
+    background-color: #151515;
+	border-color: #151515
+}
+
+QComboBox
+{
+    selection-background-color: #222;
+    background-color: #222;
+    border-style: solid;
+    border: 1px solid #222;
+    border-radius: 0px;
+    padding: 2px;
+	padding-left: 4px;
+	outline: 0;
+}
+
+/* Make stuff light up on hover */
+
+
+QComboBox:hover,QAbstractSpinBox:hover,QLineEdit:hover,QAbstractView:hover,QTreeView:hover
+{
+	background-color: #151515;
+	border-color: #151515;
+    color: silver;
+}
+
+QTextEdit:hover
+{	
+	border-color: #151515;
+	background-color: #151515;
+}
+
+QComboBox:on
+{
+    background-color: #222;
+    padding-top: 2px;
+    padding-left: 4px;
+    selection-background-color: #4a4a4a;
+}
+
+/* No idea */
+
+
+QComboBox QAbstractItemView
+{
+    background-color: #222;
+    border-radius: 0px;
+    border: 1px solid #222;
+    selection-background-color: #2e3844;
+	outline: 0;
+	
+}
+
+QComboBox::drop-down
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+	padding: 4px;
+    border-left-width: 0px;
+    border-left-color: darkgray;
+    border-left-style: solid;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+QComboBox::down-arrow
+{
+    image: url(:/qss_icons/rc/gopen.png);
+}
+
+QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
+QComboBox::down-arrow:focus
+{
+    image: url(:/qss_icons/rc/gopen.png);
+}
+
+QPushButton:pressed
+{
+    background-color: #111;
+}
+
+/* Spinboxes */
+
+QAbstractSpinBox {
+    padding-top: 0px;
+    padding-bottom: 0px;
+	min-height:  21px;
+    border: 1px solid #222;
+    background-color: #222;
+    color: silver;
+}
+
+QAbstractSpinBox:up-button
+{
+    background-color: #333;
+	 border: 0px solid #333;  
+	width: 20px;
+	subcontrol-position: top right;
+}
+
+QAbstractSpinBox:down-button
+{
+    background-color: #333;
+    width: 20px;
+	 border: 0px solid #333;
+    subcontrol-position: bottom right;
+}
+
+QAbstractSpinBox:up-button:disabled
+{
+    background-color: #333;
+	 border: 0px solid #333;  
+	width: 20px;
+	subcontrol-position: top right;
+}
+
+QAbstractSpinBox:down-button:disabled
+{
+    background-color: #333;
+    width: 20px;
+	 border: 0px solid #333;
+    subcontrol-position: bottom right;
+}
+
+QAbstractSpinBox::up-arrow,QAbstractSpinBox::up-arrow:disabled,QAbstractSpinBox::up-arrow:off {
+    image: url(:/qss_icons/rc/up_arrow_disabled.png);
+    width: 20px;
+    height: 10px;
+}
+
+QAbstractSpinBox::up-arrow:hover
+{
+    background-color: #444;
+}
+
+
+QAbstractSpinBox::down-arrow,QAbstractSpinBox::down-arrow:disabled,QAbstractSpinBox::down-arrow:off
+{
+    image: url(:/qss_icons/rc/down_arrow_disabled.png);
+    width: 20px;
+    height: 10px;
+}
+QAbstractSpinBox::down-arrow:hover
+{
+    background-color: #444;
+}
+
+
+QLabel
+{
+    border: 0px solid black;
+}
+
+/* Dock widgets */
+
+QDockWidget
+{
+    color: silver;
+    titlebar-close-icon: url(:/qss_icons/rc/close.png);
+    titlebar-normal-icon: url(:/qss_icons/rc/undock.png);
+}
+
+QDockWidget::title
+{
+    border: 0px solid #404040;
+    border-bottom: #444;
+    text-align: left;
+    spacing: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 0px;
+    background-color: #404040;
+    background-image: none;
+    padding-left: 10px;
+}
+
+
+QDockWidget {
+    border: 0px solid lightgray;
+    titlebar-close-icon: url(:/qss_icons/rc/close.png);
+    titlebar-normal-icon: url(:/qss_icons/rc/undock.png);
+}
+
+QDockWidget::close-button, QDockWidget::float-button {
+    border: 0px solid transparent;
+    border-radius: 0px;
+    background: transparent;
+    icon-size: 10px;
+}
+
+QDockWidget::close-button:hover, QDockWidget::float-button:hover {
+    background: #3A3939;
+}
+
+QDockWidget::close-button:pressed, QDockWidget::float-button:pressed {
+    padding: 1px -1px -1px 1px;
+}
+
+/* We don't grow trees here 
+
+QTreeView, QListView, QTableView
+{
+    border: 1px solid #3A3939;
+    background-color: #201F1F;
+}
+
+QTreeView:branch:selected, QTreeView:branch:hover
+{
+    background: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+    border-image: url(:/qss_icons/rc/transparent.png);
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+    image: url(:/qss_icons/rc/branch_closed.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings {
+    image: url(:/qss_icons/rc/branch_open.png);
+}
+
+QTreeView::branch:has-children:!has-siblings:closed:hover,
+QTreeView::branch:closed:has-children:has-siblings:hover {
+    image: url(:/qss_icons/rc/branch_closed-on.png);
+    }
+
+QTreeView::branch:open:has-children:!has-siblings:hover,
+QTreeView::branch:open:has-children:has-siblings:hover {
+    image: url(:/qss_icons/rc/branch_open-on.png);
+    }
+
+/* slider horizontal, works */
+
+
+QSlider::groove:horizontal {
+    border: 1px solid #222;
+    height: 5px;
+    background: #222;
+    margin: 2px 0;
+    
+}
+
+QSlider:selected, QTabBar:tab:selected {
+    border: 0px;
+     
+}
+
+QSlider::handle:horizontal {
+    background: #666;
+    border: 1px solid #666;
+    width: 5px;
+    height: 14px;
+    margin: -4px 0;
+  
+}
+
+QSlider::handle:horizontal:disabled {
+    background: #444;
+    border: 1px solid #444;
+    width: 6px;
+    height: 14px;
+    margin: -4px 0;
+  
+}
+
+
+/* Slider vertical, doesn't work */
+
+QSlider::groove:vertical {
+    border: 1px solid #3A3939;
+    width: 8px;
+    background: #201F1F;
+    margin: 0 0px;
+    border-radius: 0px;
+}
+
+QSlider::handle:vertical {
+    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.0 silver,
+      stop: 0.2 #a8a8a8, stop: 1 #727272);
+    border: 1px solid #3A3939;
+    width: 14px;
+    height: 14px;
+    margin: 0 -4px;
+    border-radius: 0px;
+}
+
+QScrollBar:horizontal
+{
+    height: 15px;
+    margin: 0px 15px 0px 15px;
+    border: 0px ;
+    background-color: #222;
+}
+
+QScrollBar::handle:horizontal
+{
+    background-color: #333;
+    min-width: 5px;
+   }
+
+QScrollBar::handle:horizontal:hover
+{
+    background-color: #303030;
+    min-width: 5px;
+   }
+
+
+QScrollBar::sub-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrollrt.png);
+    width: 15px;
+    height: 15px;
+	background-color:  #222;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal
+{
+    border-image: url(:/qss_icons/rc/scrolllf.png);
+    height: 15px;
+    width: 15px;
+	background-color:  #222;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+}
+
+/* Vertical scroll bar, works fine */
+
+
+QScrollBar:vertical
+{
+    background-color:  #222;
+    width: 15px;
+    margin: 15px 0 15px 0;
+    border: 0px solid #222;
+    
+}
+
+QScrollBar::handle:vertical
+{
+    background-color: #333;
+    min-height: 5px;
+}
+
+QScrollBar::handle:vertical:hover
+{
+    background-color: #303030;
+    min-height: 5px;
+}
+
+QScrollBar::sub-line:vertical
+{
+    border-image: url(:/qss_icons/rc/scrollup.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+   
+    border-image: url(:/qss_icons/rc/scrolldn.png);
+	background-color:  #222;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+{
+
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+{
+    background-color:  #151515;
+    height: 15px;
+    width: 15px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+{
+    background: none;
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_8">
+   <item row="0" column="4">
+    <widget class="QPushButton" name="pushButton_disableShader">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>77</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Enable or disable a shader.</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/icons/enableDisableShader</normaloff>:/icons/enableDisableShader</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QPushButton" name="pushButton_defaultShader">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>77</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Reset the shader to default.</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/icons/resetShader</normaloff>:/icons/resetShader</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="pushButton_deleteShader">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>77</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Delete a shader.</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/icons/removeShader</normaloff>:/icons/removeShader</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushButton_newShader">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>77</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Add a new shader.</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/icons/addShader</normaloff>:/icons/addShader</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLineEdit" name="lineEdit_search">
+     <property name="placeholderText">
+      <string>Search...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>157</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" colspan="6">
+    <widget class="QGroupBox" name="groupBox_texture">
+     <property name="title">
+      <string>Texture</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_baseTexture">
+          <property name="text">
+           <string>Base Texture</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="checkBox_baseTexture2">
+          <property name="text">
+           <string>Base Texture 2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="checkBox_transparency">
+          <property name="text">
+           <string>Transparency</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBox_detail">
+          <property name="text">
+           <string>Detail Texture</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBox_color">
+          <property name="text">
+           <string>Color</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="checkBox_other">
+          <property name="text">
+           <string>Other</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="6">
+    <widget class="QGroupBox" name="groupBox_shading">
+     <property name="title">
+      <string>Shading</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_phong">
+          <property name="text">
+           <string>Phong</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="checkBox_reflection">
+          <property name="text">
+           <string>Reflection</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBox_selfIllumination">
+          <property name="text">
+           <string>Self Illumination</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBox_rimLight">
+          <property name="text">
+           <string>Rim Light</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" rowspan="5">
+    <widget class="QListWidget" name="listWidget_shader">
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+background-color: #222;
+border: 1px solid #222;
+}</string>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="6">
+    <widget class="QGroupBox" name="groupBox_water">
+     <property name="title">
+      <string>Water</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_water">
+          <property name="text">
+           <string>Water</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="checkBox_flowmap">
+          <property name="text">
+           <string>Flowmap</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="checkBox_waterReflection">
+          <property name="text">
+           <string>Reflection</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBox_refraction">
+          <property name="text">
+           <string>Refraction</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBox_fog">
+          <property name="text">
+           <string>Fog</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="checkBox_scroll">
+          <property name="text">
+           <string>Scroll</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="6">
+    <widget class="QGroupBox" name="groupBox_other">
+     <property name="title">
+      <string>Other</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_9">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="checkBox_baseTextureTextureTransforms">
+          <property name="text">
+           <string>Base Texture Transform</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="checkBox_bumpmapTextureTransforms">
+          <property name="text">
+           <string>Bumpmap Transform</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QCheckBox" name="checkBox_misc">
+          <property name="text">
+           <string>Miscellaneous</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="checkBox_unlitTwoTexture">
+          <property name="text">
+           <string>UnlitTwoTexture</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QCheckBox" name="checkBox_sprite">
+          <property name="text">
+           <string>Sprite</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBox_refract">
+          <property name="text">
+           <string>Refract</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>255</x>
+     <y>507</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>255</x>
+     <y>507</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_baseTexture</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>24</x>
+     <y>190</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_baseTexture2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_transparency</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>247</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_detail</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>18</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_color</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>21</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_other</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>118</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>332</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_phong</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_selfIllumination</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>15</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_rimLight</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>411</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_water</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_flowmap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>21</x>
+     <y>466</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_waterReflection</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>26</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_reflection</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_refraction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_fog</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_scroll</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>365</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_baseTextureTextureTransforms</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_bumpmapTextureTransforms</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>31</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_misc</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_refract</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>40</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_sprite</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>394</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_unlitTwoTexture</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EditShaderDialog</receiver>
+   <slot>updateShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>30</x>
+     <y>524</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateShader()</slot>
+ </slots>
+</ui>

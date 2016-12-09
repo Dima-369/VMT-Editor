@@ -1,0 +1,10 @@
+Antlion
+Antlionsand
+Combine_Glass
+Combine_Metal
+Crowbar
+Gunship
+Metalvehicle
+Metal_Seafloorcar
+Strider
+Zombieflesh

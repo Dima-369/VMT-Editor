@@ -1,0 +1,6 @@
+Asphalt
+Carpet
+Cloth
+Paper
+Puddle
+Sheetrock

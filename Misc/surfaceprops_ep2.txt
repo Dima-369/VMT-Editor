@@ -1,0 +1,8 @@
+Advisor_Shield
+Antlion_Eggshell
+Cavern_Rock
+Hunter
+Jalopytire
+Jalopy
+Slidingrubbertire_Jalopyfront
+Slidingrubbertire_Jalopyrear
