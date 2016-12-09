@@ -128,6 +128,6 @@ FORMS += \
     ui/editgamedialog.ui \
     ui/editgamesdialog.ui
 
-RESOURCES += resources.qrc
+RESOURCES += ui/resources.qrc
 
 RC_FILE = VMT.rc
