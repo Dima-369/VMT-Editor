@@ -1332,7 +1332,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2870</y>
+             <y>-2345</y>
              <width>880</width>
              <height>4524</height>
             </rect>
@@ -15378,7 +15378,7 @@ border: 1px solid #222;
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/new</normaloff>:/icons/new</iconset>
    </property>
    <property name="text">
@@ -15393,7 +15393,7 @@ border: 1px solid #222;
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/save</normaloff>:/icons/save</iconset>
    </property>
    <property name="text">
@@ -15405,7 +15405,7 @@ border: 1px solid #222;
   </action>
   <action name="actionSave_As">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/saveAs</normaloff>:/icons/saveAs</iconset>
    </property>
    <property name="text">
@@ -15425,7 +15425,7 @@ border: 1px solid #222;
   </action>
   <action name="action_about">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/about</normaloff>:/icons/about</iconset>
    </property>
    <property name="text">
@@ -15448,7 +15448,7 @@ border: 1px solid #222;
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/openVmt</normaloff>:/icons/openVmt</iconset>
    </property>
    <property name="text">
@@ -15724,7 +15724,7 @@ border: 1px solid #222;
   </action>
   <action name="action_help">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/help</normaloff>:/icons/help</iconset>
    </property>
    <property name="text">
@@ -15787,7 +15787,7 @@ border: 1px solid #222;
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/3</normaloff>:/icons/3</iconset>
    </property>
    <property name="text">
@@ -15841,7 +15841,7 @@ border: 1px solid #222;
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/icons/1</normaloff>:/icons/1</iconset>
    </property>
    <property name="text">
@@ -16004,7 +16004,7 @@ border: 1px solid #222;
   <tabstop>lineEdit_2</tabstop>
  </tabstops>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -19408,6 +19408,342 @@ border: 1px solid #222;
     <hint type="sourcelabel">
      <x>420</x>
      <y>-354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_bump2</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>555</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_spec_amount2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_phongAmount</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_envmapAniso</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>571</x>
+     <y>527</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_envmapLightMin</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_envmapLightMax</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>753</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_envmapLight</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>571</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bumpdetailscale2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>571</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bumpdetailscale</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>571</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_translateY_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>699</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_translateX_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>613</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_scaleY_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_scaleX_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_centerY_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_centerX_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_bm_angle_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>613</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_spec_maskContrast2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>500</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_spec_maskBrightness2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>529</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_maskContrast</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_maskBrightness</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>400</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_exponent2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>349</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
