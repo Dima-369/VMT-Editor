@@ -307,3 +307,19 @@ bool utils::isBetween(const QStringList& list, double min, double max)
 	}
 	return true;
 }
+
+namespace utils {
+
+QString toParameter(const QColor &color)
+{
+	const QString red =
+		stripZeroes(QString::number(color.redF(), 'f', 2));
+	const QString green =
+		stripZeroes(QString::number(color.greenF(), 'f', 2));
+	const QString blue =
+		stripZeroes(QString::number(color.blueF(), 'f', 2));
+
+	return QString("[%1 %2 %3]").arg(red, green, blue);
+}
+
+} // namespace utils

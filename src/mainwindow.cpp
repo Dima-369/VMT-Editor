@@ -17,6 +17,7 @@
 #include "user-interface/detail-texture.h"
 #include "user-interface/shaders.h"
 #include "user-interface/view-helper.h"
+#include "user-interface/shading-reflection.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -41,6 +42,7 @@
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
 Ui::MainWindow* gUi;
 
+using namespace utils;
 
 MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	QMainWindow(parent),
@@ -745,7 +747,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	QString bumpmap;
 
 	bool showBaseTexture = false;
-    bool showBaseTexture2 = false;
+	bool showBaseTexture2 = false;
 	bool showColor = false;
 	bool showOther = false;
 	bool showTransparency = false;
@@ -1234,8 +1236,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	//----------------------------------------------------------------------------------------//
 
-	if( !( value = vmt.parameters.take("$detailblendmode") ).isEmpty() )
-	{
+	if( !( value = vmt.parameters.take("$detailblendmode") ).isEmpty() ) {
 		if (!vmt.state.detailEnabled) {
 			ERROR("$detailblendmode is only supported with "
 				"$detail!")
@@ -1256,7 +1257,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			Error("$detailblendmode value: \"" + value + "\" has caused an error while parsing!")
 		}
 
-        vmt.state.showDetail = true;
+		vmt.state.showDetail = true;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1291,7 +1292,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			Error("$detailblendfactor value: \"" + value + "\" has caused an error while parsing!")
 		}
 
-        vmt.state.showDetail = true;
+		vmt.state.showDetail = true;
 	}
 
 	if( !( value = vmt.parameters.take("$detailblendfactor2") ).isEmpty() ) {
@@ -3464,64 +3465,12 @@ VmtFile MainWindow::makeVMT()
 		if( ui->doubleSpinBox_seamlessScale->isEnabled() && ui->doubleSpinBox_seamlessScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$seamless_scale", Str( ui->doubleSpinBox_seamlessScale->value() ));
 
-		tmp = colorToParameter(utils::getBG(ui->color_reflectivity), false);
+		tmp = toParameter(utils::getBG(ui->color_reflectivity));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
 	}
 
-	//---------------------------------------------------------------------------------------//
-
-	if( !ui->groupBox_shadingReflection->isHidden() ) {
-
-		if( ui->checkBox_cubemap->isEnabled() && ui->checkBox_cubemap->isChecked() )
-			vmtFile.parameters.insert( "$envmap", "env_cubemap" );
-
-		else {
-
-			if( ui->lineEdit_envmap->isEnabled() && !ui->lineEdit_envmap->text().trimmed().isEmpty() )
-				vmtFile.parameters.insert( "$envmap", ui->lineEdit_envmap->text().trimmed() );
-		}
-
-		if( ui->doubleSpinBox_contrast->isEnabled() && ui->doubleSpinBox_contrast->value() != 0.0 )
-			vmtFile.parameters.insert( "$envmapcontrast", Str( ui->doubleSpinBox_contrast->value() ));
-
-		if( ui->doubleSpinBox_fresnelReflection->isEnabled() && ui->doubleSpinBox_fresnelReflection->value() != 1.0 )
-			if ( ui->comboBox_shader->currentText() == "VertexLitGeneric" )
-				vmtFile.parameters.insert( "$envmapfresnel", Str( 1.0 - ui->doubleSpinBox_fresnelReflection->value() ));
-			else {
-				vmtFile.parameters.insert( "$fresnelreflection", Str( ui->doubleSpinBox_fresnelReflection->value() )); }
-
-		if( ui->doubleSpinBox_saturation->isEnabled() && ui->doubleSpinBox_saturation->value() != 1.0 )
-			vmtFile.parameters.insert( "$envmapsaturation", Str( ui->doubleSpinBox_saturation->value() ));
-
-		tmp = colorToParameter(utils::getBG(ui->color_envmapTint), false);
-		if( ui->toolButton_envmapTint->isEnabled() && tmp != "[1 1 1]" )
-			vmtFile.parameters.insert( "$envmaptint", tmp );
-
-
-		if( ui->lineEdit_specmap->isEnabled() && !ui->lineEdit_specmap->text().trimmed().isEmpty() )
-			vmtFile.parameters.insert( "$envmapmask", ui->lineEdit_specmap->text().trimmed() );
-
-		if( ui->checkBox_basealpha->isEnabled() && ui->checkBox_basealpha->isChecked() )
-			vmtFile.parameters.insert( "$basealphaenvmapmask", "1" );
-
-		if( ui->checkBox_normalalpha->isEnabled() && ui->checkBox_normalalpha->isChecked() )
-			vmtFile.parameters.insert( "$normalmapalphaenvmapmask", "1" );
-
-		if( ui->doubleSpinBox_envmapLight->isEnabled() && ui->doubleSpinBox_envmapLight->value() != 0.0 )
-			vmtFile.parameters.insert( "$envmaplightscale", Str( ui->doubleSpinBox_envmapLight->value() ));
-
-		QString minmax = "[" + Str( ui->doubleSpinBox_envmapLightMin->value() ) + " " + Str( ui->doubleSpinBox_envmapLightMax->value() ) + "]";
-		if( ui->doubleSpinBox_envmapLightMin->isEnabled() && (ui->doubleSpinBox_envmapLightMin->value() != 0.0 || ui->doubleSpinBox_envmapLightMax->value() != 1.0))
-			vmtFile.parameters.insert( "$envmaplightscaleminmax", minmax);
-
-		if( ui->doubleSpinBox_envmapAniso->isEnabled() && ui->doubleSpinBox_envmapAniso->value() != 0.0 ) {
-			vmtFile.parameters.insert( "$envmapanisotropy", "1");
-			vmtFile.parameters.insert( "$envmapanisotropyscale", Str(ui->doubleSpinBox_envmapAniso->value() ));
-		}
-	}
-
-	//---------------------------------------------------------------------------------------//
+	shadingreflection::insertParametersFromViews(&vmtFile, ui);
 
 	if( !ui->groupBox_selfIllumination->isHidden() ) {
 
@@ -3533,7 +3482,7 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_envmapAlpha->isChecked() )
 			vmtFile.parameters.insert( "$selfillum_envmapmask_alpha", "1" );
 
-		tmp = colorToParameter(utils::getBG(ui->color_selfIllumTint), false);
+		tmp = toParameter(utils::getBG(ui->color_selfIllumTint));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$selfillumtint", tmp );
 
@@ -3566,7 +3515,7 @@ VmtFile MainWindow::makeVMT()
 		if( ui->spinBox_exponent->isEnabled() )
 			vmtFile.parameters.insert( "$phongexponent", Str( ui->spinBox_exponent->value() ));
 
-		tmp = colorToParameter(utils::getBG(ui->color_phongTint), false);
+		tmp = toParameter(utils::getBG(ui->color_phongTint));
 		if( ui->toolButton_phongTint->isEnabled() && tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$phongtint", tmp );
 
@@ -3731,11 +3680,11 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_color->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_color1), false);
+		tmp = toParameter(utils::getBG(ui->color_color1));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color", tmp );
 
-		tmp = colorToParameter(utils::getBG(ui->color_color2), false);
+		tmp = toParameter(utils::getBG(ui->color_color2));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color2", tmp );
 
@@ -3821,7 +3770,7 @@ VmtFile MainWindow::makeVMT()
 		if( !( tmp = ui->lineEdit_refractTexture->text().trimmed() ).isEmpty() )
 			vmtFile.parameters.insert( "$refracttinttexture", tmp );
 
-		tmp = colorToParameter(utils::getBG(ui->color_refractTint), false);
+		tmp = toParameter(utils::getBG(ui->color_refractTint));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -3943,7 +3892,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterReflection->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_reflectionTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_reflectionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$reflecttint", tmp );
 
@@ -3977,7 +3926,7 @@ VmtFile MainWindow::makeVMT()
 
 		vmtFile.parameters.insert("$refracttexture", "_rt_waterrefraction");
 
-		tmp = colorToParameter(utils::getBG(ui->color_refractionTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_refractionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -3989,7 +3938,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterFog->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_fogTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_fogTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$fogcolor", tmp );
 
@@ -6705,66 +6654,44 @@ void MainWindow::saveSettings()
 
 void MainWindow::readSettings()
 {
-	QString tmp( setKey( "saveLastGame", "1", mIniSettings ));
-
-	mSettings->saveLastGame = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "lastGame", "", mIniSettings );
-
-	mSettings->lastGame = tmp;
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "fullPathFilenameInWindowTitle", "0", mIniSettings );
-
-	mSettings->fullPathFilenameInWindowTitle = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "showShaderNameInWindowTitle", "1", mIniSettings );
-
-	mSettings->showShaderNameInWindowTitle = tmp == "1";
+	mSettings->saveLastGame = setKey("saveLastGame", true, mIniSettings);
+	mSettings->fullPathFilenameInWindowTitle =
+		setKey("fullPathFilenameInWindowTitle", false, mIniSettings);
+	mSettings->showShaderNameInWindowTitle =
+		setKey("showShaderNameInWindowTitle", true, mIniSettings);
+	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->useIndentation =
+		setKey("useIndentation", true, mIniSettings);
+	mSettings->useQuotesForTexture =
+		setKey("useQuotesForTexture", true, mIniSettings);
+	mSettings->deleteCacheAfterApplicationExit =
+		setKey("clearCacheAfterExit", false, mIniSettings);
 
 
-    tmp = setKey("autoRefresh", "1", mIniSettings );
-    mSettings->autoRefresh = (tmp == "1");
+	mSettings->recentFileListStyle =
+		setKey("recentFileListStyle", false, mIniSettings)
+			? Settings::RecentFileMenu : Settings::FileMenu;
 
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "useIndentation", "1", mIniSettings );
-
-	mSettings->useIndentation = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "recentFileListStyle", "0", mIniSettings );
-
-	mSettings->recentFileListStyle = (tmp == "1") ? Settings::RecentFileMenu : Settings::FileMenu;
-
-	if( mSettings->recentFileListStyle == Settings::FileMenu )
+	if (mSettings->recentFileListStyle == Settings::FileMenu)
 		ui->menuRecentFiles->menuAction()->setVisible(false);
 
-	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "recentFileEntryStyle", "0", mIniSettings );
+	mSettings->parameterSortStyle =
+		setKey("parameterSortStyle", false, mIniSettings)
+			? Settings::AlphabeticallySorted : Settings::Grouped;
 
-	mSettings->recentFileEntryStyle = (tmp == "1") ? Settings::FullPath : Settings::FileName;
 
-	//----------------------------------------------------------------------------------------//
+	mSettings->showShaderNameInTab =
+		setKey("showShaderNameInTab", false, mIniSettings);
 
-	tmp = setKey( "parameterSortStyle", "0", mIniSettings );
+	const QString tabTitle = mSettings->showShaderNameInTab
+		? "Parameters (" + ui->comboBox_shader->currentText() + ")"
+		: "Parameters";
 
-	mSettings->parameterSortStyle = (tmp == "1") ? Settings::AlphabeticallySorted : Settings::Grouped;
+	ui->tabWidget->setTabText(0, tabTitle);
 
-	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "useQuotesForTexture", "1", mIniSettings );
-
-	mSettings->useQuotesForTexture = (tmp == "0") ? false : true;
-
-	//----------------------------------------------------------------------------------------//
+	mSettings->lastGame = setKey("lastGame", "", mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 
@@ -6792,7 +6719,6 @@ void MainWindow::readSettings()
 		Q( "\":/files/defaultShaders\" was not found!" )
 	}
 
-	//----------------------------------------------------------------------------------------//
 
 	QStringList shaderList( mIniSettings->value("shaders").toString().split( "??", QString::SkipEmptyParts ));
 
@@ -6829,19 +6755,10 @@ void MainWindow::readSettings()
 		}
 	}
 
-	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "clearCacheAfterExit", "0", mIniSettings );
-
-	mSettings->deleteCacheAfterApplicationExit = (tmp == "1");
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "cacheSize", "100", mIniSettings );
-
+	QString tmp(setKey( "cacheSize", "100", mIniSettings ));
 	mSettings->cacheSize = ( tmp.toUInt() >= 1 && tmp.toUInt() <= 16384 ) ? tmp.toUInt() : 100;
 
-	//----------------------------------------------------------------------------------------//
 
 	QString addToIniSettings;
 
@@ -6882,27 +6799,13 @@ void MainWindow::readSettings()
 
 	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "showShaderNameInTab", "0", mIniSettings );
-
-	mSettings->showShaderNameInTab = (tmp == "1") ? true : false;
-
-	if (mSettings->showShaderNameInTab)
-		ui->tabWidget->setTabText(0, "Parameters (" + ui->comboBox_shader->currentText() + ")");
+	if (mIniSettings->contains("mainWindowGeometry"))
+		restoreGeometry(mIniSettings->value("mainWindowGeometry").toByteArray());
 	else
-		ui->tabWidget->setTabText(0, "Parameters");
-
-	//----------------------------------------------------------------------------------------//
-
-	if (!mIniSettings->contains("mainWindowGeometry")) {
-
 		resize(100, 100);
 
-	} else {
-
-		restoreGeometry( mIniSettings->value("mainWindowGeometry").toByteArray() );
-	}
-
-	restoreState( mIniSettings->value("mainWindowState").toByteArray() );
+	if (mIniSettings->contains("mainWindowState"))
+		restoreState(mIniSettings->value("mainWindowState").toByteArray());
 }
 
 void MainWindow::changeOption( Settings::Options option, const QString& value )
@@ -6970,9 +6873,11 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_CacheSize:
-
 			checkCacheSize();
+			break;
 
+		case Settings::_AutoRefresh:
+			refreshRequested();
 			break;
 
 		case Settings::_CustomShaders:
@@ -7052,7 +6957,7 @@ void MainWindow::openRecentFile()
 
 
 void MainWindow::setCurrentFile( const QString& fileName )
- {
+{
 	QStringList files = mIniSettings->value("recentFileList").toStringList();
 
 	files.removeAll(fileName);
@@ -7068,10 +6973,10 @@ void MainWindow::setCurrentFile( const QString& fileName )
 #endif
 
 	updateRecentFileActions(  mSettings->recentFileEntryStyle == Settings::FullPath ? true : false );
- }
+}
 
 void MainWindow::updateRecentFileActions( bool fullPath )
- {
+{
 	 QStringList files = mIniSettings->value("recentFileList").toStringList();
 
 	 int numRecentFiles = qMin( files.size(), (int)MaxRecentFiles );
@@ -8209,45 +8114,6 @@ void MainWindow::loadScale( const QString& value, const QString& parameter, QDou
 void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWidget) {
 
 	colorWidget->setStyleSheet("background-color: rgb(" + Str(color.red()) + "," + Str(color.green()) + "," + Str(color.blue()) + ")");
-}
-
-QString MainWindow::colorToParameter(const QColor &color, bool isWaterShader)
-{
-	if(isWaterShader) {
-
-		return QString("{%1 %2 %3}").arg(color.red()).arg(color.green()).arg(color.blue());
-
-	} else {
-
-		QString red = QString::number(color.redF(), 'f', 2);
-		QString green = QString::number(color.greenF(), 'f', 2);
-		QString blue = QString::number(color.blueF(), 'f', 2);
-
-		if(red.endsWith('0'))
-			red.chop(1);
-		if(green.endsWith('0'))
-			green.chop(1);
-		if(blue.endsWith('0'))
-			blue.chop(1);
-
-		if(red.endsWith(".0"))
-			red.chop(2);
-		if(green.endsWith(".0"))
-			green.chop(2);
-		if(blue.endsWith(".0"))
-			blue.chop(2);
-
-		if( red == "0.0")
-			red = "0";
-		if( green == "0.0" )
-			green = "0";
-		if( blue == "0.0" )
-			blue = "0.0";
-
-		return QString("[%1 %2 %3]").arg(red)
-									.arg(green)
-									.arg(blue);
-	}
 }
 
 void MainWindow::loadVMT( const QString& vmtPath )

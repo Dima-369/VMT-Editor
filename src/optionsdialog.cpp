@@ -130,10 +130,6 @@ QString OptionsDialog::constructShaderString(const QVector<Shader> &groups)
 
 void OptionsDialog::saveSettings()
 {
-	//----------------------------------------------------------------------------------------//
-	// First Tab - VMT Editor
-	//----------------------------------------------------------------------------------------//
-
 	if( ui->checkBox_saveLastGame->isChecked() )
 	{
 		if( !mSettings->saveLastGame )
@@ -176,24 +172,17 @@ void OptionsDialog::saveSettings()
 
 	//----------------------------------------------------------------------------------------//
 
-	if( ui->checkBox_autoRefresh->isChecked() )
-	{
-		if( !mSettings->autoRefresh )
-		{
+	if (ui->checkBox_autoRefresh->isChecked()) {
+		if (!mSettings->autoRefresh) {
 			mSettings->autoRefresh = true;
-            mIniSettings->setValue("autoRefresh", true);
-
-            emit optionChanged( Settings::_AutoRefresh, "1");
+			mIniSettings->setValue("autoRefresh", true);
+			emit optionChanged(Settings::_AutoRefresh, "1");
 		}
-	}
-	else
-	{
-		if(mSettings->autoRefresh)
-		{
+	} else {
+		if(mSettings->autoRefresh) {
 			mSettings->autoRefresh = false;
-            mIniSettings->setValue("autoRefresh", false);
-
-            emit optionChanged(Settings::_AutoRefresh, "0");
+			mIniSettings->setValue("autoRefresh", false);
+			emit optionChanged(Settings::_AutoRefresh, "0");
 		}
 	}
 

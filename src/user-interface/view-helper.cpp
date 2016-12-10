@@ -98,7 +98,18 @@ QColor utils::getBG(QPlainTextEdit *widget)
 	return result;
 }
 
-bool utils::equal(QDoubleSpinBox *spinBox, const QString &value)
+namespace utils {
+
+QString getNonDef(QDoubleSpinBox *sb, const QString &def)
 {
-	return utils::stripZeroes(spinBox->cleanText()) == value;
+	if (!sb->isEnabled())
+		return "";
+
+	const QString text = sb->cleanText();
+	if (utils::stripZeroes(text) == def)
+		return "";
+
+	return text;
 }
+
+} // namespace utils

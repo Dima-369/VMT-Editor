@@ -1,5 +1,4 @@
-#ifndef STRINGS_H
-#define STRINGS_H
+#pragma once
 
 #include <QString>
 
@@ -22,6 +21,12 @@ inline QString stripZeroes(const QString &s)
 	return QString(s).remove(QRegExp("\\.0*(?!0)$"));
 }
 
-} // namespace utils
+/*!
+ * Calls stripZeroes() on the cleanText() value of the spin box.
+ */
+inline QString stripZeroes(QDoubleSpinBox *sp)
+{
+	return stripZeroes(sp->cleanText());
+}
 
-#endif // STRINGS_H
+} // namespace utils

@@ -253,8 +253,6 @@ private:
 
 	void setBackgroundColor( const QColor& color, QPlainTextEdit* colorWidget );
 
-	QString colorToParameter( const QColor& color, bool isWaterShader );
-
 	//----------------------------------------------------------------------------------------//
 
 	bool loadBoolParameter( const QString& value, const QString& parameter );

@@ -259,6 +259,19 @@ bool isTupleBetween(const DoubleTuple &tuple, double min, double max);
  */
 bool isBetween(const QStringList &list, double min, double max);
 
+/*!
+ * Returns the color in {255 128 0} which maps to the RGB values.
+ */
+inline QString toWaterParameter(const QColor &color)
+{
+	return QString("{%1 %2 %3}").arg(color.red(), color.green(), color.blue());
+}
+
+/*!
+ * Returns the color in [0.5 0.1 0.5] with 1.0 being 255.
+ */
+QString toParameter(const QColor &color);
+
 } // namespace utils
 
 #endif // VMTHELPER_H

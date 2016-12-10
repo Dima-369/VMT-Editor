@@ -70,7 +70,8 @@ SOURCES += \
     src/user-interface/phong.cpp \
     src/logging/logging.cpp \
     src/opengl/helpers.cpp \
-    src/utilities/window.cpp
+    src/utilities/window.cpp \
+    src/user-interface/shading-reflection.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -113,7 +114,8 @@ HEADERS += \
     src/user-interface/phong.h \
     src/utilities/strings.h \
     src/opengl/helpers.h \
-    src/utilities/window.h
+    src/utilities/window.h \
+    src/user-interface/shading-reflection.h
 
 FORMS += \
     ui/mainwindow.ui \
@@ -128,6 +130,6 @@ FORMS += \
     ui/editgamedialog.ui \
     ui/editgamesdialog.ui
 
-RESOURCES += ui/resources.qrc
+RESOURCES += resources.qrc
 
 RC_FILE = VMT.rc

@@ -7,8 +7,7 @@
 #include "glwidget_spec.h"
 
 #include "vmt/vmt-helper.h"
-
-#include <QString>
+#include "utilities/strings.h"
 
 namespace utils {
 
@@ -87,16 +86,42 @@ void applyBackgroundColor(int red, int green, int blue,
 QColor getBG(QPlainTextEdit *widget);
 
 /*!
+ * Returns the spin box value if the view is enabled and different to the
+ * default value.
+ *
+ * Make sure to pass "4" for the default value because trailing zeroes
+ * are stripped.
+ */
+QString getNonDef(QDoubleSpinBox *sb, const QString &def);
+
+/*!
  * Strips all trailing zeroes and then compares the resulting string against
  * it.
  *
  * Make sure that you do not include any trailing zeroes in the passed
  * comparion string!
  *
- * If the spin box contains "4.000", we would need to compare against "4.",
- * so that this method returns true.
+ * If the spin box contains "4.00", pass "4" for the value parameter.
  */
-bool equal(QDoubleSpinBox *spinBox, const QString &value);
+inline bool equal(QDoubleSpinBox *spinBox, const QString &value)
+{
+	return utils::stripZeroes(spinBox->cleanText()) == value;
+}
+
+inline bool isChecked(QCheckBox *cb)
+{
+	return cb->isEnabled() && cb->isChecked();
+}
+
+/*!
+ * Returns an empty string if the line edit is not enabled.
+ */
+inline QString getText(QLineEdit *le)
+{
+	if (le->isEnabled())
+		return le->text().trimmed();
+	return "";
+}
 
 } // namespace utils
 

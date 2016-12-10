@@ -49,6 +49,15 @@ QString setKey( const QString& name, const QString& def, QSettings* settings )
 	}
 }
 
+bool setKey(const QString &name, bool def, QSettings *settings)
+{
+	if (settings->contains(name))
+		return settings->value(name).toBool();
+
+	settings->setValue(name, def);
+	return def;
+}
+
 QString addTabs( int amount )
 {
 	QString tmp;

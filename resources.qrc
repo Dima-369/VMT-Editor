@@ -1,0 +1,125 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qss_icons/rc/branch_closed.png</file>
+        <file>qss_icons/rc/branch_closed-on.png</file>
+        <file>qss_icons/rc/branch_open.png</file>
+        <file>qss_icons/rc/branch_open-on.png</file>
+        <file>qss_icons/rc/checkbox.png</file>
+        <file>qss_icons/rc/close.png</file>
+        <file>qss_icons/rc/down_arrow.png</file>
+        <file>qss_icons/rc/down_arrow_disabled.png</file>
+        <file>qss_icons/rc/Hmovetoolbar.png</file>
+        <file>qss_icons/rc/Hsepartoolbar.png</file>
+        <file>qss_icons/rc/left_arrow.png</file>
+        <file>qss_icons/rc/left_arrow_disabled.png</file>
+        <file>qss_icons/rc/right_arrow.png</file>
+        <file>qss_icons/rc/right_arrow_disabled.png</file>
+        <file>qss_icons/rc/scrolldn.png</file>
+        <file>qss_icons/rc/scrollup.png</file>
+        <file>qss_icons/rc/sizegrip.png</file>
+        <file>qss_icons/rc/stylesheet-branch-end.png</file>
+        <file>qss_icons/rc/stylesheet-branch-more.png</file>
+        <file>qss_icons/rc/stylesheet-vline.png</file>
+        <file>qss_icons/rc/transparent.png</file>
+        <file>qss_icons/rc/undock.png</file>
+        <file>qss_icons/rc/up_arrow.png</file>
+        <file>qss_icons/rc/up_arrow_disabled.png</file>
+        <file>qss_icons/rc/Vmovetoolbar.png</file>
+        <file>qss_icons/rc/Vsepartoolbar.png</file>
+        <file>qss_icons/rc/right.png</file>
+        <file>qss_icons/rc/gopen.png</file>
+        <file>qss_icons/rc/scrolllf.png</file>
+        <file>qss_icons/rc/scrollrt.png</file>
+    </qresource>
+    <qresource prefix="/textures">
+        <file alias="alpha">Images/alpha.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="subGroup">Images/ac1.png</file>
+        <file alias="vmt_192_flat">Images/vmt_192_flat.png</file>
+        <file alias="parameter">Images/ac2.png</file>
+        <file alias="openVmt">Images/open.png</file>
+        <file alias="vmt_16">Images/vmt_16.png</file>
+        <file alias="vmt_256">Images/vmt_256.png</file>
+        <file alias="qt">Images/qt.png</file>
+        <file alias="browse">Images/browse.png</file>
+        <file alias="preview">Images/preview2.png</file>
+        <file alias="new">Images/new.png</file>
+        <file alias="save">Images/save.png</file>
+        <file alias="about">Images/about.png</file>
+        <file alias="help">Images/help.png</file>
+        <file alias="warning">Images/warning.png</file>
+        <file alias="error">Images/error.png</file>
+        <file alias="info">Images/info.png</file>
+        <file alias="info32">Images/info32.png</file>
+        <file alias="1">Images/1.png</file>
+        <file alias="2">Images/2.png</file>
+        <file alias="3">Images/3.png</file>
+        <file alias="4">Images/4.png</file>
+        <file alias="5">Images/5.png</file>
+        <file alias="6">Images/6.png</file>
+        <file alias="saveAs">Images/saveas.png</file>
+        <file alias="vmt_192">Images/vmt_192.png</file>
+        <file alias="border">Images/border.png</file>
+        <file alias="addGroup">Images/add_group.png</file>
+        <file alias="addShader">Images/add_shader.png</file>
+        <file alias="resetShader">Images/default_shader.png</file>
+        <file alias="enableDisableShader">Images/en_dis_shader.png</file>
+        <file alias="removeGroup">Images/remove_group.png</file>
+        <file alias="removeShader">Images/remove_shader.png</file>
+        <file alias="cacheOptions">Images/cacheOptions.png</file>
+        <file alias="parametersOptions">Images/parametersOptions.png</file>
+        <file alias="texturePreviewOptions">Images/texturePreviewOptions.png</file>
+        <file alias="vmt32">Images/vmt32.png</file>
+        <file alias="success">Images/success.png</file>
+        <file alias="failed">Images/failed.png</file>
+        <file alias="basetexture">Images/basetexture.png</file>
+        <file alias="basetexture2">Images/basetexture2.png</file>
+        <file alias="color">Images/color.png</file>
+        <file alias="detail">Images/detail.png</file>
+        <file alias="other">Images/other.png</file>
+        <file alias="trans">Images/trans.png</file>
+        <file alias="illu">Images/illu.png</file>
+        <file alias="phong">Images/phong.png</file>
+        <file alias="ref">Images/ref.png</file>
+        <file alias="transparent">Images/transparent.png</file>
+        <file alias="information">Images/information.png</file>
+        <file alias="info_warning">Images/info_warning.png</file>
+        <file alias="vmt_options">Images/vmt_options.png</file>
+        <file alias="misc">Images/misc.png</file>
+    </qresource>
+    <qresource prefix="/files">
+        <file alias="subGroups">Misc/completions.txt</file>
+        <file alias="parameters">Misc/completions_parameters.txt</file>
+        <file alias="quoteParameters">Misc/quotes_required.txt</file>
+        <file alias="defaultShaders">Misc/default_shader_settings.txt</file>
+        <file alias="allowedShaderGroups">Misc/allowed_shadergroups.txt</file>
+        <file alias="vmt_parameters">Misc/vmt_parameters.txt</file>
+    </qresource>
+    <qresource prefix="/surfaces">
+        <file alias="alienSwarm">Misc/surfaceprops_alienswarm.txt</file>
+        <file alias="default">Misc/surfaceprops_default.txt</file>
+        <file alias="ep2">Misc/surfaceprops_ep2.txt</file>
+        <file alias="hl2">Misc/surfaceprops_hl2.txt</file>
+        <file alias="l4d">Misc/surfaceprops_l4d.txt</file>
+        <file alias="l4d2">Misc/surfaceprops_l4d2.txt</file>
+        <file alias="portal">Misc/surfaceprops_portal.txt</file>
+        <file alias="portal2">Misc/surfaceprops_portal2.txt</file>
+        <file alias="csgo">Misc/surfaceprops_csgo.txt</file>
+    </qresource>
+    <qresource prefix="/overlays">
+        <file alias="bump1">Misc/texture_overlays/01bump.png</file>
+        <file alias="diffuse1">Misc/texture_overlays/01diffuse.png</file>
+        <file alias="exponent1">Misc/texture_overlays/01exponent.png</file>
+        <file alias="spec1">Misc/texture_overlays/01spec.png</file>
+        <file alias="bump2">Misc/texture_overlays/02bump.png</file>
+        <file alias="diffuse2">Misc/texture_overlays/02diffuse.png</file>
+        <file alias="diffuse3">Misc/texture_overlays/03diffuse.png</file>
+        <file alias="diffuse4">Misc/texture_overlays/04diffuse.png</file>
+        <file alias="detail">Misc/texture_overlays/01detail.png</file>
+        <file alias="texture1">Misc/texture_overlays/01texture.png</file>
+        <file alias="texture2">Misc/texture_overlays/02texture.png</file>
+        <file alias="texture3">Misc/texture_overlays/03texture.png</file>
+        <file alias="texture4">Misc/texture_overlays/04texture.png</file>
+    </qresource>
+</RCC>
