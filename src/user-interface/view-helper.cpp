@@ -55,9 +55,9 @@ void utils::applyBackgroundColor(const QString &parameter, const QString &value,
 }
 
 void utils::applyBackgroundColor(const QString &parameter, const QString &value,
-		QPlainTextEdit *colorWidget, Ui::MainWindow *ui)
+		QPlainTextEdit *colorWidget, Ui::MainWindow *ui, bool toSrgb)
 {
-	utils::ColorResult r = utils::parseColor(parameter, value, ui);
+	utils::ColorResult r = utils::parseColor(parameter, value, ui, toSrgb);
 
 	if (r.notDefault) {
 		int red = r.intValues.at(0);

@@ -72,7 +72,7 @@ utils::IntResult utils::parseInt(const QString &parameter, const QString &value,
 }
 
 utils::ColorResult utils::parseColor(const QString &parameter,
-		const QString &value, Ui::MainWindow *ui)
+		const QString &value, Ui::MainWindow *ui, bool toSrgb)
 {
 	utils::ColorResult result;
 
@@ -101,6 +101,8 @@ utils::ColorResult utils::parseColor(const QString &parameter,
 			} else if (x > 1.0) {
 				x = 1.0;
 			}
+			if (toSrgb)
+				x = pow(x, 0.454545);
 			result.intValues.append(static_cast<int>(x * 255.0));
 		}
 		return result;
@@ -310,14 +312,21 @@ bool utils::isBetween(const QStringList& list, double min, double max)
 
 namespace utils {
 
-QString toParameter(const QColor &color)
+QString toParameter(const QColor &color, bool toLinear)
 {
-	const QString red =
-		stripZeroes(QString::number(color.redF(), 'f', 2));
-	const QString green =
-		stripZeroes(QString::number(color.greenF(), 'f', 2));
-	const QString blue =
-		stripZeroes(QString::number(color.blueF(), 'f', 2));
+	double redf = color.redF();
+	double greenf = color.greenF();
+	double bluef = color.blueF();
+
+	if(toLinear) {
+		redf = pow(redf, 2.2);
+		greenf = pow(greenf, 2.2);
+		bluef = pow(bluef, 2.2);
+	}
+
+	const QString red = stripZeroes(QString::number(redf, 'f', 2));
+	const QString green = stripZeroes(QString::number(greenf, 'f', 2));
+	const QString blue = stripZeroes(QString::number(bluef, 'f', 2));
 
 	return QString("[%1 %2 %3]").arg(red, green, blue);
 }
