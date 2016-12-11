@@ -3968,7 +3968,7 @@ VmtFile MainWindow::makeVMT()
 
 		if( !tmp2.isEmpty() && !tmp3.isEmpty() )
 		{
-			if( tmp3.contains( QRegExp("[\\s]+") ))
+			if( tmp3.contains( QRegExp("[\\s\\\/]+") ))
 			{
 				tmp3.prepend("\"");
 				tmp3.append("\"");
