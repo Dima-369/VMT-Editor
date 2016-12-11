@@ -66,7 +66,7 @@ void applyBackgroundColor(const QString &parameter, const QString &value,
 	Ui::MainWindow *ui);
 
 void applyBackgroundColor(const QString &parameter, const QString &value,
-	QPlainTextEdit *colorWidget, Ui::MainWindow *ui);
+	QPlainTextEdit *colorWidget, Ui::MainWindow *ui, bool toSrgb = false);
 
 /*!
  * Applies a background-color stylesheet to the passed color widget.

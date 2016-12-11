@@ -3083,7 +3083,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	if( !( value = vmt.parameters.take("$color") ).isEmpty() )
 	{
 		QString col1 = "$color";
-		utils::applyBackgroundColor(col1, value, ui->color_color1, ui);
+		utils::applyBackgroundColor(col1, value, ui->color_color1, ui, true);
 
 		showColor = true;
 	}
@@ -3680,7 +3680,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_color->isHidden() ) {
 
-		tmp = toParameter(utils::getBG(ui->color_color1));
+		tmp = toParameter(utils::getBG(ui->color_color1), true);
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color", tmp );
 

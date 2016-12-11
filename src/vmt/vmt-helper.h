@@ -173,7 +173,7 @@ IntResult parseInt(const QString &parameter, const QString &value, int def,
  * The UI parameter is required as we need to log errors.
  */
 ColorResult parseColor(const QString &parameter, const QString &value,
-	Ui::MainWindow *ui);
+	Ui::MainWindow *ui, bool toSrgb = false);
 
 /*!
  * Parses the passed boolean parameter with values 0 or 1.
@@ -270,7 +270,7 @@ inline QString toWaterParameter(const QColor &color)
 /*!
  * Returns the color in [0.5 0.1 0.5] with 1.0 being 255.
  */
-QString toParameter(const QColor &color);
+QString toParameter(const QColor &color, bool toLinear = false);
 
 } // namespace utils
 
