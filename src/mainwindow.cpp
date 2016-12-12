@@ -4585,32 +4585,26 @@ void MainWindow::toggleTransparency() {
 			ui->action_transparency->setChecked(false);
 		}
 	}
-
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleDetailTexture()
 {
 	utils::toggle(this, ui->action_detail, ui->groupBox_detailTexture);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleColor()
 {
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleOther()
 {
 	utils::toggle(this, ui->action_other, ui->groupBox_textureOther);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleMisc()
 {
 	utils::toggle(this, ui->action_misc, ui->groupBox_misc);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhong() {
@@ -4632,7 +4626,6 @@ void MainWindow::togglePhong() {
 	}
 
 	utils::toggle(this, ui->action_phong, ui->groupBox_phong);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhongBrush() {
@@ -4641,7 +4634,6 @@ void MainWindow::togglePhongBrush() {
 		previewTexture(preview.mode, preview.texture);
 	}
 	utils::toggle(this, ui->action_phongBrush, ui->groupBox_phongBrush);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleReflection() {
@@ -4662,13 +4654,11 @@ void MainWindow::toggleReflection() {
 	}
 
 	utils::toggle(this, ui->action_reflection, ui->groupBox_shadingReflection);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleSelfIllumination() {
 	utils::toggle(this, ui->action_selfIllumination,
 				  ui->groupBox_selfIllumination);
-	checkTextureVisibility();
 }
 
 QString MainWindow::currentGameMaterialDir() {
@@ -6413,7 +6403,6 @@ void MainWindow::shaderChanged()
 	phongAction->setVisible( ui->action_phong->isEnabled() && ui->menu_shading->isEnabled() );
 
 	phongBrushAction->setVisible( ui->action_phongBrush->isEnabled() && ui->menu_shading->isEnabled() );
-	checkTextureVisibility();
 
 	updateWindowTitle();
 
@@ -6545,31 +6534,6 @@ void MainWindow::dragMoveEvent(QDragMoveEvent* event)
 void MainWindow::dragLeaveEvent(QDragLeaveEvent* event)
 {
 	event->accept();
-}
-
-void MainWindow::checkTextureVisibility()
-{
-	// TODO: Why is this necessary?
-	/*glWidget_diffuse1->setVisible( !ui->groupBox_baseTexture->isHidden()  && (glWidget_diffuse1->showBumpmap || glWidget_diffuse1->showDiffuse) );
-	glWidget_diffuse2->setVisible( !ui->groupBox_baseTexture2->isHidden() && (glWidget_diffuse2->showBumpmap || glWidget_diffuse2->showDiffuse) );
-
-	foreach (GLWidget* glWidget, glWidgets) {
-
-		if (glWidget->isPreviewing()) {
-			if( glWidget->objectName() == "preview_basetexture3" )
-				glWidget->setVisible( !ui->groupBox_baseTexture3->isHidden() );
-			else if( glWidget->objectName() == "preview_basetexture4" )
-				glWidget->setVisible( !ui->groupBox_baseTexture4->isHidden() );
-			else if( glWidget->objectName() == "preview_detail" )
-				glWidget->setVisible( !ui->groupBox_detailTexture->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap1" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap2" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_exponent1" )
-				glWidget->setVisible( !ui->groupBox_phong->isHidden() );
-		}
-	}*/
 }
 
 void MainWindow::setGameState(bool enabled)
@@ -8970,7 +8934,6 @@ void ValueLineEdit::_editingFinished()
 // convenience macro for handling menu action triggers (see below for usage)
 #define HANDLE_ACTION(groupBox) { \
 	utils::toggle(this, checked, groupBox, mParsingVMT); \
-	checkTextureVisibility(); \
 }
 
 void MainWindow::on_action_baseTexture2_triggered(bool checked)

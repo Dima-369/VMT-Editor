@@ -297,8 +297,6 @@ private:
 
 public slots:
 
-	void checkTextureVisibility();
-
 	void finishedLoading();
 
 	void acceptedEditGames();
