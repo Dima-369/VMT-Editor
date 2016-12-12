@@ -1334,7 +1334,7 @@ QGroupBox::title {
              <x>0</x>
              <y>0</y>
              <width>880</width>
-             <height>4505</height>
+             <height>4524</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -15100,7 +15100,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1154</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -15359,11 +15359,26 @@ border: 1px solid #222;
 }
 </string>
        </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::NoSelection</enum>
        </property>
        <property name="isWrapping" stdset="0">
         <bool>true</bool>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+       <property name="layoutMode">
+        <enum>QListView::SinglePass</enum>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
