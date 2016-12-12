@@ -1,5 +1,4 @@
-#ifndef VMTPARSER_H
-#define VMTPARSER_H
+#pragma once
 
 #include <QString>
 #include <QMap>
@@ -19,7 +18,7 @@
  */
 struct VmtState
 {
-	bool phongEnabled;
+	bool phongEnabled = false;
 
 	/*!
 	 * True if the phong or phongbrush group box should be shown.
@@ -28,33 +27,24 @@ struct VmtState
 	 * shown. Show the phong group box on the VertexLitGeneric shader and
 	 * the phongbrush otherwise.
 	 */
-	bool showPhong;
+	bool showPhong = false;
 
-	bool normalBlendEnabled;
+	bool normalBlendEnabled = false;
 
-	bool showNormalBlend;
+	bool showNormalBlend = false;
 
-	bool detailEnabled;
+	bool detailEnabled = false;
 
-	bool showDetail;
+	bool showDetail = false;
 
 	/*!
 	 * Helper field to persist the directory of the game so textures can be
 	 * validated and previewed.
 	 *
-	 * Should be set in the start of parseVmt(). Set it to 0 if no game is
-	 * selected.
+	 * Should be set in the start of parseVmt().
+	 * Set it to NULL if no game is selected.
 	 */
-	QDir *gameDirectory;
-
-	VmtState() :
-		phongEnabled(false),
-		showPhong(false),
-		normalBlendEnabled(false),
-		showNormalBlend(false),
-		detailEnabled(false),
-		showDetail(false),
-		gameDirectory(0) {}
+	QDir *gameDirectory = nullptr;
 };
 
 struct VmtFile
@@ -145,5 +135,3 @@ private:
 
 	static QString alphabeticallySortedParameters( QMap< QString, QString >* parameters, bool isPatchShader, bool quotesForTextures, bool useIndentation );
 };
-
-#endif // VMTPARSER_H

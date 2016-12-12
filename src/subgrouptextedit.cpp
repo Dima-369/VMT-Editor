@@ -84,9 +84,8 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 
 	QObject::connect( mCompleter, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
 
-	// we do not clear the memory because this TextEdit is only created once
-
 	// to color groups like PlayerLogo
+	// we do not clear the memory because this TextEdit is only created once
 	new Highlighter(document());
 
 	// Calculating the tab stop width by taking 4 random characters as Consolas is a monospaced font

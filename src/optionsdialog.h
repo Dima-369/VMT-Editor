@@ -41,8 +41,9 @@ struct Settings
 		FileName,
 		FullPath
 	};
-
-	bool saveLastGame; // 0 = disable, 1 = enable, [game name] = only available on 1, stores last game
+	//
+	// 0 = disable, 1 = enable, [game name] = only available on 1, stores last game
+	bool saveLastGame; 
 
 	QString lastGame;
 
