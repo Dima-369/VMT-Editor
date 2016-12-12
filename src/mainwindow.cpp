@@ -6648,8 +6648,9 @@ void MainWindow::readSettings()
 
 	ui->tabWidget->setTabText(0, tabTitle);
 
-
-	mSettings->lastGame = setKey("lastGame", "", mIniSettings);
+	// Note that if you just pass "" for the def, because then the boolean
+	// overloaded method is used for some random reason
+	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 
