@@ -15372,10 +15372,10 @@ border: 1px solid #222;
         <enum>QAbstractItemView::NoSelection</enum>
        </property>
        <property name="isWrapping" stdset="0">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="resizeMode">
-        <enum>QListView::Adjust</enum>
+        <enum>QListView::Fixed</enum>
        </property>
        <property name="layoutMode">
         <enum>QListView::SinglePass</enum>
