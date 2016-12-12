@@ -9,7 +9,7 @@ Highlighter::Highlighter( QTextDocument* parent ) :
 
 	//////////////////////////////////////////////
 
-	QStringList groupPatterns = listFromFile(":/files/subGroups");
+	QStringList groupPatterns = extractLines(":/files/subGroups");
 
 	for( int i = 0; i < groupPatterns.size(); ++i )
 		groupPatterns[i] = "\\b" + groupPatterns.at(i) + "\\b";
@@ -28,7 +28,7 @@ Highlighter::Highlighter( QTextDocument* parent ) :
 
 	//////////////////////////////////////////////
 
-	QStringList parameterPatterns = listFromFile(":/files/parameters");
+	QStringList parameterPatterns = extractLines(":/files/parameters");
 
 	for( int i = 0; i < parameterPatterns.size(); ++i )
 	{

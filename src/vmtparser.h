@@ -8,6 +8,7 @@
 #include <QDir>
 
 #include "utilities.h"
+#include "utilities/strings.h"
 
 /*!
  * Represents the state of the parsed VMT like if $phong is enabled to help

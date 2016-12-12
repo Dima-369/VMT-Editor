@@ -5867,7 +5867,7 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_maskTexture->setDisabled(true);
 
-		QStringList defaultSurfaces = listFromFile(":/surfaces/default");
+		QStringList defaultSurfaces = extractLines(":/surfaces/default");
 		ui->comboBox_surface->insertItems(1, defaultSurfaces);
 		ui->comboBox_surface2->insertItems(1, defaultSurfaces);
 		ui->comboBox_unlitTwoTextureSurface->insertItems(1, defaultSurfaces);
@@ -5922,29 +5922,29 @@ void MainWindow::gameChanged( const QString& game )
 		ui->toolButton_unlitTwoTextureDiffuse->setEnabled(true);
 		ui->toolButton_unlitTwoTextureDiffuse2->setEnabled(true);
 
-		QStringList tmp( listFromFile(":/surfaces/default") );
+		QStringList tmp(extractLines(":/surfaces/default"));
 
 		if( getCurrentGame() == "Alien Swarm" )
 		{
-			tmp.append( listFromFile(":/surfaces/alienSwarm") );
+			tmp.append(extractLines(":/surfaces/alienSwarm"));
 		}
 		else if( getCurrentGame() == "Half-Life 2: Episode Two" )
 		{
-			tmp.append( listFromFile(":/surfaces/ep2") );
+			tmp.append(extractLines(":/surfaces/ep2"));
 		}
 		else if( getCurrentGame() == "Half-Life 2" )
 		{
-			tmp.append( listFromFile(":/surfaces/hl2") );
+			tmp.append( extractLines(":/surfaces/hl2") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead" )
 		{
-			tmp.append( listFromFile(":/surfaces/l4d") );
+			tmp.append( extractLines(":/surfaces/l4d") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead 2" )
-			tmp.append( listFromFile(":/surfaces/l4d") + listFromFile(":/surfaces/l4d2"));
+			tmp.append( extractLines(":/surfaces/l4d") + extractLines(":/surfaces/l4d2"));
 
 		else if( getCurrentGame() == "Counter-Strike: Global Offensive" )
-			tmp.append( listFromFile(":/surfaces/csgo") );
+			tmp.append( extractLines(":/surfaces/csgo") );
 
 		tmp.sort();
 
@@ -8747,7 +8747,7 @@ void MainWindow::displayAboutDialog()
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
 	QLineEdit(parent),
-	completer(setModelFromFile(":/files/vmt_parameters", this))
+	completer(new QCompleter(extractLines(":/files/vmt_parameters")))
 {
 	setMinimumWidth(250);
 	setAttribute(Qt::WA_DeleteOnClose);

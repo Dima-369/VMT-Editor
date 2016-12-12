@@ -11,7 +11,7 @@ QStringList VmtParser::mGroups;
 VmtParser::VmtParser( QListWidget* logger ) :
 	mLogger(logger)
 {
-	mQuoteParameters = listFromFile(":/files/quoteParameters");
+	mQuoteParameters = extractLines(":/files/quoteParameters");
 
 	// Used for nice VMT formatting, the order here is important
 

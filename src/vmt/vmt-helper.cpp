@@ -28,7 +28,7 @@ utils::DoubleResult utils::parseDouble(const QString &parameter,
 		return result;
 	}
 
-	QString v = utils::stripZeroes(value);
+	const auto v = stripZeroes(value);
 	if (def == v) {
 		if (logErrors) {
 			if (def.contains(".")) {
@@ -255,7 +255,7 @@ utils::DoubleTuple utils::toDoubleTuple(const QString &s, int amount)
 
 			if (ok) {
 				result.values.append(c);
-				result.strings.append(utils::stripZeroes(s));
+				result.strings.append(stripZeroes(s));
 			} else {
 				result.valid = false;
 				qDebug() << "Parse error: " << s;
