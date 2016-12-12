@@ -4358,6 +4358,24 @@ void MainWindow::resetWidgets() {
 
 	//----------------------------------------------------------------------------------------//
 
+	//TODO: Make this work
+
+	QCompleter* qCompleter = new QCompleter(this);
+
+	QStringList tmp = listFromFile(":/files/vmt_parameters");
+	tmp << listFromFile(":/files/vmt_parameters");
+
+	qCompleter->setModel( new QStringListModel( tmp ) );
+
+	QListView* list = new QListView();
+	list->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+
+	qCompleter->setPopup(list);
+	qCompleter->setCompletionMode(QCompleter::PopupCompletion);
+	qCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+	//-----
+
 	QLayoutItem *child;
 	while ((child = ui->formLayout_2->takeAt(0)) != 0) {
 		delete child->widget();
@@ -4372,6 +4390,10 @@ void MainWindow::resetWidgets() {
 
 	ui->formLayout_2->addRow( new ParameterLineEdit(ui->scrollAreaWidgetContents) );
 	ui->formLayout_3->addRow( new ValueLineEdit(ui->scrollAreaWidgetContents) );
+
+	//And this
+
+	ui->formLayout_2->setCompleter(qCompleter);
 
 	//----------------------------------------------------------------------------------------//
 
