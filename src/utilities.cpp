@@ -35,18 +35,12 @@ QStringList listFromFile( const QString& fileName )
 	return words;
 }
 
-QString setKey( const QString& name, const QString& def, QSettings* settings )
+QString setKey(const QString& name, const QString& def, QSettings* settings)
 {
 	if( settings->contains(name) )
-	{
 		return settings->value(name).toString();
-	}
-	else
-	{
-		settings->setValue( name, def );
-
-		return def;
-	}
+	settings->setValue(name, def);
+	return def;
 }
 
 bool setKey(const QString &name, bool def, QSettings *settings)
