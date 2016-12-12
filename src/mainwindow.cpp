@@ -5410,12 +5410,15 @@ void MainWindow::widgetChanged()
 		}
 
 		if(mSettings->autoRefresh) {
-
-			QWidget* caller = qobject_cast<QWidget *>( sender() );
-
-			if( caller->objectName() != "textEdit_proxies" ) {
+			const auto c = sender();
+			if (c == nullptr) {
 				refreshRequested();
+			} else {
+				if(qobject_cast<QWidget*>(c)->objectName() != "textEdit_proxies" ) {
+					refreshRequested();
+				}
 			}
+			
 		}
 	}
 
