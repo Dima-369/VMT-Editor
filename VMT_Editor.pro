@@ -2,6 +2,7 @@ QT += core gui opengl widgets
 
 TEMPLATE = app
 
+CONFIG += c++11
 
 win32-msvc*:{
     QMAKE_CXXFLAGS_RELEASE -= "-O2"
@@ -71,7 +72,8 @@ SOURCES += \
     src/logging/logging.cpp \
     src/opengl/helpers.cpp \
     src/utilities/window.cpp \
-    src/user-interface/shading-reflection.cpp
+    src/user-interface/shading-reflection.cpp \
+    src/utilities/strings.cpp \
 
 HEADERS += \
     src/mainwindow.h \

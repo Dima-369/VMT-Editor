@@ -80,21 +80,14 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 	mCompleter->setModel( new StringListModel( tmp, mCompleter ) );
 
 
-	QListView* list = new QListView();
-	list->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-
-	mCompleter->setPopup( list );
-
-
 	mCompleter->setWidget(this);
 	mCompleter->setCompletionMode(QCompleter::PopupCompletion);
 	mCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
 	QObject::connect( mCompleter, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
 
-
-	Highlighter* highlighter = new Highlighter( document() );
-	Q_UNUSED(highlighter)
+	// to color groups like PlayerLogo
+	new Highlighter(document());
 
 	// Calculating the tab stop width by taking 4 random characters as Consolas is a monospaced font
 	QFont font( fontFamily(), 9 );

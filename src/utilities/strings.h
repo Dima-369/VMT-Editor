@@ -1,6 +1,9 @@
 #pragma once
 
-#include <QString>
+#include <QStringListModel>
+#include <QDoubleSpinBox>
+#include <QFile>
+#include <QCompleter>
 
 namespace utils {
 
@@ -16,17 +19,17 @@ namespace utils {
  *
  * This is used to avoid comparing against double values where possible.
  */
-inline QString stripZeroes(const QString &s)
-{
-	return QString(s).remove(QRegExp("\\.0*(?!0)$"));
-}
+QString stripZeroes(const QString& s);
 
 /*!
  * Calls stripZeroes() on the cleanText() value of the spin box.
  */
-inline QString stripZeroes(QDoubleSpinBox *sp)
-{
-	return stripZeroes(sp->cleanText());
-}
+QString stripZeroes(QDoubleSpinBox *sp);
+
+/*!
+ * Parses the lines from the passed file to a QStringListModel and sets it on
+ * the passed QCompleter.
+ */
+QCompleter* setModelFromFile(const QString &fileName, QObject* o);
 
 } // namespace utils

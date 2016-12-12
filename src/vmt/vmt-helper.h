@@ -8,6 +8,7 @@
 #include <QString>
 #include <QVector>
 #include <QDoubleSpinBox>
+#include <QtMath>
 
 namespace utils {
 

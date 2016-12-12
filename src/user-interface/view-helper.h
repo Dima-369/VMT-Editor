@@ -105,7 +105,7 @@ QString getNonDef(QDoubleSpinBox *sb, const QString &def);
  */
 inline bool equal(QDoubleSpinBox *spinBox, const QString &value)
 {
-	return utils::stripZeroes(spinBox->cleanText()) == value;
+    return utils::stripZeroes(spinBox) == value;
 }
 
 inline bool isChecked(QCheckBox *cb)

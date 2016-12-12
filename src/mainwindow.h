@@ -21,6 +21,7 @@
 #include "texturethread.h"
 #include "optionsdialog.h"
 #include "tintslider.h"
+#include "utilities/strings.h"
 
 
 namespace Ui {
@@ -430,6 +431,10 @@ public:
 public slots:
 
 	void _editingFinished();
+
+private:
+	
+	QCompleter* completer;
 };
 
 //----------------------------------------------------------------------------------------//

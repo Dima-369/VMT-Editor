@@ -87,7 +87,7 @@ $fogend
 $flashlighttint
 $lightmapwaterfog
 %compilewater
-$basemapluminancephongmask 1
+$basemapluminancephongmask
 $phongfresnelranges
 $phongtint
 $halflambert
@@ -124,7 +124,7 @@ $bumptransform
 $addbumpmaps
 $bumpdetailscale1
 $bumptransform2
-$disablecsmlookup 0
+$disablecsmlookup
 $treesway
 $treeswayfalloffexp
 $treeswayheight

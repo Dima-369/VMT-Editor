@@ -3961,20 +3961,14 @@ VmtFile MainWindow::makeVMT()
 	//----------------------------------------------------------------------------------------//
 
 	QString tmp2, tmp3;
-	for( int i = 0; i < ui->formLayout_2->count(); ++i )
-	{
+	for (int i = 0; i < ui->formLayout_2->count(); ++i ) {
 		tmp2 = reinterpret_cast<QLineEdit*>( ui->formLayout_2->itemAt(i)->widget() )->text().trimmed();
 		tmp3 = reinterpret_cast<QLineEdit*>( ui->formLayout_3->itemAt(i)->widget() )->text().trimmed();
 
-		if( !tmp2.isEmpty() && !tmp3.isEmpty() )
-		{
-			if( tmp3.contains( QRegExp("[\\s\\\/]+") ))
-			{
-				tmp3.prepend("\"");
-				tmp3.append("\"");
-			}
-
-			vmtFile.parameters.insert( tmp2, tmp3 );
+		if (!tmp2.isEmpty() && !tmp3.isEmpty()) {
+			if (tmp3.contains(QRegExp(R"([\s\\\/]+)")))
+				tmp3 = "\"" + tmp3 + "\"";
+			vmtFile.parameters.insert(tmp2, tmp3);
 		}
 	}
 
@@ -4358,24 +4352,6 @@ void MainWindow::resetWidgets() {
 
 	//----------------------------------------------------------------------------------------//
 
-	//TODO: Make this work
-
-	QCompleter* qCompleter = new QCompleter(this);
-
-	QStringList tmp = listFromFile(":/files/vmt_parameters");
-	tmp << listFromFile(":/files/vmt_parameters");
-
-	qCompleter->setModel( new QStringListModel( tmp ) );
-
-	QListView* list = new QListView();
-	list->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-
-	qCompleter->setPopup(list);
-	qCompleter->setCompletionMode(QCompleter::PopupCompletion);
-	qCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-
-	//-----
-
 	QLayoutItem *child;
 	while ((child = ui->formLayout_2->takeAt(0)) != 0) {
 		delete child->widget();
@@ -4390,10 +4366,6 @@ void MainWindow::resetWidgets() {
 
 	ui->formLayout_2->addRow( new ParameterLineEdit(ui->scrollAreaWidgetContents) );
 	ui->formLayout_3->addRow( new ValueLineEdit(ui->scrollAreaWidgetContents) );
-
-	//And this
-
-	ui->formLayout_2->setCompleter(qCompleter);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -8809,13 +8781,18 @@ void MainWindow::displayAboutDialog()
 //----------------------------------------------------------------------------------------//
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
-	QLineEdit(parent)
+	QLineEdit(parent),
+	completer(setModelFromFile(":/files/vmt_parameters", this))
 {
-	setMinimumWidth(200);
-	setMaximumWidth(200);
-	setAttribute( Qt::WA_DeleteOnClose );
+	setMinimumWidth(250);
+	setAttribute(Qt::WA_DeleteOnClose);
 
-	connect( this, SIGNAL( textChanged(QString) ), this, SLOT( _editingFinished() ));
+	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setFilterMode(Qt::MatchContains);
+	setCompleter(completer);
+
+	connect(this, SIGNAL(textChanged(QString)), this, SLOT(_editingFinished()));
 }
 
 void ParameterLineEdit::_editingFinished()
@@ -8904,7 +8881,7 @@ void ParameterLineEdit::_editingFinished()
 ValueLineEdit::ValueLineEdit(QWidget* parent) :
 	QLineEdit(parent)
 {
-	setAttribute( Qt::WA_DeleteOnClose );
+	setAttribute(Qt::WA_DeleteOnClose);
 
 	connect( this, SIGNAL( textChanged(QString) ), this, SLOT( _editingFinished() ));
 }
