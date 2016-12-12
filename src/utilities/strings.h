@@ -5,8 +5,6 @@
 #include <QFile>
 #include <QCompleter>
 
-namespace utils {
-
 /*!
  * Macro to convert the passed number to a QString.
  */
@@ -27,9 +25,6 @@ QString stripZeroes(const QString& s);
 QString stripZeroes(QDoubleSpinBox *sp);
 
 /*!
- * Parses the lines from the passed file to a QStringListModel and sets it on
- * the passed QCompleter.
+ * Extracts non empty lines from the passed file.
  */
-QCompleter* setModelFromFile(const QString &fileName, QObject* o);
-
-} // namespace utils
+QStringList extractLines(const QString& fileName);

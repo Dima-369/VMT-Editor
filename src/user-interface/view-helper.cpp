@@ -106,7 +106,7 @@ QString getNonDef(QDoubleSpinBox *sb, const QString &def)
 		return "";
 
 	const QString text = sb->cleanText();
-	if (utils::stripZeroes(text) == def)
+	if (stripZeroes(text) == def)
 		return "";
 
 	return text;

@@ -4585,32 +4585,26 @@ void MainWindow::toggleTransparency() {
 			ui->action_transparency->setChecked(false);
 		}
 	}
-
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleDetailTexture()
 {
 	utils::toggle(this, ui->action_detail, ui->groupBox_detailTexture);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleColor()
 {
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleOther()
 {
 	utils::toggle(this, ui->action_other, ui->groupBox_textureOther);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleMisc()
 {
 	utils::toggle(this, ui->action_misc, ui->groupBox_misc);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhong() {
@@ -4632,7 +4626,6 @@ void MainWindow::togglePhong() {
 	}
 
 	utils::toggle(this, ui->action_phong, ui->groupBox_phong);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhongBrush() {
@@ -4641,7 +4634,6 @@ void MainWindow::togglePhongBrush() {
 		previewTexture(preview.mode, preview.texture);
 	}
 	utils::toggle(this, ui->action_phongBrush, ui->groupBox_phongBrush);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleReflection() {
@@ -4662,13 +4654,11 @@ void MainWindow::toggleReflection() {
 	}
 
 	utils::toggle(this, ui->action_reflection, ui->groupBox_shadingReflection);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleSelfIllumination() {
 	utils::toggle(this, ui->action_selfIllumination,
 				  ui->groupBox_selfIllumination);
-	checkTextureVisibility();
 }
 
 QString MainWindow::currentGameMaterialDir() {
@@ -5877,7 +5867,7 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_maskTexture->setDisabled(true);
 
-		QStringList defaultSurfaces = listFromFile(":/surfaces/default");
+		QStringList defaultSurfaces = extractLines(":/surfaces/default");
 		ui->comboBox_surface->insertItems(1, defaultSurfaces);
 		ui->comboBox_surface2->insertItems(1, defaultSurfaces);
 		ui->comboBox_unlitTwoTextureSurface->insertItems(1, defaultSurfaces);
@@ -5932,29 +5922,29 @@ void MainWindow::gameChanged( const QString& game )
 		ui->toolButton_unlitTwoTextureDiffuse->setEnabled(true);
 		ui->toolButton_unlitTwoTextureDiffuse2->setEnabled(true);
 
-		QStringList tmp( listFromFile(":/surfaces/default") );
+		QStringList tmp(extractLines(":/surfaces/default"));
 
 		if( getCurrentGame() == "Alien Swarm" )
 		{
-			tmp.append( listFromFile(":/surfaces/alienSwarm") );
+			tmp.append(extractLines(":/surfaces/alienSwarm"));
 		}
 		else if( getCurrentGame() == "Half-Life 2: Episode Two" )
 		{
-			tmp.append( listFromFile(":/surfaces/ep2") );
+			tmp.append(extractLines(":/surfaces/ep2"));
 		}
 		else if( getCurrentGame() == "Half-Life 2" )
 		{
-			tmp.append( listFromFile(":/surfaces/hl2") );
+			tmp.append( extractLines(":/surfaces/hl2") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead" )
 		{
-			tmp.append( listFromFile(":/surfaces/l4d") );
+			tmp.append( extractLines(":/surfaces/l4d") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead 2" )
-			tmp.append( listFromFile(":/surfaces/l4d") + listFromFile(":/surfaces/l4d2"));
+			tmp.append( extractLines(":/surfaces/l4d") + extractLines(":/surfaces/l4d2"));
 
 		else if( getCurrentGame() == "Counter-Strike: Global Offensive" )
-			tmp.append( listFromFile(":/surfaces/csgo") );
+			tmp.append( extractLines(":/surfaces/csgo") );
 
 		tmp.sort();
 
@@ -6413,7 +6403,6 @@ void MainWindow::shaderChanged()
 	phongAction->setVisible( ui->action_phong->isEnabled() && ui->menu_shading->isEnabled() );
 
 	phongBrushAction->setVisible( ui->action_phongBrush->isEnabled() && ui->menu_shading->isEnabled() );
-	checkTextureVisibility();
 
 	updateWindowTitle();
 
@@ -6547,31 +6536,6 @@ void MainWindow::dragLeaveEvent(QDragLeaveEvent* event)
 	event->accept();
 }
 
-void MainWindow::checkTextureVisibility()
-{
-	// TODO: Why is this necessary?
-	/*glWidget_diffuse1->setVisible( !ui->groupBox_baseTexture->isHidden()  && (glWidget_diffuse1->showBumpmap || glWidget_diffuse1->showDiffuse) );
-	glWidget_diffuse2->setVisible( !ui->groupBox_baseTexture2->isHidden() && (glWidget_diffuse2->showBumpmap || glWidget_diffuse2->showDiffuse) );
-
-	foreach (GLWidget* glWidget, glWidgets) {
-
-		if (glWidget->isPreviewing()) {
-			if( glWidget->objectName() == "preview_basetexture3" )
-				glWidget->setVisible( !ui->groupBox_baseTexture3->isHidden() );
-			else if( glWidget->objectName() == "preview_basetexture4" )
-				glWidget->setVisible( !ui->groupBox_baseTexture4->isHidden() );
-			else if( glWidget->objectName() == "preview_detail" )
-				glWidget->setVisible( !ui->groupBox_detailTexture->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap1" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap2" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_exponent1" )
-				glWidget->setVisible( !ui->groupBox_phong->isHidden() );
-		}
-	}*/
-}
-
 void MainWindow::setGameState(bool enabled)
 {
 	QList<QAction*> actions = ui->action_games->actions();
@@ -6684,8 +6648,9 @@ void MainWindow::readSettings()
 
 	ui->tabWidget->setTabText(0, tabTitle);
 
-
-	mSettings->lastGame = setKey("lastGame", "", mIniSettings);
+	// Note that if you just pass "" for the def, because then the boolean
+	// overloaded method is used for some random reason
+	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 
@@ -8782,7 +8747,7 @@ void MainWindow::displayAboutDialog()
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
 	QLineEdit(parent),
-	completer(setModelFromFile(":/files/vmt_parameters", this))
+	completer(new QCompleter(extractLines(":/files/vmt_parameters")))
 {
 	setMinimumWidth(250);
 	setAttribute(Qt::WA_DeleteOnClose);
@@ -8970,7 +8935,6 @@ void ValueLineEdit::_editingFinished()
 // convenience macro for handling menu action triggers (see below for usage)
 #define HANDLE_ACTION(groupBox) { \
 	utils::toggle(this, checked, groupBox, mParsingVMT); \
-	checkTextureVisibility(); \
 }
 
 void MainWindow::on_action_baseTexture2_triggered(bool checked)

@@ -28,7 +28,7 @@ public:
 	StringListModel( QStringList list, QObject * parent = 0 ) :
 		QAbstractListModel(parent),
 		mList(list),
-		mCompletions( listFromFile(":/files/subGroups") )
+		mCompletions( extractLines(":/files/subGroups") )
 	{
 
 	}
@@ -74,8 +74,8 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 {
 	mCompleter = new QCompleter(this);
 
-	QStringList tmp = listFromFile(":/files/subGroups");
-	tmp << listFromFile(":/files/parameters");
+	QStringList tmp = extractLines(":/files/subGroups");
+	tmp << extractLines(":/files/parameters");
 
 	mCompleter->setModel( new StringListModel( tmp, mCompleter ) );
 
@@ -132,7 +132,7 @@ void SubGroupTextEdit::insertCompletion( const QString& completion )
 	tc.movePosition(QTextCursor::EndOfLine);
 
 	tc.setCharFormat(format);
-	if( listFromFile(":/files/subGroups").contains(completion) )
+	if( extractLines(":/files/subGroups").contains(completion) )
 	{
 		// Check if there is text before the actual insertion
 		if( isWhitespace(tmp) || tmp.isEmpty() )

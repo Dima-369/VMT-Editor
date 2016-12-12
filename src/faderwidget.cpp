@@ -66,8 +66,6 @@ void FaderWidget::paintEvent(QPaintEvent*)
 			timer->stop();
 			close();
 
-			mainWindow->checkTextureVisibility();
-
 			fading = false;
 		}
 
@@ -79,8 +77,6 @@ void FaderWidget::paintEvent(QPaintEvent*)
 
 			timer->stop();
 			close();
-
-			mainWindow->checkTextureVisibility();
 
 			fading = false;
 		}

@@ -1,5 +1,4 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#pragma once
 
 #include "editshaderdialog.h"
 #include "optionsdialog.h"
@@ -44,8 +43,6 @@ static QStringList gShaders = (QStringList() << "Cable" << "Decal" << "DecalModu
 // TODO: Put setKey(), addDefaultShader() and something else I forgot in the classes
 bool isWhitespace( const QString& input );
 
-QStringList listFromFile( const QString& fileName );
-
 QString setKey( const QString& name, const QString& def, QSettings* settings );
 
 bool setKey(const QString &name, bool def, QSettings *settings);
@@ -53,5 +50,3 @@ bool setKey(const QString &name, bool def, QSettings *settings);
 QString addTabs( int amount );
 
 void removeSingleLineComment( QString& string );
-
-#endif // UTILITIES_H

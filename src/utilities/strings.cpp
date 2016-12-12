@@ -1,7 +1,5 @@
 #include "strings.h"
 
-namespace utils {
-
 QString stripZeroes(const QString &s)
 {
 	return QString(s).remove(QRegExp("\\.0*(?!0)$"));
@@ -12,7 +10,7 @@ QString stripZeroes(QDoubleSpinBox *sp)
 	return stripZeroes(sp->cleanText());
 }
 
-QCompleter* setModelFromFile(const QString &fileName, QObject* o)
+QStringList extractLines(const QString& fileName)
 {
 	QFile file(fileName);
 	file.open(QFile::ReadOnly);
@@ -23,8 +21,5 @@ QCompleter* setModelFromFile(const QString &fileName, QObject* o)
 		if (!line.isEmpty())
 			words << line.trimmed();
 	}
-
-	return new QCompleter(words, o);
+	return words;
 }
-
-} // namespace utils
