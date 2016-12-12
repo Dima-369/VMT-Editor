@@ -303,6 +303,11 @@ public slots:
 
 	void deniedEditGames();
 
+	/*!
+	 * mSettings->autoRefresh() needs to be ignored for the Proxies
+	 * TextEdit, otherwise we get lots of errors when text is typed into
+	 * the view because the text is validated.
+	 */
 	void widgetChanged();
 
 	void refreshRequested();
