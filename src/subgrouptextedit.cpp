@@ -18,7 +18,6 @@
 #include <QHeaderView>
 
 #include "vmtparser.h"
-#include "highlighter.h"
 
 
 class StringListModel : public QAbstractListModel
@@ -79,12 +78,13 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 
 	mCompleter->setModel( new StringListModel( tmp, mCompleter ) );
 
-
 	mCompleter->setWidget(this);
 	mCompleter->setCompletionMode(QCompleter::PopupCompletion);
 	mCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
 	QObject::connect( mCompleter, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
+
+	// we do not clear the memory because this TextEdit is only created once
 
 	// to color groups like PlayerLogo
 	new Highlighter(document());
@@ -94,11 +94,6 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 	QFontMetrics fm(font);
 
 	setTabStopWidth( fm.boundingRect("aaaa").width() );
-}
-
-SubGroupTextEdit::~SubGroupTextEdit()
-{
-
 }
 
 void SubGroupTextEdit::insertCompletion( const QString& completion )
