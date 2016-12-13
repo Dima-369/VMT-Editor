@@ -8756,7 +8756,7 @@ void MainWindow::displayAboutDialog()
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
 	QLineEdit(parent),
-	completer(new QCompleter(extractLines(":/files/vmt_parameters")))
+	completer(new QCompleter(extractLines(":/files/vmtParameters")))
 {
 	setMinimumWidth(250);
 	setAttribute(Qt::WA_DeleteOnClose);
