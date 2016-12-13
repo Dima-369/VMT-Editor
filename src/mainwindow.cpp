@@ -4512,7 +4512,15 @@ QString MainWindow::action_SaveAs() {
 		if ( ui->lineEdit_diffuse->text().isEmpty() ) vtfName = "\\untitled.vmt";
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
-			vtfName = "\\" + vtfLong.section("\\", -1);
+			QString tmp;
+			tmp = vtfLong.section("\\", -1);
+
+			if ( tmp.contains(".") )  {
+				vtfName = "\\" + tmp.section(".", 0, 0);
+			} else {
+				vtfName = "\\" + tmp;
+			}
+
 		}
 
 		if( getCurrentGame() == "" ) {
