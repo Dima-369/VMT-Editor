@@ -8,13 +8,13 @@ Includes texture preview, parameter validation and generally tries to help in ed
 
 ## Downloads
 
-Windows binary releaseses are provided on Github's release page.
+Windows binary releases are provided on Github's release page.
 
-We dropped the InnoSetup binary, as it only adds the Windows Explorer integration to open VMT files and Start menu shortcuts and most seem to dislike the installation process.
+We dropped the InnoSetup binary, as it only adds the Windows Explorer integration to open VMT files and Start menu shortcuts, and most seem to dislike the installation process.
 
 ## OS Support
 
-Windows is primarily supported because we can easily rely on `VTFCmd.exe` (see link below) to convert VTFs to images files, so they can be used in the preview.
+Windows is primarily supported because we rely on `VTFCmd.exe` (see link below) to convert VTFs to images files, so they can be used in the preview.
 
 But you can compile on macOS or Linux for yourself, and pretty much everything besides the texture preview will work.
 
