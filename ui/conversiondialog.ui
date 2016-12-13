@@ -2486,6 +2486,21 @@ QToolButton:hover
          </property>
          <item>
           <property name="text">
+           <string>Sharpen Soft</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Medium</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sharpen Strong</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>None</string>
           </property>
          </item>
@@ -2522,21 +2537,6 @@ QToolButton:hover
          <item>
           <property name="text">
            <string>Soft</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Sharpen Soft</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Sharpen Medium</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Sharpen Strong</string>
           </property>
          </item>
          <item>
