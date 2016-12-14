@@ -360,6 +360,8 @@ private slots:
 
 	void displayConversionDialog();
 
+	void displayConversionDialog( QString fileName);
+
 	void displayBatchDialog();
 
 	void gameTriggered( bool triggered );

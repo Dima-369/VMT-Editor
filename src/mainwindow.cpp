@@ -452,7 +452,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		fileToOpen.endsWith("gif", Qt::CaseInsensitive) ||
 		fileToOpen.endsWith("png", Qt::CaseInsensitive) ) {
 
-		displayConversionDialog();
+		initialFile = "";
+		displayConversionDialog(fileToOpen);
 		//ConversionDialog->addFile(fileToOpen);
 	}
 
@@ -8688,6 +8689,22 @@ void MainWindow::displayConversionDialog()
 
 		dialog.show();
 		dialog.exec();
+
+	} else {
+
+		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
+	}
+}
+
+void MainWindow::displayConversionDialog( QString fileName )
+{
+	if( QDir().exists("vtfcmd.exe") ) {
+
+		ConversionDialog dialog( mIniSettings, this );
+
+		dialog.show();
+		dialog.exec();
+		dialog.addFile( fileName );
 
 	} else {
 
