@@ -446,9 +446,17 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->comboBox_shader, SIGNAL(currentIndexChanged(int)), this, SLOT(shaderChanged()) );
 
-	if(fileToOpen.endsWith("vtf", Qt::CaseInsensitive) ||
-		fileToOpen.endsWith("jpg", Qt::CaseInsensitive) ||
-		fileToOpen.endsWith("png", Qt::CaseInsensitive)) {
+	if(	fileToOpen.endsWith("jpg", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("tga", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("dds", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("gif", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("png", Qt::CaseInsensitive) ) {
+
+		displayConversionDialog();
+		//ConversionDialog->addFile(fileToOpen);
+	}
+
+	if( fileToOpen.endsWith("vtf", Qt::CaseInsensitive) ) {
 
 		// clearing to avoid loading it in showEvent()
 		initialFile = "";

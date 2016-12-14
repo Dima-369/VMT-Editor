@@ -19,6 +19,8 @@ public:
 	explicit ConversionDialog( QSettings* iniSettings, QWidget* parent = NULL);
 
 	~ConversionDialog();
+
+	void addFile(QString fileName);
 	
 private:
 

@@ -57,6 +57,38 @@ ConversionDialog::~ConversionDialog() {
 	delete ui;
 }
 
+void ConversionDialog::addFile( QString fileName ) {
+
+		settings->setValue( "lastConvertAddDirectory", fileName.left( fileName.lastIndexOf("\\") ));
+
+		QString tmp = fileName;
+
+		if( listEntriesWithDirectories.contains(tmp) )
+			continue;
+
+		listEntriesWithDirectories.insert( tmp, false );
+
+		// for instance: nature\rock_cbm.vtf
+		tmp = tmp.right( tmp.size() - tmp.lastIndexOf("\\", tmp.lastIndexOf("\\") - 1) - 1 );
+
+		filesToAddInListWidget.append(tmp);
+
+		ui->listWidget_textures->insertItem(0, fileName);
+
+			int counter = 0;
+			QMap<QString, bool>::const_iterator it = listEntriesWithDirectories.constBegin();
+			while( it != listEntriesWithDirectories.constEnd() ) {
+
+				if( it.value() )
+					ui->listWidget_textures->item(counter)->setToolTip( "Converted: " + it.key() );
+				else
+					ui->listWidget_textures->item(counter)->setToolTip( it.key() );
+
+				++it;
+				++counter;
+			}
+}
+
 int ConversionDialog::countImagesToConvert() {
 
 	int count = 0;
