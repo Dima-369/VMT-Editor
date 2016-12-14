@@ -7263,9 +7263,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-
-				//TODO: add a function to reconvert the file and copy it to .vmt dir
-				//connect(reconvert, &QAction::triggered, this, reconvert(fileName));
+//				connect(reconvert, &QAction::triggered, this, reconvertTexture(fileName));
 
 				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
@@ -8704,7 +8702,6 @@ void MainWindow::displayConversionDialog()
 		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
 	}
 }
-
 void MainWindow::displayBatchDialog() {
 
 	BatchDialog dialog( mAvailableGames, makeVMT(), mIniSettings, this );
@@ -8744,6 +8741,51 @@ void MainWindow::gameTriggered( bool triggered )
 
 		gameChanged("");
 	}
+}
+
+void MainWindow::reconvertTexture(QString fileName) {
+
+//	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
+
+//	if( texturesToCopy.contains(lineEdit) ) {
+
+//		QString toDelete = "Cache\\Move\\" + lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit);
+
+//		if( !QFile::remove(toDelete) )
+//			Error("Error while removing \"" + toDelete + "\"")
+
+//		texturesToCopy.remove(lineEdit);
+//	}
+
+//	QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
+//		outputFile = outputFile.left( outputFile.indexOf('.') );
+
+//	texturesToCopy.insert(lineEdit, outputFile);
+
+//	lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+//	lineEdit->setDisabled(true);
+
+//	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+//		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
+
+//		conversionThread->fileName = fileName;
+//		conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
+//		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+
+//		conversionThread->start();
+
+//	fileName.chop(4);
+
+//	QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
+//	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
+
+//	if( QFile::exists(toFile) )
+//		QFile::remove(toFile);
+
+//	QFile::copy(fromFile, toFile);
+
+//	previewTexture(objectName);
+
 }
 
 void MainWindow::showEditGamesDialog()

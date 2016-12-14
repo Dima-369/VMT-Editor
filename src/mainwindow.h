@@ -378,6 +378,8 @@ private slots:
 
 	void addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox);
 
+	void reconvertTexture( QString fileName );
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
