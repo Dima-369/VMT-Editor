@@ -151,6 +151,10 @@ private:
 
 	bool mSteamInstalled;
 
+	bool mOpenConvertDialog;
+
+	QString fileToConvert;
+
 	//----------------------------------------------------------------------------------------//
 
 	QSettings* mIniSettings;
@@ -359,8 +363,6 @@ private slots:
 	void displayOptionsDialog();
 
 	void displayConversionDialog();
-
-	void displayConversionDialog( QString fileName);
 
 	void displayBatchDialog();
 

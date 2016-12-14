@@ -63,6 +63,21 @@ void ConversionDialog::addFile( QString fileName ) {
 
 	ui->listWidget_textures->addItem(fileName);
 
+	listEntriesWithDirectories.insert( fileName, false );
+
+	int counter = 0;
+	QMap<QString, bool>::const_iterator it = listEntriesWithDirectories.constBegin();
+	while( it != listEntriesWithDirectories.constEnd() ) {
+
+		if( it.value() )
+			ui->listWidget_textures->item(counter)->setToolTip( "Converted: " + it.key() );
+		else
+			ui->listWidget_textures->item(counter)->setToolTip( it.key() );
+
+		++it;
+		++counter;
+	}
+
 }
 
 int ConversionDialog::countImagesToConvert() {

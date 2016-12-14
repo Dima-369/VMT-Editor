@@ -453,8 +453,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		fileToOpen.endsWith("png", Qt::CaseInsensitive) ) {
 
 		initialFile = "";
-		displayConversionDialog(fileToOpen);
-		//ConversionDialog->addFile(fileToOpen);
+		mOpenConvertDialog = true;
+		fileToConvert = fileToOpen;
 	}
 
 	if( fileToOpen.endsWith("vtf", Qt::CaseInsensitive) ) {
@@ -6502,6 +6502,11 @@ void MainWindow::showEvent(QShowEvent *event)
 		loadVMT(initialFile);
 		initialFile = "";
 	}
+
+
+	if (mOpenConvertDialog) {
+		QTimer::singleShot(0, this, SLOT( displayConversionDialog() ));
+	}
 }
 
 void MainWindow::dropEvent(QDropEvent* event)
@@ -8687,24 +8692,12 @@ void MainWindow::displayConversionDialog()
 
 		ConversionDialog dialog( mIniSettings, this );
 
+		if (fileToConvert != "") {
+			dialog.addFile( fileToConvert );
+			fileToConvert = "";
+		}
 		dialog.show();
 		dialog.exec();
-
-	} else {
-
-		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
-	}
-}
-
-void MainWindow::displayConversionDialog( QString fileName )
-{
-	if( QDir().exists("vtfcmd.exe") ) {
-
-		ConversionDialog dialog( mIniSettings, this );
-
-		dialog.show();
-		dialog.exec();
-		dialog.addFile( fileName );
 
 	} else {
 
