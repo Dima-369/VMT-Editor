@@ -7088,6 +7088,11 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	if( !fileName.isEmpty() ) {
 
+		if( !lineEdit->actions().isEmpty() ) {
+			QAction *action = lineEdit->actions()[0];
+			action->~QAction();
+		}
+
 		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
 		if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
@@ -7145,6 +7150,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 			QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
 			QString fullNewName( ((mVMTLoaded) ? vmtParser->lastVMTFile().directory : currentGameMaterialDir()) + nameWithExtension );
+
+
 
 			if( fileType.toLower() == ".vtf" ) {
 
@@ -7240,6 +7247,11 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
 				lineEdit->setDisabled(true);
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+
+				//TODO: add a function to reconvert the file and copy it to .vmt dir
+				//connect(reconvert, &QAction::triggered, this, reconvert(fileName));
 
 				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
