@@ -200,6 +200,16 @@ void ConversionDialog::convertRequested() {
 		else if(tmp == "Kaiser") arguments.insert("-rfilter", "KAISER");
 	}
 
+	tmp = ui->comboBox_vtfVersion->currentText();
+	if(tmp != "7.3") {
+
+		if(tmp == "7.4") arguments.insert("-version", "7.4");
+		else if(tmp == "7.5") arguments.insert("-version", "7.5");
+		else if(tmp == "7.2") arguments.insert("-version", "7.2");
+		else if(tmp == "7.1") arguments.insert("-version", "7.1");
+		else if(tmp == "7.0") arguments.insert("-version", "7.0");
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	tmp = ui->comboBox_resizeSharpenFilter->currentText();
