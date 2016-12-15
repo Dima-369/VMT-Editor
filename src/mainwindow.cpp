@@ -8688,6 +8688,7 @@ void MainWindow::displayOptionsDialog()
 
 void MainWindow::displayConversionDialog()
 {
+#ifdef Q_OS_WIN
 	if( QDir().exists("vtfcmd.exe") ) {
 
 		ConversionDialog dialog( mIniSettings, this );
@@ -8703,6 +8704,11 @@ void MainWindow::displayConversionDialog()
 
 		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
 	}
+#else
+	ConversionDialog dialog(mIniSettings, this);
+	dialog.show();
+	dialog.exec();
+#endif
 }
 void MainWindow::displayBatchDialog() {
 
