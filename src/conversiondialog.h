@@ -19,25 +19,21 @@ public:
 
 	~ConversionDialog();
 
-	void addFile(QString fileName);
+	void addFile(const QString& fileName);
 	
 private:
 
 	Ui::ConversionDialog* ui;
 
-	QMap< QString, bool> listEntriesWithDirectories;
-
-	int countImagesToConvert();
+	QStringList listEntriesWithDirectories;
 
 	bool compareImages( const QImage& image1, const QImage& image2 );
 
 	QSettings* settings;
 
-public slots:
+private slots:
 
 	void setTemplate();
-
-private slots:
 
 	void convertRequested();
 
@@ -50,5 +46,4 @@ private slots:
 	void convertAskModeChanged();
 
 	void resetWidgets();
-
 };
