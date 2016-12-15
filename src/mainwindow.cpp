@@ -64,6 +64,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	mShaderKnownButNotListed(false),
 	mIgnoreShaderChanged(true),
 	mSteamInstalled(false),
+	mOpenConvertDialog(false),
 	mIniSettings(new QSettings("settings.ini", QSettings::IniFormat, this)),
 	mSettings(new Settings),
 	initialFile(fileToOpen),
