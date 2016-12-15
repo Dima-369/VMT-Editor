@@ -34,6 +34,10 @@ private:
 
 	QSettings* settings;
 
+public slots:
+
+	void setTemplate();
+
 private slots:
 
 	void convertRequested();
@@ -45,6 +49,9 @@ private slots:
 	void clearRequested();
 
 	void convertAskModeChanged();
+
+	void resetWidgets();
+
 };
 
 #endif // CONVERSIONDIALOG_H

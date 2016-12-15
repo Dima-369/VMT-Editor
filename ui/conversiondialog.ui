@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>862</width>
-    <height>390</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="font">
@@ -415,7 +415,7 @@ QPushButton
 {
     color: silver;
     background-color: #282828;
-    border-width: 1px;
+    border-width: 0px;
     border-color: #282828;
     border-style: solid;
     padding-top: 5px;
@@ -429,7 +429,7 @@ QPushButton
 QPushButton:disabled
 {
     background-color:#505050;
-    border-width: 1px;
+    border-width: 0px;
     border-color: #505050;
     border-style: solid;
     padding-top: 5px;
@@ -1680,6 +1680,45 @@ QToolButton:hover
          </layout>
         </widget>
        </item>
+       <item row="9" column="3">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>VTF version:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>25</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="3" column="3">
         <widget class="QComboBox" name="comboBox_vtfVersion">
          <property name="minimumSize">
@@ -1747,12 +1786,12 @@ QToolButton:hover
          </item>
          <item>
           <property name="text">
-           <string>RGBA 8888</string>
+           <string>DXT3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ABGR 8888</string>
+           <string>DXT5</string>
           </property>
          </item>
          <item>
@@ -1762,7 +1801,27 @@ QToolButton:hover
          </item>
          <item>
           <property name="text">
+           <string>RGBA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>BGR 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ABGR 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ARGB 8888</string>
           </property>
          </item>
          <item>
@@ -1793,26 +1852,6 @@ QToolButton:hover
          <item>
           <property name="text">
            <string>BGR 888 Bluescreen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ARGB 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRA 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT3</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT5</string>
           </property>
          </item>
          <item>
@@ -1871,100 +1910,6 @@ QToolButton:hover
           </property>
          </item>
         </widget>
-       </item>
-       <item row="8" column="4">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>25</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="2">
-        <widget class="QLabel" name="label_17">
-         <property name="text">
-          <string>VTF version:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="3">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label">
-         <property name="minimumSize">
-          <size>
-           <width>119</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Non-alpha textures:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Textures with alpha:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="2" column="3">
         <widget class="QComboBox" name="comboBox_alphaTextures">
@@ -1987,12 +1932,12 @@ QToolButton:hover
          </item>
          <item>
           <property name="text">
-           <string>RGBA 8888</string>
+           <string>DXT1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>ABGR 8888</string>
+           <string>DXT3</string>
           </property>
          </item>
          <item>
@@ -2002,7 +1947,27 @@ QToolButton:hover
          </item>
          <item>
           <property name="text">
+           <string>RGBA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>BGR 888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ARGB 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ABGR 8888</string>
           </property>
          </item>
          <item>
@@ -2033,26 +1998,6 @@ QToolButton:hover
          <item>
           <property name="text">
            <string>BGR 888 Bluescreen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ARGB 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRA 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT3</string>
           </property>
          </item>
          <item>
@@ -2112,8 +2057,8 @@ QToolButton:hover
          </item>
         </widget>
        </item>
-       <item row="0" column="2">
-        <spacer name="verticalSpacer_4">
+       <item row="4" column="3">
+        <spacer name="verticalSpacer_7">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -2123,7 +2068,133 @@ QToolButton:hover
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>10</height>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Textures with alpha:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>119</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Non-alpha textures:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Templates</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_tDefault">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_t03">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Uncom. no alpha</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="pushButton_t01">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No alpha</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="pushButton_t02">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Uncompressed</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_t04">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Sky</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton_t05">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Sky cheap</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
           </size>
          </property>
         </spacer>
@@ -3026,8 +3097,27 @@ QToolButton:hover
        <string>Flags</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBox_clampt">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Clamp T</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QCheckBox" name="checkBox_pointsample">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="text">
           <string>Pointsample</string>
          </property>
@@ -3035,138 +3125,31 @@ QToolButton:hover
        </item>
        <item row="0" column="1">
         <widget class="QCheckBox" name="checkBox_trilinear">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="text">
           <string>Trilinear</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QCheckBox" name="checkBox_clamps">
-         <property name="text">
-          <string>Clamps</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBox_clampt">
-         <property name="text">
-          <string>Clampt</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBox_anisotropic">
-         <property name="text">
-          <string>Anisotropic</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QCheckBox" name="checkBox_hintDXT5">
-         <property name="text">
-          <string>Hint DXT5</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBox_normal">
-         <property name="text">
-          <string>Normal</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBox_noMIP">
-         <property name="text">
-          <string>No MIP</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QCheckBox" name="checkBox_noLOD">
-         <property name="text">
-          <string>No LOD</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="checkBox_minMIP">
-         <property name="text">
-          <string>Min MIP</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="checkBox_depthRendertarget">
-         <property name="text">
-          <string>Depth rendertarget</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QCheckBox" name="checkBox_noDebugOverride">
-         <property name="text">
-          <string>No debug override</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="checkBox_singleCopy">
-         <property name="text">
-          <string>Single copy</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBox_noDepthbuffer">
-         <property name="text">
-          <string>No depth buffer</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QCheckBox" name="checkBox_clampU">
-         <property name="text">
-          <string>Clamp U</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
+       <item row="8" column="0">
         <widget class="QCheckBox" name="checkBox_vertexTexture">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="text">
           <string>Vertex texture</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBox_ssbump">
-         <property name="text">
-          <string>SSBump</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QCheckBox" name="checkBox_border">
-         <property name="text">
-          <string>Border</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QCheckBox" name="checkBox_rendertarget">
-         <property name="text">
-          <string>Rendertarget</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QCheckBox" name="checkBox_procedural">
-         <property name="text">
-          <string>Procedural</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
+       <item row="10" column="0">
         <spacer name="verticalSpacer_6">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -3178,6 +3161,214 @@ QToolButton:hover
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="checkBox_normal">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Normal</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QCheckBox" name="checkBox_singleCopy">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Single copy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QCheckBox" name="checkBox_noDebugOverride">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>No debug override</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="checkBox_depthRendertarget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Depth rendertarget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="checkBox_noDepthbuffer">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>No depth buffer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_anisotropic">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Anisotropic</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBox_clamps">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Clamp S</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="checkBox_clampU">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Clamp U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QCheckBox" name="checkBox_hintDXT5">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Hint DXT5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="checkBox_noMIP">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>No MIP</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBox_noLOD">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>No LOD</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QCheckBox" name="checkBox_minMIP">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Min MIP</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBox_ssbump">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>SSBump</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="checkBox_border">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Border</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="checkBox_rendertarget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Rendertarget</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QCheckBox" name="checkBox_procedural">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Procedural</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -3228,12 +3419,12 @@ QToolButton:hover
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>355</x>
-     <y>49</y>
+     <x>819</x>
+     <y>67</y>
     </hint>
     <hint type="destinationlabel">
-     <x>341</x>
-     <y>186</y>
+     <x>819</x>
+     <y>212</y>
     </hint>
    </hints>
   </connection>
@@ -3292,12 +3483,12 @@ QToolButton:hover
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>559</x>
-     <y>138</y>
+     <x>564</x>
+     <y>155</y>
     </hint>
     <hint type="destinationlabel">
-     <x>641</x>
-     <y>139</y>
+     <x>640</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>
@@ -3328,8 +3519,8 @@ QToolButton:hover
      <y>54</y>
     </hint>
     <hint type="destinationlabel">
-     <x>644</x>
-     <y>159</y>
+     <x>639</x>
+     <y>183</y>
     </hint>
    </hints>
   </connection>
@@ -3349,5 +3540,104 @@ QToolButton:hover
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_t01</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t02</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t03</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t04</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t05</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_tDefault</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>487</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>setTemplate()</slot>
+ </slots>
 </ui>

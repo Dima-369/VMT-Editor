@@ -709,3 +709,96 @@ void ConversionDialog::convertAskModeChanged() {
 	}
 }
 
+void ConversionDialog::resetWidgets() {
+
+	ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+	ui->comboBox_alphaTextures->setCurrentIndex(0);
+	ui->comboBox_vtfVersion->setCurrentIndex(0);
+
+	ui->checkBox_disableMipmaps->setChecked(false);
+	ui->comboBox_mipmapFilter->setCurrentIndex(0);
+	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(0);
+
+	ui->checkBox_resizeToPowerOfTwo->setChecked(true);
+	ui->comboBox_resizeMethod->setCurrentIndex(0);
+	ui->comboBox_resizeFilter->setCurrentIndex(0);
+	ui->comboBox_resizeSharpenFilter->setCurrentIndex(0);
+	ui->spinBox_specificHeight->setValue(0);
+	ui->spinBox_specificWidth->setValue(0);
+
+	ui->spinBox_maximumHeight->setValue(0);
+	ui->spinBox_maximumWidth->setValue(0);
+
+	ui->checkBox_convertToNormalMap->setChecked(false);
+	ui->comboBox_generationKernel->setCurrentIndex(0);
+	ui->comboBox_heightCalculation->setCurrentIndex(0);
+	ui->comboBox_alphaResult->setCurrentIndex(0);
+	ui->doubleSpinBox_normalMapScale->setValue(2.0);
+	ui->checkBox_wrapForTiledTextures->setChecked(false);
+
+	ui->doubleSpinBox_bumpMappingScale->setValue(1.0);
+	ui->checkBox_thumbnailImage->setChecked(true);
+	ui->checkBox_reflectivity->setChecked(true);
+	ui->checkBox_gammaCorrection->setChecked(false);
+	ui->doubleSpinBox_gammaCorrection->setValue(0.0);
+
+	ui->checkBox_pointsample->setChecked(false);
+	ui->checkBox_trilinear->setChecked(false);
+	ui->checkBox_clamps->setChecked(false);
+	ui->checkBox_clampt->setChecked(false);
+	ui->checkBox_anisotropic->setChecked(false);
+	ui->checkBox_hintDXT5->setChecked(false);
+	ui->checkBox_normal->setChecked(false);
+	ui->checkBox_noMIP->setChecked(false);
+	ui->checkBox_noLOD->setChecked(false);
+	ui->checkBox_minMIP->setChecked(false);
+	ui->checkBox_depthRendertarget->setChecked(false);
+	ui->checkBox_noDebugOverride->setChecked(false);
+	ui->checkBox_singleCopy->setChecked(false);
+	ui->checkBox_noDepthbuffer->setChecked(false);
+	ui->checkBox_clampU->setChecked(false);
+	ui->checkBox_vertexTexture->setChecked(false);
+	ui->checkBox_ssbump->setChecked(false);
+	ui->checkBox_border->setChecked(false);
+	ui->checkBox_rendertarget->setChecked(false);
+	ui->checkBox_procedural->setChecked(false);
+}
+
+void ConversionDialog::setTemplate() {
+
+	resetWidgets();
+
+	QWidget* caller = qobject_cast<QWidget *>( sender() );
+
+	if( caller->objectName() == "pushButton_t01" ){
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(1);
+	}
+	else if( caller->objectName() == "pushButton_t02" ){
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(6);
+	}
+	else if( caller->objectName() == "pushButton_t03" ){
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(5);
+	}
+	else if( caller->objectName() == "pushButton_t04" ){
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(5);
+		ui->checkBox_disableMipmaps->setChecked(true);
+		ui->checkBox_clamps->setChecked(true);
+		ui->checkBox_clampt->setChecked(true);
+		ui->checkBox_noMIP->setChecked(true);
+	}
+	else if( caller->objectName() == "pushButton_t05" ){
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(1);
+		ui->checkBox_disableMipmaps->setChecked(true);
+		ui->checkBox_clamps->setChecked(true);
+		ui->checkBox_clampt->setChecked(true);
+		ui->checkBox_noMIP->setChecked(true);
+	}
+
+
+}
+
