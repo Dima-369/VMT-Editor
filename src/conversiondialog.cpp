@@ -97,8 +97,8 @@ void ConversionDialog::convertRequested() {
 
 	if( countImagesToConvert() == 0 ) {
 
-		MsgBox::information(this, "Information",
-							"There is nothing to convert anymore.\n\nUse the Add... button to add images!");
+		MsgBox::information(this, "Nothing to convert",
+							"There is nothing to convert.\nUse the Add... button to add images!");
 		return;
 	}
 
