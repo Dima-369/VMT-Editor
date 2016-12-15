@@ -151,6 +151,7 @@ void ConversionDialog::convertRequested() {
 		else if(tmp == "RGB 888 Bluescreen") arguments.insert("-alphaformat", "RGB888_BLUESCREEN");
 		else if(tmp == "BGR 888 Bluescreen") arguments.insert("-alphaformat", "BGR888_BLUESCREEN");
 		else if(tmp == "BGRA 8888") arguments.insert("-alphaformat", "BGRA8888");
+		else if(tmp == "DXT1") arguments.insert("-alphaformat", "DXT1");
 		else if(tmp == "DXT3") arguments.insert("-alphaformat", "DXT3");
 		else if(tmp == "DXT5") arguments.insert("-alphaformat", "DXT5");
 		else if(tmp == "BGRX 8888") arguments.insert("-alphaformat", "BGRX8888");
@@ -726,8 +727,8 @@ void ConversionDialog::resetWidgets() {
 	ui->spinBox_specificHeight->setValue(0);
 	ui->spinBox_specificWidth->setValue(0);
 
-	ui->spinBox_maximumHeight->setValue(0);
-	ui->spinBox_maximumWidth->setValue(0);
+	ui->spinBox_maximumHeight->setValue(4096);
+	ui->spinBox_maximumWidth->setValue(4096);
 
 	ui->checkBox_convertToNormalMap->setChecked(false);
 	ui->comboBox_generationKernel->setCurrentIndex(0);
