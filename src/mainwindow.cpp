@@ -7105,6 +7105,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 		if( !lineEdit->actions().isEmpty() ) {
 			QAction *action = lineEdit->actions()[0];
 			action->~QAction();
+			lineEdit->setToolTip("");
 		}
 
 		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
@@ -7263,7 +7264,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-//				connect(reconvert, &QAction::triggered, this, reconvertTexture(fileName));
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(clicked()), this, SLOT(reconvertTexture()));
 
 				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
@@ -8743,7 +8745,12 @@ void MainWindow::gameTriggered( bool triggered )
 	}
 }
 
-void MainWindow::reconvertTexture(QString fileName) {
+void MainWindow::reconvertTexture() {
+
+	QObject* caller = qobject_cast<QWidget *>( sender() )->parent();
+	QString name = caller->objectName();
+
+	Error(name);
 
 //	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
