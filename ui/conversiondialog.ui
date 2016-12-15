@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
-    <height>484</height>
+    <width>862</width>
+    <height>390</height>
    </rect>
   </property>
   <property name="font">
@@ -924,13 +924,13 @@ border: 1px solid #222;
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
@@ -955,13 +955,13 @@ border: 1px solid #222;
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
@@ -986,13 +986,13 @@ border: 1px solid #222;
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
@@ -1017,13 +1017,13 @@ border: 1px solid #222;
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>180</width>
          <height>23</height>
         </size>
        </property>
@@ -1115,13 +1115,13 @@ border: 1px solid #222;
     <widget class="QTabWidget" name="tabWidget">
      <property name="minimumSize">
       <size>
-       <width>500</width>
+       <width>450</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>500</width>
+       <width>450</width>
        <height>16777215</height>
       </size>
      </property>
@@ -1427,103 +1427,261 @@ QToolButton:hover
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Output formats</string>
+       <string>Formats</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <item row="5" column="2">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>Filter:</string>
+       <item row="5" column="2" colspan="2">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Mipmaps</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QCheckBox" name="checkBox_disableMipmaps">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Disable Mipmaps</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="label_17">
-         <property name="text">
-          <string>VTF version:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>Sharpen filter:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Textures with alpha:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox_disableMipmaps">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Disable Mipmaps</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_mipmapFilter">
+            <property name="minimumSize">
+             <size>
+              <width>238</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>230</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Box</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Point</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Triangle</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Quadratic</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cubic</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Catrom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mitchell</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gaussian</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sinc</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Bessel</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hanning</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hamming</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Blackman</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Kaiser</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboBox_mipmapSharpenFilter">
+            <property name="minimumSize">
+             <size>
+              <width>238</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>230</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Sharpen Soft</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sharpen Medium</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sharpen Strong</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Negative</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Lighter</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Darker</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>More Contrast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Less Contrast</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Smoothen</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Soft</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Find Edges</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Contour</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Detect Edges</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Detect Eges - Soft</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Emboss</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mean Removal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Unsharp</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>XSharpen</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Warpsharp</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Filter:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Sharpen filter:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item row="3" column="3">
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>5</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="3">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Non-alpha textures:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="3">
-        <widget class="QComboBox" name="comboBox_mipmapSharpenFilter">
+        <widget class="QComboBox" name="comboBox_vtfVersion">
          <property name="minimumSize">
           <size>
            <width>250</width>
@@ -1538,339 +1696,37 @@ QToolButton:hover
          </property>
          <item>
           <property name="text">
-           <string>Sharpen Soft</string>
+           <string>7.4</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Sharpen Medium</string>
+           <string>7.5</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Sharpen Strong</string>
+           <string>7.3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>None</string>
+           <string>7.2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Negative</string>
+           <string>7.1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Lighter</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Darker</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>More Contrast</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Less Contrast</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Smoothen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Soft</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Find Edges</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Contour</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Detect Edges</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Detect Eges - Soft</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Emboss</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mean Removal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Unsharp</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XSharpen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Warpsharp</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QComboBox" name="comboBox_mipmapFilter">
-         <property name="minimumSize">
-          <size>
-           <width>250</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>Box</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Point</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Triangle</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Quadratic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Cubic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Catrom</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mitchell</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Gaussian</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Sinc</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Bessel</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Hanning</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Hamming</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Blackman</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Kaiser</string>
+           <string>7.0</string>
           </property>
          </item>
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QComboBox" name="comboBox_alphaTextures">
-         <property name="minimumSize">
-          <size>
-           <width>250</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>DXT5</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGBA 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ABGR 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGB 888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGR 888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGB 565</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>I8</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>IA 88</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>A8</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGB 888 Bluescreen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGR 888 Bluescreen</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ARGB 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRA 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT3</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRX 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGR 565</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRX 5551</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRA 4444</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DXT1 one bit alpha</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BGRA 5551</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>UV 88</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>UVWQ 8888</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGBA 16161616F</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RGBA 16161616</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>UVLX 8888</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="3">
         <widget class="QComboBox" name="comboBox_noAlphaTextures">
          <property name="minimumSize">
           <size>
@@ -2016,8 +1872,102 @@ QToolButton:hover
          </item>
         </widget>
        </item>
+       <item row="8" column="4">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>25</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>VTF version:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="3">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>119</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Non-alpha textures:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Textures with alpha:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="2" column="3">
-        <widget class="QComboBox" name="comboBox_vtfVersion">
+        <widget class="QComboBox" name="comboBox_alphaTextures">
          <property name="minimumSize">
           <size>
            <width>250</width>
@@ -2032,53 +1982,140 @@ QToolButton:hover
          </property>
          <item>
           <property name="text">
-           <string>7.4</string>
+           <string>DXT5</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>7.5</string>
+           <string>RGBA 8888</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>7.3</string>
+           <string>ABGR 8888</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>7.2</string>
+           <string>RGB 888</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>7.1</string>
+           <string>BGR 888</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>7.0</string>
+           <string>RGB 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>I8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>IA 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>A8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGB 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 888 Bluescreen</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ARGB 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGR 565</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRX 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 4444</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DXT1 one bit alpha</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>BGRA 5551</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UV 88</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVWQ 8888</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616F</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>RGBA 16161616</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>UVLX 8888</string>
           </property>
          </item>
         </widget>
        </item>
-       <item row="7" column="4">
-        <spacer name="horizontalSpacer_3">
+       <item row="0" column="2">
+        <spacer name="verticalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType">
           <enum>QSizePolicy::Fixed</enum>
@@ -2086,7 +2123,7 @@ QToolButton:hover
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>20</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
@@ -2204,7 +2241,7 @@ QToolButton:hover
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>164</width>
+              <width>165</width>
               <height>20</height>
              </size>
             </property>
@@ -2540,7 +2577,7 @@ QToolButton:hover
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
+           <width>16</width>
            <height>20</height>
           </size>
          </property>
@@ -2820,7 +2857,7 @@ QToolButton:hover
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
+           <width>45</width>
            <height>20</height>
           </size>
          </property>
@@ -2846,7 +2883,14 @@ QToolButton:hover
        <string>Miscellaneous</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="6" column="2">
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkBox_gammaCorrection">
+         <property name="text">
+          <string>Gamma correction:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
         <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2859,30 +2903,7 @@ QToolButton:hover
          </property>
         </spacer>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBox_gammaCorrection">
-         <property name="text">
-          <string>Gamma correction:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QCheckBox" name="checkBox_reflectivity">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Calculate reflectivity</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
+       <item row="6" column="2">
         <widget class="QDoubleSpinBox" name="doubleSpinBox_gammaCorrection">
          <property name="enabled">
           <bool>false</bool>
@@ -2898,7 +2919,7 @@ QToolButton:hover
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="1" column="2">
         <widget class="QDoubleSpinBox" name="doubleSpinBox_bumpMappingScale">
          <property name="maximumSize">
           <size>
@@ -2911,17 +2932,46 @@ QToolButton:hover
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="checkBox_reflectivity">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Calculate reflectivity</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
         <widget class="QLabel" name="label_16">
          <property name="text">
-          <string>Engine bump mapping scale:</string>
+          <string>Engine bump scale:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="4" column="3">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="2">
         <widget class="QCheckBox" name="checkBox_thumbnailImage">
          <property name="minimumSize">
           <size>
@@ -2937,20 +2987,7 @@ QToolButton:hover
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0">
+       <item row="1" column="0">
         <spacer name="horizontalSpacer_9">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -2960,8 +2997,24 @@ QToolButton:hover
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
+           <width>25</width>
            <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
           </size>
          </property>
         </spacer>
