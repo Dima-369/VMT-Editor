@@ -1,5 +1,4 @@
-#ifndef CONVERSIONDIALOG_H
-#define CONVERSIONDIALOG_H
+#pragma once
 
 #include "dialogwithouthelpbutton.h"
 
@@ -53,5 +52,3 @@ private slots:
 	void resetWidgets();
 
 };
-
-#endif // CONVERSIONDIALOG_H

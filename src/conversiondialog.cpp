@@ -710,11 +710,11 @@ void ConversionDialog::convertAskModeChanged() {
 	}
 }
 
-void ConversionDialog::resetWidgets() {
-
+void ConversionDialog::resetWidgets()
+{
 	ui->comboBox_noAlphaTextures->setCurrentIndex(0);
 	ui->comboBox_alphaTextures->setCurrentIndex(0);
-	ui->comboBox_vtfVersion->setCurrentIndex(0);
+	ui->comboBox_vtfVersion->setCurrentIndex(1);
 
 	ui->checkBox_disableMipmaps->setChecked(false);
 	ui->comboBox_mipmapFilter->setCurrentIndex(0);
@@ -765,8 +765,8 @@ void ConversionDialog::resetWidgets() {
 	ui->checkBox_procedural->setChecked(false);
 }
 
-void ConversionDialog::setTemplate() {
-
+void ConversionDialog::setTemplate()
+{
 	resetWidgets();
 
 	QWidget* caller = qobject_cast<QWidget *>( sender() );
