@@ -57,48 +57,26 @@ ConversionDialog::~ConversionDialog() {
 	delete ui;
 }
 
-void ConversionDialog::addFile( QString fileName ) {
-
+void ConversionDialog::addFile(const QString& fileName)
+{
 	settings->setValue( "lastConvertAddDirectory", fileName.left( fileName.lastIndexOf("\\") ));
 
 	ui->listWidget_textures->addItem(fileName);
-
-	listEntriesWithDirectories.insert( fileName, false );
+	listEntriesWithDirectories.append(fileName);
 
 	int counter = 0;
-	QMap<QString, bool>::const_iterator it = listEntriesWithDirectories.constBegin();
-	while( it != listEntriesWithDirectories.constEnd() ) {
-
-		if( it.value() )
-			ui->listWidget_textures->item(counter)->setToolTip( "Converted: " + it.key() );
-		else
-			ui->listWidget_textures->item(counter)->setToolTip( it.key() );
-
-		++it;
-		++counter;
+	foreach(const QString& file, listEntriesWithDirectories) {
+		ui->listWidget_textures->item(counter)->setToolTip(file);
+		counter++;
 	}
-
 }
 
-int ConversionDialog::countImagesToConvert() {
-
-	int count = 0;
-
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
-		if( !ui->listWidget_textures->item(i)->toolTip().startsWith("Converted: ") )
-			++count;
-	}
-
-	return count;
-}
-
-void ConversionDialog::convertRequested() {
-
-	if( countImagesToConvert() == 0 ) {
-
+void ConversionDialog::convertRequested()
+{
+	if (listEntriesWithDirectories.isEmpty()) {
 		MsgBox::information(this, "Nothing to convert",
-							"There is nothing to convert.\nUse the Add... button to add images!");
+			"There is nothing to convert.\n"
+			"Use the Add... button to add images!");
 		return;
 	}
 
@@ -202,9 +180,9 @@ void ConversionDialog::convertRequested() {
 	}
 
 	tmp = ui->comboBox_vtfVersion->currentText();
-	if(tmp != "7.3") {
-
-		if(tmp == "7.4") arguments.insert("-version", "7.4");
+	// Version 7.3 is default if we do not pass another version
+	if (tmp != "7.3") {
+		if (tmp == "7.4") arguments.insert("-version", "7.4");
 		else if(tmp == "7.5") arguments.insert("-version", "7.5");
 		else if(tmp == "7.2") arguments.insert("-version", "7.2");
 		else if(tmp == "7.1") arguments.insert("-version", "7.1");
@@ -445,12 +423,13 @@ void ConversionDialog::convertRequested() {
 
 	int rememberOverwrite = -1;
 
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
+	for( int i = 0; i < ui->listWidget_textures->count(); ++i )
+	{
 		QString fileName = ui->listWidget_textures->item(i)->toolTip();
 			fileName.chop(4);
 
-		bool skipEntry = false;
+		// TODO: What is this for?
+		/*bool skipEntry = false;
 
 		QMap<QString, bool>::iterator it = listEntriesWithDirectories.begin();
 		while( it != listEntriesWithDirectories.constEnd() ) {
@@ -467,7 +446,7 @@ void ConversionDialog::convertRequested() {
 		}
 
 		if(skipEntry)
-			continue;
+			continue;*/
 
 		anotherTry:
 
@@ -475,7 +454,6 @@ void ConversionDialog::convertRequested() {
 
 		QString test = filePath.left( filePath.size() - 3 ).append("vtf");
 
-		// TODO:
 		if( QDir(test.replace("\\", "/")).exists(test) ) {
 
 			switch( settings->value("convertAskMode", 0).toInt() ) {
@@ -537,40 +515,19 @@ void ConversionDialog::convertRequested() {
 
 		if( output.endsWith("1/1 files completed.") ) {
 
-			int index = 0;
-			for( ; index < ui->listWidget_textures->count(); ++index ) {
+			for (int i = 0; i < ui->listWidget_textures->count(); ++i) {
+				const QString toolTip = ui->listWidget_textures->item(i)->toolTip();
 
-				QListWidgetItem* item = ui->listWidget_textures->item(index);
-
-				if( item->toolTip().left( item->toolTip().size() - 4 ) == fileName ) {
-
+				if (toolTip.left(toolTip.size() - 4) == fileName) {
+					ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
 					break;
 				}
 			}
-
-			QString toolTip = "Converted: " + ui->listWidget_textures->item(index)->toolTip();
-
-			ui->listWidget_textures->item(index)->setToolTip(toolTip);
-
-			QMap<QString, bool>::iterator it = listEntriesWithDirectories.begin();
-			while( it != listEntriesWithDirectories.constEnd() ) {
-
-				if( it.key() == fileName ) {
-
-					it.value() = true;
-
-					break;
-				}
-
-				++it;
-			}
-
-			ui->listWidget_textures->item(index)->setIcon(QIcon(":/icons/success"));
 
 			qApp->processEvents();
 
-		} else if( output.contains("Width must be a power of two (nearest powers are") ||
-				   output.contains("Height must be a power of two (nearest powers are")) {
+		} else if (output.contains("Width must be a power of two (nearest powers are") ||
+			output.contains("Height must be a power of two (nearest powers are")) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("Error while converting!");
@@ -617,12 +574,12 @@ void ConversionDialog::convertRequested() {
 
 void ConversionDialog::addRequested() {
 
-	QStringList fileNames = QFileDialog::getOpenFileNames( this,
-														   "Select one or more images files to convert",
-														   settings->value( "lastConvertAddDirectory", "" ).toString(),
-														   "Images (*.bmp *.dds *.gif *.jpg *.png *.tga)");
-	QStringList filesToAddInListWidget;
+	QStringList fileNames = QFileDialog::getOpenFileNames(this,
+		"Select one or more images files to convert",
+		settings->value("lastConvertAddDirectory", "").toString(),
+		"Images (*.bmp *.dds *.gif *.jpg *.png *.tga)");
 
+	QStringList filesToAddInListWidget;
 	if( fileNames.count() > 0 ) {
 
 		settings->setValue( "lastConvertAddDirectory", fileNames.last().left( fileNames.last().lastIndexOf("\\") ));
@@ -636,7 +593,7 @@ void ConversionDialog::addRequested() {
 			if( listEntriesWithDirectories.contains(tmp) )
 				continue;
 
-			listEntriesWithDirectories.insert( tmp, false );
+			listEntriesWithDirectories.append(tmp);
 
 			// for instance: nature\rock_cbm.vtf
 			tmp = tmp.right( tmp.size() - tmp.lastIndexOf("\\", tmp.lastIndexOf("\\") - 1) - 1 );
@@ -647,50 +604,34 @@ void ConversionDialog::addRequested() {
 		}
 
 		if(addFiles) {
-
 			ui->listWidget_textures->insertItems(0, filesToAddInListWidget);
-
 			ui->listWidget_textures->sortItems();
 
 			int counter = 0;
-			QMap<QString, bool>::const_iterator it = listEntriesWithDirectories.constBegin();
-			while( it != listEntriesWithDirectories.constEnd() ) {
-
-				if( it.value() )
-					ui->listWidget_textures->item(counter)->setToolTip( "Converted: " + it.key() );
-				else
-					ui->listWidget_textures->item(counter)->setToolTip( it.key() );
-
-				++it;
+			foreach(const QString& file, listEntriesWithDirectories) {
+				ui->listWidget_textures->item(counter)->setToolTip(file);
 				++counter;
 			}
 		}
 	}
 }
 
-void ConversionDialog::removeRequested() {
-
-	qDeleteAll( ui->listWidget_textures->selectedItems() );
-
+void ConversionDialog::removeRequested()
+{
+	qDeleteAll(ui->listWidget_textures->selectedItems());
 	listEntriesWithDirectories.clear();
 
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
+	for (int i = 0; i < ui->listWidget_textures->count(); ++i) { 
 		QString itemToolTip = ui->listWidget_textures->item(i)->toolTip();
-
-		if( itemToolTip.startsWith("Converted: ") )
-			listEntriesWithDirectories.insert( itemToolTip.mid(6), true );
-		else
-			listEntriesWithDirectories.insert(itemToolTip, false);
+		listEntriesWithDirectories.append(itemToolTip);
 	}
 
 	ui->listWidget_textures->sortItems();
 }
 
-void ConversionDialog::clearRequested() {
-
+void ConversionDialog::clearRequested()
+{
 	ui->listWidget_textures->clear();
-
 	listEntriesWithDirectories.clear();
 }
 
@@ -769,29 +710,28 @@ void ConversionDialog::setTemplate()
 {
 	resetWidgets();
 
-	QWidget* caller = qobject_cast<QWidget *>( sender() );
-
-	if( caller->objectName() == "pushButton_t01" ){
+	const QString caller = qobject_cast<QWidget*>(sender())->objectName();
+	if (caller == "pushButton_t01") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
 		ui->comboBox_alphaTextures->setCurrentIndex(1);
-	}
-	else if( caller->objectName() == "pushButton_t02" ){
+
+	} else if (caller == "pushButton_t02") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
 		ui->comboBox_alphaTextures->setCurrentIndex(6);
-	}
-	else if( caller->objectName() == "pushButton_t03" ){
+
+	} else if (caller == "pushButton_t03") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
 		ui->comboBox_alphaTextures->setCurrentIndex(5);
-	}
-	else if( caller->objectName() == "pushButton_t04" ){
+
+	} else if (caller == "pushButton_t04") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
 		ui->comboBox_alphaTextures->setCurrentIndex(5);
 		ui->checkBox_disableMipmaps->setChecked(true);
 		ui->checkBox_clamps->setChecked(true);
 		ui->checkBox_clampt->setChecked(true);
 		ui->checkBox_noMIP->setChecked(true);
-	}
-	else if( caller->objectName() == "pushButton_t05" ){
+
+	} else if (caller == "pushButton_t05") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
 		ui->comboBox_alphaTextures->setCurrentIndex(1);
 		ui->checkBox_disableMipmaps->setChecked(true);
@@ -799,7 +739,5 @@ void ConversionDialog::setTemplate()
 		ui->checkBox_clampt->setChecked(true);
 		ui->checkBox_noMIP->setChecked(true);
 	}
-
-
 }
 
