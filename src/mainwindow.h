@@ -38,7 +38,6 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	// TODO: Move to some utility file
 	enum GroupBoxes {
 		BaseTexture,
 		BaseTexture2,
@@ -435,7 +434,7 @@ class ParameterLineEdit : public QLineEdit
 
 public:
 
-	explicit ParameterLineEdit( QWidget* parent = NULL );
+	explicit ParameterLineEdit(QWidget* parent = NULL);
 
 public slots:
 

@@ -42,7 +42,11 @@
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
 Ui::MainWindow* gUi;
 
+// needed for ParameterLineEdit, we do not want to load this twice
+QStringList vmtParameters_;
+
 using namespace utils;
+
 
 MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	QMainWindow(parent),
@@ -67,6 +71,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	fresnelYStart(0.5),
 	ignoreFresnelY(false)
 {
+	// this has to be set before setupUi()
+	vmtParameters_ = extractLines(":/files/vmtParameters");
+
 	ui->setupUi(this);
 	gUi = ui;
 
@@ -8849,7 +8856,7 @@ void MainWindow::displayAboutDialog()
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
 	QLineEdit(parent),
-	completer(new QCompleter(extractLines(":/files/vmtParameters")))
+	completer(new QCompleter(vmtParameters_))
 {
 	setMinimumWidth(250);
 	setAttribute(Qt::WA_DeleteOnClose);
@@ -8925,19 +8932,17 @@ void ParameterLineEdit::_editingFinished()
 			}
 		}
 
-		if(createNew)
-		{
-			grid2->addRow( new ParameterLineEdit(ui->scrollAreaWidgetContents) );
+		if(createNew) {
+			grid2->addRow(new ParameterLineEdit(ui->scrollAreaWidgetContents));
 			grid3->addRow( new ValueLineEdit(ui->scrollAreaWidgetContents) );
 
-			for( int i = 0; i < grid2->count(); ++i )
-			{
-				QWidget::setTabOrder( grid2->itemAt(i)->widget(), grid3->itemAt(i)->widget() );
+			for (int i = 0; i < grid2->count(); ++i) {
+				QWidget::setTabOrder(
+					grid2->itemAt(i)->widget(),
+					grid3->itemAt(i)->widget());
 
 				if( (i + 1) < grid2->count() )
-				{
 					QWidget::setTabOrder( grid3->itemAt(i)->widget(), grid2->itemAt(i + 1)->widget() );
-				}
 			}
 		}
 	}
