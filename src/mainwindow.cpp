@@ -7089,7 +7089,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	QString fileName;
 
-	QString lastTextureDirectory = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir", "").toString());
+	const QString lastTextureDirectory = QDir::toNativeSeparators(
+		mIniSettings->value("lastTextureBrowseDir", "").toString());
 
 	if( lastTextureDirectory.startsWith( QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive )) {
 
@@ -7308,8 +7309,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 	fileName = fileName.left( fileName.size() - 4 );
 
 	if(updateLastTextureDirectory) {
-
-		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")));
+		mIniSettings->setValue("lastTextureBrowseDir",
+			QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")));
 		mIniSettings->sync();
 	}
 
