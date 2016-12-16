@@ -25,9 +25,6 @@ win32-g++: {
     LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
 }
 
-win32:CONFIG(release, debug|release): DEFINES += _RELEASE=1
-else:win32:CONFIG(debug, debug|release): DEFINES += _DEBUG=1
-
 linux {
     LIBS += -lGL -lGLU
 }
