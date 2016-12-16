@@ -4453,7 +4453,7 @@ void MainWindow::action_Open() {
 		if( fileName.isEmpty() )
 			return;
 
-		mIniSettings->setValue( "lastSaveAsDir", fileName.left( fileName.lastIndexOf("\\") ));
+		mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")) );
 
 	} else {
 
@@ -4464,7 +4464,7 @@ void MainWindow::action_Open() {
 		if( fileName.isEmpty() )
 			return;
 
-		mIniSettings->setValue( "lastSaveAsDir", fileName.left( fileName.lastIndexOf("\\") ));
+		mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")) );
 	}
 
 	loadVMT(fileName);
@@ -4525,12 +4525,17 @@ QString MainWindow::action_SaveAs() {
 	} else {
 
 		QString lastSaveAsDir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+		QString currentGameDir = QDir::toNativeSeparators(currentGameMaterialDir());
 		QString vtfName;
 		if ( ui->lineEdit_diffuse->text().isEmpty() ) vtfName = "\\untitled.vmt";
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
 			QString tmp;
-			tmp = vtfLong.section("/", -1);
+			if ( vtfLong.contains("/")) {
+				tmp = vtfLong.section("/", -1);
+			} else {
+				tmp = vtfLong.section("\\", -1);
+			}
 
 			if ( tmp.contains(".") )  {
 				vtfName = "\\" + tmp.section(".", 0, 0);
@@ -4547,7 +4552,7 @@ QString MainWindow::action_SaveAs() {
 
 		} else {
 
-			if( lastSaveAsDir.startsWith( QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive ) ) {
+			if( lastSaveAsDir.startsWith( currentGameDir, Qt::CaseInsensitive ) ) {
 
 				fileName = QFileDialog::getSaveFileName(this, tr("Save Valve Material"),
 														lastSaveAsDir + vtfName, "VMT (*.vmt)");
@@ -7174,15 +7179,15 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			updateLastTextureDirectory = false;
 
 			QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
-			QString fullNewName( ((mVMTLoaded) ? vmtParser->lastVMTFile().directory : currentGameMaterialDir()) + nameWithExtension );
-
-
 
 			if( fileType.toLower() == ".vtf" ) {
 
-				if( QFile::exists(fullNewName) ) {
+				if( mVMTLoaded ) {
+					QString fullNewName = currentGameMaterialDir() + nameWithExtension;
 
-					MsgBox msgBox(this);
+					if( QFile::exists(fullNewName) ) {
+
+						MsgBox msgBox(this);
 						msgBox.setWindowTitle("File already exists!");
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
 						QPushButton* renameButton = msgBox.addButton( "Rename", QMessageBox::NoRole );
@@ -7190,66 +7195,78 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setDefaultButton( renameButton );
 						msgBox.setIcon( QMessageBox::Warning );
 
-					msgBox.setText( fullNewName + " already exists. Do you want to overwrite or rename it?"  );
+						msgBox.setText( fullNewName + " already exists. Do you want to overwrite or rename it?"  );
 
-					msgBox.exec();
+						msgBox.exec();
 
-					if( msgBox.clickedButton() == overwriteButton ) {
+						if( msgBox.clickedButton() == overwriteButton ) {
 
-						if( QFile::remove(fullNewName) ) {
+							if( QFile::remove(fullNewName) ) {
 
-							if( QFile::copy(fileName, fullNewName) ) {
+								if( QFile::copy(fileName, fullNewName) ) {
 
-								fileName = fullNewName;
+									fileName = fullNewName;
+
+									goto updateLineEdit;
+
+								} else {
+									Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
+								}
+
+							} else {
+								Error("\"" + fileName + "\" could not be deleted!")
+							}
+
+						} else if( msgBox.clickedButton() == renameButton ) {
+
+							int fileSuffix = 1;
+
+							fullNewName = fullNewName.left( fullNewName.size() - 4 ).append("_");
+
+							while( QFile::exists( fullNewName + Str(fileSuffix) + ".vtf" )) {
+
+								++fileSuffix;
+							}
+
+							if( QFile::copy(fileName, fullNewName + Str(fileSuffix) + ".vtf") ) {
+
+								fileName = fullNewName + Str(fileSuffix) + ".vtf";
 
 								goto updateLineEdit;
 
 							} else {
-
-								Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
+								Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + Str(fileSuffix) + ".vtf\"")
 							}
-
-						} else {
-
-							Error("\"" + fileName + "\" could not be deleted!")
 						}
 
-					} else if( msgBox.clickedButton() == renameButton ) {
+					} else {
 
-						int fileSuffix = 1;
+						if( QFile::copy(fileName, fullNewName) ) {
 
-						fullNewName = fullNewName.left( fullNewName.size() - 4 ).append("_");
-
-						while( QFile::exists( fullNewName + Str(fileSuffix) + ".vtf" )) {
-
-							++fileSuffix;
-						}
-
-						if( QFile::copy(fileName, fullNewName + Str(fileSuffix) + ".vtf") ) {
-
-							fileName = fullNewName + Str(fileSuffix) + ".vtf";
+							fileName = fullNewName;
 
 							goto updateLineEdit;
 
 						} else {
-
-							Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + Str(fileSuffix) + ".vtf\"")
+							Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
 						}
 					}
 
+				//VMT not saved
 				} else {
 
-					if( QFile::copy(fileName, fullNewName) ) {
-
-						fileName = fullNewName;
-
-						goto updateLineEdit;
-
-					} else {
-
-						Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
-					}
+					lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+					QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
+					QFile::copy(fileName, tempName);
+					texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
+					lineEdit->setDisabled(true);
 				}
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(clicked()), this, SLOT(reconvertTexture()));
+
+				previewTexture( objectName );
 
 			} else {
 
@@ -8140,7 +8157,7 @@ void MainWindow::loadVMT( const QString& vmtPath )
 
 	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
 
-	mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(vmtPath).left( vmtPath.lastIndexOf('\\') ));
+	mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(vmtPath).left( QDir::toNativeSeparators(vmtPath).lastIndexOf('\\') ));
 	mIniSettings->sync();
 
 	//----------------------------------------------------------------------------------------//
