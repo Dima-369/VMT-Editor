@@ -4,6 +4,20 @@ TEMPLATE = app
 
 CONFIG += c++11
 
+
+# copying required DLLs
+win32 {
+    TARGET_CUSTOM_EXT = .exe
+    DEPLOY_COMMAND = windeployqt
+}
+CONFIG(debug, debug|release) {
+    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
+} else {
+    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
+}
+QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+
+
 win32-msvc*:{
     QMAKE_CXXFLAGS_RELEASE -= "-O2"
     QMAKE_CXXFLAGS_RELEASE += "-Od"
