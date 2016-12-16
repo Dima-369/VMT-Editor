@@ -4568,6 +4568,8 @@ QString MainWindow::action_SaveAs() {
 
 		refreshRequested();
 
+		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
+
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
@@ -4581,7 +4583,6 @@ QString MainWindow::action_SaveAs() {
 	}
 
 	updateWindowTitle();
-	processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
 	refreshRequested();
 
 	return fileName;
