@@ -5786,24 +5786,28 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 	return false;
 }
 
-void MainWindow::previewTexture( const QString& object ) {
+void MainWindow::previewTexture(const QString& object, bool deleteFromCache)
+{
+	const QString cacheFile = QString("Cache/%1.png").arg(object);
+	if (deleteFromCache)
+		QFile(cacheFile).remove();
 
-	if( object == "preview_basetexture1" )
-		glWidget_diffuse1->loadTexture( "Cache/" + object + ".png", glWidget_diffuse1->getBumpmap() );
-	else if( object == "preview_bumpmap1" )
-		glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + object + ".png" );
-	else if( object == "preview_basetexture2" )
-		glWidget_diffuse2->loadTexture( "Cache/" + object + ".png", glWidget_diffuse2->getBumpmap() );
-	else if( object == "preview_bumpmap2" )
-		glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + object + ".png" );
+	if (object == "preview_basetexture1") {
+		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
 
-	else {
+	} else if (object == "preview_bumpmap1") {
+		glWidget_diffuse1->loadTexture(glWidget_diffuse1->getDiffuse(), cacheFile);
 
-		foreach(GLWidget* glWidget, glWidgets) {
+	} else if(object == "preview_basetexture2") {
+		glWidget_diffuse2->loadTexture(cacheFile, glWidget_diffuse2->getBumpmap());
 
-			if( glWidget->objectName() == object ) {
+	} else if (object == "preview_bumpmap2") {
+		glWidget_diffuse2->loadTexture(glWidget_diffuse2->getDiffuse(), cacheFile);
 
-				glWidget->loadTexture("Cache/" + object + ".png");
+	} else {
+		foreach (GLWidget* glWidget, glWidgets) {
+			if (glWidget->objectName() == object) {
+				glWidget->loadTexture(cacheFile);
 				break;
 			}
 		}

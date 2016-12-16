@@ -76,8 +76,9 @@ public:
 
 	VmtFile makeVMT();
 
-	// public for ConversionThread
-	void previewTexture(const QString& object);
+	// public for ConversionThread, the deleteFromCache parameter should be
+	// set to true for calls from the ConversionThread
+	void previewTexture(const QString& object, bool deleteFromCache = false);
 
 	// public for ClickableLabel
 	Ui::MainWindow* ui;
