@@ -6970,18 +6970,15 @@ void MainWindow::setCurrentFile( const QString& fileName )
 	mIniSettings->setValue("recentFileList", files);
 
 #ifdef Q_OS_WIN
-	QWinJumpList jp;
 	auto item = new QWinJumpListItem(QWinJumpListItem::Link);
-	const auto a = QCoreApplication::applicationFilePath();
-	item->setFilePath(a);
-	QStringList args;
-	args.append(fileName);
-	item->setArguments(args);
+	item->setFilePath(QCoreApplication::applicationFilePath());
 	item->setWorkingDirectory(QCoreApplication::applicationDirPath());
 	item->setTitle(QFileInfo(fileName).fileName());
 	item->setIcon(QIcon(":/icons/vmt_192_flat"));
 	item->setDescription(fileName);
-	jp.recent()->addItem(item);
+	item->setArguments(QStringList(fileName));
+
+	QWinJumpList().recent()->addItem(item);
 #endif
 
 	updateRecentFileActions(mSettings->recentFileEntryStyle == Settings::FullPath);
