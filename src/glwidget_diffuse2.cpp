@@ -114,7 +114,6 @@ void GLWidget_Diffuse2::loadTexture(const QString &diffuse1,
 		const QString &bumpmap1)
 {
 	if (diffuse1.isEmpty() && bumpmap1.isEmpty()) {
-		qDebug() << "Both textures are empty?";
 		reset();
 		return;
 	}
