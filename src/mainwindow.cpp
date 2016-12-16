@@ -4485,11 +4485,11 @@ void MainWindow::action_Save() {
 
 		dir = directory + '/';
 
+		processTexturesToCopy(dir);
+
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
 
 		updateWindowTitle();
-
-		processTexturesToCopy(dir);
 
 	} else {
 
