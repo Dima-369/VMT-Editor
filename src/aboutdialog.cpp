@@ -8,7 +8,7 @@ AboutDialog::AboutDialog( QWidget* parent ) :
 	ui->setupUi(this);
 
 	ui->label_version->setTextFormat(Qt::PlainText);
-    ui->label_version->setText(QString("1.0.2 - Compiled on ") + __DATE__);
+	ui->label_version->setText(QString("1.1 - Compiled on ") + __DATE__);
 }
 
 AboutDialog::~AboutDialog()
