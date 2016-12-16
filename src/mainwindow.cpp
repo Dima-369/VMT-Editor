@@ -8779,50 +8779,53 @@ void MainWindow::reconvertTexture()
 {
 	const auto lineEdit =
 		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
-	const auto name = lineEdit->objectName();
+	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
-//	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
+	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 
-//	if( texturesToCopy.contains(lineEdit) ) {
+	QString fileName = tooltip;
+	QString extension = fileName.section(".", -1);
+	QString newFile = fileName.section("/", -1).section(".", 0, 0);
 
-//		QString toDelete = "Cache\\Move\\" + lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit);
+	if (extension != "vtf") {
 
-//		if( !QFile::remove(toDelete) )
-//			Error("Error while removing \"" + toDelete + "\"")
+	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+	connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
-//		texturesToCopy.remove(lineEdit);
-//	}
+	conversionThread->fileName = fileName;
+	conversionThread->newFileName = objectName + "_" + ".vtf";
+	conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
 
-//	QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
-//		outputFile = outputFile.left( outputFile.indexOf('.') );
+	conversionThread->start();
 
-//	texturesToCopy.insert(lineEdit, outputFile);
+	} else {
+		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
+	}
 
-//	lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-//	lineEdit->setDisabled(true);
+	if( QFile::exists(dir + newFile + ".vtf") ) {
 
-//	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-//		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
+		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
 
-//		conversionThread->fileName = fileName;
-//		conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-//		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+			Error( "Error removing \"" + dir + newFile + ".vtf\"" );
+			return;
+		}
+	}
 
-//		conversionThread->start();
+	if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
+						dir + newFile + ".vtf" ) ) {
 
-//	fileName.chop(4);
+		Error( "Error moving file to " + dir)
+	} else {
+		Info( "File " + fileName + " succesfully reconverted");
+	}
 
-//	QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-//	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
+	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
 
-//	if( QFile::exists(toFile) )
-//		QFile::remove(toFile);
+	if( QFile::exists(toFile) )
+		QFile::remove(toFile);
 
-//	QFile::copy(fromFile, toFile);
-
-//	previewTexture(objectName);
-
+	previewTexture(objectName);
 }
 
 void MainWindow::showEditGamesDialog()
