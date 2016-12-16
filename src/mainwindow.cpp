@@ -8777,8 +8777,10 @@ void MainWindow::gameTriggered( bool triggered )
 
 void MainWindow::reconvertTexture()
 {
-	const auto name = qobject_cast<QObject*>(sender())->parent()->objectName();
-	Error(name);
+	const auto lineEdit =
+		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+	const auto name = lineEdit->objectName();
+	const auto tooltip = lineEdit->toolTip();
 
 //	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
