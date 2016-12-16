@@ -956,6 +956,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_path</tabstop>
+  <tabstop>toolButton_browse</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
