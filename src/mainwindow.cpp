@@ -6370,9 +6370,6 @@ void MainWindow::shaderChanged()
 		}
 
 	} else {
-
-		Y("DOES NOT CONTAIN SHADER: " + shader)
-
 		ui->groupBox_waterReflection->setTitle("Water - Reflection");
 
 		ui->menu_custom->setEnabled(true);
