@@ -19,9 +19,6 @@ win32 {
 
 
 win32-msvc*:{
-    QMAKE_CXXFLAGS_RELEASE -= "-O2"
-    QMAKE_CXXFLAGS_RELEASE += "-Od"
-
     LIBS += \
         Comdlg32.lib \
         Advapi32.lib \
