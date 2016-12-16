@@ -8824,7 +8824,8 @@ void MainWindow::reconvertTexture()
 	if( QFile::exists(toFile) )
 		QFile::remove(toFile);
 
-	previewTexture(objectName);
+	if (extension == "vtf")
+		previewTexture(objectName);
 }
 
 void MainWindow::showEditGamesDialog()
