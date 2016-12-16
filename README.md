@@ -20,7 +20,7 @@ But you can compile on macOS or Linux for yourself, and pretty much everything b
 
 ## How to compile yourself
 
-We are using Qt 5.6 and MinGW 5.3.0 for compiling.
+We are using Qt 5.6 and MinGW 5.3.0 for compiling (but newer versions should work as well).
 
 - Download the community edition setup of [Qt](https://www.qt.io/)
 - Install Qt Creator and MinGW (Qt setup handles this)
