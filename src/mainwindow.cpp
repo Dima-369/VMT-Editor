@@ -6970,10 +6970,21 @@ void MainWindow::setCurrentFile( const QString& fileName )
 	mIniSettings->setValue("recentFileList", files);
 
 #ifdef Q_OS_WIN
-	SHAddToRecentDocs( SHARD_PATH, QString(fileName).replace("/", "\\").toStdString().c_str() );
+	QWinJumpList jp;
+	auto item = new QWinJumpListItem(QWinJumpListItem::Link);
+	const auto a = QCoreApplication::applicationFilePath();
+	item->setFilePath(a);
+	QStringList args;
+	args.append(fileName);
+	item->setArguments(args);
+	item->setWorkingDirectory(QCoreApplication::applicationDirPath());
+	item->setTitle(QFileInfo(fileName).fileName());
+	item->setIcon(QIcon(":/icons/vmt_192_flat"));
+	item->setDescription(fileName);
+	jp.recent()->addItem(item);
 #endif
 
-	updateRecentFileActions(  mSettings->recentFileEntryStyle == Settings::FullPath ? true : false );
+	updateRecentFileActions(mSettings->recentFileEntryStyle == Settings::FullPath);
 }
 
 void MainWindow::updateRecentFileActions( bool fullPath )

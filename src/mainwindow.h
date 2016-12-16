@@ -13,6 +13,12 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+#ifdef Q_OS_WIN
+#   include <QWinJumpList>
+#   include <QWinJumpListCategory>
+#   include <QWinJumpListItem>
+#endif
+
 #include "vmtparser.h"
 #include "glwidget.h"
 #include "glwidget_diffuse1.h"

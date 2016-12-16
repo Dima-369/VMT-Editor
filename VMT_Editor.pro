@@ -1,4 +1,7 @@
 QT += core gui opengl widgets
+win32 {
+  QT += winextras # for QJumpList
+}
 
 TEMPLATE = app
 
