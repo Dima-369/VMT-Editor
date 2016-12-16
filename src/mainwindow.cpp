@@ -5812,7 +5812,7 @@ void MainWindow::previewTexture( const QString& object ) {
 
 QString MainWindow::steamAppsDirectory()
 {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 	QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam",
 		QSettings::NativeFormat);
 	QString steamDirString = settings.value("SteamPath").toString();
@@ -5827,18 +5827,14 @@ QString MainWindow::steamAppsDirectory()
 	}
 
 	return "";
-#else
-#ifdef Q_OS_LINUX
-	QDir dir("/home/gira/.local/share/Steam/");
-	if (dir.exists()) {
-		if (dir.cd("steamapps")) {
-			mSteamInstalled = true;
-		}
-	}
+#elif defined(Q_OS_LINUX)
+	QDir dir(QString("/home/%1/.local/share/Steam/")
+		.arg(QString(qgetenv("USER"))));
+	if (dir.exists() && dir.cd("steamapps"))
+		mSteamInstalled = true;
 	return dir.absolutePath();
 #else
 	return "";
-#endif
 #endif
 }
 
