@@ -503,7 +503,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileToOpen;
 
 					if(mVMTLoaded) {
@@ -620,7 +620,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 				ui->lineEdit_diffuse->setText(fileToOpen.right( fileToOpen.length() - fileToOpen.lastIndexOf('/', fileToOpen.lastIndexOf('/') - 1) ));
 				ui->lineEdit_diffuse->setDisabled(true);
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+				ConversionThread* conversionThread = new ConversionThread(this);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
 					conversionThread->fileName = fileToOpen;
@@ -7153,7 +7153,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileName;
 
 					if(mVMTLoaded) {
@@ -7291,7 +7291,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+				ConversionThread* conversionThread = new ConversionThread(this);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
 					conversionThread->fileName = fileName;
@@ -8798,15 +8798,14 @@ void MainWindow::reconvertTexture()
 	}
 
 	if (extension != "vtf") {
+		ConversionThread* conversionThread = new ConversionThread(this);
+		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
-	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-	connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
-	conversionThread->fileName = fileName;
-	conversionThread->objectName = objectName;
-	conversionThread->newFileName = "";
-	conversionThread->outputParameter = "-output \"" + dir + "\"";
-	conversionThread->start();
+		conversionThread->fileName = fileName;
+		conversionThread->objectName = objectName;
+		conversionThread->newFileName = "";
+		conversionThread->outputParameter = "-output \"" + dir + "\"";
+		conversionThread->start();
 
 	} else {
 		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");

@@ -1,19 +1,15 @@
 #include "conversionthread.h"
-#include "mainwindow.h"
-#include "utilities.h"
 
-#include <QProcess>
-#include <QDir>
-
-ConversionThread::ConversionThread( QObject* parent, QListWidget* logger ) :
-	QThread(parent),
-	mLogger(logger)
+ConversionThread::ConversionThread(MainWindow* mw) :
+	QThread(mw),
+	mainWindow(mw),
+	mLogger(mw->mLogger)
 {
 
 }
 
-void ConversionThread::run() {
-
+void ConversionThread::run()
+{
 	QProcess process;
 	process.start("vtfcmd.exe -file \"" + fileName.replace("/", "\\") + "\" " + outputParameter.replace("/", "\\") + " -resize -msharpen SHARPENSOFT -version 7.4");
 
@@ -21,12 +17,11 @@ void ConversionThread::run() {
 
 	output = process.readAllStandardOutput().simplified();
 
-	if( output.endsWith("1/1 files completed.") ) {
-
+	if (output.endsWith("1/1 files completed.")) {
 		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
-		if (objectName != "") {
-			MainWindow::previewTexture(objectName);
+		if (!objectName.isEmpty()) {
+			mainWindow->previewTexture(objectName);
 		}
 
 		if (newFileName != "") {

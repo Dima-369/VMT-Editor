@@ -76,8 +76,14 @@ public:
 
 	VmtFile makeVMT();
 
-	// Made public for ClickableLabel
+	// public for ConversionThread
+	void previewTexture(const QString& object);
+
+	// public for ClickableLabel
 	Ui::MainWindow* ui;
+
+	// public for ConversionThread
+	QListWidget* mLogger;
 
 protected:
 
@@ -111,8 +117,6 @@ private:
 	GLWidget_Spec* glWidget_spec;
 
 	QString loadedVmtFile;
-
-	QListWidget* mLogger;
 
 	// Game + Directory
 	QMap<QString, QString> mAvailableGames;
@@ -232,8 +236,6 @@ private:
 	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly );
 
 	bool previewTexture( GLWidget_Spec::Mode mode, const QString& texture );
-
-	void previewTexture( const QString& object );
 
 	void saveSettings();
 
