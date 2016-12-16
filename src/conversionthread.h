@@ -17,6 +17,7 @@ public:
 	QString fileName;
 	QString outputParameter;
 	QString newFileName;
+	QString objectName = "";
 
 private:
 

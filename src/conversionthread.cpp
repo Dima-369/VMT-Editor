@@ -1,5 +1,5 @@
 #include "conversionthread.h"
-
+#include "mainwindow.h"
 #include "utilities.h"
 
 #include <QProcess>
@@ -25,18 +25,24 @@ void ConversionThread::run() {
 
 		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
-		QDir moveDir( QDir::currentPath() + "/Cache/Move/" );
+		if (objectName != "") {
+			MainWindow::previewTexture(objectName);
+		}
+
+		if (newFileName != "") {
+			QDir moveDir( QDir::currentPath() + "/Cache/Move/" );
 			moveDir.remove(newFileName);
 
-		QString toRename = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1);
+			QString toRename = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1);
 			toRename.chop( fileName.length() - fileName.lastIndexOf('.') );
 			toRename += ".vtf";
 
-		if( !QFile::rename(QDir::currentPath() + "\\Cache\\Move\\" + toRename,
-						   QDir::currentPath() + "\\Cache\\Move\\" + newFileName) ) {
+			if( !QFile::rename(QDir::currentPath() + "\\Cache\\Move\\" + toRename,
+							   QDir::currentPath() + "\\Cache\\Move\\" + newFileName) ) {
 
 
-			Error("There was an error renaming \"" + toRename + "\" to \"" + newFileName + "\"")
+				Error("There was an error renaming \"" + toRename + "\" to \"" + newFileName + "\"")
+			}
 		}
 
 

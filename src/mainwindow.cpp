@@ -8788,21 +8788,6 @@ void MainWindow::reconvertTexture()
 	QString extension = fileName.section(".", -1);
 	QString newFile = fileName.section("/", -1).section(".", 0, 0);
 
-	if (extension != "vtf") {
-
-	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-	connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
-	conversionThread->fileName = fileName;
-	conversionThread->newFileName = objectName + "_" + ".vtf";
-	conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
-
-	conversionThread->start();
-
-	} else {
-		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
-	}
-
 	if( QFile::exists(dir + newFile + ".vtf") ) {
 
 		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
@@ -8812,12 +8797,27 @@ void MainWindow::reconvertTexture()
 		}
 	}
 
-	if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
-						dir + newFile + ".vtf" ) ) {
+	if (extension != "vtf") {
 
-		Error( "Error moving file to " + dir)
+	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+	connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
+
+	conversionThread->fileName = fileName;
+	conversionThread->objectName = objectName;
+	conversionThread->newFileName = "";
+	conversionThread->outputParameter = "-output \"" + dir + "\"";
+	conversionThread->start();
+
 	} else {
-		Info( "File " + fileName + " succesfully reconverted");
+		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
+
+		if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
+							dir + newFile + ".vtf" ) ) {
+
+			Error( "Error moving file to " + dir)
+		} else {
+			Info( "File " + fileName + " succesfully copied");
+		}
 	}
 
 	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
