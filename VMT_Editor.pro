@@ -9,13 +9,13 @@ CONFIG += c++11
 win32 {
     TARGET_CUSTOM_EXT = .exe
     DEPLOY_COMMAND = windeployqt
+  CONFIG(debug, debug|release) {
+      DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
+  } else {
+      DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
+  }
+  QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 }
-CONFIG(debug, debug|release) {
-    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
-} else {
-    DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
-}
-QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 
 
 win32-msvc*:{
