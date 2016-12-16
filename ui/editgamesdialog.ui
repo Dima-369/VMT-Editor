@@ -930,6 +930,13 @@ color: silver;
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushButton_edit</tabstop>
+  <tabstop>pushButton_add</tabstop>
+  <tabstop>pushButton_remove</tabstop>
+  <tabstop>pushButton_scan</tabstop>
+  <tabstop>tableWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -939,8 +946,8 @@ color: silver;
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>472</x>
-     <y>367</y>
+     <x>481</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>
@@ -955,8 +962,8 @@ color: silver;
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>491</x>
-     <y>362</y>
+     <x>500</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>515</x>
