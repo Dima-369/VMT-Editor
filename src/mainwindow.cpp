@@ -4530,7 +4530,7 @@ QString MainWindow::action_SaveAs() {
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
 			QString tmp;
-			tmp = vtfLong.section("\\", -1);
+			tmp = vtfLong.section("/", -1);
 
 			if ( tmp.contains(".") )  {
 				vtfName = "\\" + tmp.section(".", 0, 0);
