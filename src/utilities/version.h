@@ -21,9 +21,12 @@ struct Version {
 		patch(patch) {}
 };
 
+QString versionToString(const Version& v);
+
 QString getCurrentVersion();
 
-QString versionToString(Version v);
+// Removes the trailing .0, so "1.1.0" becomes "1.1"
+QString removeTrailingVersionZero(const QString& vs);
 
 // If no new version is available, major is 0
 // If the network request failed, major is -1

@@ -11,10 +11,20 @@ Version getCurrentVersionRaw()
 	return Version(parts[0].toInt(), parts[1].toInt(), parts[2].toInt());
 }
 
-QString versionToString(Version v)
+QString versionToString(const Version& v)
 {
 	return QString("%1.%2.%3")
 		.arg(v.major).arg(v.minor).arg(v.patch);
+}
+
+QString removeTrailingVersionZero(const QString& vs)
+{
+	if (vs.endsWith(".0")) {
+		QString tmp(vs);
+		tmp.chop(2);
+		return tmp;
+	}
+	return vs;
 }
 
 QString getCurrentVersion()
