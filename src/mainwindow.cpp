@@ -663,15 +663,6 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	mIsInConstructor = false;
 }
 
-MainWindow::~MainWindow() {
-
-	delete mIniSettings;
-
-	delete vmtParser;
-
-	delete ui;
-}
-
 void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox) {
 
 	if( !( value = vmt.parameters.take(string)).isEmpty() ) {
