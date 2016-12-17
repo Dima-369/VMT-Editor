@@ -1,28 +1,22 @@
 QT += core gui opengl widgets network
-win32 {
-  QT += winextras # for QJumpList
-}
 
 TEMPLATE = app
 
 CONFIG += c++11
 
-
-# copying required DLLs
 win32 {
-    TARGET_CUSTOM_EXT = .exe
-    DEPLOY_COMMAND = windeployqt
+  QT += winextras # for QJumpList
+  LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
+
+  # copying required DLLs
+  TARGET_CUSTOM_EXT = .exe
+  DEPLOY_COMMAND = windeployqt
   CONFIG(debug, debug|release) {
       DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
   } else {
       DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
   }
   QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
-}
-
-
-win32-g++: {
-    LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
 }
 
 linux {
