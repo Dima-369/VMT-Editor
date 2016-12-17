@@ -7198,10 +7198,6 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 					QString fullNewName = dir + "\\" + nameWithExtension;
 
-					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-					lineEdit->setToolTip(fileName);
-					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
 					if( QFile::exists(fullNewName) ) {
 
 						MsgBox msgBox(this);
