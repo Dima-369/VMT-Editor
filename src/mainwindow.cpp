@@ -7143,10 +7143,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	bool updateLastTextureDirectory = true;
 
-	if( !fileName.isEmpty() ) {
-
+	if (!fileName.isEmpty()) {
 		clearLineEditAction(lineEdit);
-		lineEdit->setToolTip("");
 
 		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
