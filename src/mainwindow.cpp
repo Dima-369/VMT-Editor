@@ -7214,8 +7214,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 					QString fullNewName = dir + nameWithExtension;
 
-					if( QFile::exists(fullNewName) ) {
-
+					if (QFile::exists(fullNewName)) {
 						MsgBox msgBox(this);
 						msgBox.setWindowTitle("File already exists!");
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
@@ -7245,28 +7244,6 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 								Error("\"" + fileName + "\" could not be deleted!")
 							}
 						}
-
-//						} else if( msgBox.clickedButton() == renameButton ) {
-
-//							int fileSuffix = 1;
-
-//							fullNewName = fullNewName.left( fullNewName.size() - 4 ).append("_");
-
-//							while( QFile::exists( fullNewName + Str(fileSuffix) + ".vtf" )) {
-
-//								++fileSuffix;
-//							}
-
-//							if( QFile::copy(fileName, fullNewName + Str(fileSuffix) + ".vtf") ) {
-
-//								fileName = fullNewName + Str(fileSuffix) + ".vtf";
-
-//								goto updateLineEdit;
-
-//							} else {
-//								Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + Str(fileSuffix) + ".vtf\"")
-//							}
-//						}
 
 					} else {
 
