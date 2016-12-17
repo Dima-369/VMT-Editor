@@ -2,6 +2,11 @@
 
 #include <QFile>
 #include <QString>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
+#include <QEventLoop>
 
 // those are methods specified in POSIX.1, we don't want those!
 #undef major
@@ -18,6 +23,7 @@ struct Version {
 
 QString getCurrentVersion();
 
-// if no new version is available, major is set to 0
-// otherwise the new version is returned
+// If no new version is available, major is 0
+// If the network request failed, major is -1
+// Otherwise the new version is returned
 Version checkForNewVersion();
