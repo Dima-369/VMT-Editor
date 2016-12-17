@@ -39,6 +39,7 @@ translateVar
 textureScrollVar
 textureScrollRate
 textureScrollAngle
+textureScale
 
 toggleTextureVar
 toggleTextureFrameNumVar
