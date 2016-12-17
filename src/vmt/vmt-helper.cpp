@@ -217,7 +217,7 @@ void utils::parseTexture(const QString &parameter, const QString &value,
 	}
 
 	if (vmt.state.gameDirectory != 0 && !vmt.state.gameDirectory->exists(
-			"material/" + s + ".vtf")) {
+			"materials/" + s + ".vtf")) {
 
 		ERROR(parameter + " file: \"" + s + ".vtf\" does not exist!")
 	}
