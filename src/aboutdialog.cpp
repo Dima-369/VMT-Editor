@@ -1,5 +1,4 @@
 #include "aboutdialog.h"
-#include "ui_aboutdialog.h"
 
 AboutDialog::AboutDialog( QWidget* parent ) :
 	DialogWithoutHelpButton(parent),
@@ -8,7 +7,9 @@ AboutDialog::AboutDialog( QWidget* parent ) :
 	ui->setupUi(this);
 
 	ui->label_version->setTextFormat(Qt::PlainText);
-	ui->label_version->setText(QString("1.1 - Compiled on ") + __DATE__);
+
+	ui->label_version->setText(QString("%1 - Compiled on %2")
+		.arg(to_string(fetch_version())).arg(__DATE__));
 }
 
 AboutDialog::~AboutDialog()

@@ -74,6 +74,7 @@ SOURCES += \
     src/utilities/window.cpp \
     src/user-interface/shading-reflection.cpp \
     src/utilities/strings.cpp \
+    src/utilities/version.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -117,7 +118,8 @@ HEADERS += \
     src/utilities/strings.h \
     src/opengl/helpers.h \
     src/utilities/window.h \
-    src/user-interface/shading-reflection.h
+    src/user-interface/shading-reflection.h \
+    src/utilities/version.h
 
 FORMS += \
     ui/mainwindow.ui \
