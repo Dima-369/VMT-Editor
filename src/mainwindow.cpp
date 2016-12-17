@@ -7225,7 +7225,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setDefaultButton( overwriteButton );
 						msgBox.setIcon( QMessageBox::Warning );
 
-						msgBox.setText( fullNewName + " already exists. Do you want to overwrite or rename it?"  );
+						msgBox.setText( QDir::toNativeSeparators(fullNewName) + " already exists. Do you want to overwrite it?"  );
 
 						if(  msgBox.exec() != QMessageBox::Cancel ) {
 
