@@ -649,8 +649,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 		fileToOpen = fileToOpen.left( fileToOpen.size() - 4 );
 
-		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileToOpen).left( QDir::toNativeSeparators(fileToOpen).lastIndexOf("\\")));
-		mIniSettings->sync();
+		mIniSettings->setValue("lastSaveAsDir",
+			QDir::toNativeSeparators(fileToOpen).left(QDir::toNativeSeparators(fileToOpen).lastIndexOf("\\")));
 
 		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileToOpen);
 		ui->lineEdit_diffuse->setText(relativeFilePath);
@@ -7334,7 +7334,6 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 	if(updateLastTextureDirectory) {
 		mIniSettings->setValue("lastTextureBrowseDir",
 			QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")));
-		mIniSettings->sync();
 	}
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileName);
@@ -8162,8 +8161,8 @@ void MainWindow::loadVMT( const QString& vmtPath )
 
 	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
 
-	mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(vmtPath).left( QDir::toNativeSeparators(vmtPath).lastIndexOf('\\') ));
-	mIniSettings->sync();
+	mIniSettings->setValue("lastSaveAsDir",
+		QDir::toNativeSeparators(vmtPath).left(QDir::toNativeSeparators(vmtPath).lastIndexOf('\\')));
 
 	//----------------------------------------------------------------------------------------//
 
