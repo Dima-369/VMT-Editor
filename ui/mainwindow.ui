@@ -81,36 +81,15 @@ QWidget:disabled
     
 }
 
-/* The fuck is this
-
- QWidget:item:hover
-{
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1,
-    stop: 0 #78879b, stop: 1 #78879b);
-    color: black;
-}
-
-QWidget:item:selected
-{
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1,
-    stop: 0 #78879b, stop: 1 #78879b);
-}
- 
-*/
-
-/* Menus and shit */
-
 QMenuBar
-
 {
-	
 	background-color: #333;
-    color: silver;
+  color: silver;
 }
 
 QMenuBar::item
 {
-    background: transparent;
+  background: transparent;
 }
 
 QMenuBar::item:selected
@@ -411,8 +390,6 @@ QSizeGrip {
     width: 12px;
     height: 12px;
 }
-
-/* Separators and shit */
 
 QMainWindow::separator
 {
