@@ -621,8 +621,6 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 				ui->lineEdit_diffuse->setDisabled(true);
 
 				ConversionThread* conversionThread = new ConversionThread(this);
-					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
 					conversionThread->fileName = fileToOpen;
 					conversionThread->newFileName = ui->lineEdit_diffuse->objectName() + "_" + texturesToCopy.value(ui->lineEdit_diffuse) + ".vtf";
 					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
@@ -7310,12 +7308,9 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
 				ConversionThread* conversionThread = new ConversionThread(this);
-					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
 					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
-
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -8848,8 +8843,6 @@ void MainWindow::reconvertTexture()
 
 	if (extension != "vtf") {
 		ConversionThread* conversionThread = new ConversionThread(this);
-		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
 		conversionThread->fileName = fileName;
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
