@@ -208,7 +208,6 @@ void processExponent1(const QString &parameter, const QString &value,
 
 	if (r.notDefault) {
 		ui->spinBox_exponent->setValue(r.value);
-		ui->spinBox_exponent2->setValue(r.value);
 	}
 }
 
@@ -340,6 +339,14 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 			if (r.notDefault) widget->setValue(r.value); \
 		} \
 	}
+	#define INT(p, def, widget) { \
+		PREP(p) \
+			const QString &v = vmt->parameters.take(p); \
+			utils::IntResult r = \
+				utils::parseInt(p, v, def, ui); \
+			if (r.notDefault) widget->setValue(r.value); \
+		} \
+	}
 	#define BOOL(p, widget) { \
 		PREP(p) \
 			const QString &v = vmt->parameters.take(p); \
@@ -384,4 +391,5 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	DO_CHOICE("$phongamount2", processPhongAmount, false)
 	DO_CHOICE("$phongmaskcontrastbrightness2",
 		processMaskContrastBrightness, false)
+	INT("$phongexponent2", 5, ui->spinBox_exponent2)
 }

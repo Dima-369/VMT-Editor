@@ -4052,6 +4052,22 @@ void MainWindow::resetWidgets() {
 
 	//----------------------------------------------------------------------------------------//
 
+	clearLineEditAction(ui->lineEdit_diffuse);
+	clearLineEditAction(ui->lineEdit_diffuse2);
+	clearLineEditAction(ui->lineEdit_diffuse3);
+	clearLineEditAction(ui->lineEdit_diffuse4);
+	clearLineEditAction(ui->lineEdit_bumpmap);
+	clearLineEditAction(ui->lineEdit_bumpmap2);
+	clearLineEditAction(ui->lineEdit_bump2);
+	clearLineEditAction(ui->lineEdit_detail);
+	clearLineEditAction(ui->lineEdit_exponentTexture);
+	clearLineEditAction(ui->lineEdit_specmap);
+	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
+	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
+	clearLineEditAction(ui->lineEdit_waterNormalMap);
+
+	//----------------------------------------------------------------------------------------//
+
 	setCurrentGame(mSettings->lastGame);
 
 	ui->menu_water->setDisabled(true);
@@ -7127,11 +7143,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	if( !fileName.isEmpty() ) {
 
-		if( !lineEdit->actions().isEmpty() ) {
-			QAction *action = lineEdit->actions()[0];
-			action->~QAction();
-			lineEdit->setToolTip("");
-		}
+		clearLineEditAction(lineEdit);
+		lineEdit->setToolTip("");
 
 		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
