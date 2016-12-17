@@ -21,23 +21,12 @@ win32 {
 }
 
 
-win32-msvc*:{
-    LIBS += \
-        Comdlg32.lib \
-        Advapi32.lib \
-        Shell32.lib
-}
-
 win32-g++: {
     LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
 }
 
 win32:CONFIG(release, debug|release): DEFINES += _RELEASE=1
 else:win32:CONFIG(debug, debug|release): DEFINES += _DEBUG=1
-
-!win32-msvc*:{
-    QMAKE_CXXFLAGS_RELEASE += "-O0"
-}
 
 linux {
     LIBS += -lGL -lGLU
