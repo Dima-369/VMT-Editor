@@ -7223,7 +7223,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
 						msgBox.addButton( QMessageBox::Cancel );
 						msgBox.setDefaultButton( overwriteButton );
-						msgBox.setIcon( QMessageBox::Warning );
+						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
 
 						msgBox.setText( QDir::toNativeSeparators(fullNewName) + " already exists. Do you want to overwrite it?"  );
 
