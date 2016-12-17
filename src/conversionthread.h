@@ -1,8 +1,12 @@
-#ifndef CONVERSIONTHREAD_H
-#define CONVERSIONTHREAD_H
+#pragma once
 
 #include <QThread>
 #include <QListWidget>
+#include <QProcess>
+#include <QDir>
+
+#include "mainwindow.h"
+#include "utilities.h"
 
 class ConversionThread : public QThread
 {
@@ -10,19 +14,21 @@ class ConversionThread : public QThread
 
 public:
 
-	ConversionThread( QObject* parent, QListWidget* logger );
+	ConversionThread(MainWindow* mw);
 
 	virtual void run();
 
 	QString fileName;
 	QString outputParameter;
+	QString relativeFilePath;
 	QString newFileName;
+	QString objectName;
 
 private:
 
 	QString output;
+	MainWindow* mainWindow;
 
+	// required for the ERROR, INFO macros
 	QListWidget* mLogger;
 };
-
-#endif // CONVERSIONTHREAD_H

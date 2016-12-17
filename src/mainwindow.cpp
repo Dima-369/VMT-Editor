@@ -503,7 +503,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileToOpen;
 
 					if(mVMTLoaded) {
@@ -620,7 +620,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 				ui->lineEdit_diffuse->setText(fileToOpen.right( fileToOpen.length() - fileToOpen.lastIndexOf('/', fileToOpen.lastIndexOf('/') - 1) ));
 				ui->lineEdit_diffuse->setDisabled(true);
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+				ConversionThread* conversionThread = new ConversionThread(this);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
 					conversionThread->fileName = fileToOpen;
@@ -5597,7 +5597,7 @@ void MainWindow::previewTexture()
 	repaint();
 }
 
-bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly ) {
+bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly, bool ignoreCache ) {
 
 	checkCacheSize();
 
@@ -5608,9 +5608,13 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		return false;
 
 	} else {
-
-		QString texturePath( currentGameMaterialDir() + "/" + texture );
-
+		QString texturePath;
+		if( texture.endsWith(".") ) {
+			texturePath = texture;
+			texturePath.chop(1);
+		} else {
+			texturePath = ( currentGameMaterialDir() + "/" + texture );
+		}
 		QFile vtfFile( texturePath + ".vtf" );
 		if( !vtfFile.exists() ) {
 
@@ -5681,6 +5685,11 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
 
 		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
+		if( ignoreCache ) {
+			if( cacheFile.exists() )
+				cacheFile.remove();
+		}
+
 		if( cacheFile.exists() )
 		{
 			if( object == "preview_basetexture1" ) {
@@ -5786,24 +5795,26 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 	return false;
 }
 
-void MainWindow::previewTexture( const QString& object ) {
+void MainWindow::previewTexture(const QString& object)
+{
+	const QString cacheFile = QString("Cache/%1.png").arg(object);
 
-	if( object == "preview_basetexture1" )
-		glWidget_diffuse1->loadTexture( "Cache/" + object + ".png", glWidget_diffuse1->getBumpmap() );
-	else if( object == "preview_bumpmap1" )
-		glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + object + ".png" );
-	else if( object == "preview_basetexture2" )
-		glWidget_diffuse2->loadTexture( "Cache/" + object + ".png", glWidget_diffuse2->getBumpmap() );
-	else if( object == "preview_bumpmap2" )
-		glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + object + ".png" );
+	if (object == "preview_basetexture1") {
+		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
 
-	else {
+	} else if (object == "preview_bumpmap1") {
+		glWidget_diffuse1->loadTexture(glWidget_diffuse1->getDiffuse(), cacheFile);
 
-		foreach(GLWidget* glWidget, glWidgets) {
+	} else if(object == "preview_basetexture2") {
+		glWidget_diffuse2->loadTexture(cacheFile, glWidget_diffuse2->getBumpmap());
 
-			if( glWidget->objectName() == object ) {
+	} else if (object == "preview_bumpmap2") {
+		glWidget_diffuse2->loadTexture(glWidget_diffuse2->getDiffuse(), cacheFile);
 
-				glWidget->loadTexture("Cache/" + object + ".png");
+	} else {
+		foreach (GLWidget* glWidget, glWidgets) {
+			if (glWidget->objectName() == object) {
+				glWidget->loadTexture(cacheFile);
 				break;
 			}
 		}
@@ -5812,7 +5823,7 @@ void MainWindow::previewTexture( const QString& object ) {
 
 QString MainWindow::steamAppsDirectory()
 {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 	QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam",
 		QSettings::NativeFormat);
 	QString steamDirString = settings.value("SteamPath").toString();
@@ -5827,18 +5838,14 @@ QString MainWindow::steamAppsDirectory()
 	}
 
 	return "";
-#else
-#ifdef Q_OS_LINUX
-	QDir dir("/home/gira/.local/share/Steam/");
-	if (dir.exists()) {
-		if (dir.cd("steamapps")) {
-			mSteamInstalled = true;
-		}
-	}
+#elif defined(Q_OS_LINUX)
+	QDir dir(QString("/home/%1/.local/share/Steam/")
+		.arg(QString(qgetenv("USER"))));
+	if (dir.exists() && dir.cd("steamapps"))
+		mSteamInstalled = true;
 	return dir.absolutePath();
 #else
 	return "";
-#endif
 #endif
 }
 
@@ -7161,7 +7168,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileName;
 
 					if(mVMTLoaded) {
@@ -7188,7 +7195,12 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			if( fileType.toLower() == ".vtf" ) {
 
 				if( mVMTLoaded ) {
-					QString fullNewName = currentGameMaterialDir() + nameWithExtension;
+					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+					QString fullNewName = dir + "\\" + nameWithExtension;
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
 					if( QFile::exists(fullNewName) ) {
 
@@ -7196,7 +7208,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setWindowTitle("File already exists!");
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
 						QPushButton* renameButton = msgBox.addButton( "Rename", QMessageBox::NoRole );
-						msgBox.addButton( QMessageBox::No );
+						msgBox.addButton( QMessageBox::Cancel );
 						msgBox.setDefaultButton( renameButton );
 						msgBox.setIcon( QMessageBox::Warning );
 
@@ -7250,6 +7262,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 							fileName = fullNewName;
 
+							Info( "File \"" + fileName + "\" succesfully copied");
+
 							goto updateLineEdit;
 
 						} else {
@@ -7271,7 +7285,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				previewTexture( objectName );
+				previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
 
 			} else {
 
@@ -7299,7 +7313,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+				ConversionThread* conversionThread = new ConversionThread(this);
 					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
 					conversionThread->fileName = fileName;
@@ -8790,26 +8804,42 @@ void MainWindow::reconvertTexture()
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+	QString preview;
+
+	if( objectName == "lineEdit_diffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_bumpmap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_diffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bumpmap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_diffuse3" )
+		preview = "preview_basetexture3";
+	else if( objectName == "lineEdit_diffuse4" )
+		preview = "preview_basetexture4";
+	else if( objectName == "lineEdit_detail" )
+		preview = "preview_detail";
+	else if( objectName == "lineEdit_refractNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_refractNormalMap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_waterNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bump2" )
+		preview = "preview_bumpmap2";
+
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
 	QString newFile = fileName.section("/", -1).section(".", 0, 0);
 
-	if (extension != "vtf") {
-
-	ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-	connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
-	conversionThread->fileName = fileName;
-	conversionThread->newFileName = objectName + "_" + ".vtf";
-	conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
-
-	conversionThread->start();
-
-	} else {
-		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
-	}
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + "/" + newFile);
 
 	if( QFile::exists(dir + newFile + ".vtf") ) {
 
@@ -8820,20 +8850,31 @@ void MainWindow::reconvertTexture()
 		}
 	}
 
-	if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
-						dir + newFile + ".vtf" ) ) {
+	if (extension != "vtf") {
+		ConversionThread* conversionThread = new ConversionThread(this);
+		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
-		Error( "Error moving file to " + dir)
+		conversionThread->fileName = fileName;
+		conversionThread->objectName = preview;
+		conversionThread->relativeFilePath = relativeFilePath;
+		conversionThread->newFileName = "";
+		conversionThread->outputParameter = "-output \"" + dir + "\"";
+		conversionThread->start();
+
 	} else {
-		Info( "File " + fileName + " succesfully reconverted");
+		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
+
+		if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
+							dir + newFile + ".vtf" ) ) {
+
+			Error( "Error moving file to " + dir)
+		} else {
+			Info( "File \"" + fileName + "\" succesfully copied");
+		}
 	}
 
-	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
-
-	if( QFile::exists(toFile) )
-		QFile::remove(toFile);
-
-	previewTexture(objectName);
+	if (extension == "vtf")
+		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 }
 
 void MainWindow::showEditGamesDialog()

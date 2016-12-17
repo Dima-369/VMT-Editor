@@ -82,8 +82,17 @@ public:
 
 	VmtFile makeVMT();
 
-	// Made public for ClickableLabel
+	// public for ConversionThread, the deleteFromCache parameter should be
+	// set to true for calls from the ConversionThread
+	void previewTexture(const QString& object);
+
+	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly, bool ignoreCache = false );
+
+	// public for ClickableLabel
 	Ui::MainWindow* ui;
+
+	// public for ConversionThread
+	QListWidget* mLogger;
 
 protected:
 
@@ -117,8 +126,6 @@ private:
 	GLWidget_Spec* glWidget_spec;
 
 	QString loadedVmtFile;
-
-	QListWidget* mLogger;
 
 	// Game + Directory
 	QMap<QString, QString> mAvailableGames;
@@ -235,11 +242,7 @@ private:
 
 	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
 
-	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly );
-
 	bool previewTexture( GLWidget_Spec::Mode mode, const QString& texture );
-
-	void previewTexture( const QString& object );
 
 	void saveSettings();
 
