@@ -8782,6 +8782,35 @@ void MainWindow::reconvertTexture()
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+	QString preview;
+
+	if( objectName == "lineEdit_diffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_bumpmap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_diffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bumpmap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_diffuse3" )
+		preview = "preview_basetexture3";
+	else if( objectName == "lineEdit_diffuse4" )
+		preview = "preview_basetexture4";
+	else if( objectName == "lineEdit_detail" )
+		preview = "preview_detail";
+	else if( objectName == "lineEdit_refractNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_refractNormalMap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_waterNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bump2" )
+		preview = "preview_bumpmap2";
+
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 
 	QString fileName = tooltip;
@@ -8802,7 +8831,7 @@ void MainWindow::reconvertTexture()
 		connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
 
 		conversionThread->fileName = fileName;
-		conversionThread->objectName = objectName;
+		conversionThread->objectName = preview;
 		conversionThread->newFileName = "";
 		conversionThread->outputParameter = "-output \"" + dir + "\"";
 		conversionThread->start();
@@ -8819,13 +8848,8 @@ void MainWindow::reconvertTexture()
 		}
 	}
 
-	QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
-
-	if( QFile::exists(toFile) )
-		QFile::remove(toFile);
-
 	if (extension == "vtf")
-		previewTexture(objectName);
+		previewTexture(preview, true);
 }
 
 void MainWindow::showEditGamesDialog()
