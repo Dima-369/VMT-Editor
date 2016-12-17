@@ -643,7 +643,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 			}
 		}
 
-		goto doneWithCrap;
+		goto returnFromMethod;
 
 		updateLineEdit:
 
@@ -658,7 +658,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		previewTexture( objectName, relativeFilePath, true, false, false, false );
 	}
 
-	doneWithCrap:
+	returnFromMethod:
 
 	mIsInConstructor = false;
 }
