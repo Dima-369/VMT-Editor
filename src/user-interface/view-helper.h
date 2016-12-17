@@ -1,5 +1,4 @@
-#ifndef VIEWHELPER_H
-#define VIEWHELPER_H
+#pragma once
 
 #include "ui_mainwindow.h"
 
@@ -123,6 +122,13 @@ inline QString getText(QLineEdit *le)
 	return "";
 }
 
-} // namespace utils
+inline void clearLineEditAction(QLineEdit* le)
+{
+	const auto actions = le->actions();
+	if (!actions.isEmpty()) {
+		le->removeAction(actions[0]);
+	}
+	le->setToolTip("");
+}
 
-#endif // VIEWHELPER_H
+} // namespace utils
