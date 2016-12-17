@@ -20,6 +20,7 @@ public:
 
 	QString fileName;
 	QString outputParameter;
+	QString relativeFilePath;
 	QString newFileName;
 	QString objectName;
 

@@ -78,7 +78,9 @@ public:
 
 	// public for ConversionThread, the deleteFromCache parameter should be
 	// set to true for calls from the ConversionThread
-	void previewTexture(const QString& object, bool deleteFromCache = false);
+	void previewTexture(const QString& object);
+
+	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly, bool ignoreCache = false );
 
 	// public for ClickableLabel
 	Ui::MainWindow* ui;
@@ -233,8 +235,6 @@ private:
 	void changeColor( QPlainTextEdit* colorField );
 
 	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
-
-	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly );
 
 	bool previewTexture( GLWidget_Spec::Mode mode, const QString& texture );
 

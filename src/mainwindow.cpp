@@ -5597,7 +5597,7 @@ void MainWindow::previewTexture()
 	repaint();
 }
 
-bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly ) {
+bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly, bool ignoreCache ) {
 
 	checkCacheSize();
 
@@ -5608,9 +5608,13 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		return false;
 
 	} else {
-
-		QString texturePath( currentGameMaterialDir() + "/" + texture );
-
+		QString texturePath;
+		if( texture.endsWith(".") ) {
+			texturePath = texture;
+			texturePath.chop(1);
+		} else {
+			texturePath = ( currentGameMaterialDir() + "/" + texture );
+		}
 		QFile vtfFile( texturePath + ".vtf" );
 		if( !vtfFile.exists() ) {
 
@@ -5681,6 +5685,11 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
 
 		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
+		if( ignoreCache ) {
+			if( cacheFile.exists() )
+				cacheFile.remove();
+		}
+
 		if( cacheFile.exists() )
 		{
 			if( object == "preview_basetexture1" ) {
@@ -5786,11 +5795,9 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 	return false;
 }
 
-void MainWindow::previewTexture(const QString& object, bool deleteFromCache)
+void MainWindow::previewTexture(const QString& object)
 {
 	const QString cacheFile = QString("Cache/%1.png").arg(object);
-	if (deleteFromCache)
-		QFile::remove(cacheFile);
 
 	if (object == "preview_basetexture1") {
 		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
@@ -7180,7 +7187,12 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			if( fileType.toLower() == ".vtf" ) {
 
 				if( mVMTLoaded ) {
-					QString fullNewName = currentGameMaterialDir() + nameWithExtension;
+					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+					QString fullNewName = dir + "\\" + nameWithExtension;
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
 					if( QFile::exists(fullNewName) ) {
 
@@ -7188,7 +7200,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setWindowTitle("File already exists!");
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
 						QPushButton* renameButton = msgBox.addButton( "Rename", QMessageBox::NoRole );
-						msgBox.addButton( QMessageBox::No );
+						msgBox.addButton( QMessageBox::Cancel );
 						msgBox.setDefaultButton( renameButton );
 						msgBox.setIcon( QMessageBox::Warning );
 
@@ -7242,6 +7254,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 							fileName = fullNewName;
 
+							Info( "File \"" + fileName + "\" succesfully copied");
+
 							goto updateLineEdit;
 
 						} else {
@@ -7263,7 +7277,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				previewTexture( objectName );
+				previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
 
 			} else {
 
@@ -8817,6 +8831,8 @@ void MainWindow::reconvertTexture()
 	QString extension = fileName.section(".", -1);
 	QString newFile = fileName.section("/", -1).section(".", 0, 0);
 
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + "/" + newFile);
+
 	if( QFile::exists(dir + newFile + ".vtf") ) {
 
 		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
@@ -8832,6 +8848,7 @@ void MainWindow::reconvertTexture()
 
 		conversionThread->fileName = fileName;
 		conversionThread->objectName = preview;
+		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
 		conversionThread->outputParameter = "-output \"" + dir + "\"";
 		conversionThread->start();
@@ -8844,12 +8861,12 @@ void MainWindow::reconvertTexture()
 
 			Error( "Error moving file to " + dir)
 		} else {
-			Info( "File " + fileName + " succesfully copied");
+			Info( "File \"" + fileName + "\" succesfully copied");
 		}
 	}
 
 	if (extension == "vtf")
-		previewTexture(preview, true);
+		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 }
 
 void MainWindow::showEditGamesDialog()

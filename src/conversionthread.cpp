@@ -21,8 +21,7 @@ void ConversionThread::run()
 		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
 		if (!objectName.isEmpty()) {
-			const bool deleteFromCache = true;
-			mainWindow->previewTexture(objectName, deleteFromCache);
+			mainWindow->previewTexture( objectName, relativeFilePath, true, false, false, false, true );
 		}
 
 		if (newFileName != "") {
