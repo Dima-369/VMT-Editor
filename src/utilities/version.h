@@ -23,6 +23,8 @@ struct Version {
 
 QString getCurrentVersion();
 
+QString versionToString(Version v);
+
 // If no new version is available, major is 0
 // If the network request failed, major is -1
 // Otherwise the new version is returned
