@@ -17,6 +17,7 @@
 #include "user-interface/detail-texture.h"
 #include "user-interface/shaders.h"
 #include "user-interface/view-helper.h"
+#include "user-interface/shading-reflection.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -41,6 +42,11 @@
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
 Ui::MainWindow* gUi;
 
+// needed for ParameterLineEdit, we do not want to load this twice
+QStringList vmtParameters_;
+
+using namespace utils;
+
 
 MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	QMainWindow(parent),
@@ -58,6 +64,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	mShaderKnownButNotListed(false),
 	mIgnoreShaderChanged(true),
 	mSteamInstalled(false),
+	mOpenConvertDialog(false),
 	mIniSettings(new QSettings("settings.ini", QSettings::IniFormat, this)),
 	mSettings(new Settings),
 	initialFile(fileToOpen),
@@ -65,6 +72,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	fresnelYStart(0.5),
 	ignoreFresnelY(false)
 {
+	// this has to be set before setupUi()
+	vmtParameters_ = extractLines(":/files/vmtParameters");
+
 	ui->setupUi(this);
 	gUi = ui;
 
@@ -303,6 +313,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
+	connect(ui->action_checkUpdate, SIGNAL(triggered()), SLOT(checkForUpdates()));
+
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
 
 	//----------------------------------------------------------------------------------------//
@@ -444,9 +456,18 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->comboBox_shader, SIGNAL(currentIndexChanged(int)), this, SLOT(shaderChanged()) );
 
-	if(fileToOpen.endsWith("vtf", Qt::CaseInsensitive) ||
-		fileToOpen.endsWith("jpg", Qt::CaseInsensitive) ||
-		fileToOpen.endsWith("png", Qt::CaseInsensitive)) {
+	if(	fileToOpen.endsWith("jpg", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("tga", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("dds", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("gif", Qt::CaseInsensitive) ||
+		fileToOpen.endsWith("png", Qt::CaseInsensitive) ) {
+
+		initialFile = "";
+		mOpenConvertDialog = true;
+		fileToConvert = fileToOpen;
+	}
+
+	if( fileToOpen.endsWith("vtf", Qt::CaseInsensitive) ) {
 
 		// clearing to avoid loading it in showEvent()
 		initialFile = "";
@@ -484,7 +505,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileToOpen;
 
 					if(mVMTLoaded) {
@@ -601,9 +622,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 				ui->lineEdit_diffuse->setText(fileToOpen.right( fileToOpen.length() - fileToOpen.lastIndexOf('/', fileToOpen.lastIndexOf('/') - 1) ));
 				ui->lineEdit_diffuse->setDisabled(true);
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
-
+				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileToOpen;
 					conversionThread->newFileName = ui->lineEdit_diffuse->objectName() + "_" + texturesToCopy.value(ui->lineEdit_diffuse) + ".vtf";
 					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
@@ -624,14 +643,14 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 			}
 		}
 
-		goto doneWithCrap;
+		goto returnFromMethod;
 
 		updateLineEdit:
 
 		fileToOpen = fileToOpen.left( fileToOpen.size() - 4 );
 
-		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileToOpen).left( QDir::toNativeSeparators(fileToOpen).lastIndexOf("\\")));
-		mIniSettings->sync();
+		mIniSettings->setValue("lastSaveAsDir",
+			QDir::toNativeSeparators(fileToOpen).left(QDir::toNativeSeparators(fileToOpen).lastIndexOf("\\")));
 
 		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileToOpen);
 		ui->lineEdit_diffuse->setText(relativeFilePath);
@@ -639,18 +658,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		previewTexture( objectName, relativeFilePath, true, false, false, false );
 	}
 
-	doneWithCrap:
+	returnFromMethod:
 
 	mIsInConstructor = false;
-}
-
-MainWindow::~MainWindow() {
-
-	delete mIniSettings;
-
-	delete vmtParser;
-
-	delete ui;
 }
 
 void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox) {
@@ -745,7 +755,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	QString bumpmap;
 
 	bool showBaseTexture = false;
-    bool showBaseTexture2 = false;
+	bool showBaseTexture2 = false;
 	bool showColor = false;
 	bool showOther = false;
 	bool showTransparency = false;
@@ -1234,8 +1244,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	//----------------------------------------------------------------------------------------//
 
-	if( !( value = vmt.parameters.take("$detailblendmode") ).isEmpty() )
-	{
+	if( !( value = vmt.parameters.take("$detailblendmode") ).isEmpty() ) {
 		if (!vmt.state.detailEnabled) {
 			ERROR("$detailblendmode is only supported with "
 				"$detail!")
@@ -1256,7 +1265,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			Error("$detailblendmode value: \"" + value + "\" has caused an error while parsing!")
 		}
 
-        vmt.state.showDetail = true;
+		vmt.state.showDetail = true;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1291,7 +1300,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			Error("$detailblendfactor value: \"" + value + "\" has caused an error while parsing!")
 		}
 
-        vmt.state.showDetail = true;
+		vmt.state.showDetail = true;
 	}
 
 	if( !( value = vmt.parameters.take("$detailblendfactor2") ).isEmpty() ) {
@@ -3082,7 +3091,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	if( !( value = vmt.parameters.take("$color") ).isEmpty() )
 	{
 		QString col1 = "$color";
-		utils::applyBackgroundColor(col1, value, ui->color_color1, ui);
+		utils::applyBackgroundColor(col1, value, ui->color_color1, ui, true);
 
 		showColor = true;
 	}
@@ -3464,64 +3473,12 @@ VmtFile MainWindow::makeVMT()
 		if( ui->doubleSpinBox_seamlessScale->isEnabled() && ui->doubleSpinBox_seamlessScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$seamless_scale", Str( ui->doubleSpinBox_seamlessScale->value() ));
 
-		tmp = colorToParameter(utils::getBG(ui->color_reflectivity), false);
+		tmp = toParameter(utils::getBG(ui->color_reflectivity));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
 	}
 
-	//---------------------------------------------------------------------------------------//
-
-	if( !ui->groupBox_shadingReflection->isHidden() ) {
-
-		if( ui->checkBox_cubemap->isEnabled() && ui->checkBox_cubemap->isChecked() )
-			vmtFile.parameters.insert( "$envmap", "env_cubemap" );
-
-		else {
-
-			if( ui->lineEdit_envmap->isEnabled() && !ui->lineEdit_envmap->text().trimmed().isEmpty() )
-				vmtFile.parameters.insert( "$envmap", ui->lineEdit_envmap->text().trimmed() );
-		}
-
-		if( ui->doubleSpinBox_contrast->isEnabled() && ui->doubleSpinBox_contrast->value() != 0.0 )
-			vmtFile.parameters.insert( "$envmapcontrast", Str( ui->doubleSpinBox_contrast->value() ));
-
-		if( ui->doubleSpinBox_fresnelReflection->isEnabled() && ui->doubleSpinBox_fresnelReflection->value() != 1.0 )
-			if ( ui->comboBox_shader->currentText() == "VertexLitGeneric" )
-				vmtFile.parameters.insert( "$envmapfresnel", Str( 1.0 - ui->doubleSpinBox_fresnelReflection->value() ));
-			else {
-				vmtFile.parameters.insert( "$fresnelreflection", Str( ui->doubleSpinBox_fresnelReflection->value() )); }
-
-		if( ui->doubleSpinBox_saturation->isEnabled() && ui->doubleSpinBox_saturation->value() != 1.0 )
-			vmtFile.parameters.insert( "$envmapsaturation", Str( ui->doubleSpinBox_saturation->value() ));
-
-		tmp = colorToParameter(utils::getBG(ui->color_envmapTint), false);
-		if( ui->toolButton_envmapTint->isEnabled() && tmp != "[1 1 1]" )
-			vmtFile.parameters.insert( "$envmaptint", tmp );
-
-
-		if( ui->lineEdit_specmap->isEnabled() && !ui->lineEdit_specmap->text().trimmed().isEmpty() )
-			vmtFile.parameters.insert( "$envmapmask", ui->lineEdit_specmap->text().trimmed() );
-
-		if( ui->checkBox_basealpha->isEnabled() && ui->checkBox_basealpha->isChecked() )
-			vmtFile.parameters.insert( "$basealphaenvmapmask", "1" );
-
-		if( ui->checkBox_normalalpha->isEnabled() && ui->checkBox_normalalpha->isChecked() )
-			vmtFile.parameters.insert( "$normalmapalphaenvmapmask", "1" );
-
-		if( ui->doubleSpinBox_envmapLight->isEnabled() && ui->doubleSpinBox_envmapLight->value() != 0.0 )
-			vmtFile.parameters.insert( "$envmaplightscale", Str( ui->doubleSpinBox_envmapLight->value() ));
-
-		QString minmax = "[" + Str( ui->doubleSpinBox_envmapLightMin->value() ) + " " + Str( ui->doubleSpinBox_envmapLightMax->value() ) + "]";
-		if( ui->doubleSpinBox_envmapLightMin->isEnabled() && (ui->doubleSpinBox_envmapLightMin->value() != 0.0 || ui->doubleSpinBox_envmapLightMax->value() != 1.0))
-			vmtFile.parameters.insert( "$envmaplightscaleminmax", minmax);
-
-		if( ui->doubleSpinBox_envmapAniso->isEnabled() && ui->doubleSpinBox_envmapAniso->value() != 0.0 ) {
-			vmtFile.parameters.insert( "$envmapanisotropy", "1");
-			vmtFile.parameters.insert( "$envmapanisotropyscale", Str(ui->doubleSpinBox_envmapAniso->value() ));
-		}
-	}
-
-	//---------------------------------------------------------------------------------------//
+	shadingreflection::insertParametersFromViews(&vmtFile, ui);
 
 	if( !ui->groupBox_selfIllumination->isHidden() ) {
 
@@ -3533,7 +3490,7 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_envmapAlpha->isChecked() )
 			vmtFile.parameters.insert( "$selfillum_envmapmask_alpha", "1" );
 
-		tmp = colorToParameter(utils::getBG(ui->color_selfIllumTint), false);
+		tmp = toParameter(utils::getBG(ui->color_selfIllumTint));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$selfillumtint", tmp );
 
@@ -3566,7 +3523,7 @@ VmtFile MainWindow::makeVMT()
 		if( ui->spinBox_exponent->isEnabled() )
 			vmtFile.parameters.insert( "$phongexponent", Str( ui->spinBox_exponent->value() ));
 
-		tmp = colorToParameter(utils::getBG(ui->color_phongTint), false);
+		tmp = toParameter(utils::getBG(ui->color_phongTint));
 		if( ui->toolButton_phongTint->isEnabled() && tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$phongtint", tmp );
 
@@ -3731,11 +3688,11 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_color->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_color1), false);
+		tmp = toParameter(utils::getBG(ui->color_color1), true);
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color", tmp );
 
-		tmp = colorToParameter(utils::getBG(ui->color_color2), false);
+		tmp = toParameter(utils::getBG(ui->color_color2));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color2", tmp );
 
@@ -3821,7 +3778,7 @@ VmtFile MainWindow::makeVMT()
 		if( !( tmp = ui->lineEdit_refractTexture->text().trimmed() ).isEmpty() )
 			vmtFile.parameters.insert( "$refracttinttexture", tmp );
 
-		tmp = colorToParameter(utils::getBG(ui->color_refractTint), false);
+		tmp = toParameter(utils::getBG(ui->color_refractTint));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -3943,7 +3900,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterReflection->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_reflectionTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_reflectionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$reflecttint", tmp );
 
@@ -3977,7 +3934,7 @@ VmtFile MainWindow::makeVMT()
 
 		vmtFile.parameters.insert("$refracttexture", "_rt_waterrefraction");
 
-		tmp = colorToParameter(utils::getBG(ui->color_refractionTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_refractionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -3989,7 +3946,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterFog->isHidden() ) {
 
-		tmp = colorToParameter(utils::getBG(ui->color_fogTint), true);
+		tmp = toWaterParameter(utils::getBG(ui->color_fogTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$fogcolor", tmp );
 
@@ -4012,20 +3969,14 @@ VmtFile MainWindow::makeVMT()
 	//----------------------------------------------------------------------------------------//
 
 	QString tmp2, tmp3;
-	for( int i = 0; i < ui->formLayout_2->count(); ++i )
-	{
+	for (int i = 0; i < ui->formLayout_2->count(); ++i ) {
 		tmp2 = reinterpret_cast<QLineEdit*>( ui->formLayout_2->itemAt(i)->widget() )->text().trimmed();
 		tmp3 = reinterpret_cast<QLineEdit*>( ui->formLayout_3->itemAt(i)->widget() )->text().trimmed();
 
-		if( !tmp2.isEmpty() && !tmp3.isEmpty() )
-		{
-			if( tmp3.contains( QRegExp("[\\s]+") ))
-			{
-				tmp3.prepend("\"");
-				tmp3.append("\"");
-			}
-
-			vmtFile.parameters.insert( tmp2, tmp3 );
+		if (!tmp2.isEmpty() && !tmp3.isEmpty()) {
+			if (tmp3.contains(QRegExp(R"([\s\\\/]+)")))
+				tmp3 = "\"" + tmp3 + "\"";
+			vmtFile.parameters.insert(tmp2, tmp3);
 		}
 	}
 
@@ -4091,6 +4042,22 @@ void MainWindow::resetWidgets() {
 	ui->label_exponent->setEnabled(true);
 	ui->spinBox_exponent->setEnabled(true);
 	ui->horizontalSlider_exponent->setEnabled(true);
+
+	//----------------------------------------------------------------------------------------//
+
+	clearLineEditAction(ui->lineEdit_diffuse);
+	clearLineEditAction(ui->lineEdit_diffuse2);
+	clearLineEditAction(ui->lineEdit_diffuse3);
+	clearLineEditAction(ui->lineEdit_diffuse4);
+	clearLineEditAction(ui->lineEdit_bumpmap);
+	clearLineEditAction(ui->lineEdit_bumpmap2);
+	clearLineEditAction(ui->lineEdit_bump2);
+	clearLineEditAction(ui->lineEdit_detail);
+	clearLineEditAction(ui->lineEdit_exponentTexture);
+	clearLineEditAction(ui->lineEdit_specmap);
+	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
+	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
+	clearLineEditAction(ui->lineEdit_waterNormalMap);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4493,7 +4460,7 @@ void MainWindow::action_Open() {
 		if( fileName.isEmpty() )
 			return;
 
-		mIniSettings->setValue( "lastSaveAsDir", fileName.left( fileName.lastIndexOf("\\") ));
+		mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")) );
 
 	} else {
 
@@ -4504,7 +4471,7 @@ void MainWindow::action_Open() {
 		if( fileName.isEmpty() )
 			return;
 
-		mIniSettings->setValue( "lastSaveAsDir", fileName.left( fileName.lastIndexOf("\\") ));
+		mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")) );
 	}
 
 	loadVMT(fileName);
@@ -4525,11 +4492,11 @@ void MainWindow::action_Save() {
 
 		dir = directory + '/';
 
+		processTexturesToCopy(dir);
+
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
 
 		updateWindowTitle();
-
-		processTexturesToCopy(dir);
 
 	} else {
 
@@ -4565,11 +4532,24 @@ QString MainWindow::action_SaveAs() {
 	} else {
 
 		QString lastSaveAsDir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+		QString currentGameDir = QDir::toNativeSeparators(currentGameMaterialDir());
 		QString vtfName;
 		if ( ui->lineEdit_diffuse->text().isEmpty() ) vtfName = "\\untitled.vmt";
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
-			vtfName = "\\" + vtfLong.section("\\", -1);
+			QString tmp;
+			if ( vtfLong.contains("/")) {
+				tmp = vtfLong.section("/", -1);
+			} else {
+				tmp = vtfLong.section("\\", -1);
+			}
+
+			if ( tmp.contains(".") )  {
+				vtfName = "\\" + tmp.section(".", 0, 0);
+			} else {
+				vtfName = "\\" + tmp;
+			}
+
 		}
 
 		if( getCurrentGame() == "" ) {
@@ -4579,7 +4559,7 @@ QString MainWindow::action_SaveAs() {
 
 		} else {
 
-			if( lastSaveAsDir.startsWith( QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive ) ) {
+			if( lastSaveAsDir.startsWith( currentGameDir, Qt::CaseInsensitive ) ) {
 
 				fileName = QFileDialog::getSaveFileName(this, tr("Save Valve Material"),
 														lastSaveAsDir + vtfName, "VMT (*.vmt)");
@@ -4600,6 +4580,8 @@ QString MainWindow::action_SaveAs() {
 
 		refreshRequested();
 
+		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
+
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
@@ -4613,7 +4595,6 @@ QString MainWindow::action_SaveAs() {
 	}
 
 	updateWindowTitle();
-	processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
 	refreshRequested();
 
 	return fileName;
@@ -4642,32 +4623,26 @@ void MainWindow::toggleTransparency() {
 			ui->action_transparency->setChecked(false);
 		}
 	}
-
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleDetailTexture()
 {
 	utils::toggle(this, ui->action_detail, ui->groupBox_detailTexture);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleColor()
 {
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleOther()
 {
 	utils::toggle(this, ui->action_other, ui->groupBox_textureOther);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleMisc()
 {
 	utils::toggle(this, ui->action_misc, ui->groupBox_misc);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhong() {
@@ -4689,7 +4664,6 @@ void MainWindow::togglePhong() {
 	}
 
 	utils::toggle(this, ui->action_phong, ui->groupBox_phong);
-	checkTextureVisibility();
 }
 
 void MainWindow::togglePhongBrush() {
@@ -4698,7 +4672,6 @@ void MainWindow::togglePhongBrush() {
 		previewTexture(preview.mode, preview.texture);
 	}
 	utils::toggle(this, ui->action_phongBrush, ui->groupBox_phongBrush);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleReflection() {
@@ -4719,13 +4692,11 @@ void MainWindow::toggleReflection() {
 	}
 
 	utils::toggle(this, ui->action_reflection, ui->groupBox_shadingReflection);
-	checkTextureVisibility();
 }
 
 void MainWindow::toggleSelfIllumination() {
 	utils::toggle(this, ui->action_selfIllumination,
 				  ui->groupBox_selfIllumination);
-	checkTextureVisibility();
 }
 
 QString MainWindow::currentGameMaterialDir() {
@@ -5476,8 +5447,17 @@ void MainWindow::widgetChanged()
 
 		}
 
-		if(mSettings->autoRefresh)
-			refreshRequested();
+		if(mSettings->autoRefresh) {
+			const auto c = sender();
+			if (c == nullptr) {
+				refreshRequested();
+			} else {
+				if(qobject_cast<QWidget*>(c)->objectName() != "textEdit_proxies" ) {
+					refreshRequested();
+				}
+			}
+			
+		}
 	}
 
 }
@@ -5624,7 +5604,7 @@ void MainWindow::previewTexture()
 	repaint();
 }
 
-bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly ) {
+bool MainWindow::previewTexture( const QString& object, const QString& texture, bool baseTexture, bool alpha, bool alphaTest, bool alphaOnly, bool ignoreCache ) {
 
 	checkCacheSize();
 
@@ -5635,9 +5615,13 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		return false;
 
 	} else {
-
-		QString texturePath( currentGameMaterialDir() + "/" + texture );
-
+		QString texturePath;
+		if( texture.endsWith(".") ) {
+			texturePath = texture;
+			texturePath.chop(1);
+		} else {
+			texturePath = ( currentGameMaterialDir() + "/" + texture );
+		}
 		QFile vtfFile( texturePath + ".vtf" );
 		if( !vtfFile.exists() ) {
 
@@ -5708,6 +5692,11 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
 
 		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
+		if( ignoreCache ) {
+			if( cacheFile.exists() )
+				cacheFile.remove();
+		}
+
 		if( cacheFile.exists() )
 		{
 			if( object == "preview_basetexture1" ) {
@@ -5813,24 +5802,26 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 	return false;
 }
 
-void MainWindow::previewTexture( const QString& object ) {
+void MainWindow::previewTexture(const QString& object)
+{
+	const QString cacheFile = QString("Cache/%1.png").arg(object);
 
-	if( object == "preview_basetexture1" )
-		glWidget_diffuse1->loadTexture( "Cache/" + object + ".png", glWidget_diffuse1->getBumpmap() );
-	else if( object == "preview_bumpmap1" )
-		glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + object + ".png" );
-	else if( object == "preview_basetexture2" )
-		glWidget_diffuse2->loadTexture( "Cache/" + object + ".png", glWidget_diffuse2->getBumpmap() );
-	else if( object == "preview_bumpmap2" )
-		glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + object + ".png" );
+	if (object == "preview_basetexture1") {
+		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
 
-	else {
+	} else if (object == "preview_bumpmap1") {
+		glWidget_diffuse1->loadTexture(glWidget_diffuse1->getDiffuse(), cacheFile);
 
-		foreach(GLWidget* glWidget, glWidgets) {
+	} else if(object == "preview_basetexture2") {
+		glWidget_diffuse2->loadTexture(cacheFile, glWidget_diffuse2->getBumpmap());
 
-			if( glWidget->objectName() == object ) {
+	} else if (object == "preview_bumpmap2") {
+		glWidget_diffuse2->loadTexture(glWidget_diffuse2->getDiffuse(), cacheFile);
 
-				glWidget->loadTexture("Cache/" + object + ".png");
+	} else {
+		foreach (GLWidget* glWidget, glWidgets) {
+			if (glWidget->objectName() == object) {
+				glWidget->loadTexture(cacheFile);
 				break;
 			}
 		}
@@ -5839,7 +5830,7 @@ void MainWindow::previewTexture( const QString& object ) {
 
 QString MainWindow::steamAppsDirectory()
 {
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 	QSettings settings("HKEY_CURRENT_USER\\Software\\Valve\\Steam",
 		QSettings::NativeFormat);
 	QString steamDirString = settings.value("SteamPath").toString();
@@ -5854,18 +5845,14 @@ QString MainWindow::steamAppsDirectory()
 	}
 
 	return "";
-#else
-#ifdef Q_OS_LINUX
-	QDir dir("/home/gira/.local/share/Steam/");
-	if (dir.exists()) {
-		if (dir.cd("steamapps")) {
-			mSteamInstalled = true;
-		}
-	}
+#elif defined(Q_OS_LINUX)
+	QDir dir(QString("/home/%1/.local/share/Steam/")
+		.arg(QString(qgetenv("USER"))));
+	if (dir.exists() && dir.cd("steamapps"))
+		mSteamInstalled = true;
 	return dir.absolutePath();
 #else
 	return "";
-#endif
 #endif
 }
 
@@ -5934,7 +5921,7 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_maskTexture->setDisabled(true);
 
-		QStringList defaultSurfaces = listFromFile(":/surfaces/default");
+		QStringList defaultSurfaces = extractLines(":/surfaces/default");
 		ui->comboBox_surface->insertItems(1, defaultSurfaces);
 		ui->comboBox_surface2->insertItems(1, defaultSurfaces);
 		ui->comboBox_unlitTwoTextureSurface->insertItems(1, defaultSurfaces);
@@ -5989,29 +5976,29 @@ void MainWindow::gameChanged( const QString& game )
 		ui->toolButton_unlitTwoTextureDiffuse->setEnabled(true);
 		ui->toolButton_unlitTwoTextureDiffuse2->setEnabled(true);
 
-		QStringList tmp( listFromFile(":/surfaces/default") );
+		QStringList tmp(extractLines(":/surfaces/default"));
 
 		if( getCurrentGame() == "Alien Swarm" )
 		{
-			tmp.append( listFromFile(":/surfaces/alienSwarm") );
+			tmp.append(extractLines(":/surfaces/alienSwarm"));
 		}
 		else if( getCurrentGame() == "Half-Life 2: Episode Two" )
 		{
-			tmp.append( listFromFile(":/surfaces/ep2") );
+			tmp.append(extractLines(":/surfaces/ep2"));
 		}
 		else if( getCurrentGame() == "Half-Life 2" )
 		{
-			tmp.append( listFromFile(":/surfaces/hl2") );
+			tmp.append( extractLines(":/surfaces/hl2") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead" )
 		{
-			tmp.append( listFromFile(":/surfaces/l4d") );
+			tmp.append( extractLines(":/surfaces/l4d") );
 		}
 		else if( getCurrentGame() == "Left 4 Dead 2" )
-			tmp.append( listFromFile(":/surfaces/l4d") + listFromFile(":/surfaces/l4d2"));
+			tmp.append( extractLines(":/surfaces/l4d") + extractLines(":/surfaces/l4d2"));
 
 		else if( getCurrentGame() == "Counter-Strike: Global Offensive" )
-			tmp.append( listFromFile(":/surfaces/csgo") );
+			tmp.append( extractLines(":/surfaces/csgo") );
 
 		tmp.sort();
 
@@ -6397,9 +6384,6 @@ void MainWindow::shaderChanged()
 		}
 
 	} else {
-
-		Y("DOES NOT CONTAIN SHADER: " + shader)
-
 		ui->groupBox_waterReflection->setTitle("Water - Reflection");
 
 		ui->menu_custom->setEnabled(true);
@@ -6470,7 +6454,6 @@ void MainWindow::shaderChanged()
 	phongAction->setVisible( ui->action_phong->isEnabled() && ui->menu_shading->isEnabled() );
 
 	phongBrushAction->setVisible( ui->action_phongBrush->isEnabled() && ui->menu_shading->isEnabled() );
-	checkTextureVisibility();
 
 	updateWindowTitle();
 
@@ -6544,6 +6527,11 @@ void MainWindow::showEvent(QShowEvent *event)
 		loadVMT(initialFile);
 		initialFile = "";
 	}
+
+
+	if (mOpenConvertDialog) {
+		QTimer::singleShot(0, this, SLOT( displayConversionDialog() ));
+	}
 }
 
 void MainWindow::dropEvent(QDropEvent* event)
@@ -6602,31 +6590,6 @@ void MainWindow::dragMoveEvent(QDragMoveEvent* event)
 void MainWindow::dragLeaveEvent(QDragLeaveEvent* event)
 {
 	event->accept();
-}
-
-void MainWindow::checkTextureVisibility()
-{
-	// TODO: Why is this necessary?
-	/*glWidget_diffuse1->setVisible( !ui->groupBox_baseTexture->isHidden()  && (glWidget_diffuse1->showBumpmap || glWidget_diffuse1->showDiffuse) );
-	glWidget_diffuse2->setVisible( !ui->groupBox_baseTexture2->isHidden() && (glWidget_diffuse2->showBumpmap || glWidget_diffuse2->showDiffuse) );
-
-	foreach (GLWidget* glWidget, glWidgets) {
-
-		if (glWidget->isPreviewing()) {
-			if( glWidget->objectName() == "preview_basetexture3" )
-				glWidget->setVisible( !ui->groupBox_baseTexture3->isHidden() );
-			else if( glWidget->objectName() == "preview_basetexture4" )
-				glWidget->setVisible( !ui->groupBox_baseTexture4->isHidden() );
-			else if( glWidget->objectName() == "preview_detail" )
-				glWidget->setVisible( !ui->groupBox_detailTexture->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap1" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_normalmap2" )
-				glWidget->setVisible( !ui->groupBox_refract->isHidden() );
-			else if( glWidget->objectName() == "preview_exponent1" )
-				glWidget->setVisible( !ui->groupBox_phong->isHidden() );
-		}
-	}*/
 }
 
 void MainWindow::setGameState(bool enabled)
@@ -6705,66 +6668,45 @@ void MainWindow::saveSettings()
 
 void MainWindow::readSettings()
 {
-	QString tmp( setKey( "saveLastGame", "1", mIniSettings ));
-
-	mSettings->saveLastGame = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "lastGame", "", mIniSettings );
-
-	mSettings->lastGame = tmp;
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "fullPathFilenameInWindowTitle", "0", mIniSettings );
-
-	mSettings->fullPathFilenameInWindowTitle = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "showShaderNameInWindowTitle", "1", mIniSettings );
-
-	mSettings->showShaderNameInWindowTitle = tmp == "1";
+	mSettings->saveLastGame = setKey("saveLastGame", true, mIniSettings);
+	mSettings->fullPathFilenameInWindowTitle =
+		setKey("fullPathFilenameInWindowTitle", false, mIniSettings);
+	mSettings->showShaderNameInWindowTitle =
+		setKey("showShaderNameInWindowTitle", true, mIniSettings);
+	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->useIndentation =
+		setKey("useIndentation", true, mIniSettings);
+	mSettings->useQuotesForTexture =
+		setKey("useQuotesForTexture", true, mIniSettings);
+	mSettings->deleteCacheAfterApplicationExit =
+		setKey("clearCacheAfterExit", false, mIniSettings);
 
 
-    tmp = setKey("autoRefresh", "1", mIniSettings );
-    mSettings->autoRefresh = (tmp == "1");
+	mSettings->recentFileListStyle =
+		setKey("recentFileListStyle", false, mIniSettings)
+			? Settings::RecentFileMenu : Settings::FileMenu;
 
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "useIndentation", "1", mIniSettings );
-
-	mSettings->useIndentation = tmp == "1";
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "recentFileListStyle", "0", mIniSettings );
-
-	mSettings->recentFileListStyle = (tmp == "1") ? Settings::RecentFileMenu : Settings::FileMenu;
-
-	if( mSettings->recentFileListStyle == Settings::FileMenu )
+	if (mSettings->recentFileListStyle == Settings::FileMenu)
 		ui->menuRecentFiles->menuAction()->setVisible(false);
 
-	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "recentFileEntryStyle", "0", mIniSettings );
+	mSettings->parameterSortStyle =
+		setKey("parameterSortStyle", false, mIniSettings)
+			? Settings::AlphabeticallySorted : Settings::Grouped;
 
-	mSettings->recentFileEntryStyle = (tmp == "1") ? Settings::FullPath : Settings::FileName;
 
-	//----------------------------------------------------------------------------------------//
+	mSettings->showShaderNameInTab =
+		setKey("showShaderNameInTab", false, mIniSettings);
 
-	tmp = setKey( "parameterSortStyle", "0", mIniSettings );
+	const QString tabTitle = mSettings->showShaderNameInTab
+		? "Parameters (" + ui->comboBox_shader->currentText() + ")"
+		: "Parameters";
 
-	mSettings->parameterSortStyle = (tmp == "1") ? Settings::AlphabeticallySorted : Settings::Grouped;
+	ui->tabWidget->setTabText(0, tabTitle);
 
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "useQuotesForTexture", "1", mIniSettings );
-
-	mSettings->useQuotesForTexture = (tmp == "0") ? false : true;
-
-	//----------------------------------------------------------------------------------------//
+	// Note that if you just pass "" for the def, because then the boolean
+	// overloaded method is used for some random reason
+	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 
@@ -6792,7 +6734,6 @@ void MainWindow::readSettings()
 		Q( "\":/files/defaultShaders\" was not found!" )
 	}
 
-	//----------------------------------------------------------------------------------------//
 
 	QStringList shaderList( mIniSettings->value("shaders").toString().split( "??", QString::SkipEmptyParts ));
 
@@ -6829,19 +6770,10 @@ void MainWindow::readSettings()
 		}
 	}
 
-	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "clearCacheAfterExit", "0", mIniSettings );
-
-	mSettings->deleteCacheAfterApplicationExit = (tmp == "1");
-
-	//----------------------------------------------------------------------------------------//
-
-	tmp = setKey( "cacheSize", "100", mIniSettings );
-
+	QString tmp(setKey( "cacheSize", "100", mIniSettings ));
 	mSettings->cacheSize = ( tmp.toUInt() >= 1 && tmp.toUInt() <= 16384 ) ? tmp.toUInt() : 100;
 
-	//----------------------------------------------------------------------------------------//
 
 	QString addToIniSettings;
 
@@ -6882,27 +6814,13 @@ void MainWindow::readSettings()
 
 	//----------------------------------------------------------------------------------------//
 
-	tmp = setKey( "showShaderNameInTab", "0", mIniSettings );
-
-	mSettings->showShaderNameInTab = (tmp == "1") ? true : false;
-
-	if (mSettings->showShaderNameInTab)
-		ui->tabWidget->setTabText(0, "Parameters (" + ui->comboBox_shader->currentText() + ")");
+	if (mIniSettings->contains("mainWindowGeometry"))
+		restoreGeometry(mIniSettings->value("mainWindowGeometry").toByteArray());
 	else
-		ui->tabWidget->setTabText(0, "Parameters");
-
-	//----------------------------------------------------------------------------------------//
-
-	if (!mIniSettings->contains("mainWindowGeometry")) {
-
 		resize(100, 100);
 
-	} else {
-
-		restoreGeometry( mIniSettings->value("mainWindowGeometry").toByteArray() );
-	}
-
-	restoreState( mIniSettings->value("mainWindowState").toByteArray() );
+	if (mIniSettings->contains("mainWindowState"))
+		restoreState(mIniSettings->value("mainWindowState").toByteArray());
 }
 
 void MainWindow::changeOption( Settings::Options option, const QString& value )
@@ -6970,9 +6888,11 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_CacheSize:
-
 			checkCacheSize();
+			break;
 
+		case Settings::_AutoRefresh:
+			refreshRequested();
 			break;
 
 		case Settings::_CustomShaders:
@@ -7052,7 +6972,7 @@ void MainWindow::openRecentFile()
 
 
 void MainWindow::setCurrentFile( const QString& fileName )
- {
+{
 	QStringList files = mIniSettings->value("recentFileList").toStringList();
 
 	files.removeAll(fileName);
@@ -7064,14 +6984,22 @@ void MainWindow::setCurrentFile( const QString& fileName )
 	mIniSettings->setValue("recentFileList", files);
 
 #ifdef Q_OS_WIN
-	SHAddToRecentDocs( SHARD_PATH, QString(fileName).replace("/", "\\").toStdString().c_str() );
+	auto item = new QWinJumpListItem(QWinJumpListItem::Link);
+	item->setFilePath(QCoreApplication::applicationFilePath());
+	item->setWorkingDirectory(QCoreApplication::applicationDirPath());
+	item->setTitle(QFileInfo(fileName).fileName());
+	item->setIcon(QIcon(":/icons/vmt_192_flat"));
+	item->setDescription(fileName);
+	item->setArguments(QStringList(fileName));
+
+	QWinJumpList().recent()->addItem(item);
 #endif
 
-	updateRecentFileActions(  mSettings->recentFileEntryStyle == Settings::FullPath ? true : false );
- }
+	updateRecentFileActions(mSettings->recentFileEntryStyle == Settings::FullPath);
+}
 
 void MainWindow::updateRecentFileActions( bool fullPath )
- {
+{
 	 QStringList files = mIniSettings->value("recentFileList").toStringList();
 
 	 int numRecentFiles = qMin( files.size(), (int)MaxRecentFiles );
@@ -7186,7 +7114,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	QString fileName;
 
-	QString lastTextureDirectory = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir", "").toString());
+	const QString lastTextureDirectory = QDir::toNativeSeparators(
+		mIniSettings->value("lastTextureBrowseDir", "").toString());
 
 	if( lastTextureDirectory.startsWith( QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive )) {
 
@@ -7205,7 +7134,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	bool updateLastTextureDirectory = true;
 
-	if( !fileName.isEmpty() ) {
+	if (!fileName.isEmpty()) {
+		clearLineEditAction(lineEdit);
 
 		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
@@ -7240,7 +7170,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				if(convert) {
 
-					ConversionThread* conversionThread = new ConversionThread(this, mLogger);
+					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileName;
 
 					if(mVMTLoaded) {
@@ -7263,79 +7193,78 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			updateLastTextureDirectory = false;
 
 			QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
-			QString fullNewName( ((mVMTLoaded) ? vmtParser->lastVMTFile().directory : currentGameMaterialDir()) + nameWithExtension );
 
 			if( fileType.toLower() == ".vtf" ) {
 
-				if( QFile::exists(fullNewName) ) {
+				if( mVMTLoaded ) {
 
-					MsgBox msgBox(this);
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+					QString fullNewName = dir + nameWithExtension;
+
+					if (QFile::exists(fullNewName)) {
+						MsgBox msgBox(this);
 						msgBox.setWindowTitle("File already exists!");
 						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
-						QPushButton* renameButton = msgBox.addButton( "Rename", QMessageBox::NoRole );
-						msgBox.addButton( QMessageBox::No );
-						msgBox.setDefaultButton( renameButton );
-						msgBox.setIcon( QMessageBox::Warning );
+						msgBox.addButton( QMessageBox::Cancel );
+						msgBox.setDefaultButton( overwriteButton );
+						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
 
-					msgBox.setText( fullNewName + " already exists. Do you want to overwrite or rename it?"  );
+						msgBox.setText( QDir::toNativeSeparators(fullNewName) + " already exists. Do you want to overwrite it?"  );
 
-					msgBox.exec();
+						if(  msgBox.exec() != QMessageBox::Cancel ) {
 
-					if( msgBox.clickedButton() == overwriteButton ) {
+							if( QFile::remove(fullNewName) ) {
 
-						if( QFile::remove(fullNewName) ) {
+								if( QFile::copy(fileName, fullNewName) ) {
 
-							if( QFile::copy(fileName, fullNewName) ) {
+									fileName = fullNewName;
 
-								fileName = fullNewName;
+									Info( "File \"" + fileName + "\" successfully copied");
 
-								goto updateLineEdit;
+									goto updateLineEdit;
+
+								} else {
+									Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
+								}
 
 							} else {
-
-								Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
+								Error("\"" + fileName + "\" could not be deleted!")
 							}
-
-						} else {
-
-							Error("\"" + fileName + "\" could not be deleted!")
 						}
 
-					} else if( msgBox.clickedButton() == renameButton ) {
+					} else {
 
-						int fileSuffix = 1;
+						if( QFile::copy(fileName, fullNewName) ) {
 
-						fullNewName = fullNewName.left( fullNewName.size() - 4 ).append("_");
+							fileName = fullNewName;
 
-						while( QFile::exists( fullNewName + Str(fileSuffix) + ".vtf" )) {
-
-							++fileSuffix;
-						}
-
-						if( QFile::copy(fileName, fullNewName + Str(fileSuffix) + ".vtf") ) {
-
-							fileName = fullNewName + Str(fileSuffix) + ".vtf";
+							Info( "File \"" + fileName + "\" successfully copied");
 
 							goto updateLineEdit;
 
 						} else {
-
-							Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + Str(fileSuffix) + ".vtf\"")
+							Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
 						}
 					}
 
+				//VMT not saved
 				} else {
 
-					if( QFile::copy(fileName, fullNewName) ) {
+					lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+					QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
+					QFile::copy(fileName, tempName);
+					texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
+					lineEdit->setDisabled(true);
 
-						fileName = fullNewName;
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-						goto updateLineEdit;
-
-					} else {
-
-						Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
-					}
+					previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
 				}
 
 			} else {
@@ -7360,13 +7289,14 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
 				lineEdit->setDisabled(true);
 
-				ConversionThread* conversionThread = new ConversionThread(this, mLogger);
-					connect(conversionThread, SIGNAL(finished()), this, SLOT(finishedConversionThread()));
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
+				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
 					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
-
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -7393,9 +7323,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 	fileName = fileName.left( fileName.size() - 4 );
 
 	if(updateLastTextureDirectory) {
-
-		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")));
-		mIniSettings->sync();
+		mIniSettings->setValue("lastTextureBrowseDir",
+			QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf("\\")));
 	}
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileName);
@@ -8211,45 +8140,6 @@ void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWi
 	colorWidget->setStyleSheet("background-color: rgb(" + Str(color.red()) + "," + Str(color.green()) + "," + Str(color.blue()) + ")");
 }
 
-QString MainWindow::colorToParameter(const QColor &color, bool isWaterShader)
-{
-	if(isWaterShader) {
-
-		return QString("{%1 %2 %3}").arg(color.red()).arg(color.green()).arg(color.blue());
-
-	} else {
-
-		QString red = QString::number(color.redF(), 'f', 2);
-		QString green = QString::number(color.greenF(), 'f', 2);
-		QString blue = QString::number(color.blueF(), 'f', 2);
-
-		if(red.endsWith('0'))
-			red.chop(1);
-		if(green.endsWith('0'))
-			green.chop(1);
-		if(blue.endsWith('0'))
-			blue.chop(1);
-
-		if(red.endsWith(".0"))
-			red.chop(2);
-		if(green.endsWith(".0"))
-			green.chop(2);
-		if(blue.endsWith(".0"))
-			blue.chop(2);
-
-		if( red == "0.0")
-			red = "0";
-		if( green == "0.0" )
-			green = "0";
-		if( blue == "0.0" )
-			blue = "0.0";
-
-		return QString("[%1 %2 %3]").arg(red)
-									.arg(green)
-									.arg(blue);
-	}
-}
-
 void MainWindow::loadVMT( const QString& vmtPath )
 {
 	mLoading = true;
@@ -8262,8 +8152,8 @@ void MainWindow::loadVMT( const QString& vmtPath )
 
 	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
 
-	mIniSettings->setValue( "lastSaveAsDir", QDir::toNativeSeparators(vmtPath).left( vmtPath.lastIndexOf('\\') ));
-	mIniSettings->sync();
+	mIniSettings->setValue("lastSaveAsDir",
+		QDir::toNativeSeparators(vmtPath).left(QDir::toNativeSeparators(vmtPath).lastIndexOf('\\')));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -8820,10 +8710,15 @@ void MainWindow::displayOptionsDialog()
 
 void MainWindow::displayConversionDialog()
 {
+#ifdef Q_OS_WIN
 	if( QDir().exists("vtfcmd.exe") ) {
 
 		ConversionDialog dialog( mIniSettings, this );
 
+		if (fileToConvert != "") {
+			dialog.addFile( fileToConvert );
+			fileToConvert = "";
+		}
 		dialog.show();
 		dialog.exec();
 
@@ -8831,8 +8726,12 @@ void MainWindow::displayConversionDialog()
 
 		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
 	}
+#else
+	ConversionDialog dialog(mIniSettings, this);
+	dialog.show();
+	dialog.exec();
+#endif
 }
-
 void MainWindow::displayBatchDialog() {
 
 	BatchDialog dialog( mAvailableGames, makeVMT(), mIniSettings, this );
@@ -8871,6 +8770,117 @@ void MainWindow::gameTriggered( bool triggered )
 		}
 
 		gameChanged("");
+	}
+}
+
+void MainWindow::reconvertTexture()
+{
+	const auto lineEdit =
+		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+	const auto objectName = lineEdit->objectName();
+	const auto tooltip = lineEdit->toolTip();
+
+	QString preview;
+
+	if( objectName == "lineEdit_diffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_bumpmap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_diffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bumpmap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_diffuse3" )
+		preview = "preview_basetexture3";
+	else if( objectName == "lineEdit_diffuse4" )
+		preview = "preview_basetexture4";
+	else if( objectName == "lineEdit_detail" )
+		preview = "preview_detail";
+	else if( objectName == "lineEdit_refractNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_refractNormalMap2" )
+		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_waterNormalMap" )
+		preview = "preview_bumpmap1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" )
+		preview = "preview_basetexture1";
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" )
+		preview = "preview_basetexture2";
+	else if( objectName == "lineEdit_bump2" )
+		preview = "preview_bumpmap2";
+
+	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+
+	QString fileName = tooltip;
+	QString extension = fileName.section(".", -1);
+	QString newFile = fileName.section("/", -1).section(".", 0, 0);
+
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + "/" + newFile);
+
+	if( QFile::exists(dir + newFile + ".vtf") ) {
+
+		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
+
+			Error( "Error removing \"" + dir + newFile + ".vtf\"" );
+			return;
+		}
+	}
+
+	if (extension != "vtf") {
+		ConversionThread* conversionThread = new ConversionThread(this);
+		conversionThread->fileName = fileName;
+		conversionThread->objectName = preview;
+		conversionThread->relativeFilePath = relativeFilePath;
+		conversionThread->newFileName = "";
+		conversionThread->outputParameter = "-output \"" + dir + "\"";
+		conversionThread->start();
+
+	} else {
+		QFile::copy(fileName, QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf");
+
+		if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + objectName + "_" + newFile + ".vtf",
+							dir + newFile + ".vtf" ) ) {
+
+			Error( "Error moving file to " + dir)
+		} else {
+			Info( "File \"" + fileName + "\" successfully copied");
+		}
+	}
+
+	if (extension == "vtf")
+		previewTexture( preview, relativeFilePath, true, false, false, false, true );
+
+	lineEdit->setText(relativeFilePath);
+}
+
+void MainWindow::checkForUpdates()
+{
+	auto v = checkForNewVersion();
+	if (v.major == -1) {
+		Error("Failed to fetch latest version from GitHub!");
+
+	} else if (v.major == 0) {
+		Info(QString("You have the latest version: %1")
+			.arg(removeTrailingVersionZero(getCurrentVersion())));
+
+	} else {
+		const auto vs = versionToString(v);
+
+		MsgBox msgBox(this);
+		msgBox.setWindowTitle("New version available!");
+		msgBox.setText(QString("A new version is available: %1")
+			.arg(removeTrailingVersionZero(vs)));
+		msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
+		msgBox.setStyleSheet("QPushButton{    color: silver;    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #333, stop: 1 #404040);    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;min-width: 65px;    padding-bottom: 5px;    padding-left: 5px;    padding-right: 5px;    font-family: Segoe Ui; font-size: 9pt; height: 11px;}QPushButton:disabled{    background-color:#505050;    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;    padding-bottom: 5px;min-width: 65px;    padding-left: 5px;    padding-right: 5px;    color: #3A3939;}QPushButton:focus{border: 1px solid #78879b;}QPushButton:hover{    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #444, stop: 1 #505050);} QLabel{ color: silver; font-size: 12pt; } QMessageBox { background-color: #404040; }");
+
+		QPushButton* dlButton = msgBox.addButton("Download", QMessageBox::YesRole);
+		msgBox.addButton(QMessageBox::Cancel);
+		msgBox.setDefaultButton(dlButton);
+
+		if (msgBox.exec() != QMessageBox::Cancel) {
+			QDesktopServices::openUrl(QString(
+				"https://github.com/Gira-X/VMT-Editor/releases"));
+		}
 	}
 }
 
@@ -8921,13 +8931,18 @@ void MainWindow::displayAboutDialog()
 //----------------------------------------------------------------------------------------//
 
 ParameterLineEdit::ParameterLineEdit(QWidget* parent) :
-	QLineEdit(parent)
+	QLineEdit(parent),
+	completer(new QCompleter(vmtParameters_))
 {
-	setMinimumWidth(200);
-	setMaximumWidth(200);
-	setAttribute( Qt::WA_DeleteOnClose );
+	setMinimumWidth(250);
+	setAttribute(Qt::WA_DeleteOnClose);
 
-	connect( this, SIGNAL( textChanged(QString) ), this, SLOT( _editingFinished() ));
+	completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setFilterMode(Qt::MatchContains);
+	setCompleter(completer);
+
+	connect(this, SIGNAL(textChanged(QString)), this, SLOT(_editingFinished()));
 }
 
 void ParameterLineEdit::_editingFinished()
@@ -8993,19 +9008,17 @@ void ParameterLineEdit::_editingFinished()
 			}
 		}
 
-		if(createNew)
-		{
-			grid2->addRow( new ParameterLineEdit(ui->scrollAreaWidgetContents) );
+		if(createNew) {
+			grid2->addRow(new ParameterLineEdit(ui->scrollAreaWidgetContents));
 			grid3->addRow( new ValueLineEdit(ui->scrollAreaWidgetContents) );
 
-			for( int i = 0; i < grid2->count(); ++i )
-			{
-				QWidget::setTabOrder( grid2->itemAt(i)->widget(), grid3->itemAt(i)->widget() );
+			for (int i = 0; i < grid2->count(); ++i) {
+				QWidget::setTabOrder(
+					grid2->itemAt(i)->widget(),
+					grid3->itemAt(i)->widget());
 
 				if( (i + 1) < grid2->count() )
-				{
 					QWidget::setTabOrder( grid3->itemAt(i)->widget(), grid2->itemAt(i + 1)->widget() );
-				}
 			}
 		}
 	}
@@ -9016,7 +9029,7 @@ void ParameterLineEdit::_editingFinished()
 ValueLineEdit::ValueLineEdit(QWidget* parent) :
 	QLineEdit(parent)
 {
-	setAttribute( Qt::WA_DeleteOnClose );
+	setAttribute(Qt::WA_DeleteOnClose);
 
 	connect( this, SIGNAL( textChanged(QString) ), this, SLOT( _editingFinished() ));
 }
@@ -9105,7 +9118,6 @@ void ValueLineEdit::_editingFinished()
 // convenience macro for handling menu action triggers (see below for usage)
 #define HANDLE_ACTION(groupBox) { \
 	utils::toggle(this, checked, groupBox, mParsingVMT); \
-	checkTextureVisibility(); \
 }
 
 void MainWindow::on_action_baseTexture2_triggered(bool checked)

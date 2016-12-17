@@ -16,7 +16,7 @@ bool normalblend::hasChanged(Ui::MainWindow *ui)
 {
 	// simplifying default checks
 	#define START return (
-	#define VAL(w, s) utils::stripZeroes(w->cleanText()) != s ||
+	#define VAL(w, s) stripZeroes(w->cleanText()) != s ||
 	#define CHE(w) w->isChecked() ||
 	#define COL(w) utils::getBG(w) != white ||
 	#define TEX(w) w->text() != "" ||

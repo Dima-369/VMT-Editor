@@ -1,5 +1,4 @@
-#ifndef CONVERSIONDIALOG_H
-#define CONVERSIONDIALOG_H
+#pragma once
 
 #include "dialogwithouthelpbutton.h"
 
@@ -19,20 +18,22 @@ public:
 	explicit ConversionDialog( QSettings* iniSettings, QWidget* parent = NULL);
 
 	~ConversionDialog();
+
+	void addFile(const QString& fileName);
 	
 private:
 
 	Ui::ConversionDialog* ui;
 
-	QMap< QString, bool> listEntriesWithDirectories;
-
-	int countImagesToConvert();
+	QStringList listEntriesWithDirectories;
 
 	bool compareImages( const QImage& image1, const QImage& image2 );
 
 	QSettings* settings;
 
 private slots:
+
+	void setTemplate();
 
 	void convertRequested();
 
@@ -43,6 +44,6 @@ private slots:
 	void clearRequested();
 
 	void convertAskModeChanged();
-};
 
-#endif // CONVERSIONDIALOG_H
+	void resetWidgets();
+};

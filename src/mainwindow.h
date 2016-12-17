@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QTableWidgetItem>
@@ -12,6 +11,13 @@
 #include <QSpacerItem>
 #include <QLineEdit>
 #include <QVBoxLayout>
+#include <QDesktopServices>
+
+#ifdef Q_OS_WIN
+#   include <QWinJumpList>
+#   include <QWinJumpListCategory>
+#   include <QWinJumpListItem>
+#endif
 
 #include "vmtparser.h"
 #include "glwidget.h"
@@ -21,6 +27,8 @@
 #include "texturethread.h"
 #include "optionsdialog.h"
 #include "tintslider.h"
+#include "utilities/strings.h"
+#include "utilities/version.h"
 
 
 namespace Ui {
@@ -37,7 +45,6 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	// TODO: Move to some utility file
 	enum GroupBoxes {
 		BaseTexture,
 		BaseTexture2,
@@ -70,14 +77,21 @@ public:
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
 
-	~MainWindow();
-
 	void parseVMT( VmtFile vmtFile );
 
 	VmtFile makeVMT();
 
-	// Made public for ClickableLabel
+	// public for ConversionThread, the deleteFromCache parameter should be
+	// set to true for calls from the ConversionThread
+	void previewTexture(const QString& object);
+
+	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly, bool ignoreCache = false );
+
+	// public for ClickableLabel
 	Ui::MainWindow* ui;
+
+	// public for ConversionThread
+	QListWidget* mLogger;
 
 protected:
 
@@ -111,8 +125,6 @@ private:
 	GLWidget_Spec* glWidget_spec;
 
 	QString loadedVmtFile;
-
-	QListWidget* mLogger;
 
 	// Game + Directory
 	QMap<QString, QString> mAvailableGames;
@@ -149,6 +161,10 @@ private:
 	bool mIgnoreShaderChanged;
 
 	bool mSteamInstalled;
+
+	bool mOpenConvertDialog;
+
+	QString fileToConvert;
 
 	//----------------------------------------------------------------------------------------//
 
@@ -225,11 +241,7 @@ private:
 
 	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
 
-	bool previewTexture( const QString& object, const QString& texture, bool basetexture, bool alpha, bool alphatest, bool alphaOnly );
-
 	bool previewTexture( GLWidget_Spec::Mode mode, const QString& texture );
-
-	void previewTexture( const QString& object );
 
 	void saveSettings();
 
@@ -252,8 +264,6 @@ private:
 	QColor getBackgroundColor( QPlainTextEdit* colorWidget );
 
 	void setBackgroundColor( const QColor& color, QPlainTextEdit* colorWidget );
-
-	QString colorToParameter( const QColor& color, bool isWaterShader );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -298,14 +308,17 @@ private:
 
 public slots:
 
-	void checkTextureVisibility();
-
 	void finishedLoading();
 
 	void acceptedEditGames();
 
 	void deniedEditGames();
 
+	/*!
+	 * mSettings->autoRefresh() needs to be ignored for the Proxies
+	 * TextEdit, otherwise we get lots of errors when text is typed into
+	 * the view because the text is validated.
+	 */
 	void widgetChanged();
 
 	void refreshRequested();
@@ -372,6 +385,10 @@ private slots:
 
 	void addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox);
 
+	void reconvertTexture();
+
+	void checkForUpdates();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
@@ -427,11 +444,15 @@ class ParameterLineEdit : public QLineEdit
 
 public:
 
-	explicit ParameterLineEdit( QWidget* parent = NULL );
+	explicit ParameterLineEdit(QWidget* parent = NULL);
 
 public slots:
 
 	void _editingFinished();
+
+private:
+	
+	QCompleter* completer;
 };
 
 //----------------------------------------------------------------------------------------//
@@ -450,5 +471,3 @@ public slots:
 
 	void _editingFinished();
 };
-
-#endif // MAINWINDOW_H

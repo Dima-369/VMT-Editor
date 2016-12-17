@@ -57,25 +57,26 @@ ConversionDialog::~ConversionDialog() {
 	delete ui;
 }
 
-int ConversionDialog::countImagesToConvert() {
+void ConversionDialog::addFile(const QString& fileName)
+{
+	settings->setValue( "lastConvertAddDirectory", fileName.left( fileName.lastIndexOf("\\") ));
 
-	int count = 0;
+	ui->listWidget_textures->addItem(fileName);
+	listEntriesWithDirectories.append(fileName);
 
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
-		if( !ui->listWidget_textures->item(i)->toolTip().startsWith("Converted: ") )
-			++count;
+	int counter = 0;
+	foreach(const QString& file, listEntriesWithDirectories) {
+		ui->listWidget_textures->item(counter)->setToolTip(file);
+		counter++;
 	}
-
-	return count;
 }
 
-void ConversionDialog::convertRequested() {
-
-	if( countImagesToConvert() == 0 ) {
-
-		MsgBox::information(this, "Information",
-							"There is nothing to convert anymore.\n\nUse the Add... button to add images!");
+void ConversionDialog::convertRequested()
+{
+	if (listEntriesWithDirectories.isEmpty()) {
+		MsgBox::information(this, "Nothing to convert",
+			"There is nothing to convert.\n"
+			"Use the Add... button to add images!");
 		return;
 	}
 
@@ -128,6 +129,7 @@ void ConversionDialog::convertRequested() {
 		else if(tmp == "RGB 888 Bluescreen") arguments.insert("-alphaformat", "RGB888_BLUESCREEN");
 		else if(tmp == "BGR 888 Bluescreen") arguments.insert("-alphaformat", "BGR888_BLUESCREEN");
 		else if(tmp == "BGRA 8888") arguments.insert("-alphaformat", "BGRA8888");
+		else if(tmp == "DXT1") arguments.insert("-alphaformat", "DXT1");
 		else if(tmp == "DXT3") arguments.insert("-alphaformat", "DXT3");
 		else if(tmp == "DXT5") arguments.insert("-alphaformat", "DXT5");
 		else if(tmp == "BGRX 8888") arguments.insert("-alphaformat", "BGRX8888");
@@ -175,6 +177,16 @@ void ConversionDialog::convertRequested() {
 		else if(tmp == "Hamming") arguments.insert("-rfilter", "HAMMING");
 		else if(tmp == "Blackman") arguments.insert("-rfilter", "BLACKMAN");
 		else if(tmp == "Kaiser") arguments.insert("-rfilter", "KAISER");
+	}
+
+	tmp = ui->comboBox_vtfVersion->currentText();
+	// Version 7.3 is default if we do not pass another version
+	if (tmp != "7.3") {
+		if (tmp == "7.4") arguments.insert("-version", "7.4");
+		else if(tmp == "7.5") arguments.insert("-version", "7.5");
+		else if(tmp == "7.2") arguments.insert("-version", "7.2");
+		else if(tmp == "7.1") arguments.insert("-version", "7.1");
+		else if(tmp == "7.0") arguments.insert("-version", "7.0");
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -411,12 +423,13 @@ void ConversionDialog::convertRequested() {
 
 	int rememberOverwrite = -1;
 
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
+	for( int i = 0; i < ui->listWidget_textures->count(); ++i )
+	{
 		QString fileName = ui->listWidget_textures->item(i)->toolTip();
 			fileName.chop(4);
 
-		bool skipEntry = false;
+		// TODO: What is this for?
+		/*bool skipEntry = false;
 
 		QMap<QString, bool>::iterator it = listEntriesWithDirectories.begin();
 		while( it != listEntriesWithDirectories.constEnd() ) {
@@ -433,7 +446,7 @@ void ConversionDialog::convertRequested() {
 		}
 
 		if(skipEntry)
-			continue;
+			continue;*/
 
 		anotherTry:
 
@@ -441,7 +454,6 @@ void ConversionDialog::convertRequested() {
 
 		QString test = filePath.left( filePath.size() - 3 ).append("vtf");
 
-		// TODO:
 		if( QDir(test.replace("\\", "/")).exists(test) ) {
 
 			switch( settings->value("convertAskMode", 0).toInt() ) {
@@ -503,40 +515,19 @@ void ConversionDialog::convertRequested() {
 
 		if( output.endsWith("1/1 files completed.") ) {
 
-			int index = 0;
-			for( ; index < ui->listWidget_textures->count(); ++index ) {
+			for (int i = 0; i < ui->listWidget_textures->count(); ++i) {
+				const QString toolTip = ui->listWidget_textures->item(i)->toolTip();
 
-				QListWidgetItem* item = ui->listWidget_textures->item(index);
-
-				if( item->toolTip().left( item->toolTip().size() - 4 ) == fileName ) {
-
+				if (toolTip.left(toolTip.size() - 4) == fileName) {
+					ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
 					break;
 				}
 			}
-
-			QString toolTip = "Converted: " + ui->listWidget_textures->item(index)->toolTip();
-
-			ui->listWidget_textures->item(index)->setToolTip(toolTip);
-
-			QMap<QString, bool>::iterator it = listEntriesWithDirectories.begin();
-			while( it != listEntriesWithDirectories.constEnd() ) {
-
-				if( it.key() == fileName ) {
-
-					it.value() = true;
-
-					break;
-				}
-
-				++it;
-			}
-
-			ui->listWidget_textures->item(index)->setIcon(QIcon(":/icons/success"));
 
 			qApp->processEvents();
 
-		} else if( output.contains("Width must be a power of two (nearest powers are") ||
-				   output.contains("Height must be a power of two (nearest powers are")) {
+		} else if (output.contains("Width must be a power of two (nearest powers are") ||
+			output.contains("Height must be a power of two (nearest powers are")) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("Error while converting!");
@@ -583,12 +574,12 @@ void ConversionDialog::convertRequested() {
 
 void ConversionDialog::addRequested() {
 
-	QStringList fileNames = QFileDialog::getOpenFileNames( this,
-														   "Select one or more images files to convert",
-														   settings->value( "lastConvertAddDirectory", "" ).toString(),
-														   "Images (*.bmp *.dds *.gif *.jpg *.png *.tga)");
-	QStringList filesToAddInListWidget;
+	QStringList fileNames = QFileDialog::getOpenFileNames(this,
+		"Select one or more images files to convert",
+		settings->value("lastConvertAddDirectory", "").toString(),
+		"Images (*.bmp *.dds *.gif *.jpg *.png *.tga)");
 
+	QStringList filesToAddInListWidget;
 	if( fileNames.count() > 0 ) {
 
 		settings->setValue( "lastConvertAddDirectory", fileNames.last().left( fileNames.last().lastIndexOf("\\") ));
@@ -602,7 +593,7 @@ void ConversionDialog::addRequested() {
 			if( listEntriesWithDirectories.contains(tmp) )
 				continue;
 
-			listEntriesWithDirectories.insert( tmp, false );
+			listEntriesWithDirectories.append(tmp);
 
 			// for instance: nature\rock_cbm.vtf
 			tmp = tmp.right( tmp.size() - tmp.lastIndexOf("\\", tmp.lastIndexOf("\\") - 1) - 1 );
@@ -613,50 +604,34 @@ void ConversionDialog::addRequested() {
 		}
 
 		if(addFiles) {
-
 			ui->listWidget_textures->insertItems(0, filesToAddInListWidget);
-
 			ui->listWidget_textures->sortItems();
 
 			int counter = 0;
-			QMap<QString, bool>::const_iterator it = listEntriesWithDirectories.constBegin();
-			while( it != listEntriesWithDirectories.constEnd() ) {
-
-				if( it.value() )
-					ui->listWidget_textures->item(counter)->setToolTip( "Converted: " + it.key() );
-				else
-					ui->listWidget_textures->item(counter)->setToolTip( it.key() );
-
-				++it;
+			foreach(const QString& file, listEntriesWithDirectories) {
+				ui->listWidget_textures->item(counter)->setToolTip(file);
 				++counter;
 			}
 		}
 	}
 }
 
-void ConversionDialog::removeRequested() {
-
-	qDeleteAll( ui->listWidget_textures->selectedItems() );
-
+void ConversionDialog::removeRequested()
+{
+	qDeleteAll(ui->listWidget_textures->selectedItems());
 	listEntriesWithDirectories.clear();
 
-	for( int i = 0; i < ui->listWidget_textures->count(); ++i ) {
-
+	for (int i = 0; i < ui->listWidget_textures->count(); ++i) { 
 		QString itemToolTip = ui->listWidget_textures->item(i)->toolTip();
-
-		if( itemToolTip.startsWith("Converted: ") )
-			listEntriesWithDirectories.insert( itemToolTip.mid(6), true );
-		else
-			listEntriesWithDirectories.insert(itemToolTip, false);
+		listEntriesWithDirectories.append(itemToolTip);
 	}
 
 	ui->listWidget_textures->sortItems();
 }
 
-void ConversionDialog::clearRequested() {
-
+void ConversionDialog::clearRequested()
+{
 	ui->listWidget_textures->clear();
-
 	listEntriesWithDirectories.clear();
 }
 
@@ -673,6 +648,96 @@ void ConversionDialog::convertAskModeChanged() {
 	} else {
 
 		settings->setValue( "convertAskMode", 2 );
+	}
+}
+
+void ConversionDialog::resetWidgets()
+{
+	ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+	ui->comboBox_alphaTextures->setCurrentIndex(0);
+	ui->comboBox_vtfVersion->setCurrentIndex(1);
+
+	ui->checkBox_disableMipmaps->setChecked(false);
+	ui->comboBox_mipmapFilter->setCurrentIndex(0);
+	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(0);
+
+	ui->checkBox_resizeToPowerOfTwo->setChecked(true);
+	ui->comboBox_resizeMethod->setCurrentIndex(0);
+	ui->comboBox_resizeFilter->setCurrentIndex(0);
+	ui->comboBox_resizeSharpenFilter->setCurrentIndex(0);
+	ui->spinBox_specificHeight->setValue(0);
+	ui->spinBox_specificWidth->setValue(0);
+
+	ui->spinBox_maximumHeight->setValue(4096);
+	ui->spinBox_maximumWidth->setValue(4096);
+
+	ui->checkBox_convertToNormalMap->setChecked(false);
+	ui->comboBox_generationKernel->setCurrentIndex(0);
+	ui->comboBox_heightCalculation->setCurrentIndex(0);
+	ui->comboBox_alphaResult->setCurrentIndex(0);
+	ui->doubleSpinBox_normalMapScale->setValue(2.0);
+	ui->checkBox_wrapForTiledTextures->setChecked(false);
+
+	ui->doubleSpinBox_bumpMappingScale->setValue(1.0);
+	ui->checkBox_thumbnailImage->setChecked(true);
+	ui->checkBox_reflectivity->setChecked(true);
+	ui->checkBox_gammaCorrection->setChecked(false);
+	ui->doubleSpinBox_gammaCorrection->setValue(0.0);
+
+	ui->checkBox_pointsample->setChecked(false);
+	ui->checkBox_trilinear->setChecked(false);
+	ui->checkBox_clamps->setChecked(false);
+	ui->checkBox_clampt->setChecked(false);
+	ui->checkBox_anisotropic->setChecked(false);
+	ui->checkBox_hintDXT5->setChecked(false);
+	ui->checkBox_normal->setChecked(false);
+	ui->checkBox_noMIP->setChecked(false);
+	ui->checkBox_noLOD->setChecked(false);
+	ui->checkBox_minMIP->setChecked(false);
+	ui->checkBox_depthRendertarget->setChecked(false);
+	ui->checkBox_noDebugOverride->setChecked(false);
+	ui->checkBox_singleCopy->setChecked(false);
+	ui->checkBox_noDepthbuffer->setChecked(false);
+	ui->checkBox_clampU->setChecked(false);
+	ui->checkBox_vertexTexture->setChecked(false);
+	ui->checkBox_ssbump->setChecked(false);
+	ui->checkBox_border->setChecked(false);
+	ui->checkBox_rendertarget->setChecked(false);
+	ui->checkBox_procedural->setChecked(false);
+}
+
+void ConversionDialog::setTemplate()
+{
+	resetWidgets();
+
+	const QString caller = qobject_cast<QWidget*>(sender())->objectName();
+	if (caller == "pushButton_t01") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(1);
+
+	} else if (caller == "pushButton_t02") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(6);
+
+	} else if (caller == "pushButton_t03") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(5);
+
+	} else if (caller == "pushButton_t04") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
+		ui->comboBox_alphaTextures->setCurrentIndex(5);
+		ui->checkBox_disableMipmaps->setChecked(true);
+		ui->checkBox_clamps->setChecked(true);
+		ui->checkBox_clampt->setChecked(true);
+		ui->checkBox_noMIP->setChecked(true);
+
+	} else if (caller == "pushButton_t05") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(1);
+		ui->checkBox_disableMipmaps->setChecked(true);
+		ui->checkBox_clamps->setChecked(true);
+		ui->checkBox_clampt->setChecked(true);
+		ui->checkBox_noMIP->setChecked(true);
 	}
 }
 

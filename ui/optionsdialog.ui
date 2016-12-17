@@ -273,8 +273,6 @@ QSizeGrip {
     height: 12px;
 }
 
-/* Separators and shit */
-
 QMainWindow::separator
 {
     background-color: #333;
@@ -1114,6 +1112,24 @@ QSlider::handle:vertical {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_saveLastGame</tabstop>
+  <tabstop>checkBox_fullPathFilenameInTitle</tabstop>
+  <tabstop>checkBox_showShaderNameInTitle</tabstop>
+  <tabstop>checkBox_autoRefresh</tabstop>
+  <tabstop>radioButton_recentFileListInMenu</tabstop>
+  <tabstop>radioButton_recentFileListInSubmenu</tabstop>
+  <tabstop>radioButton_recentFileEntriesFileNameOnly</tabstop>
+  <tabstop>radioButton_recentFileEntriesFullPath</tabstop>
+  <tabstop>checkBox_showShaderNameInTab</tabstop>
+  <tabstop>checkBox_useIndentation</tabstop>
+  <tabstop>checkBox_useQuotesForTexture</tabstop>
+  <tabstop>radioButton_groupedParameters</tabstop>
+  <tabstop>radioButton_alphabeticallySorted</tabstop>
+  <tabstop>pushButton_editShaders</tabstop>
+  <tabstop>checkBox_clearCacheAfterExit</tabstop>
+  <tabstop>spinBox_cacheSize</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

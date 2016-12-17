@@ -8,6 +8,7 @@
 #include <QString>
 #include <QVector>
 #include <QDoubleSpinBox>
+#include <QtMath>
 
 namespace utils {
 
@@ -173,7 +174,7 @@ IntResult parseInt(const QString &parameter, const QString &value, int def,
  * The UI parameter is required as we need to log errors.
  */
 ColorResult parseColor(const QString &parameter, const QString &value,
-	Ui::MainWindow *ui);
+	Ui::MainWindow *ui, bool toSrgb = false);
 
 /*!
  * Parses the passed boolean parameter with values 0 or 1.
@@ -258,6 +259,19 @@ bool isTupleBetween(const DoubleTuple &tuple, double min, double max);
  * Min value is inclusive and the max value is exclusive: [min, max)
  */
 bool isBetween(const QStringList &list, double min, double max);
+
+/*!
+ * Returns the color in {255 128 0} which maps to the RGB values.
+ */
+inline QString toWaterParameter(const QColor &color)
+{
+	return QString("{%1 %2 %3}").arg(color.red(), color.green(), color.blue());
+}
+
+/*!
+ * Returns the color in [0.5 0.1 0.5] with 1.0 being 255.
+ */
+QString toParameter(const QColor &color, bool toLinear = false);
 
 } // namespace utils
 

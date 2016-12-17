@@ -1,8 +1,8 @@
-#ifndef HIGHLIGHTER_H
-#define HIGHLIGHTER_H
+#pragma once
 
 #include <QSyntaxHighlighter>
 
+#include "utilities/strings.h"
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -28,5 +28,3 @@ private:
 	QTextCharFormat parameterFormat;
 	QTextCharFormat quotationFormat;
 };
-
-#endif // HIGHLIGHTER_H

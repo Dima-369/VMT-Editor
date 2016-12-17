@@ -1,27 +1,22 @@
-QT += core gui opengl widgets
+QT += core gui opengl widgets network
 
 TEMPLATE = app
 
+CONFIG += c++11
 
-win32-msvc*:{
-    QMAKE_CXXFLAGS_RELEASE -= "-O2"
-    QMAKE_CXXFLAGS_RELEASE += "-Od"
+win32 {
+  QT += winextras # for QJumpList
+  LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
 
-    LIBS += \
-        Comdlg32.lib \
-        Advapi32.lib \
-        Shell32.lib
-}
-
-win32-g++: {
-    LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
-}
-
-win32:CONFIG(release, debug|release): DEFINES += _RELEASE=1
-else:win32:CONFIG(debug, debug|release): DEFINES += _DEBUG=1
-
-!win32-msvc*:{
-    QMAKE_CXXFLAGS_RELEASE += "-O0"
+  # copying required DLLs
+  TARGET_CUSTOM_EXT = .exe
+  DEPLOY_COMMAND = windeployqt
+  CONFIG(debug, debug|release) {
+      DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_CUSTOM_EXT}))
+  } else {
+      DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
+  }
+  QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
 }
 
 linux {
@@ -70,7 +65,10 @@ SOURCES += \
     src/user-interface/phong.cpp \
     src/logging/logging.cpp \
     src/opengl/helpers.cpp \
-    src/utilities/window.cpp
+    src/utilities/window.cpp \
+    src/user-interface/shading-reflection.cpp \
+    src/utilities/strings.cpp \
+    src/utilities/version.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -113,7 +111,9 @@ HEADERS += \
     src/user-interface/phong.h \
     src/utilities/strings.h \
     src/opengl/helpers.h \
-    src/utilities/window.h
+    src/utilities/window.h \
+    src/user-interface/shading-reflection.h \
+    src/utilities/version.h
 
 FORMS += \
     ui/mainwindow.ui \

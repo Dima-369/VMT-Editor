@@ -18,7 +18,6 @@
 #include <QHeaderView>
 
 #include "vmtparser.h"
-#include "highlighter.h"
 
 
 class StringListModel : public QAbstractListModel
@@ -28,7 +27,7 @@ public:
 	StringListModel( QStringList list, QObject * parent = 0 ) :
 		QAbstractListModel(parent),
 		mList(list),
-		mCompletions( listFromFile(":/files/subGroups") )
+		mCompletions( extractLines(":/files/subGroups") )
 	{
 
 	}
@@ -74,17 +73,10 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 {
 	mCompleter = new QCompleter(this);
 
-	QStringList tmp = listFromFile(":/files/subGroups");
-	tmp << listFromFile(":/files/parameters");
+	QStringList tmp = extractLines(":/files/subGroups");
+	tmp << extractLines(":/files/parameters");
 
 	mCompleter->setModel( new StringListModel( tmp, mCompleter ) );
-
-
-	QListView* list = new QListView();
-	list->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-
-	mCompleter->setPopup( list );
-
 
 	mCompleter->setWidget(this);
 	mCompleter->setCompletionMode(QCompleter::PopupCompletion);
@@ -92,20 +84,15 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 
 	QObject::connect( mCompleter, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
 
-
-	Highlighter* highlighter = new Highlighter( document() );
-	Q_UNUSED(highlighter)
+	// to color groups like PlayerLogo
+	// we do not clear the memory because this TextEdit is only created once
+	new Highlighter(document());
 
 	// Calculating the tab stop width by taking 4 random characters as Consolas is a monospaced font
 	QFont font( fontFamily(), 9 );
 	QFontMetrics fm(font);
 
 	setTabStopWidth( fm.boundingRect("aaaa").width() );
-}
-
-SubGroupTextEdit::~SubGroupTextEdit()
-{
-
 }
 
 void SubGroupTextEdit::insertCompletion( const QString& completion )
@@ -139,7 +126,7 @@ void SubGroupTextEdit::insertCompletion( const QString& completion )
 	tc.movePosition(QTextCursor::EndOfLine);
 
 	tc.setCharFormat(format);
-	if( listFromFile(":/files/subGroups").contains(completion) )
+	if( extractLines(":/files/subGroups").contains(completion) )
 	{
 		// Check if there is text before the actual insertion
 		if( isWhitespace(tmp) || tmp.isEmpty() )

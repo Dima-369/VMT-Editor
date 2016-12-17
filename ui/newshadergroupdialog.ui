@@ -267,8 +267,6 @@ QSizeGrip {
     height: 12px;
 }
 
-/* Separators and shit */
-
 QMainWindow::separator
 {
     background-color: #333;

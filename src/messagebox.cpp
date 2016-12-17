@@ -15,7 +15,7 @@ MsgBox::MsgBox(QWidget* parent) :
 	//SendMessage( (HWND)msgBox->winId(), WM_SETICON, ICON_SMALL, (LPARAM)qt_pixmapToWinHICON(QPixmap(":/icons/vmt_16")));
 #endif
 
-	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px;} QLabel{ font-size: 12pt; } QMessageBox { background-color: #404040; }");
+	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px;} QLabel{ font-size: 11pt; min-height: 35px; qproperty-alignment: 'AlignVCenter | AlignLeft'; } QMessageBox { background-color: #404040; }");
 }
 
 void MsgBox::setWindowTitle(const QString &title)

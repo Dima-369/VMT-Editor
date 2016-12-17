@@ -1,9 +1,9 @@
-#ifndef STRINGS_H
-#define STRINGS_H
+#pragma once
 
-#include <QString>
-
-namespace utils {
+#include <QStringListModel>
+#include <QDoubleSpinBox>
+#include <QFile>
+#include <QCompleter>
 
 /*!
  * Macro to convert the passed number to a QString.
@@ -17,11 +17,14 @@ namespace utils {
  *
  * This is used to avoid comparing against double values where possible.
  */
-inline QString stripZeroes(const QString &s)
-{
-	return QString(s).remove(QRegExp("\\.0*(?!0)$"));
-}
+QString stripZeroes(const QString& s);
 
-} // namespace utils
+/*!
+ * Calls stripZeroes() on the cleanText() value of the spin box.
+ */
+QString stripZeroes(QDoubleSpinBox *sp);
 
-#endif // STRINGS_H
+/*!
+ * Extracts non empty lines from the passed file.
+ */
+QStringList extractLines(const QString& fileName);

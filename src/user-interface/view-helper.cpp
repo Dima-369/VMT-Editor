@@ -55,9 +55,9 @@ void utils::applyBackgroundColor(const QString &parameter, const QString &value,
 }
 
 void utils::applyBackgroundColor(const QString &parameter, const QString &value,
-		QPlainTextEdit *colorWidget, Ui::MainWindow *ui)
+		QPlainTextEdit *colorWidget, Ui::MainWindow *ui, bool toSrgb)
 {
-	utils::ColorResult r = utils::parseColor(parameter, value, ui);
+	utils::ColorResult r = utils::parseColor(parameter, value, ui, toSrgb);
 
 	if (r.notDefault) {
 		int red = r.intValues.at(0);
@@ -98,7 +98,18 @@ QColor utils::getBG(QPlainTextEdit *widget)
 	return result;
 }
 
-bool utils::equal(QDoubleSpinBox *spinBox, const QString &value)
+namespace utils {
+
+QString getNonDef(QDoubleSpinBox *sb, const QString &def)
 {
-	return utils::stripZeroes(spinBox->cleanText()) == value;
+	if (!sb->isEnabled())
+		return "";
+
+	const QString text = sb->cleanText();
+	if (stripZeroes(text) == def)
+		return "";
+
+	return text;
 }
+
+} // namespace utils

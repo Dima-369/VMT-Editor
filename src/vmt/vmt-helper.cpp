@@ -28,7 +28,7 @@ utils::DoubleResult utils::parseDouble(const QString &parameter,
 		return result;
 	}
 
-	QString v = utils::stripZeroes(value);
+	const auto v = stripZeroes(value);
 	if (def == v) {
 		if (logErrors) {
 			if (def.contains(".")) {
@@ -72,7 +72,7 @@ utils::IntResult utils::parseInt(const QString &parameter, const QString &value,
 }
 
 utils::ColorResult utils::parseColor(const QString &parameter,
-		const QString &value, Ui::MainWindow *ui)
+		const QString &value, Ui::MainWindow *ui, bool toSrgb)
 {
 	utils::ColorResult result;
 
@@ -101,6 +101,8 @@ utils::ColorResult utils::parseColor(const QString &parameter,
 			} else if (x > 1.0) {
 				x = 1.0;
 			}
+			if (toSrgb)
+				x = pow(x, 0.454545);
 			result.intValues.append(static_cast<int>(x * 255.0));
 		}
 		return result;
@@ -215,7 +217,7 @@ void utils::parseTexture(const QString &parameter, const QString &value,
 	}
 
 	if (vmt.state.gameDirectory != 0 && !vmt.state.gameDirectory->exists(
-			"material/" + s + ".vtf")) {
+			"materials/" + s + ".vtf")) {
 
 		ERROR(parameter + " file: \"" + s + ".vtf\" does not exist!")
 	}
@@ -253,7 +255,7 @@ utils::DoubleTuple utils::toDoubleTuple(const QString &s, int amount)
 
 			if (ok) {
 				result.values.append(c);
-				result.strings.append(utils::stripZeroes(s));
+				result.strings.append(stripZeroes(s));
 			} else {
 				result.valid = false;
 				qDebug() << "Parse error: " << s;
@@ -307,3 +309,26 @@ bool utils::isBetween(const QStringList& list, double min, double max)
 	}
 	return true;
 }
+
+namespace utils {
+
+QString toParameter(const QColor &color, bool toLinear)
+{
+	double redf = color.redF();
+	double greenf = color.greenF();
+	double bluef = color.blueF();
+
+	if(toLinear) {
+		redf = pow(redf, 2.2);
+		greenf = pow(greenf, 2.2);
+		bluef = pow(bluef, 2.2);
+	}
+
+	const QString red = stripZeroes(QString::number(redf, 'f', 2));
+	const QString green = stripZeroes(QString::number(greenf, 'f', 2));
+	const QString blue = stripZeroes(QString::number(bluef, 'f', 2));
+
+	return QString("[%1 %2 %3]").arg(red, green, blue);
+}
+
+} // namespace utils

@@ -1,12 +1,9 @@
-#ifndef TEXTEDIT_H
-#define TEXTEDIT_H
+#pragma once
 
 #include <QTextEdit>
 
 #include "utilities.h"
-
-
-class QCompleter;
+#include "highlighter.h"
 
 class SubGroupTextEdit : public QTextEdit
 {
@@ -15,8 +12,6 @@ class SubGroupTextEdit : public QTextEdit
 public:
 
 	SubGroupTextEdit( QWidget* parent = NULL );
-
-	~SubGroupTextEdit();
 
 protected:
 
@@ -38,5 +33,3 @@ private:
 
 	QCompleter* mCompleter;
 };
-
-#endif // TEXTEDIT_H
