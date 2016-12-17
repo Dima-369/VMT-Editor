@@ -1,6 +1,12 @@
 #include "version.h"
 
-Version fetch_version()
+QString versionToString(Version v)
+{
+	return QString("%1.%2.%3")
+		.arg(v.major).arg(v.minor).arg(v.patch);
+}
+
+QString getCurrentVersion()
 {
 	QFile f(":/files/version");
 	f.open(QFile::ReadOnly | QFile::Text);
@@ -8,11 +14,11 @@ Version fetch_version()
 	f.close();
 
 	const auto parts = version.split('.');
-	return Version(parts[0].toInt(), parts[1].toInt(), parts[2].toInt());
+	return versionToString(Version(
+		parts[0].toInt(), parts[1].toInt(), parts[2].toInt()));
 }
 
-QString to_string(Version v)
+Version checkForNewVersion()
 {
-	return QString("%1.%2.%3")
-		.arg(v.major).arg(v.minor).arg(v.patch);
+	return Version(1, 1, 0);
 }

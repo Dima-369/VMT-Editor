@@ -16,6 +16,8 @@ struct Version {
 		patch(patch) {}
 };
 
-Version fetch_version();
+QString getCurrentVersion();
 
-QString to_string(Version v);
+// if no new version is available, major is set to 0
+// otherwise the new version is returned
+Version checkForNewVersion();

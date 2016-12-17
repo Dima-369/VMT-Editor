@@ -28,6 +28,7 @@
 #include "optionsdialog.h"
 #include "tintslider.h"
 #include "utilities/strings.h"
+#include "utilities/version.h"
 
 
 namespace Ui {
@@ -387,6 +388,8 @@ private slots:
 	void addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox);
 
 	void reconvertTexture();
+
+	void checkForUpdates();
 
 	//----------------------------------------------------------------------------------------//
 

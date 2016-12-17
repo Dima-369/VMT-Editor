@@ -313,6 +313,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
+	connect(ui->action_checkUpdate, SIGNAL(triggered()), SLOT(checkForUpdates()));
+
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
 
 	//----------------------------------------------------------------------------------------//
@@ -8873,6 +8875,16 @@ void MainWindow::reconvertTexture()
 		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 
 	lineEdit->setText(relativeFilePath);
+}
+
+void MainWindow::checkForUpdates()
+{
+	auto v = checkForNewVersion();
+	if (v.major == 1) {
+		Info(QString("You have the latest version: %1")
+			.arg(getCurrentVersion()));
+	} else {
+	}
 }
 
 void MainWindow::showEditGamesDialog()

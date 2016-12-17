@@ -1334,7 +1334,7 @@ QGroupBox::title {
              <x>0</x>
              <y>0</y>
              <width>880</width>
-             <height>4524</height>
+             <height>4568</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -15020,7 +15020,7 @@ p, li { white-space: pre-wrap; }
              <x>0</x>
              <y>0</y>
              <width>895</width>
-             <height>753</height>
+             <height>749</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -15100,7 +15100,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1154</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -15140,6 +15140,7 @@ p, li { white-space: pre-wrap; }
      <string>&amp;Help</string>
     </property>
     <addaction name="action_about"/>
+    <addaction name="action_checkUpdate"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -15910,6 +15911,11 @@ border: 1px solid #222;
    </property>
    <property name="text">
     <string>Normal blend</string>
+   </property>
+  </action>
+  <action name="action_checkUpdate">
+   <property name="text">
+    <string>Check for Updates</string>
    </property>
   </action>
  </widget>

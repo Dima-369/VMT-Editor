@@ -1,4 +1,4 @@
-QT += core gui opengl widgets
+QT += core gui opengl widgets network
 win32 {
   QT += winextras # for QJumpList
 }
