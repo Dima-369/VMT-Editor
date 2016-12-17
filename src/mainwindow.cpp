@@ -5790,7 +5790,7 @@ void MainWindow::previewTexture(const QString& object, bool deleteFromCache)
 {
 	const QString cacheFile = QString("Cache/%1.png").arg(object);
 	if (deleteFromCache)
-		QFile(cacheFile).remove();
+		QFile::remove(cacheFile);
 
 	if (object == "preview_basetexture1") {
 		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
