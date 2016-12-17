@@ -7193,6 +7193,11 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			if( fileType.toLower() == ".vtf" ) {
 
 				if( mVMTLoaded ) {
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
 					QString fullNewName = dir + "\\" + nameWithExtension;
 
@@ -7217,6 +7222,8 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 								if( QFile::copy(fileName, fullNewName) ) {
 
 									fileName = fullNewName;
+
+									Info( "File \"" + fileName + "\" succesfully copied");
 
 									goto updateLineEdit;
 
@@ -7273,13 +7280,13 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					QFile::copy(fileName, tempName);
 					texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
 					lineEdit->setDisabled(true);
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+					previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
 				}
-
-				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-				lineEdit->setToolTip(fileName);
-				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-				previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
 
 			} else {
 
@@ -8864,6 +8871,8 @@ void MainWindow::reconvertTexture()
 
 	if (extension == "vtf")
 		previewTexture( preview, relativeFilePath, true, false, false, false, true );
+
+	lineEdit->setText(relativeFilePath);
 }
 
 void MainWindow::showEditGamesDialog()
