@@ -15116,8 +15116,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="action_about"/>
     <addaction name="action_checkUpdate"/>
+    <addaction name="action_about"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
