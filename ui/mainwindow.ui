@@ -14558,7 +14558,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="text">
-                      <string>No lod</string>
+                      <string>No LOD</string>
                      </property>
                     </widget>
                    </item>
