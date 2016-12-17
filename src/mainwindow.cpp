@@ -8913,9 +8913,8 @@ void MainWindow::checkForUpdates()
 		msgBox.setDefaultButton(dlButton);
 
 		if (msgBox.exec() != QMessageBox::Cancel) {
-			QDesktopServices::openUrl(
-				QString("https://github.com/Gira-X/VMT-Editor/releases/tag/v%1")
-				.arg(vs));
+			QDesktopServices::openUrl(QString(
+				"https://github.com/Gira-X/VMT-Editor/releases"));
 		}
 	}
 }

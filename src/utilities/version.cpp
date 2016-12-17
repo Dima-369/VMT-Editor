@@ -37,8 +37,7 @@ Version checkForNewVersion()
 	QNetworkAccessManager mgr;
 	QEventLoop loop;
 	QNetworkRequest req(QUrl(
-		//"https://raw.githubusercontent.com/Gira-X/VMT-Editor/master/misc/version.txt"));
-		"https://gitlab.com/Gira/testus/raw/master/version.txt"));
+		"https://raw.githubusercontent.com/Gira-X/VMT-Editor/master/misc/version.txt"));
 
 	QNetworkReply* reply = mgr.get(req);
 	QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
