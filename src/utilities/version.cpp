@@ -44,8 +44,8 @@ Version checkForNewVersion()
 		parts[0].toInt(), parts[1].toInt(), parts[2].toInt());
 	const auto cv = getCurrentVersionRaw();
 
-	if (v.major * 1000 + v.minor * 100 + v.patch >
-			cv.major * 1000 + cv.minor * 100 + cv.patch)
+	if (v.major * 10000 + v.minor * 100 + v.patch >
+			cv.major * 10000 + cv.minor * 100 + cv.patch)
 		return v;
 
 	return Version(0, 0, 0);
