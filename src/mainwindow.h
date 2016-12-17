@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QTableWidgetItem>
@@ -12,6 +11,7 @@
 #include <QSpacerItem>
 #include <QLineEdit>
 #include <QVBoxLayout>
+#include <QDesktopServices>
 
 #ifdef Q_OS_WIN
 #   include <QWinJumpList>
@@ -28,6 +28,7 @@
 #include "optionsdialog.h"
 #include "tintslider.h"
 #include "utilities/strings.h"
+#include "utilities/version.h"
 
 
 namespace Ui {
@@ -388,6 +389,8 @@ private slots:
 
 	void reconvertTexture();
 
+	void checkForUpdates();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
@@ -470,5 +473,3 @@ public slots:
 
 	void _editingFinished();
 };
-
-#endif // MAINWINDOW_H

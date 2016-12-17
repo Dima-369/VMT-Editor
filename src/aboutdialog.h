@@ -1,11 +1,10 @@
-#ifndef ABOUTDIALOG_H
-#define ABOUTDIALOG_H
+#pragma once
 
+#include "ui_aboutdialog.h"
 #include "dialogwithouthelpbutton.h"
-
+#include "utilities/version.h"
 
 namespace Ui {
-
 	class AboutDialog;
 }
 
@@ -15,7 +14,7 @@ class AboutDialog : public DialogWithoutHelpButton
 	
 public:
 
-	explicit AboutDialog( QWidget* parent = NULL );
+	explicit AboutDialog(QWidget* parent = NULL);
 
 	~AboutDialog();
 	
@@ -23,5 +22,3 @@ private:
 
 	Ui::AboutDialog* ui;
 };
-
-#endif // ABOUTDIALOG_H

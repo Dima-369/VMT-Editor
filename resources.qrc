@@ -93,6 +93,7 @@
         <file alias="defaultShaders">misc/default_shader_settings.txt</file>
         <file alias="allowedShaderGroups">misc/allowed_shadergroups.txt</file>
         <file alias="vmtParameters">misc/vmt_parameters.txt</file>
+        <file alias="version">misc/version.txt</file>
     </qresource>
     <qresource prefix="/surfaces">
         <file alias="alienSwarm">misc/surfaceprops_alienswarm.txt</file>
