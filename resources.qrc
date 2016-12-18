@@ -80,6 +80,7 @@
         <file alias="misc">images/misc.png</file>
         <file alias="reconvert">images/reconvert.png</file>
         <file alias="iconFlat">images/icon_flat.png</file>
+        <file alias="github">images/github.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>
