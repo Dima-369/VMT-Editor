@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>560</width>
     <height>230</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
+    <width>560</width>
     <height>230</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
+    <width>560</width>
     <height>230</height>
    </size>
   </property>
@@ -1161,7 +1161,10 @@ QSlider::handle:vertical {
     </rect>
    </property>
    <property name="pixmap">
-    <pixmap resource="resources.qrc">:/icons/vmt_192_flat</pixmap>
+    <pixmap resource="../resources.qrc">:/icons/iconFlat</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -1195,7 +1198,7 @@ font-family: &quot;Segoe UI Semilight&quot;
    <property name="geometry">
     <rect>
      <x>369</x>
-     <y>29</y>
+     <y>27</y>
      <width>221</width>
      <height>16</height>
     </rect>
@@ -1214,7 +1217,7 @@ font-family: &quot;Segoe UI Semilight&quot;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#7d7d7d;&quot;&gt;1.0 - Compiled at: ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#7d7d7d;&quot;&gt;1.1.0 - Compiled on Dec 18 2016&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>
@@ -1249,16 +1252,19 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Made by:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Dmytro Butemann&lt;/span&gt;&lt;span style=&quot; color:#d8d8d8;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Programmer&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Jan Gortnar&lt;/span&gt;&lt;span style=&quot; color:#d8d8d8;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Artist, User Interface Designer&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Thanks to VDC for providing parameter descriptions.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Dmytro Butemann &lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Programmer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Jan Gortnar &lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Artist, User Interface Designer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/Gira-X/VMT-Editor&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#cacaca;&quot;&gt;GitHub&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:20px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Thanks to VDC for providing parameter descriptions.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

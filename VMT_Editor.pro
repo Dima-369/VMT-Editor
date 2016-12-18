@@ -5,8 +5,10 @@ TEMPLATE = app
 CONFIG += c++11
 
 win32 {
-  QT += winextras # for QJumpList
+  # for QJumpList
+  QT += winextras 
   LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
+  RC_ICONS = app.ico
 
   # copying required DLLs
   TARGET_CUSTOM_EXT = .exe
@@ -129,5 +131,3 @@ FORMS += \
     ui/editgamesdialog.ui
 
 RESOURCES += resources.qrc
-
-RC_FILE = VMT.rc

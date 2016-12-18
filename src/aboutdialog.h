@@ -11,14 +11,10 @@ namespace Ui {
 class AboutDialog : public DialogWithoutHelpButton
 {
 	Q_OBJECT
-	
 public:
-
-	explicit AboutDialog(QWidget* parent = NULL);
-
+	explicit AboutDialog(QWidget* parent = nullptr);
 	~AboutDialog();
 	
 private:
-
 	Ui::AboutDialog* ui;
 };

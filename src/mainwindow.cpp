@@ -36,7 +36,6 @@
 
 #ifdef Q_OS_WIN
 #   include <Windows.h>
-#   include <Shlobj.h>
 #endif
 
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
@@ -4483,8 +4482,6 @@ void MainWindow::action_Save() {
 
 	if(mVMTLoaded) {
 
-		mChildWidgetChanged = false;
-
 		refreshRequested();
 
 		const QString directory = vmtParser->lastVMTFile().directory;
@@ -4495,6 +4492,8 @@ void MainWindow::action_Save() {
 		processTexturesToCopy(dir);
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
+
+		mChildWidgetChanged = false;
 
 		updateWindowTitle();
 
@@ -4576,8 +4575,6 @@ QString MainWindow::action_SaveAs() {
 
 		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf('\\') ));
 
-		mChildWidgetChanged = false;
-
 		refreshRequested();
 
 		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
@@ -4585,6 +4582,8 @@ QString MainWindow::action_SaveAs() {
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
+
+		mChildWidgetChanged = false;
 
 		mVMTLoaded = true;
 
@@ -6920,6 +6919,13 @@ void MainWindow::toggledDetailUniformScale(bool checked)
 	detailtexture::toggledUniformScale(checked, ui);
 }
 
+
+void MainWindow::updateTextureOnUi(
+	const QString& objectName, const QString& relativeFilePath)
+{
+	previewTexture(objectName, relativeFilePath, true, false, false, false, true);
+}
+
 void MainWindow::openRecentFile()
 {
 	QAction* action = qobject_cast<QAction*>(sender());
@@ -7213,7 +7219,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setDefaultButton( overwriteButton );
 						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
 
-						msgBox.setText( QDir::toNativeSeparators(fullNewName) + " already exists. Do you want to overwrite it?"  );
+						msgBox.setText( QDir::toNativeSeparators(nameWithExtension) + " already exists. Do you want to overwrite it?"  );
 
 						if(  msgBox.exec() != QMessageBox::Cancel ) {
 
@@ -7221,9 +7227,9 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 								if( QFile::copy(fileName, fullNewName) ) {
 
-									fileName = fullNewName;
-
 									Info( "File \"" + fileName + "\" successfully copied");
+
+									fileName = fullNewName;
 
 									goto updateLineEdit;
 
@@ -7281,35 +7287,80 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					texturesToCopy.remove(lineEdit);
 				}
 
-				QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
+				if(mVMTLoaded) {
+
+					QString newFile = fileName.section("/", -1).section(".", 0, 0);
+					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+					QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
+					if( QFile::exists(dir + newFile + ".vtf") ) {
+						MsgBox msgBox(this);
+						msgBox.setWindowTitle("File already exists!");
+						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
+						msgBox.addButton( QMessageBox::Cancel );
+						msgBox.setDefaultButton( overwriteButton );
+						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
+
+						msgBox.setText( QDir::toNativeSeparators(newFile + ".vtf") + " already exists. Do you want to overwrite it?"  );
+
+						if(  msgBox.exec() != QMessageBox::Cancel ) {
+
+							if( !QFile::remove( dir + newFile + ".vtf" ) ) {
+								Error( "Error removing \"" + dir + newFile + ".vtf\"" );
+								return;
+							}
+						} else {
+							return;
+						}
+					}
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+					ConversionThread* conversionThread = new ConversionThread(this);
+						conversionThread->fileName = fileName;
+						conversionThread->objectName = objectName;
+						conversionThread->relativeFilePath = relativeFilePath;
+						conversionThread->newFileName = "";
+						conversionThread->outputParameter = "-output \"" + dir + "\"";
+						conversionThread->start();
+
+					lineEdit->setText(relativeFilePath);
+
+
+				} else {
+
+					QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
 					outputFile = outputFile.left( outputFile.indexOf('.') );
 
-				texturesToCopy.insert(lineEdit, outputFile);
+					texturesToCopy.insert(lineEdit, outputFile);
 
-				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-				lineEdit->setDisabled(true);
+					lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+					lineEdit->setDisabled(true);
 
-				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-				lineEdit->setToolTip(fileName);
-				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				ConversionThread* conversionThread = new ConversionThread(this);
-					conversionThread->fileName = fileName;
-					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
-					conversionThread->start();
+					ConversionThread* conversionThread = new ConversionThread(this);
+						conversionThread->fileName = fileName;
+						conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
+						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						conversionThread->start();
 
-				fileName.chop(4);
+					fileName.chop(4);
 
-				QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-				QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
+					QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
+					QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
 
-				if( QFile::exists(toFile) )
-					QFile::remove(toFile);
+					if( QFile::exists(toFile) )
+						QFile::remove(toFile);
 
-				QFile::copy(fromFile, toFile);
+					QFile::copy(fromFile, toFile);
 
-				previewTexture(objectName);
+					previewTexture(objectName);
+				}
 			}
 		}
 	}
@@ -8515,14 +8566,15 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("File already exists!");
-				msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
-				msgBox.setDefaultButton( QMessageBox::No );
+				QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
+				msgBox.addButton( QMessageBox::Cancel );
+				msgBox.setDefaultButton( overwriteButton );
 				msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
 			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + it.value() +
 							".vtf already exists. Do you want to overwrite it?"  );
 
-			if( msgBox.exec() != QMessageBox::Yes ) {
+			if( msgBox.exec() == QMessageBox::Cancel ) {
 
 				++it;
 				continue;
@@ -8809,13 +8861,13 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
 
-	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
 	QString newFile = fileName.section("/", -1).section(".", 0, 0);
 
-	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + "/" + newFile);
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
 	if( QFile::exists(dir + newFile + ".vtf") ) {
 
