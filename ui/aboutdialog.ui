@@ -1254,43 +1254,12 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Dmytro Butemann &lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Programmer&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#d8d8d8;&quot;&gt;Jan Gortnar &lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#b6b6b6;&quot;&gt;Artist, User Interface Designer&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Thanks to VDC for providing parameter descriptions.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="GitHubLinkLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>500</x>
-     <y>70</y>
-     <width>48</width>
-     <height>48</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel::hover {
-background-color: rgb(255, 255, 0);
-}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="../resources.qrc">:/icons/github</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
+&lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/Gira-X/VMT-Editor&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#cacaca;&quot;&gt;GitHub&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:20px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Thanks to VDC for providing parameter descriptions.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>GitHubLinkLabel</class>
-   <extends>QLabel</extends>
-   <header>aboutdialog.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>
