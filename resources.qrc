@@ -38,7 +38,6 @@
         <file alias="subGroup">images/ac1.png</file>
         <file alias="parameter">images/ac2.png</file>
         <file alias="openVmt">images/open.png</file>
-        <file alias="qt">images/qt.png</file>
         <file alias="browse">images/browse.png</file>
         <file alias="preview">images/preview2.png</file>
         <file alias="new">images/new.png</file>
@@ -48,7 +47,6 @@
         <file alias="warning">images/warning.png</file>
         <file alias="error">images/error.png</file>
         <file alias="info">images/info.png</file>
-        <file alias="info32">images/info32.png</file>
         <file alias="1">images/1.png</file>
         <file alias="2">images/2.png</file>
         <file alias="3">images/3.png</file>
