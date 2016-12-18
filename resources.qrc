@@ -85,6 +85,7 @@
         <file alias="vmt_options">images/vmt_options.png</file>
         <file alias="misc">images/misc.png</file>
         <file alias="reconvert">images/reconvert.png</file>
+        <file alias="vmtIco">images/vmt.ico</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>
