@@ -36,11 +36,8 @@
     </qresource>
     <qresource prefix="/icons">
         <file alias="subGroup">images/ac1.png</file>
-        <file alias="vmt_192_flat">images/vmt_192_flat.png</file>
         <file alias="parameter">images/ac2.png</file>
         <file alias="openVmt">images/open.png</file>
-        <file alias="vmt_16">images/vmt_16.png</file>
-        <file alias="vmt_256">images/vmt_256.png</file>
         <file alias="qt">images/qt.png</file>
         <file alias="browse">images/browse.png</file>
         <file alias="preview">images/preview2.png</file>
@@ -59,7 +56,6 @@
         <file alias="5">images/5.png</file>
         <file alias="6">images/6.png</file>
         <file alias="saveAs">images/saveas.png</file>
-        <file alias="vmt_192">images/vmt_192.png</file>
         <file alias="border">images/border.png</file>
         <file alias="addGroup">images/add_group.png</file>
         <file alias="addShader">images/add_shader.png</file>
@@ -67,7 +63,6 @@
         <file alias="enableDisableShader">images/en_dis_shader.png</file>
         <file alias="removeGroup">images/remove_group.png</file>
         <file alias="removeShader">images/remove_shader.png</file>
-        <file alias="vmt32">images/vmt32.png</file>
         <file alias="success">images/success.png</file>
         <file alias="failed">images/failed.png</file>
         <file alias="basetexture">images/basetexture.png</file>
@@ -82,9 +77,9 @@
         <file alias="transparent">images/transparent.png</file>
         <file alias="information">images/information.png</file>
         <file alias="info_warning">images/info_warning.png</file>
-        <file alias="vmt_options">images/vmt_options.png</file>
         <file alias="misc">images/misc.png</file>
         <file alias="reconvert">images/reconvert.png</file>
+        <file alias="iconFlat">images/icon_flat.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>
