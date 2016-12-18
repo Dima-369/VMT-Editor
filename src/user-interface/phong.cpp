@@ -208,6 +208,7 @@ void processExponent1(const QString &parameter, const QString &value,
 
 	if (r.notDefault) {
 		ui->spinBox_exponent->setValue(r.value);
+		ui->spinBox_exponent2->setValue(r.value);
 	}
 }
 
@@ -391,5 +392,5 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	DO_CHOICE("$phongamount2", processPhongAmount, false)
 	DO_CHOICE("$phongmaskcontrastbrightness2",
 		processMaskContrastBrightness, false)
-	INT("$phongexponent2", 5, ui->spinBox_exponent2)
+	INT("$phongexponent2", 5, ui->spinBox_spec_exponent2)
 }
