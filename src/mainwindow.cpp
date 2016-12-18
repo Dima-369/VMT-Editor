@@ -4483,8 +4483,6 @@ void MainWindow::action_Save() {
 
 	if(mVMTLoaded) {
 
-		mChildWidgetChanged = false;
-
 		refreshRequested();
 
 		const QString directory = vmtParser->lastVMTFile().directory;
@@ -4495,6 +4493,8 @@ void MainWindow::action_Save() {
 		processTexturesToCopy(dir);
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
+
+		mChildWidgetChanged = false;
 
 		updateWindowTitle();
 
@@ -4576,8 +4576,6 @@ QString MainWindow::action_SaveAs() {
 
 		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf('\\') ));
 
-		mChildWidgetChanged = false;
-
 		refreshRequested();
 
 		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
@@ -4585,6 +4583,8 @@ QString MainWindow::action_SaveAs() {
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
+
+		mChildWidgetChanged = false;
 
 		mVMTLoaded = true;
 
