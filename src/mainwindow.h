@@ -115,7 +115,6 @@ protected:
 
 private:
 
-
 	VmtParser* vmtParser;
 
 	QList<GLWidget*> glWidgets;
@@ -358,6 +357,10 @@ public slots:
 	void changeOption( Settings::Options option, const QString& value );
 
 	void toggledDetailUniformScale(bool checked);
+
+	// required for the conversion thread
+	void updateTextureOnUi(
+		const QString& objectName, const QString& relativeFilePath);
 
 private slots:
 

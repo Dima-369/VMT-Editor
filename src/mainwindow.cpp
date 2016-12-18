@@ -6919,6 +6919,13 @@ void MainWindow::toggledDetailUniformScale(bool checked)
 	detailtexture::toggledUniformScale(checked, ui);
 }
 
+
+void MainWindow::updateTextureOnUi(
+	const QString& objectName, const QString& relativeFilePath)
+{
+	previewTexture(objectName, relativeFilePath, true, false, false, false, true);
+}
+
 void MainWindow::openRecentFile()
 {
 	QAction* action = qobject_cast<QAction*>(sender());
