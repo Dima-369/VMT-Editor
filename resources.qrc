@@ -48,7 +48,6 @@
         <file alias="warning">images/warning.png</file>
         <file alias="error">images/error.png</file>
         <file alias="info">images/info.png</file>
-        <file alias="info32">images/info32.png</file>
         <file alias="1">images/1.png</file>
         <file alias="2">images/2.png</file>
         <file alias="3">images/3.png</file>
