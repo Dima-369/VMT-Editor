@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
+    <width>560</width>
     <height>230</height>
    </rect>
   </property>
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
-    <height>200</height>
+    <width>560</width>
+    <height>230</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>700</width>
-    <height>300</height>
+    <width>560</width>
+    <height>230</height>
    </size>
   </property>
   <property name="palette">
@@ -1198,7 +1198,7 @@ font-family: &quot;Segoe UI Semilight&quot;
    <property name="geometry">
     <rect>
      <x>369</x>
-     <y>28</y>
+     <y>27</y>
      <width>221</width>
      <height>16</height>
     </rect>
@@ -1257,6 +1257,9 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/Gira-X/VMT-Editor&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#cacaca;&quot;&gt;GitHub&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:20px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;Thanks to VDC for providing parameter descriptions.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:6px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
