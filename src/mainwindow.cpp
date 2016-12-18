@@ -7213,7 +7213,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setDefaultButton( overwriteButton );
 						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
 
-						msgBox.setText( QDir::toNativeSeparators(fullNewName) + " already exists. Do you want to overwrite it?"  );
+						msgBox.setText( QDir::toNativeSeparators(nameWithExtension) + " already exists. Do you want to overwrite it?"  );
 
 						if(  msgBox.exec() != QMessageBox::Cancel ) {
 
@@ -7295,7 +7295,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						msgBox.setDefaultButton( overwriteButton );
 						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
 
-						msgBox.setText( QDir::toNativeSeparators(dir + newFile + ".vtf") + " already exists. Do you want to overwrite it?"  );
+						msgBox.setText( QDir::toNativeSeparators(newFile + ".vtf") + " already exists. Do you want to overwrite it?"  );
 
 						if(  msgBox.exec() != QMessageBox::Cancel ) {
 
@@ -8559,14 +8559,15 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("File already exists!");
-				msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
-				msgBox.setDefaultButton( QMessageBox::No );
+				QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
+				msgBox.addButton( QMessageBox::Cancel );
+				msgBox.setDefaultButton( overwriteButton );
 				msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
 			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + it.value() +
 							".vtf already exists. Do you want to overwrite it?"  );
 
-			if( msgBox.exec() != QMessageBox::Yes ) {
+			if( msgBox.exec() == QMessageBox::Cancel ) {
 
 				++it;
 				continue;
