@@ -31,4 +31,9 @@ private:
 
 	// required for the ERROR, INFO macros
 	QListWidget* mLogger;
+
+signals:
+
+	void updateTextureOnUi(
+		const QString& objectName, const QString& relativeFilePath);
 };

@@ -5,7 +5,8 @@ ConversionThread::ConversionThread(MainWindow* mw) :
 	mainWindow(mw),
 	mLogger(mw->mLogger)
 {
-
+	connect(this, SIGNAL(updateTextureOnUi(QString, QString)),
+		mw, SLOT(updateTextureOnUi(QString, QString)));
 }
 
 void ConversionThread::run()
@@ -21,7 +22,7 @@ void ConversionThread::run()
 		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
 		if (!objectName.isEmpty()) {
-			mainWindow->previewTexture( objectName, relativeFilePath, true, false, false, false, true );
+			emit updateTextureOnUi(objectName, relativeFilePath);
 		}
 
 		if (newFileName != "") {
