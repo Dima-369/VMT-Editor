@@ -38,7 +38,6 @@
         <file alias="subGroup">images/ac1.png</file>
         <file alias="parameter">images/ac2.png</file>
         <file alias="openVmt">images/open.png</file>
-        <file alias="qt">images/qt.png</file>
         <file alias="browse">images/browse.png</file>
         <file alias="preview">images/preview2.png</file>
         <file alias="new">images/new.png</file>
