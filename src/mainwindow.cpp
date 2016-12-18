@@ -36,7 +36,6 @@
 
 #ifdef Q_OS_WIN
 #   include <Windows.h>
-#   include <Shlobj.h>
 #endif
 
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
