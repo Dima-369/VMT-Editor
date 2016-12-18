@@ -7312,21 +7312,22 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						} else {
 							return;
 						}
-
-						QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-						lineEdit->setToolTip(fileName);
-						connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-						ConversionThread* conversionThread = new ConversionThread(this);
-							conversionThread->fileName = fileName;
-							conversionThread->objectName = objectName;
-							conversionThread->relativeFilePath = relativeFilePath;
-							conversionThread->newFileName = "";
-							conversionThread->outputParameter = "-output \"" + dir + "\"";
-							conversionThread->start();
-
-						lineEdit->setText(relativeFilePath);
 					}
+
+					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+					lineEdit->setToolTip(fileName);
+					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+					ConversionThread* conversionThread = new ConversionThread(this);
+						conversionThread->fileName = fileName;
+						conversionThread->objectName = objectName;
+						conversionThread->relativeFilePath = relativeFilePath;
+						conversionThread->newFileName = "";
+						conversionThread->outputParameter = "-output \"" + dir + "\"";
+						conversionThread->start();
+
+					lineEdit->setText(relativeFilePath);
+
 
 				} else {
 
