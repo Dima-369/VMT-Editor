@@ -19,6 +19,7 @@
 #   include <QWinJumpListItem>
 #endif
 
+#include "aboutdialog.h"
 #include "vmtparser.h"
 #include "glwidget.h"
 #include "glwidget_diffuse1.h"

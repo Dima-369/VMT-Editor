@@ -1,5 +1,15 @@
 #include "aboutdialog.h"
 
+GitHubLinkLabel::GitHubLinkLabel(QWidget* parent) :
+	QLabel(parent) {}
+
+
+void GitHubLinkLabel::mousePressEvent(QMouseEvent* event)
+{
+	QDesktopServices::openUrl
+		(QString("https://github.com/Gira-X/VMT-Editor"));
+}
+
 AboutDialog::AboutDialog( QWidget* parent ) :
 	DialogWithoutHelpButton(parent),
 	ui(new Ui::AboutDialog)

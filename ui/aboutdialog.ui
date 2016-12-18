@@ -1259,7 +1259,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#b6b6b6;&quot;&gt;GNU GPLv3 licensed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="GitHubLinkLabel" name="label_3">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -1284,6 +1284,13 @@ background-color: rgb(255, 255, 0);
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GitHubLinkLabel</class>
+   <extends>QLabel</extends>
+   <header>aboutdialog.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>
