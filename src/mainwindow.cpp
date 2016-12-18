@@ -7221,9 +7221,9 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 								if( QFile::copy(fileName, fullNewName) ) {
 
-									fileName = fullNewName;
-
 									Info( "File \"" + fileName + "\" successfully copied");
+
+									fileName = fullNewName;
 
 									goto updateLineEdit;
 
@@ -7286,7 +7286,6 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					QString newFile = fileName.section("/", -1).section(".", 0, 0);
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 					QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
-					Error(dir + newFile + ".vtf");
 
 					if( QFile::exists(dir + newFile + ".vtf") ) {
 						MsgBox msgBox(this);
