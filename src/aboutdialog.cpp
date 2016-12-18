@@ -8,7 +8,8 @@ AboutDialog::AboutDialog( QWidget* parent ) :
 
 	ui->label_version->setTextFormat(Qt::PlainText);
 	ui->label_version->setText(QString("%1 - Compiled on %2")
-		.arg(getCurrentVersion()).arg(__DATE__));
+		.arg(removeTrailingVersionZero(getCurrentVersion()))
+		.arg(__DATE__));
 }
 
 AboutDialog::~AboutDialog()
