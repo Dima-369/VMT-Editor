@@ -1161,7 +1161,10 @@ QSlider::handle:vertical {
     </rect>
    </property>
    <property name="pixmap">
-    <pixmap resource="resources.qrc">:/icons/vmt_192_flat</pixmap>
+    <pixmap resource="../resources.qrc">:/icons/iconFlat</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -1258,7 +1261,7 @@ p, li { white-space: pre-wrap; }
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
