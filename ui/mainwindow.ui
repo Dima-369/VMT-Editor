@@ -15531,9 +15531,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_baseTexture2">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/basetexture2</normaloff>:/icons/basetexture2</iconset>
@@ -15543,9 +15540,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_transparency">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/trans</normaloff>:/icons/trans</iconset>
@@ -15555,9 +15549,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_detail">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/detail</normaloff>:/icons/detail</iconset>
@@ -15567,9 +15558,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_other">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/other</normaloff>:/icons/other</iconset>
@@ -15579,9 +15567,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_reflection">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/ref</normaloff>:/icons/ref</iconset>
@@ -15591,9 +15576,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_phong">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -15606,9 +15588,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_selfIllumination">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/illu</normaloff>:/icons/illu</iconset>
@@ -15618,9 +15597,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_rimLight">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -15638,9 +15614,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_flowmap">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/flowmap</normaloff>:/icons/flowmap</iconset>
@@ -15650,9 +15623,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_waterReflection">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/waterreflect</normaloff>:/icons/waterreflect</iconset>
@@ -15662,9 +15632,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_refraction">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/waterrefract</normaloff>:/icons/waterrefract</iconset>
@@ -15674,9 +15641,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_fog">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/waterfog</normaloff>:/icons/waterfog</iconset>
@@ -15686,17 +15650,11 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_textureTransforms">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="text">
     <string>Texture Transforms</string>
    </property>
   </action>
   <action name="action_refract">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -15776,9 +15734,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_color">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/color</normaloff>:/icons/color</iconset>
@@ -15788,9 +15743,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_baseTextureTransforms">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/texturetrans</normaloff>:/icons/texturetrans</iconset>
@@ -15800,9 +15752,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_bumpmapTransforms">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/bumptrans</normaloff>:/icons/bumptrans</iconset>
@@ -15812,9 +15761,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_misc">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/misc</normaloff>:/icons/misc</iconset>
@@ -15827,9 +15773,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_scroll">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/waterscroll</normaloff>:/icons/waterscroll</iconset>
@@ -15866,9 +15809,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_baseTexture">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/basetexture</normaloff>:/icons/basetexture</iconset>
@@ -15947,9 +15887,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_phongBrush">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/phong</normaloff>:/icons/phong</iconset>
@@ -15959,9 +15896,6 @@ border: 1px solid #222;
    </property>
   </action>
   <action name="action_normalBlend">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/normalblend</normaloff>:/icons/normalblend</iconset>
