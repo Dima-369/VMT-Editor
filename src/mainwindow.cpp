@@ -6673,6 +6673,7 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =

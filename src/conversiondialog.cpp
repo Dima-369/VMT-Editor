@@ -1,6 +1,6 @@
 #include "conversiondialog.h"
 #include "ui_conversiondialog.h"
-
+#include "optionsdialog.h"
 #include "utilities.h"
 #include "messagebox.h"
 
@@ -27,6 +27,8 @@ ConversionDialog::ConversionDialog( QSettings* iniSettings, QWidget* parent )
 	connect( ui->pushButton_clearList, SIGNAL(pressed()), this, SLOT(clearRequested()) );
 
 	ui->checkBox_resizeToPowerOfTwo->setChecked(true);
+
+	removeSuffix = iniSettings->value("removeSuffix", false).toBool();
 
 	switch( iniSettings->value("convertAskMode", 0).toInt() ) {
 
@@ -521,6 +523,23 @@ void ConversionDialog::convertRequested()
 				if (toolTip.left(toolTip.size() - 4) == fileName) {
 					ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
 					break;
+				}
+			}
+
+			if(removeSuffix) {
+				QString newName = filePath;
+				if( filePath.left( filePath.size() - 4 ).endsWith("_diffuse") ){
+					newName.chop(12);
+					newName = newName + ".vtf";
+					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
+				} else if(filePath.left( filePath.size() - 4 ).endsWith("_normal") ) {
+					newName.chop(11);
+					newName = newName + "n.vtf";
+					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
+				} else if(filePath.left( filePath.size() - 4 ).endsWith("_specular") ) {
+					newName.chop(13);
+					newName = newName + "s.vtf";
+					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
 				}
 			}
 

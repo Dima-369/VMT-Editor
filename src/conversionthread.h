@@ -23,6 +23,7 @@ public:
 	QString relativeFilePath;
 	QString newFileName;
 	QString objectName;
+	bool removeSuffix = false;
 
 private:
 

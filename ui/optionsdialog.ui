@@ -878,6 +878,13 @@ QSlider::handle:vertical {
           </property>
          </widget>
         </item>
+        <item row="5" column="0">
+         <widget class="QCheckBox" name="checkBox_autoRefresh">
+          <property name="text">
+           <string>Auto refresh VMT preview on parameter change</string>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="0" colspan="2">
          <widget class="QCheckBox" name="checkBox_saveLastGame">
           <property name="text">
@@ -892,10 +899,10 @@ QSlider::handle:vertical {
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QCheckBox" name="checkBox_autoRefresh">
+        <item row="6" column="0">
+         <widget class="QCheckBox" name="checkBox_removeSuffix">
           <property name="text">
-           <string>Auto refresh VMT preview on parameter change</string>
+           <string>Remove Substance suffixes when converting textures (_diffuse, _normal)</string>
           </property>
          </widget>
         </item>

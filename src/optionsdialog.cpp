@@ -39,6 +39,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_autoRefresh->setChecked( settings->autoRefresh );
 
+	ui->checkBox_removeSuffix->setChecked( settings->removeSuffix );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -183,6 +185,22 @@ void OptionsDialog::saveSettings()
 			mSettings->autoRefresh = false;
 			mIniSettings->setValue("autoRefresh", false);
 			emit optionChanged(Settings::_AutoRefresh, "0");
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+
+	if (ui->checkBox_removeSuffix->isChecked()) {
+		if (!mSettings->removeSuffix) {
+			mSettings->removeSuffix = true;
+			mIniSettings->setValue("removeSuffix", true);
+			emit optionChanged(Settings::_RemoveSuffix, "1");
+		}
+	} else {
+		if(mSettings->removeSuffix) {
+			mSettings->removeSuffix = false;
+			mIniSettings->setValue("removeSuffix", false);
+			emit optionChanged(Settings::_RemoveSuffix, "0");
 		}
 	}
 

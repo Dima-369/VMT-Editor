@@ -31,6 +31,8 @@ private:
 
 	QSettings* settings;
 
+	bool removeSuffix = false;
+
 private slots:
 
 	void setTemplate();
