@@ -8,7 +8,7 @@ win32 {
   # for QJumpList
   QT += winextras 
   LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
-  RC_ICONS = app.ico
+  RC_FILE = app.rc
 
   # copying required DLLs
   TARGET_CUSTOM_EXT = .exe
