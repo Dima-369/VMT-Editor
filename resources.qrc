@@ -78,6 +78,15 @@
         <file alias="misc">images/misc.png</file>
         <file alias="reconvert">images/reconvert.png</file>
         <file alias="iconFlat">images/icon_flat.png</file>
+        <file alias="bumptrans">images/bumptrans.png</file>
+        <file alias="normalblend">images/normalblend.png</file>
+        <file alias="rimlight">images/rimlight.png</file>
+        <file alias="texturetrans">images/texturetrans.png</file>
+        <file alias="flowmap">images/flowmap.png</file>
+        <file alias="waterfog">images/waterfog.png</file>
+        <file alias="waterreflect">images/waterreflect.png</file>
+        <file alias="waterrefract">images/waterrefract.png</file>
+        <file alias="waterscroll">images/waterscroll.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>
