@@ -7290,9 +7290,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				if(mVMTLoaded) {
 
-					QString newFile = fileName.section("/", -1).section(".", 0, 0);
+					QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 					QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
 
 					if( QFile::exists(dir + newFile + ".vtf") ) {
 						MsgBox msgBox(this);
@@ -7324,7 +7325,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->objectName = objectName;
 						conversionThread->relativeFilePath = relativeFilePath;
 						conversionThread->newFileName = "";
-						conversionThread->outputParameter = "-output \"" + dir + "\"";
+						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						conversionThread->moveFile = true;
+						conversionThread->newFile = newFile;
+						conversionThread->newFileDir = dir;
 						conversionThread->start();
 
 					lineEdit->setText(relativeFilePath);
@@ -7333,7 +7337,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				} else {
 
 					QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
-					outputFile = outputFile.left( outputFile.indexOf('.') );
+					outputFile = removeSuffix(outputFile.left( outputFile.indexOf('.') ));
 
 					texturesToCopy.insert(lineEdit, outputFile);
 
@@ -8866,7 +8870,7 @@ void MainWindow::reconvertTexture()
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString newFile = fileName.section("/", -1).section(".", 0, 0);
+	QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
@@ -8885,7 +8889,10 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + dir + "\"";
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+		conversionThread->moveFile = true;
+		conversionThread->newFile = newFile;
+		conversionThread->newFileDir = dir;
 		conversionThread->start();
 
 	} else {
@@ -8904,6 +8911,28 @@ void MainWindow::reconvertTexture()
 		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 
 	lineEdit->setText(relativeFilePath);
+}
+
+QString MainWindow::removeSuffix( const QString fileName)
+{
+	QString newName = fileName;
+	if(mSettings->removeSuffix) {
+
+		if( fileName.endsWith("_diffuse") ){
+			newName.chop(8);
+
+		} else if(fileName.endsWith("_normal") ) {
+			newName.chop(7);
+			newName = newName + "n";
+
+		} else if(fileName.endsWith("_specular") ) {
+			newName.chop(9);
+			newName = newName + "s";
+		}
+	}
+	Info(newName);
+	return newName;
+
 }
 
 void MainWindow::checkForUpdates()

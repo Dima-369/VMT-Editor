@@ -254,6 +254,8 @@ private:
 
 	bool transformsModified( uint index );
 
+	QString removeSuffix( const QString fileName);
+
 	//----------------------------------------------------------------------------------------//
 
 	void addGLWidget( const QString& textureOverlay, QVBoxLayout* layout, const QString& widgetObjectName );
