@@ -8930,7 +8930,7 @@ QString MainWindow::removeSuffix( const QString fileName)
 			newName = newName + "s";
 		}
 	}
-	Info(newName);
+
 	return newName;
 
 }
