@@ -8,7 +8,7 @@ Includes texture preview, parameter validation and generally tries to help in ed
 
 ## Downloads
 
-Windows binary releases are provided on [Github's release page](https://github.com/Gira-X/VMT-Editor/releases).
+Windows binary releases are provided on [GitHub's release page](https://github.com/Gira-X/VMT-Editor/releases).
 
 We dropped the InnoSetup binary, as it only adds the Windows Explorer integration to open VMT files and Start menu shortcuts, and most seem to dislike the installation process.
 
