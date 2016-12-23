@@ -1,5 +1,4 @@
-#ifndef VMTHELPER_H
-#define VMTHELPER_H
+#pragma once
 
 #include "ui_mainwindow.h"
 
@@ -265,14 +264,15 @@ bool isBetween(const QStringList &list, double min, double max);
  */
 inline QString toWaterParameter(const QColor &color)
 {
-	return QString("{%1 %2 %3}").arg(color.red(), color.green(), color.blue());
+	return QString("{%1 %2 %3}")
+		.arg(color.red())
+		.arg(color.green())
+		.arg(color.blue());
 }
 
 /*!
- * Returns the color in [0.5 0.1 0.5] with 1.0 being 255.
+ * Returns the color in [0.5 0.1 0.5] with 1.0 corresponding to a value of 255.
  */
 QString toParameter(const QColor &color, bool toLinear = false);
 
 } // namespace utils
-
-#endif // VMTHELPER_H
