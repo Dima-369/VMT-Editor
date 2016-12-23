@@ -6017,18 +6017,6 @@ void MainWindow::gameChanged( const QString& game )
 		mLoading = false;
 }
 
-/*QVector<Shader::Groups> Shader::transformGroups( Shader::Shaders shader, QVector<Groups> groups )
-{
-	QVector<Shader::Groups> finalGroups;
-
-	for (int i = 0; i < groups.count(); ++i) {
-
-		finalGroups.push_back( static_cast<Shader::Groups>(gAllowedShaderGroups.value(shader).at(groups.at(i))));
-	}
-
-	return finalGroups;
-}*/
-
 
 #define UNCHECK_MENU(menu) { \
 	for( int i = 0; i < menu->actions().count(); ++i ) \
