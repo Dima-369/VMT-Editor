@@ -19893,6 +19893,22 @@ border: 1px solid #222;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>horizontalSlider_phongTint</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>widgetChanged()</slot>
