@@ -5544,7 +5544,7 @@ void MainWindow::refreshRequested() {
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
 
-			X( "Parsing Proxies caused an error: " + tmp2 )
+			Info( "Parsing Proxies caused an error: " + tmp2 )
 		}
 
 	} else {
