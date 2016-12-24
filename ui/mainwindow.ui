@@ -20313,6 +20313,134 @@ border: 1px solid #222;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lineEdit_waterNormalMap</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>482</x>
+     <y>-3789</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_bottomMaterial</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>-3756</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-3</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_waterSurface</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>493</x>
+     <y>-3723</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_cheap</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>-3693</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-2</x>
+     <y>131</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_bumpframe</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>484</x>
+     <y>-3654</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-3</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_expensive</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>477</x>
+     <y>-3697</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_waterBottom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>598</x>
+     <y>-3698</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-2</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_reflectMarkedEntities</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-2</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>widgetChanged()</slot>
