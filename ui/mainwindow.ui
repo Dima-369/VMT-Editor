@@ -15717,6 +15717,9 @@ border: 1px solid #222;
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="action_about">
    <property name="icon">
@@ -15728,6 +15731,9 @@ border: 1px solid #222;
    </property>
    <property name="shortcut">
     <string>Shift+F1</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="actionRefresh">
@@ -16124,9 +16130,6 @@ border: 1px solid #222;
    <property name="text">
     <string>Flags</string>
    </property>
-   <property name="menuRole">
-    <enum>QAction::AboutQtRole</enum>
-   </property>
   </action>
   <action name="action_scroll">
    <property name="checkable">
@@ -16160,6 +16163,9 @@ border: 1px solid #222;
   <action name="action_options">
    <property name="text">
     <string>&amp;Options...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
   <action name="action123">
