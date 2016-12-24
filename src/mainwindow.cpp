@@ -2880,7 +2880,9 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 		if( value.toLower() != "_rt_waterreflection" ) {
 
-			Warning("$reflecttexture contains unsupported value: \"" + value + "\". Only \"_rt_waterreflection\" is supported at this time!")
+			utils::parseTexture("$reflecttexture", value, ui,
+				ui->lineEdit_waterReflectTexture, vmt);
+			//Warning("$reflecttexture contains unsupported value: \"" + value + "\". Only \"_rt_waterreflection\" is supported at this time!")
 
 		} else {
 
@@ -3950,8 +3952,9 @@ VmtFile MainWindow::makeVMT()
 
 			vmtFile.parameters.insert( "$reflecttexture", "_rt_waterreflection" );
 
-		} else {
+		} else if( !( tmp = ui->lineEdit_waterReflectTexture->text().trimmed() ).isEmpty() && ui->lineEdit_waterReflectTexture->isEnabled() ) {
 
+			vmtFile.parameters.insert( "$reflecttexture", tmp );
 			//vmtFile.parameters.insert( "$envmap", "env_cubemap" );
 		}
 
@@ -7181,6 +7184,9 @@ void MainWindow::browseVTF()
 
 	else if( caller->objectName() == "toolButton_bump2" )
 		browseVTF( "preview_bumpmap2", ui->lineEdit_bump2 );
+
+	else if( caller->objectName() == "toolButton_waterReflectTexture" )
+		browseVTF( "", ui->lineEdit_waterReflectTexture );
 }
 
 void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
@@ -8134,6 +8140,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		ui->checkBox_skybox->setEnabled(enabled);
 		ui->checkBox_reflect2dskybox->setEnabled(enabled);
 		ui->checkBox_reflectMarkedEntities->setEnabled(enabled);
+
+		ui->lineEdit_waterReflectTexture->setDisabled(enabled);
+		ui->toolButton_waterReflectTexture->setDisabled(enabled);
 
 	} else if( caller->objectName() == "checkBox_transparent" ) {
 
