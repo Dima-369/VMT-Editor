@@ -266,8 +266,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
 
 	ui->doubleSpinBox_flashlightTint->setDoubleSlider(ui->horizontalSlider_flashlightTint, 10.0);
-	ui->doubleSpinBox_reflectionAmount->setDoubleSlider(ui->horizontalSlider_waterReflectAmount, 10.0);
-	ui->doubleSpinBox_refractionAmount->setDoubleSlider(ui->horizontalSlider_waterRefractAmount, 10.0);
+	ui->doubleSpinBox_reflectionAmount->setDoubleSlider(ui->horizontalSlider_waterReflectAmount, 2.0);
+	ui->doubleSpinBox_refractionAmount->setDoubleSlider(ui->horizontalSlider_waterRefractAmount, 2.0);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5421,6 +5421,12 @@ void MainWindow::loadTintColor(const QString &value, const QString &command,
 		ui->horizontalSlider_selfIllumTint->initialize(colorField, parsedColor);
 	else if(command == "$phongtint")
 		ui->horizontalSlider_phongTint->initialize(colorField, parsedColor);
+	else if(command == "$fogcolor")
+		ui->horizontalSlider_waterFogColor->initialize(colorField, parsedColor);
+	else if(command == "$reflecttint")
+		ui->horizontalSlider_waterReflectColor->initialize(colorField, parsedColor);
+	else if(command == "$refracttint")
+		ui->horizontalSlider_waterRefractColor->initialize(colorField, parsedColor);
 }
 
 void MainWindow::loadScrollParameter( QString value, const QString& command, uint index )
@@ -7690,13 +7696,13 @@ void MainWindow::changedColor() {
 		changeColor(ui->color_refractTint);
 
 	else if( caller->objectName() == "toolButton_refractionTint" )
-		changeColor(ui->color_refractionTint);
+		changeColor(ui->color_refractionTint, ui->horizontalSlider_waterRefractColor);
 
 	else if( caller->objectName() == "toolButton_reflectionTint" )
-		changeColor(ui->color_reflectionTint);
+		changeColor(ui->color_reflectionTint, ui->horizontalSlider_waterReflectColor);
 
 	else if( caller->objectName() == "toolButton_fogTint" )
-		changeColor(ui->color_fogTint);
+		changeColor(ui->color_fogTint, ui->horizontalSlider_waterFogColor);
 
 	else if( caller->objectName() == "toolButton_color1" )
 		changeColor(ui->color_color1);
