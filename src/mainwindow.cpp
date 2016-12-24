@@ -100,6 +100,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	miscAction = new QAction( QIcon( ":/icons/misc"), "Flags", this);
 
+	waterFlowmapAction = new QAction( QIcon( ":/icons/flowmap"), "Flowmap", this);
+	waterReflectionAction = new QAction( QIcon( ":/icons/waterreflect"), "Reflection", this);
+	waterRefractionAction = new QAction( QIcon( ":/icons/waterrefract"), "Refraction", this);
+	waterFogAction = new QAction( QIcon( ":/icons/waterfog"), "Fog", this);
+
 	QAction *filler = new QAction( QIcon( ":/icons/transparent"), "", this );
 	filler->setDisabled(true);
 
@@ -113,6 +118,16 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		connect(colorAction, SIGNAL(triggered()), this, SLOT(toggleColor()));
 	list.append(otherAction);
 		connect(otherAction, SIGNAL(triggered()), this, SLOT(toggleOther()));
+
+	list.append(waterFlowmapAction);
+		connect(waterFlowmapAction, SIGNAL(triggered()), this, SLOT(toggleFlowmap()));
+	list.append(waterReflectionAction);
+		connect(waterReflectionAction, SIGNAL(triggered()), this, SLOT(toggleWaterReflection()));
+	list.append(waterRefractionAction);
+		connect(waterRefractionAction, SIGNAL(triggered()), this, SLOT(toggleWaterRefraction()));
+	list.append(waterFogAction);
+		connect(waterFogAction, SIGNAL(triggered()), this, SLOT(toggleWaterFog()));
+
 
 	QAction *separator = new QAction(this);
 	separator->setSeparator(true);
@@ -250,12 +265,20 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
 
+	ui->doubleSpinBox_flashlightTint->setDoubleSlider(ui->horizontalSlider_flashlightTint, 10.0);
+	ui->doubleSpinBox_reflectionAmount->setDoubleSlider(ui->horizontalSlider_waterReflectAmount, 10.0);
+	ui->doubleSpinBox_refractionAmount->setDoubleSlider(ui->horizontalSlider_waterRefractAmount, 10.0);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
 	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
 	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
+
+	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
+	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
+	ui->horizontalSlider_waterFogColor->initialize(ui->color_fogTint);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -2884,6 +2907,24 @@ void MainWindow::parseVMT( VmtFile vmt )
 		showWaterReflection = true;
 	}
 
+	if( !( value = vmt.parameters.take("$reflectonlymarkedentities") ).isEmpty() ) {
+
+		if( vmt.shaderName != "Water" )
+			Error("$reflectonlymarkedentities only works with the Water shader!")
+
+		if(isBottomWater)
+			Error("$reflectonlymarkedentities only works with \"$abovewater 1\"!")
+
+		if(!ui->checkBox_realTimeReflection->isChecked())
+			Error("$reflectonlymarkedentities only works with \"$reflecttexture _rt_waterreflection\"!")
+
+		if( loadBoolParameter( value, "$reflectonlymarkedentities" ))
+			ui->checkBox_reflectMarkedEntities->setChecked(true);
+
+		showWaterReflection = true;
+	}
+
+
 	if( !( value = vmt.parameters.take("$reflectskyboxonly") ).isEmpty() ) {
 
 		if( vmt.shaderName != "Water" )
@@ -3802,12 +3843,8 @@ VmtFile MainWindow::makeVMT()
 				  selectedGame == "Dota 2" ||
 				  selectedGame == "Counter-Strike: Global Offensive" )) {
 
-				vmtFile.parameters.insert( "$envmap", "env_cubemap");
 			}
 
-		} else {
-
-			vmtFile.parameters.insert( "$envmap", "env_cubemap");
 		}
 
 		if( !( tmp = ui->lineEdit_waterNormalMap->text().trimmed() ).isEmpty() )
@@ -3920,6 +3957,9 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->checkBox_skybox->isChecked() && ui->checkBox_skybox->isEnabled() )
 			vmtFile.parameters.insert( "$reflectskyboxonly", "1" );
+
+		if( ui->checkBox_reflectMarkedEntities->isChecked() && ui->checkBox_reflectMarkedEntities->isEnabled() )
+			vmtFile.parameters.insert( "$reflectonlymarkedentities", "1" );
 
 		if( ui->checkBox_reflectEntities->isChecked() && ui->checkBox_reflectEntities->isEnabled() )
 			vmtFile.parameters.insert( "$reflectentities", "1" );
@@ -4698,6 +4738,23 @@ void MainWindow::toggleSelfIllumination() {
 				  ui->groupBox_selfIllumination);
 }
 
+void MainWindow::toggleFlowmap() {
+	utils::toggle(this, ui->action_flowmap,
+				  ui->groupBox_waterFlow);
+}
+void MainWindow::toggleWaterReflection() {
+	utils::toggle(this, ui->action_waterReflection,
+				  ui->groupBox_waterReflection);
+}
+void MainWindow::toggleWaterRefraction() {
+	utils::toggle(this, ui->action_refraction,
+				  ui->groupBox_waterRefraction);
+}
+void MainWindow::toggleWaterFog() {
+	utils::toggle(this, ui->action_fog,
+				  ui->groupBox_waterFog);
+}
+
 QString MainWindow::currentGameMaterialDir() {
 
 	QString game = getCurrentGame();
@@ -4728,7 +4785,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" does not exist!")
+				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -4766,7 +4823,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf + ".vtf" ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" does not exist!")
+				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -6281,13 +6338,16 @@ void MainWindow::shaderChanged()
 				ui->action_color->setChecked(false);
 				ui->groupBox_color->setVisible(false);
 
+				ui->action_reflection->setChecked(false);
+				ui->groupBox_shadingReflection->setVisible(false);
+
 				ui->action_other->setChecked(false);
 				ui->groupBox_textureOther->setVisible(false);
 
 				//----------------------------------------------------------------------------------------//
 
 				ui->menu_texture->setDisabled(true);
-				ui->menu_shading->setDisabled(true);
+				ui->menu_shading->setEnabled(true);
 				ui->menu_water->setEnabled(true);
 
 			} else { // Transparency, Detail, Color, Other allowed
@@ -6345,6 +6405,13 @@ void MainWindow::shaderChanged()
 
 				ui->action_selfIllumination->setVisible(true);
 				ui->action_selfIllumination->setEnabled(true);
+			}
+
+			if (shader == "Water") {
+
+				ui->menu_shading->setEnabled(true);
+				ui->action_reflection->setVisible(true);
+				ui->action_reflection->setEnabled(true);
 			}
 
 			ui->groupBox_refract->setVisible(shader == "Refract");
@@ -6441,6 +6508,11 @@ void MainWindow::shaderChanged()
 	phongAction->setVisible( ui->action_phong->isEnabled() && ui->menu_shading->isEnabled() );
 
 	phongBrushAction->setVisible( ui->action_phongBrush->isEnabled() && ui->menu_shading->isEnabled() );
+
+	waterFlowmapAction->setVisible( ui->action_flowmap->isEnabled() && ui->menu_water->isEnabled() );
+	waterReflectionAction->setVisible( ui->action_waterReflection->isEnabled() && ui->menu_water->isEnabled() );
+	waterRefractionAction->setVisible( ui->action_refraction->isEnabled() && ui->menu_water->isEnabled() );
+	waterFogAction->setVisible( ui->action_fog->isEnabled() && ui->menu_water->isEnabled() );
 
 	updateWindowTitle();
 
@@ -8054,6 +8126,8 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 		ui->checkBox_reflectEntities->setEnabled(enabled);
 		ui->checkBox_skybox->setEnabled(enabled);
+		ui->checkBox_reflect2dskybox->setEnabled(enabled);
+		ui->checkBox_reflectMarkedEntities->setEnabled(enabled);
 
 	} else if( caller->objectName() == "checkBox_transparent" ) {
 
@@ -8333,8 +8407,6 @@ void MainWindow::hideParameterGroupboxes()
 	{
 		ui->groupBox_water->show();
 
-		if( !ui->checkBox_waterBottom->isChecked() )
-			ui->groupBox_waterRefraction->show();
 	}
 
 	UNCHECK_MENU( ui->menu_texture )

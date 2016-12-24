@@ -199,6 +199,11 @@ private:
 
 	QAction* miscAction;
 
+	QAction* waterFlowmapAction;
+	QAction* waterReflectionAction;
+	QAction* waterRefractionAction;
+	QAction* waterFogAction;
+
 	//----------------------------------------------------------------------------------------//
 
 	double fresnelYStart;
@@ -411,6 +416,11 @@ private slots:
 	void toggleReflection();
 	void toggleSelfIllumination();
 	void toggleMisc();
+	//--------------------------//
+	void toggleFlowmap();
+	void toggleWaterReflection();
+	void toggleWaterRefraction();
+	void toggleWaterFog();
 
 	void on_action_baseTexture2_triggered(bool checked);
 	void on_action_transparency_triggered(bool checked);

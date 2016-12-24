@@ -49,3 +49,5 @@ camopatterntexture
 camoboundingboxmin
 camoboundingboxmax
 surfaceprop
+
+$fallbackmaterial

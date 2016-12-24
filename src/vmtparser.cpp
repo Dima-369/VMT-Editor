@@ -35,7 +35,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$abovewater;$forceexpensive;$forcecheap;$reflect2dskybox" );
 	mGroups.append( "$scroll1;$scroll2");
 	mGroups.append( "$flow_debug;$flowmap;$flow_noise_texture;$flow_normaluvscale;$flow_worlduvscale;$flow_uvscrolldistance;$flow_bumpstrength;$flow_noise_scale;$flow_timescale;$flow_timeintervalinseconds" );
-	mGroups.append( "$reflecttexture;$reflecttint;$reflectamount;$reflectentities;$reflectskyboxonly" );
+	mGroups.append( "$reflecttexture;$reflecttint;$reflectamount;$reflectentities;$reflectskyboxonly;$reflectonlymarkedentities" );
 	mGroups.append( "$refracttexture;$refract;$refracttinttexture;$refracttint;$refractamount;$bluramount;$refractblur" );
 	mGroups.append( "$fogenable;$fogcolor;$fogstart;$fogend;$flashlighttint;$lightmapwaterfog" );
 
