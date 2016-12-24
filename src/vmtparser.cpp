@@ -792,7 +792,7 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 
 	int subShaderBracketCounter = 0;
 
-	QRegExp reg("[a-zA-Z0-9_]+");
+	QRegExp reg("[a-zA-Z0-9_><]+");
 
 	QString tmp(subGroups);
 	QTextStream in( &tmp );
