@@ -1,6 +1,7 @@
 QT += core gui opengl widgets network
 
 TEMPLATE = app
+TARGET = "VMT Editor"
 
 CONFIG += c++11
 
