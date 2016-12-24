@@ -788,7 +788,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 
 	bool expectingInitialSubGroupName = true;
 	bool expectingOpenBracket = false;
-	bool expectingEOF = false;
 
 	int subShaderBracketCounter = 0;
 
@@ -812,14 +811,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		if(line.isEmpty())
 			continue;
 
-		//////////////////////////////
-
-		if(expectingEOF)
-		{
-			return "Line " + Str(lineCount) + " (" + line + ": Expected end of file!";
-		}
-
-		//////////////////////////////
 
 		if( line == "{" )
 		{
@@ -868,7 +859,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 				if( subShaderBracketCounter == 0 )
 				{
 					inSubGroups = false;
-					expectingEOF = true;
 				}
 			}
 		}
