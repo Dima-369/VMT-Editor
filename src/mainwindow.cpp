@@ -6525,6 +6525,9 @@ void MainWindow::shaderChanged()
 
 	updateWindowTitle();
 
+    if (mSettings->autoRefresh)
+        refreshRequested();
+
 	if (!wasLoading) mLoading = false;
 }
 
