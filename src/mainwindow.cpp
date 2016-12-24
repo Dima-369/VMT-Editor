@@ -3952,7 +3952,7 @@ VmtFile MainWindow::makeVMT()
 
 		} else {
 
-			vmtFile.parameters.insert( "$envmap", "env_cubemap" );
+			//vmtFile.parameters.insert( "$envmap", "env_cubemap" );
 		}
 
 		if( ui->checkBox_skybox->isChecked() && ui->checkBox_skybox->isEnabled() )
