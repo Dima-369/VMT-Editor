@@ -1309,7 +1309,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3507</y>
+             <y>-227</y>
              <width>880</width>
              <height>4565</height>
             </rect>
@@ -2867,7 +2867,7 @@ QGroupBox::title {
                     <widget class="QCheckBox" name="checkBox_expensive">
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
+                       <width>120</width>
                        <height>0</height>
                       </size>
                      </property>
