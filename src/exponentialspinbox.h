@@ -1,8 +1,11 @@
-#ifndef EXPONENTIALSPINBOX_H
-#define EXPONENTIALSPINBOX_H
+#pragma once
 
 #include <QDoubleSpinBox>
 #include <QSlider>
+#include <QDateTime>
+#include <QtMath>
+
+#include "utilities.h"
 
 class ExponentialSpinBox : public QDoubleSpinBox {
 
@@ -25,5 +28,3 @@ private slots:
 	void changeSpinBox(int value);
 	void changeSlider(double value);
 };
-
-#endif // EXPONENTIALSPINBOX_H

@@ -23,22 +23,32 @@ static QStringList gShaders = (QStringList() << "Cable" << "Decal" << "DecalModu
 											 << "VertexLitGeneric" << "Water" << "WorldVertexTransition" << "Shattered Glass" << "Lightmapped_4WayBlend" );
 
 
-#define Error(x) { qDebug() << QString(x); mLogger->addItem( new QListWidgetItem( QIcon(":/icons/error"), x )); mLogger->scrollToBottom(); }
+#define Error(x) { \
+	qDebug() << QString(x); \
+	mLogger->addItem( new QListWidgetItem( QIcon(":/icons/error"), x )); \
+	mLogger->scrollToBottom(); \
+}
 
-#define Warning(x) { qDebug() << QString(x); mLogger->addItem( new QListWidgetItem( QIcon(":/icons/warning"), x )); mLogger->scrollToBottom(); }
+#define Warning(x) { \
+	qDebug() << QString(x); \
+	mLogger->addItem( new QListWidgetItem( QIcon(":/icons/warning"), x )); \
+	mLogger->scrollToBottom(); \
+}
 
-#define Info(x) { qDebug() << QString(x); mLogger->addItem( new QListWidgetItem( QIcon(":/icons/info"), x )); mLogger->scrollToBottom(); }
+#define Info(x) { \
+	qDebug() << QString(x); \
+	mLogger->addItem( new QListWidgetItem( QIcon(":/icons/info"), x )); \
+	mLogger->scrollToBottom(); \
+}
 
-
-
-#define X(x) { qDebug() << QString(x); mLogger->addItem( new QListWidgetItem( QIcon(":/icons/about"), "Error: " + QString(x) )); mLogger->scrollToBottom(); }
-
-#define Y(x) { qDebug() << QString(x); }
-
-#define Q(x) { qDebug() << "\n\n" << QString(x); MsgBox::warning( NULL, "Fatal error occurred!", QString(x) ); exit(1); }
+#define DebugLog(x) { qDebug() << QString(x); }
 
 #define Str(x) QString::number(x)
 
+/*!
+ * Shows a message box and quits the application with error code 1.
+ */
+void fatalError(const QString& msg);
 
 // TODO: Put setKey(), addDefaultShader() and something else I forgot in the classes
 bool isWhitespace( const QString& input );

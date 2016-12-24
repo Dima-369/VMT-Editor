@@ -6778,30 +6778,23 @@ void MainWindow::readSettings()
 	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
+	defaultShaderFile.open(QFile::ReadOnly | QFile::Text);
 
-	if( defaultShaderFile.open(QFile::ReadOnly | QFile::Text) )
-	{
-		while( !defaultShaderFile.atEnd() )
+	while (!defaultShaderFile.atEnd()) {
+		QString line = defaultShaderFile.readLine();
+		QStringList options( line.split("?") );
+
+		QVector< Shader::Groups > groups;
+
+		for( int i = 2; i < options.count(); ++i )
 		{
-			QString line = defaultShaderFile.readLine();
-			QStringList options( line.split("?") );
-
-			QVector< Shader::Groups > groups;
-
-			for( int i = 2; i < options.count(); ++i )
-			{
-				groups.append( static_cast< Shader::Groups >( options.at(i).toInt() ));
-			}
-
-			mSettings->defaultShaders.append( Shader( options.at(0), options.at(1) == "1", groups ));
+			groups.append( static_cast< Shader::Groups >( options.at(i).toInt() ));
 		}
 
-		defaultShaderFile.close();
+		mSettings->defaultShaders.append( Shader( options.at(0), options.at(1) == "1", groups ));
 	}
-	else
-	{
-		Q( "\":/files/defaultShaders\" was not found!" )
-	}
+
+	defaultShaderFile.close();
 
 
 	QStringList shaderList( mIniSettings->value("shaders").toString().split( "??", QString::SkipEmptyParts ));
@@ -6964,7 +6957,11 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			refreshRequested();
 			break;
 
+		case Settings::_RemoveSuffix:
+			break;
+
 		case Settings::_CustomShaders:
+			// TODO: Move into own function
 
 			QString currentShader = ui->comboBox_shader->currentText();
 

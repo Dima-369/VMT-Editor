@@ -87,7 +87,8 @@ void GLWidget_Diffuse1::initializeGL()
 		"	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;"
 		"}") ) {
 
-		Q("Vertex shader is broken:\n\n" + shaderProgram->log())
+		fatalError(QString("Vertex shader error:\n\n%1")
+			.arg(shaderProgram->log()));
 	}
 
 	if( !shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
@@ -105,7 +106,8 @@ void GLWidget_Diffuse1::initializeGL()
 		"	}"
 		"}") ) {
 
-		Q("Fragment shader is broken:\n\n" + shaderProgram->log())
+		fatalError(QString("Fragment shader error:\n\n%1")
+			.arg(shaderProgram->log()));
 	}
 
 	shaderProgram->link();
