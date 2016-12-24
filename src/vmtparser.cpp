@@ -925,10 +925,22 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		}
 	}
 
-	if( subShaderBracketCounter > 0 )
-		return Str(subShaderBracketCounter) + " unmatched open brackets found!";
-	else if( subShaderBracketCounter < 0 )
-		return Str(subShaderBracketCounter) + " unmatched closed brackets found!";
+	if (subShaderBracketCounter == 1)
+		return QString("Unmatched open bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter >= 2)
+		return QString("%1 unmatched open brackets found!")
+			.arg(subShaderBracketCounter);
+
+	// TODO: Can this even happen? It looks like errors caused by
+	// unmatched closed brackets are already handled by the
+	// "Expected open bracked found" check
+	if (subShaderBracketCounter == -1)
+		return QString("Unmatched closed bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter <= -2)
+		return QString("%1 unmatched closed brackets found!")
+			.arg(subShaderBracketCounter);
 
 	return "";
 }
