@@ -788,11 +788,10 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 
 	bool expectingInitialSubGroupName = true;
 	bool expectingOpenBracket = false;
-	bool expectingEOF = false;
 
 	int subShaderBracketCounter = 0;
 
-	QRegExp reg("[a-zA-Z0-9_]+");
+	QRegExp reg("[a-zA-Z0-9_><]+");
 
 	QString tmp(subGroups);
 	QTextStream in( &tmp );
@@ -812,14 +811,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		if(line.isEmpty())
 			continue;
 
-		//////////////////////////////
-
-		if(expectingEOF)
-		{
-			return "Line " + Str(lineCount) + " (" + line + ": Expected end of file!";
-		}
-
-		//////////////////////////////
 
 		if( line == "{" )
 		{
@@ -868,7 +859,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 				if( subShaderBracketCounter == 0 )
 				{
 					inSubGroups = false;
-					expectingEOF = true;
 				}
 			}
 		}
@@ -925,10 +915,22 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		}
 	}
 
-	if( subShaderBracketCounter > 0 )
-		return Str(subShaderBracketCounter) + " unmatched open brackets found!";
-	else if( subShaderBracketCounter < 0 )
-		return Str(subShaderBracketCounter) + " unmatched closed brackets found!";
+	if (subShaderBracketCounter == 1)
+		return QString("Unmatched open bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter >= 2)
+		return QString("%1 unmatched open brackets found!")
+			.arg(subShaderBracketCounter);
+
+	// TODO: Can this even happen? It looks like errors caused by
+	// unmatched closed brackets are already handled by the
+	// "Expected open bracked found" check
+	if (subShaderBracketCounter == -1)
+		return QString("Unmatched closed bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter <= -2)
+		return QString("%1 unmatched closed brackets found!")
+			.arg(subShaderBracketCounter);
 
 	return "";
 }
