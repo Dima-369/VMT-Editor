@@ -18,6 +18,7 @@
 #include "user-interface/shaders.h"
 #include "user-interface/view-helper.h"
 #include "user-interface/shading-reflection.h"
+#include "user-interface/treesway.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 

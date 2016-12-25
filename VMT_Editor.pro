@@ -71,7 +71,8 @@ SOURCES += \
     src/utilities/window.cpp \
     src/user-interface/shading-reflection.cpp \
     src/utilities/strings.cpp \
-    src/utilities/version.cpp
+    src/utilities/version.cpp \
+    src/user-interface/treesway.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -116,7 +117,8 @@ HEADERS += \
     src/opengl/helpers.h \
     src/utilities/window.h \
     src/user-interface/shading-reflection.h \
-    src/utilities/version.h
+    src/utilities/version.h \
+    src/user-interface/treesway.h
 
 FORMS += \
     ui/mainwindow.ui \

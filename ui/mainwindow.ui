@@ -14996,7 +14996,7 @@ QGroupBox::title {
                  <item row="0" column="1" colspan="2">
                   <layout class="QHBoxLayout" name="horizontalLayout_51">
                    <item>
-                    <widget class="QSpinBox" name="spinBox_treeswayHeoght">
+                    <widget class="QSpinBox" name="spinBox_treeswayHeight">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -15295,7 +15295,7 @@ QGroupBox::title {
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_treeswaxSpeed">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_treeswaySpeed">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -15647,37 +15647,6 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="0">
-                  <widget class="QLabel" name="label_81">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Scrumble falloff:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="6" column="1" colspan="2">
                   <layout class="QHBoxLayout" name="horizontalLayout_57">
                    <item>
@@ -15833,7 +15802,7 @@ QGroupBox::title {
                  <item row="8" column="1" colspan="2">
                   <layout class="QHBoxLayout" name="horizontalLayout_73">
                    <item>
-                    <widget class="QSpinBox" name="spinBox_treeswayScrumbleFalloff">
+                    <widget class="QSpinBox" name="spinBox_treeswayScrumbleFrequency">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -15868,7 +15837,7 @@ QGroupBox::title {
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_95">
+                    <widget class="QLabel" name="label_81">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                        <horstretch>0</horstretch>
@@ -15897,7 +15866,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Frequency:</string>
+                      <string>Falloff:</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -15905,7 +15874,7 @@ QGroupBox::title {
                     </widget>
                    </item>
                    <item>
-                    <widget class="QSpinBox" name="spinBox_treeswayScrumbleFrequency">
+                    <widget class="QSpinBox" name="spinBox_treeswayScrumbleFalloff">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -15937,6 +15906,37 @@ QGroupBox::title {
                     </spacer>
                    </item>
                   </layout>
+                 </item>
+                 <item row="8" column="0">
+                  <widget class="QLabel" name="label_82">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Scrumble freq:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </widget>
