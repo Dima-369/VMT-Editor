@@ -449,6 +449,7 @@ private slots:
 	void on_action_refract_2_triggered(bool checked);
 	void on_action_normalBlend_triggered(bool checked);
 	void on_action_treeSway_triggered(bool checked);
+	void on_action_decal_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------------------//

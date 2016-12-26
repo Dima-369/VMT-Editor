@@ -790,6 +790,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	bool showColor = false;
 	bool showOther = false;
 	bool showTransparency = false;
+	bool showDecal = false;
 
 	bool showShadingReflection = false;
 	bool showSelfIllumination = false;
@@ -1396,6 +1397,38 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	//----------------------------------------------------------------------------------------//
 
+	bool usingDecal = false;
+
+	if( !( value = vmt.parameters.take("$decaltexture") ).isEmpty() )
+	{
+		utils::parseTexture("$decaltexture", value, ui,
+				ui->lineEdit_decal, vmt);
+
+		usingDecal = true;
+		showDecal = true;
+	}
+
+	if( !( value = vmt.parameters.take("$decalblendmode") ).isEmpty() ) {
+		if (!usingDecal) {
+			ERROR("$decalblendmode is only supported with "
+				"$decaltexture!")
+		}
+		bool ok;
+		int blendMode = value.toInt(&ok);
+
+		if(ok) {
+			if (blendMode >= 2) {
+				Error("$decalblendmode only supports values 0 and 1!")
+			} else {
+				ui->comboBox_decalBlendMode->setCurrentIndex(blendMode);
+			}
+		} else{
+			Error("$decalblendmode value: \"" + value + "\" has caused an error while parsing!")
+		}
+
+		showDecal = true;
+	}
+
 	bool usingEnvmap = false;
 
 	if( !( value = vmt.parameters.take("$envmap") ).isEmpty() )
@@ -1417,8 +1450,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			usingEnvmap = true;
 		}
 
-		if( vmt.shaderName != "Water" )
-			showShadingReflection = true;
+		showShadingReflection = true;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -3254,6 +3286,9 @@ void MainWindow::parseVMT( VmtFile vmt )
 		ui->action_treeSway->trigger();
 	}
 
+	if(showDecal)
+		ui->action_decal->trigger();
+
 	if(showShadingReflection)
 		ui->action_reflection->trigger();
 
@@ -3524,6 +3559,16 @@ VmtFile MainWindow::makeVMT()
 
 			if( ui->doubleSpinBox_detailAmount4->isEnabled() && ui->doubleSpinBox_detailAmount4->value() != 1.0 )
 				vmtFile.parameters.insert( "$detailblendfactor4", Str( ui->doubleSpinBox_detailAmount4->value() ));
+		}
+	}
+
+	//---------------------------------------------------------------------------------------//
+
+	if( !ui->groupBox_textureDecal->isHidden() )
+	{
+		if( !ui->lineEdit_decal->text().trimmed().isEmpty() ) {
+			vmtFile.parameters.insert( "$decaltexture", ui->lineEdit_decal->text().trimmed() );
+			vmtFile.parameters.insert( "$decalblendmode", Str( ui->comboBox_decalBlendMode->currentIndex() ));
 		}
 	}
 
@@ -4175,6 +4220,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
 	clearLineEditAction(ui->lineEdit_waterNormalMap);
+	clearLineEditAction(ui->lineEdit_decal);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4196,6 +4242,9 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse2->clear();
 	ui->lineEdit_bumpmap2->clear();
 	ui->lineEdit_detail->clear();
+
+	ui->lineEdit_decal->clear();
+	ui->comboBox_decalBlendMode->setCurrentIndex(0);
 
 	ui->lineEdit_blendmodulate->clear();
 	ui->lineEdit_lightWarp->clear();
@@ -6592,6 +6641,7 @@ void MainWindow::shaderChanged()
 
 	ui->action_normalBlend->setVisible( ui->action_normalBlend->isEnabled() );
 	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
+	ui->action_decal->setVisible( ui->action_decal->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -7275,6 +7325,9 @@ void MainWindow::browseVTF()
 
 	else if( caller->objectName() == "toolButton_waterReflectTexture" )
 		browseVTF( "", ui->lineEdit_waterReflectTexture );
+
+	else if( caller->objectName() == "toolButton_decal" )
+		browseVTF( "", ui->lineEdit_decal );
 }
 
 void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
@@ -9383,6 +9436,11 @@ void MainWindow::on_action_normalBlend_triggered(bool checked)
 void MainWindow::on_action_treeSway_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_treeSway)
+}
+
+void MainWindow::on_action_decal_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_textureDecal)
 }
 
 void MainWindow::on_action_detail_triggered(bool checked)

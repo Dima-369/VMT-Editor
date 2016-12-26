@@ -45,5 +45,6 @@ $phongamount2
 $phongmaskcontrastbrightness
 $phongmaskcontrastbrightness2
 $envmaplightscaleminmax
+$decaltexture
 %keywords
 %tooltexture

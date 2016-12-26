@@ -22,6 +22,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$basetexture4;$texture4_uvscale;$texture4_lumstart;$texture4_lumend;$texture4_blendstart;$texture4_blendend;$lumblendfactor4" );
 	mGroups.append( "$seamless_scale;$lightwarptexture;$reflectivity");
 	mGroups.append( "$detail;$detailblendmode;$detailscale;$detailblendfactor;$detailblendfactor2;$detailblendfactor3;$detailblendfactor4" );
+	mGroups.append( "$decaltexture;$decalblendmode" );
 	mGroups.append( "$blendmodulatetexture;$alpha;$translucent;$alphatest;$alphatestreference;$additive;$decal;$nocull" );
 
 	mGroups.append( "$envmap;$envmapmask;$normalmapalphaenvmapmask;$basealphaenvmapmask;$envmaptint;$envmapcontrast;$envmapsaturation;$envmaptint;$envmapfresnel;$envmapfresnelminmaxexp;$fresnelreflection;$envmaplightscale;$envmaplightscaleminmax;$envmapanisotropy;$envmapanisotropyscale" );
