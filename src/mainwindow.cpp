@@ -8604,8 +8604,8 @@ void MainWindow::refreshGameListSoft()
 		if( QFile::exists( tmp.absolutePath() + "/alien swarm/swarm/gameinfo.txt") )
 			mAvailableGames.insert("Alien Swarm", tmp.absolutePath() + "/alien swarm/swarm" );
 
-		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
-			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
+//		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
+//			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
 
 		if( QFile::exists( tmp.absolutePath() + "/counter-strike global offensive/csgo/gameinfo.txt") )
 			mAvailableGames.insert("Counter-Strike: Global Offensive", tmp.absolutePath() + "/counter-strike global offensive/csgo" );
@@ -8636,6 +8636,15 @@ void MainWindow::refreshGameListSoft()
 
 		if( QFile::exists( tmp.absolutePath() + "/portal/portal/gameinfo.txt") )
 			mAvailableGames.insert("Portal", tmp.absolutePath() + "/portal/portal");
+
+		if( QFile::exists( tmp.absolutePath() + "/dayofinfamy/doi/gameinfo.txt") )
+			mAvailableGames.insert("Day of Infamy", tmp.absolutePath() + "/dayofinfamy/doi");
+
+		if( QFile::exists( tmp.absolutePath() + "/insurgency2/insurgency/gameinfo.txt") )
+			mAvailableGames.insert("Insurgency", tmp.absolutePath() + "/insurgency2/insurgency");
+
+		if( QFile::exists( tmp.absolutePath() + "/black mesa/bms/gameinfo.txt") )
+			mAvailableGames.insert("Black Mesa", tmp.absolutePath() + "/black mesa/bms");
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -8689,8 +8698,8 @@ void MainWindow::refreshGameList() {
 		if( QFile::exists( tmp.absolutePath() + "/alien swarm/swarm/gameinfo.txt") )
 			mAvailableGames.insert("Alien Swarm", tmp.absolutePath() + "/alien swarm/swarm" );
 
-		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
-			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
+//		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
+//			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
 
 		if( QFile::exists( tmp.absolutePath() + "/Counter-Strike Global Offensive/csgo/gameinfo.txt") )
 			mAvailableGames.insert("Counter-Strike: Global Offensive", tmp.absolutePath() + "/Counter-Strike Global Offensive/csgo" );
@@ -8721,6 +8730,15 @@ void MainWindow::refreshGameList() {
 
 		if( QFile::exists( tmp.absolutePath() + "/portal/portal/gameinfo.txt") )
 			mAvailableGames.insert("Portal", tmp.absolutePath() + "/portal/portal");
+
+		if( QFile::exists( tmp.absolutePath() + "/dayofinfamy/doi/gameinfo.txt") )
+			mAvailableGames.insert("Day of Infamy", tmp.absolutePath() + "/dayofinfamy/doi");
+
+		if( QFile::exists( tmp.absolutePath() + "/insurgency2/insurgency/gameinfo.txt") )
+			mAvailableGames.insert("Insurgency", tmp.absolutePath() + "/insurgency2/insurgency");
+
+		if( QFile::exists( tmp.absolutePath() + "/black mesa/bms/gameinfo.txt") )
+			mAvailableGames.insert("Black Mesa", tmp.absolutePath() + "/black mesa/bms");
 	}
 
 	//----------------------------------------------------------------------------------------//
