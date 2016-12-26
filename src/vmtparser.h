@@ -37,6 +37,10 @@ struct VmtState
 
 	bool showDetail = false;
 
+	bool showTreeSway = false;
+
+	bool treeSwayEnabled = false;
+
 	/*!
 	 * Helper field to persist the directory of the game so textures can be
 	 * validated and previewed.

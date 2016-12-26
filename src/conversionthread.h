@@ -23,6 +23,9 @@ public:
 	QString relativeFilePath;
 	QString newFileName;
 	QString objectName;
+	bool moveFile = false;
+	QString newFile;
+	QString newFileDir;
 
 private:
 

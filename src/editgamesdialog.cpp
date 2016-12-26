@@ -36,8 +36,6 @@ EditGamesDialog::~EditGamesDialog()
 void EditGamesDialog::selectRow(QString game)
 {
 	toSelect = game;
-
-	Y("selectRow: " + toSelect)
 }
 
 void EditGamesDialog::fillWidget()

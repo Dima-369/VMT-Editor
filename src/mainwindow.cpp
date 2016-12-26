@@ -18,6 +18,7 @@
 #include "user-interface/shaders.h"
 #include "user-interface/view-helper.h"
 #include "user-interface/shading-reflection.h"
+#include "user-interface/treesway.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -100,6 +101,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	miscAction = new QAction( QIcon( ":/icons/misc"), "Flags", this);
 
+	waterFlowmapAction = new QAction( QIcon( ":/icons/flowmap"), "Flowmap", this);
+	waterReflectionAction = new QAction( QIcon( ":/icons/waterreflect"), "Reflection", this);
+	waterRefractionAction = new QAction( QIcon( ":/icons/waterrefract"), "Refraction", this);
+	waterFogAction = new QAction( QIcon( ":/icons/waterfog"), "Fog", this);
+
 	QAction *filler = new QAction( QIcon( ":/icons/transparent"), "", this );
 	filler->setDisabled(true);
 
@@ -113,6 +119,16 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		connect(colorAction, SIGNAL(triggered()), this, SLOT(toggleColor()));
 	list.append(otherAction);
 		connect(otherAction, SIGNAL(triggered()), this, SLOT(toggleOther()));
+
+	list.append(waterFlowmapAction);
+		connect(waterFlowmapAction, SIGNAL(triggered()), this, SLOT(toggleFlowmap()));
+	list.append(waterReflectionAction);
+		connect(waterReflectionAction, SIGNAL(triggered()), this, SLOT(toggleWaterReflection()));
+	list.append(waterRefractionAction);
+		connect(waterRefractionAction, SIGNAL(triggered()), this, SLOT(toggleWaterRefraction()));
+	list.append(waterFogAction);
+		connect(waterFogAction, SIGNAL(triggered()), this, SLOT(toggleWaterFog()));
+
 
 	QAction *separator = new QAction(this);
 	separator->setSeparator(true);
@@ -250,12 +266,28 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
 
+	ui->doubleSpinBox_flashlightTint->setDoubleSlider(ui->horizontalSlider_flashlightTint, 10.0);
+	ui->doubleSpinBox_reflectionAmount->setDoubleSlider(ui->horizontalSlider_waterReflectAmount, 2.0);
+	ui->doubleSpinBox_refractionAmount->setDoubleSlider(ui->horizontalSlider_waterRefractAmount, 2.0);
+
+	ui->doubleSpinBox_treeswayStartHeight->setDoubleSlider(ui->horizontalSlider_treeswayStartHeight);
+	ui->doubleSpinBox_treeswayStartRadius->setDoubleSlider(ui->horizontalSlider_treeswayStartRadius);
+	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 4.0);
+	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 4.0);
+	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 4.0);
+	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 4.0);
+	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 4.0);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
 	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
 	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
+
+	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
+	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
+	ui->horizontalSlider_waterFogColor->initialize(ui->color_fogTint);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -758,6 +790,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	bool showColor = false;
 	bool showOther = false;
 	bool showTransparency = false;
+	bool showDecal = false;
 
 	bool showShadingReflection = false;
 	bool showSelfIllumination = false;
@@ -1364,6 +1397,38 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	//----------------------------------------------------------------------------------------//
 
+	bool usingDecal = false;
+
+	if( !( value = vmt.parameters.take("$decaltexture") ).isEmpty() )
+	{
+		utils::parseTexture("$decaltexture", value, ui,
+				ui->lineEdit_decal, vmt);
+
+		usingDecal = true;
+		showDecal = true;
+	}
+
+	if( !( value = vmt.parameters.take("$decalblendmode") ).isEmpty() ) {
+		if (!usingDecal) {
+			ERROR("$decalblendmode is only supported with "
+				"$decaltexture!")
+		}
+		bool ok;
+		int blendMode = value.toInt(&ok);
+
+		if(ok) {
+			if (blendMode >= 2) {
+				Error("$decalblendmode only supports values 0 and 1!")
+			} else {
+				ui->comboBox_decalBlendMode->setCurrentIndex(blendMode);
+			}
+		} else{
+			Error("$decalblendmode value: \"" + value + "\" has caused an error while parsing!")
+		}
+
+		showDecal = true;
+	}
+
 	bool usingEnvmap = false;
 
 	if( !( value = vmt.parameters.take("$envmap") ).isEmpty() )
@@ -1385,8 +1450,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			usingEnvmap = true;
 		}
 
-		if( vmt.shaderName != "Water" )
-			showShadingReflection = true;
+		showShadingReflection = true;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1690,6 +1754,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
+	treesway::parseParameters(ui, &vmt);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1913,6 +1978,14 @@ void MainWindow::parseVMT( VmtFile vmt )
 	{
 		if( loadBoolParameter( value, "$nolod") )
 			ui->checkBox_noLod->setChecked(true);
+
+		showMiscellaneous = true;
+	}
+
+	if( !( value = vmt.parameters.take("$disablecsmlookup") ).isEmpty() )
+	{
+		if( loadBoolParameter( value, "$disablecsmlookup") )
+			ui->checkBox_disableCsmLookup->setChecked(true);
 
 		showMiscellaneous = true;
 	}
@@ -2857,7 +2930,9 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 		if( value.toLower() != "_rt_waterreflection" ) {
 
-			Warning("$reflecttexture contains unsupported value: \"" + value + "\". Only \"_rt_waterreflection\" is supported at this time!")
+			utils::parseTexture("$reflecttexture", value, ui,
+				ui->lineEdit_waterReflectTexture, vmt);
+			//Warning("$reflecttexture contains unsupported value: \"" + value + "\". Only \"_rt_waterreflection\" is supported at this time!")
 
 		} else {
 
@@ -2883,6 +2958,24 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 		showWaterReflection = true;
 	}
+
+	if( !( value = vmt.parameters.take("$reflectonlymarkedentities") ).isEmpty() ) {
+
+		if( vmt.shaderName != "Water" )
+			Error("$reflectonlymarkedentities only works with the Water shader!")
+
+		if(isBottomWater)
+			Error("$reflectonlymarkedentities only works with \"$abovewater 1\"!")
+
+		if(!ui->checkBox_realTimeReflection->isChecked())
+			Error("$reflectonlymarkedentities only works with \"$reflecttexture _rt_waterreflection\"!")
+
+		if( loadBoolParameter( value, "$reflectonlymarkedentities" ))
+			ui->checkBox_reflectMarkedEntities->setChecked(true);
+
+		showWaterReflection = true;
+	}
+
 
 	if( !( value = vmt.parameters.take("$reflectskyboxonly") ).isEmpty() ) {
 
@@ -3189,6 +3282,13 @@ void MainWindow::parseVMT( VmtFile vmt )
 		ui->action_normalBlend->trigger();
 	}
 
+	if(vmt.state.showTreeSway) {
+		ui->action_treeSway->trigger();
+	}
+
+	if(showDecal)
+		ui->action_decal->trigger();
+
 	if(showShadingReflection)
 		ui->action_reflection->trigger();
 
@@ -3464,6 +3564,16 @@ VmtFile MainWindow::makeVMT()
 
 	//---------------------------------------------------------------------------------------//
 
+	if( !ui->groupBox_textureDecal->isHidden() )
+	{
+		if( !ui->lineEdit_decal->text().trimmed().isEmpty() ) {
+			vmtFile.parameters.insert( "$decaltexture", ui->lineEdit_decal->text().trimmed() );
+			vmtFile.parameters.insert( "$decalblendmode", Str( ui->comboBox_decalBlendMode->currentIndex() ));
+		}
+	}
+
+	//---------------------------------------------------------------------------------------//
+
 	if( !ui->groupBox_textureOther->isHidden() )
 	{
 		if( !( tmp = ui->lineEdit_lightWarp->text().trimmed() ).isEmpty() && ui->lineEdit_lightWarp->isEnabled() )
@@ -3651,6 +3761,57 @@ VmtFile MainWindow::makeVMT()
 
 	//---------------------------------------------------------------------------------------//
 
+	if( !ui->groupBox_treeSway->isHidden() )
+	{
+		vmtFile.parameters.insert( "$treesway", "1" );
+
+		if( ui->spinBox_treeswayHeight->value() != 0)
+			vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
+
+		if( ui->spinBox_treeswayRadius->value() != 0)
+			vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
+
+		if( ui->spinBox_treeswaySpeedLerpEnd->value() != 0)
+			vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
+
+		if( ui->spinBox_treeswaySpeedLerpStart->value() != 0)
+			vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
+
+		if( ui->spinBox_treeswayScrumbleFrequency->value() != 0)
+			vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
+
+		if( ui->spinBox_treeswayFalloff->value() != 0)
+			vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
+
+		if( ui->spinBox_treeswayScrumbleFalloff->value() != 0)
+			vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
+
+
+
+		if( ui->doubleSpinBox_treeswayStartHeight->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
+
+		if( ui->doubleSpinBox_treeswayStartRadius->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
+
+		if( ui->doubleSpinBox_treeswayStrength->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
+
+		if( ui->doubleSpinBox_treeswayspeedHighWind->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
+
+		if( ui->doubleSpinBox_treeswayScrumbleStrength->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
+
+		if( ui->doubleSpinBox_treeswaySpeed->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
+
+		if( ui->doubleSpinBox_treeswayScrumbleSpeed->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
+	}
+
+	//---------------------------------------------------------------------------------------//
+
 	if( !ui->groupBox_misc->isHidden() )
 	{
 		if( ui->checkBox_model->isEnabled() && ui->checkBox_model->isChecked() )
@@ -3677,6 +3838,8 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_noFullBright->isChecked() )
 			vmtFile.parameters.insert( "$no_fullbright", "1" );
 
+		if( ui->checkBox_disableCsmLookup->isChecked() )
+			vmtFile.parameters.insert( "$disablecsmlookup", "1" );
 
 		if( !ui->lineEdit_keywords->text().trimmed().isEmpty() )
 			vmtFile.parameters.insert( "%keywords", ui->lineEdit_keywords->text().trimmed() );
@@ -3802,12 +3965,8 @@ VmtFile MainWindow::makeVMT()
 				  selectedGame == "Dota 2" ||
 				  selectedGame == "Counter-Strike: Global Offensive" )) {
 
-				vmtFile.parameters.insert( "$envmap", "env_cubemap");
 			}
 
-		} else {
-
-			vmtFile.parameters.insert( "$envmap", "env_cubemap");
 		}
 
 		if( !( tmp = ui->lineEdit_waterNormalMap->text().trimmed() ).isEmpty() )
@@ -3913,13 +4072,17 @@ VmtFile MainWindow::makeVMT()
 
 			vmtFile.parameters.insert( "$reflecttexture", "_rt_waterreflection" );
 
-		} else {
+		} else if( !( tmp = ui->lineEdit_waterReflectTexture->text().trimmed() ).isEmpty() && ui->lineEdit_waterReflectTexture->isEnabled() ) {
 
-			vmtFile.parameters.insert( "$envmap", "env_cubemap" );
+			vmtFile.parameters.insert( "$reflecttexture", tmp );
+			//vmtFile.parameters.insert( "$envmap", "env_cubemap" );
 		}
 
 		if( ui->checkBox_skybox->isChecked() && ui->checkBox_skybox->isEnabled() )
 			vmtFile.parameters.insert( "$reflectskyboxonly", "1" );
+
+		if( ui->checkBox_reflectMarkedEntities->isChecked() && ui->checkBox_reflectMarkedEntities->isEnabled() )
+			vmtFile.parameters.insert( "$reflectonlymarkedentities", "1" );
 
 		if( ui->checkBox_reflectEntities->isChecked() && ui->checkBox_reflectEntities->isEnabled() )
 			vmtFile.parameters.insert( "$reflectentities", "1" );
@@ -4057,6 +4220,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
 	clearLineEditAction(ui->lineEdit_waterNormalMap);
+	clearLineEditAction(ui->lineEdit_decal);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4078,6 +4242,9 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse2->clear();
 	ui->lineEdit_bumpmap2->clear();
 	ui->lineEdit_detail->clear();
+
+	ui->lineEdit_decal->clear();
+	ui->comboBox_decalBlendMode->setCurrentIndex(0);
 
 	ui->lineEdit_blendmodulate->clear();
 	ui->lineEdit_lightWarp->clear();
@@ -4226,6 +4393,7 @@ void MainWindow::resetWidgets() {
 
 	phong::resetWidgets(ui);
 	normalblend::resetWidgets(ui);
+	treesway::resetWidgets(ui);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4698,6 +4866,23 @@ void MainWindow::toggleSelfIllumination() {
 				  ui->groupBox_selfIllumination);
 }
 
+void MainWindow::toggleFlowmap() {
+	utils::toggle(this, ui->action_flowmap,
+				  ui->groupBox_waterFlow);
+}
+void MainWindow::toggleWaterReflection() {
+	utils::toggle(this, ui->action_waterReflection,
+				  ui->groupBox_waterReflection);
+}
+void MainWindow::toggleWaterRefraction() {
+	utils::toggle(this, ui->action_refraction,
+				  ui->groupBox_waterRefraction);
+}
+void MainWindow::toggleWaterFog() {
+	utils::toggle(this, ui->action_fog,
+				  ui->groupBox_waterFog);
+}
+
 QString MainWindow::currentGameMaterialDir() {
 
 	QString game = getCurrentGame();
@@ -4728,7 +4913,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" does not exist!")
+				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -4766,7 +4951,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf + ".vtf" ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" does not exist!")
+				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -4895,6 +5080,9 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 	case Phong:
 	case PhongBrush:
 		return phong::hasChanged(groupBox, ui);
+
+	case TreeSway:
+		return treesway::hasChanged(ui);
 
 	case Reflection:
 
@@ -5364,6 +5552,12 @@ void MainWindow::loadTintColor(const QString &value, const QString &command,
 		ui->horizontalSlider_selfIllumTint->initialize(colorField, parsedColor);
 	else if(command == "$phongtint")
 		ui->horizontalSlider_phongTint->initialize(colorField, parsedColor);
+	else if(command == "$fogcolor")
+		ui->horizontalSlider_waterFogColor->initialize(colorField, parsedColor);
+	else if(command == "$reflecttint")
+		ui->horizontalSlider_waterReflectColor->initialize(colorField, parsedColor);
+	else if(command == "$refracttint")
+		ui->horizontalSlider_waterRefractColor->initialize(colorField, parsedColor);
 }
 
 void MainWindow::loadScrollParameter( QString value, const QString& command, uint index )
@@ -5487,7 +5681,7 @@ void MainWindow::refreshRequested() {
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
 
-			X( "Parsing Proxies caused an error: " + tmp2 )
+			Info( "Parsing Proxies caused an error: " + tmp2 )
 		}
 
 	} else {
@@ -6017,18 +6211,6 @@ void MainWindow::gameChanged( const QString& game )
 		mLoading = false;
 }
 
-/*QVector<Shader::Groups> Shader::transformGroups( Shader::Shaders shader, QVector<Groups> groups )
-{
-	QVector<Shader::Groups> finalGroups;
-
-	for (int i = 0; i < groups.count(); ++i) {
-
-		finalGroups.push_back( static_cast<Shader::Groups>(gAllowedShaderGroups.value(shader).at(groups.at(i))));
-	}
-
-	return finalGroups;
-}*/
-
 
 #define UNCHECK_MENU(menu) { \
 	for( int i = 0; i < menu->actions().count(); ++i ) \
@@ -6112,6 +6294,8 @@ void MainWindow::shaderChanged()
 			case PhongBrush:
 				phong::resetAction(ui);
 				break;
+			case TreeSway:
+				treesway::resetAction(ui);break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6212,6 +6396,12 @@ void MainWindow::shaderChanged()
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 
+			ui->action_treeSway->setEnabled( shader == "VertexLitGeneric" );
+			ui->action_treeSway->setVisible( shader == "VertexLitGeneric" );
+
+			ui->action_decal->setEnabled( shader == "VertexLitGeneric" );
+			ui->action_decal->setVisible( shader == "VertexLitGeneric" );
+
 			if(shader != "LightmappedGeneric")
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
@@ -6293,13 +6483,16 @@ void MainWindow::shaderChanged()
 				ui->action_color->setChecked(false);
 				ui->groupBox_color->setVisible(false);
 
+				ui->action_reflection->setChecked(false);
+				ui->groupBox_shadingReflection->setVisible(false);
+
 				ui->action_other->setChecked(false);
 				ui->groupBox_textureOther->setVisible(false);
 
 				//----------------------------------------------------------------------------------------//
 
 				ui->menu_texture->setDisabled(true);
-				ui->menu_shading->setDisabled(true);
+				ui->menu_shading->setEnabled(true);
 				ui->menu_water->setEnabled(true);
 
 			} else { // Transparency, Detail, Color, Other allowed
@@ -6357,6 +6550,13 @@ void MainWindow::shaderChanged()
 
 				ui->action_selfIllumination->setVisible(true);
 				ui->action_selfIllumination->setEnabled(true);
+			}
+
+			if (shader == "Water") {
+
+				ui->menu_shading->setEnabled(true);
+				ui->action_reflection->setVisible(true);
+				ui->action_reflection->setEnabled(true);
 			}
 
 			ui->groupBox_refract->setVisible(shader == "Refract");
@@ -6440,6 +6640,8 @@ void MainWindow::shaderChanged()
 	ui->action_rimLight->setVisible( ui->action_rimLight->isEnabled() );
 
 	ui->action_normalBlend->setVisible( ui->action_normalBlend->isEnabled() );
+	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
+	ui->action_decal->setVisible( ui->action_decal->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -6454,7 +6656,15 @@ void MainWindow::shaderChanged()
 
 	phongBrushAction->setVisible( ui->action_phongBrush->isEnabled() && ui->menu_shading->isEnabled() );
 
+	waterFlowmapAction->setVisible( ui->action_flowmap->isEnabled() && ui->menu_water->isEnabled() );
+	waterReflectionAction->setVisible( ui->action_waterReflection->isEnabled() && ui->menu_water->isEnabled() );
+	waterRefractionAction->setVisible( ui->action_refraction->isEnabled() && ui->menu_water->isEnabled() );
+	waterFogAction->setVisible( ui->action_fog->isEnabled() && ui->menu_water->isEnabled() );
+
 	updateWindowTitle();
+
+    if (mSettings->autoRefresh)
+        refreshRequested();
 
 	if (!wasLoading) mLoading = false;
 }
@@ -6673,6 +6883,7 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -6708,30 +6919,23 @@ void MainWindow::readSettings()
 	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
+	defaultShaderFile.open(QFile::ReadOnly | QFile::Text);
 
-	if( defaultShaderFile.open(QFile::ReadOnly | QFile::Text) )
-	{
-		while( !defaultShaderFile.atEnd() )
+	while (!defaultShaderFile.atEnd()) {
+		QString line = defaultShaderFile.readLine();
+		QStringList options( line.split("?") );
+
+		QVector< Shader::Groups > groups;
+
+		for( int i = 2; i < options.count(); ++i )
 		{
-			QString line = defaultShaderFile.readLine();
-			QStringList options( line.split("?") );
-
-			QVector< Shader::Groups > groups;
-
-			for( int i = 2; i < options.count(); ++i )
-			{
-				groups.append( static_cast< Shader::Groups >( options.at(i).toInt() ));
-			}
-
-			mSettings->defaultShaders.append( Shader( options.at(0), options.at(1) == "1", groups ));
+			groups.append( static_cast< Shader::Groups >( options.at(i).toInt() ));
 		}
 
-		defaultShaderFile.close();
+		mSettings->defaultShaders.append( Shader( options.at(0), options.at(1) == "1", groups ));
 	}
-	else
-	{
-		Q( "\":/files/defaultShaders\" was not found!" )
-	}
+
+	defaultShaderFile.close();
 
 
 	QStringList shaderList( mIniSettings->value("shaders").toString().split( "??", QString::SkipEmptyParts ));
@@ -6894,7 +7098,11 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			refreshRequested();
 			break;
 
+		case Settings::_RemoveSuffix:
+			break;
+
 		case Settings::_CustomShaders:
+			// TODO: Move into own function
 
 			QString currentShader = ui->comboBox_shader->currentText();
 
@@ -7114,6 +7322,12 @@ void MainWindow::browseVTF()
 
 	else if( caller->objectName() == "toolButton_bump2" )
 		browseVTF( "preview_bumpmap2", ui->lineEdit_bump2 );
+
+	else if( caller->objectName() == "toolButton_waterReflectTexture" )
+		browseVTF( "", ui->lineEdit_waterReflectTexture );
+
+	else if( caller->objectName() == "toolButton_decal" )
+		browseVTF( "", ui->lineEdit_decal );
 }
 
 void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
@@ -7289,9 +7503,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 				if(mVMTLoaded) {
 
-					QString newFile = fileName.section("/", -1).section(".", 0, 0);
+					QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
 					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 					QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
 
 					if( QFile::exists(dir + newFile + ".vtf") ) {
 						MsgBox msgBox(this);
@@ -7323,7 +7538,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->objectName = objectName;
 						conversionThread->relativeFilePath = relativeFilePath;
 						conversionThread->newFileName = "";
-						conversionThread->outputParameter = "-output \"" + dir + "\"";
+						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						conversionThread->moveFile = true;
+						conversionThread->newFile = newFile;
+						conversionThread->newFileDir = dir;
 						conversionThread->start();
 
 					lineEdit->setText(relativeFilePath);
@@ -7332,7 +7550,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 				} else {
 
 					QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
-					outputFile = outputFile.left( outputFile.indexOf('.') );
+					outputFile = removeSuffix(outputFile.left( outputFile.indexOf('.') ));
 
 					texturesToCopy.insert(lineEdit, outputFile);
 
@@ -7625,13 +7843,13 @@ void MainWindow::changedColor() {
 		changeColor(ui->color_refractTint);
 
 	else if( caller->objectName() == "toolButton_refractionTint" )
-		changeColor(ui->color_refractionTint);
+		changeColor(ui->color_refractionTint, ui->horizontalSlider_waterRefractColor);
 
 	else if( caller->objectName() == "toolButton_reflectionTint" )
-		changeColor(ui->color_reflectionTint);
+		changeColor(ui->color_reflectionTint, ui->horizontalSlider_waterReflectColor);
 
 	else if( caller->objectName() == "toolButton_fogTint" )
-		changeColor(ui->color_fogTint);
+		changeColor(ui->color_fogTint, ui->horizontalSlider_waterFogColor);
 
 	else if( caller->objectName() == "toolButton_color1" )
 		changeColor(ui->color_color1);
@@ -8061,6 +8279,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 		ui->checkBox_reflectEntities->setEnabled(enabled);
 		ui->checkBox_skybox->setEnabled(enabled);
+		ui->checkBox_reflect2dskybox->setEnabled(enabled);
+		ui->checkBox_reflectMarkedEntities->setEnabled(enabled);
+
+		ui->lineEdit_waterReflectTexture->setDisabled(enabled);
+		ui->toolButton_waterReflectTexture->setDisabled(enabled);
 
 	} else if( caller->objectName() == "checkBox_transparent" ) {
 
@@ -8340,8 +8563,6 @@ void MainWindow::hideParameterGroupboxes()
 	{
 		ui->groupBox_water->show();
 
-		if( !ui->checkBox_waterBottom->isChecked() )
-			ui->groupBox_waterRefraction->show();
 	}
 
 	UNCHECK_MENU( ui->menu_texture )
@@ -8383,8 +8604,8 @@ void MainWindow::refreshGameListSoft()
 		if( QFile::exists( tmp.absolutePath() + "/alien swarm/swarm/gameinfo.txt") )
 			mAvailableGames.insert("Alien Swarm", tmp.absolutePath() + "/alien swarm/swarm" );
 
-		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
-			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
+//		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
+//			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
 
 		if( QFile::exists( tmp.absolutePath() + "/counter-strike global offensive/csgo/gameinfo.txt") )
 			mAvailableGames.insert("Counter-Strike: Global Offensive", tmp.absolutePath() + "/counter-strike global offensive/csgo" );
@@ -8415,6 +8636,15 @@ void MainWindow::refreshGameListSoft()
 
 		if( QFile::exists( tmp.absolutePath() + "/portal/portal/gameinfo.txt") )
 			mAvailableGames.insert("Portal", tmp.absolutePath() + "/portal/portal");
+
+		if( QFile::exists( tmp.absolutePath() + "/dayofinfamy/doi/gameinfo.txt") )
+			mAvailableGames.insert("Day of Infamy", tmp.absolutePath() + "/dayofinfamy/doi");
+
+		if( QFile::exists( tmp.absolutePath() + "/insurgency2/insurgency/gameinfo.txt") )
+			mAvailableGames.insert("Insurgency", tmp.absolutePath() + "/insurgency2/insurgency");
+
+		if( QFile::exists( tmp.absolutePath() + "/black mesa/bms/gameinfo.txt") )
+			mAvailableGames.insert("Black Mesa", tmp.absolutePath() + "/black mesa/bms");
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -8468,8 +8698,8 @@ void MainWindow::refreshGameList() {
 		if( QFile::exists( tmp.absolutePath() + "/alien swarm/swarm/gameinfo.txt") )
 			mAvailableGames.insert("Alien Swarm", tmp.absolutePath() + "/alien swarm/swarm" );
 
-		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
-			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
+//		if( QFile::exists( tmp.absolutePath() + "/dota 2 beta/dota/gameinfo.txt") )
+//			mAvailableGames.insert("Dota 2", tmp.absolutePath() + "/dota 2 beta/dota" );
 
 		if( QFile::exists( tmp.absolutePath() + "/Counter-Strike Global Offensive/csgo/gameinfo.txt") )
 			mAvailableGames.insert("Counter-Strike: Global Offensive", tmp.absolutePath() + "/Counter-Strike Global Offensive/csgo" );
@@ -8500,6 +8730,15 @@ void MainWindow::refreshGameList() {
 
 		if( QFile::exists( tmp.absolutePath() + "/portal/portal/gameinfo.txt") )
 			mAvailableGames.insert("Portal", tmp.absolutePath() + "/portal/portal");
+
+		if( QFile::exists( tmp.absolutePath() + "/dayofinfamy/doi/gameinfo.txt") )
+			mAvailableGames.insert("Day of Infamy", tmp.absolutePath() + "/dayofinfamy/doi");
+
+		if( QFile::exists( tmp.absolutePath() + "/insurgency2/insurgency/gameinfo.txt") )
+			mAvailableGames.insert("Insurgency", tmp.absolutePath() + "/insurgency2/insurgency");
+
+		if( QFile::exists( tmp.absolutePath() + "/black mesa/bms/gameinfo.txt") )
+			mAvailableGames.insert("Black Mesa", tmp.absolutePath() + "/black mesa/bms");
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -8865,7 +9104,7 @@ void MainWindow::reconvertTexture()
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString newFile = fileName.section("/", -1).section(".", 0, 0);
+	QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
@@ -8884,7 +9123,10 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + dir + "\"";
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+		conversionThread->moveFile = true;
+		conversionThread->newFile = newFile;
+		conversionThread->newFileDir = dir;
 		conversionThread->start();
 
 	} else {
@@ -8903,6 +9145,28 @@ void MainWindow::reconvertTexture()
 		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 
 	lineEdit->setText(relativeFilePath);
+}
+
+QString MainWindow::removeSuffix( const QString fileName)
+{
+	QString newName = fileName;
+	if(mSettings->removeSuffix) {
+
+		if( fileName.endsWith("_diffuse") ){
+			newName.chop(8);
+
+		} else if(fileName.endsWith("_normal") ) {
+			newName.chop(7);
+			newName = newName + "n";
+
+		} else if(fileName.endsWith("_specular") ) {
+			newName.chop(9);
+			newName = newName + "s";
+		}
+	}
+
+	return newName;
+
 }
 
 void MainWindow::checkForUpdates()
@@ -9185,6 +9449,16 @@ void MainWindow::on_action_transparency_triggered(bool checked)
 void MainWindow::on_action_normalBlend_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_normalBlend)
+}
+
+void MainWindow::on_action_treeSway_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_treeSway)
+}
+
+void MainWindow::on_action_decal_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_textureDecal)
 }
 
 void MainWindow::on_action_detail_triggered(bool checked)

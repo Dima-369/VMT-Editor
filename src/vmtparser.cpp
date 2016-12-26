@@ -22,6 +22,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$basetexture4;$texture4_uvscale;$texture4_lumstart;$texture4_lumend;$texture4_blendstart;$texture4_blendend;$lumblendfactor4" );
 	mGroups.append( "$seamless_scale;$lightwarptexture;$reflectivity");
 	mGroups.append( "$detail;$detailblendmode;$detailscale;$detailblendfactor;$detailblendfactor2;$detailblendfactor3;$detailblendfactor4" );
+	mGroups.append( "$decaltexture;$decalblendmode" );
 	mGroups.append( "$blendmodulatetexture;$alpha;$translucent;$alphatest;$alphatestreference;$additive;$decal;$nocull" );
 
 	mGroups.append( "$envmap;$envmapmask;$normalmapalphaenvmapmask;$basealphaenvmapmask;$envmaptint;$envmapcontrast;$envmapsaturation;$envmaptint;$envmapfresnel;$envmapfresnelminmaxexp;$fresnelreflection;$envmaplightscale;$envmaplightscaleminmax;$envmapanisotropy;$envmapanisotropyscale" );
@@ -35,15 +36,16 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$abovewater;$forceexpensive;$forcecheap;$reflect2dskybox" );
 	mGroups.append( "$scroll1;$scroll2");
 	mGroups.append( "$flow_debug;$flowmap;$flow_noise_texture;$flow_normaluvscale;$flow_worlduvscale;$flow_uvscrolldistance;$flow_bumpstrength;$flow_noise_scale;$flow_timescale;$flow_timeintervalinseconds" );
-	mGroups.append( "$reflecttexture;$reflecttint;$reflectamount;$reflectentities;$reflectskyboxonly" );
+	mGroups.append( "$reflecttexture;$reflecttint;$reflectamount;$reflectentities;$reflectskyboxonly;$reflectonlymarkedentities" );
 	mGroups.append( "$refracttexture;$refract;$refracttinttexture;$refracttint;$refractamount;$bluramount;$refractblur" );
 	mGroups.append( "$fogenable;$fogcolor;$fogstart;$fogend;$flashlighttint;$lightmapwaterfog" );
 
 	mGroups.append( "$addbumpmaps;$bumpdetailscale1;$bumpdetailscale2;$bumptransform2" );
 	mGroups.append( "$basetexturetransform;$bumptransform" );
-	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright" );
+	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright;$disablecsmlookup" );
 	mGroups.append( "$color;$color2;$blendtintbybasealpha" );
 	mGroups.append( "$spriteorientation;$spriteorigin" );
+	mGroups.append( "$treesway;$treeswayheight;$treeswaystartheight;$treeswayradius;$treeswaystartradius;$treeswaystrength;$treeswayspeed;$treeswayfalloffexp;$treeswayscrumblestrength;$treeswayscrumblespeed;$treeswayscrumblefrequency;$treeswayscrumblefalloffexp;$treeswayspeedhighwindmultiplier;$treeswayspeedlerpstart;$treeswayspeedlerpend" );
 
 	mGroups.append( "%compilewater;%tooltexture;%keywords" );
 }
@@ -53,14 +55,15 @@ void VmtParser::setDirectory( const QString& directory )
 {
 	if( directory.isEmpty() )
 	{
-		X( "Parameter: \"directory\" is empty!\n" );
+		Info("Parameter: \"directory\" is empty!\n" );
 
 		mWorkingDirectory = "";
 	}
 	else
 	{
-		if( !QDir(directory).exists() )
-			Q( "Directory specified does not exist!" );
+		if (!QDir(directory).exists())
+			fatalError("Directory specified does not exist!");
+
 
 		if( directory.endsWith('/') )
 			mWorkingDirectory = directory;
@@ -274,7 +277,7 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 {
 	if( relativeFileName.isEmpty() )
 	{
-		X("\"relativeFileName\" is empty!")
+		Info("\"relativeFileName\" is empty!")
 	}
 	else
 	{
@@ -282,7 +285,7 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 
 		if( !vmtFile.open( QIODevice::WriteOnly | QIODevice::Text ))
 		{
-			X( "\"" + relativeFileName + "\" failed to be opened in WriteOnly mode!" );
+			Info("\"" + relativeFileName + "\" failed to be opened in WriteOnly mode!" );
 		}
 		else
 		{
@@ -302,7 +305,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 {
 	if( relativeFileName.isEmpty() )
 	{
-		X("relativeFileName\" is empty!")
+		Info("relativeFileName\" is empty!")
 	}
 	else
 	{
@@ -311,7 +314,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 		// QIODevice::Text:  Converting "\r\n" to "\n" (Not really needed)
 		if( !vmtFile.open(QIODevice::ReadOnly | QIODevice::Text) )
 		{
-			X( relativeFileName + "\" failed to be opened in ReadOnly mode!" );
+			Info(relativeFileName + "\" failed to be opened in ReadOnly mode!" );
 		}
 		else
 		{
@@ -362,7 +365,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 				if(expectingEOF)
 				{
-					X("Line " + Str(lineCount) + " (" + line + ": Expected end of file!")
+					Info("Line " + Str(lineCount) + " (" + line + ": Expected end of file!")
 					continue;
 				}
 
@@ -375,7 +378,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 					if(expectingShaderName)
 					{
-						X("Line " + Str(lineCount) + ": Expected shader name!")
+						Info("Line " + Str(lineCount) + ": Expected shader name!")
 					}
 					else if(expectingOpenBracket)
 					{
@@ -411,7 +414,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 					}
 					else
 					{
-						X("Line " + Str(lineCount) + ": Open bracket without a group name found!")
+						Info("Line " + Str(lineCount) + ": Open bracket without a group name found!")
 					}
 				}
 				else if( line == "}" )
@@ -439,7 +442,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 					}
 					else if(expectingOpenBracket)
 					{
-						X("Line " + Str(lineCount) + ": Expected open bracket!")
+						Info("Line " + Str(lineCount) + ": Expected open bracket!")
 					}
 				}
 				else
@@ -451,7 +454,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 						{
 							if( line.contains('{') || line.contains('}') )
 							{
-								X("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid shader name!")
+								Info("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid shader name!")
 							}
 
 							vmtEntry.shaderName = line;
@@ -461,7 +464,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 						}
 						else if(expectingOpenBracket)
 						{
-							X("Line " + Str(lineCount) + ": Expected open bracket!")
+							Info("Line " + Str(lineCount) + ": Expected open bracket!")
 						}
 						else
 						{
@@ -469,7 +472,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 							if( line.contains('{') || line.contains('}') )
 							{
-								X("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid sub group name!")
+								Info("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid sub group name!")
 							}
 
 							expectingOpenBracket = true;
@@ -481,7 +484,7 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 					{
 						if(expectingOpenBracket)
 						{
-							X("Line " + Str(lineCount) + ": Expected open bracket!")
+							Info("Line " + Str(lineCount) + ": Expected open bracket!")
 						}
 						else
 						{
@@ -507,11 +510,11 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 			if( subShaderBracketCounter != 0 )
 			{
-				X("ERROR: Unexpected end of shader group!")
+				Info("ERROR: Unexpected end of shader group!")
 			}
 			if( shaderBracketCounter != 0 )
 			{
-				X("ERROR: Unexpected end of file!")
+				Info("ERROR: Unexpected end of file!")
 			}
 
 			/////////////////////////////////////////////////////////////////////
@@ -788,11 +791,10 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 
 	bool expectingInitialSubGroupName = true;
 	bool expectingOpenBracket = false;
-	bool expectingEOF = false;
 
 	int subShaderBracketCounter = 0;
 
-	QRegExp reg("[a-zA-Z0-9_]+");
+	QRegExp reg("[a-zA-Z0-9_><]+");
 
 	QString tmp(subGroups);
 	QTextStream in( &tmp );
@@ -812,14 +814,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		if(line.isEmpty())
 			continue;
 
-		//////////////////////////////
-
-		if(expectingEOF)
-		{
-			return "Line " + Str(lineCount) + " (" + line + ": Expected end of file!";
-		}
-
-		//////////////////////////////
 
 		if( line == "{" )
 		{
@@ -868,7 +862,6 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 				if( subShaderBracketCounter == 0 )
 				{
 					inSubGroups = false;
-					expectingEOF = true;
 				}
 			}
 		}
@@ -925,10 +918,22 @@ QString VmtParser::parseSubGroups( const QString& subGroups, QString* output )
 		}
 	}
 
-	if( subShaderBracketCounter > 0 )
-		return Str(subShaderBracketCounter) + " unmatched open brackets found!";
-	else if( subShaderBracketCounter < 0 )
-		return Str(subShaderBracketCounter) + " unmatched closed brackets found!";
+	if (subShaderBracketCounter == 1)
+		return QString("Unmatched open bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter >= 2)
+		return QString("%1 unmatched open brackets found!")
+			.arg(subShaderBracketCounter);
+
+	// TODO: Can this even happen? It looks like errors caused by
+	// unmatched closed brackets are already handled by the
+	// "Expected open bracked found" check
+	if (subShaderBracketCounter == -1)
+		return QString("Unmatched closed bracket found!")
+			.arg(subShaderBracketCounter);
+	if (subShaderBracketCounter <= -2)
+		return QString("%1 unmatched closed brackets found!")
+			.arg(subShaderBracketCounter);
 
 	return "";
 }
@@ -976,7 +981,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 
 		if(expectingEOF)
 		{
-			X("Line " + Str(lineCount) + " (" + line + ": Expected end of file!")
+			Info("Line " + Str(lineCount) + " (" + line + ": Expected end of file!")
 			continue;
 		}
 
@@ -1005,14 +1010,14 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 			}
 			else
 			{
-				X("Line " + Str(lineCount) + ": Open bracket without a group name found!")
+				Info("Line " + Str(lineCount) + ": Open bracket without a group name found!")
 			}
 		}
 		else if( line == "}" )
 		{
 			if(expectingOpenBracket)
 			{
-				X("Line " + Str(lineCount) + ": Expected open bracket!")
+				Info("Line " + Str(lineCount) + ": Expected open bracket!")
 			}
 			else
 			{
@@ -1046,7 +1051,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 			{
 				if(expectingOpenBracket)
 				{
-					X("Line " + Str(lineCount) + ": Expected open bracket!")
+					Info("Line " + Str(lineCount) + ": Expected open bracket!")
 				}
 				else
 				{
@@ -1054,7 +1059,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 
 					if( line.contains('{') || line.contains('}') )
 					{
-						X("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid sub group name!")
+						Info("Line " + Str(lineCount) + ": \"" + line + "\" is not a valid sub group name!")
 					}
 
 					expectingOpenBracket = true;
@@ -1063,11 +1068,11 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 					{
 						if(inInsertBlock)
 						{
-							X("ERROR: Only one insert block is allowed per shader!")
+							Info("ERROR: Only one insert block is allowed per shader!")
 						}
 						else if(inSubBlock)
 						{
-							X("ERROR: Only one insert block is allowed per shader!")
+							Info("ERROR: Only one insert block is allowed per shader!")
 						}
 						else
 						{
@@ -1082,7 +1087,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 						}
 						else if(inShader)
 						{
-							X("ERROR: Patch shader block only allows one block named insert!")
+							Info("ERROR: Patch shader block only allows one block named insert!")
 						}
 					}
 				}
@@ -1091,7 +1096,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 			{
 				if(expectingOpenBracket)
 				{
-					X("Line " + Str(lineCount) + ": Expected open bracket!")
+					Info("Line " + Str(lineCount) + ": Expected open bracket!")
 				}
 				else
 				{
@@ -1109,7 +1114,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 						{
 							if( output.parameters.contains("include") )
 							{
-								X("ERROR: Only one include parameter is allowed within the Patch block!")
+								Info("ERROR: Only one include parameter is allowed within the Patch block!")
 							}
 							else
 							{
@@ -1118,7 +1123,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 						}
 						else
 						{
-							X("ERROR: Patch shader is only allowed to have one include parameter inside the Patch block!")
+							Info("ERROR: Patch shader is only allowed to have one include parameter inside the Patch block!")
 						}
 					}
 				}
@@ -1127,7 +1132,7 @@ VmtFile VmtParser::loadPatchVmt( QFile* file, qint64 pos, int startLine )
 	}
 
 	if( subShaderBracketCounter != 0 )
-		X("ERROR: Unexpected end of file!")
+		Info("ERROR: Unexpected end of file!")
 
 	/////////////////////////////////////////////////////////////////////
 

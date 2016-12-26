@@ -1,14 +1,16 @@
 QT += core gui opengl widgets network
 
 TEMPLATE = app
-
 CONFIG += c++11
 
 win32 {
   # for QJumpList
-  QT += winextras 
+  QT += winextras
   LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
-  RC_ICONS = app.ico
+  RC_FILE = app.rc
+
+  # we really need that VMT_Editor.exe
+  TARGET = "VMT_Editor"
 
   # copying required DLLs
   TARGET_CUSTOM_EXT = .exe
@@ -19,6 +21,8 @@ win32 {
       DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
   }
   QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+} else {
+  TARGET = "VMT Editor"
 }
 
 linux {
@@ -70,7 +74,8 @@ SOURCES += \
     src/utilities/window.cpp \
     src/user-interface/shading-reflection.cpp \
     src/utilities/strings.cpp \
-    src/utilities/version.cpp
+    src/utilities/version.cpp \
+    src/user-interface/treesway.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -115,7 +120,8 @@ HEADERS += \
     src/opengl/helpers.h \
     src/utilities/window.h \
     src/user-interface/shading-reflection.h \
-    src/utilities/version.h
+    src/utilities/version.h \
+    src/user-interface/treesway.h
 
 FORMS += \
     ui/mainwindow.ui \

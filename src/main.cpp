@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 
 	QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
 
-	// this ensures that we always set the working directory to the path
-	// of the executable, so we do not mess up with Cache
-	if( !QDir::setCurrent( QFileInfo(argv[0]).path() ) )
-		Q( "Failed to set the current working directory!" )
+	// this ensures that we are always working in the executable path,
+	// so the Cache directory does not end up somewhere else
+	if (!QDir::setCurrent(a.applicationDirPath()))
+		fatalError("Failed to set the current working directory!");
 
 	QString fileToOpen;
 	if(argc == 2) {

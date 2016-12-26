@@ -1,5 +1,12 @@
 #include "utilities.h"
 
+void fatalError(const QString& msg)
+{
+	qDebug() << "Fatal error: " << QString(msg);
+	MsgBox::warning(NULL, "Fatal error occurred!", msg);
+	exit(1);
+}
+
 bool isWhitespace( const QString& input )
 {
 	static const QRegExp reg("\\s+");

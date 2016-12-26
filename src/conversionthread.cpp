@@ -21,9 +21,7 @@ void ConversionThread::run()
 	if (output.endsWith("1/1 files completed.")) {
 		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
-		if (!objectName.isEmpty()) {
-			emit updateTextureOnUi(objectName, relativeFilePath);
-		}
+
 
 		if (newFileName != "") {
 			QDir moveDir( QDir::currentPath() + "/Cache/Move/" );
@@ -39,6 +37,21 @@ void ConversionThread::run()
 
 				Error("There was an error renaming \"" + toRename + "\" to \"" + newFileName + "\"")
 			}
+		}
+
+		if(moveFile) {
+			QString toRename = fileName.section("/", -1).section(".", 0, 0);
+			toRename += ".vtf";
+
+			if( !QFile::rename(QDir::currentPath() + "\\Cache\\Move\\" + toRename,
+							   newFileDir + newFile + ".vtf") ) {
+
+				Error("There was an error moving\"" + toRename + "\"");
+			}
+		}
+
+		if (!objectName.isEmpty()) {
+			emit updateTextureOnUi(objectName, relativeFilePath);
 		}
 
 

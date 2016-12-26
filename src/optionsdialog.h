@@ -19,6 +19,7 @@ struct Settings
 		_RecentFileListStyle,
 		_RecentFileEntryStyle,
 		_AutoRefresh,
+		_RemoveSuffix,
 		//----------------------------------------------------------------------------------------//
 		_ParameterSortStyle,
 		_ShowShaderNameInTab,
@@ -52,6 +53,8 @@ struct Settings
 	bool showShaderNameInWindowTitle;
 
     bool autoRefresh;
+
+	bool removeSuffix;
 
 	RecentFileListStyle recentFileListStyle;
 

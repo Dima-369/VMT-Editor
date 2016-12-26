@@ -82,8 +82,7 @@ void EditShaderDialog::parseSettings( const QVector< Shader >& settingShaders, c
 void EditShaderDialog::loadAllowedShaderGroups()
 {
 	QFile file(":/files/allowedShaderGroups");
-	if( !file.open(QFile::ReadOnly | QFile::Text) )
-		Q("Could not open \":/files/allowedShaderGroups\"!")
+	file.open(QFile::ReadOnly | QFile::Text);
 
 	int count = 0;
 	while( !file.atEnd() )

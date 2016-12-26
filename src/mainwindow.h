@@ -72,7 +72,8 @@ public:
 		Refract,
 		Sprite,
 		UnlitTwoTexture,
-		NormalBlend
+		NormalBlend,
+		TreeSway
 	};
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
@@ -199,6 +200,11 @@ private:
 
 	QAction* miscAction;
 
+	QAction* waterFlowmapAction;
+	QAction* waterReflectionAction;
+	QAction* waterRefractionAction;
+	QAction* waterFogAction;
+
 	//----------------------------------------------------------------------------------------//
 
 	double fresnelYStart;
@@ -253,6 +259,8 @@ private:
 	void browseVTF( const QString& objectName, QLineEdit* lineEdit );
 
 	bool transformsModified( uint index );
+
+	QString removeSuffix( const QString fileName);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -409,6 +417,11 @@ private slots:
 	void toggleReflection();
 	void toggleSelfIllumination();
 	void toggleMisc();
+	//--------------------------//
+	void toggleFlowmap();
+	void toggleWaterReflection();
+	void toggleWaterRefraction();
+	void toggleWaterFog();
 
 	void on_action_baseTexture2_triggered(bool checked);
 	void on_action_transparency_triggered(bool checked);
@@ -435,6 +448,8 @@ private slots:
 	void on_action_water_triggered(bool checked);
 	void on_action_refract_2_triggered(bool checked);
 	void on_action_normalBlend_triggered(bool checked);
+	void on_action_treeSway_triggered(bool checked);
+	void on_action_decal_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------------------//

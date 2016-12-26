@@ -45,3 +45,4 @@ ShadowModel
 Empty
 
 Proxies
+GPU<2
