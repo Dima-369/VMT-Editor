@@ -1034,7 +1034,7 @@ QGroupBox::title {
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_parameters">
        <attribute name="title">
@@ -16905,8 +16905,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>895</width>
+             <height>753</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
