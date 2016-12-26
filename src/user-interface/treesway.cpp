@@ -5,10 +5,6 @@
 #include "logging/logging.h"
 #include "utilities/strings.h"
 
-utils::Preview treesway::toggle(Ui::MainWindow *ui)
-{
-}
-
 bool treesway::hasChanged(Ui::MainWindow *ui)
 {
 	// simplifying default checks
@@ -20,14 +16,27 @@ bool treesway::hasChanged(Ui::MainWindow *ui)
 	#define END false);
 
 	START
-
+	VAL(ui->spinBox_treeswayHeight, "0")
+	VAL(ui->spinBox_treeswayRadius, "0")
+	VAL(ui->doubleSpinBox_treeswayStartHeight, "0.0")
+	VAL(ui->doubleSpinBox_treeswayStartRadius, "0.0")
+	VAL(ui->spinBox_treeswayFalloff, "0")
+	VAL(ui->spinBox_treeswaySpeedLerpEnd, "0")
+	VAL(ui->spinBox_treeswaySpeedLerpStart, "0")
+	VAL(ui->doubleSpinBox_treeswayStrength, "0.0")
+	VAL(ui->doubleSpinBox_treeswaySpeed, "0.0")
+	VAL(ui->doubleSpinBox_treeswayspeedHighWind, "0.0")
+	VAL(ui->doubleSpinBox_treeswayScrumbleStrength, "0.0")
+	VAL(ui->doubleSpinBox_treeswayScrumbleSpeed, "0.0")
+	VAL(ui->spinBox_treeswayScrumbleFrequency, "0")
+	VAL(ui->spinBox_treeswayScrumbleFalloff, "0")
 	END
 }
 
 void treesway::resetAction(Ui::MainWindow *ui)
 {
-	ui->groupBox_normalBlend->setVisible(false);
-	ui->action_normalBlend->setChecked(false);
+	ui->groupBox_treeSway->setVisible(false);
+	ui->action_treeSway->setChecked(false);
 }
 
 void treesway::resetWidgets(Ui::MainWindow *ui)
@@ -37,6 +46,7 @@ void treesway::resetWidgets(Ui::MainWindow *ui)
 
 	ui->doubleSpinBox_treeswayStartHeight->setValue(0.0);
 	ui->doubleSpinBox_treeswayStartRadius->setValue(0.0);
+	ui->spinBox_treeswayFalloff->setValue(0);
 
 	ui->spinBox_treeswaySpeedLerpEnd->setValue(0);
 	ui->spinBox_treeswaySpeedLerpStart->setValue(0);
@@ -79,9 +89,9 @@ void treesway::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	// PREP opens an if
 	#define PREP(p) \
 		if (vmt->parameters.contains(p)) { \
-			if (!vmt->state.normalBlendEnabled) \
-				ERROR(p " only works with $addbumpmaps") \
-			vmt->state.showNormalBlend = true;
+			if (!vmt->state.treeSwayEnabled) \
+				ERROR(p " only works with $treesway") \
+			vmt->state.showTreeSway = true;
 
 	#define DOUBLE(p, def, widget) { \
 		PREP(p) \
@@ -99,23 +109,23 @@ void treesway::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 			if (r.notDefault) widget->setValue(r.value); \
 		} \
 	}
-	initializeNormalBlend(ui, vmt);
+	initializeTreesway(ui, vmt);
 
-	INT("$treeswayheight", "0", ui->spinBox_treeswayHeight)
-	INT("$treeswayradius", "0", ui->spinBox_treeswayRadius)
+	INT("$treeswayheight", 0, ui->spinBox_treeswayHeight)
+	INT("$treeswayradius", 0, ui->spinBox_treeswayRadius)
+	INT("$treeswayspeedlerpend", 0, ui->spinBox_treeswaySpeedLerpEnd)
+	INT("$treeswayspeedlerpstart", 0, ui->spinBox_treeswaySpeedLerpStart)
+	INT("$treeswayscrumblefrequency", 0, ui->spinBox_treeswayScrumbleFrequency)
+	INT("$treeswayfalloffexp", 0, ui->spinBox_treeswayFalloff)
+	INT("$treeswayscrumblefalloffexp", 0, ui->spinBox_treeswayScrumbleFalloff)
 
-	INT("$treeswayspeedlerpend", "0", ui->spinBox_treeswaySpeedLerpEnd)
-	INT("$treeswayspeedlerpstart", "0", ui->spinBox_treeswaySpeedLerpStart)
-	INT("$treeswayscrumblefrequency", "0", ui->spinBox_treeswayScrumbleFrequency)
-	INT("$treeswayscrumblefalloffexp", "0", ui->spinBox_treeswayScrumbleFalloff)
-
-	DOUBLE("$treeswaystartheight", "0", ui->doubleSpinBox_treeswayStartHeight)
-	DOUBLE("$treeswaystartradius", "0", ui->doubleSpinBox_treeswayStartRadius)
-	DOUBLE("$treeswaystrength", "0", ui->doubleSpinBox_treeswayStrength)
-	DOUBLE("$treeswayspeedhighwindmultiplier", "0", ui->doubleSpinBox_treeswayspeedHighWind)
-	DOUBLE("$treeswayscrumblestrength", "0", ui->doubleSpinBox_treeswayScrumbleStrength)
-	DOUBLE("$treeswayspeed", "0", ui->doubleSpinBox_treeswaySpeed)
-	DOUBLE("$treeswayscrumblespeed", "0", ui->doubleSpinBox_treeswayScrumbleSpeed)
+	DOUBLE("$treeswaystartheight", "0.0", ui->doubleSpinBox_treeswayStartHeight)
+	DOUBLE("$treeswaystartradius", "0.0", ui->doubleSpinBox_treeswayStartRadius)
+	DOUBLE("$treeswaystrength", "0.0", ui->doubleSpinBox_treeswayStrength)
+	DOUBLE("$treeswayspeedhighwindmultiplier", "0.0", ui->doubleSpinBox_treeswayspeedHighWind)
+	DOUBLE("$treeswayscrumblestrength", "0.0", ui->doubleSpinBox_treeswayScrumbleStrength)
+	DOUBLE("$treeswayspeed", "0.0", ui->doubleSpinBox_treeswaySpeed)
+	DOUBLE("$treeswayscrumblespeed", "0.0", ui->doubleSpinBox_treeswayScrumbleSpeed)
 
 
 }

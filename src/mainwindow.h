@@ -72,7 +72,8 @@ public:
 		Refract,
 		Sprite,
 		UnlitTwoTexture,
-		NormalBlend
+		NormalBlend,
+		TreeSway
 	};
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
@@ -447,6 +448,7 @@ private slots:
 	void on_action_water_triggered(bool checked);
 	void on_action_refract_2_triggered(bool checked);
 	void on_action_normalBlend_triggered(bool checked);
+	void on_action_treeSway_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------------------//

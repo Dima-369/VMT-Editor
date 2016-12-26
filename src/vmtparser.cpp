@@ -41,9 +41,10 @@ VmtParser::VmtParser( QListWidget* logger ) :
 
 	mGroups.append( "$addbumpmaps;$bumpdetailscale1;$bumpdetailscale2;$bumptransform2" );
 	mGroups.append( "$basetexturetransform;$bumptransform" );
-	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright" );
+	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright;$disablecsmlookup" );
 	mGroups.append( "$color;$color2;$blendtintbybasealpha" );
 	mGroups.append( "$spriteorientation;$spriteorigin" );
+	mGroups.append( "$treesway;$treeswayheight;$treeswaystartheight;$treeswayradius;$treeswaystartradius;$treeswaystrength;$treeswayspeed;$treeswayfalloffexp;$treeswayscrumblestrength;$treeswayscrumblespeed;$treeswayscrumblefrequency;$treeswayscrumblefalloffexp;$treeswayspeedhighwindmultiplier;$treeswayspeedlerpstart;$treeswayspeedlerpend" );
 
 	mGroups.append( "%compilewater;%tooltexture;%keywords" );
 }

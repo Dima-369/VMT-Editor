@@ -270,6 +270,14 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_reflectionAmount->setDoubleSlider(ui->horizontalSlider_waterReflectAmount, 2.0);
 	ui->doubleSpinBox_refractionAmount->setDoubleSlider(ui->horizontalSlider_waterRefractAmount, 2.0);
 
+	ui->doubleSpinBox_treeswayStartHeight->setDoubleSlider(ui->horizontalSlider_treeswayStartHeight);
+	ui->doubleSpinBox_treeswayStartRadius->setDoubleSlider(ui->horizontalSlider_treeswayStartRadius);
+	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 4.0);
+	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 4.0);
+	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 4.0);
+	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 4.0);
+	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 4.0);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
@@ -1714,6 +1722,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
+	treesway::parseParameters(ui, &vmt);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1937,6 +1946,14 @@ void MainWindow::parseVMT( VmtFile vmt )
 	{
 		if( loadBoolParameter( value, "$nolod") )
 			ui->checkBox_noLod->setChecked(true);
+
+		showMiscellaneous = true;
+	}
+
+	if( !( value = vmt.parameters.take("$disablecsmlookup") ).isEmpty() )
+	{
+		if( loadBoolParameter( value, "$disablecsmlookup") )
+			ui->checkBox_disableCsmLookup->setChecked(true);
 
 		showMiscellaneous = true;
 	}
@@ -3233,6 +3250,10 @@ void MainWindow::parseVMT( VmtFile vmt )
 		ui->action_normalBlend->trigger();
 	}
 
+	if(vmt.state.showTreeSway) {
+		ui->action_treeSway->trigger();
+	}
+
 	if(showShadingReflection)
 		ui->action_reflection->trigger();
 
@@ -3695,6 +3716,57 @@ VmtFile MainWindow::makeVMT()
 
 	//---------------------------------------------------------------------------------------//
 
+	if( !ui->groupBox_treeSway->isHidden() )
+	{
+		vmtFile.parameters.insert( "$treesway", "1" );
+
+		if( ui->spinBox_treeswayHeight->value() != 0)
+			vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
+
+		if( ui->spinBox_treeswayRadius->value() != 0)
+			vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
+
+		if( ui->spinBox_treeswaySpeedLerpEnd->value() != 0)
+			vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
+
+		if( ui->spinBox_treeswaySpeedLerpStart->value() != 0)
+			vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
+
+		if( ui->spinBox_treeswayScrumbleFrequency->value() != 0)
+			vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
+
+		if( ui->spinBox_treeswayFalloff->value() != 0)
+			vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
+
+		if( ui->spinBox_treeswayScrumbleFalloff->value() != 0)
+			vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
+
+
+
+		if( ui->doubleSpinBox_treeswayStartHeight->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
+
+		if( ui->doubleSpinBox_treeswayStartRadius->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
+
+		if( ui->doubleSpinBox_treeswayStrength->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
+
+		if( ui->doubleSpinBox_treeswayspeedHighWind->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
+
+		if( ui->doubleSpinBox_treeswayScrumbleStrength->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
+
+		if( ui->doubleSpinBox_treeswaySpeed->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
+
+		if( ui->doubleSpinBox_treeswayScrumbleSpeed->value() != 0.0 )
+			vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
+	}
+
+	//---------------------------------------------------------------------------------------//
+
 	if( !ui->groupBox_misc->isHidden() )
 	{
 		if( ui->checkBox_model->isEnabled() && ui->checkBox_model->isChecked() )
@@ -3721,6 +3793,8 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_noFullBright->isChecked() )
 			vmtFile.parameters.insert( "$no_fullbright", "1" );
 
+		if( ui->checkBox_disableCsmLookup->isChecked() )
+			vmtFile.parameters.insert( "$disablecsmlookup", "1" );
 
 		if( !ui->lineEdit_keywords->text().trimmed().isEmpty() )
 			vmtFile.parameters.insert( "%keywords", ui->lineEdit_keywords->text().trimmed() );
@@ -4270,6 +4344,7 @@ void MainWindow::resetWidgets() {
 
 	phong::resetWidgets(ui);
 	normalblend::resetWidgets(ui);
+	treesway::resetWidgets(ui);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4956,6 +5031,9 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 	case Phong:
 	case PhongBrush:
 		return phong::hasChanged(groupBox, ui);
+
+	case TreeSway:
+		return treesway::hasChanged(ui);
 
 	case Reflection:
 
@@ -6167,6 +6245,8 @@ void MainWindow::shaderChanged()
 			case PhongBrush:
 				phong::resetAction(ui);
 				break;
+			case TreeSway:
+				treesway::resetAction(ui);break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6266,6 +6346,12 @@ void MainWindow::shaderChanged()
 			ui->action_normalBlend->setVisible( shader == "LightmappedGeneric" );
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
+
+			ui->action_treeSway->setEnabled( shader == "VertexLitGeneric" );
+			ui->action_treeSway->setVisible( shader == "VertexLitGeneric" );
+
+			ui->action_decal->setEnabled( shader == "VertexLitGeneric" );
+			ui->action_decal->setVisible( shader == "VertexLitGeneric" );
 
 			if(shader != "LightmappedGeneric")
 				ui->groupBox_normalBlend->setVisible(false);
@@ -6505,6 +6591,7 @@ void MainWindow::shaderChanged()
 	ui->action_rimLight->setVisible( ui->action_rimLight->isEnabled() );
 
 	ui->action_normalBlend->setVisible( ui->action_normalBlend->isEnabled() );
+	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -9291,6 +9378,11 @@ void MainWindow::on_action_transparency_triggered(bool checked)
 void MainWindow::on_action_normalBlend_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_normalBlend)
+}
+
+void MainWindow::on_action_treeSway_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_treeSway)
 }
 
 void MainWindow::on_action_detail_triggered(bool checked)
