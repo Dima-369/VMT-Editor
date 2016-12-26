@@ -10,6 +10,7 @@ win32 {
   QT += winextras 
   LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
   RC_FILE = app.rc
+  TARGET = "VMT_Editor"
 
   # copying required DLLs
   TARGET_CUSTOM_EXT = .exe
