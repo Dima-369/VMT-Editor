@@ -1,15 +1,15 @@
 QT += core gui opengl widgets network
 
 TEMPLATE = app
-TARGET = "VMT Editor"
-
 CONFIG += c++11
 
 win32 {
   # for QJumpList
-  QT += winextras 
+  QT += winextras
   LIBS += -lgdi32 -lcomdlg32 -lopengl32 -lglu32
   RC_FILE = app.rc
+
+  # we really need that VMT_Editor.exe
   TARGET = "VMT_Editor"
 
   # copying required DLLs
@@ -21,6 +21,8 @@ win32 {
       DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
   }
   QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
+} else {
+  TARGET = "VMT Editor"
 }
 
 linux {
