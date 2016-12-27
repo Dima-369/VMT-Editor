@@ -6295,7 +6295,8 @@ void MainWindow::shaderChanged()
 				phong::resetAction(ui);
 				break;
 			case TreeSway:
-				treesway::resetAction(ui);break;
+				treesway::resetAction(ui);
+				break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6339,6 +6340,9 @@ void MainWindow::shaderChanged()
 			ALLOW_MENU(ui->menu_water)
 
 		} else {
+
+			const auto isVertexLitGeneric =
+				(shader == "VertexLitGeneric");
 
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
@@ -6396,15 +6400,19 @@ void MainWindow::shaderChanged()
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 
-			ui->action_treeSway->setEnabled( shader == "VertexLitGeneric" );
-			ui->action_treeSway->setVisible( shader == "VertexLitGeneric" );
+			ui->action_treeSway->setVisible(isVertexLitGeneric);
+			ui->action_decal->setVisible(isVertexLitGeneric);
+			if (!isVertexLitGeneric) {
+				ui->action_treeSway->setChecked(false);
+				ui->action_decal->setChecked(false);
+				ui->groupBox_treeSway->setVisible(false);
+				ui->groupBox_textureDecal->setVisible(false);
+			}
 
-			ui->action_decal->setEnabled( shader == "VertexLitGeneric" );
-			ui->action_decal->setVisible( shader == "VertexLitGeneric" );
-
-			if(shader != "LightmappedGeneric")
+			if(shader != "LightmappedGeneric") {
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
+			}
 
 			//----------------------------------------------------------------------------------------//
 
@@ -6432,7 +6440,6 @@ void MainWindow::shaderChanged()
 
 			// Base Texture not allowed
 			if (shader == "Refract" || shader == "UnlitTwoTexture" || shader == "Water") {
-
 				ui->action_baseTexture->setChecked(false);
 				ui->groupBox_baseTexture->setVisible(false);
 
