@@ -6891,6 +6891,7 @@ void MainWindow::readSettings()
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
+	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -7106,6 +7107,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_RemoveSuffix:
+			break;
+
+		case Settings::_RemoveAlpha:
 			break;
 
 		case Settings::_CustomShaders:
@@ -7497,6 +7501,48 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			} else {
 
 				// Image files, fileType != ".vtf"
+				bool noAlpha = true;
+
+				if( lineEdit == ui->lineEdit_diffuse ) {
+					if (ui->checkBox_basealpha->isChecked() ||
+						ui->groupBox_selfIllumination->isVisible() ||
+						ui->checkBox_alphaTest->isChecked() ||
+						ui->checkBox_transparent->isChecked() ||
+						ui->checkBox_blendTint->isChecked() ||
+						ui->checkBox_phongBaseAlpha->isChecked() ||
+						ui->checkBox_exponentBaseAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_bumpmap ) {
+					if (ui->checkBox_normalalpha->isChecked() ||
+						ui->groupBox_phong->isVisible() ||
+						ui->checkBox_phongNormalAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse2 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse3 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse4 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse ) {
+					noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse2 ) {
+					noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_specmap ) {
+					if (ui->checkBox_envmapAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_decal )
+					noAlpha = false;
 
 				if( texturesToCopy.contains(lineEdit) ) {
 
@@ -7545,7 +7591,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->objectName = objectName;
 						conversionThread->relativeFilePath = relativeFilePath;
 						conversionThread->newFileName = "";
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						if(noAlpha && mSettings->removeAlpha)
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+						else
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 						conversionThread->moveFile = true;
 						conversionThread->newFile = newFile;
 						conversionThread->newFileDir = dir;
@@ -7571,7 +7620,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileName;
 						conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						if(noAlpha && mSettings->removeAlpha)
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+						else
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 						conversionThread->start();
 
 					fileName.chop(4);
@@ -9078,20 +9130,44 @@ void MainWindow::reconvertTexture()
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+	bool noAlpha = true;
 	QString preview;
 
-	if( objectName == "lineEdit_diffuse" )
+	if( objectName == "lineEdit_diffuse" ) {
 		preview = "preview_basetexture1";
-	else if( objectName == "lineEdit_bumpmap" )
+		if (ui->checkBox_basealpha->isChecked() ||
+			ui->groupBox_selfIllumination->isVisible() ||
+			ui->checkBox_alphaTest->isChecked() ||
+			ui->checkBox_transparent->isChecked() ||
+			ui->checkBox_blendTint->isChecked() ||
+			ui->checkBox_phongBaseAlpha->isChecked() ||
+			ui->checkBox_exponentBaseAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_bumpmap" ) {
 		preview = "preview_bumpmap1";
-	else if( objectName == "lineEdit_diffuse2" )
+		if (ui->checkBox_normalalpha->isChecked() ||
+			ui->groupBox_phong->isVisible() ||
+			ui->checkBox_phongNormalAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_diffuse2" ) {
 		preview = "preview_basetexture2";
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_bumpmap2" )
 		preview = "preview_bumpmap2";
-	else if( objectName == "lineEdit_diffuse3" )
+	else if( objectName == "lineEdit_diffuse3" ) {
 		preview = "preview_basetexture3";
-	else if( objectName == "lineEdit_diffuse4" )
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_diffuse4" ) {
 		preview = "preview_basetexture4";
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_detail" )
 		preview = "preview_detail";
 	else if( objectName == "lineEdit_refractNormalMap" )
@@ -9100,12 +9176,22 @@ void MainWindow::reconvertTexture()
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_waterNormalMap" )
 		preview = "preview_bumpmap1";
-	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" )
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" ) {
 		preview = "preview_basetexture1";
-	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" )
+		noAlpha = false;
+	}
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" ) {
 		preview = "preview_basetexture2";
+		noAlpha = false;
+	}
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_specmap" ) {
+		if (ui->checkBox_envmapAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_decal" )
+		noAlpha = false;
 
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
@@ -9130,7 +9216,10 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+		if (noAlpha && mSettings->removeAlpha)
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+		else
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;

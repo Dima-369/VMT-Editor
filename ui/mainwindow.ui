@@ -1309,7 +1309,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3238</y>
+             <y>-2973</y>
              <width>880</width>
              <height>5052</height>
             </rect>
@@ -3302,11 +3302,17 @@ QGroupBox::title {
                      <bold>false</bold>
                     </font>
                    </property>
+                   <property name="toolTip">
+                    <string>$basetexture</string>
+                   </property>
                    <property name="text">
                     <string>Diffuse:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="openExternalLinks">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
@@ -16908,8 +16914,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>895</width>
+             <height>753</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">

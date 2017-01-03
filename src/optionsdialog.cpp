@@ -41,6 +41,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_removeSuffix->setChecked( settings->removeSuffix );
 
+	ui->checkBox_removeAlpha->setChecked( settings->removeAlpha );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -201,6 +203,22 @@ void OptionsDialog::saveSettings()
 			mSettings->removeSuffix = false;
 			mIniSettings->setValue("removeSuffix", false);
 			emit optionChanged(Settings::_RemoveSuffix, "0");
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+
+	if (ui->checkBox_removeAlpha->isChecked()) {
+		if (!mSettings->removeAlpha) {
+			mSettings->removeAlpha = true;
+			mIniSettings->setValue("removeAlpha", true);
+			emit optionChanged(Settings::_RemoveAlpha, "1");
+		}
+	} else {
+		if(mSettings->removeAlpha) {
+			mSettings->removeAlpha = false;
+			mIniSettings->setValue("removeAlpha", false);
+			emit optionChanged(Settings::_RemoveAlpha, "0");
 		}
 	}
 
