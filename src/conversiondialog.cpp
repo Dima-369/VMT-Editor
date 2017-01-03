@@ -118,7 +118,6 @@ void ConversionDialog::convertRequested()
 	//----------------------------------------------------------------------------------------//
 
 	tmp = ui->comboBox_alphaTextures->currentText();
-	if(tmp != "DXT5") {
 
 		if(tmp == "RGBA 8888") arguments.insert("-alphaformat", "RGBA8888");
 		else if(tmp == "ABGR 8888") arguments.insert("-alphaformat", "ABGR8888");
@@ -145,7 +144,7 @@ void ConversionDialog::convertRequested()
 		else if(tmp == "RGBA 16161616F") arguments.insert("-alphaformat", "RGBA16161616F");
 		else if(tmp == "RGBA 16161616") arguments.insert("-alphaformat", "RGBA16161616");
 		else if(tmp == "UVLX 8888") arguments.insert("-alphaformat", "UVLX8888");
-	}
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -454,7 +453,26 @@ void ConversionDialog::convertRequested()
 
 		QString filePath = ui->listWidget_textures->item(i)->toolTip();
 
-		QString test = filePath.left( filePath.size() - 3 ).append("vtf");
+		QString test = filePath;
+
+		if(removeSuffix) {
+			test.chop(4);
+			if( test.endsWith("_diffuse") ){
+				test.chop(8);
+				test = test + ".vtf";
+			} else if( test.endsWith("_normal") ) {
+				test.chop(7);
+				test = test + "n.vtf";
+			} else if( test.endsWith("_specular") ) {
+				test.chop(9);
+				test = test + "s.vtf";
+			} else {
+				test = test + ".vtf";
+			}
+		} else {
+			test.chop(4);
+			test = test + ".vtf";
+		}
 
 		if( QDir(test.replace("\\", "/")).exists(test) ) {
 
@@ -468,9 +486,9 @@ void ConversionDialog::convertRequested()
 							msgBox.setWindowTitle("File already exists!");
 							msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No | QMessageBox::Abort );
 							msgBox.setDefaultButton( QMessageBox::No );
-							msgBox.setIcon( QMessageBox::Warning );
+							msgBox.setIconPixmap( QPixmap(":/icons/info_warning") );
 
-						msgBox.setText( "A file with the name of: \n\n\"" + test + "\"\n\n already exists."
+						msgBox.setText( "A file with the name of: \"" + test + "\" already exists."
 										" Would you like to overwrite it?"  );
 
 						QApplication::restoreOverrideCursor();
@@ -527,19 +545,29 @@ void ConversionDialog::convertRequested()
 			}
 
 			if(removeSuffix) {
+				QString oldName = filePath.left( filePath.size() - 3 ).append("vtf");
 				QString newName = filePath;
 				if( filePath.left( filePath.size() - 4 ).endsWith("_diffuse") ){
 					newName.chop(12);
 					newName = newName + ".vtf";
-					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
+					if( !QFile::remove( newName ) ) {
+
+					}
+					QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
 				} else if(filePath.left( filePath.size() - 4 ).endsWith("_normal") ) {
 					newName.chop(11);
 					newName = newName + "n.vtf";
-					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
+					if( !QFile::remove( newName ) ) {
+
+					}
+					QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
 				} else if(filePath.left( filePath.size() - 4 ).endsWith("_specular") ) {
 					newName.chop(13);
 					newName = newName + "s.vtf";
-					QFile::rename(QDir::toNativeSeparators(test), QDir::toNativeSeparators(newName));
+					if( !QFile::remove( newName ) ) {
+
+					}
+					QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
 				}
 			}
 
