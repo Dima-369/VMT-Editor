@@ -1309,7 +1309,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2973</y>
+             <y>-4299</y>
              <width>880</width>
              <height>5052</height>
             </rect>
@@ -15234,7 +15234,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>4.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -15310,7 +15310,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>4.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -15386,7 +15386,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>10.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -15756,7 +15756,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>2.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -15832,7 +15832,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>10.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -16914,8 +16914,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>895</width>
-             <height>753</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">

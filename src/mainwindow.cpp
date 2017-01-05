@@ -272,11 +272,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->doubleSpinBox_treeswayStartHeight->setDoubleSlider(ui->horizontalSlider_treeswayStartHeight);
 	ui->doubleSpinBox_treeswayStartRadius->setDoubleSlider(ui->horizontalSlider_treeswayStartRadius);
-	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 4.0);
-	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 4.0);
-	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 4.0);
-	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 4.0);
-	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 4.0);
+	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 10.0);
+	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 10.0);
+	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 10.0);
+	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 10.0);
+	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 10.0);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -3765,49 +3765,33 @@ VmtFile MainWindow::makeVMT()
 	{
 		vmtFile.parameters.insert( "$treesway", "1" );
 
-		if( ui->spinBox_treeswayHeight->value() != 0)
-			vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
+		vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
 
-		if( ui->spinBox_treeswayRadius->value() != 0)
-			vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
+		vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
 
-		if( ui->spinBox_treeswaySpeedLerpEnd->value() != 0)
-			vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
 
-		if( ui->spinBox_treeswaySpeedLerpStart->value() != 0)
-			vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
 
-		if( ui->spinBox_treeswayScrumbleFrequency->value() != 0)
-			vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
 
-		if( ui->spinBox_treeswayFalloff->value() != 0)
-			vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
+		vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
 
-		if( ui->spinBox_treeswayScrumbleFalloff->value() != 0)
-			vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
 
+		vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
 
+		vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
 
-		if( ui->doubleSpinBox_treeswayStartHeight->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
+		vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
 
-		if( ui->doubleSpinBox_treeswayStartRadius->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
 
-		if( ui->doubleSpinBox_treeswayStrength->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
 
-		if( ui->doubleSpinBox_treeswayspeedHighWind->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
+		vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
 
-		if( ui->doubleSpinBox_treeswayScrumbleStrength->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
-
-		if( ui->doubleSpinBox_treeswaySpeed->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
-
-		if( ui->doubleSpinBox_treeswayScrumbleSpeed->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
 	}
 
 	//---------------------------------------------------------------------------------------//

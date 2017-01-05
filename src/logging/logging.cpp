@@ -12,3 +12,11 @@ void logging::error(const QString &s, Ui::MainWindow *ui)
 	ui->listWidget->addItem(new QListWidgetItem(QIcon(":/icons/error"), s));
 	ui->listWidget->scrollToBottom();
 }
+
+void logging::info(const QString &s, Ui::MainWindow *ui)
+{
+	qDebug() << QString(s);
+	ui->listWidget->addItem(new QListWidgetItem(QIcon(":/icons/info"), s));
+	ui->listWidget->scrollToBottom();
+}
+

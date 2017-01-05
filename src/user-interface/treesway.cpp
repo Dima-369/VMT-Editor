@@ -121,11 +121,11 @@ void treesway::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 
 	DOUBLE("$treeswaystartheight", "0.0", ui->doubleSpinBox_treeswayStartHeight)
 	DOUBLE("$treeswaystartradius", "0.0", ui->doubleSpinBox_treeswayStartRadius)
-	DOUBLE("$treeswaystrength", "0.0", ui->doubleSpinBox_treeswayStrength)
-	DOUBLE("$treeswayspeedhighwindmultiplier", "0.0", ui->doubleSpinBox_treeswayspeedHighWind)
-	DOUBLE("$treeswayscrumblestrength", "0.0", ui->doubleSpinBox_treeswayScrumbleStrength)
-	DOUBLE("$treeswayspeed", "0.0", ui->doubleSpinBox_treeswaySpeed)
-	DOUBLE("$treeswayscrumblespeed", "0.0", ui->doubleSpinBox_treeswayScrumbleSpeed)
+	DOUBLE("$treeswaystrength", "1000.0", ui->doubleSpinBox_treeswayStrength)
+	DOUBLE("$treeswayspeedhighwindmultiplier", "1000.0", ui->doubleSpinBox_treeswayspeedHighWind)
+	DOUBLE("$treeswayscrumblestrength", "1000.0", ui->doubleSpinBox_treeswayScrumbleStrength)
+	DOUBLE("$treeswayspeed", "1000.0", ui->doubleSpinBox_treeswaySpeed)
+	DOUBLE("$treeswayscrumblespeed", "1000.0", ui->doubleSpinBox_treeswayScrumbleSpeed)
 
 
 }

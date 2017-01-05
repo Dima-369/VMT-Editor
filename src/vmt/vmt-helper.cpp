@@ -32,9 +32,9 @@ utils::DoubleResult utils::parseDouble(const QString &parameter,
 	if (def == v) {
 		if (logErrors) {
 			if (def.contains(".")) {
-				ERROR(parameter + " has default value: " + def)
+				INFO(parameter + " has default value: " + def)
 			} else {
-				ERROR(parameter + " has default value: "
+				INFO(parameter + " has default value: "
 					+ def +  ".0")
 			}
 		}
@@ -65,7 +65,7 @@ utils::IntResult utils::parseInt(const QString &parameter, const QString &value,
 		result.notDefault = true;
 
 	} else {
-		ERROR(parameter + " has default value: " + STR(def))
+		INFO(parameter + " has default value: " + STR(def))
 	}
 
 	return result;
@@ -113,7 +113,7 @@ utils::ColorResult utils::parseColor(const QString &parameter,
 	QRegularExpression regex(full);
 
 	if (!regex.match(value).hasMatch()) {
-		ERROR(parameter + " has default value: " + value);
+		INFO(parameter + " has default value: " + value);
 		return result;
 	}
 
@@ -150,7 +150,7 @@ utils::ColorResult utils::parseColor(const QString &parameter,
 	}
 
 	if (allDefault) {
-		ERROR(parameter + " has default value: {255 255 255}")
+		INFO(parameter + " has default value: {255 255 255}")
 	} else {
 		result.notDefault = true;
 	}
@@ -170,7 +170,7 @@ utils::BooleanResult utils::parseBoolean(const QString &parameter,
 	if (value == "1") {
 		result.value = true;
 	} else {
-		ERROR(parameter + " has default value: 0")
+		INFO(parameter + " has default value: 0")
 	}
 	return result;
 }
@@ -191,7 +191,7 @@ utils::BooleanResult utils::takeBoolean(const QString &parameter, VmtFile *vmt,
 	if (raw == "1") {
 		result.value = true;
 	} else {
-		ERROR(parameter + " has default value: 0")
+		INFO(parameter + " has default value: 0")
 	}
 	return result;
 }
@@ -219,7 +219,7 @@ void utils::parseTexture(const QString &parameter, const QString &value,
 	if (vmt.state.gameDirectory != 0 && !vmt.state.gameDirectory->exists(
 			"materials/" + s + ".vtf")) {
 
-		ERROR(parameter + " file: \"" + s + ".vtf\" cannot be found!")
+		INFO(parameter + " file: \"" + s + ".vtf\" cannot be found!")
 	}
 
 	widget->setText(s);

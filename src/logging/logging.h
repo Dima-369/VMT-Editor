@@ -11,6 +11,9 @@
 #undef ERROR
 #define ERROR(s_) logging::error(s_, ui);
 
+#undef INFO
+#define INFO(s_) logging::info(s_, ui);
+
 namespace logging {
 
 /*!
@@ -18,5 +21,7 @@ namespace logging {
  * console in the user interface.
  */
 void error(const QString &s, Ui::MainWindow *ui);
+
+void info(const QString &s, Ui::MainWindow *ui);
 
 } // namespace logging
