@@ -228,7 +228,7 @@ QString VmtParser::alphabeticallySortedParameters( QMap< QString, QString >* par
 QString VmtParser::groupParameters( QMap< QString, QString >* parameters, bool isCustomShader, bool isWaterShader, bool isPatchShader, bool quotesForTextures, bool useIndentation )
 {
 	// Needed for $normalmap because it is found in the Water and Refract shader
-	mGroups[11] = (isWaterShader || isCustomShader) ?
+	mGroups[12] = (isWaterShader || isCustomShader) ?
 				"$normalmap;$bottommaterial;$bumpframe" :
 				"$refract;$normalmap;$normalmap2;$refracttinttexture;$refracttint;$refractamount;$bluramount";
 
