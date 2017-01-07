@@ -793,7 +793,7 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-147</y>
            <width>522</width>
            <height>699</height>
           </rect>
@@ -940,7 +940,7 @@ QSlider::handle:vertical {
           <item>
            <widget class="QGroupBox" name="groupBox_parameter">
             <property name="title">
-             <string>Shaders</string>
+             <string>Formatting</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_12">
              <item row="1" column="0" colspan="2">
@@ -953,7 +953,7 @@ QSlider::handle:vertical {
              <item row="3" column="0" colspan="2">
               <widget class="QCheckBox" name="checkBox_useQuotesForTexture">
                <property name="text">
-                <string>Use quotes for texture related parameters (optional)</string>
+                <string>I like quotes</string>
                </property>
               </widget>
              </item>

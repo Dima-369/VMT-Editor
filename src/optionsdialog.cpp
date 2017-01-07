@@ -65,7 +65,7 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_useIndentation->setChecked( settings->useIndentation );
 
-	ui->checkBox_useQuotesForTexture->setChecked( settings->useQuotesForTexture );
+	ui->checkBox_useQuotesForTexture->setChecked( !settings->useQuotesForTexture );
 
 	updateCustomShaderStats();
 
@@ -364,7 +364,7 @@ void OptionsDialog::saveSettings()
 
 	//----------------------------------------------------------------------------------------//
 
-	if( ui->checkBox_useQuotesForTexture->isChecked() )
+	if( !ui->checkBox_useQuotesForTexture->isChecked() )
 	{
 		if( !mSettings->useQuotesForTexture )
 		{
