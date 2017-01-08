@@ -4133,8 +4133,6 @@ VmtFile MainWindow::makeVMT()
 		tmp3 = reinterpret_cast<QLineEdit*>( ui->formLayout_3->itemAt(i)->widget() )->text().trimmed();
 
 		if (!tmp2.isEmpty() && !tmp3.isEmpty()) {
-			if (tmp3.contains(QRegExp(R"([\s\\\/]+)")))
-				tmp3 = "\"" + tmp3 + "\"";
 			vmtFile.parameters.insert(tmp2, tmp3);
 		}
 	}

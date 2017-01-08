@@ -131,7 +131,21 @@ QString VmtParser::convertVmt( VmtFile vmtEntry, bool groupedParameters, bool qu
 
 			moreParameters = true;
 
-			if(useIndentation) {
+			QString indentation = (useIndentation ? addTabs( vmtEntry.shaderName.compare("Patch") == 0 ? 2 : 1 ) : "");
+
+			if(quotesForTexture) {
+
+				if( it.value().contains(QRegExp(R"([\s\\\/]+)")) )
+					out.append( indentation + it.key() + " \"" + it.value() + "\"\n" );
+				else
+					out.append( indentation + it.key() + " " + it.value() + "\n" );
+
+			} else {
+
+					out.append( indentation + "\"" + it.key() + "\" \"" + it.value() + "\"\n" );
+			}
+
+			/*if(useIndentation) {
 
 				if( vmtEntry.shaderName.compare("Patch") != 0 )
 					out.append( addTabs(1) + it.key() + " " + it.value() + "\n" );
@@ -141,7 +155,7 @@ QString VmtParser::convertVmt( VmtFile vmtEntry, bool groupedParameters, bool qu
 			} else {
 
 				out.append( it.key() + " " + it.value() + "\n" );
-			}
+			}*/
 
 			++it;
 		}
