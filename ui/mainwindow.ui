@@ -17954,6 +17954,9 @@ border: 1px solid #222;
    <property name="text">
     <string>Save As Template...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
+   </property>
   </action>
  </widget>
  <customwidgets>

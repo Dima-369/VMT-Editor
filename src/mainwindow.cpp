@@ -376,6 +376,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		cacheFolder.mkdir("Cache");
 		cacheFolder.mkdir("Cache/Move");
 
+	QDir templatesFolder;
+		templatesFolder.mkdir("templates");
+
 #ifdef Q_OS_WIN
 	utils::checkVtfCmd(ui);
 #endif
@@ -4775,8 +4778,6 @@ QString MainWindow::action_SaveAsTemplate() {
 
 		refreshRequested();
 
-		setCurrentFile( fileName );
-
 		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
 
 		mChildWidgetChanged = false;
@@ -4807,7 +4808,7 @@ void MainWindow::action_RefreshTemplateList() {
 
 	for( int i = 0; i < numTemplates; ++i )
 	{
-	   QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(templates[i]).fileName() );
+	   QString text = tr("&%1").arg( QFileInfo(templates[i]).fileName() );
 	   templateActions[i]->setText(text);
 	   templateActions[i]->setData(templates[i]);
 	   templateActions[i]->setVisible(true);
@@ -7305,7 +7306,7 @@ void MainWindow::openTemplate() {
 
 		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
 		parseVMT(vmt);
-
+		refreshRequested();
 	}
 }
 
@@ -7347,7 +7348,7 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 {
 		 for( int i = 0; i < numRecentFiles; ++i )
 		 {
-			QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(files[i]).absoluteFilePath() );
+			QString text = tr("&%1").arg( QFileInfo(files[i]).absoluteFilePath() );
 			recentFileActions[i]->setText(text);
 			recentFileActions[i]->setData(files[i]);
 			recentFileActions[i]->setVisible(true);
@@ -7357,7 +7358,7 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 {
 		 for( int i = 0; i < numRecentFiles; ++i )
 		 {
-			QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(files[i]).fileName() );
+			QString text = tr("&%1").arg( QFileInfo(files[i]).fileName() );
 			recentFileActions[i]->setText(text);
 			recentFileActions[i]->setData(files[i]);
 			recentFileActions[i]->setVisible(true);
