@@ -199,6 +199,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->actionOpen,			 SIGNAL(triggered()),  this, SLOT(action_Open()));
 	connect( ui->actionSave,			 SIGNAL(triggered()),  this, SLOT(action_Save()));
 	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_SaveAs()));
+	connect( ui->actionSave_As_Template, SIGNAL(triggered()),  this, SLOT(action_SaveAsTemplate()));
 	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
 
 	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
@@ -382,6 +383,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	//----------------------------------------------------------------------------------------//
 
 	separatorAct = ui->menuFile->addSeparator();
+	separatorTemp = ui->menuTemplates->addSeparator();
 
 	for( int i = 0; i < MaxRecentFiles; ++i ) {
 
@@ -4762,6 +4764,36 @@ QString MainWindow::action_SaveAs() {
 	return fileName;
 }
 
+QString MainWindow::action_SaveAsTemplate() {
+
+	QString fileName;
+
+	fileName = QFileDialog::getSaveFileName( this, "Save Valve Material",
+													QDir::currentPath() + "\\templates\\untitled.vmt", "VMT (*.vmt)" );
+
+	if( !fileName.isEmpty() ) {
+
+		refreshRequested();
+
+		setCurrentFile( fileName );
+
+		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
+
+		mChildWidgetChanged = false;
+
+		mVMTLoaded = true;
+
+	} else {
+
+		mExitRequested = false;
+	}
+
+	updateWindowTitle();
+	refreshRequested();
+	action_RefreshTemplateList();
+	return fileName;
+}
+
 void MainWindow::action_RefreshTemplateList() {
 
 	//QDir* templatesDir = new QDir(QDir::currentPath() + "/templates");
@@ -4769,7 +4801,7 @@ void MainWindow::action_RefreshTemplateList() {
 	for ( int i = 0; i < templates.size(); i++ ) {
 		templates[i].prepend(QDir::currentPath() + "/templates/");
 	}
-	qDebug()<<templates;
+	//qDebug()<<templates;
 
 	int numTemplates = qMin( templates.size(), (int)MaxTemplates );
 
@@ -4787,14 +4819,15 @@ void MainWindow::action_RefreshTemplateList() {
 		templateActions[j]->setVisible(false);
 	}
 
-	/*if( numTemplates > 0 )
+	if( numTemplates > 0 )
 	{
-		separatorAct->setVisible(true);
+		ui->menuTemplates->insertAction( ui->actionRefresh_List, separatorTemp );
+		separatorTemp->setVisible(true);
 	}
 	else
 	{
-		separatorAct->setVisible(false);
-	}*/
+		separatorTemp->setVisible(false);
+	}
 }
 
 void MainWindow::toggleTransparency() {

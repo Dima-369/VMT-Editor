@@ -89,6 +89,7 @@
         <file alias="waterscroll">images/waterscroll.png</file>
         <file alias="treesway">images/treesway.png</file>
         <file alias="decal">images/decal.png</file>
+        <file alias="saveastemplate">images/saveastemplate.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>

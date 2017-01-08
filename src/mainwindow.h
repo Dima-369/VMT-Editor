@@ -187,6 +187,7 @@ private:
 	QAction* templateActions[MaxTemplates];
 
 	QAction* separatorAct;
+	QAction* separatorTemp;
 
 	//----------------------------------------------------------------------------------------//
 
@@ -410,6 +411,7 @@ private slots:
 	void action_Open();
 	void action_Save();
 	QString action_SaveAs();
+	QString action_SaveAsTemplate();
 
 	void action_RefreshTemplateList();
 
