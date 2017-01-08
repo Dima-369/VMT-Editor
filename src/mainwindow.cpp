@@ -4897,7 +4897,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
+				Info("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -4935,7 +4935,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf + ".vtf" ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
+				Info("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -5218,7 +5218,7 @@ bool MainWindow::loadBoolParameter( const QString& value, const QString& paramet
 	if( value == "1" )
 		return true;
 	else if( value == "0" )
-		Info("" + parameter + " has value \"0\" which is the default!")
+		Info("" + parameter + " has default value: 0")
 	else
 		Error("" + parameter + " has unrecognizable value: \"" + value + "\"")
 
@@ -5271,7 +5271,7 @@ bool MainWindow::loadDoubleParameter( double* doubleValue, const QString& value,
 			return true;
 		}
 
-		Info("" + parameter + " has value \"" + Str(defaultValue) + "\" which is the default!")
+		Info("" + parameter + " has default value: \"" + Str(defaultValue) + "\"")
 
 		return false;
 	}
@@ -8457,7 +8457,7 @@ void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWi
 	colorWidget->setStyleSheet("background-color: rgb(" + Str(color.red()) + "," + Str(color.green()) + "," + Str(color.blue()) + ")");
 }
 
-void MainWindow::loadVMT( const QString& vmtPath )
+void MainWindow::loadVMT( const QString& vmtPath, bool isTemplate )
 {
 	mLoading = true;
 
