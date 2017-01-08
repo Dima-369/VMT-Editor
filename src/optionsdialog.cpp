@@ -43,6 +43,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_removeAlpha->setChecked( settings->removeAlpha );
 
+	ui->checkBox_templateNew->setChecked( settings->templateNew );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -171,6 +173,22 @@ void OptionsDialog::saveSettings()
 			mIniSettings->setValue( "showShaderNameInWindowTitle", "0" );
 
 			emit optionChanged( Settings::_ShowShaderNameInWindowTitle, "0" );
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+
+	if (ui->checkBox_templateNew->isChecked()) {
+		if (!mSettings->templateNew) {
+			mSettings->templateNew = true;
+			mIniSettings->setValue("templateNew", true);
+			emit optionChanged(Settings::_TemplateNew, "1");
+		}
+	} else {
+		if(mSettings->templateNew) {
+			mSettings->templateNew = false;
+			mIniSettings->setValue("templateNew", false);
+			emit optionChanged(Settings::_TemplateNew, "0");
 		}
 	}
 

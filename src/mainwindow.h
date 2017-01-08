@@ -181,8 +181,10 @@ private:
 	//----------------------------------------------------------------------------------------//
 
 	enum { MaxRecentFiles = 9 };
+	enum { MaxTemplates = 16 };
 
 	QAction* recentFileActions[MaxRecentFiles];
+	QAction* templateActions[MaxTemplates];
 
 	QAction* separatorAct;
 
@@ -287,7 +289,7 @@ private:
 
 	void loadScrollParameter( QString value, const QString& command, uint index );
 
-	void loadVMT( const QString& vmtPath );
+	void loadVMT( const QString& vmtPath);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -335,6 +337,8 @@ public slots:
 	void shaderChanged();
 
 	void openRecentFile();
+
+	void openTemplate();
 
 	void browseVTF();
 
@@ -406,6 +410,8 @@ private slots:
 	void action_Open();
 	void action_Save();
 	QString action_SaveAs();
+
+	void action_RefreshTemplateList();
 
 	void toggleTransparency();
 	void toggleDetailTexture();

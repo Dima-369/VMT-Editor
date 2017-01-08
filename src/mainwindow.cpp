@@ -201,6 +201,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_SaveAs()));
 	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
 
+	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
+
 	connect( ui->action_refreshGameList, SIGNAL(triggered()),  this, SLOT(refreshGameList()));
 
 	connect( ui->actionRefresh,			 SIGNAL(triggered()),  this, SLOT(refreshRequested()));
@@ -393,6 +395,17 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 		 connect(recentFileActions[i], SIGNAL(triggered()), this, SLOT(openRecentFile()));
 	}
+
+	for( int i = 0; i < MaxTemplates; ++i ) {
+
+		templateActions[i] = new QAction(this);
+		templateActions[i]->setVisible(false);
+		ui->menuTemplates->insertAction( ui->actionRefresh_List, templateActions[i] );
+
+		connect(templateActions[i], SIGNAL(triggered()), this, SLOT(openTemplate()));
+	}
+
+	action_RefreshTemplateList();
 
 	updateRecentFileActions( mSettings->recentFileEntryStyle == Settings::FullPath ? true : false );
 
@@ -4751,6 +4764,41 @@ QString MainWindow::action_SaveAs() {
 	return fileName;
 }
 
+void MainWindow::action_RefreshTemplateList() {
+
+	//QDir* templatesDir = new QDir(QDir::currentPath() + "/templates");
+	QStringList templates = QDir(QDir::currentPath() + "/templates").entryList(QStringList()<<"*.vmt");
+	for ( int i = 0; i < templates.size(); i++ ) {
+		templates[i].prepend(QDir::currentPath() + "/templates/");
+	}
+	qDebug()<<templates;
+
+	int numTemplates = qMin( templates.size(), (int)MaxTemplates );
+
+	for( int i = 0; i < numTemplates; ++i )
+	{
+	   QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(templates[i]).fileName() );
+	   templateActions[i]->setText(text);
+	   templateActions[i]->setData(templates[i]);
+	   templateActions[i]->setVisible(true);
+	}
+
+
+	for( int j = numTemplates; j < MaxTemplates; ++j )
+	{
+		templateActions[j]->setVisible(false);
+	}
+
+	/*if( numTemplates > 0 )
+	{
+		separatorAct->setVisible(true);
+	}
+	else
+	{
+		separatorAct->setVisible(false);
+	}*/
+}
+
 void MainWindow::toggleTransparency() {
 
 	if(ui->action_transparency->isEnabled()) {
@@ -6874,6 +6922,7 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->useIndentation =
@@ -7096,6 +7145,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_RemoveAlpha:
 			break;
 
+		case Settings::_TemplateNew:
+			break;
+
 		case Settings::_CustomShaders:
 			// TODO: Move into own function
 
@@ -7176,6 +7228,53 @@ void MainWindow::openRecentFile()
 
 			msgBox.exec();
 		}
+	}
+}
+
+void MainWindow::openTemplate() {
+
+	QAction* action = qobject_cast<QAction*>(sender());
+
+	if(action)
+	{
+		if( mSettings->templateNew ) {
+
+			bool actionAccepted = true;
+
+			if( mChildWidgetChanged ) {
+
+				switch( _displaySaveMessage() ) {
+
+					case QMessageBox::Save:
+
+						action_Save();
+
+					case QMessageBox::Cancel:
+					case QMessageBox::Escape:
+
+						actionAccepted = false;
+
+						return;
+				}
+			}
+
+			if(actionAccepted) {
+				resetWidgets();
+				updateWindowTitle();
+
+				QList<QAction*> actions = ui->action_games->actions();
+				foreach(QAction* action, actions) {
+					action->setEnabled(true);
+				}
+
+				setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
+			}
+
+		}
+
+		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+		parseVMT(vmt);
+
 	}
 }
 
@@ -8457,7 +8556,7 @@ void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWi
 	colorWidget->setStyleSheet("background-color: rgb(" + Str(color.red()) + "," + Str(color.green()) + "," + Str(color.blue()) + ")");
 }
 
-void MainWindow::loadVMT( const QString& vmtPath, bool isTemplate )
+void MainWindow::loadVMT( const QString& vmtPath )
 {
 	mLoading = true;
 

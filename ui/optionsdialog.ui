@@ -793,9 +793,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-147</y>
+           <y>0</y>
            <width>522</width>
-           <height>699</height>
+           <height>720</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -830,6 +830,13 @@ QSlider::handle:vertical {
               <widget class="QCheckBox" name="checkBox_saveLastGame">
                <property name="text">
                 <string>Save last selected game</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBox_templateNew">
+               <property name="text">
+                <string>Create a new VMT when opening a template</string>
                </property>
               </widget>
              </item>
