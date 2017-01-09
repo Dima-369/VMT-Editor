@@ -198,8 +198,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
 	connect( ui->actionOpen,			 SIGNAL(triggered()),  this, SLOT(action_Open()));
 	connect( ui->actionSave,			 SIGNAL(triggered()),  this, SLOT(action_Save()));
-	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_SaveAs()));
-	connect( ui->actionSave_As_Template, SIGNAL(triggered()),  this, SLOT(action_SaveAsTemplate()));
+	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_saveAs()));
+	connect( ui->actionSave_As_Template, SIGNAL(triggered()), SLOT(saveAsTemplate()));
 	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
 
 	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
@@ -4671,7 +4671,7 @@ void MainWindow::action_Save() {
 
 	} else {
 
-		action_SaveAs();
+		action_saveAs();
 	}
 
 	mLoading = true;
@@ -4683,7 +4683,7 @@ void MainWindow::action_Save() {
 	mLoading = false;
 }
 
-QString MainWindow::action_SaveAs() {
+QString MainWindow::action_saveAs() {
 
 	QString fileName;
 
@@ -4771,32 +4771,25 @@ QString MainWindow::action_SaveAs() {
 	return fileName;
 }
 
-QString MainWindow::action_SaveAsTemplate() {
+void MainWindow::saveAsTemplate()
+{
+	const auto suggestion = QDir::toNativeSeparators(
+		QDir::current().filePath("templates/untitled.vmt"));
+	const auto fileName = QFileDialog::getSaveFileName(this,
+		"Save Valve Material Template", suggestion, "VMT (*.vmt)" );
 
-	QString fileName;
+	if (fileName.isEmpty())
+		return;
 
-	fileName = QFileDialog::getSaveFileName( this, "Save Valve Material",
-													QDir::currentPath() + "\\templates\\untitled.vmt", "VMT (*.vmt)" );
-
-	if( !fileName.isEmpty() ) {
-
-		refreshRequested();
-
-		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
-
-		mChildWidgetChanged = false;
-
-		mVMTLoaded = true;
-
-	} else {
-
-		mExitRequested = false;
-	}
+	refreshRequested();
+	vmtParser->saveVmtFile(ui->plainTextEdit_vmtPreview->toPlainText(),
+		fileName);
+	mChildWidgetChanged = false;
+	mVMTLoaded = true;
 
 	updateWindowTitle();
 	refreshRequested();
 	action_RefreshTemplateList();
-	return fileName;
 }
 
 void MainWindow::action_RefreshTemplateList() {
