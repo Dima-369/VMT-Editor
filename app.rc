@@ -14,7 +14,7 @@ BEGIN
             VALUE "FileVersion",        "1.2.1"
             VALUE "ProductVersion",     "1.2.1"
             VALUE "ProductName",        "VMT Editor"
-            VALUE "LegalCopyright",     "Copyright © 2016"
+            VALUE "LegalCopyright",     "Copyright © 2016-2017"
         END
     END
 
