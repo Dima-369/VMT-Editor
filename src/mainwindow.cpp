@@ -7305,6 +7305,7 @@ void MainWindow::openTemplate() {
 		}
 
 		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+		ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
 		parseVMT(vmt);
 		refreshRequested();
 	}
