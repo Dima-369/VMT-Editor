@@ -3647,8 +3647,12 @@ VmtFile MainWindow::makeVMT()
 																   " " + Str(ui->doubleSpinBox_fresnelRangesY->value()) +
 																   " " + Str(ui->doubleSpinBox_fresnelRangesZ->value()) + "]" ) );
 
-		if( ui->spinBox_exponent->isEnabled() )
-			vmtFile.parameters.insert( "$phongexponent", Str( ui->spinBox_exponent->value() ));
+		// Note that we always place $phongexponent in the VMT
+		// regardless if it has the default value 5
+		if (ui->spinBox_exponent->isEnabled()) {
+			vmtFile.parameters.insert("$phongexponent",
+				Str(ui->spinBox_exponent->value()));
+		}
 
 		tmp = toParameter(utils::getBG(ui->color_phongTint));
 		if( ui->toolButton_phongTint->isEnabled() && tmp != "[1 1 1]" )

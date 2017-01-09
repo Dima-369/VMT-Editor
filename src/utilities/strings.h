@@ -19,6 +19,7 @@
  */
 QString stripZeroes(const QString& s);
 
+// TODO: Place in view-helper
 /*!
  * Calls stripZeroes() on the cleanText() value of the spin box.
  */
