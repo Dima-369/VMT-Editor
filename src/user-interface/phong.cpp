@@ -204,7 +204,7 @@ void processExponent1(const QString &parameter, const QString &value,
 	if(vmt.parameters.contains("$phongexponenttexture"))
 		ERROR("$phongexponent overrides $phongexponenttexture!")
 
-	utils::IntResult r = utils::parseInt(parameter, value, 5, ui);
+	utils::IntResult r = utils::parseInt(parameter, value, 1000, ui);
 
 	if (r.notDefault) {
 		ui->spinBox_exponent->setValue(r.value);
@@ -378,7 +378,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	BOOL("$phongalbedotint", ui->checkBox_albedoTint)
 	DO_WITH_VMT("$phongexponent", processExponent1)
 	TEXTURE("$phongexponenttexture", ui->lineEdit_exponentTexture)
-	DOUBLE("$phongboost", "5", ui->doubleSpinBox_boost)
+	DOUBLE("$phongboost", "1", ui->doubleSpinBox_boost)
 	BOOL("$basemapalphaphongmask", ui->checkBox_exponentBaseAlpha)
 	BOOL("$basemapluminancephongmask", ui->checkBox_baseLuminanceMask)
 	BOOL("$halflambert", ui->checkBox_halfLambert)
@@ -392,5 +392,5 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	DO_CHOICE("$phongamount2", processPhongAmount, false)
 	DO_CHOICE("$phongmaskcontrastbrightness2",
 		processMaskContrastBrightness, false)
-	INT("$phongexponent2", 5, ui->spinBox_spec_exponent2)
+	INT("$phongexponent2", 1000, ui->spinBox_spec_exponent2)
 }
