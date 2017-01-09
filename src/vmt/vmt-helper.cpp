@@ -3,7 +3,9 @@
 #include "logging/logging.h"
 #include "utilities/strings.h"
 
-void utils::addOnUnequal(const QString &name, QDoubleSpinBox *sb, double value,
+namespace utils {
+
+void addOnUnequal(const QString &name, QDoubleSpinBox *sb, double value,
 		VmtFile* vmt)
 {
 	if (sb->isEnabled()) {
@@ -13,11 +15,10 @@ void utils::addOnUnequal(const QString &name, QDoubleSpinBox *sb, double value,
 	}
 }
 
-utils::DoubleResult utils::parseDouble(const QString &parameter,
-		const QString &value, const QString &def, Ui::MainWindow *ui,
-		bool logErrors)
+DoubleResult parseDouble(const QString &parameter, const QString &value,
+		const QString &def, Ui::MainWindow *ui, bool logErrors)
 {
-	utils::DoubleResult result;
+	DoubleResult result;
 	result.string = value;
 
 	bool ok;
@@ -46,13 +47,31 @@ utils::DoubleResult utils::parseDouble(const QString &parameter,
 	return result;
 }
 
-utils::IntResult utils::parseInt(const QString &parameter, const QString &value,
+DoubleResult parseDoubleNoDef(const QString &value)
+{
+	DoubleResult result;
+	result.string = value;
+
+	bool ok;
+	double d = value.toDouble(&ok);
+
+	if (!ok) {
+		result.invalid = true;
+		return result;
+	}
+
+	result.notDefault = true;
+	result.value = d;
+	return result;
+}
+
+IntResult parseInt(const QString &parameter, const QString &value,
 		int def, Ui::MainWindow *ui)
 {
-	utils::IntResult result;
+	IntResult result;
 
 	bool logErrors = false;
-	utils::DoubleResult r = utils::parseDouble(parameter, value,
+	DoubleResult r = parseDouble(parameter, value,
 		QString::number(def), ui, logErrors);
 
 	if (r.invalid) {
@@ -71,13 +90,28 @@ utils::IntResult utils::parseInt(const QString &parameter, const QString &value,
 	return result;
 }
 
-utils::ColorResult utils::parseColor(const QString &parameter,
+IntResult parseIntNoDefault(const QString &value)
+{
+	DoubleResult r = parseDoubleNoDef(value);
+	IntResult result;
+
+	if (r.invalid) {
+		result.invalid = true;
+		return result;
+	}
+
+	result.notDefault = true;
+	result.value = static_cast<int>(r.value);
+	return result;
+}
+
+ColorResult parseColor(const QString &parameter,
 		const QString &value, Ui::MainWindow *ui, bool toSrgb)
 {
-	utils::ColorResult result;
+	ColorResult result;
 
 	// first we check if the value is in the regular [] format
-	utils::DoubleTuple dp = utils::toDoubleTuple(value, 3);
+	DoubleTuple dp = toDoubleTuple(value, 3);
 	if (dp.valid) {
 		bool allDefault = true;
 		result.valid = true;
@@ -158,10 +192,10 @@ utils::ColorResult utils::parseColor(const QString &parameter,
 	return result;
 }
 
-utils::BooleanResult utils::parseBoolean(const QString &parameter,
+BooleanResult parseBoolean(const QString &parameter,
 		const QString &value, Ui::MainWindow *ui)
 {
-	utils::BooleanResult result;
+	BooleanResult result;
 	result.present = true;
 	if (value != "0" && value != "1") {
 		ERROR(parameter + " has an invalid value: " + value)
@@ -175,10 +209,10 @@ utils::BooleanResult utils::parseBoolean(const QString &parameter,
 	return result;
 }
 
-utils::BooleanResult utils::takeBoolean(const QString &parameter, VmtFile *vmt,
+BooleanResult takeBoolean(const QString &parameter, VmtFile *vmt,
 		Ui::MainWindow *ui)
 {
-	utils::BooleanResult result;
+	BooleanResult result;
 	const QString raw = vmt->parameters.take(parameter);
 	if (raw.isEmpty())
 		return result;
@@ -196,7 +230,7 @@ utils::BooleanResult utils::takeBoolean(const QString &parameter, VmtFile *vmt,
 	return result;
 }
 
-QString utils::prepareTexture(const QString &value)
+QString prepareTexture(const QString &value)
 {
 	QString s = QString(value).replace("\\", "/");
 	if (s.endsWith(".vtf")) {
@@ -205,10 +239,10 @@ QString utils::prepareTexture(const QString &value)
 	return s;
 }
 
-void utils::parseTexture(const QString &parameter, const QString &value,
+void parseTexture(const QString &parameter, const QString &value,
 		Ui::MainWindow *ui, QLineEdit *widget, VmtFile vmt)
 {
-	QString s = utils::prepareTexture(value);
+	QString s = prepareTexture(value);
 
 	if (value.endsWith(".vtf")) {
 		ERROR(parameter + " should not end with .vtf!")
@@ -225,9 +259,9 @@ void utils::parseTexture(const QString &parameter, const QString &value,
 	widget->setText(s);
 }
 
-utils::DoubleTuple utils::toDoubleTuple(const QString &s, int amount)
+DoubleTuple toDoubleTuple(const QString &s, int amount)
 {
-	utils::DoubleTuple result;
+	DoubleTuple result;
 
 	QString full = "^\\s*\\[\\s*";
 	for (int i = 0; i < amount; i++) {
@@ -269,10 +303,10 @@ utils::DoubleTuple utils::toDoubleTuple(const QString &s, int amount)
 	return result;
 }
 
-utils::IntTuple utils::toIntTuple(const QString &input, int amount)
+IntTuple toIntTuple(const QString &input, int amount)
 {
-	utils::IntTuple result;
-	utils::DoubleTuple fromDouble = utils::toDoubleTuple(input, amount);
+	IntTuple result;
+	DoubleTuple fromDouble = toDoubleTuple(input, amount);
 	if (fromDouble.valid) {
 		foreach (double value, fromDouble.values) {
 			result.values.append(static_cast<int>(value));
@@ -283,7 +317,7 @@ utils::IntTuple utils::toIntTuple(const QString &input, int amount)
 	return result;
 }
 
-bool utils::isTupleBetween(const utils::DoubleTuple &tuple, double min,
+bool isTupleBetween(const DoubleTuple &tuple, double min,
 		double max)
 {
 	foreach(double value, tuple.values) {
@@ -294,7 +328,7 @@ bool utils::isTupleBetween(const utils::DoubleTuple &tuple, double min,
 	return true;
 }
 
-bool utils::isBetween(const QStringList& list, double min, double max)
+bool isBetween(const QStringList& list, double min, double max)
 {
 	foreach(const QString& value, list) {
 		bool ok;
@@ -309,8 +343,6 @@ bool utils::isBetween(const QStringList& list, double min, double max)
 	}
 	return true;
 }
-
-namespace utils {
 
 QString toParameter(const QColor &color, bool toLinear)
 {
