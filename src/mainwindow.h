@@ -405,13 +405,14 @@ private slots:
 
 	void checkForUpdates();
 
+	void saveAsTemplate();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
 	void action_Open();
 	void action_Save();
-	QString action_SaveAs();
-	QString action_SaveAsTemplate();
+	QString action_saveAs();
 
 	void action_RefreshTemplateList();
 
