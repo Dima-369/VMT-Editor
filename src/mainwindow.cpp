@@ -772,6 +772,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	//----------------------------------------------------------------------------------------//
 
 	int index = ui->comboBox_shader->findText(vmt.shaderName, Qt::MatchFixedString);
+	int currentIndex = ui->comboBox_shader->currentIndex();
 	if (index == -1) {
 
 		Info("Unknown shader found, adding shader to enabled custom shaders!")
@@ -786,7 +787,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText(vmt.shaderName));
 
-	} else {
+	} else if (!isTemplate || (isTemplate && index != currentIndex) ) {
 
 		sortShaderComboBox();
 
