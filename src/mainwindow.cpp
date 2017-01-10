@@ -7310,11 +7310,12 @@ void MainWindow::openTemplate() {
 		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
 
 
-		if ( !ui->textEdit_proxies->toPlainText().isEmpty() ) {
+		if ( !ui->textEdit_proxies->toPlainText().isEmpty() && !vmt.subGroups.isEmpty() ) {
 
 			ui->textEdit_proxies->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 			ui->textEdit_proxies->textCursor().deletePreviousChar();
 			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t").replace("Proxies\n{\n", "\n") );
+
 		} else {
 			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t") );
 		}
