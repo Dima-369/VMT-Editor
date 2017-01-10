@@ -4708,6 +4708,7 @@ QString MainWindow::action_saveAs() {
 		if ( ui->lineEdit_diffuse->text().isEmpty() ) vtfName = "\\untitled.vmt";
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
+
 			QString tmp;
 			if ( vtfLong.contains("/")) {
 				tmp = vtfLong.section("/", -1);
@@ -4719,6 +4720,10 @@ QString MainWindow::action_saveAs() {
 				vtfName = "\\" + tmp.section(".", 0, 0);
 			} else {
 				vtfName = "\\" + tmp;
+			}
+
+			if( vtfName.endsWith("_diffuse") ) {
+				vtfName.chop(8);
 			}
 
 		}
