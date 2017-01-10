@@ -732,7 +732,7 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 	}
 }
 
-void MainWindow::parseVMT( VmtFile vmt )
+void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 {
 	mParsingVMT = true;
 
@@ -1465,6 +1465,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			utils::parseTexture("$envmap", value, ui,
 				ui->lineEdit_envmap, vmt);
 
+			ui->checkBox_cubemap->setChecked(false);
 			usingEnvmap = true;
 		}
 
@@ -3277,73 +3278,73 @@ void MainWindow::parseVMT( VmtFile vmt )
 	if(showBaseTexture2 && !ui->action_baseTexture2->isChecked())
 		ui->action_baseTexture2->trigger();
 
-    if(vmt.state.showDetail)
+	if(vmt.state.showDetail && !ui->action_detail->isChecked())
 		ui->action_detail->trigger();
 
-	if(showTransparency)
+	if(showTransparency && !ui->action_transparency->isChecked())
 		ui->action_transparency->trigger();
 
-	if(showColor)
+	if(showColor && !ui->action_color->isChecked())
 		ui->action_color->trigger();
 
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
 		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric) {
+		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
 			ui->action_phong->trigger();
-		} else {
+		} else if (!ui->action_phongBrush->isChecked()) {
 			ui->action_phongBrush->trigger();
 		}
 	}
 
-	if(vmt.state.showNormalBlend) {
+	if(vmt.state.showNormalBlend && !ui->action_normalBlend->isChecked()) {
 		ui->action_normalBlend->trigger();
 	}
 
-	if(vmt.state.showTreeSway) {
+	if(vmt.state.showTreeSway && !ui->action_treeSway->isChecked()) {
 		ui->action_treeSway->trigger();
 	}
 
-	if(showDecal)
+	if(showDecal && !ui->action_decal->isChecked())
 		ui->action_decal->trigger();
 
-	if(showShadingReflection)
+	if(showShadingReflection && !ui->action_reflection->isChecked())
 		ui->action_reflection->trigger();
 
-	if(showSelfIllumination)
+	if(showSelfIllumination && !ui->action_selfIllumination->isChecked())
 		ui->action_selfIllumination->trigger();
 
-	if(showRimLight)
+	if(showRimLight && !ui->action_rimLight->isChecked())
 		ui->action_rimLight->trigger();
 
-	if(showFlowmap)
+	if(showFlowmap && !ui->action_flowmap->isChecked())
 		ui->action_flowmap->trigger();
 
-	if(showWaterReflection)
+	if(showWaterReflection && !ui->action_waterReflection->isChecked())
 		ui->action_waterReflection->trigger();
 
-	if(showWaterRefraction)
+	if(showWaterRefraction && !ui->action_refraction->isChecked())
 		ui->action_refraction->trigger();
 
-	if(showWaterFog)
+	if(showWaterFog && !ui->action_fog->isChecked())
 		ui->action_fog->trigger();
 
-	if(showBaseTextureTransform)
+	if(showBaseTextureTransform && !ui->action_baseTextureTransforms->isChecked())
 		ui->action_baseTextureTransforms->trigger();
 
-	if(showBumpmapTransform)
+	if(showBumpmapTransform && !ui->action_bumpmapTransforms->isChecked())
 		ui->action_bumpmapTransforms->trigger();
 
-	if(showMiscellaneous)
+	if(showMiscellaneous && !ui->action_misc->isChecked())
 		ui->action_misc->trigger();
 
-	if(showOther)
+	if(showOther && !ui->action_other->isChecked())
 		ui->action_other->trigger();
 
-	if(showSprite)
+	if(showSprite && !ui->groupBox_sprite->isVisible())
 		ui->groupBox_sprite->setVisible(true);
 
-	if(showScroll)
+	if(showScroll && !ui->action_scroll->isChecked())
 		ui->action_scroll->trigger();
 
 	//----------------------------------------------------------------------------------------//
@@ -7307,8 +7308,18 @@ void MainWindow::openTemplate() {
 		}
 
 		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
-		ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
-		parseVMT(vmt);
+
+
+		if ( !ui->textEdit_proxies->toPlainText().isEmpty() ) {
+
+			ui->textEdit_proxies->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+			ui->textEdit_proxies->textCursor().deletePreviousChar();
+			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t").replace("Proxies\n{\n", "\n") );
+		} else {
+			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t") );
+		}
+
+		parseVMT(vmt, true);
 		refreshRequested();
 	}
 }

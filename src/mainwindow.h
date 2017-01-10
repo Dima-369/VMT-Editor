@@ -78,7 +78,7 @@ public:
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
 
-	void parseVMT( VmtFile vmtFile );
+	void parseVMT( VmtFile vmtFile, bool isTemplate = false );
 
 	VmtFile makeVMT();
 
