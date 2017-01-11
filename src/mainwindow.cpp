@@ -407,7 +407,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		templateActions[i]->setVisible(false);
 		ui->menuTemplates->insertAction( ui->actionRefresh_List, templateActions[i] );
 
-		connect(templateActions[i], SIGNAL(triggered()), this, SLOT(openTemplate()));
+		connect(templateActions[i], SIGNAL(triggered()), SLOT(openTemplate()));
 	}
 
 	action_RefreshTemplateList();
@@ -7273,52 +7273,44 @@ void MainWindow::openTemplate() {
 
 	if(action)
 	{
-		if( mSettings->templateNew ) {
+		if( mSettings->templateNew && mChildWidgetChanged) {
 
-			bool actionAccepted = true;
+			switch( _displaySaveMessage() ) {
 
-			if( mChildWidgetChanged ) {
-
-				switch( _displaySaveMessage() ) {
-
-					case QMessageBox::Save:
-
-						action_Save();
-
-					case QMessageBox::Cancel:
-					case QMessageBox::Escape:
-
-						actionAccepted = false;
-
-						return;
-				}
+			case QMessageBox::Save:
+				action_Save();
+			case QMessageBox::Cancel:
+			case QMessageBox::Escape:
+				return;
 			}
 
-			if(actionAccepted) {
-				resetWidgets();
-				updateWindowTitle();
+			resetWidgets();
+			updateWindowTitle();
 
-				QList<QAction*> actions = ui->action_games->actions();
-				foreach(QAction* action, actions) {
-					action->setEnabled(true);
-				}
-
-				setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
+			QList<QAction*> actions = ui->action_games->actions();
+			foreach(QAction* action, actions) {
+				action->setEnabled(true);
 			}
 
+			setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
 		}
 
 		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
 
+		if ( !ui->textEdit_proxies->toPlainText().isEmpty() &&
+			 !vmt.subGroups.isEmpty() ) {
 
-		if ( !ui->textEdit_proxies->toPlainText().isEmpty() && !vmt.subGroups.isEmpty() ) {
+			ui->textEdit_proxies->moveCursor(QTextCursor::End,
+											 QTextCursor::MoveAnchor);
 
-			ui->textEdit_proxies->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 			ui->textEdit_proxies->textCursor().deletePreviousChar();
-			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t").replace("Proxies\n{\n", "\n") );
+			ui->textEdit_proxies->insertPlainText(
+				vmt.subGroups.replace("    ", "\t")
+					.replace("Proxies\n{\n", "\n") );
 
 		} else {
-			ui->textEdit_proxies->insertPlainText( vmt.subGroups.replace("    ", "\t") );
+			ui->textEdit_proxies->insertPlainText(
+				vmt.subGroups.replace("    ", "\t") );
 		}
 
 		parseVMT(vmt, true);
