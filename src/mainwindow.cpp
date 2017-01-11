@@ -7271,51 +7271,48 @@ void MainWindow::openTemplate() {
 
 	QAction* action = qobject_cast<QAction*>(sender());
 
-	if(action)
-	{
-		if( mSettings->templateNew && mChildWidgetChanged) {
+	if (mSettings->templateNew && mChildWidgetChanged) {
 
-			switch( _displaySaveMessage() ) {
+		switch( _displaySaveMessage() ) {
 
-			case QMessageBox::Save:
-				action_Save();
-			case QMessageBox::Cancel:
-			case QMessageBox::Escape:
-				return;
-			}
-
-			resetWidgets();
-			updateWindowTitle();
-
-			QList<QAction*> actions = ui->action_games->actions();
-			foreach(QAction* action, actions) {
-				action->setEnabled(true);
-			}
-
-			setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
+		case QMessageBox::Save:
+			action_Save();
+		case QMessageBox::Cancel:
+		case QMessageBox::Escape:
+			return;
 		}
 
-		VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+		resetWidgets();
+		updateWindowTitle();
 
-		if ( !ui->textEdit_proxies->toPlainText().isEmpty() &&
-			 !vmt.subGroups.isEmpty() ) {
+		QList<QAction*> actions = ui->action_games->actions();
+		foreach(QAction* action, actions) {
+			action->setEnabled(true);
+		}
 
-			ui->textEdit_proxies->moveCursor(QTextCursor::End,
-											 QTextCursor::MoveAnchor);
+		setCurrentGame(mSettings->saveLastGame ? mSettings->lastGame : "");
+	}
 
-			ui->textEdit_proxies->textCursor().deletePreviousChar();
-			ui->textEdit_proxies->insertPlainText(
+	VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+
+	if (!ui->textEdit_proxies->toPlainText().isEmpty() &&
+		!vmt.subGroups.isEmpty() ) {
+
+		ui->textEdit_proxies->moveCursor(QTextCursor::End,
+										 QTextCursor::MoveAnchor);
+
+		ui->textEdit_proxies->textCursor().deletePreviousChar();
+		ui->textEdit_proxies->insertPlainText(
 				vmt.subGroups.replace("    ", "\t")
 					.replace("Proxies\n{\n", "\n") );
 
-		} else {
-			ui->textEdit_proxies->insertPlainText(
+	} else {
+		ui->textEdit_proxies->insertPlainText(
 				vmt.subGroups.replace("    ", "\t") );
-		}
-
-		parseVMT(vmt, true);
-		refreshRequested();
 	}
+
+	parseVMT(vmt, true);
+	refreshRequested();
 }
 
 
