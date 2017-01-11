@@ -201,15 +201,14 @@ void processFresnelRanges(const QString &parameter, const QString &value,
 void processExponent1(const QString &parameter, const QString &value,
 		Ui::MainWindow *ui, VmtFile vmt)
 {
+	Q_UNUSED(parameter);
+
 	if(vmt.parameters.contains("$phongexponenttexture"))
 		ERROR("$phongexponent overrides $phongexponenttexture!")
 
-	utils::IntResult r = utils::parseInt(parameter, value, 5, ui);
-
-	if (r.notDefault) {
-		ui->spinBox_exponent->setValue(r.value);
-		ui->spinBox_exponent2->setValue(r.value);
-	}
+	utils::IntResult r = utils::parseIntNoDefault(value);
+	ui->spinBox_exponent->setValue(r.value);
+	ui->spinBox_exponent2->setValue(r.value);
 }
 
 /*!
@@ -348,6 +347,13 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 			if (r.notDefault) widget->setValue(r.value); \
 		} \
 	}
+	#define INTNODEF(p, widget) { \
+		PREP(p) \
+			const QString &v = vmt->parameters.take(p); \
+			utils::IntResult r = utils::parseIntNoDefault(v); \
+			widget->setValue(r.value); \
+		} \
+	}
 	#define BOOL(p, widget) { \
 		PREP(p) \
 			const QString &v = vmt->parameters.take(p); \
@@ -378,7 +384,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	BOOL("$phongalbedotint", ui->checkBox_albedoTint)
 	DO_WITH_VMT("$phongexponent", processExponent1)
 	TEXTURE("$phongexponenttexture", ui->lineEdit_exponentTexture)
-	DOUBLE("$phongboost", "5", ui->doubleSpinBox_boost)
+	DOUBLE("$phongboost", "1", ui->doubleSpinBox_boost)
 	BOOL("$basemapalphaphongmask", ui->checkBox_exponentBaseAlpha)
 	BOOL("$basemapluminancephongmask", ui->checkBox_baseLuminanceMask)
 	BOOL("$halflambert", ui->checkBox_halfLambert)
@@ -392,5 +398,5 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	DO_CHOICE("$phongamount2", processPhongAmount, false)
 	DO_CHOICE("$phongmaskcontrastbrightness2",
 		processMaskContrastBrightness, false)
-	INT("$phongexponent2", 5, ui->spinBox_spec_exponent2)
+	INTNODEF("$phongexponent2", ui->spinBox_spec_exponent2)
 }

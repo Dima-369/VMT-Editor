@@ -147,10 +147,16 @@ void addOnUnequal(const QString &name, QDoubleSpinBox* sb, double value,
  * zeroes. If you want to check for 4.0 you would pass "4" and for 4.25, you
  * would pass "4.25".
  *
- * The UI parameter is required as we need to log errors.
+ * The UI parameter is required as we need to log errors, with the
+ * parameter name.
  */
 DoubleResult parseDouble(const QString &parameter, const QString &value,
 	const QString &def, Ui::MainWindow *ui, bool logErrors = true);
+
+/*!
+ * Does not log anything!
+ */
+DoubleResult parseDoubleNoDef(const QString &value);
 
 /*!
  * Parses the passed parameter as an integer by using parseDouble() and casting
@@ -160,6 +166,11 @@ DoubleResult parseDouble(const QString &parameter, const QString &value,
  */
 IntResult parseInt(const QString &parameter, const QString &value, int def,
 	Ui::MainWindow *ui);
+
+/*!
+ * Like parseInt() but does not consider any default value.
+ */
+IntResult parseIntNoDefault(const QString &value);
 
 /*!
  * Parses the passed parameter as a color tuple.

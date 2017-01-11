@@ -131,7 +131,21 @@ QString VmtParser::convertVmt( VmtFile vmtEntry, bool groupedParameters, bool qu
 
 			moreParameters = true;
 
-			if(useIndentation) {
+			QString indentation = (useIndentation ? addTabs( vmtEntry.shaderName.compare("Patch") == 0 ? 2 : 1 ) : "");
+
+			if(quotesForTexture) {
+
+				if( it.value().contains(QRegExp(R"([\s\\\/]+)")) )
+					out.append( indentation + it.key() + " \"" + it.value() + "\"\n" );
+				else
+					out.append( indentation + it.key() + " " + it.value() + "\n" );
+
+			} else {
+
+					out.append( indentation + "\"" + it.key() + "\" \"" + it.value() + "\"\n" );
+			}
+
+			/*if(useIndentation) {
 
 				if( vmtEntry.shaderName.compare("Patch") != 0 )
 					out.append( addTabs(1) + it.key() + " " + it.value() + "\n" );
@@ -141,7 +155,7 @@ QString VmtParser::convertVmt( VmtFile vmtEntry, bool groupedParameters, bool qu
 			} else {
 
 				out.append( it.key() + " " + it.value() + "\n" );
-			}
+			}*/
 
 			++it;
 		}
@@ -187,14 +201,14 @@ QString VmtParser::alphabeticallySortedParameters( QMap< QString, QString >* par
 
 				if(useIndentation) {
 
-					if( it.value().contains( " " ) || mQuoteParameters.contains( it.key(), Qt::CaseInsensitive ))
+					if( it.value().contains(QRegExp(R"([\s\\\/]+)")) || mQuoteParameters.contains( it.key(), Qt::CaseInsensitive ))
 						output.append( addTabs( isPatchShader ? 2 : 1 ) + it.key() + " \"" + it.value() + "\"\n" );
 					else
 						output.append( addTabs( isPatchShader ? 2 : 1 ) + it.key() + " " + it.value() + "\n" );
 
 				} else {
 
-					if( it.value().contains( " " ) || mQuoteParameters.contains( it.key(), Qt::CaseInsensitive ))
+					if( it.value().contains(QRegExp(R"([\s\\\/]+)")) || mQuoteParameters.contains( it.key(), Qt::CaseInsensitive ))
 						output.append( it.key() + " \"" + it.value() + "\"\n" );
 					else
 						output.append( it.key() + " " + it.value() + "\n" );
@@ -204,17 +218,17 @@ QString VmtParser::alphabeticallySortedParameters( QMap< QString, QString >* par
 
 				if(useIndentation) {
 
-					if( it.value().contains( " " ) )
+					/*if( it.value().contains( " " ) )
 						output.append( addTabs( isPatchShader ? 2 : 1 ) + it.key() + " \"" + it.value() + "\"\n" );
-					else
-						output.append( addTabs( isPatchShader ? 2 : 1 ) + it.key() + " " + it.value() + "\n" );
+					else*/
+						output.append( addTabs( isPatchShader ? 2 : 1 ) + "\"" + it.key() + "\" \"" + it.value() + "\"\n" );
 
 				} else {
 
-					if( it.value().contains( " " ) )
+					/*if( it.value().contains( " " ) )
 						output.append( it.key() + " \"" + it.value() + "\"\n" );
-					else
-						output.append( it.key() + " " + it.value() + "\n" );
+					else*/
+						output.append( "\"" + it.key() + "\" \"" + it.value() + "\"\n" );
 				}
 			}
 		}
@@ -228,7 +242,7 @@ QString VmtParser::alphabeticallySortedParameters( QMap< QString, QString >* par
 QString VmtParser::groupParameters( QMap< QString, QString >* parameters, bool isCustomShader, bool isWaterShader, bool isPatchShader, bool quotesForTextures, bool useIndentation )
 {
 	// Needed for $normalmap because it is found in the Water and Refract shader
-	mGroups[11] = (isWaterShader || isCustomShader) ?
+	mGroups[12] = (isWaterShader || isCustomShader) ?
 				"$normalmap;$bottommaterial;$bumpframe" :
 				"$refract;$normalmap;$normalmap2;$refracttinttexture;$refracttint;$refractamount;$bluramount";
 
@@ -249,17 +263,17 @@ QString VmtParser::groupParameters( QMap< QString, QString >* parameters, bool i
 
 				if(quotesForTextures) {
 
-					if( value.contains( " " ) || mQuoteParameters.contains( groupParameters.at(j), Qt::CaseInsensitive ))
+					if( value.contains(QRegExp(R"([\s\\\/]+)")) || mQuoteParameters.contains( groupParameters.at(j), Qt::CaseInsensitive ))
 						output.append( indentation + groupParameters.at(j) + " \"" + value + "\"\n" );
 					else
 						output.append( indentation + groupParameters.at(j) + " " + value + "\n" );
 
 				} else {
 
-					if( value.contains( " " ) )
+					/*if( value.contains( " " ) )
 						output.append( indentation + groupParameters.at(j) + " \"" + value + "\"\n" );
-					else
-						output.append( indentation + groupParameters.at(j) + " " + value + "\n" );
+					else*/
+						output.append( indentation + "\"" + groupParameters.at(j) + "\" \"" + value + "\"\n" );
 				}
 
 				groupEdited = true;

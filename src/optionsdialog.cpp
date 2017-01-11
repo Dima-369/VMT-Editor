@@ -41,6 +41,10 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_removeSuffix->setChecked( settings->removeSuffix );
 
+	ui->checkBox_removeAlpha->setChecked( settings->removeAlpha );
+
+	ui->checkBox_templateNew->setChecked( settings->templateNew );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -63,7 +67,7 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_useIndentation->setChecked( settings->useIndentation );
 
-	ui->checkBox_useQuotesForTexture->setChecked( settings->useQuotesForTexture );
+	ui->checkBox_useQuotesForTexture->setChecked( !settings->useQuotesForTexture );
 
 	updateCustomShaderStats();
 
@@ -174,6 +178,22 @@ void OptionsDialog::saveSettings()
 
 	//----------------------------------------------------------------------------------------//
 
+	if (ui->checkBox_templateNew->isChecked()) {
+		if (!mSettings->templateNew) {
+			mSettings->templateNew = true;
+			mIniSettings->setValue("templateNew", true);
+			emit optionChanged(Settings::_TemplateNew, "1");
+		}
+	} else {
+		if(mSettings->templateNew) {
+			mSettings->templateNew = false;
+			mIniSettings->setValue("templateNew", false);
+			emit optionChanged(Settings::_TemplateNew, "0");
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+
 	if (ui->checkBox_autoRefresh->isChecked()) {
 		if (!mSettings->autoRefresh) {
 			mSettings->autoRefresh = true;
@@ -201,6 +221,22 @@ void OptionsDialog::saveSettings()
 			mSettings->removeSuffix = false;
 			mIniSettings->setValue("removeSuffix", false);
 			emit optionChanged(Settings::_RemoveSuffix, "0");
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+
+	if (ui->checkBox_removeAlpha->isChecked()) {
+		if (!mSettings->removeAlpha) {
+			mSettings->removeAlpha = true;
+			mIniSettings->setValue("removeAlpha", true);
+			emit optionChanged(Settings::_RemoveAlpha, "1");
+		}
+	} else {
+		if(mSettings->removeAlpha) {
+			mSettings->removeAlpha = false;
+			mIniSettings->setValue("removeAlpha", false);
+			emit optionChanged(Settings::_RemoveAlpha, "0");
 		}
 	}
 
@@ -346,7 +382,7 @@ void OptionsDialog::saveSettings()
 
 	//----------------------------------------------------------------------------------------//
 
-	if( ui->checkBox_useQuotesForTexture->isChecked() )
+	if( !ui->checkBox_useQuotesForTexture->isChecked() )
 	{
 		if( !mSettings->useQuotesForTexture )
 		{

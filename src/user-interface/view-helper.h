@@ -93,6 +93,11 @@ QColor getBG(QPlainTextEdit *widget);
  */
 QString getNonDef(QDoubleSpinBox *sb, const QString &def);
 
+inline QString stripZeroes(QDoubleSpinBox *sp)
+{
+	return stripZeroes(sp->cleanText());
+}
+
 /*!
  * Strips all trailing zeroes and then compares the resulting string against
  * it.

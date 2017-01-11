@@ -198,8 +198,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
 	connect( ui->actionOpen,			 SIGNAL(triggered()),  this, SLOT(action_Open()));
 	connect( ui->actionSave,			 SIGNAL(triggered()),  this, SLOT(action_Save()));
-	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_SaveAs()));
+	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_saveAs()));
+	connect( ui->actionSave_As_Template, SIGNAL(triggered()), SLOT(saveAsTemplate()));
 	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
+
+	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
 
 	connect( ui->action_refreshGameList, SIGNAL(triggered()),  this, SLOT(refreshGameList()));
 
@@ -272,11 +275,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->doubleSpinBox_treeswayStartHeight->setDoubleSlider(ui->horizontalSlider_treeswayStartHeight);
 	ui->doubleSpinBox_treeswayStartRadius->setDoubleSlider(ui->horizontalSlider_treeswayStartRadius);
-	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 4.0);
-	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 4.0);
-	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 4.0);
-	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 4.0);
-	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 4.0);
+	ui->doubleSpinBox_treeswayStrength->setDoubleSlider(ui->horizontalSlider_treeswayStrength, 10.0);
+	ui->doubleSpinBox_treeswaySpeed->setDoubleSlider(ui->horizontalSlider_treeswaySpeed, 10.0);
+	ui->doubleSpinBox_treeswayspeedHighWind->setDoubleSlider(ui->horizontalSlider_treeswayspeedHighWind, 10.0);
+	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 10.0);
+	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 10.0);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -373,6 +376,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		cacheFolder.mkdir("Cache");
 		cacheFolder.mkdir("Cache/Move");
 
+	QDir templatesFolder;
+		templatesFolder.mkdir("templates");
+
 #ifdef Q_OS_WIN
 	utils::checkVtfCmd(ui);
 #endif
@@ -380,6 +386,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	//----------------------------------------------------------------------------------------//
 
 	separatorAct = ui->menuFile->addSeparator();
+	separatorTemp = ui->menuTemplates->addSeparator();
 
 	for( int i = 0; i < MaxRecentFiles; ++i ) {
 
@@ -393,6 +400,17 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 		 connect(recentFileActions[i], SIGNAL(triggered()), this, SLOT(openRecentFile()));
 	}
+
+	for( int i = 0; i < MaxTemplates; ++i ) {
+
+		templateActions[i] = new QAction(this);
+		templateActions[i]->setVisible(false);
+		ui->menuTemplates->insertAction( ui->actionRefresh_List, templateActions[i] );
+
+		connect(templateActions[i], SIGNAL(triggered()), SLOT(openTemplate()));
+	}
+
+	action_RefreshTemplateList();
 
 	updateRecentFileActions( mSettings->recentFileEntryStyle == Settings::FullPath ? true : false );
 
@@ -714,7 +732,7 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 	}
 }
 
-void MainWindow::parseVMT( VmtFile vmt )
+void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 {
 	mParsingVMT = true;
 
@@ -754,6 +772,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 	//----------------------------------------------------------------------------------------//
 
 	int index = ui->comboBox_shader->findText(vmt.shaderName, Qt::MatchFixedString);
+	int currentIndex = ui->comboBox_shader->currentIndex();
 	if (index == -1) {
 
 		Info("Unknown shader found, adding shader to enabled custom shaders!")
@@ -768,7 +787,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 
 		ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText(vmt.shaderName));
 
-	} else {
+	} else if (!isTemplate || (isTemplate && index != currentIndex) ) {
 
 		sortShaderComboBox();
 
@@ -1447,6 +1466,7 @@ void MainWindow::parseVMT( VmtFile vmt )
 			utils::parseTexture("$envmap", value, ui,
 				ui->lineEdit_envmap, vmt);
 
+			ui->checkBox_cubemap->setChecked(false);
 			usingEnvmap = true;
 		}
 
@@ -3259,73 +3279,73 @@ void MainWindow::parseVMT( VmtFile vmt )
 	if(showBaseTexture2 && !ui->action_baseTexture2->isChecked())
 		ui->action_baseTexture2->trigger();
 
-    if(vmt.state.showDetail)
+	if(vmt.state.showDetail && !ui->action_detail->isChecked())
 		ui->action_detail->trigger();
 
-	if(showTransparency)
+	if(showTransparency && !ui->action_transparency->isChecked())
 		ui->action_transparency->trigger();
 
-	if(showColor)
+	if(showColor && !ui->action_color->isChecked())
 		ui->action_color->trigger();
 
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
 		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric) {
+		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
 			ui->action_phong->trigger();
-		} else {
+		} else if (!ui->action_phongBrush->isChecked()) {
 			ui->action_phongBrush->trigger();
 		}
 	}
 
-	if(vmt.state.showNormalBlend) {
+	if(vmt.state.showNormalBlend && !ui->action_normalBlend->isChecked()) {
 		ui->action_normalBlend->trigger();
 	}
 
-	if(vmt.state.showTreeSway) {
+	if(vmt.state.showTreeSway && !ui->action_treeSway->isChecked()) {
 		ui->action_treeSway->trigger();
 	}
 
-	if(showDecal)
+	if(showDecal && !ui->action_decal->isChecked())
 		ui->action_decal->trigger();
 
-	if(showShadingReflection)
+	if(showShadingReflection && !ui->action_reflection->isChecked())
 		ui->action_reflection->trigger();
 
-	if(showSelfIllumination)
+	if(showSelfIllumination && !ui->action_selfIllumination->isChecked())
 		ui->action_selfIllumination->trigger();
 
-	if(showRimLight)
+	if(showRimLight && !ui->action_rimLight->isChecked())
 		ui->action_rimLight->trigger();
 
-	if(showFlowmap)
+	if(showFlowmap && !ui->action_flowmap->isChecked())
 		ui->action_flowmap->trigger();
 
-	if(showWaterReflection)
+	if(showWaterReflection && !ui->action_waterReflection->isChecked())
 		ui->action_waterReflection->trigger();
 
-	if(showWaterRefraction)
+	if(showWaterRefraction && !ui->action_refraction->isChecked())
 		ui->action_refraction->trigger();
 
-	if(showWaterFog)
+	if(showWaterFog && !ui->action_fog->isChecked())
 		ui->action_fog->trigger();
 
-	if(showBaseTextureTransform)
+	if(showBaseTextureTransform && !ui->action_baseTextureTransforms->isChecked())
 		ui->action_baseTextureTransforms->trigger();
 
-	if(showBumpmapTransform)
+	if(showBumpmapTransform && !ui->action_bumpmapTransforms->isChecked())
 		ui->action_bumpmapTransforms->trigger();
 
-	if(showMiscellaneous)
+	if(showMiscellaneous && !ui->action_misc->isChecked())
 		ui->action_misc->trigger();
 
-	if(showOther)
+	if(showOther && !ui->action_other->isChecked())
 		ui->action_other->trigger();
 
-	if(showSprite)
+	if(showSprite && !ui->groupBox_sprite->isVisible())
 		ui->groupBox_sprite->setVisible(true);
 
-	if(showScroll)
+	if(showScroll && !ui->action_scroll->isChecked())
 		ui->action_scroll->trigger();
 
 	//----------------------------------------------------------------------------------------//
@@ -3629,8 +3649,12 @@ VmtFile MainWindow::makeVMT()
 																   " " + Str(ui->doubleSpinBox_fresnelRangesY->value()) +
 																   " " + Str(ui->doubleSpinBox_fresnelRangesZ->value()) + "]" ) );
 
-		if( ui->spinBox_exponent->isEnabled() )
-			vmtFile.parameters.insert( "$phongexponent", Str( ui->spinBox_exponent->value() ));
+		// Note that we always place $phongexponent in the VMT
+		// regardless if it has the default value 5
+		if (ui->spinBox_exponent->isEnabled()) {
+			vmtFile.parameters.insert("$phongexponent",
+				Str(ui->spinBox_exponent->value()));
+		}
 
 		tmp = toParameter(utils::getBG(ui->color_phongTint));
 		if( ui->toolButton_phongTint->isEnabled() && tmp != "[1 1 1]" )
@@ -3765,49 +3789,33 @@ VmtFile MainWindow::makeVMT()
 	{
 		vmtFile.parameters.insert( "$treesway", "1" );
 
-		if( ui->spinBox_treeswayHeight->value() != 0)
-			vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
+		vmtFile.parameters.insert( "$treeswayheight", Str( ui->spinBox_treeswayHeight->value() ));
 
-		if( ui->spinBox_treeswayRadius->value() != 0)
-			vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
+		vmtFile.parameters.insert( "$treeswayradius", Str( ui->spinBox_treeswayRadius->value() ));
 
-		if( ui->spinBox_treeswaySpeedLerpEnd->value() != 0)
-			vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedlerpend", Str( ui->spinBox_treeswaySpeedLerpEnd->value() ));
 
-		if( ui->spinBox_treeswaySpeedLerpStart->value() != 0)
-			vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedlerpstart", Str( ui->spinBox_treeswaySpeedLerpStart->value() ));
 
-		if( ui->spinBox_treeswayScrumbleFrequency->value() != 0)
-			vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblefrequency", Str( ui->spinBox_treeswayScrumbleFrequency->value() ));
 
-		if( ui->spinBox_treeswayFalloff->value() != 0)
-			vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
+		vmtFile.parameters.insert( "$treeswayfalloffexp", Str( ui->spinBox_treeswayFalloff->value() ));
 
-		if( ui->spinBox_treeswayScrumbleFalloff->value() != 0)
-			vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblefalloffexp", Str( ui->spinBox_treeswayScrumbleFalloff->value() ));
 
+		vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
 
+		vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
 
-		if( ui->doubleSpinBox_treeswayStartHeight->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystartheight", Str( ui->doubleSpinBox_treeswayStartHeight->value() ));
+		vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
 
-		if( ui->doubleSpinBox_treeswayStartRadius->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystartradius", Str( ui->doubleSpinBox_treeswayStartRadius->value() ));
+		vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
 
-		if( ui->doubleSpinBox_treeswayStrength->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswaystrength", Str( ui->doubleSpinBox_treeswayStrength->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
 
-		if( ui->doubleSpinBox_treeswayspeedHighWind->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayspeedhighwindmultiplier", Str( ui->doubleSpinBox_treeswayspeedHighWind->value() ));
+		vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
 
-		if( ui->doubleSpinBox_treeswayScrumbleStrength->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayscrumblestrength", Str( ui->doubleSpinBox_treeswayScrumbleStrength->value() ));
-
-		if( ui->doubleSpinBox_treeswaySpeed->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayspeed", Str( ui->doubleSpinBox_treeswaySpeed->value() ));
-
-		if( ui->doubleSpinBox_treeswayScrumbleSpeed->value() != 0.0 )
-			vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
+		vmtFile.parameters.insert( "$treeswayscrumblespeed", Str( ui->doubleSpinBox_treeswayScrumbleSpeed->value() ));
 	}
 
 	//---------------------------------------------------------------------------------------//
@@ -4136,8 +4144,6 @@ VmtFile MainWindow::makeVMT()
 		tmp3 = reinterpret_cast<QLineEdit*>( ui->formLayout_3->itemAt(i)->widget() )->text().trimmed();
 
 		if (!tmp2.isEmpty() && !tmp3.isEmpty()) {
-			if (tmp3.contains(QRegExp(R"([\s\\\/]+)")))
-				tmp3 = "\"" + tmp3 + "\"";
 			vmtFile.parameters.insert(tmp2, tmp3);
 		}
 	}
@@ -4667,7 +4673,7 @@ void MainWindow::action_Save() {
 
 	} else {
 
-		action_SaveAs();
+		action_saveAs();
 	}
 
 	mLoading = true;
@@ -4679,7 +4685,7 @@ void MainWindow::action_Save() {
 	mLoading = false;
 }
 
-QString MainWindow::action_SaveAs() {
+QString MainWindow::action_saveAs() {
 
 	QString fileName;
 
@@ -4704,6 +4710,7 @@ QString MainWindow::action_SaveAs() {
 		if ( ui->lineEdit_diffuse->text().isEmpty() ) vtfName = "\\untitled.vmt";
 		else {
 			QString vtfLong = ui->lineEdit_diffuse->text();
+
 			QString tmp;
 			if ( vtfLong.contains("/")) {
 				tmp = vtfLong.section("/", -1);
@@ -4715,6 +4722,10 @@ QString MainWindow::action_SaveAs() {
 				vtfName = "\\" + tmp.section(".", 0, 0);
 			} else {
 				vtfName = "\\" + tmp;
+			}
+
+			if( vtfName.endsWith("_diffuse") ) {
+				vtfName.chop(8);
 			}
 
 		}
@@ -4765,6 +4776,63 @@ QString MainWindow::action_SaveAs() {
 	refreshRequested();
 
 	return fileName;
+}
+
+void MainWindow::saveAsTemplate()
+{
+	const auto suggestion = QDir::toNativeSeparators(
+		QDir::current().filePath("templates/untitled.vmt"));
+	const auto fileName = QFileDialog::getSaveFileName(this,
+		"Save Valve Material Template", suggestion, "VMT (*.vmt)" );
+
+	if (fileName.isEmpty())
+		return;
+
+	refreshRequested();
+	vmtParser->saveVmtFile(ui->plainTextEdit_vmtPreview->toPlainText(),
+		fileName);
+	mChildWidgetChanged = false;
+	mVMTLoaded = true;
+
+	updateWindowTitle();
+	refreshRequested();
+	action_RefreshTemplateList();
+}
+
+void MainWindow::action_RefreshTemplateList() {
+
+	//QDir* templatesDir = new QDir(QDir::currentPath() + "/templates");
+	QStringList templates = QDir(QDir::currentPath() + "/templates").entryList(QStringList()<<"*.vmt");
+	for ( int i = 0; i < templates.size(); i++ ) {
+		templates[i].prepend(QDir::currentPath() + "/templates/");
+	}
+	//qDebug()<<templates;
+
+	int numTemplates = qMin( templates.size(), (int)MaxTemplates );
+
+	for( int i = 0; i < numTemplates; ++i )
+	{
+	   QString text = tr("&%1").arg( QFileInfo(templates[i]).fileName() );
+	   templateActions[i]->setText(text);
+	   templateActions[i]->setData(templates[i]);
+	   templateActions[i]->setVisible(true);
+	}
+
+
+	for( int j = numTemplates; j < MaxTemplates; ++j )
+	{
+		templateActions[j]->setVisible(false);
+	}
+
+	if( numTemplates > 0 )
+	{
+		ui->menuTemplates->insertAction( ui->actionRefresh_List, separatorTemp );
+		separatorTemp->setVisible(true);
+	}
+	else
+	{
+		separatorTemp->setVisible(false);
+	}
 }
 
 void MainWindow::toggleTransparency() {
@@ -4913,7 +4981,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
+				Info("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -4951,7 +5019,7 @@ QString MainWindow::validateTexture(QString objectName, QString vtf, const QStri
 		if( !( gameInfoDir.exists( "materials/" + vtf + ".vtf" ))) {
 
 			if(mGameSelected)
-				Error("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
+				Info("" + command + " vtf file: \"" + vtf + ".vtf\" cannot be found!")
 
 		} else {
 
@@ -5234,7 +5302,7 @@ bool MainWindow::loadBoolParameter( const QString& value, const QString& paramet
 	if( value == "1" )
 		return true;
 	else if( value == "0" )
-		Info("" + parameter + " has value \"0\" which is the default!")
+		Info("" + parameter + " has default value: 0")
 	else
 		Error("" + parameter + " has unrecognizable value: \"" + value + "\"")
 
@@ -5287,7 +5355,7 @@ bool MainWindow::loadDoubleParameter( double* doubleValue, const QString& value,
 			return true;
 		}
 
-		Info("" + parameter + " has value \"" + Str(defaultValue) + "\" which is the default!")
+		Info("" + parameter + " has default value: \"" + Str(defaultValue) + "\"")
 
 		return false;
 	}
@@ -6295,7 +6363,8 @@ void MainWindow::shaderChanged()
 				phong::resetAction(ui);
 				break;
 			case TreeSway:
-				treesway::resetAction(ui);break;
+				treesway::resetAction(ui);
+				break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6339,6 +6408,9 @@ void MainWindow::shaderChanged()
 			ALLOW_MENU(ui->menu_water)
 
 		} else {
+
+			const auto isVertexLitGeneric =
+				(shader == "VertexLitGeneric");
 
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
@@ -6396,15 +6468,19 @@ void MainWindow::shaderChanged()
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 
-			ui->action_treeSway->setEnabled( shader == "VertexLitGeneric" );
-			ui->action_treeSway->setVisible( shader == "VertexLitGeneric" );
+			ui->action_treeSway->setVisible(isVertexLitGeneric);
+			ui->action_decal->setVisible(isVertexLitGeneric);
+			if (!isVertexLitGeneric) {
+				ui->action_treeSway->setChecked(false);
+				ui->action_decal->setChecked(false);
+				ui->groupBox_treeSway->setVisible(false);
+				ui->groupBox_textureDecal->setVisible(false);
+			}
 
-			ui->action_decal->setEnabled( shader == "VertexLitGeneric" );
-			ui->action_decal->setVisible( shader == "VertexLitGeneric" );
-
-			if(shader != "LightmappedGeneric")
+			if(shader != "LightmappedGeneric") {
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
+			}
 
 			//----------------------------------------------------------------------------------------//
 
@@ -6432,7 +6508,6 @@ void MainWindow::shaderChanged()
 
 			// Base Texture not allowed
 			if (shader == "Refract" || shader == "UnlitTwoTexture" || shader == "Water") {
-
 				ui->action_baseTexture->setChecked(false);
 				ui->groupBox_baseTexture->setVisible(false);
 
@@ -6883,7 +6958,9 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
+	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -7101,6 +7178,12 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_RemoveSuffix:
 			break;
 
+		case Settings::_RemoveAlpha:
+			break;
+
+		case Settings::_TemplateNew:
+			break;
+
 		case Settings::_CustomShaders:
 			// TODO: Move into own function
 
@@ -7184,6 +7267,54 @@ void MainWindow::openRecentFile()
 	}
 }
 
+void MainWindow::openTemplate() {
+
+	QAction* action = qobject_cast<QAction*>(sender());
+
+	if (mSettings->templateNew && mChildWidgetChanged) {
+
+		switch( _displaySaveMessage() ) {
+
+		case QMessageBox::Save:
+			action_Save();
+		case QMessageBox::Cancel:
+		case QMessageBox::Escape:
+			return;
+		}
+
+		resetWidgets();
+		updateWindowTitle();
+
+		QList<QAction*> actions = ui->action_games->actions();
+		foreach(QAction* action, actions) {
+			action->setEnabled(true);
+		}
+
+		setCurrentGame(mSettings->saveLastGame ? mSettings->lastGame : "");
+	}
+
+	VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+
+	if (!ui->textEdit_proxies->toPlainText().isEmpty() &&
+		!vmt.subGroups.isEmpty() ) {
+
+		ui->textEdit_proxies->moveCursor(QTextCursor::End,
+										 QTextCursor::MoveAnchor);
+
+		ui->textEdit_proxies->textCursor().deletePreviousChar();
+		ui->textEdit_proxies->insertPlainText(
+				vmt.subGroups.replace("    ", "\t")
+					.replace("Proxies\n{\n", "\n") );
+
+	} else {
+		ui->textEdit_proxies->insertPlainText(
+				vmt.subGroups.replace("    ", "\t") );
+	}
+
+	parseVMT(vmt, true);
+	refreshRequested();
+}
+
 
 void MainWindow::setCurrentFile( const QString& fileName )
 {
@@ -7222,7 +7353,7 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 {
 		 for( int i = 0; i < numRecentFiles; ++i )
 		 {
-			QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(files[i]).absoluteFilePath() );
+			QString text = tr("&%1").arg( QFileInfo(files[i]).absoluteFilePath() );
 			recentFileActions[i]->setText(text);
 			recentFileActions[i]->setData(files[i]);
 			recentFileActions[i]->setVisible(true);
@@ -7232,7 +7363,7 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 {
 		 for( int i = 0; i < numRecentFiles; ++i )
 		 {
-			QString text = tr("&%1   %2").arg(i + 1).arg( QFileInfo(files[i]).fileName() );
+			QString text = tr("&%1").arg( QFileInfo(files[i]).fileName() );
 			recentFileActions[i]->setText(text);
 			recentFileActions[i]->setData(files[i]);
 			recentFileActions[i]->setVisible(true);
@@ -7490,6 +7621,48 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 			} else {
 
 				// Image files, fileType != ".vtf"
+				bool noAlpha = true;
+
+				if( lineEdit == ui->lineEdit_diffuse ) {
+					if (ui->checkBox_basealpha->isChecked() ||
+						ui->groupBox_selfIllumination->isVisible() ||
+						ui->checkBox_alphaTest->isChecked() ||
+						ui->checkBox_transparent->isChecked() ||
+						ui->checkBox_blendTint->isChecked() ||
+						ui->checkBox_phongBaseAlpha->isChecked() ||
+						ui->checkBox_exponentBaseAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_bumpmap ) {
+					if (ui->checkBox_normalalpha->isChecked() ||
+						ui->groupBox_phong->isVisible() ||
+						ui->checkBox_phongNormalAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse2 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse3 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_diffuse4 ) {
+					if (ui->checkBox_basealpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse ) {
+					noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse2 ) {
+					noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_specmap ) {
+					if (ui->checkBox_envmapAlpha->isChecked() )
+						noAlpha = false;
+				}
+				else if( lineEdit == ui->lineEdit_decal )
+					noAlpha = false;
 
 				if( texturesToCopy.contains(lineEdit) ) {
 
@@ -7538,7 +7711,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->objectName = objectName;
 						conversionThread->relativeFilePath = relativeFilePath;
 						conversionThread->newFileName = "";
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						if(noAlpha && mSettings->removeAlpha)
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+						else
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 						conversionThread->moveFile = true;
 						conversionThread->newFile = newFile;
 						conversionThread->newFileDir = dir;
@@ -7564,7 +7740,10 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					ConversionThread* conversionThread = new ConversionThread(this);
 						conversionThread->fileName = fileName;
 						conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+						if(noAlpha && mSettings->removeAlpha)
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+						else
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 						conversionThread->start();
 
 					fileName.chop(4);
@@ -9071,20 +9250,44 @@ void MainWindow::reconvertTexture()
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+	bool noAlpha = true;
 	QString preview;
 
-	if( objectName == "lineEdit_diffuse" )
+	if( objectName == "lineEdit_diffuse" ) {
 		preview = "preview_basetexture1";
-	else if( objectName == "lineEdit_bumpmap" )
+		if (ui->checkBox_basealpha->isChecked() ||
+			ui->groupBox_selfIllumination->isVisible() ||
+			ui->checkBox_alphaTest->isChecked() ||
+			ui->checkBox_transparent->isChecked() ||
+			ui->checkBox_blendTint->isChecked() ||
+			ui->checkBox_phongBaseAlpha->isChecked() ||
+			ui->checkBox_exponentBaseAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_bumpmap" ) {
 		preview = "preview_bumpmap1";
-	else if( objectName == "lineEdit_diffuse2" )
+		if (ui->checkBox_normalalpha->isChecked() ||
+			ui->groupBox_phong->isVisible() ||
+			ui->checkBox_phongNormalAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_diffuse2" ) {
 		preview = "preview_basetexture2";
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_bumpmap2" )
 		preview = "preview_bumpmap2";
-	else if( objectName == "lineEdit_diffuse3" )
+	else if( objectName == "lineEdit_diffuse3" ) {
 		preview = "preview_basetexture3";
-	else if( objectName == "lineEdit_diffuse4" )
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_diffuse4" ) {
 		preview = "preview_basetexture4";
+		if (ui->checkBox_basealpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_detail" )
 		preview = "preview_detail";
 	else if( objectName == "lineEdit_refractNormalMap" )
@@ -9093,12 +9296,22 @@ void MainWindow::reconvertTexture()
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_waterNormalMap" )
 		preview = "preview_bumpmap1";
-	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" )
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse" ) {
 		preview = "preview_basetexture1";
-	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" )
+		noAlpha = false;
+	}
+	else if( objectName == "lineEdit_unlitTwoTextureDiffuse2" ) {
 		preview = "preview_basetexture2";
+		noAlpha = false;
+	}
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
+	else if( objectName == "lineEdit_specmap" ) {
+		if (ui->checkBox_envmapAlpha->isChecked() )
+			noAlpha = false;
+	}
+	else if( objectName == "lineEdit_decal" )
+		noAlpha = false;
 
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
@@ -9123,7 +9336,10 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"";
+		if (noAlpha && mSettings->removeAlpha)
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+		else
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;

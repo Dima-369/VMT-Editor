@@ -20,11 +20,6 @@
 QString stripZeroes(const QString& s);
 
 /*!
- * Calls stripZeroes() on the cleanText() value of the spin box.
- */
-QString stripZeroes(QDoubleSpinBox *sp);
-
-/*!
  * Extracts non empty lines from the passed file.
  */
 QStringList extractLines(const QString& fileName);
