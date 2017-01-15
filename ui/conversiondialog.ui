@@ -1475,6 +1475,32 @@ QPushButton:hover
           <string>Templates</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_t06">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Normal</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_t03">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>U. no alpha</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QPushButton" name="pushButton_tDefault">
             <property name="maximumSize">
@@ -1485,19 +1511,6 @@ QPushButton:hover
             </property>
             <property name="text">
              <string>Default</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="pushButton_t03">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Normal</string>
             </property>
            </widget>
           </item>
@@ -1514,7 +1527,7 @@ QPushButton:hover
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="0" column="3">
            <widget class="QPushButton" name="pushButton_t02">
             <property name="maximumSize">
              <size>
@@ -1523,11 +1536,11 @@ QPushButton:hover
              </size>
             </property>
             <property name="text">
-             <string>Uncompressed</string>
+             <string>Uncomp.</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="0" column="4">
            <widget class="QPushButton" name="pushButton_t04">
             <property name="maximumSize">
              <size>
@@ -1540,7 +1553,7 @@ QPushButton:hover
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
+          <item row="1" column="4">
            <widget class="QPushButton" name="pushButton_t05">
             <property name="maximumSize">
              <size>
@@ -1550,6 +1563,19 @@ QPushButton:hover
             </property>
             <property name="text">
              <string>Sky cheap</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton_t07">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>N. no alpha</string>
             </property>
            </widget>
           </item>
@@ -3667,8 +3693,8 @@ QPushButton:hover
    <slot>setTemplate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>631</x>
-     <y>77</y>
+     <x>716</x>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
@@ -3683,8 +3709,8 @@ QPushButton:hover
    <slot>setTemplate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>631</x>
-     <y>108</y>
+     <x>716</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
@@ -3731,12 +3757,44 @@ QPushButton:hover
    <slot>setTemplate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>540</x>
-     <y>76</y>
+     <x>539</x>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
      <y>487</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t06</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>583</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>497</x>
+     <y>426</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_t07</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>setTemplate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>588</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>453</x>
+     <y>404</y>
     </hint>
    </hints>
   </connection>
