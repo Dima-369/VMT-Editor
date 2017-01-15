@@ -12,7 +12,7 @@ ConversionThread::ConversionThread(MainWindow* mw) :
 void ConversionThread::run()
 {
 	QProcess process;
-	process.start("vtfcmd.exe -file \"" + fileName.replace("/", "\\") + "\" " + outputParameter.replace("/", "\\") + " -resize -msharpen SHARPENSOFT -version 7.4");
+	process.start("vtfcmd.exe -file \"" + fileName.replace("/", "\\") + "\" " + outputParameter.replace("/", "\\") + " -resize -version 7.4");
 
 	process.waitForFinished();
 

@@ -767,8 +767,8 @@ void ConversionDialog::setTemplate()
 		ui->comboBox_alphaTextures->setCurrentIndex(6);
 
 	} else if (caller == "pushButton_t03") {
-		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
-		ui->comboBox_alphaTextures->setCurrentIndex(5);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(3);
+		ui->checkBox_normal->setChecked(true);
 
 	} else if (caller == "pushButton_t04") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);

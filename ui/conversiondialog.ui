@@ -1497,7 +1497,7 @@ QPushButton:hover
              </size>
             </property>
             <property name="text">
-             <string>Uncom. no alpha</string>
+             <string>Normal</string>
             </property>
            </widget>
           </item>

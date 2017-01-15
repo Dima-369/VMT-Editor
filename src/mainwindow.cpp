@@ -7674,6 +7674,20 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 					texturesToCopy.remove(lineEdit);
 				}
 
+				bool isNormal = false;
+				QString mipmapFilter = "";
+
+				if ( lineEdit == ui->lineEdit_bumpmap ||
+					 lineEdit == ui->lineEdit_bumpmap2 ||
+					 lineEdit == ui->lineEdit_bump2 ||
+					 lineEdit == ui->lineEdit_refractNormalMap ||
+					 lineEdit == ui->lineEdit_refractNormalMap2 ||
+					 lineEdit == ui->lineEdit_waterNormalMap )
+					isNormal = true;
+
+				if (!isNormal)
+					mipmapFilter = "-msharpen SHARPENSOFT";
+
 				if(mVMTLoaded) {
 
 					QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
@@ -7712,9 +7726,9 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->relativeFilePath = relativeFilePath;
 						conversionThread->newFileName = "";
 						if(noAlpha && mSettings->removeAlpha)
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
 						else
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
 						conversionThread->moveFile = true;
 						conversionThread->newFile = newFile;
 						conversionThread->newFileDir = dir;
@@ -7741,9 +7755,9 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 						conversionThread->fileName = fileName;
 						conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
 						if(noAlpha && mSettings->removeAlpha)
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
 						else
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
+							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
 						conversionThread->start();
 
 					fileName.chop(4);
@@ -9251,7 +9265,9 @@ void MainWindow::reconvertTexture()
 	const auto tooltip = lineEdit->toolTip();
 
 	bool noAlpha = true;
+	bool isNormal = false;
 	QString preview;
+	QString mipmapFilter = "";
 
 	if( objectName == "lineEdit_diffuse" ) {
 		preview = "preview_basetexture1";
@@ -9313,6 +9329,17 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
 
+	if ( objectName == "lineEdit_bumpmap" ||
+		 objectName == "lineEdit_bumpmap2" ||
+		 objectName == "lineEdit_bump2" ||
+		 objectName == "lineEdit_refractNormalMap" ||
+		 objectName == "lineEdit_refractNormalMap2" ||
+		 objectName == "lineEdit_waterNormalMap" )
+		isNormal = true;
+
+	if (!isNormal)
+		mipmapFilter = "-msharpen SHARPENSOFT";
+
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
 	QString fileName = tooltip;
@@ -9337,9 +9364,9 @@ void MainWindow::reconvertTexture()
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
 		if (noAlpha && mSettings->removeAlpha)
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1";
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
 		else
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5";
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
