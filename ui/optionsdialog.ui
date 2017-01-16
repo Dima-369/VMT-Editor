@@ -975,7 +975,7 @@ QSlider::handle:vertical {
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_shaderGroups_2">
+           <widget class="QGroupBox" name="groupBox_fileAssociation">
             <property name="title">
              <string>File Association</string>
             </property>
