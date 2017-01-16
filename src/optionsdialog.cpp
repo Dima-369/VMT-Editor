@@ -18,6 +18,10 @@ OptionsDialog::OptionsDialog(QWidget* parent) :
 
 	connect( this, SIGNAL( accepted() ), this, SLOT( saveSettings() ));
 	connect( ui->pushButton_editShaders, SIGNAL( released() ), this, SLOT( displayEditShaderDialog() ));
+	
+#ifndef Q_OS_WIN
+	ui->groupBox_fileAssociation->hide();
+#endif
 }
 
 OptionsDialog::~OptionsDialog()
