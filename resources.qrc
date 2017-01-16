@@ -90,6 +90,7 @@
         <file alias="treesway">images/treesway.png</file>
         <file alias="decal">images/decal.png</file>
         <file alias="saveastemplate">images/saveastemplate.png</file>
+        <file>images/vmtfile.ico</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>

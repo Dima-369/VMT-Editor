@@ -459,3 +459,61 @@ void OptionsDialog::displayEditShaderDialog()
 		updateCustomShaderStats();
 	}
 }
+
+void OptionsDialog::associate()
+{
+	QWidget* caller = qobject_cast<QWidget *>( sender() );
+
+	//pushButton_assignToContext
+	//pushButton_changeIconVmt
+	//pushButton_changeIconVtf
+	//pushButton_undoFile
+
+	QString exeDir = QDir::currentPath() + "/VMT_Editor.exe";
+
+	MsgBox msgBox(this);
+		   msgBox.setWindowTitle("Registry changes");
+		   msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
+		   msgBox.setDefaultButton( QMessageBox::No );
+		   msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
+
+		   msgBox.setText( "This action will change registry keys.\n"
+						   "VMT Editor must be ran in Administrator mode.\n"
+						   "Are you sure you want to continue?");
+
+	if (msgBox.exec() != QMessageBox::Yes)
+		return;
+
+	//QSettings vmtFile("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.vmt\\OpenWithProgids", QSettings::NativeFormat);
+
+	QSettings vmtFileAction("HKEY_CLASSES_ROOT\\VMTFile\\shell\\Open with VMT Editor\\command", QSettings::NativeFormat);
+
+	QSettings vmtFileIcon("HKEY_CLASSES_ROOT\\VMTFile\\DefaultIcon", QSettings::NativeFormat);
+	QSettings vmtFileIcon2("HKEY_CLASSES_ROOT\\Applications\\VMT_Editor.exe\\DefaultIcon", QSettings::NativeFormat);
+	QSettings vmtFileIcon3("HKEY_CLASSES_ROOT\\.vmt\\DefaultIcon", QSettings::NativeFormat);
+	QSettings vtfFileIcon("HKEY_CLASSES_ROOT\\Applications\\VTFEdit.exe\\DefaultIcon", QSettings::NativeFormat);
+	QSettings vtfFileIcon2("HKEY_CLASSES_ROOT\\VTFFile\\DefaultIcon", QSettings::NativeFormat);
+
+	QSettings progId("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.vmt\\UserChoice", QSettings::NativeFormat);
+
+	QString progIdName = progId.value("ProgId", "VMTFile").toString();
+
+	QSettings vmtFileAction2("HKEY_CLASSES_ROOT\\" + QDir::toNativeSeparators(progIdName) + "\\shell\\Open with VMT Editor\\command", QSettings::NativeFormat);
+
+	if (caller->objectName() == "pushButton_assignToContext") {
+		vmtFileAction.setValue("Default", "\"" + QDir::toNativeSeparators(exeDir) + "\" \"%1\"");
+		vmtFileAction2.setValue("Default", "\"" + QDir::toNativeSeparators(exeDir) + "\" \"%1\"");
+	}
+
+	if (caller->objectName() == "pushButton_changeIconVmt") {
+		vmtFileIcon.setValue("Default", QDir::toNativeSeparators(exeDir) + ",1");
+		vmtFileIcon2.setValue("Default", QDir::toNativeSeparators(exeDir) + ",1");
+		vmtFileIcon3.setValue("Default", QDir::toNativeSeparators(exeDir) + ",1");
+	}
+
+	if (caller->objectName() == "pushButton_changeIconVtf") {
+		vtfFileIcon.setValue("Default", QDir::toNativeSeparators(exeDir) + ",2");
+		vtfFileIcon2.setValue("Default", QDir::toNativeSeparators(exeDir) + ",2");
+	}
+
+}

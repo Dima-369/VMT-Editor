@@ -5,6 +5,7 @@
 #include "editshaderdialog.h"
 
 #include <QSettings>
+#include <QDir>
 
 /**
  * The struct is initialized inside MainWindow::readSettings().
@@ -143,6 +144,8 @@ private slots:
 	void saveSettings();
 
 	void displayEditShaderDialog();
+
+	void associate();
 };
 
 #endif // OPTIONSDIALOG_H

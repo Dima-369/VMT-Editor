@@ -1,4 +1,6 @@
 IDI_ICON1 ICON DISCARDABLE "app.ico"
+IDI_ICON2 ICON DISCARDABLE "vmtfile.ico"
+IDI_ICON3 ICON DISCARDABLE "vtffile.ico"
 
 #include <windows.h>
 

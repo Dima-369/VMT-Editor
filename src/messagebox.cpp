@@ -6,7 +6,7 @@ MsgBox::MsgBox(QWidget* parent) :
 	QMessageBox(parent),
 	msgBox(new QMessageBox(parent))
 {
-	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px;} QLabel{ font-size: 11pt; min-height: 35px; qproperty-alignment: 'AlignVCenter | AlignLeft'; } QMessageBox { background-color: #404040; }");
+	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px;} QLabel{ font-size: 11pt; qproperty-alignment: 'AlignVCenter | AlignLeft'; } QMessageBox { background-color: #404040; }");
 }
 
 void MsgBox::setWindowTitle(const QString &title)
