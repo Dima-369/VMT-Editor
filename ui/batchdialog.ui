@@ -427,8 +427,9 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
@@ -436,6 +437,13 @@ QPushButton:hover
     background-color: #151515;
 	border-color: #151515
 }
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
+}
+
 
 QComboBox
 {
@@ -508,11 +516,6 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
-}
-
-QPushButton:pressed
-{
-    background-color: #111;
 }
 
 /* Spinboxes */

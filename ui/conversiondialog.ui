@@ -440,8 +440,9 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
@@ -449,6 +450,13 @@ QPushButton:hover
     background-color: #151515;
 	border-color: #151515
 }
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
+}
+
 
 QComboBox
 {
@@ -494,7 +502,7 @@ QComboBox QAbstractItemView
     background-color: #222;
     border-radius: 0px;
     border: 1px solid #222;
-    selection-background-color: #2e3844;
+    selection-background-color: #151515;
 	outline: 0;
 	
 }
@@ -521,11 +529,6 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
-}
-
-QPushButton:pressed
-{
-    background-color: #111;
 }
 
 /* Spinboxes */
@@ -1462,7 +1465,7 @@ QPushButton:disabled
 QPushButton:focus
 {
 	background-color: #404040;
-	border-color: #2e3844;
+	border-color: #151515;
 }
 
 QPushButton:hover

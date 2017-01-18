@@ -424,12 +424,13 @@ QPushButton
 {
     color: silver;
     background-color: #282828;
-    border-width: 0px;
+    border-width: 1px;
     border-color: #282828;
     border-style: solid;
-    padding-top: 5px;
+    padding-top: 2px;
 	min-width: 65px;
-    padding-bottom: 5px;
+	min-height: 17px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
    
@@ -438,12 +439,13 @@ QPushButton
 QPushButton:disabled
 {
     background-color:#505050;
-    border-width: 0px;
+    border-width: 1px;
     border-color: #505050;
     border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 	min-width: 65px;
+	min-height: 17px;
     padding-left: 5px;
     padding-right: 5px;
     color: #3A3939;
@@ -451,8 +453,9 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
@@ -460,6 +463,14 @@ QPushButton:hover
     background-color: #151515;
 	border-color: #151515
 }
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
+	border-width: 1px;
+}
+
 
 QComboBox
 {
@@ -532,11 +543,6 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
-}
-
-QPushButton:pressed
-{
-    background-color: #111;
 }
 
 /* Spinboxes */
@@ -793,9 +799,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-173</y>
+           <y>-231</y>
            <width>522</width>
-           <height>785</height>
+           <height>783</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -990,8 +996,8 @@ QSlider::handle:vertical {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>75</width>
-                 <height>25</height>
+                 <width>77</width>
+                 <height>23</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -1015,8 +1021,8 @@ QSlider::handle:vertical {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>75</width>
-                 <height>25</height>
+                 <width>77</width>
+                 <height>23</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -1040,8 +1046,8 @@ QSlider::handle:vertical {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>75</width>
-                 <height>25</height>
+                 <width>77</width>
+                 <height>23</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -1087,7 +1093,7 @@ QSlider::handle:vertical {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>75</width>
+                 <width>77</width>
                  <height>23</height>
                 </size>
                </property>
