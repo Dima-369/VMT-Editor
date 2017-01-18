@@ -765,10 +765,12 @@ void ConversionDialog::setTemplate()
 	} else if (caller == "pushButton_t02") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
 		ui->comboBox_alphaTextures->setCurrentIndex(6);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(3);
 
 	} else if (caller == "pushButton_t03") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
 		ui->comboBox_alphaTextures->setCurrentIndex(5);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(3);
 
 	} else if (caller == "pushButton_t04") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(5);
@@ -777,7 +779,6 @@ void ConversionDialog::setTemplate()
 		ui->checkBox_clamps->setChecked(true);
 		ui->checkBox_clampt->setChecked(true);
 		ui->checkBox_noMIP->setChecked(true);
-
 	} else if (caller == "pushButton_t05") {
 		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
 		ui->comboBox_alphaTextures->setCurrentIndex(1);
@@ -785,6 +786,17 @@ void ConversionDialog::setTemplate()
 		ui->checkBox_clamps->setChecked(true);
 		ui->checkBox_clampt->setChecked(true);
 		ui->checkBox_noMIP->setChecked(true);
+	} else if (caller == "pushButton_t06") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(0);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(3);
+		ui->checkBox_normal->setChecked(true);
+	} else if (caller == "pushButton_t07") {
+		ui->comboBox_noAlphaTextures->setCurrentIndex(0);
+		ui->comboBox_alphaTextures->setCurrentIndex(1);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(3);
+		ui->checkBox_normal->setChecked(true);
 	}
+
 }
 

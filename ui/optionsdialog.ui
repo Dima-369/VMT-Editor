@@ -427,9 +427,10 @@ QPushButton
     border-width: 1px;
     border-color: #282828;
     border-style: solid;
-    padding-top: 5px;
+    padding-top: 2px;
 	min-width: 65px;
-    padding-bottom: 5px;
+	min-height: 17px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
    
@@ -441,9 +442,10 @@ QPushButton:disabled
     border-width: 1px;
     border-color: #505050;
     border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 	min-width: 65px;
+	min-height: 17px;
     padding-left: 5px;
     padding-right: 5px;
     color: #3A3939;
@@ -451,8 +453,9 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
@@ -460,6 +463,14 @@ QPushButton:hover
     background-color: #151515;
 	border-color: #151515
 }
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
+	border-width: 1px;
+}
+
 
 QComboBox
 {
@@ -532,11 +543,6 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
-}
-
-QPushButton:pressed
-{
-    background-color: #111;
 }
 
 /* Spinboxes */
@@ -793,9 +799,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-231</y>
            <width>522</width>
-           <height>720</height>
+           <height>783</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -970,6 +976,103 @@ QSlider::handle:vertical {
                 <string>Use indentation in the VMT</string>
                </property>
               </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_fileAssociation">
+            <property name="title">
+             <string>File Association</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_14">
+             <item row="0" column="1">
+              <widget class="QPushButton" name="pushButton_changeIconVmt">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>77</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Change .vmt icon</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="pushButton_assignToContext">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>77</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Add to .vmt context menu</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButton_changeIconVtf">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>77</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Change .vtf icon</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -1199,5 +1302,56 @@ QSlider::handle:vertical {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_assignToContext</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>associate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>607</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_changeIconVmt</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>associate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>417</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_changeIconVtf</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>associate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>421</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>604</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>associate()</slot>
+ </slots>
 </ui>

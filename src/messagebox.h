@@ -2,6 +2,9 @@
 #define MESSAGEBOX_H
 
 #include <QMessageBox>
+#include <QtGui>
+#include <QSpacerItem>
+#include <QGridLayout>
 
 class MsgBox : public QMessageBox
 {

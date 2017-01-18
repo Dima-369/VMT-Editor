@@ -13,6 +13,8 @@
 *.dll
 *.dylib
 
+Thumbs.db
+
 # Qt-es
 
 /.qmake.cache
@@ -38,4 +40,3 @@ Makefile*
 
 # QtCtreator CMake
 CMakeLists.txt.user*
-

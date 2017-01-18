@@ -409,9 +409,9 @@ QPushButton
     border-width: 1px;
     border-color: #282828;
     border-style: solid;
-    padding-top: 5px;
+    padding-top: 3px;
 	min-width: 65px;
-    padding-bottom: 5px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
    
@@ -423,8 +423,8 @@ QPushButton:disabled
     border-width: 1px;
     border-color: #505050;
     border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 3px;
+    padding-bottom: 2px;
 	min-width: 65px;
     padding-left: 5px;
     padding-right: 5px;
@@ -433,14 +433,22 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
 {
     background-color: #151515;
 	border-color: #151515
+}
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
+	border-width: 1px;
 }
 
 QComboBox
@@ -514,11 +522,6 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
-}
-
-QPushButton:pressed
-{
-    background-color: #111;
 }
 
 /* Spinboxes */
@@ -913,7 +916,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
       <string>Enable or disable a shader.</string>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../resources.qrc">
        <normaloff>:/icons/enableDisableShader</normaloff>:/icons/enableDisableShader</iconset>
      </property>
     </widget>
@@ -942,7 +945,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
       <string>Reset the shader to default.</string>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../resources.qrc">
        <normaloff>:/icons/resetShader</normaloff>:/icons/resetShader</iconset>
      </property>
     </widget>
@@ -1009,7 +1012,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
       <string>Delete a shader.</string>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../resources.qrc">
        <normaloff>:/icons/removeShader</normaloff>:/icons/removeShader</iconset>
      </property>
     </widget>
@@ -1054,7 +1057,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
       <string>Add a new shader.</string>
      </property>
      <property name="icon">
-      <iconset resource="resources.qrc">
+      <iconset resource="../resources.qrc">
        <normaloff>:/icons/addShader</normaloff>:/icons/addShader</iconset>
      </property>
     </widget>
@@ -1301,7 +1304,7 @@ border: 1px solid #222;
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections>
   <connection>

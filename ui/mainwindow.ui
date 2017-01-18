@@ -94,16 +94,16 @@ QMenuBar::item
 
 QMenuBar::item:selected
 {
-    border: 1px solid #41464d;
-	background-color: #41464d;
+    border: 1px solid #151515;
+	background-color: #151515;
 	
 
 }
 
 QMenuBar::item:pressed
 {
-    border: 1px solid #41464d;
-    background-color: #41464d;
+    border: 1px solid #151515;
+    background-color: #151515;
 
     margin-bottom: 0px;
     
@@ -112,6 +112,7 @@ QMenuBar::item:pressed
 QMenu
 {
 	border: 1px solid #aaa;
+	padding: 1px;
     color: black;
 	background-color: #eee;
 }
@@ -120,7 +121,7 @@ QMenu::item
 {
 	background: transparent;
 	margin: 1px;
-    padding: 4px 30px 4px 30px;
+    padding: 4px 30px 4px 24px;
 }
 
 QMenu::item:selected
@@ -136,7 +137,7 @@ QMenu::separator
     padding-left: 20px;
 	margin-top: 2px;
 	margin-bottom: 2px;
-    margin-left: 24px;
+    margin-left: 22px;
     margin-right: 5px;
 }
 
@@ -560,14 +561,21 @@ QPushButton:disabled
 
 QPushButton:focus
 {
-	background-color: #2e3844;
-	border-color: #2e3844;
+/*background-color: #2e3844;*/
+	border-width: 2px;
+	border-color: #151515;
 }
 
 QPushButton:hover
 {
     background-color: #151515;
 	border-color: #151515
+}
+
+QPushButton:pressed
+{
+    background-color: #333;
+	border-color: #333;
 }
 
 QComboBox
@@ -614,7 +622,7 @@ QComboBox QAbstractItemView
     background-color: #222;
     border-radius: 0px;
     border: 1px solid #222;
-    selection-background-color: #2e3844;
+    selection-background-color: #151515;
 	outline: 0;
 	
 }
@@ -643,10 +651,7 @@ QComboBox::down-arrow:focus
     image: url(:/images/qss/gopen.png);
 }
 
-QPushButton:pressed
-{
-    background-color: #333;
-}
+
 
 /* Spinboxes */
 

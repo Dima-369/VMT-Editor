@@ -6,7 +6,10 @@ MsgBox::MsgBox(QWidget* parent) :
 	QMessageBox(parent),
 	msgBox(new QMessageBox(parent))
 {
-	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px;} QLabel{ font-size: 11pt; min-height: 35px; qproperty-alignment: 'AlignVCenter | AlignLeft'; } QMessageBox { background-color: #404040; }");
+	msgBox->setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px; margin-top: 0px; width: 70px; } "
+						  "QGridLayout{ qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+						  "QLabel{ font-size: 11pt; qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+						  "QMessageBox { background-color: #404040; }");
 }
 
 void MsgBox::setWindowTitle(const QString &title)
@@ -62,6 +65,9 @@ void MsgBox::setIcon(QMessageBox::Icon icon)
 void MsgBox::setText(const QString &text)
 {
 	msgBox->setText(text);
+	QSpacerItem* horizontalSpacer = new QSpacerItem(450, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+	QGridLayout* layout = (QGridLayout*)msgBox->layout();
+	layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
 }
 
 int MsgBox::exec()
