@@ -795,11 +795,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		shaderChanged();
 	}
 
-	ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( vmt,
-																	   mSettings->parameterSortStyle == Settings::Grouped,
-																	   mSettings->useQuotesForTexture,
-																	   mSettings->useIndentation ));
-
 	//----------------------------------------------------------------------------------------//
 
 	QString bumpmap;
@@ -3300,9 +3295,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	//----------------------------------------------------------------------------------------//
 
-	// General misc. stuff
-
 	updateWindowTitle();
+	refreshRequested();
 
 	mParsingVMT = false;
 }
