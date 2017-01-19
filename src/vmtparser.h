@@ -94,7 +94,7 @@ public:
 
 	void saveVmtFile( const QString& vmt, const QString& relativeFileName );
 
-	VmtFile loadVmtFile( const QString& relativeFileName );
+	VmtFile loadVmtFile( const QString& relativeFileName, bool isTemplate = false );
 
 	VmtFile loadVmtFileSilently( const QString& relativeFileName );
 

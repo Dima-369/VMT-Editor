@@ -6976,7 +6976,7 @@ void MainWindow::openTemplate() {
 		setCurrentGame(mSettings->saveLastGame ? mSettings->lastGame : "");
 	}
 
-	VmtFile vmt = vmtParser->loadVmtFile( action->data().toString() );
+	VmtFile vmt = vmtParser->loadVmtFile( action->data().toString(), true );
 
 	if (!ui->textEdit_proxies->toPlainText().isEmpty() &&
 		!vmt.subGroups.isEmpty() ) {

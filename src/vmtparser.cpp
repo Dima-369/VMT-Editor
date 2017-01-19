@@ -315,7 +315,7 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 	}
 }
 
-VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
+VmtFile VmtParser::loadVmtFile( const QString& relativeFileName, bool isTemplate )
 {
 	if( relativeFileName.isEmpty() )
 	{
@@ -535,13 +535,14 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 			QFileInfo fileInfo(vmtFile);
 
-			vmtEntry.fileName = fileInfo.fileName();
-			vmtEntry.directory = fileInfo.absolutePath();
+			if (!isTemplate) {
+				vmtEntry.fileName = fileInfo.fileName();
+				vmtEntry.directory = fileInfo.absolutePath();
 
-			vmtEntry.subGroups = formatSubGroups(subGroups, 0);
-			vmtEntry.shader = Shader::convert(vmtEntry.shaderName);
-
-			mLastVmtFile = vmtEntry;
+				mLastVmtFile = vmtEntry;
+			}
+				vmtEntry.subGroups = formatSubGroups(subGroups, 0);
+				vmtEntry.shader = Shader::convert(vmtEntry.shaderName);
 			return vmtEntry;
 		}
 	}
