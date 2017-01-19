@@ -142,12 +142,17 @@ ColorResult parseColor(const QString &parameter,
 		return result;
 	}
 
-	// now we check the {} format
-	QString full = "^\\s*\\{\\s*[0-9]+\\s+[0-9]+\\s+[0-9]+\\s*\\}\\s*$";
-	QRegularExpression regex(full);
+	// now we check the {} format, like " {12 12.5 13 }"
+	const QString doubleRegex = "[0-9]*\\.?[0-9]+";
+	const QString full = QString(
+			"^\\s*\\{\\s*" + doubleRegex +
+			"\\s+" + doubleRegex +
+			"\\s+" + doubleRegex +
+			"\\s*\\}\\s*$");
 
+	const QRegularExpression regex(full);
 	if (!regex.match(value).hasMatch()) {
-		INFO(parameter + " has default value: " + value);
+		ERROR(parameter + " has invalid value: \"" + value + "\"");
 		return result;
 	}
 
@@ -156,37 +161,27 @@ ColorResult parseColor(const QString &parameter,
 	QString p = QString(value).remove("{").remove("}");
 	QStringList parts = p.trimmed().split(" ", QString::SkipEmptyParts);
 
-	bool allDefault = true;
+	if (parts[0] == "255" && parts[1] == "255" && parts[2] == "255") {
+		INFO(parameter + " has default white value")
+		return result;
+	} else {
+		result.notDefault = true;
+	}
 
-	foreach (const QString &s, parts) {
-
-		if (s != "255") {
-			allDefault = false;
-			break;
-		}
-
+	foreach (const QString& s, parts) {
 		bool ok;
-		int i = s.toInt(&ok);
-
-		if (i < 0) {
-			i = 0;
-		} else if (i > 255) {
-			i = 255;
-		}
-
-		if (ok) {
-			result.doubleValues.append(i / 255.0);
-			result.intValues.append(static_cast<int>(i));
-		} else {
+		double x = s.toDouble(&ok);
+		if (!ok) {
 			result.valid = false;
 			return result;
 		}
-	}
-
-	if (allDefault) {
-		INFO(parameter + " has default value: {255 255 255}")
-	} else {
-		result.notDefault = true;
+		if (x < 0) {
+			x = 0;
+		} else if (x > 255) {
+			x = 255;
+		}
+		result.doubleValues.append(x / 255.0);
+		result.intValues.append(static_cast<int>(x));
 	}
 
 	return result;
