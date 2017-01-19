@@ -177,7 +177,7 @@ IntResult parseIntNoDefault(const QString &value);
  *
  * The format is the same for the DoubleTuple except that {255 255 255} is also
  * supported where each integer goes from 0 to 255 and directly reprents the
- * RGB value.
+ * RGB value, but doubles are also handled but lost upon saving the VMT.
  *
  * The default values are white or as a string: [1 1 1].
  *
