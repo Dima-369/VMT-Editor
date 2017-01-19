@@ -161,13 +161,6 @@ ColorResult parseColor(const QString &parameter,
 	QString p = QString(value).remove("{").remove("}");
 	QStringList parts = p.trimmed().split(" ", QString::SkipEmptyParts);
 
-	if (parts[0] == "255" && parts[1] == "255" && parts[2] == "255") {
-		INFO(parameter + " has default white value")
-		return result;
-	} else {
-		result.notDefault = true;
-	}
-
 	foreach (const QString& s, parts) {
 		bool ok;
 		double x = s.toDouble(&ok);
@@ -182,6 +175,14 @@ ColorResult parseColor(const QString &parameter,
 		}
 		result.doubleValues.append(x / 255.0);
 		result.intValues.append(static_cast<int>(x));
+	}
+
+	if (result.intValues[0] == 255 &&
+			result.intValues[1] == 255 &&
+			result.intValues[2] == 255) {
+		INFO(parameter + " has default white value")
+	} else {
+		result.notDefault = true;
 	}
 
 	return result;

@@ -286,8 +286,6 @@ private:
 
 	bool loadDoubleParameter( double* doubleValue, const QString& value, const QString& parameter, double defaultValue );
 
-	void loadTintColor( const QString& value, const QString& command, QPlainTextEdit* colorField, bool isWaterRelated );
-
 	void loadScrollParameter( QString value, const QString& command, uint index );
 
 	void loadVMT( const QString& vmtPath);

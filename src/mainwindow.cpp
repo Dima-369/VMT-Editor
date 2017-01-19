@@ -1010,16 +1010,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	}
 
 	if( !( value = vmt.parameters.take("$reflectivity") ).isEmpty() ) {
-
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
-
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" ) {
-			Info("$reflectivity has the default value: \"[1 1 1]\"!")
-		} else {
-			loadTintColor(value, "$reflectivity",
-				ui->color_reflectivity, false);
-		}
+		applyBackgroundColor("$reflectivity", value,
+			ui->color_reflectivity,
+			ui->horizontalSlider_reflectivity, ui);
 
 		showOther = true;
 	}
@@ -1653,15 +1646,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingEnvmap )
 			Error("$envmaptint is only supported with $envmap!")
 
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
-
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" ) {
-			Info("$envmaptint has the default value of \"[1 1 1]\"!")
-		} else {
-			loadTintColor(value, "$envmaptint",
-				ui->color_envmapTint, false);
-		}
+		applyBackgroundColor("$envmaptint", value,
+			ui->color_envmapTint,
+			ui->horizontalSlider_envmapTint, ui);
 
 		showShadingReflection = true;
 	}
@@ -1815,22 +1802,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	// ~BaseAlpha checkbox
 
-	if( !( value = vmt.parameters.take("$selfillumtint") ).isEmpty() )
-	{
-		if( !usingSelfIllum )
-		{
+	if( !( value = vmt.parameters.take("$selfillumtint") ).isEmpty() ) {
+
+		if (!usingSelfIllum)
 			Error("$selfillumtint only works with \"$selfillum 1\"!")
-		}
 
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
-
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" ) {
-			Info("$selfillumtint has the default value: \"[1 1 1]\"!")
-		} else {
-			loadTintColor(value, "$selfillumtint",
-				ui->color_selfIllumTint, false);
-		}
+		applyBackgroundColor("$selfillumtint", value,
+			ui->color_selfIllumTint,
+			ui->horizontalSlider_selfIllumTint, ui);
 
 		showSelfIllumination = true;
 	}
@@ -2440,20 +2419,12 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( (vmt.shaderName != "Refract") && (vmt.shaderName != "Water") )
 			Error("$refracttint only works with the Refract or Water shaders!")
 
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
+		QPlainTextEdit* colorWidget = (vmt.shader == Shader::S_Water) 
+			? ui->color_refractionTint
+			: ui->color_refractTint;
 
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" )
-			Info("$refracttint has the default value: \"[1 1 1]\"!")
-
-		else {
-			if( vmt.shaderName == "Water" )
-			{
-				loadTintColor( value, "$refracttint", ui->color_refractionTint, true );
-			}
-			else
-				loadTintColor( value, "$refracttint", ui->color_refractTint, false );
-		}
+		applyBackgroundColor("$refracttint", value, colorWidget,
+			ui->horizontalSlider_waterRefractColor, ui);
 
 		showWaterRefraction = true;
 	}
@@ -2535,13 +2506,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( vmt.shaderName != "Water" )
 			Error("$fogcolor only works with the Water shader!")
 
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
-
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" )
-			Info("$fogcolor has the default value: \"{255 255 255}\"!")
-		else
-			loadTintColor( value, "$fogcolor", ui->color_fogTint, true );
+		applyBackgroundColor("$fogcolor", value,
+			ui->color_fogTint,
+			ui->horizontalSlider_waterFogColor, ui);
 
 		showWaterFog = true;
 	}
@@ -2896,27 +2863,15 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$reflecttint") ).isEmpty() )
 	{
-		if( vmt.shaderName != "Water" )
-		{
+		if (vmt.shaderName != "Water")
 			Error("$reflecttint only works with the Water shader!")
-		}
 
-		if(isBottomWater)
-		{
-			Error("$reflecttint only works with \"$abovewater 1\"!")
-		}
+		if (isBottomWater)
+	 		Error("$reflecttint only works with \"$abovewater 1\"!")
 
-		QString tmp2(value.simplified());
-		tmp2.remove( QRegExp("[\\s]+") );
-
-		if( tmp2 == "[111]" || tmp2 == "{255255255}" )
-		{
-			Info("$reflecttint has the default value: \"[1 1 1]\"!")
-		}
-		else
-		{
-			loadTintColor( value, "$reflecttint", ui->color_reflectionTint, true );
-		}
+		applyBackgroundColor("$reflecttint", value,
+			ui->color_reflectionTint,
+			ui->horizontalSlider_waterReflectColor, ui);
 
 		showWaterReflection = true;
 	}
@@ -3152,9 +3107,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
-
-		//if( loadBoolParameter( value, "$rimlight") )
-		//	rimLightEnabled = true;
 	}
 
 	if( !( value = vmt.parameters.take("$rimlightexponent") ).isEmpty() ) {
@@ -3210,10 +3162,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$color2") ).isEmpty() )
 	{
-
 		QString col1 = "$color2";
 		utils::applyBackgroundColor(col1, value, ui->color_color2, ui);
-
 
 		showColor = true;
 	}
@@ -5365,267 +5315,6 @@ bool MainWindow::loadDoubleParameter( double* doubleValue, const QString& value,
 
 		return false;
 	}
-}
-
-void MainWindow::loadTintColor(const QString &value, const QString &command,
-		QPlainTextEdit *colorField, bool isWaterRelated)
-{
-	QString color(value);
-	QColor parsedColor;
-	color = color.simplified();
-
-	int index = 0;
-
-	if( color.startsWith('[') )
-	{
-		color.remove( 0, 1 );
-		color = color.simplified();
-
-		if( color.endsWith(']') )
-		{
-			color.chop(1);
-			color = color.simplified();
-
-			index = color.indexOf(' ');
-			if( index != -1 )
-			{
-				QString tmp = color.left( index );
-
-				float red, green, blue;
-
-				bool ok;
-				red = tmp.toFloat(&ok);
-
-				if(ok)
-				{
-					color.remove(0, index + 1);
-
-					index = color.indexOf(' ');
-					if( index != -1 )
-					{
-						tmp = color.left( index );
-
-						green = tmp.toFloat(&ok);
-
-						if(ok)
-						{
-							color.remove(0, index + 1);
-
-							blue = color.toFloat(&ok);
-
-							if(ok)
-							{
-								// Finally done, now validating
-
-								if( !(red >= 0.0f && red <= 256.0f) )
-								{
-									Error("" + command + " red channel (" + Str(red) + ") isn't in the range of 0.0 to 256.0")
-								}
-								else if( !(green >= 0.0f && green <= 256.0f) )
-								{
-									Error("" + command + " green channel (" + Str(green) + ") isn't in the range of 0.0 to 256.0")
-								}
-								else if( !(blue >= 0.0f && blue <= 256.0f) )
-								{
-									Error("" + command + " blue channel (" + Str(blue) + ") isn't in the range of 0.0 to 256.0")
-								}
-								else
-								{
-									if(isWaterRelated)
-									{
-										tmp = QString( "background-color: rgb(%1, %2, %3)" ).arg( QString::number( red * 255.0f   ))
-																							.arg( QString::number( green * 255.0f ))
-																							.arg( QString::number( blue * 255.0f  ));
-
-										colorField->setStyleSheet(tmp);
-									}
-									else
-									{
-										tmp = QString( "background-color: rgb(%1, %2, %3)" ).arg( QString::number( qMin( 255.0f, red * 255.0f   )))
-																							.arg( QString::number( qMin( 255.0f, green * 255.0f )))
-																							.arg( QString::number( qMin( 255.0f, blue * 255.0f  )));
-
-										colorField->setStyleSheet(tmp);
-									}
-
-									parsedColor.setRedF(red);
-									parsedColor.setGreenF(green);
-									parsedColor.setBlueF(blue);
-
-									goto adjustColor;
-								}
-							}
-							else
-							{
-								goto error;
-							}
-						}
-						else
-						{
-							goto error;
-						}
-					}
-					else
-					{
-						goto error;
-					}
-				}
-				else
-				{
-					goto error;
-				}
-			}
-			else
-			{
-				goto error;
-			}
-		}
-		else
-		{
-			goto error;
-		}
-	}
-	else
-	{
-		if( color.startsWith('{') )
-		{
-			color.remove( 0, 1 );
-			color = color.simplified();
-
-			if( color.endsWith('}') )
-				goto intMethod;
-
-			goto error2;
-		}
-
-		error:
-
-		Error( command + " (" + value + ") is not in the valid format of: \"[<red float> <green float> <blue float>]\"!")
-	}
-
-	return;
-
-	//----------------------------------------------------------------------------------------//
-
-	intMethod:
-
-	color.chop(1);
-	color = color.simplified();
-
-	index = color.indexOf(' ');
-	if( index != -1 )
-	{
-		QString tmp = color.left( index );
-
-		int red, green, blue;
-
-		bool ok;
-		red = tmp.toInt(&ok);
-
-		if(ok)
-		{
-			color.remove(0, index + 1);
-
-			index = color.indexOf(' ');
-			if( index != -1 )
-			{
-				tmp = color.left( index );
-
-				green = tmp.toInt(&ok);
-
-				if(ok)
-				{
-					color.remove(0, index + 1);
-
-					blue = color.toInt(&ok);
-
-					if(ok)
-					{
-						// Finally done, now validating
-
-						if( !(red >= 0 && red <= 255) )
-						{
-							Error("" + command + " red channel (" + Str(red) + ") isn't in the range of 0 to 255!")
-						}
-						else if( !(green >= 0 && green <= 255) )
-						{
-							Error("" + command + " green channel (" + Str(green) + ") isn't in the range of 0 to 255!")
-						}
-						else if( !(blue >= 0 && blue <= 255) )
-						{
-							Error("" + command + " blue channel (" + Str(blue) + ") isn't in the range of 0 to 255!")
-						}
-						else
-						{
-							if(isWaterRelated)
-							{
-								tmp = QString( "background-color: rgb(%1, %2, %3)" ).arg( QString::number( red   ))
-																					.arg( QString::number( green ))
-																					.arg( QString::number( blue  ));
-
-								colorField->setStyleSheet(tmp);
-							}
-							else
-							{
-								tmp = QString( "background-color: rgb(%1, %2, %3)" ).arg( QString::number( red   ))
-																					.arg( QString::number( green ))
-																					.arg( QString::number( blue  ));
-
-								colorField->setStyleSheet(tmp);
-							}
-
-							parsedColor.setRed(red);
-							parsedColor.setGreen(green);
-							parsedColor.setBlue(blue);
-
-							goto adjustColor;
-						}
-					}
-					else
-					{
-						goto error2;
-					}
-				}
-				else
-				{
-					goto error2;
-				}
-			}
-			else
-			{
-				goto error2;
-			}
-		}
-		else
-		{
-			goto error2;
-		}
-	}
-	else
-	{
-		error2:
-
-		Error( command + " (" + value + ") is not in the valid format of: \"{<red int> <green int> <blue int>}\"!")
-	}
-
-	return;
-
-	adjustColor:
-
-	if( command == "$envmaptint" )
-		ui->horizontalSlider_envmapTint->initialize(colorField, parsedColor);
-	else if( command == "$reflectivity" )
-		ui->horizontalSlider_reflectivity->initialize(colorField, parsedColor);
-	else if(command == "$selfillumtint")
-		ui->horizontalSlider_selfIllumTint->initialize(colorField, parsedColor);
-	else if(command == "$phongtint")
-		ui->horizontalSlider_phongTint->initialize(colorField, parsedColor);
-	else if(command == "$fogcolor")
-		ui->horizontalSlider_waterFogColor->initialize(colorField, parsedColor);
-	else if(command == "$reflecttint")
-		ui->horizontalSlider_waterReflectColor->initialize(colorField, parsedColor);
-	else if(command == "$refracttint")
-		ui->horizontalSlider_waterRefractColor->initialize(colorField, parsedColor);
 }
 
 void MainWindow::loadScrollParameter( QString value, const QString& command, uint index )
