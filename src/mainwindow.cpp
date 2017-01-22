@@ -9151,13 +9151,27 @@ void MainWindow::fresnelSliderEdited( int a ) {
 
 	double value = double(a) / 100.0;
 	ignoreFresnelY = true;
-	ui->doubleSpinBox_fresnelRangesY->setValue( fresnelYStart + (1.0 - fresnelYStart) * value );
+	if (inverseFresnelY) {
+		ui->doubleSpinBox_fresnelRangesY->setValue( fresnelYStart * value );
+	} else {
+		ui->doubleSpinBox_fresnelRangesY->setValue( fresnelYStart + (1.0 - fresnelYStart) * value );
+	}
 }
 
 void MainWindow::fresnelYEdited( double value ) {
 
-	if(!ignoreFresnelY)
-		fresnelYStart = (value - ui->doubleSpinBox_fresnelRangesX->value()) / (1.0 - ui->doubleSpinBox_fresnelRangesX->value());
+	double fresnelX = ui->doubleSpinBox_fresnelRangesX->value();
+
+	if(!ignoreFresnelY) {
+
+		if(fresnelX > value) {
+			fresnelYStart = (value / fresnelX);
+			inverseFresnelY = true;
+		} else {
+			fresnelYStart = (value - fresnelX) / (1.000001 - fresnelX);
+			inverseFresnelY = false;
+		}
+	}
 	else
 		ignoreFresnelY = false;
 }

@@ -212,6 +212,7 @@ private:
 
 	double fresnelYStart;
 	bool ignoreFresnelY;
+	bool inverseFresnelY = false;
 
 	//----------------------------------------------------------------------------------------//
 
