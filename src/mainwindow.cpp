@@ -3607,8 +3607,14 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_halfLambert->isChecked() )
 			vmtFile.parameters.insert( "$halflambert", "1" );
 
+		if( ui->checkBox_disableHalfLambert->isChecked() )
+			vmtFile.parameters.insert( "$phongdisablehalflambert", "1" );
+
 		if( ui->lineEdit_exponentTexture->isEnabled() && !ui->lineEdit_exponentTexture->text().trimmed().isEmpty() )
 			vmtFile.parameters.insert( "$phongexponenttexture", ui->lineEdit_exponentTexture->text().trimmed() );
+
+		if( !ui->lineEdit_phongWarp->text().trimmed().isEmpty() )
+			vmtFile.parameters.insert( "$phongwarptexture", ui->lineEdit_phongWarp->text().trimmed() );
 
 		if( ui->checkBox_baseLuminanceMask->isChecked() )
 			vmtFile.parameters.insert( "$basemapluminancephongmask", "1" );
@@ -4171,6 +4177,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
 	clearLineEditAction(ui->lineEdit_waterNormalMap);
 	clearLineEditAction(ui->lineEdit_decal);
+	clearLineEditAction(ui->lineEdit_phongWarp);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -7142,6 +7149,9 @@ void MainWindow::browseVTF()
 
 	else if( caller->objectName() == "toolButton_decal" )
 		browseVTF( "", ui->lineEdit_decal );
+
+	else if( caller->objectName() == "toolButton_phongWarp" )
+		browseVTF( "", ui->lineEdit_phongWarp );
 }
 
 void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
