@@ -91,7 +91,10 @@ QMessageBox::StandardButton MsgBox::information(QWidget *parent, const QString &
 		staticMsg.setStandardButtons(buttons);
 		staticMsg.setDefaultButton(defaultButton);
 		staticMsg.setIcon(Information);
-		staticMsg.setStyleSheet("QPushButton{    color: silver;    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #333, stop: 1 #404040);    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;min-width: 65px;    padding-bottom: 5px;    padding-left: 5px;    padding-right: 5px;    font-family: Segoe Ui; font-size: 9pt; height: 11px;}QPushButton:disabled{    background-color:#505050;    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;    padding-bottom: 5px;min-width: 65px;    padding-left: 5px;    padding-right: 5px;    color: #3A3939;}QPushButton:focus{border: 1px solid #78879b;}QPushButton:hover{    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #444, stop: 1 #505050);} QLabel{ color: silver; font-size: 12pt; } QMessageBox { background-color: #404040; }");
+		staticMsg.setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px; margin-top: 0px; width: 70px; } "
+								"QGridLayout{ qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+								"QLabel{ font-size: 11pt; qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+								"QMessageBox { background-color: #404040; }");
 		staticMsg.setIconPixmap(QPixmap(":/icons/info_warning"));
 		staticMsg.show();
 
@@ -109,7 +112,10 @@ QMessageBox::StandardButton MsgBox::warning(QWidget *parent, const QString &titl
 		staticMsg.setStandardButtons(buttons);
 		staticMsg.setDefaultButton(defaultButton);
 		staticMsg.setIcon(Warning);
-		staticMsg.setStyleSheet("QPushButton{    color: silver;    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #333, stop: 1 #404040);    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;min-width: 65px;    padding-bottom: 5px;    padding-left: 5px;    padding-right: 5px;    font-family: Segoe Ui; font-size: 9pt; height: 11px;}QPushButton:disabled{    background-color:#505050;    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;    padding-bottom: 5px;min-width: 65px;    padding-left: 5px;    padding-right: 5px;    color: #3A3939;}QPushButton:focus{border: 1px solid #78879b;}QPushButton:hover{    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #444, stop: 1 #505050);} QLabel{ color: silver; font-size: 12pt; } QMessageBox { background-color: #404040; }");
+		staticMsg.setStyleSheet("QPushButton{ font-family: Segoe Ui; font-size: 9pt; height: 11px; margin-top: 0px; width: 70px; } "
+								"QGridLayout{ qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+								"QLabel{ font-size: 11pt; qproperty-alignment: 'AlignVCenter | AlignLeft'; } "
+								"QMessageBox { background-color: #404040; }");
 		staticMsg.setIconPixmap(QPixmap(":/icons/info_warning"));
 		staticMsg.show();
 
