@@ -12,6 +12,11 @@ MsgBox::MsgBox(QWidget* parent) :
 						  "QMessageBox { background-color: #404040; }");
 }
 
+MsgBox::~MsgBox()
+{
+	delete msgBox;
+}
+
 void MsgBox::setWindowTitle(const QString &title)
 {
 	msgBox->setWindowTitle(title);
