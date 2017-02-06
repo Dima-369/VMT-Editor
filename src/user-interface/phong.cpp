@@ -56,10 +56,12 @@ bool phong::hasChanged(MainWindow::GroupBoxes groupBox, Ui::MainWindow *ui)
 		CHE(ui->checkBox_albedoTint)
 		VAL(ui->spinBox_exponent, "5")
 		TEX(ui->lineEdit_exponentTexture)
+		TEX(ui->lineEdit_phongWarp)
 		VAL(ui->doubleSpinBox_boost, "1")
 		CHE(ui->checkBox_exponentBaseAlpha)
 		CHE(ui->checkBox_baseLuminanceMask)
 		CHE(ui->checkBox_halfLambert)
+		CHE(ui->checkBox_disableHalfLambert)
 		END
 	} else {
 		// MainWindow::PhongBrush
@@ -103,11 +105,14 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 	ui->spinBox_exponent->setValue(5);
 	ui->lineEdit_exponentTexture->clear();
 
+	ui->lineEdit_phongWarp->clear();
+
 	ui->doubleSpinBox_boost->setValue(1.0);
 
 	ui->checkBox_exponentBaseAlpha->setChecked(false);
 	ui->checkBox_baseLuminanceMask->setChecked(false);
 	ui->checkBox_halfLambert->setChecked(false);
+	ui->checkBox_disableHalfLambert->setChecked(false);
 
 	// LightmappedGeneric shader (WorldVertexTransition also has those!)
 	ui->doubleSpinBox_phongAmount->setValue(1.0);
@@ -384,10 +389,12 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	BOOL("$phongalbedotint", ui->checkBox_albedoTint)
 	DO_WITH_VMT("$phongexponent", processExponent1)
 	TEXTURE("$phongexponenttexture", ui->lineEdit_exponentTexture)
+	TEXTURE("$phongwarptexture", ui->lineEdit_phongWarp)
 	DOUBLE("$phongboost", "1", ui->doubleSpinBox_boost)
 	BOOL("$basemapalphaphongmask", ui->checkBox_exponentBaseAlpha)
 	BOOL("$basemapluminancephongmask", ui->checkBox_baseLuminanceMask)
 	BOOL("$halflambert", ui->checkBox_halfLambert)
+	BOOL("$phongdisablehalflambert", ui->checkBox_disableHalfLambert)
 
 	// LightmappedGeneric shader (WorldVertexTransition also has those!)
 	DO_CHOICE("$phongamount", processPhongAmount, true)

@@ -212,6 +212,7 @@ private:
 
 	double fresnelYStart;
 	bool ignoreFresnelY;
+	bool inverseFresnelY = false;
 
 	//----------------------------------------------------------------------------------------//
 
@@ -285,8 +286,6 @@ private:
 	bool loadDoubleParameter( double* doubleValue, const QString& value, const QString& parameter );
 
 	bool loadDoubleParameter( double* doubleValue, const QString& value, const QString& parameter, double defaultValue );
-
-	void loadTintColor( const QString& value, const QString& command, QPlainTextEdit* colorField, bool isWaterRelated );
 
 	void loadScrollParameter( QString value, const QString& command, uint index );
 

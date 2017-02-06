@@ -26,7 +26,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$blendmodulatetexture;$alpha;$translucent;$alphatest;$alphatestreference;$additive;$decal;$nocull" );
 
 	mGroups.append( "$envmap;$envmapmask;$normalmapalphaenvmapmask;$basealphaenvmapmask;$envmaptint;$envmapcontrast;$envmapsaturation;$envmaptint;$envmapfresnel;$envmapfresnelminmaxexp;$fresnelreflection;$envmaplightscale;$envmaplightscaleminmax;$envmapanisotropy;$envmapanisotropyscale" );
-	mGroups.append( "$phong;$phongexponenttexture;$basemapluminancephongmask;$phongfresnelranges;$phongtint;$halflambert;$phongalbedotint;$phongexponent;$phongboost;$basemapalphaphongmask;$phongamount;$phongmaskcontrastbrightness;$phongexponent2;$phongamount2;$phongmaskcontrastbrightness2" );
+	mGroups.append( "$phong;$phongexponenttexture;$basemapluminancephongmask;$phongfresnelranges;$phongwarptexture;$phongtint;$halflambert;$phongdisablehalflambert;$phongalbedotint;$phongexponent;$phongboost;$basemapalphaphongmask;$phongamount;$phongmaskcontrastbrightness;$phongexponent2;$phongamount2;$phongmaskcontrastbrightness2" );
 	mGroups.append( "$rimlight;$rimlightexponent;$rimlightboost;$rimlightmask");
 	mGroups.append( "$selfillum;$selfillum_envmapmask_alpha;$selfillumfresnelminmaxexp;$selfillummask;$selfillumtint" );
 
@@ -315,7 +315,7 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 	}
 }
 
-VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
+VmtFile VmtParser::loadVmtFile( const QString& relativeFileName, bool isTemplate )
 {
 	if( relativeFileName.isEmpty() )
 	{
@@ -535,13 +535,14 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName )
 
 			QFileInfo fileInfo(vmtFile);
 
-			vmtEntry.fileName = fileInfo.fileName();
-			vmtEntry.directory = fileInfo.absolutePath();
+			if (!isTemplate) {
+				vmtEntry.fileName = fileInfo.fileName();
+				vmtEntry.directory = fileInfo.absolutePath();
 
-			vmtEntry.subGroups = formatSubGroups(subGroups, 0);
-			vmtEntry.shader = Shader::convert(vmtEntry.shaderName);
-
-			mLastVmtFile = vmtEntry;
+				mLastVmtFile = vmtEntry;
+			}
+				vmtEntry.subGroups = formatSubGroups(subGroups, 0);
+				vmtEntry.shader = Shader::convert(vmtEntry.shaderName);
 			return vmtEntry;
 		}
 	}

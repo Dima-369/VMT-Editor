@@ -14,6 +14,8 @@ public:
 
 	explicit MsgBox( QWidget* parent = NULL );
 
+	~MsgBox();
+
 	void setWindowTitle(const QString &title);
 
 	void setStandardButtons(StandardButtons buttons);
