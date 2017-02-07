@@ -9147,11 +9147,17 @@ void MainWindow::checkForUpdates()
 
 void MainWindow::checkForUpdatesSilent()
 {
-	auto v = checkForNewVersion();
-	if (v.major > 0) {
-		const auto vs = versionToString(v);
-		Info(QString("New version avaiable: %1").arg(removeTrailingVersionZero(vs)));
-	}
+	CheckVersionThread* thread = new CheckVersionThread();
+	connect(thread, SIGNAL(notifyOnNewVersion(QString)),
+		this,  SLOT(notifyOnNewVersion(QString)));
+	connect(thread, SIGNAL(finished()),
+		thread, SLOT(deleteLater()));
+	thread->start();
+}
+
+void MainWindow::notifyOnNewVersion(QString version)
+{
+	Info(QString("New version available: %1").arg(version));
 }
 
 void MainWindow::showEditGamesDialog()

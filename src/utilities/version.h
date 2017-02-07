@@ -5,8 +5,11 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QThread>
 #include <QUrl>
 #include <QEventLoop>
+
+#include "mainwindow.h"
 
 // those are methods specified in POSIX.1, we don't want those!
 #undef major
@@ -19,6 +22,21 @@ struct Version {
 		major(major),
 		minor(minor),
 		patch(patch) {}
+};
+
+class CheckVersionThread : public QThread
+{
+	Q_OBJECT
+
+public:
+
+	virtual void run();
+
+signals:
+	// this should only use Info() to inform the user and not display any
+	// message boxes because this thread is used for quick checking on app
+	// lanuch
+	void notifyOnNewVersion(QString version);
 };
 
 QString versionToString(const Version& v);

@@ -408,6 +408,8 @@ private slots:
 
 	void saveAsTemplate();
 
+	void notifyOnNewVersion(QString version); 
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
