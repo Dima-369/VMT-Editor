@@ -389,6 +389,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		int savedDate = mIniSettings->value("savedDate").toInt();
 
 		if (today != savedDate) {
+			mIniSettings->setValue("latestVersion", getCurrentVersion());
 			QTimer::singleShot(100, this, SLOT(checkForUpdatesSilent()));
 			mIniSettings->setValue("savedDate", today);
 		} else {
