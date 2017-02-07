@@ -383,8 +383,16 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	utils::checkVtfCmd(ui);
 #endif
 
-	if(mSettings->checkForUpdates)
-		QTimer::singleShot(200, this, SLOT(checkForUpdatesSilent()));
+	if(mSettings->checkForUpdates) {
+		QDate date;
+		int today = date.currentDate().day();
+		int savedDate = mIniSettings->value("savedDate").toInt();
+
+		if (today != savedDate) {
+			QTimer::singleShot(100, this, SLOT(checkForUpdatesSilent()));
+			mIniSettings->setValue("savedDate", today);
+		}
+	}
 
 	//----------------------------------------------------------------------------------------//
 
