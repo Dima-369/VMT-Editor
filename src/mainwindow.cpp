@@ -391,6 +391,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		if (today != savedDate) {
 			QTimer::singleShot(100, this, SLOT(checkForUpdatesSilent()));
 			mIniSettings->setValue("savedDate", today);
+		} else {
+			QString cv = getCurrentVersion();
+			QString v = mIniSettings->value("latestVersion").toString();
+			if (cv != v)
+				Info(QString("New version available: %1").arg(v));
 		}
 	}
 
@@ -9127,15 +9132,16 @@ void MainWindow::checkForUpdates()
 		Error("Failed to fetch latest version!");
 
 	} else if (v.major == 0) {
+		mIniSettings->setValue("latestVersion", getCurrentVersion());
 		Info(QString("You have the latest version: %1")
 			.arg(removeTrailingVersionZero(getCurrentVersion())));
 
 	} else {
 		const auto vs = versionToString(v);
+		mIniSettings->setValue("latestVersion", vs);
 
 		MsgBox msgBox(this);
 		msgBox.setWindowTitle("New version available!");
-
 
 		msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
@@ -9166,6 +9172,7 @@ void MainWindow::checkForUpdatesSilent()
 void MainWindow::notifyOnNewVersion(QString version)
 {
 	Info(QString("New version available: %1").arg(version));
+	mIniSettings->setValue("latestVersion", version);
 }
 
 void MainWindow::showEditGamesDialog()
