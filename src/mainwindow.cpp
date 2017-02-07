@@ -383,7 +383,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	utils::checkVtfCmd(ui);
 #endif
 
-	QTimer::singleShot(200, this, SLOT(checkForUpdatesSilent()));
+	if(mSettings->checkForUpdates)
+		QTimer::singleShot(200, this, SLOT(checkForUpdatesSilent()));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -6651,6 +6652,7 @@ void MainWindow::readSettings()
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
+	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->useIndentation =
@@ -6874,6 +6876,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_TemplateNew:
+			break;
+
+		case Settings::_CheckForUpdates:
 			break;
 
 		case Settings::_CustomShaders:
