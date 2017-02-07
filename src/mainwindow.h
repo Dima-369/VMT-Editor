@@ -404,6 +404,8 @@ private slots:
 
 	void checkForUpdates();
 
+	void checkForUpdatesSilent();
+
 	void saveAsTemplate();
 
 	//----------------------------------------------------------------------------------------//

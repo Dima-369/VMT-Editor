@@ -383,6 +383,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	utils::checkVtfCmd(ui);
 #endif
 
+	QTimer::singleShot(200, this, SLOT(checkForUpdatesSilent()));
+
 	//----------------------------------------------------------------------------------------//
 
 	separatorAct = ui->menuFile->addSeparator();
@@ -9135,6 +9137,15 @@ void MainWindow::checkForUpdates()
 			QDesktopServices::openUrl(QString(
 				"https://github.com/Gira-X/VMT-Editor/releases"));
 		}
+	}
+}
+
+void MainWindow::checkForUpdatesSilent()
+{
+	auto v = checkForNewVersion();
+	if (v.major > 0) {
+		const auto vs = versionToString(v);
+		Info(QString("New version avaiable: %1").arg(removeTrailingVersionZero(vs)));
 	}
 }
 
