@@ -9116,7 +9116,7 @@ void MainWindow::checkForUpdates()
 {
 	auto v = checkForNewVersion();
 	if (v.major == -1) {
-		Error("Failed to fetch latest version from GitHub!");
+		Error("Failed to fetch latest version!");
 
 	} else if (v.major == 0) {
 		Info(QString("You have the latest version: %1")
