@@ -383,6 +383,23 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	utils::checkVtfCmd(ui);
 #endif
 
+	if(mSettings->checkForUpdates) {
+		QDate date;
+		int today = date.currentDate().day();
+		int savedDate = mIniSettings->value("savedDate").toInt();
+
+		if (today != savedDate) {
+			mIniSettings->setValue("latestVersion", getCurrentVersion());
+			QTimer::singleShot(100, this, SLOT(checkForUpdatesSilent()));
+			mIniSettings->setValue("savedDate", today);
+		} else {
+			QString cv = getCurrentVersion();
+			QString v = mIniSettings->value("latestVersion").toString();
+			if (cv != v)
+				Info(QString("New version available: %1").arg(v));
+		}
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	separatorAct = ui->menuFile->addSeparator();
@@ -6649,6 +6666,7 @@ void MainWindow::readSettings()
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
+	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->useIndentation =
@@ -6872,6 +6890,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_TemplateNew:
+			break;
+
+		case Settings::_CheckForUpdates:
 			break;
 
 		case Settings::_CustomShaders:
@@ -9109,31 +9130,50 @@ void MainWindow::checkForUpdates()
 {
 	auto v = checkForNewVersion();
 	if (v.major == -1) {
-		Error("Failed to fetch latest version from GitHub!");
+		Error("Failed to fetch latest version!");
 
 	} else if (v.major == 0) {
+		mIniSettings->setValue("latestVersion", getCurrentVersion());
 		Info(QString("You have the latest version: %1")
 			.arg(removeTrailingVersionZero(getCurrentVersion())));
 
 	} else {
 		const auto vs = versionToString(v);
+		mIniSettings->setValue("latestVersion", vs);
 
 		MsgBox msgBox(this);
 		msgBox.setWindowTitle("New version available!");
-		msgBox.setText(QString("A new version is available: %1")
-			.arg(removeTrailingVersionZero(vs)));
+
 		msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
-		msgBox.setStyleSheet("QPushButton{    color: silver;    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #333, stop: 1 #404040);    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;min-width: 65px;    padding-bottom: 5px;    padding-left: 5px;    padding-right: 5px;    font-family: Segoe Ui; font-size: 9pt; height: 11px;}QPushButton:disabled{    background-color:#505050;    border-width: 1px;    border-color: #555;    border-style: solid;    padding-top: 5px;    padding-bottom: 5px;min-width: 65px;    padding-left: 5px;    padding-right: 5px;    color: #3A3939;}QPushButton:focus{border: 1px solid #78879b;}QPushButton:hover{    background-color: QLinearGradient( x1: 0, y1: 1, x2: 0, y2: 0,    stop: 0 #444, stop: 1 #505050);} QLabel{ color: silver; font-size: 12pt; } QMessageBox { background-color: #404040; }");
 
 		QPushButton* dlButton = msgBox.addButton("Download", QMessageBox::YesRole);
 		msgBox.addButton(QMessageBox::Cancel);
 		msgBox.setDefaultButton(dlButton);
+
+		msgBox.setText(QString("A new version is available: %1")
+			.arg(removeTrailingVersionZero(vs)));
 
 		if (msgBox.exec() != QMessageBox::Cancel) {
 			QDesktopServices::openUrl(QString(
 				"https://github.com/Gira-X/VMT-Editor/releases"));
 		}
 	}
+}
+
+void MainWindow::checkForUpdatesSilent()
+{
+	CheckVersionThread* thread = new CheckVersionThread();
+	connect(thread, SIGNAL(notifyOnNewVersion(QString)),
+		this,  SLOT(notifyOnNewVersion(QString)));
+	connect(thread, SIGNAL(finished()),
+		thread, SLOT(deleteLater()));
+	thread->start();
+}
+
+void MainWindow::notifyOnNewVersion(QString version)
+{
+	Info(QString("New version available: %1").arg(version));
+	mIniSettings->setValue("latestVersion", version);
 }
 
 void MainWindow::showEditGamesDialog()

@@ -49,6 +49,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_templateNew->setChecked( settings->templateNew );
 
+	ui->checkBox_checkForUpdates->setChecked( settings->checkForUpdates );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -241,6 +243,20 @@ void OptionsDialog::saveSettings()
 			mSettings->removeAlpha = false;
 			mIniSettings->setValue("removeAlpha", false);
 			emit optionChanged(Settings::_RemoveAlpha, "0");
+		}
+	}
+
+	if (ui->checkBox_checkForUpdates->isChecked()) {
+		if (!mSettings->checkForUpdates) {
+			mSettings->checkForUpdates = true;
+			mIniSettings->setValue("checkForUpdates", true);
+			emit optionChanged(Settings::_CheckForUpdates, "1");
+		}
+	} else {
+		if(mSettings->checkForUpdates) {
+			mSettings->checkForUpdates = false;
+			mIniSettings->setValue("checkForUpdates", false);
+			emit optionChanged(Settings::_CheckForUpdates, "0");
 		}
 	}
 

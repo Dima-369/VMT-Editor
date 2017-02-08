@@ -1,5 +1,14 @@
 #include "version.h"
 
+void CheckVersionThread::run()
+{
+	auto v = checkForNewVersion();
+	if (v.major > 0) {
+		const auto vs = versionToString(v);
+		emit notifyOnNewVersion(removeTrailingVersionZero(vs));
+	}
+}
+
 Version getCurrentVersionRaw()
 {
 	QFile f(":/files/version");
@@ -37,7 +46,7 @@ Version checkForNewVersion()
 	QNetworkAccessManager mgr;
 	QEventLoop loop;
 	QNetworkRequest req(QUrl(
-		"https://raw.githubusercontent.com/Gira-X/VMT-Editor/master/misc/version.txt"));
+		"http://gortnar.com/vmt/version.txt"));
 
 	QNetworkReply* reply = mgr.get(req);
 	QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));

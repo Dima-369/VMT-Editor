@@ -799,9 +799,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-231</y>
+           <y>0</y>
            <width>522</width>
-           <height>783</height>
+           <height>804</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -811,10 +811,10 @@ QSlider::handle:vertical {
              <string>General</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBox_autoRefresh">
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBox_fullPathFilenameInTitle">
                <property name="text">
-                <string>Auto refresh VMT preview on parameter change</string>
+                <string>Display open VMT filename as full path in window title</string>
                </property>
               </widget>
              </item>
@@ -825,10 +825,10 @@ QSlider::handle:vertical {
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBox_fullPathFilenameInTitle">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBox_autoRefresh">
                <property name="text">
-                <string>Display open VMT filename as full path in window title</string>
+                <string>Auto refresh VMT preview on parameter change</string>
                </property>
               </widget>
              </item>
@@ -843,6 +843,13 @@ QSlider::handle:vertical {
               <widget class="QCheckBox" name="checkBox_templateNew">
                <property name="text">
                 <string>Create a new VMT when opening a template</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBox_checkForUpdates">
+               <property name="text">
+                <string>Check for updates on startup</string>
                </property>
               </widget>
              </item>

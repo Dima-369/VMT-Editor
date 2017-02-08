@@ -404,7 +404,11 @@ private slots:
 
 	void checkForUpdates();
 
+	void checkForUpdatesSilent();
+
 	void saveAsTemplate();
+
+	void notifyOnNewVersion(QString version); 
 
 	//----------------------------------------------------------------------------------------//
 
