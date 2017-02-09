@@ -287,6 +287,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
 	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
+	ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
 
 	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
 	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
@@ -463,6 +464,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -1005,7 +1007,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$blendmodulatetexture") ).isEmpty() ) {
 
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
-			Error("$blendmodulatetexture is only allowed with the WorldVertexTransition shader!")
+			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!")
 
 		utils::parseTexture("$blendmodulatetexture", value, ui,
 			ui->lineEdit_blendmodulate, vmt);
@@ -1025,6 +1027,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		applyBackgroundColor("$reflectivity", value,
 			ui->color_reflectivity,
 			ui->horizontalSlider_reflectivity, ui);
+
+		showOther = true;
+	}
+
+	if( !( value = vmt.parameters.take("$reflectivity2") ).isEmpty() ) {
+		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
+			Error("$reflectivity is only works with WorldVertexTransition shader!")
+		applyBackgroundColor("$reflectivity2", value,
+			ui->color_reflectivity_2,
+			ui->horizontalSlider_reflectivity_2, ui);
 
 		showOther = true;
 	}
@@ -3566,6 +3578,10 @@ VmtFile MainWindow::makeVMT()
 		tmp = toParameter(utils::getBG(ui->color_reflectivity));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
+
+		tmp = toParameter(utils::getBG(ui->color_reflectivity_2));
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$reflectivity2", tmp );
 	}
 
 	shadingreflection::insertParametersFromViews(&vmtFile, ui);
@@ -4261,6 +4277,10 @@ void MainWindow::resetWidgets() {
 
 	ui->horizontalSlider_reflectivity->setValue(255);
 	ui->color_reflectivity->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+
+	ui->horizontalSlider_reflectivity_2->setValue(255);
+	ui->color_reflectivity_2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5111,7 +5131,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 		return (ui->lineEdit_lightWarp->text() != "" ||
 				ui->doubleSpinBox_seamlessScale->value() != 0.0 ||
-				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255));
+				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255) ||
+				utils::getBG(ui->color_reflectivity_2) != QColor(255, 255, 255));
 
 	case Phong:
 	case PhongBrush:
@@ -6192,6 +6213,11 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
+
+			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
 
 			//----------------------------------------------------------------------------------------//
 
@@ -7774,6 +7800,9 @@ void MainWindow::changedColor() {
 
 	else if( caller->objectName() == "toolButton_reflectivity" )
 		changeColor(ui->color_reflectivity, ui->horizontalSlider_reflectivity);
+
+	else if( caller->objectName() == "toolButton_reflectivity_2" )
+		changeColor(ui->color_reflectivity_2, ui->horizontalSlider_reflectivity_2);
 
 	else if( caller->objectName() == "toolButton_selfIllumTint" )
 		changeColor(ui->color_selfIllumTint, ui->horizontalSlider_selfIllumTint);
