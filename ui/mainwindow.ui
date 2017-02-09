@@ -1316,7 +1316,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2043</y>
+             <y>-2856</y>
              <width>926</width>
              <height>5098</height>
             </rect>
@@ -9964,7 +9964,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -10001,7 +10001,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -10475,7 +10475,7 @@ QGroupBox::title {
                          <number>1</number>
                         </property>
                         <property name="maximum">
-                         <number>255</number>
+                         <number>1024</number>
                         </property>
                         <property name="value">
                          <number>5</number>
@@ -10596,7 +10596,7 @@ QGroupBox::title {
                          <number>1</number>
                         </property>
                         <property name="maximum">
-                         <number>255</number>
+                         <number>1024</number>
                         </property>
                         <property name="value">
                          <number>5</number>
@@ -11107,7 +11107,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -11144,7 +11144,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -11310,7 +11310,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>10.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="value">
                       <double>1.000000000000000</double>
