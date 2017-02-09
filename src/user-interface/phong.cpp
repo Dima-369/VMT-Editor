@@ -288,9 +288,11 @@ void processPhongAmount(const QString &parameter, const QString &value,
 		if (first) {
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_phongAmount);
+				ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
 		} else {
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_spec_amount2);
+				ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 		}
 	} else {
 		double max = static_cast<double>(
