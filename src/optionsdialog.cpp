@@ -51,6 +51,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_checkForUpdates->setChecked( settings->checkForUpdates );
 
+	ui->checkBox_autoSave->setChecked( settings->autoSave );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -211,6 +213,20 @@ void OptionsDialog::saveSettings()
 			mSettings->autoRefresh = false;
 			mIniSettings->setValue("autoRefresh", false);
 			emit optionChanged(Settings::_AutoRefresh, "0");
+		}
+	}
+
+	if (ui->checkBox_autoSave->isChecked()) {
+		if (!mSettings->autoSave) {
+			mSettings->autoSave = true;
+			mIniSettings->setValue("autoSave", true);
+			emit optionChanged(Settings::_AutoSave, "1");
+		}
+	} else {
+		if(mSettings->autoSave) {
+			mSettings->autoSave = false;
+			mIniSettings->setValue("autoSave", false);
+			emit optionChanged(Settings::_AutoSave, "0");
 		}
 	}
 

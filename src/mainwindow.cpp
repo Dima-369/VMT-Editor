@@ -5426,6 +5426,10 @@ void MainWindow::widgetChanged()
 			}
 			
 		}
+		if(mSettings->autoSave) {
+			if (mVMTLoaded)
+				action_Save();
+		}
 	}
 
 }
@@ -6665,6 +6669,7 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
@@ -6884,6 +6889,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_RemoveSuffix:
+			break;
+
+		case Settings::_AutoSave:
 			break;
 
 		case Settings::_RemoveAlpha:
