@@ -282,6 +282,7 @@ void processPhongAmount(const QString &parameter, const QString &value,
 	float red = r.values.at(0);
 	float green = r.values.at(1);
 	float blue = r.values.at(2);
+	float alpha = r.values.at(3);
 
 	if (allRegular) {
 		if (first) {
@@ -303,10 +304,12 @@ void processPhongAmount(const QString &parameter, const QString &value,
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_phongAmount);
 			ui->doubleSpinBox_phongAmount->setValue(max);
+			ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
 		} else {
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_spec_amount2);
 			ui->doubleSpinBox_spec_amount2->setValue(max);
+			ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 		}
 	}
 }
