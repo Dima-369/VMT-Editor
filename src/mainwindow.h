@@ -332,6 +332,8 @@ public slots:
 
 	void refreshRequested();
 
+	void clearMessageLog();
+
 	void gameChanged( const QString& game );
 
 	void shaderChanged();

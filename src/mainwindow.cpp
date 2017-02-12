@@ -208,6 +208,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->actionRefresh,			 SIGNAL(triggered()),  this, SLOT(refreshRequested()));
 
+	connect( ui->actionClear_Message_Log,SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
+
 	connect( ui->action_hideAll,		 SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
 
 	connect( ui->action_convertToVTF,    SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
@@ -5481,7 +5483,7 @@ void MainWindow::refreshRequested() {
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
 
-			Info( "Parsing Proxies caused an error: " + tmp2 )
+			Info( "Proxies parsing error: " + tmp2 )
 		}
 
 	} else {
@@ -5491,6 +5493,10 @@ void MainWindow::refreshRequested() {
 																		   mSettings->useQuotesForTexture,
 																		   mSettings->useIndentation ));
 	}
+}
+
+void MainWindow::clearMessageLog() {
+	mLogger->clear();
 }
 
 void MainWindow::finishedLoading()
