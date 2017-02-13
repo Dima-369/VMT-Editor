@@ -100,7 +100,6 @@ int SubGroupTextEdit::lineNumberAreaWidth()
 void SubGroupTextEdit::lineNumberAreaPaintEvent(QPaintEvent* event)
 {
 	QPainter painter(lineNumberArea);
-	// same color as the Parameters/Proxies tabs when inactive
 	painter.fillRect(event->rect(), QColor(34, 34, 34));
 
 	QTextBlock block = firstVisibleBlock();
