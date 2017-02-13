@@ -107,12 +107,19 @@ void SubGroupTextEdit::lineNumberAreaPaintEvent(QPaintEvent* event)
 	int blockNumber = block.blockNumber();
 	int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
 	int bottom = top + (int) blockBoundingRect(block).height();
+	const auto current = textCursor().block();
 
 	while (block.isValid() && top <= event->rect().bottom()) {
 		if (block.isVisible() && bottom >= event->rect().top()) {
 			const QString number = QString::number(blockNumber + 1);
-			painter.setPen(QColor(150, 150, 150));
-			painter.drawText(0, top, lineNumberArea->width() - 5,
+			if (block == current) {
+				painter.setPen(QColor(210, 210, 210));
+			} else {
+				painter.setPen(QColor(110, 110, 110));
+			}
+			const int paddingRight = 5;
+			painter.drawText(0, top,
+				lineNumberArea->width() - paddingRight,
 				fontMetrics().height(), Qt::AlignRight, number);
 		}
 
@@ -140,7 +147,8 @@ void SubGroupTextEdit::updateLineNumberArea(const QRect& rect, int dy)
 void SubGroupTextEdit::updateLineNumberAreaWidth()
 {
 	// the margins at which the actual text starts
-	setViewportMargins(lineNumberAreaWidth() + 5, 0, 0, 0);
+	const int marginLeft = 5;
+	setViewportMargins(lineNumberAreaWidth() + marginLeft, 0, 0, 0);
 }
 
 void SubGroupTextEdit::insertCompletion( const QString& completion )
