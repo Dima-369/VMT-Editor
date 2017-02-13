@@ -1,25 +1,5 @@
 #include "subgrouptextedit.h"
 
-#include <QCompleter>
-#include <QKeyEvent>
-#include <QAbstractItemView>
-#include <QtDebug>
-#include <QApplication>
-#include <QModelIndex>
-#include <QAbstractItemModel>
-#include <QScrollBar>
-#include <QFile>
-#include <QStringListModel>
-#include <QMimeData>
-#include <QTextDocumentFragment>
-#include <QFileSystemModel>
-#include <QDirModel>
-#include <QTableView>
-#include <QHeaderView>
-
-#include "vmtparser.h"
-
-
 class StringListModel : public QAbstractListModel
 {
 public:
@@ -68,11 +48,11 @@ private:
 	QStringList mCompletions;
 };
 
-SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
-	: QTextEdit(parent)
+SubGroupTextEdit::SubGroupTextEdit(QWidget* parent) :
+	QPlainTextEdit(parent),
+	mCompleter(new QCompleter(this)),
+	lineNumberArea(new LineNumberArea(this))
 {
-	mCompleter = new QCompleter(this);
-
 	QStringList tmp = extractLines(":/files/subGroups");
 	tmp << extractLines(":/files/parameters");
 
@@ -82,17 +62,92 @@ SubGroupTextEdit::SubGroupTextEdit( QWidget* parent )
 	mCompleter->setCompletionMode(QCompleter::PopupCompletion);
 	mCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
-	QObject::connect( mCompleter, SIGNAL(activated(QString)), this, SLOT(insertCompletion(QString)));
+	connect(this, SIGNAL(blockCountChanged(int)),
+		SLOT(updateLineNumberAreaWidth()));
+
+	connect(this, SIGNAL(updateRequest(QRect,int)),
+		SLOT(updateLineNumberArea(QRect,int)));
+
+	updateLineNumberAreaWidth();
+
+	connect(mCompleter, SIGNAL(activated(QString)), SLOT(insertCompletion(QString)));
 
 	// to color groups like PlayerLogo
 	// we do not clear the memory because this TextEdit is only created once
 	new Highlighter(document());
 
-	// Calculating the tab stop width by taking 4 random characters as Consolas is a monospaced font
-	QFont font( fontFamily(), 9 );
-	QFontMetrics fm(font);
+	// otherwise 1 tab is very large!
+	QFont font;
+	font.setFamily("Consolas");
+	font.setStyleHint(QFont::Monospace);
+	font.setPointSize(9);
+	QFontMetrics metrics(font);
+	setTabStopWidth(4 * metrics.width(' '));
+}
 
-	setTabStopWidth( fm.boundingRect("aaaa").width() );
+int SubGroupTextEdit::lineNumberAreaWidth()
+{
+	int digits = 1;
+	int max = qMax(1, blockCount());
+	while (max >= 10) {
+		max /= 10;
+		++digits;
+	}
+	int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+	return qMax(26, space + 8);
+}
+
+void SubGroupTextEdit::lineNumberAreaPaintEvent(QPaintEvent* event)
+{
+	QPainter painter(lineNumberArea);
+	painter.fillRect(event->rect(), QColor(34, 34, 34));
+
+	QTextBlock block = firstVisibleBlock();
+	int blockNumber = block.blockNumber();
+	int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
+	int bottom = top + (int) blockBoundingRect(block).height();
+	const auto current = textCursor().block();
+
+	while (block.isValid() && top <= event->rect().bottom()) {
+		if (block.isVisible() && bottom >= event->rect().top()) {
+			const QString number = QString::number(blockNumber + 1);
+			if (block == current) {
+				painter.setPen(QColor(130, 130, 130));
+			} else {
+				painter.setPen(QColor(75, 75, 75));
+			}
+			const int paddingRight = 5;
+			painter.drawText(0, top,
+				lineNumberArea->width() - paddingRight,
+				fontMetrics().height(), Qt::AlignRight, number);
+		}
+
+		block = block.next();
+		top = bottom;
+		bottom = top + (int) blockBoundingRect(block).height();
+		++blockNumber;
+	}
+}
+
+void SubGroupTextEdit::updateLineNumberArea(const QRect& rect, int dy)
+{
+	if (dy) {
+		lineNumberArea->scroll(0, dy);
+	} else {
+		lineNumberArea->update(0, rect.y(),
+			lineNumberArea->width(), rect.height());
+	}
+
+	if (rect.contains(viewport()->rect())) {
+		updateLineNumberAreaWidth();
+	}
+}
+
+void SubGroupTextEdit::updateLineNumberAreaWidth()
+{
+	// the margins at which the actual text starts
+	const int marginLeft = 5;
+	setViewportMargins(lineNumberAreaWidth() + marginLeft, 0, 0, 0);
 }
 
 void SubGroupTextEdit::insertCompletion( const QString& completion )
@@ -157,21 +212,23 @@ QString SubGroupTextEdit::textUnderCursor() const
 	return tc.selectedText();
 }
 
-void SubGroupTextEdit::focusInEvent( QFocusEvent* event )
+void SubGroupTextEdit::focusInEvent(QFocusEvent* event)
 {
 	mCompleter->setWidget(this);
+	QPlainTextEdit::focusInEvent(event);
+}
 
-	QTextEdit::focusInEvent(event);
+void SubGroupTextEdit::resizeEvent(QResizeEvent* e)
+{
+	QPlainTextEdit::resizeEvent(e);
+
+	QRect cr = contentsRect();
+	lineNumberArea->setGeometry(
+		QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
 void SubGroupTextEdit::keyPressEvent( QKeyEvent* event )
 {
-	// For some reason we have to set the font family again because when the textedit contains no characters and the backspace key
-	// is hit, the font family will reset
-
-	setFontFamily("Consolas");
-	setFontPointSize(9);
-
 	if( mCompleter->popup()->isVisible() )
 	{
 		switch( event->key() )
@@ -196,7 +253,7 @@ void SubGroupTextEdit::keyPressEvent( QKeyEvent* event )
 
 			if( !tc.selectedText().isEmpty() )
 			{
-				QTextEdit::keyPressEvent(event);
+				QPlainTextEdit::keyPressEvent(event);
 			}
 			else
 			{
@@ -212,7 +269,7 @@ void SubGroupTextEdit::keyPressEvent( QKeyEvent* event )
 		}
 		else
 		{
-			QTextEdit::keyPressEvent(event);
+			QPlainTextEdit::keyPressEvent(event);
 		}
 	}
 
@@ -242,7 +299,6 @@ void SubGroupTextEdit::keyPressEvent( QKeyEvent* event )
 	mCompleter->complete(rect);
 }
 
-
 void SubGroupTextEdit::insertFromMimeData ( const QMimeData * source )
 {
 	// Replacing 4 spaces with 1 tab
@@ -254,5 +310,21 @@ void SubGroupTextEdit::insertFromMimeData ( const QMimeData * source )
 
 	data->setText(tmp);
 
-	QTextEdit::insertFromMimeData(data);
+	QPlainTextEdit::insertFromMimeData(data);
+}
+
+LineNumberArea::LineNumberArea(SubGroupTextEdit* editor) : 
+	QWidget(editor),
+	editor(editor)
+{
+}
+
+QSize LineNumberArea::sizeHint() const
+{
+	return QSize(editor->lineNumberAreaWidth(), 0);
+}
+
+void LineNumberArea::paintEvent(QPaintEvent* event)
+{
+	editor->lineNumberAreaPaintEvent(event);
 }
