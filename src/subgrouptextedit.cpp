@@ -94,14 +94,14 @@ int SubGroupTextEdit::lineNumberAreaWidth()
 		++digits;
 	}
 	int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
-	return space + 8;
+	return qMax(26, space + 8);
 }
 
 void SubGroupTextEdit::lineNumberAreaPaintEvent(QPaintEvent* event)
 {
 	QPainter painter(lineNumberArea);
 	// same color as the Parameters/Proxies tabs when inactive
-	painter.fillRect(event->rect(), QColor(28, 28, 28));
+	painter.fillRect(event->rect(), QColor(34, 34, 34));
 
 	QTextBlock block = firstVisibleBlock();
 	int blockNumber = block.blockNumber();
@@ -113,9 +113,9 @@ void SubGroupTextEdit::lineNumberAreaPaintEvent(QPaintEvent* event)
 		if (block.isVisible() && bottom >= event->rect().top()) {
 			const QString number = QString::number(blockNumber + 1);
 			if (block == current) {
-				painter.setPen(QColor(210, 210, 210));
+				painter.setPen(QColor(130, 130, 130));
 			} else {
-				painter.setPen(QColor(110, 110, 110));
+				painter.setPen(QColor(75, 75, 75));
 			}
 			const int paddingRight = 5;
 			painter.drawText(0, top,
