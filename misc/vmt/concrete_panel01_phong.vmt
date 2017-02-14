@@ -8,8 +8,8 @@ LightmappedGeneric
 	
 	$phong 1
 	$phongexponent 5
-                $phongMaskContrastBrightness "[.5 8]"
-                $phongAmount "[.6 .5 .4 1.0]"
+        $phongMaskContrastBrightness "[.5 8]"
+        $phongAmount "[.6 .5 .4 1.0]"
 	$envmaplightscale 0.5
 
 	$detail "park/floor/concrete_panel01_detail"

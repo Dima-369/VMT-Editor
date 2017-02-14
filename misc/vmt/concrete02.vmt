@@ -16,6 +16,6 @@ LightmappedGeneric
 
 	$phong 1
 	$phongexponent 5
-                $phongMaskContrastBrightness "[.5 8]"
-                $phongAmount "[.7 .6 .5 1.0]"
+        $phongMaskContrastBrightness "[.5 8]"
+        $phongAmount "[.7 .6 .5 1.0]"
 }

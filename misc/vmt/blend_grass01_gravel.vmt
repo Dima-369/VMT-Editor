@@ -14,12 +14,11 @@ WorldVertexTransition
 	
 	$phong 1
 	$phongexponent 4
-                $phongMaskContrastBrightness "[5.5 2]"
-                $phongAmount "[.4 .35 .3 1.0]"
-
+        $phongMaskContrastBrightness "[5.5 2]"
+        $phongAmount "[.4 .35 .3 1.0]"
 
 	$phongexponent2 5
-                $phongMaskContrastBrightness2 "[5.5 2]"
+        $phongMaskContrastBrightness2 "[5.5 2]"
 	$phongAmount2 "[.4 .35 .3 1.0]"
 
 	$blendmodulatetexture "nature/blend_texture_01"
