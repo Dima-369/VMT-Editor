@@ -193,6 +193,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	if(mSettings->saveLastGame)
 		setCurrentGame(mSettings->lastGame);
 
+	if(!mGameSelected)
+		Info("No game selected! Texture browse and preview will not work")
+
 	//----------------------------------------------------------------------------------------//
 
 	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
@@ -767,7 +770,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( gameinfoDir.exists("gameinfo.txt") )
 		{
 			gameinfoFound = true;
-
 			break;
 		}
 	}
@@ -779,7 +781,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !gameinfoDir.cd("materials") )
 		{
-			Error("\"materials\" directory containing the regular VMTs does not exist!")
+			Error("\"materials\" directory does not exist!")
 		}
 		else
 		{
@@ -8400,6 +8402,7 @@ void MainWindow::loadVMT( const QString& vmtPath )
 	if(!gameinfoFound) {
 
 		setCurrentGame("");
+		Info("gameinfo.txt not found in VMT parent directory! No game selected. Texture browse and preview will not work")
 
 	} else {
 
@@ -8709,6 +8712,10 @@ void MainWindow::refreshGameList() {
 	setGames(games);
 
 	mIniSettings->setValue( "availableGames", gamesInSettings );
+
+	if(mAvailableGames.isEmpty())
+		Error("No games found. Manually add games with Games > Manage games dialog.")
+
 
 	setCurrentGame(oldCurrentGame);
 }
