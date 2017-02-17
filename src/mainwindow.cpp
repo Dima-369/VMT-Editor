@@ -8374,6 +8374,7 @@ void MainWindow::loadVMT( const QString& vmtPath )
 
 	VmtFile vmt = vmtParser->loadVmtFile(vmtPath);
 
+	ui->tabWidget->setCurrentIndex(0);
 	resetWidgets();
 
 	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
