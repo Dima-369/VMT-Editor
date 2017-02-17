@@ -760,6 +760,10 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 
 void MainWindow::vmtPreviewParse()
 {
+	if (ui->plainTextEdit_vmtPreview->toPlainText().isEmpty()) {
+		refreshRequested();
+	}
+
 	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
 
 	mLoading = true;
