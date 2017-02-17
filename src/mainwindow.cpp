@@ -219,6 +219,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->action_batchVMT,		 SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
 
+	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_refractAmount->setDoubleSlider(ui->horizontalSlider_refractAmount);
@@ -762,6 +764,10 @@ void MainWindow::vmtPreviewParse()
 
 	mLoading = true;
 
+	bool vmtLoaded = false;
+	if (mVMTLoaded)
+		vmtLoaded = true;
+
 	//mLogger->clear();
 
 	VmtFile vmt = vmtParser->loadVmtFile(QDir::currentPath() + "/Cache/temp.vmt", true);
@@ -769,7 +775,9 @@ void MainWindow::vmtPreviewParse()
 	ui->tabWidget->setCurrentIndex(0);
 	resetWidgets();
 
-	mVMTLoaded = true;
+	if(vmtLoaded)
+		mVMTLoaded = true;
+
 	mChildWidgetChanged = true;
 
 	updateWindowTitle();
@@ -779,9 +787,12 @@ void MainWindow::vmtPreviewParse()
 	parseVMT(vmt, true);
 
 	//----------------------------------------------------------------------------------------//
-
-	mVMTLoaded = true;
 	mLoading = false;
+
+	if(mSettings->autoSave) {
+		if (mVMTLoaded)
+			action_Save();
+	}
 
 	//updateWindowTitle();
 }
@@ -4628,6 +4639,8 @@ void MainWindow::action_New() {
 		foreach(QAction* action, actions) {
 			action->setEnabled(true);
 		}
+
+		refreshRequested();
 
 		setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
 	}

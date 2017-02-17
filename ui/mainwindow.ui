@@ -17270,6 +17270,7 @@ QGroupBox::title {
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionRefresh"/>
+    <addaction name="actionParse_VMT"/>
     <addaction name="actionClear_Message_Log"/>
     <addaction name="separator"/>
     <addaction name="action_refreshGameList"/>
@@ -18269,6 +18270,14 @@ border: 1px solid #222;
   <action name="actionClear_Message_Log">
    <property name="text">
     <string>Clear Message Log</string>
+   </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="actionParse_VMT">
+   <property name="text">
+    <string>Parse VMT Preview</string>
    </property>
    <property name="shortcut">
     <string>F6</string>
