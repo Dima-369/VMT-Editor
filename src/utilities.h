@@ -41,6 +41,12 @@ static QStringList gShaders = (QStringList() << "Cable" << "Decal" << "DecalModu
 	mLogger->scrollToBottom(); \
 }
 
+#define InfoReconvert(x) { \
+	qDebug() << QString(x); \
+	mLogger->addItem( new QListWidgetItem( QIcon(":/icons/reconvert"), x )); \
+	mLogger->scrollToBottom(); \
+}
+
 #define DebugLog(x) { qDebug() << QString(x); }
 
 #define Str(x) QString::number(x)

@@ -19,7 +19,7 @@ void ConversionThread::run()
 	output = process.readAllStandardOutput().simplified();
 
 	if (output.endsWith("1/1 files completed.")) {
-		Info("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
+		InfoReconvert("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
 
 
 
