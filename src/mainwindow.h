@@ -412,6 +412,8 @@ private slots:
 
 	void notifyOnNewVersion(QString version); 
 
+	void vmtPreviewParse();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();

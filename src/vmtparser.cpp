@@ -287,7 +287,7 @@ QString VmtParser::groupParameters( QMap< QString, QString >* parameters, bool i
 	return output;
 }
 
-void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName )
+void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName, bool isTemp )
 {
 	if( relativeFileName.isEmpty() )
 	{
@@ -309,8 +309,10 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 
 			vmtFile.close();
 
-			mLastVmtFile.fileName = QFileInfo(vmtFile).fileName();
-			mLastVmtFile.directory = QFileInfo(vmtFile).absolutePath();
+			if(!isTemp) {
+				mLastVmtFile.fileName = QFileInfo(vmtFile).fileName();
+				mLastVmtFile.directory = QFileInfo(vmtFile).absolutePath();
+			}
 		}
 	}
 }

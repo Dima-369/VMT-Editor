@@ -756,6 +756,36 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 	}
 }
 
+void MainWindow::vmtPreviewParse()
+{
+	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
+
+	mLoading = true;
+
+	//mLogger->clear();
+
+	VmtFile vmt = vmtParser->loadVmtFile(QDir::currentPath() + "/Cache/temp.vmt", true);
+
+	ui->tabWidget->setCurrentIndex(0);
+	resetWidgets();
+
+	mVMTLoaded = true;
+	mChildWidgetChanged = true;
+
+	updateWindowTitle();
+
+	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
+
+	parseVMT(vmt, true);
+
+	//----------------------------------------------------------------------------------------//
+
+	mVMTLoaded = true;
+	mLoading = false;
+
+	//updateWindowTitle();
+}
+
 void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 {
 	mParsingVMT = true;
@@ -765,7 +795,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	bool gameinfoFound = false;
 	QString materialDirectory;
 
-	while( gameinfoDir.cdUp() )
+	while( gameinfoDir.cdUp() && !isTemplate )
 	{
 		if( gameinfoDir.exists("gameinfo.txt") )
 		{
@@ -790,6 +820,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if (mGameSelected)
 			vmt.state.gameDirectory = new QDir(realGameinfoDir);
+	}
+
+	if(isTemplate) {
+		realGameinfoDir = currentGameMaterialDir().section("/", 0, -2);
 	}
 
 	//----------------------------------------------------------------------------------------//

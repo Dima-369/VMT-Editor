@@ -17417,12 +17417,18 @@ QGroupBox::title {
         <enum>QPlainTextEdit::NoWrap</enum>
        </property>
        <property name="readOnly">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_31">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
        <item>
         <widget class="QPushButton" name="pushButton_refresh">
          <property name="minimumSize">
@@ -17445,6 +17451,31 @@ QGroupBox::title {
          </property>
          <property name="text">
           <string>Refresh</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_refresh_2">
+         <property name="minimumSize">
+          <size>
+           <width>77</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1000</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Parse</string>
          </property>
         </widget>
        </item>
@@ -17537,6 +17568,12 @@ border: 1px solid #222;
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_64">
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
        <item>
         <widget class="QPushButton" name="pushButton_clear">
          <property name="minimumSize">
@@ -18354,8 +18391,8 @@ border: 1px solid #222;
    <slot>refreshRequested()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1198</x>
-     <y>591</y>
+     <x>1068</x>
+     <y>551</y>
     </hint>
     <hint type="destinationlabel">
      <x>821</x>
@@ -22843,6 +22880,22 @@ border: 1px solid #222;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_refresh_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>vmtPreviewParse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1168</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>841</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>widgetChanged()</slot>
@@ -22872,5 +22925,6 @@ border: 1px solid #222;
   <slot>fresnelYEdited(double)</slot>
   <slot>toggledDetailUniformScale(bool)</slot>
   <slot>clearMessageLog()</slot>
+  <slot>vmtPreviewParse()</slot>
  </slots>
 </ui>
