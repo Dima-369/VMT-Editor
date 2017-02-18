@@ -9306,7 +9306,7 @@ void MainWindow::checkForUpdatesSilent()
 
 void MainWindow::notifyOnNewVersion(QString version)
 {
-	Info(QString("New version available: %1").arg(version));
+	Info(QString("New version available: %1").arg(removeTrailingVersionZero(version)));
 	mIniSettings->setValue("latestVersion", version);
 }
 
