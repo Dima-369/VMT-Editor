@@ -154,6 +154,10 @@ private:
 
 	bool mPreviewChanged;
 
+	QTextCursor mCursor;
+
+	int mCursorPos;
+
 	bool mShaderKnownButNotListed;
 
 	QSpacerItem* mHorizontalTextureSpacer;

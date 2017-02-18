@@ -765,11 +765,16 @@ void MainWindow::vmtPreviewChanged()
 
 void MainWindow::vmtPreviewParse()
 {
+	mCursor = ui->plainTextEdit_vmtPreview->textCursor();
+	mCursorPos = mCursor.position();
+	mCursor.setPosition(mCursorPos);
+
 	if (ui->plainTextEdit_vmtPreview->toPlainText().isEmpty()) {
 		refreshRequested();
 	}
 
 	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
+
 
 	mLoading = true;
 
@@ -784,6 +789,7 @@ void MainWindow::vmtPreviewParse()
 	ui->tabWidget->setCurrentIndex(0);
 	resetWidgets();
 
+	qDebug() << mCursor.position();
 	if(vmtLoaded)
 		mVMTLoaded = true;
 
@@ -802,6 +808,9 @@ void MainWindow::vmtPreviewParse()
 		if (mVMTLoaded)
 			action_Save();
 	}
+
+	mCursor.setPosition(mCursorPos);
+	ui->plainTextEdit_vmtPreview->setTextCursor(mCursor);
 
 	//updateWindowTitle();
 }
@@ -4702,6 +4711,9 @@ void MainWindow::action_Save() {
 
 	QString dir;
 
+	mCursor = ui->plainTextEdit_vmtPreview->textCursor();
+	mCursorPos = mCursor.position();
+
 	if(mVMTLoaded) {
 
 		if(mPreviewChanged)
@@ -4734,6 +4746,9 @@ void MainWindow::action_Save() {
 	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
 
 	mLoading = false;
+
+	mCursor.setPosition(mCursorPos);
+	ui->plainTextEdit_vmtPreview->setTextCursor(mCursor);
 }
 
 QString MainWindow::action_saveAs() {
