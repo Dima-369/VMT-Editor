@@ -7225,6 +7225,31 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 }
 }
 
+void MainWindow::changeShader()
+{
+	QWidget* caller = qobject_cast<QWidget *>( sender() );
+	int index = 0;
+	int currentIndex = ui->comboBox_shader->currentIndex();
+
+	if (caller->objectName() == "toolButton_Lightmapped")
+		index = ui->comboBox_shader->findText("LightmappedGeneric", Qt::MatchFixedString);
+
+	if (caller->objectName() == "toolButton_WorldVertex")
+		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
+
+	if (caller->objectName() == "toolButton_VertexLit")
+		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+
+	if (index != currentIndex) {
+		ui->comboBox_shader->setCurrentIndex(index);
+		shaderChanged();
+		mChildWidgetChanged = true;
+		updateWindowTitle();
+	}
+
+
+}
+
 void MainWindow::browseVTF()
 {
 	QWidget* caller = qobject_cast<QWidget *>( sender() );

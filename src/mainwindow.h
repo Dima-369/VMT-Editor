@@ -344,6 +344,8 @@ public slots:
 
 	void shaderChanged();
 
+	void changeShader();
+
 	void openRecentFile();
 
 	void openTemplate();

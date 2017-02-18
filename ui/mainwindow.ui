@@ -1465,6 +1465,231 @@ QGroupBox::title {
                  </widget>
                 </item>
                 <item>
+                 <widget class="QToolButton" name="toolButton_Lightmapped">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    color: silver;
+    background-color: #404040;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
+    padding-top: 5px;
+
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QToolButton:disabled
+{
+    background-color:#404040;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QToolButton:focus
+{
+	background-color: #404040;
+	border-color: #151515;
+}
+
+QToolButton:hover
+{
+    background-color: #383838;
+	border-color: #282828
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color: #282828
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Brush</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_WorldVertex">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    color: silver;
+    background-color: #404040;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
+    padding-top: 5px;
+
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QToolButton:disabled
+{
+    background-color:#404040;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QToolButton:focus
+{
+	background-color: #404040;
+	border-color: #151515;
+}
+
+QToolButton:hover
+{
+    background-color: #383838;
+	border-color: #282828
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color: #282828
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Blend</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_VertexLit">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    color: silver;
+    background-color: #404040;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
+    padding-top: 5px;
+
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+   
+}
+
+QToolButton:disabled
+{
+    background-color:#404040;
+    border-width: 1px;
+    border-color: #505050;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #3A3939;
+}
+
+QToolButton:focus
+{
+	background-color: #404040;
+	border-color: #151515;
+}
+
+QToolButton:hover
+{
+    background-color: #383838;
+	border-color: #282828
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color: #282828
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Model</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="horizontalSpacer_3">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -17154,8 +17379,8 @@ QGroupBox::title {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -22921,6 +23146,54 @@ border: 1px solid #222;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>toolButton_Lightmapped</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>675</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1208</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_WorldVertex</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>741</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1208</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_VertexLit</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>795</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>-8</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>widgetChanged()</slot>
@@ -22952,5 +23225,6 @@ border: 1px solid #222;
   <slot>clearMessageLog()</slot>
   <slot>vmtPreviewParse()</slot>
   <slot>vmtPreviewChanged()</slot>
+  <slot>changeShader()</slot>
  </slots>
 </ui>
