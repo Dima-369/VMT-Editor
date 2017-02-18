@@ -17154,8 +17154,8 @@ QGroupBox::title {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -18400,8 +18400,8 @@ border: 1px solid #222;
    <slot>refreshRequested()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1068</x>
-     <y>551</y>
+     <x>1070</x>
+     <y>549</y>
     </hint>
     <hint type="destinationlabel">
      <x>821</x>
@@ -22880,8 +22880,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>533</x>
-     <y>219</y>
+     <x>91</x>
+     <y>68</y>
     </hint>
     <hint type="destinationlabel">
      <x>944</x>
@@ -22902,6 +22902,22 @@ border: 1px solid #222;
     <hint type="destinationlabel">
      <x>1165</x>
      <y>841</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>plainTextEdit_vmtPreview</sender>
+   <signal>textChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>vmtPreviewChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1032</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1209</x>
+     <y>379</y>
     </hint>
    </hints>
   </connection>
@@ -22935,5 +22951,6 @@ border: 1px solid #222;
   <slot>toggledDetailUniformScale(bool)</slot>
   <slot>clearMessageLog()</slot>
   <slot>vmtPreviewParse()</slot>
+  <slot>vmtPreviewChanged()</slot>
  </slots>
 </ui>

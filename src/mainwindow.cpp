@@ -758,6 +758,11 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 	}
 }
 
+void MainWindow::vmtPreviewChanged()
+{
+	mPreviewChanged = true;
+}
+
 void MainWindow::vmtPreviewParse()
 {
 	if (ui->plainTextEdit_vmtPreview->toPlainText().isEmpty()) {
@@ -4699,7 +4704,10 @@ void MainWindow::action_Save() {
 
 	if(mVMTLoaded) {
 
-		refreshRequested();
+		if(mPreviewChanged)
+			vmtPreviewParse();
+		else
+			refreshRequested();
 
 		const QString directory = vmtParser->lastVMTFile().directory;
 		const QString fileName = vmtParser->lastVMTFile().fileName;
@@ -4797,7 +4805,10 @@ QString MainWindow::action_saveAs() {
 
 		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf('\\') ));
 
-		refreshRequested();
+		if(mPreviewChanged)
+			vmtPreviewParse();
+		else
+			refreshRequested();
 
 		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
 
@@ -5514,6 +5525,10 @@ void MainWindow::refreshRequested() {
 
 	VmtFile tmp3 = makeVMT();
 
+	mPreviewChanged = false;
+
+	ui->plainTextEdit_vmtPreview->blockSignals(true);
+
 	if( !ui->textEdit_proxies->toPlainText().isEmpty() ) {
 
 		QString tmp;
@@ -5546,6 +5561,8 @@ void MainWindow::refreshRequested() {
 																		   mSettings->useQuotesForTexture,
 																		   mSettings->useIndentation ));
 	}
+
+	ui->plainTextEdit_vmtPreview->blockSignals(false);
 }
 
 void MainWindow::clearMessageLog() {

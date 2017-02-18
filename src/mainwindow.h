@@ -152,6 +152,8 @@ private:
 
 	bool mParsingVMT;
 
+	bool mPreviewChanged;
+
 	bool mShaderKnownButNotListed;
 
 	QSpacerItem* mHorizontalTextureSpacer;
@@ -413,6 +415,8 @@ private slots:
 	void notifyOnNewVersion(QString version); 
 
 	void vmtPreviewParse();
+
+	void vmtPreviewChanged();
 
 	//----------------------------------------------------------------------------------------//
 
