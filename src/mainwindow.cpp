@@ -4743,7 +4743,7 @@ void MainWindow::action_Save() {
 
 	refreshRequested();
 
-	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
+	//vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
 
 	mLoading = false;
 
