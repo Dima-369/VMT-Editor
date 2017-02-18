@@ -1490,48 +1490,20 @@ QGroupBox::title {
                   <property name="styleSheet">
                    <string notr="true">QToolButton
 {
-    color: silver;
-    background-color: #404040;
-    border-width: 1px;
-    border-color: #282828;
-    border-style: solid;
-    padding-top: 5px;
-
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-   
-}
-
-QToolButton:disabled
-{
-    background-color:#404040;
-    border-width: 1px;
-    border-color: #505050;
-    border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #3A3939;
-}
-
-QToolButton:focus
-{
-	background-color: #404040;
-	border-color: #151515;
+    background-color: #303030;
+	border-color:  #303030;
 }
 
 QToolButton:hover
 {
-    background-color: #383838;
-	border-color: #282828
+    background-color: #282828;
+	border-color:  #282828;
 }
 
 QToolButton:pressed
 {
     background-color: #303030;
-	border-color: #282828
+	border-color:  #303030;
 }</string>
                   </property>
                   <property name="text">
@@ -1565,48 +1537,20 @@ QToolButton:pressed
                   <property name="styleSheet">
                    <string notr="true">QToolButton
 {
-    color: silver;
-    background-color: #404040;
-    border-width: 1px;
-    border-color: #282828;
-    border-style: solid;
-    padding-top: 5px;
-
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-   
-}
-
-QToolButton:disabled
-{
-    background-color:#404040;
-    border-width: 1px;
-    border-color: #505050;
-    border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #3A3939;
-}
-
-QToolButton:focus
-{
-	background-color: #404040;
-	border-color: #151515;
+    background-color: #303030;
+	border-color:  #303030;
 }
 
 QToolButton:hover
 {
-    background-color: #383838;
-	border-color: #282828
+    background-color: #282828;
+	border-color:  #282828;
 }
 
 QToolButton:pressed
 {
     background-color: #303030;
-	border-color: #282828
+	border-color:  #303030;
 }</string>
                   </property>
                   <property name="text">
@@ -1640,48 +1584,20 @@ QToolButton:pressed
                   <property name="styleSheet">
                    <string notr="true">QToolButton
 {
-    color: silver;
-    background-color: #404040;
-    border-width: 1px;
-    border-color: #282828;
-    border-style: solid;
-    padding-top: 5px;
-
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-   
-}
-
-QToolButton:disabled
-{
-    background-color:#404040;
-    border-width: 1px;
-    border-color: #505050;
-    border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #3A3939;
-}
-
-QToolButton:focus
-{
-	background-color: #404040;
-	border-color: #151515;
+    background-color: #303030;
+	border-color:  #303030;
 }
 
 QToolButton:hover
 {
-    background-color: #383838;
-	border-color: #282828
+    background-color: #282828;
+	border-color:  #282828;
 }
 
 QToolButton:pressed
 {
     background-color: #303030;
-	border-color: #282828
+	border-color:  #303030;
 }</string>
                   </property>
                   <property name="text">
