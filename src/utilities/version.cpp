@@ -5,7 +5,7 @@ void CheckVersionThread::run()
 	auto v = checkForNewVersion();
 	if (v.major > 0) {
 		const auto vs = versionToString(v);
-		emit notifyOnNewVersion(removeTrailingVersionZero(vs));
+		emit notifyOnNewVersion(vs);
 	}
 }
 
