@@ -158,6 +158,15 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	vmtParser = new VmtParser(mLogger);
 
 	ui->comboBox_shader->setInsertPolicy(QComboBox::InsertAlphabetically);
+	
+	//--------------------------------------------------------------------//
+
+	vmtPreviewCompleter = new QCompleter(vmtParameters_);
+	vmtPreviewCompleter->setModelSorting(
+		QCompleter::CaseInsensitivelySortedModel);
+	vmtPreviewCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+	vmtPreviewCompleter->setFilterMode(Qt::MatchContains);
+	ui->plainTextEdit_vmtPreview->setCompleter(vmtPreviewCompleter);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -7227,27 +7236,24 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 
 void MainWindow::changeShader()
 {
-	QWidget* caller = qobject_cast<QWidget *>( sender() );
+	const auto objectName = qobject_cast<QWidget *>(sender())->objectName();
 	int index = 0;
-	int currentIndex = ui->comboBox_shader->currentIndex();
 
-	if (caller->objectName() == "toolButton_Lightmapped")
+	if (objectName == "toolButton_Lightmapped") {
 		index = ui->comboBox_shader->findText("LightmappedGeneric", Qt::MatchFixedString);
-
-	if (caller->objectName() == "toolButton_WorldVertex")
+	} else if (objectName == "toolButton_WorldVertex") {
 		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
-
-	if (caller->objectName() == "toolButton_VertexLit")
+	} else if (objectName == "toolButton_VertexLit") {
 		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+	}
 
+	int currentIndex = ui->comboBox_shader->currentIndex();
 	if (index != currentIndex) {
 		ui->comboBox_shader->setCurrentIndex(index);
 		shaderChanged();
 		mChildWidgetChanged = true;
 		updateWindowTitle();
 	}
-
-
 }
 
 void MainWindow::browseVTF()

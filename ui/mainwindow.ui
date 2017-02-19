@@ -17542,7 +17542,7 @@ QToolButton:pressed
       <number>0</number>
      </property>
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit_vmtPreview">
+      <widget class="VmtTextEdit" name="plainTextEdit_vmtPreview">
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -17554,12 +17554,6 @@ QToolButton:pressed
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
         </font>
-       </property>
-       <property name="lineWrapMode">
-        <enum>QPlainTextEdit::NoWrap</enum>
-       </property>
-       <property name="readOnly">
-        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -18461,6 +18455,11 @@ border: 1px solid #222;
    <class>SubGroupTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>subgrouptextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VmtTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>vmttextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

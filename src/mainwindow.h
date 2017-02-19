@@ -172,6 +172,8 @@ private:
 
 	QString fileToConvert;
 
+	QCompleter* vmtPreviewCompleter;
+
 	//----------------------------------------------------------------------------------------//
 
 	QSettings* mIniSettings;
@@ -478,9 +480,10 @@ private slots:
 	void on_action_decal_triggered(bool checked);
 };
 
-//----------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
-// Needed in this header file as declaring ParameterLineEdit or ValueLineEdit in another header will result in an undefined type error of Ui::MainWindow
+// Needed in this header file as declaring ParameterLineEdit or ValueLineEdit
+// in another header will result in an undefined type error of Ui::MainWindow
 
 class ParameterLineEdit : public QLineEdit
 {
