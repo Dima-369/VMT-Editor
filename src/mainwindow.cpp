@@ -159,14 +159,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->comboBox_shader->setInsertPolicy(QComboBox::InsertAlphabetically);
 	
-	//--------------------------------------------------------------------//
-
-	vmtPreviewCompleter = new QCompleter(vmtParameters_);
-	vmtPreviewCompleter->setModelSorting(
-		QCompleter::CaseInsensitivelySortedModel);
-	vmtPreviewCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-	vmtPreviewCompleter->setFilterMode(Qt::MatchContains);
-	ui->plainTextEdit_vmtPreview->setCompleter(vmtPreviewCompleter);
+	ui->vmtPreviewTextEdit->setWordList(vmtParameters_);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -385,7 +378,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		font.setPointSize(9);
 
 	QFontMetrics metrics(font);
-	ui->plainTextEdit_vmtPreview->setTabStopWidth(4 * metrics.width(' '));
+	ui->vmtPreviewTextEdit->setTabStopWidth(4 * metrics.width(' '));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -774,15 +767,15 @@ void MainWindow::vmtPreviewChanged()
 
 void MainWindow::vmtPreviewParse()
 {
-	mCursor = ui->plainTextEdit_vmtPreview->textCursor();
+	mCursor = ui->vmtPreviewTextEdit->textCursor();
 	mCursorPos = mCursor.position();
 	mCursor.setPosition(mCursorPos);
 
-	if (ui->plainTextEdit_vmtPreview->toPlainText().isEmpty()) {
+	if (ui->vmtPreviewTextEdit->toPlainText().isEmpty()) {
 		refreshRequested();
 	}
 
-	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
+	vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
 
 
 	mLoading = true;
@@ -819,7 +812,7 @@ void MainWindow::vmtPreviewParse()
 	}
 
 	mCursor.setPosition(mCursorPos);
-	ui->plainTextEdit_vmtPreview->setTextCursor(mCursor);
+	ui->vmtPreviewTextEdit->setTextCursor(mCursor);
 
 	//updateWindowTitle();
 }
@@ -4229,7 +4222,7 @@ void MainWindow::resetWidgets() {
 
 	hideParameterGroupboxes();
 
-	ui->plainTextEdit_vmtPreview->clear();
+	ui->vmtPreviewTextEdit->clear();
 
 	ui->textEdit_proxies->clear();
 
@@ -4720,7 +4713,7 @@ void MainWindow::action_Save() {
 
 	QString dir;
 
-	mCursor = ui->plainTextEdit_vmtPreview->textCursor();
+	mCursor = ui->vmtPreviewTextEdit->textCursor();
 	mCursorPos = mCursor.position();
 
 	if(mVMTLoaded) {
@@ -4737,7 +4730,7 @@ void MainWindow::action_Save() {
 
 		processTexturesToCopy(dir);
 
-		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
+		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), directory + "/" + fileName );
 
 		mChildWidgetChanged = false;
 
@@ -4752,12 +4745,12 @@ void MainWindow::action_Save() {
 
 	refreshRequested();
 
-	//vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
+	//vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
 
 	mLoading = false;
 
 	mCursor.setPosition(mCursorPos);
-	ui->plainTextEdit_vmtPreview->setTextCursor(mCursor);
+	ui->vmtPreviewTextEdit->setTextCursor(mCursor);
 }
 
 QString MainWindow::action_saveAs() {
@@ -4838,7 +4831,7 @@ QString MainWindow::action_saveAs() {
 
 		setCurrentFile( fileName );
 
-		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
+		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), fileName );
 
 		mChildWidgetChanged = false;
 
@@ -4867,7 +4860,7 @@ void MainWindow::saveAsTemplate()
 		return;
 
 	refreshRequested();
-	vmtParser->saveVmtFile(ui->plainTextEdit_vmtPreview->toPlainText(),
+	vmtParser->saveVmtFile(ui->vmtPreviewTextEdit->toPlainText(),
 		fileName);
 	mChildWidgetChanged = false;
 	mVMTLoaded = true;
@@ -5551,7 +5544,7 @@ void MainWindow::refreshRequested() {
 
 	mPreviewChanged = false;
 
-	ui->plainTextEdit_vmtPreview->blockSignals(true);
+	ui->vmtPreviewTextEdit->blockSignals(true);
 
 	if( !ui->textEdit_proxies->toPlainText().isEmpty() ) {
 
@@ -5562,7 +5555,7 @@ void MainWindow::refreshRequested() {
 
 			tmp3.subGroups = VmtParser::formatSubGroups(tmp, 1);
 
-			ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+			ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																			   mSettings->parameterSortStyle == Settings::Grouped,
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
@@ -5570,7 +5563,7 @@ void MainWindow::refreshRequested() {
 
 			tmp3.subGroups = "";
 
-			ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+			ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																			   mSettings->parameterSortStyle == Settings::Grouped,
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
@@ -5580,13 +5573,13 @@ void MainWindow::refreshRequested() {
 
 	} else {
 
-		ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+		ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																		   mSettings->parameterSortStyle == Settings::Grouped,
 																		   mSettings->useQuotesForTexture,
 																		   mSettings->useIndentation ));
 	}
 
-	ui->plainTextEdit_vmtPreview->blockSignals(false);
+	ui->vmtPreviewTextEdit->blockSignals(false);
 }
 
 void MainWindow::clearMessageLog() {
@@ -6989,7 +6982,7 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_UseQuotesForTexture:
 		case Settings::_ParameterSortStyle:
 
-			if( !ui->plainTextEdit_vmtPreview->toPlainText().isEmpty() )
+			if( !ui->vmtPreviewTextEdit->toPlainText().isEmpty() )
 				refreshRequested();
 
 			break;

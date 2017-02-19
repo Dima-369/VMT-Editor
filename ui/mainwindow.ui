@@ -17542,7 +17542,7 @@ QToolButton:pressed
       <number>0</number>
      </property>
      <item>
-      <widget class="VmtTextEdit" name="plainTextEdit_vmtPreview">
+      <widget class="VmtTextEdit" name="vmtPreviewTextEdit">
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -18525,7 +18525,7 @@ border: 1px solid #222;
   <tabstop>checkBox_vertexAlpha</tabstop>
   <tabstop>textEdit_proxies</tabstop>
   <tabstop>scrollArea</tabstop>
-  <tabstop>plainTextEdit_vmtPreview</tabstop>
+  <tabstop>vmtPreviewTextEdit</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>lineEdit_2</tabstop>
  </tabstops>
@@ -23046,7 +23046,7 @@ border: 1px solid #222;
    </hints>
   </connection>
   <connection>
-   <sender>plainTextEdit_vmtPreview</sender>
+   <sender>vmtPreviewTextEdit</sender>
    <signal>textChanged()</signal>
    <receiver>MainWindow</receiver>
    <slot>vmtPreviewChanged()</slot>

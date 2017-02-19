@@ -13,8 +13,7 @@ class VmtTextEdit : public QTextEdit
 public:
 	VmtTextEdit(QWidget *parent = 0);
 
-	void setCompleter(QCompleter *c);
-	QCompleter *completer() const;
+	void setWordList(const QStringList& wordList);
 
 protected:
 	void keyPressEvent(QKeyEvent *e) override;

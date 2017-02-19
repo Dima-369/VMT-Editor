@@ -7,28 +7,22 @@ VmtTextEdit::VmtTextEdit(QWidget* parent) :
 {
 }
 
-void VmtTextEdit::setCompleter(QCompleter *completer)
+void VmtTextEdit::setWordList(const QStringList& wordList)
 {
-	if (c) {
-		QObject::disconnect(c, 0, this, 0);
-	}
-	c = completer;
-
-	c->setWidget(this);
+	c = new QCompleter(wordList);
+	c->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+	c->setCaseSensitivity(Qt::CaseInsensitive);
+	c->setFilterMode(Qt::MatchContains);
 	c->setCompletionMode(QCompleter::PopupCompletion);
 	c->setCaseSensitivity(Qt::CaseInsensitive);
+	c->setWidget(this);
 	QObject::connect(c, SIGNAL(activated(QString)),
 		this, SLOT(insertCompletion(QString)));
 }
 
-QCompleter *VmtTextEdit::completer() const
-{
-	return c;
-}
-
 void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 {
-	if (c && c->popup()->isVisible()) {
+	if (c->popup()->isVisible()) {
 		// The following keys are forwarded by the completer to the widget
 		switch (e->key()) {
 		case Qt::Key_Enter:
@@ -45,28 +39,29 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 
 	QTextEdit::keyPressEvent(e);
 
-	const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
-    if (!c || (ctrlOrShift && e->text().isEmpty()))
-        return;
+	const bool ctrlOrShift = e->modifiers() & 
+		(Qt::ControlModifier | Qt::ShiftModifier);
+	if (ctrlOrShift && e->text().isEmpty())
+		return;
 
-    static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-=");
-    bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
-    QString completionPrefix = textUnderCursor();
+	static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-=");
+	bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
+	QString completionPrefix = textUnderCursor();
 
-    if ((hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
-                      || eow.contains(e->text().right(1)))) {
-        c->popup()->hide();
-        return;
-    }
+	if (hasModifier || e->text().isEmpty() || completionPrefix.length() < 3 
+		|| eow.contains(e->text().right(1))) {
+		c->popup()->hide();
+		return;
+	}
 
-    if (completionPrefix != c->completionPrefix()) {
-        c->setCompletionPrefix(completionPrefix);
-        c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
-    }
-    QRect cr = cursorRect();
-    cr.setWidth(c->popup()->sizeHintForColumn(0)
-                + c->popup()->verticalScrollBar()->sizeHint().width());
-    c->complete(cr);
+	if (completionPrefix != c->completionPrefix()) {
+		c->setCompletionPrefix(completionPrefix);
+		c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
+	}
+	QRect cr = cursorRect();
+	cr.setWidth(c->popup()->sizeHintForColumn(0)
+		+ c->popup()->verticalScrollBar()->sizeHint().width());
+	c->complete(cr);
 }
 
 QString VmtTextEdit::textUnderCursor() const
