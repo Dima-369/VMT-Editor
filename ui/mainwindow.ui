@@ -17295,8 +17295,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -17554,6 +17554,12 @@ QToolButton:pressed
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
         </font>
+       </property>
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="acceptRichText">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
