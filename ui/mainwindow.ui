@@ -564,6 +564,7 @@ QPushButton:focus
 /*background-color: #2e3844;*/
 	border-width: 2px;
 	border-color: #151515;
+	outline: none;
 }
 
 QPushButton:hover
@@ -1316,7 +1317,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2877</y>
+             <y>0</y>
              <width>926</width>
              <height>5098</height>
             </rect>
@@ -17295,8 +17296,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -17559,8 +17560,7 @@ QToolButton:pressed
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-</string>
+        <string notr="true"/>
        </property>
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>
