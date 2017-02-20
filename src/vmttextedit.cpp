@@ -162,7 +162,7 @@ VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
 	vectorFormat.setForeground(QColor(187, 136, 117));
 	rule.pattern = QRegExp("\"\\[.*\\]\"");
 	rule.format = vectorFormat;
-	rules.append(rule);
+	//rules.append(rule);
 
 	quoteFormat.setForeground(QColor(220, 220, 220));
 	rule.pattern = QRegExp("\"\[a-z].*\"");
