@@ -17295,8 +17295,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -17551,14 +17551,15 @@ QToolButton:pressed
        </property>
        <property name="font">
         <font>
-         <family>Consolas</family>
+         <family>Segoe UI</family>
          <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QWidget {
-font-family: Consolas;
-}
+        <string notr="true">
 </string>
        </property>
        <property name="lineWrapMode">

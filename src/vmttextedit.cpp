@@ -151,17 +151,29 @@ void VmtTextEdit::insertCompletion(const QString& completion)
 
 VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
 	QSyntaxHighlighter(parent)
-{
-	parameterFormat.setForeground(QColor(200, 220, 0));
+{	
 	HighlightingRule rule;
-	rule.pattern = QRegExp(R"(\$\S+)");
+
+	numberFormat.setForeground(QColor(255, 255, 255));
+	rule.pattern = QRegExp("\"?\\d\"?");
+	rule.format = numberFormat;
+	rules.append(rule);
+
+	vectorFormat.setForeground(QColor(180, 180, 180));
+	rule.pattern = QRegExp("\"\\[.*\\]\"");
+	rule.format = vectorFormat;
+	rules.append(rule);
+
+	quoteFormat.setForeground(QColor(220, 220, 220));
+	rule.pattern = QRegExp("\"\\w.*\"");
+	rule.format = quoteFormat;
+	rules.append(rule);
+
+	parameterFormat.setForeground(QColor(140, 140, 140));
+	rule.pattern = QRegExp(R"(\S*\$\S+)");
 	rule.format = parameterFormat;
 	rules.append(rule);
 
-	quoteFormat.setForeground(QColor(114, 220, 114));
-	rule.pattern = QRegExp("\".*\"");
-	rule.format = quoteFormat;
-	rules.append(rule);
 }
 
 void VmtTextEditHighlighter::highlightBlock(const QString& text)

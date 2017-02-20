@@ -50,4 +50,6 @@ private:
 	// every word which starts with a dollar sign
 	QTextCharFormat parameterFormat;
 	QTextCharFormat quoteFormat;
+	QTextCharFormat numberFormat;
+	QTextCharFormat vectorFormat;
 };
