@@ -90,6 +90,8 @@ $lightmapwaterfog
 $basemapluminancephongmask
 $phongfresnelranges
 $phongtint
+$phongwarp
+$phongdisablehalflambert
 $halflambert
 $phongalbedotint
 $phongexponent
@@ -98,6 +100,7 @@ $basemapalphaphongmask
 $seamless_scale
 $lightwarptexture
 $reflectivity
+$reflectivity2
 $detail
 $detailblendfactor
 $alpha
