@@ -359,7 +359,7 @@ QTextEdit
 {
     background-color: #222;
     color: silver;
-    border: 1px solid #222;
+    border: 0px solid #222;
 }
 
 QPlainTextEdit
@@ -600,11 +600,11 @@ QComboBox:hover,QAbstractSpinBox:hover,QLineEdit:hover,QAbstractView:hover,QTree
     color: silver;
 }
 
-QTextEdit:hover
+/*QTextEdit:hover
 {	
 	border-color: #151515;
 	background-color: #151515;
-}
+}*/
 
 QComboBox:on
 {
@@ -17295,8 +17295,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -17551,9 +17551,15 @@ QToolButton:pressed
        </property>
        <property name="font">
         <font>
-         <family>Segoe UI</family>
+         <family>Consolas</family>
          <pointsize>9</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget {
+font-family: Consolas;
+}
+</string>
        </property>
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>

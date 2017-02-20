@@ -372,13 +372,13 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	//----------------------------------------------------------------------------------------//
 
 	QFont font;
-		font.setFamily("Segoe UI");
+		font.setFamily("Consolas");
 		font.setStyleHint(QFont::Monospace);
 		font.setFixedPitch(true);
 		font.setPointSize(9);
 
 	QFontMetrics metrics(font);
-	ui->vmtPreviewTextEdit->setTabStopWidth(4 * metrics.width(' '));
+	ui->vmtPreviewTextEdit->setTabStopWidth(2 * metrics.width(' '));
 
 	//----------------------------------------------------------------------------------------//
 
