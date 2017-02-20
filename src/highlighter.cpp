@@ -14,7 +14,7 @@ Highlighter::Highlighter( QTextDocument* parent ) :
 	for( int i = 0; i < groupPatterns.size(); ++i )
 		groupPatterns[i] = "\\b" + groupPatterns.at(i) + "\\b";
 
-	groupFormat.setForeground( QColor(227, 61, 65) );
+	groupFormat.setForeground( QColor(255, 90, 42) );
 	groupFormat.setFontWeight(QFont::Bold);
 	groupFormat.setFont( QFont("Consolas", 9) );
 
@@ -35,7 +35,7 @@ Highlighter::Highlighter( QTextDocument* parent ) :
 		parameterPatterns[i] = "\\b" + parameterPatterns.at(i) + "\\b";
 	}
 
-	groupFormat.setForeground( QColor(69, 183, 220) );
+	groupFormat.setForeground( QColor(117, 148, 187) );
 	groupFormat.setFontWeight(QFont::Normal);
 
 	foreach( const QString& pattern, parameterPatterns )
@@ -48,7 +48,7 @@ Highlighter::Highlighter( QTextDocument* parent ) :
 
 	//////////////////////////////////////////////
 
-	quotationFormat.setForeground( QColor(114, 220, 114) );
+	quotationFormat.setForeground( QColor(220, 220, 220) );
 	rule.pattern = QRegExp("\".*\"");
 	rule.format = quotationFormat;
 

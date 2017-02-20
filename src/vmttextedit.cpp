@@ -4,6 +4,7 @@ VmtTextEdit::VmtTextEdit(QWidget* parent) :
 	QTextEdit(parent),
 	c(NULL)
 {
+	new VmtTextEditHighlighter(document());
 }
 
 void VmtTextEdit::setWordList(const QStringList& wordList)
@@ -77,7 +78,7 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 		QTextEdit::keyPressEvent(e);
 	}
 
-	const bool ctrlOrShift = e->modifiers() & 
+	const bool ctrlOrShift = e->modifiers() &
 		(Qt::ControlModifier | Qt::ShiftModifier);
 	if (ctrlOrShift && e->text().isEmpty())
 		return;
@@ -86,7 +87,7 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 	bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
 	QString completionPrefix = textUnderCursor();
 
-	if (hasModifier || e->text().isEmpty() || completionPrefix.length() < 3 
+	if (hasModifier || e->text().isEmpty() || completionPrefix.length() < 3
 		|| eow.contains(e->text().right(1))) {
 		c->popup()->hide();
 		return;
@@ -111,9 +112,7 @@ QString VmtTextEdit::textUnderCursor() const
 
 void VmtTextEdit::focusInEvent(QFocusEvent *e)
 {
-	if (c) {
-		c->setWidget(this);
-	}
+	c->setWidget(this);
 	QTextEdit::focusInEvent(e);
 }
 
@@ -146,10 +145,47 @@ void VmtTextEdit::insertCompletion(const QString& completion)
 			QTextCursor::KeepAnchor, dollarCount);
 		tc.removeSelectedText();
 	}
-
-	//tc.select(QTextCursor::WordUnderCursor);
-	//tc.movePosition(QTextCursor::Left);
-	//tc.movePosition(QTextCursor::EndOfWord);
 	tc.insertText(completion);
 	setTextCursor(tc);
+}
+
+VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
+	QSyntaxHighlighter(parent)
+{	
+	HighlightingRule rule;
+
+	numberFormat.setForeground(QColor(255, 134, 87));
+	rule.pattern = QRegExp("\\d\\.?");
+	rule.format = numberFormat;
+	rules.append(rule);
+
+	vectorFormat.setForeground(QColor(187, 136, 117));
+	rule.pattern = QRegExp("\"\\[.*\\]\"");
+	rule.format = vectorFormat;
+	//rules.append(rule);
+
+	quoteFormat.setForeground(QColor(220, 220, 220));
+	rule.pattern = QRegExp("\"\[a-z].*\"");
+	rule.format = quoteFormat;
+	rules.append(rule);
+
+	parameterFormat.setForeground(QColor(140, 140, 140));
+	rule.pattern = QRegExp(R"(\S*\$\S+)");
+	rule.format = parameterFormat;
+	rules.append(rule);
+
+}
+
+void VmtTextEditHighlighter::highlightBlock(const QString& text)
+{
+	foreach(const HighlightingRule& rule, rules) {
+		QRegExp expression(rule.pattern);
+		int index = expression.indexIn(text);
+
+		while (index >= 0) {
+			int length = expression.matchedLength();
+			setFormat(index, length, rule.format);
+			index = expression.indexIn(text, index + length);
+		}
+	}
 }
