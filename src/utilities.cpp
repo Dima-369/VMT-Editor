@@ -29,7 +29,7 @@ bool setKey(const QString &name, bool def, QSettings *settings)
 	return def;
 }
 
-QString addTabs( int amount )
+QString addTabs(int amount)
 {
 	QString tmp;
 
