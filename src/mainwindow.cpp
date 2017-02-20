@@ -763,6 +763,8 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 void MainWindow::vmtPreviewChanged()
 {
 	mPreviewChanged = true;
+	mChildWidgetChanged = true;
+	updateWindowTitle();
 }
 
 void MainWindow::vmtPreviewParse()
