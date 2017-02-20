@@ -155,7 +155,7 @@ VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
 	HighlightingRule rule;
 
 	numberFormat.setForeground(QColor(255, 134, 87));
-	rule.pattern = QRegExp("\"?\\d\\.?\"?");
+	rule.pattern = QRegExp("\\d\\.?");
 	rule.format = numberFormat;
 	rules.append(rule);
 
