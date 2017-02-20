@@ -4,6 +4,7 @@ VmtTextEdit::VmtTextEdit(QWidget* parent) :
 	QTextEdit(parent),
 	c(NULL)
 {
+	new VmtTextEditHighlighter(document());
 }
 
 void VmtTextEdit::setWordList(const QStringList& wordList)
@@ -77,7 +78,7 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 		QTextEdit::keyPressEvent(e);
 	}
 
-	const bool ctrlOrShift = e->modifiers() & 
+	const bool ctrlOrShift = e->modifiers() &
 		(Qt::ControlModifier | Qt::ShiftModifier);
 	if (ctrlOrShift && e->text().isEmpty())
 		return;
@@ -86,7 +87,7 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 	bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
 	QString completionPrefix = textUnderCursor();
 
-	if (hasModifier || e->text().isEmpty() || completionPrefix.length() < 3 
+	if (hasModifier || e->text().isEmpty() || completionPrefix.length() < 3
 		|| eow.contains(e->text().right(1))) {
 		c->popup()->hide();
 		return;
@@ -111,9 +112,7 @@ QString VmtTextEdit::textUnderCursor() const
 
 void VmtTextEdit::focusInEvent(QFocusEvent *e)
 {
-	if (c) {
-		c->setWidget(this);
-	}
+	c->setWidget(this);
 	QTextEdit::focusInEvent(e);
 }
 
@@ -146,10 +145,35 @@ void VmtTextEdit::insertCompletion(const QString& completion)
 			QTextCursor::KeepAnchor, dollarCount);
 		tc.removeSelectedText();
 	}
-
-	//tc.select(QTextCursor::WordUnderCursor);
-	//tc.movePosition(QTextCursor::Left);
-	//tc.movePosition(QTextCursor::EndOfWord);
 	tc.insertText(completion);
 	setTextCursor(tc);
+}
+
+VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
+	QSyntaxHighlighter(parent)
+{
+	parameterFormat.setForeground(QColor(200, 220, 0));
+	HighlightingRule rule;
+	rule.pattern = QRegExp(R"(\$\S+)");
+	rule.format = parameterFormat;
+	rules.append(rule);
+
+	quoteFormat.setForeground(QColor(114, 220, 114));
+	rule.pattern = QRegExp("\".*\"");
+	rule.format = quoteFormat;
+	rules.append(rule);
+}
+
+void VmtTextEditHighlighter::highlightBlock(const QString& text)
+{
+	foreach(const HighlightingRule& rule, rules) {
+		QRegExp expression(rule.pattern);
+		int index = expression.indexIn(text);
+
+		while (index >= 0) {
+			int length = expression.matchedLength();
+			setFormat(index, length, rule.format);
+			index = expression.indexIn(text, index + length);
+		}
+	}
 }
