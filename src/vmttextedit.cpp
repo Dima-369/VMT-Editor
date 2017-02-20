@@ -1,5 +1,4 @@
 #include "vmttextedit.h"
-#include <qdebug.h>
 
 VmtTextEdit::VmtTextEdit(QWidget* parent) :
 	QTextEdit(parent),
@@ -37,7 +36,46 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 		}
 	}
 
-	QTextEdit::keyPressEvent(e);
+	if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) {
+		QTextCursor tc = textCursor();
+		const auto oldPos = tc.position();
+		tc.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+		const auto toStart = tc.selectedText();
+		int currentIndent = 0;
+		// assuming that the entered VMT is correct
+		for (int i = toStart.size() - 1; i >= 0; --i) {
+			const auto ch = toStart.at(i);
+			if (ch == '{') {
+				currentIndent++;
+			} else if (ch == '}') {
+				currentIndent--;
+			}
+		}
+		tc.setPosition(oldPos);
+		if (currentIndent <= 0) {
+			tc.insertText("\n");
+		} else {
+			tc.insertText("\n" + addTabs(currentIndent));
+		}
+	} else if (e->key() == Qt::Key_Backspace) {
+		QTextCursor tc = textCursor();
+		const auto oldPos = tc.position();
+		tc.movePosition(QTextCursor::StartOfLine);
+		tc.movePosition(QTextCursor::EndOfLine,
+			QTextCursor::KeepAnchor);
+		if (isWhitespace(tc.selectedText())) {
+			tc.removeSelectedText();
+			// need to remove previous \n as well
+			tc.movePosition(QTextCursor::PreviousCharacter,
+				QTextCursor::KeepAnchor);
+			tc.removeSelectedText();
+		} else {
+			tc.setPosition(oldPos);
+			QTextEdit::keyPressEvent(e);
+		}
+	} else {
+		QTextEdit::keyPressEvent(e);
+	}
 
 	const bool ctrlOrShift = e->modifiers() & 
 		(Qt::ControlModifier | Qt::ShiftModifier);
@@ -58,7 +96,7 @@ void VmtTextEdit::keyPressEvent(QKeyEvent *e)
 		c->setCompletionPrefix(completionPrefix);
 		c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
 	}
-	QRect cr = cursorRect();
+	auto cr = cursorRect();
 	cr.setWidth(c->popup()->sizeHintForColumn(0)
 		+ c->popup()->verticalScrollBar()->sizeHint().width());
 	c->complete(cr);

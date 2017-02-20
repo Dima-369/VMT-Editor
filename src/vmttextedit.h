@@ -6,6 +6,8 @@
 #include <QKeyEvent>
 #include <QScrollBar>
 
+#include "utilities.h"
+
 class VmtTextEdit : public QTextEdit
 {
 	Q_OBJECT
