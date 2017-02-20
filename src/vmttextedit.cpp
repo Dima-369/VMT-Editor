@@ -154,18 +154,18 @@ VmtTextEditHighlighter::VmtTextEditHighlighter(QTextDocument* parent) :
 {	
 	HighlightingRule rule;
 
-	numberFormat.setForeground(QColor(255, 255, 255));
-	rule.pattern = QRegExp("\"?\\d\"?");
+	numberFormat.setForeground(QColor(255, 134, 87));
+	rule.pattern = QRegExp("\"?\\d\\.?\"?");
 	rule.format = numberFormat;
 	rules.append(rule);
 
-	vectorFormat.setForeground(QColor(180, 180, 180));
+	vectorFormat.setForeground(QColor(187, 136, 117));
 	rule.pattern = QRegExp("\"\\[.*\\]\"");
 	rule.format = vectorFormat;
 	rules.append(rule);
 
 	quoteFormat.setForeground(QColor(220, 220, 220));
-	rule.pattern = QRegExp("\"\\w.*\"");
+	rule.pattern = QRegExp("\"\[a-z].*\"");
 	rule.format = quoteFormat;
 	rules.append(rule);
 
