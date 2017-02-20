@@ -372,7 +372,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	//----------------------------------------------------------------------------------------//
 
 	QFont font;
-		font.setFamily("SegoeUI");
+		font.setFamily("Segoe UI");
 		font.setStyleHint(QFont::Monospace);
 		font.setFixedPitch(true);
 		font.setPointSize(9);
