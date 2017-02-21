@@ -20,7 +20,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 
 	mGroups.append( "$basetexture3;$texture3_uvscale;$texture3_lumstart;$texture3_lumend;$texture3_blendstart;$texture3_blendend;$lumblendfactor3" );
 	mGroups.append( "$basetexture4;$texture4_uvscale;$texture4_lumstart;$texture4_lumend;$texture4_blendstart;$texture4_blendend;$lumblendfactor4" );
-	mGroups.append( "$seamless_scale;$lightwarptexture;$reflectivity");
+	mGroups.append( "$seamless_scale;$lightwarptexture;$reflectivity;$reflectivity2");
 	mGroups.append( "$detail;$detailblendmode;$detailscale;$detailblendfactor;$detailblendfactor2;$detailblendfactor3;$detailblendfactor4" );
 	mGroups.append( "$decaltexture;$decalblendmode" );
 	mGroups.append( "$blendmodulatetexture;$alpha;$translucent;$alphatest;$alphatestreference;$additive;$decal;$nocull" );
@@ -287,7 +287,7 @@ QString VmtParser::groupParameters( QMap< QString, QString >* parameters, bool i
 	return output;
 }
 
-void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName )
+void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName, bool isTemp )
 {
 	if( relativeFileName.isEmpty() )
 	{
@@ -309,8 +309,10 @@ void VmtParser::saveVmtFile( const QString& vmt, const QString& relativeFileName
 
 			vmtFile.close();
 
-			mLastVmtFile.fileName = QFileInfo(vmtFile).fileName();
-			mLastVmtFile.directory = QFileInfo(vmtFile).absolutePath();
+			if(!isTemp) {
+				mLastVmtFile.fileName = QFileInfo(vmtFile).fileName();
+				mLastVmtFile.directory = QFileInfo(vmtFile).absolutePath();
+			}
 		}
 	}
 }

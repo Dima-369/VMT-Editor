@@ -14,6 +14,9 @@
 #undef INFO
 #define INFO(s_) logging::info(s_, ui);
 
+#undef INFO_RECONVERT
+#define INFO_RECONVERT(s_) logging::infoReconvert(s_, ui);
+
 namespace logging {
 
 /*!
@@ -23,5 +26,7 @@ namespace logging {
 void error(const QString &s, Ui::MainWindow *ui);
 
 void info(const QString &s, Ui::MainWindow *ui);
+
+void infoReconvert(const QString &s, Ui::MainWindow *ui);
 
 } // namespace logging

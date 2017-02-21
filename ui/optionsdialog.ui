@@ -801,7 +801,7 @@ QSlider::handle:vertical {
            <x>0</x>
            <y>0</y>
            <width>522</width>
-           <height>804</height>
+           <height>825</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -818,10 +818,10 @@ QSlider::handle:vertical {
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBox_showShaderNameInTitle">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBox_templateNew">
                <property name="text">
-                <string>Show shader name in window title</string>
+                <string>Create a new VMT when opening a template</string>
                </property>
               </widget>
              </item>
@@ -832,6 +832,13 @@ QSlider::handle:vertical {
                </property>
               </widget>
              </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBox_showShaderNameInTitle">
+               <property name="text">
+                <string>Show shader name in window title</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0" colspan="2">
               <widget class="QCheckBox" name="checkBox_saveLastGame">
                <property name="text">
@@ -839,17 +846,17 @@ QSlider::handle:vertical {
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBox_templateNew">
-               <property name="text">
-                <string>Create a new VMT when opening a template</string>
-               </property>
-              </widget>
-             </item>
              <item row="7" column="0">
               <widget class="QCheckBox" name="checkBox_checkForUpdates">
                <property name="text">
                 <string>Check for updates on startup</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="checkBox_autoSave">
+               <property name="text">
+                <string>Auto save on parameter change</string>
                </property>
               </widget>
              </item>

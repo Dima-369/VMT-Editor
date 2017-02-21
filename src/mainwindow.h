@@ -152,6 +152,12 @@ private:
 
 	bool mParsingVMT;
 
+	bool mPreviewChanged;
+
+	QTextCursor mCursor;
+
+	int mCursorPos;
+
 	bool mShaderKnownButNotListed;
 
 	QSpacerItem* mHorizontalTextureSpacer;
@@ -165,6 +171,8 @@ private:
 	bool mOpenConvertDialog;
 
 	QString fileToConvert;
+
+	QCompleter* vmtPreviewCompleter;
 
 	//----------------------------------------------------------------------------------------//
 
@@ -332,9 +340,13 @@ public slots:
 
 	void refreshRequested();
 
+	void clearMessageLog();
+
 	void gameChanged( const QString& game );
 
 	void shaderChanged();
+
+	void changeShader();
 
 	void openRecentFile();
 
@@ -410,6 +422,10 @@ private slots:
 
 	void notifyOnNewVersion(QString version); 
 
+	void vmtPreviewParse();
+
+	void vmtPreviewChanged();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();
@@ -464,9 +480,10 @@ private slots:
 	void on_action_decal_triggered(bool checked);
 };
 
-//----------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 
-// Needed in this header file as declaring ParameterLineEdit or ValueLineEdit in another header will result in an undefined type error of Ui::MainWindow
+// Needed in this header file as declaring ParameterLineEdit or ValueLineEdit
+// in another header will result in an undefined type error of Ui::MainWindow
 
 class ParameterLineEdit : public QLineEdit
 {

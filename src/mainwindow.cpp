@@ -158,6 +158,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	vmtParser = new VmtParser(mLogger);
 
 	ui->comboBox_shader->setInsertPolicy(QComboBox::InsertAlphabetically);
+	
+	ui->vmtPreviewTextEdit->setWordList(vmtParameters_);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -193,6 +195,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	if(mSettings->saveLastGame)
 		setCurrentGame(mSettings->lastGame);
 
+	if(!mGameSelected)
+		Info("No game selected! Texture browse and preview will not work")
+
 	//----------------------------------------------------------------------------------------//
 
 	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
@@ -208,11 +213,15 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->actionRefresh,			 SIGNAL(triggered()),  this, SLOT(refreshRequested()));
 
+	connect( ui->actionClear_Message_Log,SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
+
 	connect( ui->action_hideAll,		 SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
 
 	connect( ui->action_convertToVTF,    SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
 
 	connect( ui->action_batchVMT,		 SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
+
+	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -287,6 +296,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
 	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
+	ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
 
 	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
 	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
@@ -368,7 +378,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		font.setPointSize(9);
 
 	QFontMetrics metrics(font);
-	ui->plainTextEdit_vmtPreview->setTabStopWidth(4 * metrics.width(' '));
+	ui->vmtPreviewTextEdit->setTabStopWidth(4 * metrics.width(' '));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -463,6 +473,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -749,6 +760,65 @@ void MainWindow::addCSGOParameter(QString value, VmtFile& vmt, QString string, Q
 	}
 }
 
+void MainWindow::vmtPreviewChanged()
+{
+	mPreviewChanged = true;
+	mChildWidgetChanged = true;
+	updateWindowTitle();
+}
+
+void MainWindow::vmtPreviewParse()
+{
+	mCursor = ui->vmtPreviewTextEdit->textCursor();
+	mCursorPos = mCursor.position();
+	mCursor.setPosition(mCursorPos);
+
+	if (ui->vmtPreviewTextEdit->toPlainText().isEmpty()) {
+		refreshRequested();
+	}
+
+	vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), QDir::currentPath() + "/Cache/temp.vmt", true );
+
+
+	mLoading = true;
+
+	bool vmtLoaded = false;
+	if (mVMTLoaded)
+		vmtLoaded = true;
+
+	//mLogger->clear();
+
+	VmtFile vmt = vmtParser->loadVmtFile(QDir::currentPath() + "/Cache/temp.vmt", true);
+
+	ui->tabWidget->setCurrentIndex(0);
+	resetWidgets();
+
+	qDebug() << mCursor.position();
+	if(vmtLoaded)
+		mVMTLoaded = true;
+
+	mChildWidgetChanged = true;
+
+	updateWindowTitle();
+
+	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
+
+	parseVMT(vmt, true);
+
+	//----------------------------------------------------------------------------------------//
+	mLoading = false;
+
+	if(mSettings->autoSave) {
+		if (mVMTLoaded)
+			action_Save();
+	}
+
+	mCursor.setPosition(mCursorPos);
+	ui->vmtPreviewTextEdit->setTextCursor(mCursor);
+
+	//updateWindowTitle();
+}
+
 void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 {
 	mParsingVMT = true;
@@ -758,12 +828,11 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	bool gameinfoFound = false;
 	QString materialDirectory;
 
-	while( gameinfoDir.cdUp() )
+	while( gameinfoDir.cdUp() && !isTemplate )
 	{
 		if( gameinfoDir.exists("gameinfo.txt") )
 		{
 			gameinfoFound = true;
-
 			break;
 		}
 	}
@@ -775,7 +844,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !gameinfoDir.cd("materials") )
 		{
-			Error("\"materials\" directory containing the regular VMTs does not exist!")
+			Error("\"materials\" directory does not exist!")
 		}
 		else
 		{
@@ -784,6 +853,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if (mGameSelected)
 			vmt.state.gameDirectory = new QDir(realGameinfoDir);
+	}
+
+	if(isTemplate) {
+		realGameinfoDir = currentGameMaterialDir().section("/", 0, -2);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1005,7 +1078,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$blendmodulatetexture") ).isEmpty() ) {
 
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
-			Error("$blendmodulatetexture is only allowed with the WorldVertexTransition shader!")
+			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!")
 
 		utils::parseTexture("$blendmodulatetexture", value, ui,
 			ui->lineEdit_blendmodulate, vmt);
@@ -1025,6 +1098,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		applyBackgroundColor("$reflectivity", value,
 			ui->color_reflectivity,
 			ui->horizontalSlider_reflectivity, ui);
+
+		showOther = true;
+	}
+
+	if( !( value = vmt.parameters.take("$reflectivity2") ).isEmpty() ) {
+		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
+			Error("$reflectivity is only works with WorldVertexTransition shader!")
+		applyBackgroundColor("$reflectivity2", value,
+			ui->color_reflectivity_2,
+			ui->horizontalSlider_reflectivity_2, ui);
 
 		showOther = true;
 	}
@@ -3566,6 +3649,10 @@ VmtFile MainWindow::makeVMT()
 		tmp = toParameter(utils::getBG(ui->color_reflectivity));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
+
+		tmp = toParameter(utils::getBG(ui->color_reflectivity_2));
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$reflectivity2", tmp );
 	}
 
 	shadingreflection::insertParametersFromViews(&vmtFile, ui);
@@ -4137,7 +4224,7 @@ void MainWindow::resetWidgets() {
 
 	hideParameterGroupboxes();
 
-	ui->plainTextEdit_vmtPreview->clear();
+	ui->vmtPreviewTextEdit->clear();
 
 	ui->textEdit_proxies->clear();
 
@@ -4261,6 +4348,10 @@ void MainWindow::resetWidgets() {
 
 	ui->horizontalSlider_reflectivity->setValue(255);
 	ui->color_reflectivity->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+
+	ui->horizontalSlider_reflectivity_2->setValue(255);
+	ui->color_reflectivity_2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4571,6 +4662,8 @@ void MainWindow::action_New() {
 			action->setEnabled(true);
 		}
 
+		refreshRequested();
+
 		setCurrentGame( mSettings->saveLastGame ? mSettings->lastGame : "");
 	}
 
@@ -4622,9 +4715,15 @@ void MainWindow::action_Save() {
 
 	QString dir;
 
+	mCursor = ui->vmtPreviewTextEdit->textCursor();
+	mCursorPos = mCursor.position();
+
 	if(mVMTLoaded) {
 
-		refreshRequested();
+		if(mPreviewChanged)
+			vmtPreviewParse();
+		else
+			refreshRequested();
 
 		const QString directory = vmtParser->lastVMTFile().directory;
 		const QString fileName = vmtParser->lastVMTFile().fileName;
@@ -4633,7 +4732,7 @@ void MainWindow::action_Save() {
 
 		processTexturesToCopy(dir);
 
-		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), directory + "/" + fileName );
+		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), directory + "/" + fileName );
 
 		mChildWidgetChanged = false;
 
@@ -4648,9 +4747,12 @@ void MainWindow::action_Save() {
 
 	refreshRequested();
 
-	vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
+	//vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), vmtParser->lastVMTFile().directory + "/" + vmtParser->lastVMTFile().fileName );
 
 	mLoading = false;
+
+	mCursor.setPosition(mCursorPos);
+	ui->vmtPreviewTextEdit->setTextCursor(mCursor);
 }
 
 QString MainWindow::action_saveAs() {
@@ -4722,13 +4824,16 @@ QString MainWindow::action_saveAs() {
 
 		mIniSettings->setValue("lastSaveAsDir", QDir::toNativeSeparators(fileName).left( QDir::toNativeSeparators(fileName).lastIndexOf('\\') ));
 
-		refreshRequested();
+		if(mPreviewChanged)
+			vmtPreviewParse();
+		else
+			refreshRequested();
 
 		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
 
 		setCurrentFile( fileName );
 
-		vmtParser->saveVmtFile( ui->plainTextEdit_vmtPreview->toPlainText(), fileName );
+		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), fileName );
 
 		mChildWidgetChanged = false;
 
@@ -4757,7 +4862,7 @@ void MainWindow::saveAsTemplate()
 		return;
 
 	refreshRequested();
-	vmtParser->saveVmtFile(ui->plainTextEdit_vmtPreview->toPlainText(),
+	vmtParser->saveVmtFile(ui->vmtPreviewTextEdit->toPlainText(),
 		fileName);
 	mChildWidgetChanged = false;
 	mVMTLoaded = true;
@@ -5111,7 +5216,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 		return (ui->lineEdit_lightWarp->text() != "" ||
 				ui->doubleSpinBox_seamlessScale->value() != 0.0 ||
-				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255));
+				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255) ||
+				utils::getBG(ui->color_reflectivity_2) != QColor(255, 255, 255));
 
 	case Phong:
 	case PhongBrush:
@@ -5426,6 +5532,10 @@ void MainWindow::widgetChanged()
 			}
 			
 		}
+		if(mSettings->autoSave) {
+			if (mVMTLoaded)
+				action_Save();
+		}
 	}
 
 }
@@ -5433,6 +5543,10 @@ void MainWindow::widgetChanged()
 void MainWindow::refreshRequested() {
 
 	VmtFile tmp3 = makeVMT();
+
+	mPreviewChanged = false;
+
+	ui->vmtPreviewTextEdit->blockSignals(true);
 
 	if( !ui->textEdit_proxies->toPlainText().isEmpty() ) {
 
@@ -5443,7 +5557,7 @@ void MainWindow::refreshRequested() {
 
 			tmp3.subGroups = VmtParser::formatSubGroups(tmp, 1);
 
-			ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+			ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																			   mSettings->parameterSortStyle == Settings::Grouped,
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
@@ -5451,21 +5565,27 @@ void MainWindow::refreshRequested() {
 
 			tmp3.subGroups = "";
 
-			ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+			ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																			   mSettings->parameterSortStyle == Settings::Grouped,
 																			   mSettings->useQuotesForTexture,
 																			   mSettings->useIndentation ));
 
-			Info( "Parsing Proxies caused an error: " + tmp2 )
+			Info( "Proxies parsing error: " + tmp2 )
 		}
 
 	} else {
 
-		ui->plainTextEdit_vmtPreview->setPlainText( vmtParser->convertVmt( tmp3,
+		ui->vmtPreviewTextEdit->setPlainText( vmtParser->convertVmt( tmp3,
 																		   mSettings->parameterSortStyle == Settings::Grouped,
 																		   mSettings->useQuotesForTexture,
 																		   mSettings->useIndentation ));
 	}
+
+	ui->vmtPreviewTextEdit->blockSignals(false);
+}
+
+void MainWindow::clearMessageLog() {
+	mLogger->clear();
 }
 
 void MainWindow::finishedLoading()
@@ -6189,6 +6309,11 @@ void MainWindow::shaderChanged()
 				ui->action_normalBlend->setChecked(false);
 			}
 
+			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
+
 			//----------------------------------------------------------------------------------------//
 
 			ui->action_baseTexture->setChecked(shader == "Lightmapped_4WayBlend");
@@ -6665,6 +6790,7 @@ void MainWindow::readSettings()
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
+	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
@@ -6858,7 +6984,7 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_UseQuotesForTexture:
 		case Settings::_ParameterSortStyle:
 
-			if( !ui->plainTextEdit_vmtPreview->toPlainText().isEmpty() )
+			if( !ui->vmtPreviewTextEdit->toPlainText().isEmpty() )
 				refreshRequested();
 
 			break;
@@ -6884,6 +7010,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 			break;
 
 		case Settings::_RemoveSuffix:
+			break;
+
+		case Settings::_AutoSave:
 			break;
 
 		case Settings::_RemoveAlpha:
@@ -7098,6 +7227,28 @@ void MainWindow::updateRecentFileActions( bool fullPath )
 	 {
 		 separatorAct->setVisible(false);
 	 }
+}
+
+void MainWindow::changeShader()
+{
+	const auto objectName = qobject_cast<QWidget *>(sender())->objectName();
+	int index = 0;
+
+	if (objectName == "toolButton_Lightmapped") {
+		index = ui->comboBox_shader->findText("LightmappedGeneric", Qt::MatchFixedString);
+	} else if (objectName == "toolButton_WorldVertex") {
+		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
+	} else if (objectName == "toolButton_VertexLit") {
+		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+	}
+
+	int currentIndex = ui->comboBox_shader->currentIndex();
+	if (index != currentIndex) {
+		ui->comboBox_shader->setCurrentIndex(index);
+		shaderChanged();
+		mChildWidgetChanged = true;
+		updateWindowTitle();
+	}
 }
 
 void MainWindow::browseVTF()
@@ -7767,6 +7918,9 @@ void MainWindow::changedColor() {
 	else if( caller->objectName() == "toolButton_reflectivity" )
 		changeColor(ui->color_reflectivity, ui->horizontalSlider_reflectivity);
 
+	else if( caller->objectName() == "toolButton_reflectivity_2" )
+		changeColor(ui->color_reflectivity_2, ui->horizontalSlider_reflectivity_2);
+
 	else if( caller->objectName() == "toolButton_selfIllumTint" )
 		changeColor(ui->color_selfIllumTint, ui->horizontalSlider_selfIllumTint);
 
@@ -8329,6 +8483,7 @@ void MainWindow::loadVMT( const QString& vmtPath )
 
 	VmtFile vmt = vmtParser->loadVmtFile(vmtPath);
 
+	ui->tabWidget->setCurrentIndex(0);
 	resetWidgets();
 
 	ui->textEdit_proxies->setPlainText( vmt.subGroups.replace("    ", "\t") );
@@ -8357,6 +8512,7 @@ void MainWindow::loadVMT( const QString& vmtPath )
 	if(!gameinfoFound) {
 
 		setCurrentGame("");
+		Info("gameinfo.txt not found in VMT parent directory! No game selected. Texture browse and preview will not work")
 
 	} else {
 
@@ -8666,6 +8822,10 @@ void MainWindow::refreshGameList() {
 	setGames(games);
 
 	mIniSettings->setValue( "availableGames", gamesInSettings );
+
+	if(mAvailableGames.isEmpty())
+		Error("No games found. Manually add games with Games > Manage games dialog.")
+
 
 	setCurrentGame(oldCurrentGame);
 }
@@ -9172,7 +9332,7 @@ void MainWindow::checkForUpdatesSilent()
 
 void MainWindow::notifyOnNewVersion(QString version)
 {
-	Info(QString("New version available: %1").arg(version));
+	Info(QString("New version available: %1").arg(removeTrailingVersionZero(version)));
 	mIniSettings->setValue("latestVersion", version);
 }
 

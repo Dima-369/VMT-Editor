@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1154</width>
-    <height>802</height>
+    <width>1200</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="font">
@@ -359,7 +359,7 @@ QTextEdit
 {
     background-color: #222;
     color: silver;
-    border: 1px solid #222;
+    border: 0px solid #222;
 }
 
 QPlainTextEdit
@@ -564,6 +564,7 @@ QPushButton:focus
 /*background-color: #2e3844;*/
 	border-width: 2px;
 	border-color: #151515;
+	outline: none;
 }
 
 QPushButton:hover
@@ -600,11 +601,11 @@ QComboBox:hover,QAbstractSpinBox:hover,QLineEdit:hover,QAbstractView:hover,QTree
     color: silver;
 }
 
-QTextEdit:hover
+/*QTextEdit:hover
 {	
 	border-color: #151515;
 	background-color: #151515;
-}
+}*/
 
 QComboBox:on
 {
@@ -1316,9 +1317,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2845</y>
-             <width>880</width>
-             <height>5069</height>
+             <y>0</y>
+             <width>926</width>
+             <height>5098</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -1461,6 +1462,147 @@ QGroupBox::title {
                   </property>
                   <property name="maxVisibleItems">
                    <number>20</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_Lightmapped">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    background-color: #303030;
+	border-color:  #303030;
+}
+
+QToolButton:hover
+{
+    background-color: #282828;
+	border-color:  #282828;
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color:  #303030;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Brush</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_WorldVertex">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    background-color: #303030;
+	border-color:  #303030;
+}
+
+QToolButton:hover
+{
+    background-color: #282828;
+	border-color:  #282828;
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color:  #303030;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Blend</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_VertexLit">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>23</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QToolButton
+{
+    background-color: #303030;
+	border-color:  #303030;
+}
+
+QToolButton:hover
+{
+    background-color: #282828;
+	border-color:  #282828;
+}
+
+QToolButton:pressed
+{
+    background-color: #303030;
+	border-color:  #303030;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string>Model</string>
                   </property>
                  </widget>
                 </item>
@@ -7760,20 +7902,8 @@ QGroupBox::title {
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_6">
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_lightWarp">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_reflectivity2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -7784,14 +7914,39 @@ QGroupBox::title {
                     </font>
                    </property>
                    <property name="text">
-                    <string>Light warp:</string>
+                    <string>Reflectivity 2:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="0">
+                 <item row="3" column="1">
+                  <widget class="TintSlider" name="horizontalSlider_reflectivity_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>200</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>200</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="maximum">
+                    <number>255</number>
+                   </property>
+                   <property name="value">
+                    <number>255</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_seamlessScale">
                    <property name="minimumSize">
                     <size>
@@ -7844,6 +7999,37 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_lightWarp">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Light warp:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="2" column="4" colspan="2">
                   <spacer name="horizontalSpacer_49">
                    <property name="orientation">
@@ -7856,6 +8042,25 @@ QGroupBox::title {
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_reflectivity">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Reflectivity:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
                  </item>
                  <item row="1" column="5">
                   <widget class="QToolButton" name="toolButton_lightWarp">
@@ -7885,8 +8090,8 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_reflectivity">
+                 <item row="1" column="1" colspan="4">
+                  <widget class="QLineEdit" name="lineEdit_lightWarp">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -7896,11 +8101,30 @@ QGroupBox::title {
                      <bold>false</bold>
                     </font>
                    </property>
-                   <property name="text">
-                    <string>Reflectivity:</string>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="TintSlider" name="horizontalSlider_reflectivity">
+                   <property name="minimumSize">
+                    <size>
+                     <width>200</width>
+                     <height>0</height>
+                    </size>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <property name="maximumSize">
+                    <size>
+                     <width>200</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="maximum">
+                    <number>255</number>
+                   </property>
+                   <property name="value">
+                    <number>255</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -7935,45 +8159,7 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="TintSlider" name="horizontalSlider_reflectivity">
-                   <property name="minimumSize">
-                    <size>
-                     <width>200</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>200</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="maximum">
-                    <number>255</number>
-                   </property>
-                   <property name="value">
-                    <number>255</number>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1" colspan="4">
-                  <widget class="QLineEdit" name="lineEdit_lightWarp">
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
+                 <item row="4" column="1">
                   <widget class="QDoubleSpinBox" name="doubleSpinBox_seamlessScale">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -8004,6 +8190,65 @@ QGroupBox::title {
                    </property>
                    <property name="singleStep">
                     <double>0.000500000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="3">
+                  <widget class="QToolButton" name="toolButton_reflectivity_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Pick color</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QPlainTextEdit" name="color_reflectivity_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>70</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>70</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="verticalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="horizontalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
                    </property>
                   </widget>
                  </item>
@@ -9532,646 +9777,6 @@ QGroupBox::title {
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_47">
-                 <item row="7" column="0" colspan="2">
-                  <widget class="QFrame" name="frame_2">
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QGridLayout" name="gridLayout_48">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item row="0" column="2">
-                     <layout class="QGridLayout" name="gridLayout_17">
-                      <item row="0" column="0">
-                       <widget class="QLabel" name="label_spec_amount2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>100</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Amount 2:</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="label_spec_exponent2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>100</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Glossiness 2:</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="label_spec_maskBrightness2">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>100</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Mask bright. 2:</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0">
-                       <widget class="QLabel" name="label_spec_maskContrast2">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>100</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Mask contrast 2:</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="2">
-                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_amount2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="maximum">
-                         <double>8.000000000000000</double>
-                        </property>
-                        <property name="singleStep">
-                         <double>0.100000000000000</double>
-                        </property>
-                        <property name="value">
-                         <double>1.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="3">
-                       <widget class="QPlainTextEdit" name="color_spec_amount2">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>70</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="verticalScrollBarPolicy">
-                         <enum>Qt::ScrollBarAlwaysOff</enum>
-                        </property>
-                        <property name="horizontalScrollBarPolicy">
-                         <enum>Qt::ScrollBarAlwaysOff</enum>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="4">
-                       <widget class="QToolButton" name="toolButton_spec_amount2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Pick color</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="5">
-                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_amountAlpha2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="maximum">
-                         <double>16.000000000000000</double>
-                        </property>
-                        <property name="singleStep">
-                         <double>0.100000000000000</double>
-                        </property>
-                        <property name="value">
-                         <double>1.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1">
-                       <widget class="QSlider" name="horizontalSlider_spec_exponent2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>200</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>200</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="minimum">
-                         <number>1</number>
-                        </property>
-                        <property name="maximum">
-                         <number>255</number>
-                        </property>
-                        <property name="value">
-                         <number>5</number>
-                        </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="2">
-                       <widget class="QSpinBox" name="spinBox_spec_exponent2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="minimum">
-                         <number>1</number>
-                        </property>
-                        <property name="maximum">
-                         <number>255</number>
-                        </property>
-                        <property name="value">
-                         <number>5</number>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="1">
-                       <widget class="QSlider" name="horizontalSlider_spec_maskBrightness2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>200</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>200</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="maximum">
-                         <number>1600</number>
-                        </property>
-                        <property name="singleStep">
-                         <number>25</number>
-                        </property>
-                        <property name="value">
-                         <number>100</number>
-                        </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="1">
-                       <widget class="QSlider" name="horizontalSlider_spec_maskContrast2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>200</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>200</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="maximum">
-                         <number>1600</number>
-                        </property>
-                        <property name="singleStep">
-                         <number>25</number>
-                        </property>
-                        <property name="value">
-                         <number>100</number>
-                        </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="2">
-                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_maskContrast2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="maximum">
-                         <double>20.000000000000000</double>
-                        </property>
-                        <property name="singleStep">
-                         <double>0.100000000000000</double>
-                        </property>
-                        <property name="value">
-                         <double>1.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="2">
-                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_maskBrightness2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>23</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>75</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Segoe UI</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <italic>false</italic>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="maximum">
-                         <double>20.000000000000000</double>
-                        </property>
-                        <property name="singleStep">
-                         <double>0.100000000000000</double>
-                        </property>
-                        <property name="value">
-                         <double>1.000000000000000</double>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="1">
-                       <widget class="QSlider" name="horizontalSlider_spec_amount2">
-                        <property name="minimumSize">
-                         <size>
-                          <width>200</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>200</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="maximum">
-                         <number>800</number>
-                        </property>
-                        <property name="value">
-                         <number>100</number>
-                        </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_62">
-                   <item>
-                    <widget class="QSlider" name="horizontalSlider_phongAmount">
-                     <property name="minimumSize">
-                      <size>
-                       <width>200</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>200</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="maximum">
-                      <number>800</number>
-                     </property>
-                     <property name="value">
-                      <number>100</number>
-                     </property>
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_phongAmount">
-                     <property name="minimumSize">
-                      <size>
-                       <width>75</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>75</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="maximum">
-                      <double>8.000000000000000</double>
-                     </property>
-                     <property name="singleStep">
-                      <double>0.100000000000000</double>
-                     </property>
-                     <property name="value">
-                      <double>1.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPlainTextEdit" name="color_phongAmount">
-                     <property name="enabled">
-                      <bool>false</bool>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>75</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>70</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="verticalScrollBarPolicy">
-                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                     </property>
-                     <property name="horizontalScrollBarPolicy">
-                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QToolButton" name="toolButton_phongAmount">
-                     <property name="minimumSize">
-                      <size>
-                       <width>75</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>75</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Pick color</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_phongAmountAlpha">
-                     <property name="minimumSize">
-                      <size>
-                       <width>75</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>75</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="maximum">
-                      <double>16.000000000000000</double>
-                     </property>
-                     <property name="singleStep">
-                      <double>0.100000000000000</double>
-                     </property>
-                     <property name="value">
-                      <double>1.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
                  <item row="6" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_68">
                    <item>
@@ -10456,6 +10061,31 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_phongTint_3">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Amount:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="2" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_65">
                    <item>
@@ -10476,7 +10106,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -10513,7 +10143,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -10534,31 +10164,6 @@ QGroupBox::title {
                     </spacer>
                    </item>
                   </layout>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_phongTint_3">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Amount:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="label_exponent_3">
@@ -10585,18 +10190,671 @@ QGroupBox::title {
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="2">
-                  <spacer name="horizontalSpacer_60">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                 <item row="1" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_62">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_phongAmount">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>800</number>
+                     </property>
+                     <property name="value">
+                      <number>100</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_phongAmount">
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>8.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="color_phongAmount">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_phongAmount">
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Pick color</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_phongAmountAlpha">
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>16.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_77">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="7" column="0" colspan="2">
+                  <widget class="QFrame" name="frame_2">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
                    </property>
-                  </spacer>
+                   <layout class="QGridLayout" name="gridLayout_48">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item row="0" column="2">
+                     <layout class="QGridLayout" name="gridLayout_17">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_spec_amount2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Amount 2:</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="label_spec_exponent2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Glossiness 2:</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="label_spec_maskContrast2">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Mask contrast 2:</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="label_spec_maskBrightness2">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Mask bright. 2:</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="3">
+                       <widget class="QPlainTextEdit" name="color_spec_amount2">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>70</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="verticalScrollBarPolicy">
+                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                        </property>
+                        <property name="horizontalScrollBarPolicy">
+                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="2">
+                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_amount2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="maximum">
+                         <double>8.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                        <property name="value">
+                         <double>1.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="5">
+                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_amountAlpha2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="maximum">
+                         <double>16.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                        <property name="value">
+                         <double>1.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QSlider" name="horizontalSlider_spec_exponent2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>200</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>200</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="minimum">
+                         <number>1</number>
+                        </property>
+                        <property name="maximum">
+                         <number>1024</number>
+                        </property>
+                        <property name="value">
+                         <number>5</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="4">
+                       <widget class="QToolButton" name="toolButton_spec_amount2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Pick color</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QSlider" name="horizontalSlider_spec_maskBrightness2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>200</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>200</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="maximum">
+                         <number>1600</number>
+                        </property>
+                        <property name="singleStep">
+                         <number>25</number>
+                        </property>
+                        <property name="value">
+                         <number>100</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QSlider" name="horizontalSlider_spec_maskContrast2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>200</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>200</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="maximum">
+                         <number>1600</number>
+                        </property>
+                        <property name="singleStep">
+                         <number>25</number>
+                        </property>
+                        <property name="value">
+                         <number>100</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="2">
+                       <widget class="QSpinBox" name="spinBox_spec_exponent2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="minimum">
+                         <number>1</number>
+                        </property>
+                        <property name="maximum">
+                         <number>1024</number>
+                        </property>
+                        <property name="value">
+                         <number>5</number>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QSlider" name="horizontalSlider_spec_amount2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>200</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>200</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="maximum">
+                         <number>800</number>
+                        </property>
+                        <property name="value">
+                         <number>100</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="2">
+                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_maskContrast2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="maximum">
+                         <double>20.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                        <property name="value">
+                         <double>1.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="2">
+                       <widget class="DoubleSliderSpinBox" name="doubleSpinBox_spec_maskBrightness2">
+                        <property name="minimumSize">
+                         <size>
+                          <width>75</width>
+                          <height>23</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>75</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Segoe UI</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <italic>false</italic>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="maximum">
+                         <double>20.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                        <property name="value">
+                         <double>1.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="6">
+                       <spacer name="horizontalSpacer_78">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
                  </item>
                 </layout>
                </widget>
@@ -10991,7 +11249,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -11028,7 +11286,7 @@ QGroupBox::title {
                       <number>1</number>
                      </property>
                      <property name="maximum">
-                      <number>255</number>
+                      <number>1024</number>
                      </property>
                      <property name="value">
                       <number>5</number>
@@ -11194,7 +11452,7 @@ QGroupBox::title {
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>10.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="value">
                       <double>1.000000000000000</double>
@@ -16776,17 +17034,7 @@ QGroupBox::title {
 }</string>
           </property>
           <property name="lineWrapMode">
-           <enum>QTextEdit::NoWrap</enum>
-          </property>
-          <property name="html">
-           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Segoe UI';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="acceptRichText">
-           <bool>false</bool>
+           <enum>QPlainTextEdit::NoWrap</enum>
           </property>
          </widget>
         </item>
@@ -17048,8 +17296,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>895</width>
-             <height>753</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -17128,7 +17376,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1154</width>
+     <width>1200</width>
      <height>21</height>
     </rect>
    </property>
@@ -17164,6 +17412,8 @@ p, li { white-space: pre-wrap; }
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionRefresh"/>
+    <addaction name="actionParse_VMT"/>
+    <addaction name="actionClear_Message_Log"/>
     <addaction name="separator"/>
     <addaction name="action_refreshGameList"/>
     <addaction name="separator"/>
@@ -17293,7 +17543,7 @@ p, li { white-space: pre-wrap; }
       <number>0</number>
      </property>
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit_vmtPreview">
+      <widget class="VmtTextEdit" name="vmtPreviewTextEdit">
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -17304,18 +17554,30 @@ p, li { white-space: pre-wrap; }
         <font>
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
-       <property name="lineWrapMode">
-        <enum>QPlainTextEdit::NoWrap</enum>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
-       <property name="readOnly">
-        <bool>true</bool>
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="acceptRichText">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_31">
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
        <item>
         <widget class="QPushButton" name="pushButton_refresh">
          <property name="minimumSize">
@@ -17338,6 +17600,31 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="text">
           <string>Refresh</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_refresh_2">
+         <property name="minimumSize">
+          <size>
+           <width>77</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1000</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Parse</string>
          </property>
         </widget>
        </item>
@@ -17377,7 +17664,10 @@ p, li { white-space: pre-wrap; }
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_3">
-    <layout class="QHBoxLayout" name="horizontalLayout_23">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <property name="leftMargin">
       <number>0</number>
      </property>
@@ -17424,6 +17714,41 @@ border: 1px solid #222;
         <bool>true</bool>
        </property>
       </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_64">
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="pushButton_clear">
+         <property name="minimumSize">
+          <size>
+           <width>77</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1000</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -18090,13 +18415,24 @@ border: 1px solid #222;
     <string>Ctrl+Shift+T</string>
    </property>
   </action>
+  <action name="actionClear_Message_Log">
+   <property name="text">
+    <string>Clear Message Log</string>
+   </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="actionParse_VMT">
+   <property name="text">
+    <string>Parse VMT Preview</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>SubGroupTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>subgrouptextedit.h</header>
-  </customwidget>
   <customwidget>
    <class>ParameterLineEdit</class>
    <extends>QLineEdit</extends>
@@ -18127,6 +18463,16 @@ border: 1px solid #222;
    <class>ExponentialSpinBox</class>
    <extends>QDoubleSpinBox</extends>
    <header>exponentialspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SubGroupTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>subgrouptextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VmtTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>vmttextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -18192,7 +18538,7 @@ border: 1px solid #222;
   <tabstop>checkBox_vertexAlpha</tabstop>
   <tabstop>textEdit_proxies</tabstop>
   <tabstop>scrollArea</tabstop>
-  <tabstop>plainTextEdit_vmtPreview</tabstop>
+  <tabstop>vmtPreviewTextEdit</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>lineEdit_2</tabstop>
  </tabstops>
@@ -18207,8 +18553,8 @@ border: 1px solid #222;
    <slot>refreshRequested()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1152</x>
-     <y>593</y>
+     <x>1070</x>
+     <y>549</y>
     </hint>
     <hint type="destinationlabel">
      <x>821</x>
@@ -18224,11 +18570,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-918</y>
+     <y>-909</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
    </hints>
   </connection>
@@ -18240,7 +18586,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-892</y>
+     <y>-879</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -18256,11 +18602,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-918</y>
+     <y>-909</y>
     </hint>
    </hints>
   </connection>
@@ -18272,11 +18618,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
     <hint type="destinationlabel">
      <x>531</x>
-     <y>-892</y>
+     <y>-879</y>
     </hint>
    </hints>
   </connection>
@@ -18288,11 +18634,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
     <hint type="destinationlabel">
      <x>607</x>
-     <y>-892</y>
+     <y>-879</y>
     </hint>
    </hints>
   </connection>
@@ -18304,7 +18650,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-948</y>
+     <y>-935</y>
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
@@ -18319,8 +18665,8 @@ border: 1px solid #222;
    <slot>detailTextureChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-786</y>
+     <x>826</x>
+     <y>-773</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -18335,8 +18681,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-183</y>
+     <x>907</x>
+     <y>-163</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -18351,8 +18697,8 @@ border: 1px solid #222;
    <slot>modifiedLineEdit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-183</y>
+     <x>826</x>
+     <y>-163</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -18368,7 +18714,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-948</y>
+     <y>-935</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -18384,7 +18730,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-212</y>
+     <y>-192</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
@@ -18400,7 +18746,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-154</y>
+     <y>-134</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -18416,7 +18762,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-133</y>
+     <y>-113</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
@@ -18431,8 +18777,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-154</y>
+     <x>907</x>
+     <y>-134</y>
     </hint>
     <hint type="destinationlabel">
      <x>625</x>
@@ -18448,7 +18794,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>-103</y>
+     <y>-83</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -18463,8 +18809,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>433</y>
+     <x>906</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -18479,8 +18825,8 @@ border: 1px solid #222;
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>775</x>
-     <y>367</y>
+     <x>679</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -18495,8 +18841,8 @@ border: 1px solid #222;
    <slot>modifiedLineEdit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>433</y>
+     <x>825</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -18512,7 +18858,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>399</x>
-     <y>-468</y>
+     <y>-448</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -18527,8 +18873,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-786</y>
+     <x>826</x>
+     <y>-773</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18544,7 +18890,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>498</x>
-     <y>-756</y>
+     <y>-743</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18560,7 +18906,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>412</x>
-     <y>-704</y>
+     <y>-713</y>
     </hint>
     <hint type="destinationlabel">
      <x>308</x>
@@ -18576,7 +18922,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-673</y>
+     <y>-682</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18592,7 +18938,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-918</y>
+     <y>-909</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
@@ -18608,7 +18954,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-892</y>
+     <y>-879</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -18624,7 +18970,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>536</x>
-     <y>-918</y>
+     <y>-909</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -18640,7 +18986,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
     <hint type="destinationlabel">
      <x>493</x>
@@ -18656,7 +19002,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-2655</y>
+     <y>-2642</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -18672,7 +19018,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-2655</y>
+     <y>-2642</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -18688,7 +19034,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2685</y>
+     <y>-2672</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -18704,7 +19050,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>491</x>
-     <y>-2510</y>
+     <y>-2497</y>
     </hint>
     <hint type="destinationlabel">
      <x>414</x>
@@ -18719,8 +19065,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>-2510</y>
+     <x>906</x>
+     <y>-2497</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -18735,8 +19081,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>-2510</y>
+     <x>825</x>
+     <y>-2497</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -18752,7 +19098,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1543</y>
+     <y>1563</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -18768,7 +19114,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1543</y>
+     <y>1563</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -18784,7 +19130,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1574</y>
+     <y>1594</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -18800,7 +19146,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1574</y>
+     <y>1594</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -18816,7 +19162,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1543</y>
+     <y>1563</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -18832,7 +19178,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1574</y>
+     <y>1594</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -18848,7 +19194,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>1574</y>
+     <y>1594</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -18864,7 +19210,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1628</y>
+     <y>1648</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
@@ -18880,7 +19226,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1628</y>
+     <y>1648</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -18896,7 +19242,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1659</y>
+     <y>1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -18912,7 +19258,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1659</y>
+     <y>1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -18928,7 +19274,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1628</y>
+     <y>1648</y>
     </hint>
     <hint type="destinationlabel">
      <x>278</x>
@@ -18944,7 +19290,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1659</y>
+     <y>1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -18960,27 +19306,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>1659</y>
+     <y>1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
      <y>596</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>textEdit_proxies</sender>
-   <signal>textChanged()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>widgetChanged()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>88</x>
-     <y>63</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>115</x>
-     <y>512</y>
     </hint>
    </hints>
   </connection>
@@ -18992,7 +19322,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1377</y>
+     <y>1397</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -19008,7 +19338,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1206</y>
+     <y>1226</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19023,8 +19353,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2285</y>
+     <x>907</x>
+     <y>-2272</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19040,7 +19370,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19056,7 +19386,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19071,8 +19401,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>2148</y>
+     <x>906</x>
+     <y>2168</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -19087,8 +19417,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>2119</y>
+     <x>906</x>
+     <y>2139</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -19104,11 +19434,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>431</x>
-     <y>-2166</y>
+     <y>-2161</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
-     <y>-2170</y>
+     <y>-2157</y>
     </hint>
    </hints>
   </connection>
@@ -19120,11 +19450,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
-     <x>385</x>
-     <y>1333</y>
+     <x>389</x>
+     <y>1353</y>
     </hint>
    </hints>
   </connection>
@@ -19136,11 +19466,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
-     <x>299</x>
-     <y>-2256</y>
+     <x>297</x>
+     <y>-2243</y>
     </hint>
    </hints>
   </connection>
@@ -19151,8 +19481,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>985</y>
+     <x>907</x>
+     <y>1005</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19168,11 +19498,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
-     <x>780</x>
-     <y>-2256</y>
+     <x>826</x>
+     <y>-2243</y>
     </hint>
    </hints>
   </connection>
@@ -19183,8 +19513,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>1014</y>
+     <x>907</x>
+     <y>1034</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19200,7 +19530,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>842</y>
+     <y>862</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19216,7 +19546,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19231,8 +19561,8 @@ border: 1px solid #222;
    <slot>browseVMT()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2256</y>
+     <x>907</x>
+     <y>-2243</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -19248,7 +19578,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-335</y>
+     <y>-315</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -19264,7 +19594,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-306</y>
+     <y>-286</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -19279,8 +19609,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>2119</y>
+     <x>825</x>
+     <y>2139</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19296,7 +19626,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>757</y>
+     <y>777</y>
     </hint>
     <hint type="destinationlabel">
      <x>252</x>
@@ -19311,8 +19641,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1681</y>
+     <x>826</x>
+     <y>-1668</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -19328,7 +19658,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1652</y>
+     <y>-1639</y>
     </hint>
     <hint type="destinationlabel">
      <x>489</x>
@@ -19343,8 +19673,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1739</y>
+     <x>826</x>
+     <y>-1726</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -19359,8 +19689,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1710</y>
+     <x>826</x>
+     <y>-1697</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -19375,8 +19705,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1710</y>
+     <x>907</x>
+     <y>-1697</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -19391,8 +19721,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1739</y>
+     <x>907</x>
+     <y>-1726</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -19407,8 +19737,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1681</y>
+     <x>907</x>
+     <y>-1668</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19423,8 +19753,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-786</y>
+     <x>907</x>
+     <y>-773</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -19440,7 +19770,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-862</y>
+     <y>-852</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19456,7 +19786,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2202</y>
+     <y>2222</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19472,7 +19802,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2228</y>
+     <y>2248</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19488,7 +19818,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2202</y>
+     <y>2222</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19504,7 +19834,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>371</y>
+     <y>453</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -19520,7 +19850,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>548</y>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -19535,8 +19865,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>-2601</y>
+     <x>906</x>
+     <y>-2588</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -19551,8 +19881,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>860</x>
-     <y>-2570</y>
+     <x>906</x>
+     <y>-2557</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -19567,8 +19897,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-526</y>
+     <x>907</x>
+     <y>-535</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -19583,8 +19913,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-526</y>
+     <x>826</x>
+     <y>-535</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -19600,7 +19930,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-285</y>
+     <y>-265</y>
     </hint>
     <hint type="destinationlabel">
      <x>123</x>
@@ -19616,7 +19946,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2176</y>
+     <y>2196</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -19632,7 +19962,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2176</y>
+     <y>2196</y>
     </hint>
     <hint type="destinationlabel">
      <x>842</x>
@@ -19648,7 +19978,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2202</y>
+     <y>2222</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -19664,7 +19994,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2228</y>
+     <y>2248</y>
     </hint>
     <hint type="destinationlabel">
      <x>861</x>
@@ -19680,7 +20010,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2176</y>
+     <y>2196</y>
     </hint>
     <hint type="destinationlabel">
      <x>506</x>
@@ -19695,8 +20025,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2395</y>
+     <x>907</x>
+     <y>-2382</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -19711,8 +20041,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2395</y>
+     <x>826</x>
+     <y>-2382</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -19727,8 +20057,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2366</y>
+     <x>907</x>
+     <y>-2353</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -19743,8 +20073,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2366</y>
+     <x>826</x>
+     <y>-2353</y>
     </hint>
     <hint type="destinationlabel">
      <x>287</x>
@@ -19760,7 +20090,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2337</y>
+     <y>-2324</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -19776,7 +20106,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1237</y>
+     <y>1257</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19792,7 +20122,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>1297</y>
+     <y>1317</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -19808,7 +20138,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>1293</y>
+     <y>1313</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -19824,7 +20154,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>1320</y>
+     <y>1340</y>
     </hint>
     <hint type="destinationlabel">
      <x>736</x>
@@ -19840,7 +20170,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1461</y>
+     <y>1481</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -19856,7 +20186,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>1461</y>
+     <y>1481</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -19872,7 +20202,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>1490</y>
+     <y>1510</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -19888,7 +20218,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1490</y>
+     <y>1510</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -19904,7 +20234,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1408</y>
+     <y>1428</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -19920,7 +20250,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>873</y>
+     <y>893</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
@@ -19936,7 +20266,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>528</x>
-     <y>873</y>
+     <y>893</y>
     </hint>
     <hint type="destinationlabel">
      <x>734</x>
@@ -19952,7 +20282,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>904</y>
+     <y>924</y>
     </hint>
     <hint type="destinationlabel">
      <x>608</x>
@@ -19968,7 +20298,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>428</x>
-     <y>929</y>
+     <y>949</y>
     </hint>
     <hint type="destinationlabel">
      <x>540</x>
@@ -19984,7 +20314,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>525</x>
-     <y>929</y>
+     <y>949</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -20000,7 +20330,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>604</y>
+     <y>624</y>
     </hint>
     <hint type="destinationlabel">
      <x>580</x>
@@ -20016,7 +20346,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>633</y>
+     <y>653</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -20032,7 +20362,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>654</y>
+     <y>674</y>
     </hint>
     <hint type="destinationlabel">
      <x>565</x>
@@ -20047,8 +20377,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-183</y>
+     <x>826</x>
+     <y>-163</y>
     </hint>
     <hint type="destinationlabel">
      <x>675</x>
@@ -20064,7 +20394,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-212</y>
+     <y>-192</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20079,8 +20409,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-154</y>
+     <x>826</x>
+     <y>-134</y>
     </hint>
     <hint type="destinationlabel">
      <x>634</x>
@@ -20096,7 +20426,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-154</y>
+     <y>-134</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20112,7 +20442,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-133</y>
+     <y>-113</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -20128,7 +20458,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-72</y>
+     <y>-52</y>
     </hint>
     <hint type="destinationlabel">
      <x>600</x>
@@ -20144,7 +20474,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-41</y>
+     <y>-21</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -20159,8 +20489,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>985</y>
+     <x>826</x>
+     <y>1005</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -20176,7 +20506,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-10</y>
+     <y>10</y>
     </hint>
     <hint type="destinationlabel">
      <x>601</x>
@@ -20191,8 +20521,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>1014</y>
+     <x>826</x>
+     <y>1034</y>
     </hint>
     <hint type="destinationlabel">
      <x>720</x>
@@ -20208,7 +20538,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>411</x>
-     <y>1152</y>
+     <y>1172</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -20224,7 +20554,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1044</y>
+     <y>1064</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -20240,7 +20570,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1073</y>
+     <y>1093</y>
     </hint>
     <hint type="destinationlabel">
      <x>795</x>
@@ -20256,7 +20586,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1102</y>
+     <y>1122</y>
     </hint>
     <hint type="destinationlabel">
      <x>798</x>
@@ -20272,7 +20602,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1044</y>
+     <y>1064</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -20288,7 +20618,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1073</y>
+     <y>1093</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
@@ -20304,7 +20634,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1102</y>
+     <y>1122</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -20320,7 +20650,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1131</y>
+     <y>1151</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -20336,7 +20666,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>464</y>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -20352,7 +20682,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>464</y>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -20368,7 +20698,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>464</y>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -20384,7 +20714,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>548</y>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -20399,8 +20729,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>775</x>
-     <y>367</y>
+     <x>679</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -20416,7 +20746,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>433</y>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>573</x>
@@ -20431,8 +20761,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>433</y>
+     <x>825</x>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>681</x>
@@ -20448,7 +20778,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>402</y>
+     <y>422</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -20464,7 +20794,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>450</x>
-     <y>520</y>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -20479,8 +20809,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>-2601</y>
+     <x>825</x>
+     <y>-2588</y>
     </hint>
     <hint type="destinationlabel">
      <x>307</x>
@@ -20495,8 +20825,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>589</x>
-     <y>520</y>
+     <x>596</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
@@ -20511,8 +20841,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>779</x>
-     <y>-2570</y>
+     <x>825</x>
+     <y>-2557</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -20528,7 +20858,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2540</y>
+     <y>-2527</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -20544,7 +20874,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-2479</y>
+     <y>-2466</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -20560,7 +20890,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-2448</y>
+     <y>-2435</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -20575,8 +20905,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>706</y>
+     <x>826</x>
+     <y>726</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -20591,8 +20921,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>727</y>
+     <x>826</x>
+     <y>747</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -20608,7 +20938,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>612</x>
-     <y>788</y>
+     <y>808</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -20624,7 +20954,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>516</x>
-     <y>788</y>
+     <y>808</y>
     </hint>
     <hint type="destinationlabel">
      <x>250</x>
@@ -20640,7 +20970,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>420</x>
-     <y>788</y>
+     <y>808</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -20656,7 +20986,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>1297</y>
+     <y>1317</y>
     </hint>
     <hint type="destinationlabel">
      <x>575</x>
@@ -20672,11 +21002,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>432</y>
+     <y>483</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>433</y>
+     <y>484</y>
     </hint>
    </hints>
   </connection>
@@ -20688,11 +21018,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>433</y>
+     <y>484</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>432</y>
+     <y>483</y>
     </hint>
    </hints>
   </connection>
@@ -20703,8 +21033,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2087</y>
+     <x>907</x>
+     <y>-2074</y>
     </hint>
     <hint type="destinationlabel">
      <x>420</x>
@@ -20719,8 +21049,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-2116</y>
+     <x>907</x>
+     <y>-2103</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -20735,8 +21065,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2116</y>
+     <x>826</x>
+     <y>-2103</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -20751,8 +21081,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2087</y>
+     <x>826</x>
+     <y>-2074</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -20768,7 +21098,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2058</y>
+     <y>-2045</y>
     </hint>
     <hint type="destinationlabel">
      <x>486</x>
@@ -20784,7 +21114,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-836</y>
+     <y>-826</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -20799,8 +21129,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1418</y>
+     <x>907</x>
+     <y>-1405</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -20815,8 +21145,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1184</y>
+     <x>907</x>
+     <y>-1171</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -20831,8 +21161,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1418</y>
+     <x>826</x>
+     <y>-1405</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -20848,7 +21178,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1382</y>
+     <y>-1369</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -20864,7 +21194,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1382</y>
+     <y>-1369</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -20880,7 +21210,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1616</y>
+     <y>-1603</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -20896,7 +21226,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1616</y>
+     <y>-1603</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -20911,8 +21241,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>552</x>
-     <y>-2029</y>
+     <x>575</x>
+     <y>-2024</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -20928,7 +21258,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-2008</y>
+     <y>-1995</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -20944,7 +21274,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1979</y>
+     <y>-1966</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -20960,7 +21290,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1586</y>
+     <y>-1573</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -20976,7 +21306,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1557</y>
+     <y>-1544</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -20992,7 +21322,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1528</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21008,7 +21338,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1499</y>
+     <y>-1486</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21024,7 +21354,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1470</y>
+     <y>-1457</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21040,7 +21370,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1352</y>
+     <y>-1339</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21056,7 +21386,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1323</y>
+     <y>-1310</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21072,7 +21402,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1294</y>
+     <y>-1281</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21088,7 +21418,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1265</y>
+     <y>-1252</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21104,7 +21434,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1236</y>
+     <y>-1223</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21119,8 +21449,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1184</y>
+     <x>826</x>
+     <y>-1171</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21136,7 +21466,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1148</y>
+     <y>-1135</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21152,7 +21482,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1148</y>
+     <y>-1135</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21168,7 +21498,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1118</y>
+     <y>-1105</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21184,7 +21514,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1089</y>
+     <y>-1076</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21200,7 +21530,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1060</y>
+     <y>-1047</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21216,7 +21546,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1031</y>
+     <y>-1018</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21232,7 +21562,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1002</y>
+     <y>-989</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21248,7 +21578,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-918</y>
+     <y>-909</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21264,7 +21594,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-890</y>
+     <y>-881</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21280,7 +21610,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>464</y>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21296,7 +21626,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>1297</y>
+     <y>1317</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21312,7 +21642,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>686</x>
-     <y>-497</y>
+     <y>-506</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21328,7 +21658,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>-498</y>
+     <y>-507</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -21344,7 +21674,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>499</x>
-     <y>-704</y>
+     <y>-713</y>
     </hint>
     <hint type="destinationlabel">
      <x>929</x>
@@ -21360,7 +21690,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-706</y>
+     <y>-715</y>
     </hint>
     <hint type="destinationlabel">
      <x>928</x>
@@ -21376,11 +21706,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>137</y>
+     <y>157</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>136</y>
+     <y>156</y>
     </hint>
    </hints>
   </connection>
@@ -21392,11 +21722,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>136</y>
+     <y>156</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>137</y>
+     <y>157</y>
     </hint>
    </hints>
   </connection>
@@ -21408,11 +21738,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>259</y>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>258</y>
+     <y>278</y>
     </hint>
    </hints>
   </connection>
@@ -21424,11 +21754,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>258</y>
+     <y>278</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>259</y>
+     <y>279</y>
     </hint>
    </hints>
   </connection>
@@ -21440,7 +21770,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>106</y>
+     <y>126</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21456,7 +21786,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>230</y>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21472,11 +21802,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-154</y>
+     <y>-134</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
-     <y>164</y>
+     <y>184</y>
     </hint>
    </hints>
   </connection>
@@ -21488,11 +21818,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>164</y>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>-154</y>
+     <y>-134</y>
     </hint>
    </hints>
   </connection>
@@ -21504,11 +21834,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-133</y>
+     <y>-113</y>
     </hint>
     <hint type="destinationlabel">
      <x>755</x>
-     <y>195</y>
+     <y>215</y>
     </hint>
    </hints>
   </connection>
@@ -21520,11 +21850,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>755</x>
-     <y>195</y>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>-133</y>
+     <y>-113</y>
     </hint>
    </hints>
   </connection>
@@ -21536,7 +21866,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>463</y>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21551,8 +21881,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-1915</y>
+     <x>907</x>
+     <y>-1902</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21568,11 +21898,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>604</y>
+     <y>624</y>
     </hint>
     <hint type="destinationlabel">
      <x>529</x>
-     <y>603</y>
+     <y>623</y>
     </hint>
    </hints>
   </connection>
@@ -21584,11 +21914,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>603</y>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
-     <y>604</y>
+     <y>624</y>
     </hint>
    </hints>
   </connection>
@@ -21600,7 +21930,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-264</y>
+     <y>-244</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21615,8 +21945,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-1915</y>
+     <x>826</x>
+     <y>-1902</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21632,7 +21962,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>230</y>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21648,7 +21978,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>106</y>
+     <y>126</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21664,7 +21994,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>52</y>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21680,7 +22010,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>21</y>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21696,7 +22026,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>798</x>
-     <y>21</y>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21712,7 +22042,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>21</y>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21728,7 +22058,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1792</y>
+     <y>-1779</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21744,7 +22074,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1823</y>
+     <y>-1810</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21760,7 +22090,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>-1854</y>
+     <y>-1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21776,7 +22106,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1854</y>
+     <y>-1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21792,7 +22122,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1885</y>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21808,7 +22138,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1885</y>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21824,7 +22154,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1854</y>
+     <y>-1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21840,7 +22170,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1854</y>
+     <y>-1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21856,7 +22186,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1885</y>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21872,7 +22202,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>288</y>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21888,7 +22218,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>317</y>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21904,7 +22234,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>168</y>
+     <y>188</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21920,7 +22250,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>199</y>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21936,7 +22266,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>137</y>
+     <y>157</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21952,7 +22282,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>-104</y>
+     <y>-84</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21968,7 +22298,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>259</y>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -21984,7 +22314,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>756</y>
+     <y>776</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -21999,8 +22329,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>706</y>
+     <x>907</x>
+     <y>726</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -22016,7 +22346,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>370</y>
+     <y>452</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22032,7 +22362,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1205</y>
+     <y>1225</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22048,7 +22378,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1376</y>
+     <y>1396</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22064,7 +22394,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>841</y>
+     <y>861</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22080,7 +22410,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>842</y>
+     <y>862</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22095,8 +22425,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>1267</y>
+     <x>907</x>
+     <y>1287</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -22111,8 +22441,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>652</x>
-     <y>1267</y>
+     <x>826</x>
+     <y>1287</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22127,8 +22457,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2285</y>
+     <x>826</x>
+     <y>-2272</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22143,8 +22473,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>780</x>
-     <y>-2256</y>
+     <x>826</x>
+     <y>-2243</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22160,7 +22490,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2227</y>
+     <y>-2214</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22176,7 +22506,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22192,7 +22522,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>476</x>
-     <y>-2170</y>
+     <y>-2157</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22208,7 +22538,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22224,7 +22554,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2195</y>
+     <y>-2190</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22240,7 +22570,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>1320</y>
+     <y>1340</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22256,7 +22586,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>1713</y>
+     <y>1733</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22272,7 +22602,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>1744</y>
+     <y>1764</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22288,7 +22618,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1713</y>
+     <y>1733</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22304,7 +22634,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1744</y>
+     <y>1764</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22320,7 +22650,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1789</y>
+     <y>1809</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22336,7 +22666,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1820</y>
+     <y>1840</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22352,7 +22682,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1851</y>
+     <y>1871</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22368,7 +22698,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1896</y>
+     <y>1916</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22384,7 +22714,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1927</y>
+     <y>1947</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22400,7 +22730,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1958</y>
+     <y>1978</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22416,7 +22746,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1989</y>
+     <y>2009</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22432,7 +22762,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2034</y>
+     <y>2054</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22448,7 +22778,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>2065</y>
+     <y>2085</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22464,7 +22794,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>542</x>
-     <y>2065</y>
+     <y>2085</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22479,8 +22809,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>563</x>
-     <y>-526</y>
+     <x>773</x>
+     <y>-535</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22495,8 +22825,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>580</x>
-     <y>-416</y>
+     <x>790</x>
+     <y>-396</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22512,7 +22842,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>-387</y>
+     <y>-367</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22528,11 +22858,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1851</y>
+     <y>1871</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1850</y>
+     <y>1870</y>
     </hint>
    </hints>
   </connection>
@@ -22544,11 +22874,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1850</y>
+     <y>1870</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>1851</y>
+     <y>1871</y>
     </hint>
    </hints>
   </connection>
@@ -22560,11 +22890,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1957</y>
+     <y>1977</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>1958</y>
+     <y>1978</y>
     </hint>
    </hints>
   </connection>
@@ -22576,11 +22906,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1958</y>
+     <y>1978</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1957</y>
+     <y>1977</y>
     </hint>
    </hints>
   </connection>
@@ -22592,11 +22922,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1988</y>
+     <y>2008</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>1989</y>
+     <y>2009</y>
     </hint>
    </hints>
   </connection>
@@ -22608,11 +22938,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1989</y>
+     <y>2009</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1988</y>
+     <y>2008</y>
     </hint>
    </hints>
   </connection>
@@ -22623,8 +22953,8 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>-416</y>
+     <x>907</x>
+     <y>-396</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22639,8 +22969,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>457</x>
-     <y>-387</y>
+     <x>497</x>
+     <y>-367</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22655,8 +22985,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>347</x>
-     <y>490</y>
+     <x>559</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -22671,12 +23001,156 @@ border: 1px solid #222;
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>818</x>
-     <y>483</y>
+     <x>906</x>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>281</x>
      <y>809</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clearMessageLog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1082</x>
+     <y>785</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>954</x>
+     <y>811</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textEdit_proxies</sender>
+   <signal>blockCountChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>91</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>944</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_refresh_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>vmtPreviewParse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1168</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1165</x>
+     <y>841</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>vmtPreviewTextEdit</sender>
+   <signal>textChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>vmtPreviewChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1032</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1209</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_Lightmapped</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>696</x>
+     <y>-2796</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1208</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_WorldVertex</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>762</x>
+     <y>-2796</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1208</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_VertexLit</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changeShader()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>828</x>
+     <y>-2796</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>-8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_reflectivity_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>-492</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>633</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_halfLambert</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>560</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-7</x>
+     <y>626</y>
     </hint>
    </hints>
   </connection>
@@ -22708,5 +23182,9 @@ border: 1px solid #222;
   <slot>fresnelSliderEdited(int)</slot>
   <slot>fresnelYEdited(double)</slot>
   <slot>toggledDetailUniformScale(bool)</slot>
+  <slot>clearMessageLog()</slot>
+  <slot>vmtPreviewParse()</slot>
+  <slot>vmtPreviewChanged()</slot>
+  <slot>changeShader()</slot>
  </slots>
 </ui>

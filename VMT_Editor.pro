@@ -75,7 +75,8 @@ SOURCES += \
     src/user-interface/shading-reflection.cpp \
     src/utilities/strings.cpp \
     src/utilities/version.cpp \
-    src/user-interface/treesway.cpp
+    src/user-interface/treesway.cpp \
+    src/vmttextedit.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -121,7 +122,8 @@ HEADERS += \
     src/utilities/window.h \
     src/user-interface/shading-reflection.h \
     src/utilities/version.h \
-    src/user-interface/treesway.h
+    src/user-interface/treesway.h \
+    src/vmttextedit.h
 
 FORMS += \
     ui/mainwindow.ui \

@@ -41,6 +41,12 @@ static QStringList gShaders = (QStringList() << "Cable" << "Decal" << "DecalModu
 	mLogger->scrollToBottom(); \
 }
 
+#define InfoReconvert(x) { \
+	qDebug() << QString(x); \
+	mLogger->addItem( new QListWidgetItem( QIcon(":/icons/reconvert"), x )); \
+	mLogger->scrollToBottom(); \
+}
+
 #define DebugLog(x) { qDebug() << QString(x); }
 
 #define Str(x) QString::number(x)
@@ -57,6 +63,6 @@ QString setKey( const QString& name, const QString& def, QSettings* settings );
 
 bool setKey(const QString &name, bool def, QSettings *settings);
 
-QString addTabs( int amount );
+QString addTabs(int amount);
 
 void removeSingleLineComment( QString& string );

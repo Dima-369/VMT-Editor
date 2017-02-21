@@ -24,6 +24,7 @@ struct Settings
 		_RemoveAlpha,
 		_TemplateNew,
 		_CheckForUpdates,
+		_AutoSave,
 		//----------------------------------------------------------------------------------------//
 		_ParameterSortStyle,
 		_ShowShaderNameInTab,
@@ -63,6 +64,8 @@ struct Settings
 	bool removeAlpha;
 
 	bool templateNew;
+
+	bool autoSave;
 
 	bool checkForUpdates;
 

@@ -92,7 +92,7 @@ public:
 
 	static QString convertVmt( VmtFile vmtEntry, bool groupedParameters, bool quotesForTexture, bool useIndentation );
 
-	void saveVmtFile( const QString& vmt, const QString& relativeFileName );
+	void saveVmtFile(const QString& vmt, const QString& relativeFileName , bool isTemp = false);
 
 	VmtFile loadVmtFile( const QString& relativeFileName, bool isTemplate = false );
 
