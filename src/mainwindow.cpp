@@ -5646,44 +5646,74 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 	if (name == "lineEdit_diffuse")
 		processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
 
-	/*
-	if( caller->objectName() == "lineEdit_diffuse" ) {
-		previewTexture( "preview_basetexture1",
-						ui->lineEdit_diffuse->text(),
-						true,
-						ui->checkBox_transparent->isChecked() || ui->checkBox_alphaTest->isChecked() || ui->checkBox_normalalpha->isChecked(),
-						ui->checkBox_alphaTest->isChecked(),
-						false );
-	} else if( caller->objectName() == "lineEdit_bumpmap" )
-		previewTexture( "preview_bumpmap1", ui->lineEdit_bumpmap->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_bumpmap2" )
-		previewTexture( "preview_bumpmap2", ui->lineEdit_bumpmap2->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse2" )
-		previewTexture( "preview_basetexture2", ui->lineEdit_diffuse2->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse3" )
-		previewTexture( "preview_basetexture3", ui->lineEdit_diffuse3->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse4" )
-		previewTexture( "preview_basetexture4", ui->lineEdit_diffuse4->text(), false, false, false, false );
+	else if (name == "toolButton_bumpmap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_bumpmap );
 
-	else if( caller->objectName() == "lineEdit_detail" )
-		previewTexture( "preview_detail", ui->lineEdit_detail->text(), false, false, false, false );
+	else if (name == "toolButton_diffuse2" )
+		processVtf( "preview_basetexture2", filePath, ui->lineEdit_diffuse2 );
 
-	else if( caller->objectName() == "lineEdit_refractNormalMap" )
-		previewTexture( "preview_normalmap1", ui->lineEdit_refractNormalMap->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_refractNormalMap2" )
-		previewTexture( "preview_normalmap2", ui->lineEdit_refractNormalMap2->text(), false, false, false, false );
+	else if (name == "toolButton_bumpmap2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bumpmap2 );
 
-	else if( caller->objectName() == "lineEdit_waterNormalMap" )
-		previewTexture( "preview_normalmap1", ui->lineEdit_waterNormalMap->text(), false, false, false, false );
+	else if (name == "toolButton_diffuse3" )
+		processVtf( "preview_basetexture3", filePath, ui->lineEdit_diffuse3 );
 
-	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse" )
-		previewTexture( "preview_basetexture1", ui->lineEdit_unlitTwoTextureDiffuse->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse2" )
-		previewTexture( "preview_basetexture2", ui->lineEdit_unlitTwoTextureDiffuse2->text(), false, false, false, false );
+	else if (name == "toolButton_diffuse4" )
+		processVtf( "preview_basetexture4", filePath, ui->lineEdit_diffuse4 );
 
-	else if( caller->objectName() == "lineEdit_bump2" )
-		previewTexture( "preview_bumpmap2", ui->lineEdit_bump2->text(), false, false, false, false );
-	*/
+	else if (name == "toolButton_detail" )
+		processVtf( "preview_detail", filePath, ui->lineEdit_detail );
+
+	else if (name == "toolButton_refractNormalMap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_refractNormalMap );
+	else if (name == "toolButton_refractNormalMap2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_refractNormalMap2 );
+	else if (name == "toolButton_refractTexture" )
+		processVtf( "", filePath, ui->lineEdit_refractTexture );
+
+	else if (name == "toolButton_waterNormalMap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_waterNormalMap );
+
+	else if (name == "toolButton_unlitTwoTextureDiffuse" )
+		processVtf( "preview_basetexture1", filePath, ui->lineEdit_unlitTwoTextureDiffuse );
+	else if (name == "toolButton_unlitTwoTextureDiffuse2" )
+		processVtf( "preview_basetexture2", filePath, ui->lineEdit_unlitTwoTextureDiffuse2 );
+
+	else if (name == "toolButton_blendmodulate" )
+		processVtf( "", filePath, ui->lineEdit_blendmodulate );
+	else if (name == "toolButton_lightWarp" )
+		processVtf( "", filePath, ui->lineEdit_lightWarp );
+
+	else if (name == "toolButton_envmap" )
+		processVtf( "", filePath, ui->lineEdit_envmap );
+	else if (name == "toolButton_specmap" )
+		processVtf( "", filePath, ui->lineEdit_specmap );
+
+	else if (name == "toolButton_exponentTexture" )
+		processVtf( "", filePath, ui->lineEdit_exponentTexture );
+
+	else if (name == "toolButton_maskTexture" )
+		processVtf( "", filePath, ui->lineEdit_maskTexture );
+
+	else if (name == "toolButton_flowMap" )
+		processVtf( "", filePath, ui->lineEdit_flowMap );
+	else if (name == "toolButton_noiseTexture" )
+		processVtf( "", filePath, ui->lineEdit_noiseTexture );
+
+	else if (name == "toolButton_toolTexture" )
+		processVtf( "", filePath, ui->lineEdit_toolTexture );
+
+	else if (name == "toolButton_bump2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bump2 );
+
+	else if (name == "toolButton_waterReflectTexture" )
+		processVtf( "", filePath, ui->lineEdit_waterReflectTexture );
+
+	else if (name == "toolButton_decal" )
+		processVtf( "", filePath, ui->lineEdit_decal );
+
+	else if (name == "toolButton_phongWarp" )
+		processVtf( "", filePath, ui->lineEdit_phongWarp );
 }
 
 void MainWindow::finishedLoading()
