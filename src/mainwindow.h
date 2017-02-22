@@ -336,6 +336,8 @@ private:
 
 public slots:
 
+	void handleTextureDrop(const QString& filePath);
+
 	void finishedLoading();
 
 	void acceptedEditGames();

@@ -329,6 +329,12 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->lineEdit_bump2->setValidator(windowsFilenameValidator);
 
+	//--------------------------------------------------------------------//
+	// TODO: Link and promote all other texture lineedits here
+
+	connect(ui->lineEdit_diffuse, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+
 	//----------------------------------------------------------------------------------------//
 
 	connect( ui->lineEdit_diffuse,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
@@ -5586,6 +5592,13 @@ void MainWindow::refreshRequested() {
 
 void MainWindow::clearMessageLog() {
 	mLogger->clear();
+}
+
+void MainWindow::handleTextureDrop(const QString& filePath)
+{
+	// TODO: Only handle when a game is selected?
+	const auto name = qobject_cast<QWidget *>(sender())->objectName();
+	Info(name + " got " + filePath);
 }
 
 void MainWindow::finishedLoading()

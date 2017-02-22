@@ -3628,7 +3628,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -18473,6 +18473,11 @@ border: 1px solid #222;
    <class>VmtTextEdit</class>
    <extends>QTextEdit</extends>
    <header>vmttextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TextureDragDropLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>texturedragdroplineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
