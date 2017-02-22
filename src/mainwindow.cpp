@@ -6713,26 +6713,33 @@ void MainWindow::dropEvent(QDropEvent* event)
 	// check for our needed mime type, here a file or a list of files
 	if (mimeData->hasUrls())
 	{
-		if( mChildWidgetChanged )
-		{
-			switch( _displaySaveMessage() )
+		QString str = mimeData->urls().at(0).toLocalFile();
+
+		if(QFileInfo(str).suffix() == "vmt") {
+
+			if( mChildWidgetChanged )
 			{
-			case QMessageBox::Save:
+				switch( _displaySaveMessage() )
+				{
+				case QMessageBox::Save:
 
-				action_Save();
+					action_Save();
 
-			case QMessageBox::Discard:
+				case QMessageBox::Discard:
 
-				break;
+					break;
 
-			case QMessageBox::Cancel:
-			case QMessageBox::Escape:
+				case QMessageBox::Cancel:
+				case QMessageBox::Escape:
 
-				return;
+					return;
+				}
 			}
-		}
 
-		loadVMT(mimeData->urls().at(0).toLocalFile());
+			loadVMT(mimeData->urls().at(0).toLocalFile());
+		} else {
+			Info("has images");
+		}
 	}
 }
 
@@ -6745,7 +6752,10 @@ void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 			QString str = url.toLocalFile();
 			if (!str.isEmpty())
 			{
-				if (QFileInfo(str).suffix() == "vmt")
+				if (QFileInfo(str).suffix() == "vmt" ||
+					QFileInfo(str).suffix() == "vtf" ||
+					QFileInfo(str).suffix() == "png" ||
+					QFileInfo(str).suffix() == "tga")
 				{
 					event->acceptProposedAction();
 				}
