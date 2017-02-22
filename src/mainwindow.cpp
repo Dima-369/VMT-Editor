@@ -5596,9 +5596,52 @@ void MainWindow::clearMessageLog() {
 
 void MainWindow::handleTextureDrop(const QString& filePath)
 {
-	// TODO: Only handle when a game is selected?
 	const auto name = qobject_cast<QWidget *>(sender())->objectName();
 	Info(name + " got " + filePath);
+	
+	// TODO: Only handle when a game is selected?
+
+	if (name == "lineEdit_diffuse")
+		processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
+
+	/*
+	if( caller->objectName() == "lineEdit_diffuse" ) {
+		previewTexture( "preview_basetexture1",
+						ui->lineEdit_diffuse->text(),
+						true,
+						ui->checkBox_transparent->isChecked() || ui->checkBox_alphaTest->isChecked() || ui->checkBox_normalalpha->isChecked(),
+						ui->checkBox_alphaTest->isChecked(),
+						false );
+	} else if( caller->objectName() == "lineEdit_bumpmap" )
+		previewTexture( "preview_bumpmap1", ui->lineEdit_bumpmap->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_bumpmap2" )
+		previewTexture( "preview_bumpmap2", ui->lineEdit_bumpmap2->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_diffuse2" )
+		previewTexture( "preview_basetexture2", ui->lineEdit_diffuse2->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_diffuse3" )
+		previewTexture( "preview_basetexture3", ui->lineEdit_diffuse3->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_diffuse4" )
+		previewTexture( "preview_basetexture4", ui->lineEdit_diffuse4->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_detail" )
+		previewTexture( "preview_detail", ui->lineEdit_detail->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_refractNormalMap" )
+		previewTexture( "preview_normalmap1", ui->lineEdit_refractNormalMap->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_refractNormalMap2" )
+		previewTexture( "preview_normalmap2", ui->lineEdit_refractNormalMap2->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_waterNormalMap" )
+		previewTexture( "preview_normalmap1", ui->lineEdit_waterNormalMap->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse" )
+		previewTexture( "preview_basetexture1", ui->lineEdit_unlitTwoTextureDiffuse->text(), false, false, false, false );
+	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse2" )
+		previewTexture( "preview_basetexture2", ui->lineEdit_unlitTwoTextureDiffuse2->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_bump2" )
+		previewTexture( "preview_bumpmap2", ui->lineEdit_bump2->text(), false, false, false, false );
+	*/
 }
 
 void MainWindow::finishedLoading()
