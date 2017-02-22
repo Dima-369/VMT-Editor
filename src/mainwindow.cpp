@@ -577,6 +577,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	hideParameterGroupboxes();
 
+	ui->label_bumpmapAlpha->setVisible(false);
+	ui->lineEdit_bumpmapAlpha->setVisible(false);
+	ui->toolButton_bumpmapAlpha->setVisible(false);
+
 	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("LightmappedGeneric"));
 		mIgnoreShaderChanged = false;
 	shaderChanged();
@@ -4292,7 +4296,7 @@ void MainWindow::resetWidgets() {
 	//----------------------------------------------------------------------------------------//
 
 	foreach (GLWidget *glWidget, glWidgets) {
-		glWidget->setVisible(true);
+		glWidget->setVisible(false);
 	}
 	glWidget_diffuse1->reset();
 	glWidget_diffuse2->reset();
@@ -4309,6 +4313,10 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_bumpmap->setEnabled(true);
 	ui->lineEdit_bumpmap2->setEnabled(true);
 
+	ui->label_bumpmapAlpha->setVisible(false);
+	ui->lineEdit_bumpmapAlpha->setVisible(false);
+	ui->toolButton_bumpmapAlpha->setVisible(false);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->label_exponent->setEnabled(true);
@@ -4323,6 +4331,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_diffuse4);
 	clearLineEditAction(ui->lineEdit_bumpmap);
 	clearLineEditAction(ui->lineEdit_bumpmap2);
+	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
 	clearLineEditAction(ui->lineEdit_bump2);
 	clearLineEditAction(ui->lineEdit_detail);
 	clearLineEditAction(ui->lineEdit_exponentTexture);
@@ -7654,6 +7663,12 @@ void MainWindow::processVtf(const QString& objectName,
 		lineEdit->setEnabled(true);
 		texturesToCopy.remove(lineEdit);
 
+		if (lineEdit == ui->lineEdit_bumpmap ) {
+			ui->label_bumpmapAlpha->setVisible(false);
+			ui->lineEdit_bumpmapAlpha->setVisible(false);
+			ui->toolButton_bumpmapAlpha->setVisible(false);
+		}
+
 		updateLastTextureDirectory = false;
 
 		QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
@@ -7751,6 +7766,10 @@ void MainWindow::processVtf(const QString& objectName,
 					ui->groupBox_phong->isVisible() ||
 					ui->checkBox_phongNormalAlpha->isChecked() )
 					noAlpha = false;
+
+				ui->label_bumpmapAlpha->setVisible(true);
+				ui->lineEdit_bumpmapAlpha->setVisible(true);
+				ui->toolButton_bumpmapAlpha->setVisible(true);
 			}
 			else if( lineEdit == ui->lineEdit_diffuse2 ) {
 				if (ui->checkBox_basealpha->isChecked() )
