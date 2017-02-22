@@ -334,6 +334,50 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect(ui->lineEdit_diffuse, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse3, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse4, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bumpmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bumpmap2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_detail, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_lightWarp, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_blendmodulate, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_envmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_specmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_exponentTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_waterNormalMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractNormalMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractNormalMap2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_flowMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_noiseTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_toolTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_unlitTwoTextureDiffuse, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_unlitTwoTextureDiffuse2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_maskTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bump2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5630,7 +5674,7 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 					processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
 				}
 
-				Info("got image " + fileName);
+				//Info("got image " + fileName);
 			}
 		}
 	}
@@ -5639,80 +5683,80 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 void MainWindow::handleTextureDrop(const QString& filePath)
 {
 	const auto name = qobject_cast<QWidget *>(sender())->objectName();
-	Info(name + " got " + filePath);
+	//Info(name + " got " + filePath);
 	
 	// TODO: Only handle when a game is selected?
 
 	if (name == "lineEdit_diffuse")
 		processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
 
-	else if (name == "toolButton_bumpmap" )
+	else if (name == "lineEdit_bumpmap" )
 		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_bumpmap );
 
-	else if (name == "toolButton_diffuse2" )
+	else if (name == "lineEdit_diffuse2" )
 		processVtf( "preview_basetexture2", filePath, ui->lineEdit_diffuse2 );
 
-	else if (name == "toolButton_bumpmap2" )
+	else if (name == "lineEdit_bumpmap2" )
 		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bumpmap2 );
 
-	else if (name == "toolButton_diffuse3" )
+	else if (name == "lineEdit_diffuse3" )
 		processVtf( "preview_basetexture3", filePath, ui->lineEdit_diffuse3 );
 
-	else if (name == "toolButton_diffuse4" )
+	else if (name == "lineEdit_diffuse4" )
 		processVtf( "preview_basetexture4", filePath, ui->lineEdit_diffuse4 );
 
-	else if (name == "toolButton_detail" )
+	else if (name == "lineEdit_detail" )
 		processVtf( "preview_detail", filePath, ui->lineEdit_detail );
 
-	else if (name == "toolButton_refractNormalMap" )
+	else if (name == "lineEdit_refractNormalMap" )
 		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_refractNormalMap );
-	else if (name == "toolButton_refractNormalMap2" )
+	else if (name == "lineEdit_refractNormalMap2" )
 		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_refractNormalMap2 );
-	else if (name == "toolButton_refractTexture" )
+	else if (name == "lineEdit_refractTexture" )
 		processVtf( "", filePath, ui->lineEdit_refractTexture );
 
-	else if (name == "toolButton_waterNormalMap" )
+	else if (name == "lineEdit_waterNormalMap" )
 		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_waterNormalMap );
 
-	else if (name == "toolButton_unlitTwoTextureDiffuse" )
+	else if (name == "lineEdit_unlitTwoTextureDiffuse" )
 		processVtf( "preview_basetexture1", filePath, ui->lineEdit_unlitTwoTextureDiffuse );
-	else if (name == "toolButton_unlitTwoTextureDiffuse2" )
+	else if (name == "lineEdit_unlitTwoTextureDiffuse2" )
 		processVtf( "preview_basetexture2", filePath, ui->lineEdit_unlitTwoTextureDiffuse2 );
 
-	else if (name == "toolButton_blendmodulate" )
+	else if (name == "lineEdit_blendmodulate" )
 		processVtf( "", filePath, ui->lineEdit_blendmodulate );
-	else if (name == "toolButton_lightWarp" )
+	else if (name == "lineEdit_lightWarp" )
 		processVtf( "", filePath, ui->lineEdit_lightWarp );
 
-	else if (name == "toolButton_envmap" )
+	else if (name == "lineEdit_envmap" )
 		processVtf( "", filePath, ui->lineEdit_envmap );
-	else if (name == "toolButton_specmap" )
+	else if (name == "lineEdit_specmap" )
 		processVtf( "", filePath, ui->lineEdit_specmap );
 
-	else if (name == "toolButton_exponentTexture" )
+	else if (name == "lineEdit_exponentTexture" )
 		processVtf( "", filePath, ui->lineEdit_exponentTexture );
 
-	else if (name == "toolButton_maskTexture" )
+	else if (name == "lineEdit_maskTexture" )
 		processVtf( "", filePath, ui->lineEdit_maskTexture );
 
-	else if (name == "toolButton_flowMap" )
+	else if (name == "lineEdit_flowMap" )
 		processVtf( "", filePath, ui->lineEdit_flowMap );
-	else if (name == "toolButton_noiseTexture" )
+	else if (name == "lineEdit_noiseTexture" )
 		processVtf( "", filePath, ui->lineEdit_noiseTexture );
 
-	else if (name == "toolButton_toolTexture" )
+	else if (name == "lineEdit_toolTexture" )
 		processVtf( "", filePath, ui->lineEdit_toolTexture );
 
-	else if (name == "toolButton_bump2" )
+	else if (name == "lineEdit_bump2" )
 		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bump2 );
 
-	else if (name == "toolButton_waterReflectTexture" )
+	else if (name == "lineEdit_waterReflectTexture" )
 		processVtf( "", filePath, ui->lineEdit_waterReflectTexture );
 
-	else if (name == "toolButton_decal" )
+	else if (name == "lineEdit_decal" )
 		processVtf( "", filePath, ui->lineEdit_decal );
 
-	else if (name == "toolButton_phongWarp" )
+	else if (name == "lineEdit_phongWarp" )
 		processVtf( "", filePath, ui->lineEdit_phongWarp );
 }
 
@@ -6820,7 +6864,7 @@ void MainWindow::dropEvent(QDropEvent* event)
 			loadVMT(mimeData->urls().at(0).toLocalFile());
 		} else {
 			sortDroppedTextures (mimeData);
-			Info("has images");
+			//Info("has images");
 		}
 	}
 }

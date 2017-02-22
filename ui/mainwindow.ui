@@ -1317,7 +1317,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-3690</y>
              <width>926</width>
              <height>5098</height>
             </rect>
@@ -2025,7 +2025,7 @@ QToolButton:pressed
                  <item row="0" column="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_37">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractNormalMap">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractNormalMap">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2242,7 +2242,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractTexture">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2377,7 +2377,7 @@ QToolButton:pressed
                  <item row="1" column="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_36">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractNormalMap2">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractNormalMap2">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2651,7 +2651,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_unlitTwoTextureDiffuse">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_unlitTwoTextureDiffuse">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2664,7 +2664,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_unlitTwoTextureDiffuse2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_unlitTwoTextureDiffuse2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2813,7 +2813,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_waterNormalMap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_waterNormalMap">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2879,7 +2879,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_bottomMaterial">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bottomMaterial">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -3503,7 +3503,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_bumpmap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bumpmap">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -4286,7 +4286,7 @@ QToolButton:pressed
                   </layout>
                  </item>
                  <item row="0" column="2" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_bump2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bump2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5025,7 +5025,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="3" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_blendmodulate">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_blendmodulate">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5240,7 +5240,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="2" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_bumpmap2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bumpmap2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5266,7 +5266,7 @@ QToolButton:pressed
                   </spacer>
                  </item>
                  <item row="0" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_diffuse2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5359,7 +5359,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse3">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -6653,7 +6653,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse4">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse4">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -7147,7 +7147,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_12">
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_detail">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_detail">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8091,7 +8091,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="4">
-                  <widget class="QLineEdit" name="lineEdit_lightWarp">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_lightWarp">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8361,7 +8361,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_decal">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_decal">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8797,7 +8797,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_envmap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_envmap">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -8856,7 +8856,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="2" column="2" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_specmap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -11079,7 +11079,7 @@ QToolButton:pressed
                  <item row="10" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_52">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_phongWarp">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_phongWarp">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -11294,7 +11294,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_exponentTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_exponentTexture">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -11919,7 +11919,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_8">
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_maskTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_maskTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -12764,7 +12764,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_flowMap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_flowMap">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -13270,7 +13270,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_noiseTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_noiseTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -13341,7 +13341,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_35">
                  <item row="3" column="1">
-                  <widget class="QLineEdit" name="lineEdit_waterReflectTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_waterReflectTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -16955,7 +16955,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_toolTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_toolTexture">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -17296,8 +17296,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
