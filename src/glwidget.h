@@ -1,11 +1,22 @@
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#pragma once
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLTexture>
+#include <QTimer>
+#include <QMimeData>
+#include <QDragEnterEvent>
+#include <qdebug.h>
+
+#ifdef Q_OS_DARWIN
+#   include "OpenGL/glu.h"
+#else
+#   include "GL/glu.h"
+#endif
 
 #include "opengl/helpers.h"
+
+class MainWindow;
 
 /*!
  * Displays a single texture with the passed overlay texture from
@@ -15,7 +26,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
 	GLWidget(const QString &overlayTexture, const QString &objectName,
-		QWidget *parent);
+		MainWindow *mainWindow, QWidget* parent);
 
 	~GLWidget();
 
@@ -34,7 +45,19 @@ public:
 		return isShowing;
 	}
 
+protected:
+
+	void dropEvent(QDropEvent* event);
+
+	void dragEnterEvent(QDragEnterEvent* event);
+
+	void dragMoveEvent(QDragMoveEvent* event);
+
+	void dragLeaveEvent(QDragLeaveEvent* event);
+
 private:
+	MainWindow* mainWindow;
+
 	bool isShowing;
 
 	opengl::Offset offset;
@@ -44,5 +67,3 @@ private:
 
 	QString overlay;
 };
-
-#endif // GLWIDGET_H

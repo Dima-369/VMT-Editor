@@ -1,24 +1,19 @@
 #include "glwidget.h"
 
-#include "utilities.h"
-
-#include <QTimer>
-
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
+// whatever
+#include "mainwindow.h"
 
 GLWidget::GLWidget(const QString &overlayTexture, const QString &objectName,
-		QWidget *parent) :
+		MainWindow* mainWindow, QWidget* parent) :
 	QOpenGLWidget(parent),
+	mainWindow(mainWindow),
 	isShowing(false),
 	texture(0),
 	textTexture(0),
 	overlay(overlayTexture)
 {
 	setObjectName(objectName);
+	setAcceptDrops(true);
 
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
@@ -94,4 +89,37 @@ void GLWidget::loadTexture(const QString &filePath)
 	texture = new QOpenGLTexture(image.mirrored());
 
 	update();
+}
+
+void GLWidget::dropEvent(QDropEvent* event)
+{
+	const QMimeData* mimeData = event->mimeData();
+	mainWindow->droppedTextureOnGLWidget(
+		mimeData->urls().at(0).toLocalFile(), objectName());
+}
+
+void GLWidget::dragEnterEvent(QDragEnterEvent* event)
+{
+	if (event->mimeData()->hasUrls())
+	{
+		foreach (const QUrl& url, event->mimeData()->urls())
+		{
+			QString str = url.toLocalFile();
+			if (!str.isEmpty())
+			{
+				//if (QFileInfo(str).suffix() == "vmt")
+				event->acceptProposedAction();
+			}
+		}
+	}
+}
+
+void GLWidget::dragMoveEvent(QDragMoveEvent* event)
+{
+	event->acceptProposedAction();
+}
+
+void GLWidget::dragLeaveEvent(QDragLeaveEvent* event)
+{
+	event->accept();
 }

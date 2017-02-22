@@ -1,15 +1,11 @@
 #include "glwidget_diffuse1.h"
 
-#include "utilities.h"
+// whatever
+#include "mainwindow.h"
 
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
-
-GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget *parent) :
-	QOpenGLWidget(parent),
+GLWidget_Diffuse1::GLWidget_Diffuse1(MainWindow* mainWindow) :
+	QOpenGLWidget(mainWindow),
+	mainWindow(mainWindow),
 	showDiffuse(false),
 	showBumpmap(false),
 	diffuseTexture(""),
@@ -31,6 +27,7 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget *parent) :
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
 
 	setVisible(false);
+	setAcceptDrops(true);
 }
 
 GLWidget_Diffuse1::~GLWidget_Diffuse1()
@@ -273,4 +270,37 @@ void GLWidget_Diffuse1::setEnableAlphaTest(bool enable) {
 
 	enableAlphaTest = enable;
 	update();
+}
+
+void GLWidget_Diffuse1::dropEvent(QDropEvent* event)
+{
+	const QMimeData* mimeData = event->mimeData();
+	mainWindow->droppedTextureOnGLWidget(
+		mimeData->urls().at(0).toLocalFile(), objectName());
+}
+
+void GLWidget_Diffuse1::dragEnterEvent(QDragEnterEvent* event)
+{
+	if (event->mimeData()->hasUrls())
+	{
+		foreach (const QUrl& url, event->mimeData()->urls())
+		{
+			QString str = url.toLocalFile();
+			if (!str.isEmpty())
+			{
+				//if (QFileInfo(str).suffix() == "vmt")
+				event->acceptProposedAction();
+			}
+		}
+	}
+}
+
+void GLWidget_Diffuse1::dragMoveEvent(QDragMoveEvent* event)
+{
+	event->acceptProposedAction();
+}
+
+void GLWidget_Diffuse1::dragLeaveEvent(QDragLeaveEvent* event)
+{
+	event->accept();
 }

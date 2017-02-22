@@ -1,19 +1,16 @@
 #include "glwidget_spec.h"
 
-#include <qdebug.h>
+// whatever
+#include "mainwindow.h"
 
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
-
-GLWidget_Spec::GLWidget_Spec(QWidget *parent) :
-	QOpenGLWidget(parent),
+GLWidget_Spec::GLWidget_Spec(MainWindow* mainWindow) :
+	QOpenGLWidget(mainWindow),
+	mainWindow(mainWindow),
 	texture(0),
 	textTexture(0)
 {
 	setObjectName("preview_spec1");
+	setAcceptDrops(true);
 
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
@@ -125,4 +122,37 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 		height());
 
 	update();
+}
+
+void GLWidget_Spec::dropEvent(QDropEvent* event)
+{
+	const QMimeData* mimeData = event->mimeData();
+	mainWindow->droppedTextureOnGLWidget(
+		mimeData->urls().at(0).toLocalFile(), objectName());
+}
+
+void GLWidget_Spec::dragEnterEvent(QDragEnterEvent* event)
+{
+	if (event->mimeData()->hasUrls())
+	{
+		foreach (const QUrl& url, event->mimeData()->urls())
+		{
+			QString str = url.toLocalFile();
+			if (!str.isEmpty())
+			{
+				//if (QFileInfo(str).suffix() == "vmt")
+				event->acceptProposedAction();
+			}
+		}
+	}
+}
+
+void GLWidget_Spec::dragMoveEvent(QDragMoveEvent* event)
+{
+	event->acceptProposedAction();
+}
+
+void GLWidget_Spec::dragLeaveEvent(QDragLeaveEvent* event)
+{
+	event->accept();
 }

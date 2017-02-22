@@ -94,6 +94,10 @@ public:
 	// public for ConversionThread
 	QListWidget* mLogger;
 
+	// public for dropping on the GLWidgets (should probably be a slot)
+	void droppedTextureOnGLWidget(const QString& textureFilePath,
+		const QString& objectName);
+
 protected:
 
 	void closeEvent( QCloseEvent* event );
@@ -268,7 +272,14 @@ private:
 
 	void updateRecentFileActions( bool fullPath );
 
-	void browseVTF( const QString& objectName, QLineEdit* lineEdit );
+	// returns an empty string if the dialog was rejected
+	QString launchBrowseVtfDialog(QLineEdit* lineEdit);
+
+	// if textureFileName is empty, launchBrowseVtfDialog() will be called
+	// this is used for the drag/drop functionality
+	// launches the conversion thread and so on
+	void processVtf(const QString& objectName,
+		const QString& textureFileName, QLineEdit* lineEdit);
 
 	bool transformsModified( uint index );
 
