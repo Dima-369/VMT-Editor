@@ -5600,9 +5600,36 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 	{
 		foreach (const QUrl& url, mimeData->urls())
 		{
-			QString fileName = url.toLocalFile();
-			if (!fileName.isEmpty())
+			QString filePath = url.toLocalFile();
+			if (!filePath.isEmpty())
 			{
+				QString fileName = filePath.section("/", -1).section(".", 0, 0);
+				const QString shader = ui->comboBox_shader->currentText();
+
+				if (fileName.endsWith("_normal") ||
+					fileName.endsWith("_n") ||
+					fileName.endsWith("nrm") ) {
+
+					processVtf("preview_bumpmap1", filePath, ui->lineEdit_bumpmap);
+
+				} else if (fileName.endsWith("_specular") ||
+						   fileName.endsWith("_s") ||
+						   fileName.endsWith("spec") ) {
+
+					processVtf("", filePath, ui->lineEdit_specmap);
+
+				} else if (shader == "VertexLitGeneric" &&
+							(fileName.endsWith("_glossiness") ||
+							 fileName.endsWith("_g") ||
+							 fileName.endsWith("gloss")) ) {
+
+					processVtf("", filePath, ui->lineEdit_exponentTexture);
+
+				} else {
+
+					processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
+				}
+
 				Info("got image " + fileName);
 			}
 		}
