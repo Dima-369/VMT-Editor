@@ -399,6 +399,8 @@ public slots:
 	void updateTextureOnUi(
 		const QString& objectName, const QString& relativeFilePath);
 
+	void sortDroppedTextures( const QMimeData* mimeData );
+
 private slots:
 
 	void previewTexture();

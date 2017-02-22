@@ -5594,6 +5594,21 @@ void MainWindow::clearMessageLog() {
 	mLogger->clear();
 }
 
+void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
+
+	if (mimeData->hasUrls())
+	{
+		foreach (const QUrl& url, mimeData->urls())
+		{
+			QString fileName = url.toLocalFile();
+			if (!fileName.isEmpty())
+			{
+				Info("got image " + fileName);
+			}
+		}
+	}
+}
+
 void MainWindow::handleTextureDrop(const QString& filePath)
 {
 	const auto name = qobject_cast<QWidget *>(sender())->objectName();
@@ -5947,8 +5962,17 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 }
 
 void MainWindow::previewTexture(const QString& object)
-{
-	const QString cacheFile = QString("Cache/%1.png").arg(object);
+{	
+	QString cacheFile = "";
+	const QString cacheFilePng = QString("Cache/%1.png").arg(object);
+	const QString cacheFileTga = QString("Cache/%1.tga").arg(object);
+	QFile png(cacheFilePng);
+	QFile tga(cacheFileTga);
+
+	if (png.exists())
+		cacheFile = cacheFilePng;
+	else if (tga.exists())
+		cacheFile = cacheFileTga;
 
 	if (object == "preview_basetexture1") {
 		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
@@ -6738,6 +6762,7 @@ void MainWindow::dropEvent(QDropEvent* event)
 
 			loadVMT(mimeData->urls().at(0).toLocalFile());
 		} else {
+			sortDroppedTextures (mimeData);
 			Info("has images");
 		}
 	}
@@ -7750,7 +7775,7 @@ void MainWindow::processVtf(const QString& objectName,
 				fileName.chop(4);
 
 				QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-				QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
+				QString toFile = QDir::currentPath() + "/Cache/" + objectName + fileType;
 
 				if( QFile::exists(toFile) )
 					QFile::remove(toFile);
