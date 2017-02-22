@@ -1317,9 +1317,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-389</y>
              <width>926</width>
-             <height>5098</height>
+             <height>5129</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -2025,7 +2025,7 @@ QToolButton:pressed
                  <item row="0" column="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_37">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractNormalMap">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractNormalMap">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2242,7 +2242,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractTexture">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2377,7 +2377,7 @@ QToolButton:pressed
                  <item row="1" column="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_36">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_refractNormalMap2">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_refractNormalMap2">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -2575,31 +2575,6 @@ QToolButton:pressed
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_23">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_8">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Diffuse:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_15">
                    <property name="minimumSize">
@@ -2625,8 +2600,8 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_24">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_8">
                    <property name="minimumSize">
                     <size>
                      <width>100</width>
@@ -2643,7 +2618,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Surface:</string>
+                    <string>Diffuse:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2651,7 +2626,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_unlitTwoTextureDiffuse">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_unlitTwoTextureDiffuse">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2664,7 +2639,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_unlitTwoTextureDiffuse2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_unlitTwoTextureDiffuse2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2701,6 +2676,31 @@ QToolButton:pressed
                    </property>
                    <property name="text">
                     <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_24">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Surface:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2813,7 +2813,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_waterNormalMap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_waterNormalMap">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -2879,7 +2879,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_bottomMaterial">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bottomMaterial">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -3159,7 +3159,261 @@ QToolButton:pressed
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_10">
-                 <item row="4" column="0" colspan="4">
+                 <item row="0" column="3">
+                  <widget class="QToolButton" name="toolButton_diffuse">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1">
+                  <widget class="QCheckBox" name="checkBox_ssbump">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>SSBump</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1" colspan="3">
+                  <widget class="QComboBox" name="comboBox_surface">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>150</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_7">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Bump:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QLabel" name="label_surface">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Surface:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_diffuse">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>$basetexture</string>
+                   </property>
+                   <property name="text">
+                    <string>Diffuse:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="openExternalLinks">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QToolButton" name="toolButton_bumpmap">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" colspan="2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bumpmap">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1" colspan="3">
+                  <widget class="QFrame" name="frame_lumend1">
+                   <layout class="QHBoxLayout" name="horizontalLayout_lumend1">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="3">
+                  <widget class="QFrame" name="frame_lumstart1">
+                   <layout class="QHBoxLayout" name="horizontalLayout_lumstart1">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="8" column="0" colspan="4">
                   <widget class="QFrame" name="frame_texture">
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
@@ -3373,272 +3627,103 @@ QToolButton:pressed
                    </layout>
                   </widget>
                  </item>
-                 <item row="6" column="1" colspan="3">
-                  <widget class="QFrame" name="frame_lumend1">
-                   <layout class="QHBoxLayout" name="horizontalLayout_lumend1">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                   </layout>
+                 <item row="0" column="1" colspan="2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
                   </widget>
                  </item>
                  <item row="5" column="1" colspan="3">
-                  <widget class="QFrame" name="frame_lumstart1">
-                   <layout class="QHBoxLayout" name="horizontalLayout_lumstart1">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_surface">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Surface:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_diffuse">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="toolTip">
-                    <string>$basetexture</string>
-                   </property>
-                   <property name="text">
-                    <string>Diffuse:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="openExternalLinks">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QToolButton" name="toolButton_bumpmap">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Browse...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_bumpmap">
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1" colspan="3">
-                  <widget class="QComboBox" name="comboBox_surface">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>150</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QCheckBox" name="checkBox_ssbump">
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>SSBump</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_7">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Bump:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QToolButton" name="toolButton_diffuse">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Browse...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse">
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="layout_bumpmapAlpha">
+                   <item>
+                    <widget class="QLabel" name="label_bumpmapAlpha">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Bump alpha:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_bumpmapAlpha">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_bumpmapAlpha">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Browse...</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </widget>
@@ -4286,7 +4371,7 @@ QToolButton:pressed
                   </layout>
                  </item>
                  <item row="0" column="2" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_bump2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bump2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5025,7 +5110,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="3" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_blendmodulate">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_blendmodulate">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5240,7 +5325,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="2" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_bumpmap2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_bumpmap2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5266,7 +5351,7 @@ QToolButton:pressed
                   </spacer>
                  </item>
                  <item row="0" column="2" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_diffuse2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse2">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -5359,7 +5444,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse3">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -6653,7 +6738,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_diffuse4">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse4">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -7147,7 +7232,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_12">
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_detail">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_detail">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8091,7 +8176,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="4">
-                  <widget class="QLineEdit" name="lineEdit_lightWarp">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_lightWarp">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8361,7 +8446,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_decal">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_decal">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -8797,7 +8882,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1" colspan="3">
-                  <widget class="QLineEdit" name="lineEdit_envmap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_envmap">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -8856,7 +8941,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="2" column="2" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_specmap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -11079,7 +11164,7 @@ QToolButton:pressed
                  <item row="10" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_52">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_phongWarp">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_phongWarp">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -11294,7 +11379,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_exponentTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_exponentTexture">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -11919,7 +12004,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_8">
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_maskTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_maskTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -12764,7 +12849,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="lineEdit_flowMap">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_flowMap">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -13270,7 +13355,7 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="lineEdit_noiseTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_noiseTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -13341,7 +13426,7 @@ QToolButton:pressed
                 </property>
                 <layout class="QGridLayout" name="gridLayout_35">
                  <item row="3" column="1">
-                  <widget class="QLineEdit" name="lineEdit_waterReflectTexture">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_waterReflectTexture">
                    <property name="font">
                     <font>
                      <family>Segoe UI</family>
@@ -16955,7 +17040,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_toolTexture">
+                    <widget class="TextureDragDropLineEdit" name="lineEdit_toolTexture">
                      <property name="font">
                       <font>
                        <family>Segoe UI</family>
@@ -17296,8 +17381,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -18474,6 +18559,11 @@ border: 1px solid #222;
    <extends>QTextEdit</extends>
    <header>vmttextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>TextureDragDropLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>texturedragdroplineedit.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>lineEdit_patchVmt</tabstop>
@@ -18570,11 +18660,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-909</y>
+     <y>1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
    </hints>
   </connection>
@@ -18586,7 +18676,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-879</y>
+     <y>1618</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -18602,11 +18692,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-909</y>
+     <y>1592</y>
     </hint>
    </hints>
   </connection>
@@ -18618,11 +18708,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
     <hint type="destinationlabel">
      <x>531</x>
-     <y>-879</y>
+     <y>1618</y>
     </hint>
    </hints>
   </connection>
@@ -18634,11 +18724,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
     <hint type="destinationlabel">
      <x>607</x>
-     <y>-879</y>
+     <y>1618</y>
     </hint>
    </hints>
   </connection>
@@ -18650,7 +18740,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-935</y>
+     <y>1562</y>
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
@@ -18666,7 +18756,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-773</y>
+     <y>1724</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -18682,7 +18772,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-163</y>
+     <y>2334</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -18698,7 +18788,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-163</y>
+     <y>2334</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -18714,7 +18804,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-935</y>
+     <y>1562</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -18730,7 +18820,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-192</y>
+     <y>2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
@@ -18746,7 +18836,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -18762,7 +18852,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-113</y>
+     <y>2392</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
@@ -18778,7 +18868,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
     <hint type="destinationlabel">
      <x>625</x>
@@ -18794,7 +18884,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>-83</y>
+     <y>2414</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -18810,7 +18900,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -18826,7 +18916,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>679</x>
-     <y>540</y>
+     <y>3059</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -18842,7 +18932,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -18858,7 +18948,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>399</x>
-     <y>-448</y>
+     <y>2049</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -18874,7 +18964,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-773</y>
+     <y>1724</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18890,7 +18980,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>498</x>
-     <y>-743</y>
+     <y>1754</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18906,7 +18996,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>412</x>
-     <y>-713</y>
+     <y>1784</y>
     </hint>
     <hint type="destinationlabel">
      <x>308</x>
@@ -18922,7 +19012,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-682</y>
+     <y>1815</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -18938,7 +19028,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-909</y>
+     <y>1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
@@ -18954,7 +19044,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-879</y>
+     <y>1618</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -18970,7 +19060,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>536</x>
-     <y>-909</y>
+     <y>1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -18986,7 +19076,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
     <hint type="destinationlabel">
      <x>493</x>
@@ -19002,7 +19092,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-2642</y>
+     <y>-176</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19018,7 +19108,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-2642</y>
+     <y>-176</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19034,7 +19124,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2672</y>
+     <y>-206</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19050,7 +19140,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>491</x>
-     <y>-2497</y>
+     <y>-31</y>
     </hint>
     <hint type="destinationlabel">
      <x>414</x>
@@ -19066,7 +19156,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-2497</y>
+     <y>-31</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -19082,7 +19172,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-2497</y>
+     <y>-31</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -19098,7 +19188,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1563</y>
+     <y>4082</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19114,7 +19204,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1563</y>
+     <y>4082</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -19130,7 +19220,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1594</y>
+     <y>4113</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -19146,7 +19236,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1594</y>
+     <y>4113</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19162,7 +19252,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1563</y>
+     <y>4082</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -19178,7 +19268,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1594</y>
+     <y>4113</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19194,7 +19284,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>1594</y>
+     <y>4113</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19210,7 +19300,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1648</y>
+     <y>4167</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
@@ -19226,7 +19316,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1648</y>
+     <y>4167</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -19242,7 +19332,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>1679</y>
+     <y>4198</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19258,7 +19348,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>1679</y>
+     <y>4198</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -19274,7 +19364,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1648</y>
+     <y>4167</y>
     </hint>
     <hint type="destinationlabel">
      <x>278</x>
@@ -19290,7 +19380,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>1679</y>
+     <y>4198</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19306,7 +19396,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>1679</y>
+     <y>4198</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19322,7 +19412,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1397</y>
+     <y>3916</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -19338,7 +19428,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1226</y>
+     <y>3745</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19354,7 +19444,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2272</y>
+     <y>194</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19370,7 +19460,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19386,7 +19476,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19402,7 +19492,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>2168</y>
+     <y>4687</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -19418,7 +19508,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>2139</y>
+     <y>4658</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -19434,11 +19524,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>431</x>
-     <y>-2161</y>
+     <y>313</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
-     <y>-2157</y>
+     <y>309</y>
     </hint>
    </hints>
   </connection>
@@ -19450,11 +19540,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
-     <x>389</x>
-     <y>1353</y>
+     <x>391</x>
+     <y>3872</y>
     </hint>
    </hints>
   </connection>
@@ -19466,11 +19556,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
-     <x>297</x>
-     <y>-2243</y>
+     <x>296</x>
+     <y>223</y>
     </hint>
    </hints>
   </connection>
@@ -19482,7 +19572,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1005</y>
+     <y>3524</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19498,11 +19588,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>826</x>
-     <y>-2243</y>
+     <y>223</y>
     </hint>
    </hints>
   </connection>
@@ -19514,7 +19604,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1034</y>
+     <y>3553</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19530,7 +19620,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>862</y>
+     <y>3381</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19546,7 +19636,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19562,7 +19652,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2243</y>
+     <y>223</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -19578,7 +19668,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-315</y>
+     <y>2182</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -19594,7 +19684,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-286</y>
+     <y>2211</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -19610,7 +19700,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>2139</y>
+     <y>4658</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19626,7 +19716,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>777</y>
+     <y>3296</y>
     </hint>
     <hint type="destinationlabel">
      <x>252</x>
@@ -19642,7 +19732,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1668</y>
+     <y>829</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -19658,7 +19748,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1639</y>
+     <y>858</y>
     </hint>
     <hint type="destinationlabel">
      <x>489</x>
@@ -19674,7 +19764,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1726</y>
+     <y>771</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -19690,7 +19780,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1697</y>
+     <y>800</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -19706,7 +19796,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1697</y>
+     <y>800</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -19722,7 +19812,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1726</y>
+     <y>771</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -19738,7 +19828,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1668</y>
+     <y>829</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19754,7 +19844,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-773</y>
+     <y>1724</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -19770,7 +19860,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-852</y>
+     <y>1648</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19786,7 +19876,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2222</y>
+     <y>4741</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19802,7 +19892,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2248</y>
+     <y>4767</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19818,7 +19908,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2222</y>
+     <y>4741</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19834,7 +19924,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>453</y>
+     <y>2972</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -19850,7 +19940,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>568</y>
+     <y>3087</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -19866,7 +19956,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-2588</y>
+     <y>-122</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -19882,7 +19972,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-2557</y>
+     <y>-91</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -19898,7 +19988,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-535</y>
+     <y>1962</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -19914,7 +20004,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-535</y>
+     <y>1962</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -19930,7 +20020,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-265</y>
+     <y>2240</y>
     </hint>
     <hint type="destinationlabel">
      <x>123</x>
@@ -19946,7 +20036,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2196</y>
+     <y>4715</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -19962,7 +20052,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2196</y>
+     <y>4715</y>
     </hint>
     <hint type="destinationlabel">
      <x>842</x>
@@ -19978,7 +20068,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2222</y>
+     <y>4741</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -19994,7 +20084,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2248</y>
+     <y>4767</y>
     </hint>
     <hint type="destinationlabel">
      <x>861</x>
@@ -20010,7 +20100,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2196</y>
+     <y>4715</y>
     </hint>
     <hint type="destinationlabel">
      <x>506</x>
@@ -20026,7 +20116,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2382</y>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -20042,7 +20132,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2382</y>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -20058,7 +20148,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2353</y>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -20074,7 +20164,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2353</y>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
      <x>287</x>
@@ -20090,7 +20180,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2324</y>
+     <y>142</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -20106,7 +20196,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1257</y>
+     <y>3776</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -20122,7 +20212,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>1317</y>
+     <y>3836</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -20138,7 +20228,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>1313</y>
+     <y>3832</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -20154,7 +20244,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>1340</y>
+     <y>3859</y>
     </hint>
     <hint type="destinationlabel">
      <x>736</x>
@@ -20170,7 +20260,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1481</y>
+     <y>4000</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -20186,7 +20276,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>1481</y>
+     <y>4000</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -20202,7 +20292,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>1510</y>
+     <y>4029</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -20218,7 +20308,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1510</y>
+     <y>4029</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -20234,7 +20324,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1428</y>
+     <y>3947</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -20250,7 +20340,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>893</y>
+     <y>3412</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
@@ -20266,7 +20356,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>528</x>
-     <y>893</y>
+     <y>3412</y>
     </hint>
     <hint type="destinationlabel">
      <x>734</x>
@@ -20282,7 +20372,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>924</y>
+     <y>3443</y>
     </hint>
     <hint type="destinationlabel">
      <x>608</x>
@@ -20298,7 +20388,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>428</x>
-     <y>949</y>
+     <y>3468</y>
     </hint>
     <hint type="destinationlabel">
      <x>540</x>
@@ -20314,7 +20404,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>525</x>
-     <y>949</y>
+     <y>3468</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -20330,7 +20420,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>624</y>
+     <y>3143</y>
     </hint>
     <hint type="destinationlabel">
      <x>580</x>
@@ -20346,7 +20436,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>653</y>
+     <y>3172</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -20362,7 +20452,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>674</y>
+     <y>3193</y>
     </hint>
     <hint type="destinationlabel">
      <x>565</x>
@@ -20378,7 +20468,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-163</y>
+     <y>2334</y>
     </hint>
     <hint type="destinationlabel">
      <x>675</x>
@@ -20394,7 +20484,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-192</y>
+     <y>2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20410,7 +20500,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
     <hint type="destinationlabel">
      <x>634</x>
@@ -20426,7 +20516,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20442,7 +20532,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-113</y>
+     <y>2392</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -20458,7 +20548,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-52</y>
+     <y>2445</y>
     </hint>
     <hint type="destinationlabel">
      <x>600</x>
@@ -20474,7 +20564,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-21</y>
+     <y>2476</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -20490,7 +20580,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1005</y>
+     <y>3524</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -20506,7 +20596,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>10</y>
+     <y>2508</y>
     </hint>
     <hint type="destinationlabel">
      <x>601</x>
@@ -20522,7 +20612,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1034</y>
+     <y>3553</y>
     </hint>
     <hint type="destinationlabel">
      <x>720</x>
@@ -20538,7 +20628,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>411</x>
-     <y>1172</y>
+     <y>3691</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -20554,7 +20644,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1064</y>
+     <y>3583</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -20570,7 +20660,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1093</y>
+     <y>3612</y>
     </hint>
     <hint type="destinationlabel">
      <x>795</x>
@@ -20586,7 +20676,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1122</y>
+     <y>3641</y>
     </hint>
     <hint type="destinationlabel">
      <x>798</x>
@@ -20602,7 +20692,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1064</y>
+     <y>3583</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -20618,7 +20708,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1093</y>
+     <y>3612</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
@@ -20634,7 +20724,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1122</y>
+     <y>3641</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -20650,7 +20740,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1151</y>
+     <y>3670</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -20666,7 +20756,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>391</y>
+     <y>2910</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -20682,7 +20772,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>391</y>
+     <y>2910</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -20698,7 +20788,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>391</y>
+     <y>2910</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -20714,7 +20804,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>568</y>
+     <y>3087</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -20730,7 +20820,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>679</x>
-     <y>540</y>
+     <y>3059</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -20746,7 +20836,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
     <hint type="destinationlabel">
      <x>573</x>
@@ -20762,7 +20852,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
     <hint type="destinationlabel">
      <x>681</x>
@@ -20778,7 +20868,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>422</y>
+     <y>2941</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -20794,7 +20884,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>450</x>
-     <y>540</y>
+     <y>3059</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -20810,7 +20900,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-2588</y>
+     <y>-122</y>
     </hint>
     <hint type="destinationlabel">
      <x>307</x>
@@ -20826,7 +20916,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>596</x>
-     <y>540</y>
+     <y>3059</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
@@ -20842,7 +20932,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-2557</y>
+     <y>-91</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -20858,7 +20948,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2527</y>
+     <y>-61</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -20874,7 +20964,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-2466</y>
+     <y>0</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -20890,7 +20980,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-2435</y>
+     <y>31</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -20906,7 +20996,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>726</y>
+     <y>3245</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -20922,7 +21012,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>747</y>
+     <y>3266</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -20938,7 +21028,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>612</x>
-     <y>808</y>
+     <y>3327</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -20954,7 +21044,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>516</x>
-     <y>808</y>
+     <y>3327</y>
     </hint>
     <hint type="destinationlabel">
      <x>250</x>
@@ -20970,7 +21060,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>420</x>
-     <y>808</y>
+     <y>3327</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -20986,7 +21076,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>1317</y>
+     <y>3836</y>
     </hint>
     <hint type="destinationlabel">
      <x>575</x>
@@ -21002,11 +21092,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>483</y>
+     <y>3002</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
    </hints>
   </connection>
@@ -21018,11 +21108,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>484</y>
+     <y>3003</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>483</y>
+     <y>3002</y>
     </hint>
    </hints>
   </connection>
@@ -21034,7 +21124,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2074</y>
+     <y>392</y>
     </hint>
     <hint type="destinationlabel">
      <x>420</x>
@@ -21050,7 +21140,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-2103</y>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -21066,7 +21156,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2103</y>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -21082,7 +21172,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2074</y>
+     <y>392</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -21098,7 +21188,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2045</y>
+     <y>452</y>
     </hint>
     <hint type="destinationlabel">
      <x>486</x>
@@ -21114,7 +21204,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-826</y>
+     <y>1674</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21130,7 +21220,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1405</y>
+     <y>1092</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21146,7 +21236,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1171</y>
+     <y>1326</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21162,7 +21252,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1405</y>
+     <y>1092</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21178,7 +21268,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1369</y>
+     <y>1128</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -21194,7 +21284,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1369</y>
+     <y>1128</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -21210,7 +21300,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1603</y>
+     <y>894</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21226,7 +21316,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1603</y>
+     <y>894</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21242,7 +21332,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>575</x>
-     <y>-2024</y>
+     <y>481</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21258,7 +21348,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1995</y>
+     <y>502</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21274,7 +21364,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1966</y>
+     <y>531</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21290,7 +21380,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1573</y>
+     <y>924</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -21306,7 +21396,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1544</y>
+     <y>953</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21322,7 +21412,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1515</y>
+     <y>982</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21338,7 +21428,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1486</y>
+     <y>1011</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21354,7 +21444,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1457</y>
+     <y>1040</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21370,7 +21460,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1339</y>
+     <y>1158</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21386,7 +21476,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1310</y>
+     <y>1187</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21402,7 +21492,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1281</y>
+     <y>1216</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21418,7 +21508,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1252</y>
+     <y>1245</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21434,7 +21524,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1223</y>
+     <y>1274</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21450,7 +21540,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1171</y>
+     <y>1326</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21466,7 +21556,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-1135</y>
+     <y>1362</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21482,7 +21572,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-1135</y>
+     <y>1362</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21498,7 +21588,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1105</y>
+     <y>1392</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21514,7 +21604,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1076</y>
+     <y>1421</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21530,7 +21620,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1047</y>
+     <y>1450</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21546,7 +21636,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1018</y>
+     <y>1479</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21562,7 +21652,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-989</y>
+     <y>1508</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21578,7 +21668,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-909</y>
+     <y>1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21594,7 +21684,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-881</y>
+     <y>1620</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21610,7 +21700,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>391</y>
+     <y>2910</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21626,7 +21716,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>1317</y>
+     <y>3836</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21642,7 +21732,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>686</x>
-     <y>-506</y>
+     <y>1991</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21658,7 +21748,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>-507</y>
+     <y>1991</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -21674,7 +21764,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>499</x>
-     <y>-713</y>
+     <y>1784</y>
     </hint>
     <hint type="destinationlabel">
      <x>929</x>
@@ -21690,7 +21780,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-715</y>
+     <y>1786</y>
     </hint>
     <hint type="destinationlabel">
      <x>928</x>
@@ -21706,11 +21796,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>157</y>
+     <y>2676</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>156</y>
+     <y>2675</y>
     </hint>
    </hints>
   </connection>
@@ -21722,11 +21812,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>156</y>
+     <y>2675</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>157</y>
+     <y>2676</y>
     </hint>
    </hints>
   </connection>
@@ -21738,11 +21828,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>279</y>
+     <y>2798</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>278</y>
+     <y>2797</y>
     </hint>
    </hints>
   </connection>
@@ -21754,11 +21844,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>278</y>
+     <y>2797</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>279</y>
+     <y>2798</y>
     </hint>
    </hints>
   </connection>
@@ -21770,7 +21860,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>126</y>
+     <y>2645</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21786,7 +21876,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>250</y>
+     <y>2769</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21802,11 +21892,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
-     <y>184</y>
+     <y>2703</y>
     </hint>
    </hints>
   </connection>
@@ -21818,11 +21908,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>184</y>
+     <y>2703</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>-134</y>
+     <y>2363</y>
     </hint>
    </hints>
   </connection>
@@ -21834,11 +21924,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>-113</y>
+     <y>2392</y>
     </hint>
     <hint type="destinationlabel">
      <x>755</x>
-     <y>215</y>
+     <y>2734</y>
     </hint>
    </hints>
   </connection>
@@ -21850,11 +21940,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>755</x>
-     <y>215</y>
+     <y>2734</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>-113</y>
+     <y>2392</y>
     </hint>
    </hints>
   </connection>
@@ -21866,7 +21956,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>390</y>
+     <y>2909</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21882,7 +21972,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1902</y>
+     <y>595</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -21898,11 +21988,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>624</y>
+     <y>3143</y>
     </hint>
     <hint type="destinationlabel">
      <x>529</x>
-     <y>623</y>
+     <y>3142</y>
     </hint>
    </hints>
   </connection>
@@ -21914,11 +22004,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>623</y>
+     <y>3142</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
-     <y>624</y>
+     <y>3143</y>
     </hint>
    </hints>
   </connection>
@@ -21930,7 +22020,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>510</x>
-     <y>-244</y>
+     <y>2261</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21946,7 +22036,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1902</y>
+     <y>595</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21962,7 +22052,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>250</y>
+     <y>2769</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21978,7 +22068,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>126</y>
+     <y>2645</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -21994,7 +22084,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>72</y>
+     <y>2591</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22010,7 +22100,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>41</y>
+     <y>2560</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22026,7 +22116,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>798</x>
-     <y>41</y>
+     <y>2560</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22042,7 +22132,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>41</y>
+     <y>2560</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22058,7 +22148,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1779</y>
+     <y>718</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22074,7 +22164,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1810</y>
+     <y>687</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22090,7 +22180,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>-1841</y>
+     <y>656</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22106,7 +22196,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1841</y>
+     <y>656</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22122,7 +22212,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1872</y>
+     <y>625</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22138,7 +22228,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1872</y>
+     <y>625</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22154,7 +22244,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1841</y>
+     <y>656</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22170,7 +22260,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1841</y>
+     <y>656</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22186,7 +22276,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1872</y>
+     <y>625</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22202,7 +22292,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>308</y>
+     <y>2827</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22218,7 +22308,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>337</y>
+     <y>2856</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22234,7 +22324,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>188</y>
+     <y>2707</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22250,7 +22340,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>219</y>
+     <y>2738</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22266,7 +22356,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>157</y>
+     <y>2676</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22282,7 +22372,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>-84</y>
+     <y>2414</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22298,7 +22388,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>279</y>
+     <y>2798</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -22314,7 +22404,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>776</y>
+     <y>3295</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -22330,7 +22420,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>726</y>
+     <y>3245</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -22346,7 +22436,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>452</y>
+     <y>2971</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22362,7 +22452,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1225</y>
+     <y>3744</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22378,7 +22468,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1396</y>
+     <y>3915</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22394,7 +22484,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>861</y>
+     <y>3380</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22410,7 +22500,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>862</y>
+     <y>3381</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22426,7 +22516,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1287</y>
+     <y>3806</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -22442,7 +22532,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1287</y>
+     <y>3806</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22458,7 +22548,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2272</y>
+     <y>194</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22474,7 +22564,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-2243</y>
+     <y>223</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22490,7 +22580,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2214</y>
+     <y>252</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22506,7 +22596,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22522,7 +22612,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>476</x>
-     <y>-2157</y>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22538,7 +22628,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22554,7 +22644,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-2190</y>
+     <y>284</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22570,7 +22660,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>1340</y>
+     <y>3859</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22586,7 +22676,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>1733</y>
+     <y>4252</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22602,7 +22692,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>1764</y>
+     <y>4283</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22618,7 +22708,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1733</y>
+     <y>4252</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22634,7 +22724,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1764</y>
+     <y>4283</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22650,7 +22740,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1809</y>
+     <y>4328</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22666,7 +22756,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1840</y>
+     <y>4359</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22682,7 +22772,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1871</y>
+     <y>4390</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22698,7 +22788,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1916</y>
+     <y>4435</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22714,7 +22804,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1947</y>
+     <y>4466</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22730,7 +22820,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1978</y>
+     <y>4497</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22746,7 +22836,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2009</y>
+     <y>4528</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22762,7 +22852,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2054</y>
+     <y>4573</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22778,7 +22868,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>2085</y>
+     <y>4604</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22794,7 +22884,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>542</x>
-     <y>2085</y>
+     <y>4604</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22809,8 +22899,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>-535</y>
+     <x>826</x>
+     <y>1962</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22825,8 +22915,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>790</x>
-     <y>-396</y>
+     <x>826</x>
+     <y>2101</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22842,7 +22932,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>-367</y>
+     <y>2130</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22858,11 +22948,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1871</y>
+     <y>4390</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1870</y>
+     <y>4389</y>
     </hint>
    </hints>
   </connection>
@@ -22874,11 +22964,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1870</y>
+     <y>4389</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>1871</y>
+     <y>4390</y>
     </hint>
    </hints>
   </connection>
@@ -22890,11 +22980,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1977</y>
+     <y>4496</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>1978</y>
+     <y>4497</y>
     </hint>
    </hints>
   </connection>
@@ -22906,11 +22996,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1978</y>
+     <y>4497</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1977</y>
+     <y>4496</y>
     </hint>
    </hints>
   </connection>
@@ -22922,11 +23012,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>2008</y>
+     <y>4527</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>2009</y>
+     <y>4528</y>
     </hint>
    </hints>
   </connection>
@@ -22938,11 +23028,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2009</y>
+     <y>4528</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>2008</y>
+     <y>4527</y>
     </hint>
    </hints>
   </connection>
@@ -22954,7 +23044,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-396</y>
+     <y>2101</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22970,7 +23060,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>-367</y>
+     <y>2130</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22985,8 +23075,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>559</x>
-     <y>515</y>
+     <x>665</x>
+     <y>3034</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -23002,7 +23092,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>515</y>
+     <y>3034</y>
     </hint>
     <hint type="destinationlabel">
      <x>281</x>
@@ -23082,7 +23172,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>696</x>
-     <y>-2796</y>
+     <y>-330</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -23098,7 +23188,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>762</x>
-     <y>-2796</y>
+     <y>-330</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -23114,7 +23204,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>828</x>
-     <y>-2796</y>
+     <y>-330</y>
     </hint>
     <hint type="destinationlabel">
      <x>888</x>
@@ -23129,8 +23219,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>347</x>
-     <y>-492</y>
+     <x>452</x>
+     <y>2020</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23145,12 +23235,28 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>560</y>
+     <x>450</x>
+     <y>3087</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
      <y>626</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_bumpmapAlpha</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseVTF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>873</x>
+     <y>440</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1231</x>
+     <y>472</y>
     </hint>
    </hints>
   </connection>

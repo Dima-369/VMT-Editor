@@ -1,14 +1,6 @@
 #include "glwidget_diffuse2.h"
 
-#include <qdebug.h>
-
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
-
-GLWidget_Diffuse2::GLWidget_Diffuse2(QWidget *parent) :
+GLWidget_Diffuse2::GLWidget_Diffuse2(QWidget* parent) :
 	QOpenGLWidget(parent),
 	showDiffuse(false),
 	showBumpmap(false),

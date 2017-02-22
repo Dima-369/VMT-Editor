@@ -1,9 +1,15 @@
-#ifndef GLWIDGET_DIFFUSE2_H
-#define GLWIDGET_DIFFUSE2_H
+#pragma once
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLTexture>
+#include <qdebug.h>
+
+#ifdef Q_OS_DARWIN
+#   include "OpenGL/glu.h"
+#else
+#   include "GL/glu.h"
+#endif
 
 #include "opengl/helpers.h"
 
@@ -13,7 +19,7 @@
 class GLWidget_Diffuse2 : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
-	GLWidget_Diffuse2(QWidget *parent);
+	GLWidget_Diffuse2(QWidget* parent);
 
 	~GLWidget_Diffuse2();
 
@@ -64,5 +70,3 @@ private:
 	QOpenGLTexture *bumpmapTextTexture;
 	QOpenGLTexture *textureTextTexture;
 };
-
-#endif // GLWIDGET_DIFFUSE1_H

@@ -76,7 +76,8 @@ SOURCES += \
     src/utilities/strings.cpp \
     src/utilities/version.cpp \
     src/user-interface/treesway.cpp \
-    src/vmttextedit.cpp
+    src/vmttextedit.cpp \
+    src/texturedragdroplineedit.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -123,7 +124,8 @@ HEADERS += \
     src/user-interface/shading-reflection.h \
     src/utilities/version.h \
     src/user-interface/treesway.h \
-    src/vmttextedit.h
+    src/vmttextedit.h \
+    src/texturedragdroplineedit.h
 
 FORMS += \
     ui/mainwindow.ui \
