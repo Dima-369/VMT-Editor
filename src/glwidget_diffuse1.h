@@ -16,8 +16,6 @@
 #include "utilities.h"
 #include "opengl/helpers.h"
 
-class MainWindow;
-
 /*!
  * Complex OpenGL widget to preview diffuse and bumpmap textures and have lots
  * of alpha settings.
@@ -25,7 +23,7 @@ class MainWindow;
 class GLWidget_Diffuse1 : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
-	GLWidget_Diffuse1(MainWindow* mainWindow);
+	GLWidget_Diffuse1(QWidget* parent);
 
 	~GLWidget_Diffuse1();
 
@@ -71,19 +69,7 @@ public:
 		return showDiffuse || showBumpmap;
 	}
 
-protected:
-
-	void dropEvent(QDropEvent* event);
-
-	void dragEnterEvent(QDragEnterEvent* event);
-
-	void dragMoveEvent(QDragMoveEvent* event);
-
-	void dragLeaveEvent(QDragLeaveEvent* event);
-
 private:
-	MainWindow* mainWindow;
-
 	bool showDiffuse;
 	bool showBumpmap;
 

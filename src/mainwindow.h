@@ -94,13 +94,9 @@ public:
 	// public for ConversionThread
 	QListWidget* mLogger;
 
-	// public for dropping on the GLWidgets (should probably be a slot)
-	void droppedTextureOnGLWidget(const QString& textureFilePath,
-		const QString& objectName);
-
 protected:
 
-	void closeEvent( QCloseEvent* event );
+	void closeEvent(QCloseEvent* event);
 
 	/**
 	 * Overridden to load the initial command line file.

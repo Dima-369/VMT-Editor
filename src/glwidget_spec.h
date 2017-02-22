@@ -13,8 +13,6 @@
 
 #include "opengl/helpers.h"
 
-class MainWindow;
-
 class GLWidget_Spec : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
@@ -26,7 +24,7 @@ public:
 		None
 	};
 
-	GLWidget_Spec(MainWindow* mainWindow);
+	GLWidget_Spec(QWidget* parent);
 
 	~GLWidget_Spec();
 
@@ -42,19 +40,7 @@ public:
 	 */
 	void updateValues(Mode mode, const QString& texture_);
 
-protected:
-
-	void dropEvent(QDropEvent* event);
-
-	void dragEnterEvent(QDragEnterEvent* event);
-
-	void dragMoveEvent(QDragMoveEvent* event);
-
-	void dragLeaveEvent(QDragLeaveEvent* event);
-
 private:
-	MainWindow* mainWindow;
-
 	opengl::Offset offset;
 
 	QOpenGLTexture *texture;

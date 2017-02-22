@@ -1,11 +1,7 @@
 #include "glwidget_diffuse2.h"
 
-// whatever
-#include "mainwindow.h"
-
-GLWidget_Diffuse2::GLWidget_Diffuse2(MainWindow* mainWindow) :
-	QOpenGLWidget(mainWindow),
-	mainWindow(mainWindow),
+GLWidget_Diffuse2::GLWidget_Diffuse2(QWidget* parent) :
+	QOpenGLWidget(parent),
 	showDiffuse(false),
 	showBumpmap(false),
 	diffuseTexture(""),
@@ -159,37 +155,4 @@ void GLWidget_Diffuse2::loadTexture(const QString &diffuse1,
 	mBumpmapTexture = new QOpenGLTexture(image_bumpmap);
 
 	update();
-}
-
-void GLWidget_Diffuse2::dropEvent(QDropEvent* event)
-{
-	const QMimeData* mimeData = event->mimeData();
-	mainWindow->droppedTextureOnGLWidget(
-		mimeData->urls().at(0).toLocalFile(), objectName());
-}
-
-void GLWidget_Diffuse2::dragEnterEvent(QDragEnterEvent* event)
-{
-	if (event->mimeData()->hasUrls())
-	{
-		foreach (const QUrl& url, event->mimeData()->urls())
-		{
-			QString str = url.toLocalFile();
-			if (!str.isEmpty())
-			{
-				//if (QFileInfo(str).suffix() == "vmt")
-				event->acceptProposedAction();
-			}
-		}
-	}
-}
-
-void GLWidget_Diffuse2::dragMoveEvent(QDragMoveEvent* event)
-{
-	event->acceptProposedAction();
-}
-
-void GLWidget_Diffuse2::dragLeaveEvent(QDragLeaveEvent* event)
-{
-	event->accept();
 }

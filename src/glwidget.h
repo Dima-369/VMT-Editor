@@ -16,8 +16,6 @@
 
 #include "opengl/helpers.h"
 
-class MainWindow;
-
 /*!
  * Displays a single texture with the passed overlay texture from
  * the constructor.
@@ -26,7 +24,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
 	GLWidget(const QString &overlayTexture, const QString &objectName,
-		MainWindow *mainWindow, QWidget* parent);
+		QWidget* parent);
 
 	~GLWidget();
 
@@ -45,19 +43,7 @@ public:
 		return isShowing;
 	}
 
-protected:
-
-	void dropEvent(QDropEvent* event);
-
-	void dragEnterEvent(QDragEnterEvent* event);
-
-	void dragMoveEvent(QDragMoveEvent* event);
-
-	void dragLeaveEvent(QDragLeaveEvent* event);
-
 private:
-	MainWindow* mainWindow;
-
 	bool isShowing;
 
 	opengl::Offset offset;

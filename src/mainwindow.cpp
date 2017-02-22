@@ -330,7 +330,6 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_bump2->setValidator(windowsFilenameValidator);
 
 	//--------------------------------------------------------------------//
-	// TODO: Link and promote all other texture lineedits here
 
 	connect(ui->lineEdit_diffuse, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
@@ -4300,7 +4299,7 @@ void MainWindow::resetWidgets() {
 	}
 	glWidget_diffuse1->reset();
 	glWidget_diffuse2->reset();
-	glWidget_spec->setVisible(true);
+	glWidget_spec->setVisible(false);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -6369,7 +6368,8 @@ void MainWindow::shaderChanged()
 
 			case BaseTexture: ui->groupBox_baseTexture->setVisible(false);ui->action_baseTexture->setChecked(false);break;
 			case NormalBlend:
-				normalblend::resetAction(ui);break;
+				normalblend::resetAction(ui);
+				break;
 			case BaseTexture2: ui->groupBox_baseTexture2->setVisible(false);ui->action_baseTexture2->setChecked(false);break;
 			case Transparency: ui->groupBox_transparency->setVisible(false);ui->action_transparency->setChecked(false);break;
 			case DetailTexture: ui->groupBox_detailTexture->setVisible(false);ui->action_detail->setChecked(false);break;
@@ -7450,51 +7450,6 @@ void MainWindow::changeShader()
 		mChildWidgetChanged = true;
 		updateWindowTitle();
 	}
-}
-
-void MainWindow::droppedTextureOnGLWidget(const QString& textureFilePath,
-	const QString& objectName)
-{
-	/*
-	if( caller->objectName() == "lineEdit_diffuse" ) {
-		previewTexture( "preview_basetexture1",
-						ui->lineEdit_diffuse->text(),
-						true,
-						ui->checkBox_transparent->isChecked() || ui->checkBox_alphaTest->isChecked() || ui->checkBox_normalalpha->isChecked(),
-						ui->checkBox_alphaTest->isChecked(),
-						false );
-	} else if( caller->objectName() == "lineEdit_bumpmap" )
-		previewTexture( "preview_bumpmap1", ui->lineEdit_bumpmap->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_bumpmap2" )
-		previewTexture( "preview_bumpmap2", ui->lineEdit_bumpmap2->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse2" )
-		previewTexture( "preview_basetexture2", ui->lineEdit_diffuse2->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse3" )
-		previewTexture( "preview_basetexture3", ui->lineEdit_diffuse3->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_diffuse4" )
-		previewTexture( "preview_basetexture4", ui->lineEdit_diffuse4->text(), false, false, false, false );
-
-	else if( caller->objectName() == "lineEdit_detail" )
-		previewTexture( "preview_detail", ui->lineEdit_detail->text(), false, false, false, false );
-
-	else if( caller->objectName() == "lineEdit_refractNormalMap" )
-		previewTexture( "preview_normalmap1", ui->lineEdit_refractNormalMap->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_refractNormalMap2" )
-		previewTexture( "preview_normalmap2", ui->lineEdit_refractNormalMap2->text(), false, false, false, false );
-
-	else if( caller->objectName() == "lineEdit_waterNormalMap" )
-		previewTexture( "preview_normalmap1", ui->lineEdit_waterNormalMap->text(), false, false, false, false );
-
-	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse" )
-		previewTexture( "preview_basetexture1", ui->lineEdit_unlitTwoTextureDiffuse->text(), false, false, false, false );
-	else if( caller->objectName() == "lineEdit_unlitTwoTextureDiffuse2" )
-		previewTexture( "preview_basetexture2", ui->lineEdit_unlitTwoTextureDiffuse2->text(), false, false, false, false );
-
-	else if( caller->objectName() == "lineEdit_bump2" )
-		previewTexture( "preview_bumpmap2", ui->lineEdit_bump2->text(), false, false, false, false );
-	*/
-
-	Info(objectName + " got " + textureFilePath);
 }
 
 void MainWindow::browseVTF()
@@ -8662,13 +8617,8 @@ void MainWindow::addGLWidget(
 	const QString& textureOverlay, QVBoxLayout* layout,
 	const QString& widgetObjectName)
 {
-
 	GLWidget* glWidget = new GLWidget(textureOverlay, widgetObjectName,
-			this, glWidgets.length() > 0 ? glWidgets.at(0) : NULL);
-	glWidget->setMinimumSize( QSize(192, 192) );
-	glWidget->setMaximumSize( QSize(192, 192) );
-	glWidget->setVisible(false);
-
+			glWidgets.length() > 0 ? glWidgets.at(0) : NULL);
 	glWidgets.append(glWidget);
 
 	layout->addWidget(glWidget);

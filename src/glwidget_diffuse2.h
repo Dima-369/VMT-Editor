@@ -13,15 +13,13 @@
 
 #include "opengl/helpers.h"
 
-class MainWindow;
-
 /*!
  * Displays a diffuse and bumpmap texture in a split view if both are loaded.
  */
 class GLWidget_Diffuse2 : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
-	GLWidget_Diffuse2(MainWindow* mainWindow);
+	GLWidget_Diffuse2(QWidget* parent);
 
 	~GLWidget_Diffuse2();
 
@@ -55,19 +53,7 @@ public:
 		return showDiffuse || showBumpmap;
 	}
 
-protected:
-
-	void dropEvent(QDropEvent* event);
-
-	void dragEnterEvent(QDragEnterEvent* event);
-
-	void dragMoveEvent(QDragMoveEvent* event);
-
-	void dragLeaveEvent(QDragLeaveEvent* event);
-
 private:
-	MainWindow* mainWindow;
-
 	bool showDiffuse;
 	bool showBumpmap;
 
