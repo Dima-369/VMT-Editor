@@ -30,7 +30,7 @@ We are using Qt 5.6 and MinGW 5.3.0 for compiling (but newer versions should wor
 
 Or skip the GUIs and compile through qmake directly.
 
-You can open the example VMTs in the `misc/vmt` folder to check how everything looks for you.
+You can open the example VMTs in the `misc/vmt` folder to check if everything works correctly.
 
 ## Screenshots
 
