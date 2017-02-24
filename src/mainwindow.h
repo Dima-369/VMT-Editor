@@ -178,6 +178,8 @@ private:
 
 	QSettings* mIniSettings;
 
+	QSettings* mIniPaths;
+
 	Settings* mSettings;
 
 	QString initialFile;
@@ -436,6 +438,8 @@ private slots:
 	void vmtPreviewParse();
 
 	void vmtPreviewChanged();
+
+	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
 
 	//----------------------------------------------------------------------------------------//
 

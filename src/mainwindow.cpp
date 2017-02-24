@@ -66,6 +66,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	mSteamInstalled(false),
 	mOpenConvertDialog(false),
 	mIniSettings(new QSettings("settings.ini", QSettings::IniFormat, this)),
+	mIniPaths(new QSettings("paths.ini", QSettings::IniFormat, this)),
 	mSettings(new Settings),
 	initialFile(fileToOpen),
 	mSteamAppsDir(steamAppsDirectory()),
@@ -983,6 +984,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			if( !texture.isEmpty() )
 				ui->lineEdit_unlitTwoTextureDiffuse->setText(texture);
+				createReconvertAction(ui->lineEdit_unlitTwoTextureDiffuse, value);
 
 		} else {
 
@@ -990,6 +992,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				ui->lineEdit_diffuse->setText(texture);
 
 			showBaseTexture = true;
+			createReconvertAction(ui->lineEdit_diffuse, value);
 		}
 	}
 
@@ -1025,6 +1028,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_unlitTwoTextureDiffuse2->setText(texture);
+			createReconvertAction(ui->lineEdit_unlitTwoTextureDiffuse2, value);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1043,6 +1047,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->lineEdit_diffuse2->setText(texture);
 
 		showBaseTexture2 = true;
+
+		createReconvertAction(ui->lineEdit_diffuse2, value);
 	}
 
 	if( !( value = vmt.parameters.take("$basetexture3") ).isEmpty() ) {
@@ -1054,6 +1060,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse3->setText(texture);
+			createReconvertAction(ui->lineEdit_diffuse3, value);
 	}
 
 	if( !( value = vmt.parameters.take("$basetexture4") ).isEmpty() ) {
@@ -1065,6 +1072,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse4->setText(texture);
+			createReconvertAction(ui->lineEdit_diffuse4, value);
 	}
 
 	if( !( value = vmt.parameters.take("$texture2_uvscale") ).isEmpty() ) {
@@ -1107,6 +1115,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				ui->lineEdit_bumpmap->setText(texture);
 
 			showBaseTexture = true;
+			createReconvertAction(ui->lineEdit_bumpmap, value);
 		}
 	}
 
@@ -1119,9 +1128,11 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if (!texture.isEmpty()) {
 			if (vmt.parameters.contains("$addbumpmaps")) {
 				ui->lineEdit_bump2->setText(texture);
+				createReconvertAction(ui->lineEdit_bump2, value);
 			} else {
 				ui->lineEdit_bumpmap2->setText(texture);
 				showBaseTexture2 = true;
+				createReconvertAction(ui->lineEdit_bumpmap2, value);
 			}
 		}
 	}
@@ -1137,6 +1148,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->lineEdit_blendmodulate, vmt);
 
 		showBaseTexture2 = true;
+		createReconvertAction(ui->lineEdit_blendmodulate, value);
 	}
 
 	if( !( value = vmt.parameters.take("$lightwarptexture") ).isEmpty() )
@@ -1432,6 +1444,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			"$detail", realGameinfoDir);
 
 		ui->lineEdit_detail->setText(texture);
+		createReconvertAction(ui->lineEdit_detail, texture);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1566,6 +1579,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		usingDecal = true;
 		showDecal = true;
+		createReconvertAction(ui->lineEdit_decal, value);
 	}
 
 	if( !( value = vmt.parameters.take("$decalblendmode") ).isEmpty() ) {
@@ -1864,6 +1878,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingSpecmap.isEmpty() )
 		{
 			ui->lineEdit_specmap->setText(usingSpecmap);
+			createReconvertAction(ui->lineEdit_detail, usingSpecmap);
 
 			if(usingEnvmap)
 			{
@@ -7807,6 +7822,10 @@ void MainWindow::processVtf(const QString& objectName,
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
+				Info(relativeFilePath);
+
+				mIniPaths->setValue(relativeFilePath, fileName);
+
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->objectName = objectName;
@@ -9123,6 +9142,11 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 			continue;
 		}
 
+		QString fileName = it.key()->toolTip();
+		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + it.value());
+
+		mIniPaths->setValue(relativeFilePath, fileName);
+
 		it.key()->setEnabled(true);
 		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + it.value() );
 
@@ -9451,6 +9475,8 @@ void MainWindow::reconvertTexture()
 		}
 	}
 
+	mIniPaths->setValue(relativeFilePath, fileName);
+
 	if (extension != "vtf") {
 		ConversionThread* conversionThread = new ConversionThread(this);
 		conversionThread->fileName = fileName;
@@ -9482,6 +9508,19 @@ void MainWindow::reconvertTexture()
 		previewTexture( preview, relativeFilePath, true, false, false, false, true );
 
 	lineEdit->setText(relativeFilePath);
+}
+
+void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
+	QString value = mIniPaths->value(fileName).toString();
+
+	if (value != "") {
+		QDir dir;
+		if (dir.exists(value)) {
+			QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+			lineEdit->setToolTip(value);
+			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+		}
+	}
 }
 
 QString MainWindow::removeSuffix( const QString fileName)
