@@ -165,7 +165,6 @@ void normalblend::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 		PREP(p) \
 			const QString &v = vmt->parameters.take(p); \
 			utils::parseTexture(p, v, ui, widget, *vmt); \
-			MainWindow::createReconvertAction(widget, v); \
 		} \
 	}
 

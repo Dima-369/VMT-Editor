@@ -1926,6 +1926,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
 
+	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
+	{
+		createReconvertAction(ui->lineEdit_decal, value);
+	}
+
+	if( !( value = vmt.parameters.take("$phongweaptexture") ).isEmpty() )
+	{
+		createReconvertAction(ui->lineEdit_decal, value);
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	// Self Illumination Groupbox
@@ -7737,9 +7747,9 @@ void MainWindow::processVtf(const QString& objectName,
 					ui->checkBox_phongNormalAlpha->isChecked() )
 					noAlpha = false;
 
-				ui->label_bumpmapAlpha->setVisible(true);
+				/*ui->label_bumpmapAlpha->setVisible(true);
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
-				ui->toolButton_bumpmapAlpha->setVisible(true);
+				ui->toolButton_bumpmapAlpha->setVisible(true);*/
 			}
 			else if( lineEdit == ui->lineEdit_diffuse2 ) {
 				if (ui->checkBox_basealpha->isChecked() )
@@ -7821,8 +7831,6 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-				Info(relativeFilePath);
 
 				mIniPaths->setValue(relativeFilePath, fileName);
 
