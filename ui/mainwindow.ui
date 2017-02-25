@@ -1317,7 +1317,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-389</y>
+             <y>-1542</y>
              <width>926</width>
              <height>5129</height>
             </rect>
@@ -7039,7 +7039,7 @@ QToolButton:pressed
                         <number>2</number>
                        </property>
                        <property name="maximum">
-                        <double>1.000000000000000</double>
+                        <double>16.000000000000000</double>
                        </property>
                        <property name="singleStep">
                         <double>0.050000000000000</double>
@@ -18798,7 +18798,7 @@ border: 1px solid #222;
   </connection>
   <connection>
    <sender>doubleSpinBox_opacity</sender>
-   <signal>valueChanged(QString)</signal>
+   <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
    <slot>widgetChanged()</slot>
    <hints>

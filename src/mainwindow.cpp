@@ -263,7 +263,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_envmapLight->setDoubleSlider(ui->horizontalSlider_envmapLight);
 	ui->doubleSpinBox_envmapAniso->setDoubleSlider(ui->horizontalSlider_envmapAniso);
 
-	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 10.0);
+	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 8);
 	ui->doubleSpinBox_fresnelRangesX->setDoubleSlider(ui->horizontalSlider_fresnelRanges);
 
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);

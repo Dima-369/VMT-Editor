@@ -18,7 +18,7 @@ private:
 
 	QSlider* slider;
 	double spinBoxMax;
-
+	double spinBoxDefault;
 	int convertSpinBoxValueToSlider(double value);
 
 private slots:
