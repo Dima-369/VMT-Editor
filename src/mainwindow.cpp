@@ -1928,12 +1928,12 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
 	{
-		createReconvertAction(ui->lineEdit_decal, value);
+		createReconvertAction(ui->lineEdit_exponentTexture, value);
 	}
 
-	if( !( value = vmt.parameters.take("$phongweaptexture") ).isEmpty() )
+	if( !( value = vmt.parameters.take("$phongwarptexture") ).isEmpty() )
 	{
-		createReconvertAction(ui->lineEdit_decal, value);
+		createReconvertAction(ui->lineEdit_phongWarp, value);
 	}
 
 	//----------------------------------------------------------------------------------------//
