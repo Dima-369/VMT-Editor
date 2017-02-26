@@ -801,7 +801,7 @@ QSlider::handle:vertical {
            <x>0</x>
            <y>0</y>
            <width>522</width>
-           <height>825</height>
+           <height>940</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -872,7 +872,7 @@ QSlider::handle:vertical {
              <item>
               <widget class="QCheckBox" name="checkBox_removeSuffix">
                <property name="text">
-                <string>Remove Substance suffixes when converting textures (_diffuse, _normal)</string>
+                <string>Replace Substance suffixes when converting textures (_diffuse, _normal)</string>
                </property>
               </widget>
              </item>
@@ -882,6 +882,105 @@ QSlider::handle:vertical {
                 <string>Remove alpha channel when not needed in VMT</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_removeAlpha_2">
+               <property name="text">
+                <string>Name converted VTFs after VMT name</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>Custom suffixes</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="lineEdit_suffixDiffuse"/>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Bump:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Diffuse:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="lineEdit_suffixBump"/>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLineEdit" name="lineEdit_suffixGloss"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_7">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Gloss:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Spec:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_suffixSpec"/>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>

@@ -1779,6 +1779,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showShadingReflection = true;
 	}
 
+	if( !( value = vmt.parameters.take("$envmapanisotropy") ).isEmpty() )
+	{
+		if( !usingEnvmap )
+		{
+			Error("$envmapanisotropy is only supported with $envmap!")
+		}
+
+		showShadingReflection = true;
+	}
+
 
 	if( !( value = vmt.parameters.take("$envmaplightscaleminmax") ).isEmpty() )
 	{
@@ -7337,15 +7347,17 @@ void MainWindow::openTemplate() {
 
 	QAction* action = qobject_cast<QAction*>(sender());
 
-	if (mSettings->templateNew && mChildWidgetChanged) {
+	if (mSettings->templateNew) {
 
-		switch( _displaySaveMessage() ) {
+		if (mChildWidgetChanged) {
+			switch( _displaySaveMessage() ) {
 
-		case QMessageBox::Save:
-			action_Save();
-		case QMessageBox::Cancel:
-		case QMessageBox::Escape:
-			return;
+			case QMessageBox::Save:
+				action_Save();
+			case QMessageBox::Cancel:
+			case QMessageBox::Escape:
+				return;
+			}
 		}
 
 		resetWidgets();
@@ -7806,7 +7818,6 @@ void MainWindow::processVtf(const QString& objectName,
 				QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 				QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
-
 				if( QFile::exists(dir + newFile + ".vtf") ) {
 					MsgBox msgBox(this);
 					msgBox.setWindowTitle("File already exists!");
@@ -7827,6 +7838,8 @@ void MainWindow::processVtf(const QString& objectName,
 						return;
 					}
 				}
+
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
@@ -7864,6 +7877,8 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
 
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
@@ -9486,6 +9501,8 @@ void MainWindow::reconvertTexture()
 	mIniPaths->setValue(relativeFilePath, fileName);
 
 	if (extension != "vtf") {
+		InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
+
 		ConversionThread* conversionThread = new ConversionThread(this);
 		conversionThread->fileName = fileName;
 		conversionThread->objectName = preview;
