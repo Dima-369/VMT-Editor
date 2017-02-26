@@ -104,6 +104,7 @@ void FadeGroupBox::fadeHide( MainWindow* mainWindow ) {
 	faderWidget->start(true);
 
 	connect(faderWidget, SIGNAL(doneFading()), this, SLOT(hide()));
+	connect(faderWidget, SIGNAL(doneFading()), mainWindow, SLOT(refreshRequested()));
 }
 
 void FadeGroupBox::fadeShow( MainWindow* mainWindow ) {

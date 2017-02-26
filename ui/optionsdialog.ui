@@ -799,7 +799,7 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-596</y>
+           <y>-139</y>
            <width>522</width>
            <height>1153</height>
           </rect>
@@ -886,6 +886,9 @@ QSlider::handle:vertical {
             </property>
             <item>
              <widget class="QCheckBox" name="checkBox_removeAlpha">
+              <property name="toolTip">
+               <string>Uses DXT1 instead of DXT5 when there are no alpha channel related parameters in the VMT</string>
+              </property>
               <property name="text">
                <string>Remove alpha channel when not needed in VMT</string>
               </property>
@@ -893,6 +896,9 @@ QSlider::handle:vertical {
             </item>
             <item>
              <widget class="QCheckBox" name="checkBox_removeSuffix">
+              <property name="toolTip">
+               <string>Replaces suffixes with custom ones</string>
+              </property>
               <property name="text">
                <string>Replace Substance suffixes when converting textures (_diffuse, _normal)</string>
               </property>
@@ -900,8 +906,11 @@ QSlider::handle:vertical {
             </item>
             <item>
              <widget class="QCheckBox" name="checkBox_changeName">
+              <property name="toolTip">
+               <string>Renames the converted textures after VMT filename</string>
+              </property>
               <property name="text">
-               <string>Name converted VTFs after VMT name</string>
+               <string>Name converted VTFs after VMT filename</string>
               </property>
              </widget>
             </item>

@@ -18,6 +18,7 @@ void utils::toggle(MainWindow *mainWindow, QAction *action,
 			action->setChecked(true);
 		}
 	}
+	mainWindow->refreshRequested();
 }
 
 void utils::toggle(MainWindow *mainWindow, bool checked, FadeGroupBox *groupBox,
@@ -32,6 +33,7 @@ void utils::toggle(MainWindow *mainWindow, bool checked, FadeGroupBox *groupBox,
 	} else {
 		groupBox->fadeHide(mainWindow);
 	}
+	mainWindow->refreshRequested();
 }
 
 void utils::applyBackgroundColor(const QString &parameter, const QString &value,
