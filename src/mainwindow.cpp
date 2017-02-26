@@ -7876,7 +7876,7 @@ void MainWindow::processVtf(const QString& objectName,
 					conversionThread->objectName = objectName;
 					conversionThread->relativeFilePath = relativeFilePath;
 					conversionThread->newFileName = "";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
 					conversionThread->moveFile = true;
 					conversionThread->newFile = newFile;
 					conversionThread->newFileDir = dir;
@@ -7904,7 +7904,7 @@ void MainWindow::processVtf(const QString& objectName,
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -9543,7 +9543,7 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
@@ -9696,7 +9696,7 @@ QString MainWindow::outputParameters( int type, bool noAlpha )
 		++it;
 	}
 
-	//Info(argumentString);
+	qDebug() << argumentString;
 	return argumentString;
 
 }

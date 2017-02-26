@@ -89,6 +89,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 	ui->comboBox_mipmapFilter->setCurrentIndex(ui->comboBox_mipmapFilter->findText(settings->mipmapFilter, Qt::MatchFixedString));
 	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(ui->comboBox_mipmapSharpenFilter->findText(settings->mipmapSharpenFilter, Qt::MatchFixedString));
 
+	ui->checkBox_noNormalSharpen->setChecked( settings->noNormalSharpen );
+	ui->checkBox_noGlossMip->setChecked( settings->noGlossMip );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -382,7 +384,7 @@ void OptionsDialog::saveSettings()
 		mIniSettings->setValue( "mipmapFilter", ui->comboBox_mipmapFilter->currentText() );
 	}
 	if (ui->comboBox_mipmapSharpenFilter->currentText() != mSettings->mipmapSharpenFilter ) {
-		mSettings->mipmapSharpenFilter = ui->comboBox_mipmapFilter->currentText();
+		mSettings->mipmapSharpenFilter = ui->comboBox_mipmapSharpenFilter->currentText();
 		mIniSettings->setValue( "mipmapSharpenFilter", ui->comboBox_mipmapSharpenFilter->currentText() );
 	}
 
