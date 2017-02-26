@@ -14,7 +14,7 @@ void ConversionThread::run()
 	QProcess process;
 	process.start("vtfcmd.exe -file \"" + fileName.replace("/", "\\") + "\" " + outputParameter.replace("/", "\\") + " -resize -version 7.4");
 
-	process.waitForFinished();
+	process.waitForFinished(120000);
 
 	output = process.readAllStandardOutput().simplified();
 

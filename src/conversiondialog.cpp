@@ -529,7 +529,7 @@ void ConversionDialog::convertRequested()
 
 		QProcess process;
 			process.start(processString);
-			process.waitForFinished();
+			process.waitForFinished(120000);
 
 		QString output = process.readAllStandardOutput().simplified();
 

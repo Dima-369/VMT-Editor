@@ -9197,9 +9197,9 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 		}
 
 		QString fileNameConvert = it.key()->toolTip();
-		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + it.value());
+		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + fileName);
 
-		mIniPaths->setValue(relativeFilePath, fileNameConvert );
+		mIniPaths->setValue (relativeFilePath, fileNameConvert);
 
 		it.key()->setEnabled(true);
 		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + fileName );
