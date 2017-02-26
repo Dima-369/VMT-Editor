@@ -4823,9 +4823,9 @@ void MainWindow::action_Save() {
 
 		dir = directory + '/';
 
-		processTexturesToCopy(dir);
-
 		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), directory + "/" + fileName );
+
+		processTexturesToCopy(dir);
 
 		mChildWidgetChanged = false;
 
@@ -4922,11 +4922,11 @@ QString MainWindow::action_saveAs() {
 		else
 			refreshRequested();
 
-		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
-
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), fileName );
+
+		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
 
 		mChildWidgetChanged = false;
 
@@ -7031,6 +7031,7 @@ void MainWindow::readSettings()
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
+	mSettings->changeName = setKey("changeName", false, mIniSettings);
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -7064,6 +7065,11 @@ void MainWindow::readSettings()
 	// Note that if you just pass "" for the def, because then the boolean
 	// overloaded method is used for some random reason
 	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
+
+	mSettings->diffuseSuffix = setKey("diffuseSuffix", QString("_d"), mIniSettings);
+	mSettings->bumpSuffix = setKey("bumpSuffix", QString("_n"), mIniSettings);
+	mSettings->specSuffix = setKey("specSuffix", QString("_s"), mIniSettings);
+	mSettings->glossSuffix = setKey("glossSuffix", QString("_g"), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 	defaultShaderFile.open(QFile::ReadOnly | QFile::Text);
@@ -7742,8 +7748,10 @@ void MainWindow::processVtf(const QString& objectName,
 
 			// Image files, fileType != ".vtf"
 			bool noAlpha = true;
+			int type = 0;
 
 			if( lineEdit == ui->lineEdit_diffuse ) {
+				type = 1;
 				if (ui->checkBox_basealpha->isChecked() ||
 					ui->groupBox_selfIllumination->isVisible() ||
 					ui->checkBox_alphaTest->isChecked() ||
@@ -7754,6 +7762,7 @@ void MainWindow::processVtf(const QString& objectName,
 					noAlpha = false;
 			}
 			else if( lineEdit == ui->lineEdit_bumpmap ) {
+				type = 2;
 				if (ui->checkBox_normalalpha->isChecked() ||
 					ui->groupBox_phong->isVisible() ||
 					ui->checkBox_phongNormalAlpha->isChecked() )
@@ -7782,11 +7791,15 @@ void MainWindow::processVtf(const QString& objectName,
 				noAlpha = false;
 			}
 			else if( lineEdit == ui->lineEdit_specmap ) {
+				type = 3;
 				if (ui->checkBox_envmapAlpha->isChecked() )
 					noAlpha = false;
 			}
 			else if( lineEdit == ui->lineEdit_decal )
 				noAlpha = false;
+
+			else if( lineEdit == ui->lineEdit_exponentTexture )
+				type = 4;
 
 			if( texturesToCopy.contains(lineEdit) ) {
 
@@ -7814,7 +7827,7 @@ void MainWindow::processVtf(const QString& objectName,
 
 			if(mVMTLoaded) {
 
-				QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
+				QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0), type);
 				QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 				QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
@@ -7839,7 +7852,7 @@ void MainWindow::processVtf(const QString& objectName,
 					}
 				}
 
-				InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
@@ -7867,7 +7880,7 @@ void MainWindow::processVtf(const QString& objectName,
 			} else {
 
 				QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
-				outputFile = removeSuffix(outputFile.left( outputFile.indexOf('.') ));
+				outputFile = outputFile.left( outputFile.indexOf('.') );
 
 				texturesToCopy.insert(lineEdit, outputFile);
 
@@ -7878,7 +7891,7 @@ void MainWindow::processVtf(const QString& objectName,
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-				InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
 
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
@@ -9130,7 +9143,19 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 	QMap<QLineEdit*, QString>::iterator it = texturesToCopy.begin();
 	while( it != texturesToCopy.end() ) {
 
-		if( QFile::exists(dir + it.value() + ".vtf") ) {
+		int type = 0;
+		if( it.key() == ui->lineEdit_diffuse )
+			type = 1;
+		else if( it.key() == ui->lineEdit_bumpmap )
+			type = 2;
+		else if( it.key() == ui->lineEdit_specmap )
+			type = 3;
+		else if( it.key() == ui->lineEdit_exponentTexture )
+			type = 4;
+
+		QString fileName = removeSuffix(it.value(), type);
+
+		if( QFile::exists(dir + fileName + ".vtf") ) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("File already exists!");
@@ -9139,7 +9164,7 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 				msgBox.setDefaultButton( overwriteButton );
 				msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
-			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + it.value() +
+			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + fileName +
 							".vtf already exists. Do you want to overwrite it?"  );
 
 			if( msgBox.exec() == QMessageBox::Cancel ) {
@@ -9148,30 +9173,30 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 				continue;
 			}
 
-			if( !QFile::remove( dir + it.value() + ".vtf" ) ) {
+			if( !QFile::remove( dir + fileName + ".vtf" ) ) {
 
-				Error( "Error removing \"" + dir + it.value() + ".vtf\"" )
+				Error( "Error removing \"" + dir + fileName + ".vtf\"" )
 				++it;
 				continue;
 			}
 		}
 
 		if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + it.value() + ".vtf",
-					   dir + it.value() + ".vtf" ) ) {
+					   dir + fileName + ".vtf" ) ) {
 
-			Error( "Error moving file from \"" + QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + it.value() + ".vtf\" to " +
-				dir + it.value() + ".vtf")
+			Error( "Error moving file from \"" + QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + fileName + ".vtf\" to " +
+				dir + fileName + ".vtf")
 			++it;
 			continue;
 		}
 
-		QString fileName = it.key()->toolTip();
+		QString fileNameConvert = it.key()->toolTip();
 		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + it.value());
 
-		mIniPaths->setValue(relativeFilePath, fileName);
+		mIniPaths->setValue(relativeFilePath, fileNameConvert );
 
 		it.key()->setEnabled(true);
-		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + it.value() );
+		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + fileName );
 
 		it = texturesToCopy.erase(it);
 	}
@@ -9501,7 +9526,7 @@ void MainWindow::reconvertTexture()
 	mIniPaths->setValue(relativeFilePath, fileName);
 
 	if (extension != "vtf") {
-		InfoReconvert("Converting \"" + fileName.replace("\\", "/") + "\"...");
+		InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
 
 		ConversionThread* conversionThread = new ConversionThread(this);
 		conversionThread->fileName = fileName;
@@ -9548,24 +9573,46 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 	}
 }
 
-QString MainWindow::removeSuffix( const QString fileName)
+QString MainWindow::removeSuffix( const QString fileName, int type)
 {
 	QString newName = fileName;
-	if(mSettings->removeSuffix) {
+	QString vmtName = vmtParser->lastVMTFile().fileName;
+	vmtName.chop(4);
+
+	if (mSettings->removeSuffix) {
 
 		if( fileName.endsWith("_diffuse") ){
 			newName.chop(8);
+			newName = newName + mSettings->diffuseSuffix;
 
 		} else if(fileName.endsWith("_normal") ) {
 			newName.chop(7);
-			newName = newName + "n";
+			newName = newName + mSettings->bumpSuffix;
 
 		} else if(fileName.endsWith("_specular") ) {
 			newName.chop(9);
-			newName = newName + "s";
+			newName = newName + mSettings->specSuffix;
+
+		} else if(fileName.endsWith("_glossiness") ) {
+			newName.chop(11);
+			newName = newName + mSettings->glossSuffix;
 		}
 	}
 
+	if (mSettings->changeName) {
+		if (type == 1) {
+			newName = vmtName + mSettings->diffuseSuffix;
+		}
+		if (type == 2) {
+			newName = vmtName + mSettings->bumpSuffix;
+		}
+		if (type == 3) {
+			newName = vmtName + mSettings->specSuffix;
+		}
+		if (type == 4) {
+			newName = vmtName + mSettings->glossSuffix;
+		}
+	}
 	return newName;
 
 }

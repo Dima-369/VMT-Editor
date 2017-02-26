@@ -281,7 +281,7 @@ private:
 
 	bool transformsModified( uint index );
 
-	QString removeSuffix( const QString fileName);
+	QString removeSuffix( const QString fileName, int type = 0);
 
 	//----------------------------------------------------------------------------------------//
 

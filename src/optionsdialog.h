@@ -32,7 +32,8 @@ struct Settings
 		_UseQuotesForTexture,
 		_CustomShaders,
 		//----------------------------------------------------------------------------------------//
-		_CacheSize
+		_CacheSize,
+		_ChangeName
 	};
 
 
@@ -53,6 +54,11 @@ struct Settings
 
 	QString lastGame;
 
+	QString diffuseSuffix;
+	QString bumpSuffix;
+	QString specSuffix;
+	QString glossSuffix;
+
 	bool fullPathFilenameInWindowTitle;
 
 	bool showShaderNameInWindowTitle;
@@ -68,6 +74,8 @@ struct Settings
 	bool autoSave;
 
 	bool checkForUpdates;
+
+	bool changeName;
 
 	RecentFileListStyle recentFileListStyle;
 

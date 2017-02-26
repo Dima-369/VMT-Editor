@@ -19,9 +19,7 @@ void ConversionThread::run()
 	output = process.readAllStandardOutput().simplified();
 
 	if (output.endsWith("1/1 files completed.")) {
-		InfoReconvert("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
-
-
+		InfoReconvertLight("Successfully converted \"" + fileName.replace("\\", "/").section("/", -1) + "\"")
 
 		if (newFileName != "") {
 			QDir moveDir( QDir::currentPath() + "/Cache/Move/" );
