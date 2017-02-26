@@ -86,6 +86,9 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 	ui->lineEdit_specSuffix->setText( settings->specSuffix );
 	ui->lineEdit_glossSuffix->setText( settings->glossSuffix );
 
+	ui->comboBox_mipmapFilter->setCurrentIndex(ui->comboBox_mipmapFilter->findText(settings->mipmapFilter, Qt::MatchFixedString));
+	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(ui->comboBox_mipmapSharpenFilter->findText(settings->mipmapSharpenFilter, Qt::MatchFixedString));
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -373,24 +376,49 @@ void OptionsDialog::saveSettings()
 		mIniSettings->setValue( "glossSuffix", ui->lineEdit_glossSuffix->text() );
 	}
 
-	if( ui->checkBox_changeName->isChecked() )
-	{
-		if( !mSettings->changeName )
-		{
+
+	if (ui->comboBox_mipmapFilter->currentText() != mSettings->mipmapFilter ) {
+		mSettings->mipmapFilter = ui->comboBox_mipmapFilter->currentText();
+		mIniSettings->setValue( "mipmapFilter", ui->comboBox_mipmapFilter->currentText() );
+	}
+	if (ui->comboBox_mipmapSharpenFilter->currentText() != mSettings->mipmapSharpenFilter ) {
+		mSettings->mipmapSharpenFilter = ui->comboBox_mipmapFilter->currentText();
+		mIniSettings->setValue( "mipmapSharpenFilter", ui->comboBox_mipmapSharpenFilter->currentText() );
+	}
+
+	if( ui->checkBox_changeName->isChecked() ) {
+		if( !mSettings->changeName ) {
 			mSettings->changeName = true;
 			mIniSettings->setValue( "changeName", "1" );
-
-			emit optionChanged( Settings::_ChangeName, "1" );
 		}
-	}
-	else
-	{
-		if(mSettings->changeName)
-		{
+	} else {
+		if(mSettings->changeName) {
 			mSettings->changeName = false;
 			mIniSettings->setValue( "changeName", "0" );
+		}
+	}
 
-			emit optionChanged( Settings::_ChangeName, "0" );
+	if( ui->checkBox_noNormalSharpen->isChecked() ) {
+		if( !mSettings->noNormalSharpen ) {
+			mSettings->noNormalSharpen = true;
+			mIniSettings->setValue( "noNormalSharpen", "1" );
+		}
+	} else {
+		if(mSettings->noNormalSharpen) {
+			mSettings->noNormalSharpen = false;
+			mIniSettings->setValue( "noNormalSharpen", "0" );
+		}
+	}
+
+	if( ui->checkBox_noGlossMip->isChecked() ) {
+		if( !mSettings->noGlossMip ) {
+			mSettings->noGlossMip = true;
+			mIniSettings->setValue( "noGlossMip", "1" );
+		}
+	} else {
+		if(mSettings->noGlossMip) {
+			mSettings->noGlossMip = false;
+			mIniSettings->setValue( "noGlossMip", "0" );
 		}
 	}
 

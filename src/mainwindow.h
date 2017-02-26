@@ -283,6 +283,8 @@ private:
 
 	QString removeSuffix( const QString fileName, int type = 0);
 
+	QString outputParameters( int type, bool noAlpha );
+
 	//----------------------------------------------------------------------------------------//
 
 	void addGLWidget( const QString& textureOverlay, QVBoxLayout* layout, const QString& widgetObjectName );

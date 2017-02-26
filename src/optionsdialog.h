@@ -77,6 +77,13 @@ struct Settings
 
 	bool changeName;
 
+	bool noNormalSharpen;
+
+	bool noGlossMip;
+
+	QString mipmapFilter;
+	QString mipmapSharpenFilter;
+
 	RecentFileListStyle recentFileListStyle;
 
 	RecentFileEntryStyle recentFileEntryStyle;

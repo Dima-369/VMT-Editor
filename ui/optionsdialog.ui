@@ -799,98 +799,137 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-296</y>
+           <y>-230</y>
            <width>522</width>
            <height>1098</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
+          <item row="15" column="0">
+           <layout class="QGridLayout" name="gridLayout_7">
+            <property name="leftMargin">
+             <number>12</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-font-size: 14pt;
-}</string>
+            <property name="topMargin">
+             <number>4</number>
             </property>
-            <property name="text">
-             <string>General</string>
-            </property>
-           </widget>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Cache Size:</string>
+              </property>
+              <property name="indent">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="spinBox_cacheSize">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="suffix">
+               <string> MB</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>16384</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_15">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0" colspan="3">
+             <widget class="QCheckBox" name="checkBox_clearCacheAfterExit">
+              <property name="text">
+               <string>Delete entire cache after application exit</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="label_12">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
+          <item row="5" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>12</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-font-size: 14pt;
-padding-top: 5px;
-}</string>
+            <property name="topMargin">
+             <number>4</number>
             </property>
-            <property name="text">
-             <string>VMT</string>
+            <property name="bottomMargin">
+             <number>4</number>
             </property>
-           </widget>
+            <item>
+             <widget class="QCheckBox" name="checkBox_removeAlpha">
+              <property name="text">
+               <string>Remove alpha channel when not needed in VMT</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_removeSuffix">
+              <property name="text">
+               <string>Replace Substance suffixes when converting textures (_diffuse, _normal)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_changeName">
+              <property name="text">
+               <string>Name converted VTFs after VMT name</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="14" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
+          <item row="8" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>12</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-font-size: 14pt;
-padding-top: 5px;
-}</string>
+            <property name="topMargin">
+             <number>4</number>
             </property>
-            <property name="text">
-             <string>Cache</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>14</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-font-size: 14pt;
-padding-top: 5px;
-}</string>
-            </property>
-            <property name="text">
-             <string>Texture Conversion</string>
-            </property>
-           </widget>
+            <item>
+             <widget class="QCheckBox" name="checkBox_noNormalSharpen">
+              <property name="text">
+               <string>No mipmap sharpen filter on normal</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_noGlossMip">
+              <property name="text">
+               <string>No mipmaps on glossiness</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item row="1" column="0">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -989,6 +1028,352 @@ padding-top: 5px;
             </item>
            </layout>
           </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 5px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Texture Conversion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 5px;
+}</string>
+            </property>
+            <property name="text">
+             <string>VMT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>14</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>14</number>
+            </property>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_11">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Sharpen filter:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Mipmap filter:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBox_mipmapFilter">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>Box</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Point</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Triangle</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Quadratic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Cubic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Catrom</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Mitchell</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Gaussian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sinc</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Bessel</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hanning</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hamming</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Blackman</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Kaiser</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QComboBox" name="comboBox_mipmapSharpenFilter">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1677215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>Sharpen Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sharpen Medium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sharpen Strong</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Negative</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lighter</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Darker</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>More Contrast</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Less Contrast</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Smoothen</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Find Edges</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Contour</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Detect Edges</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Detect Eges - Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Emboss</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Mean Removal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Unsharp</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XSharpen</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Warpsharp</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="14" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 5px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Cache</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+}</string>
+            </property>
+            <property name="text">
+             <string>General</string>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="0">
            <widget class="QGroupBox" name="groupBox_recentFileList">
             <property name="title">
@@ -1009,6 +1394,62 @@ padding-top: 5px;
               <widget class="QRadioButton" name="radioButton_recentFileListInSubmenu">
                <property name="text">
                 <string>Display recent file list in submenu under the file menu</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QGroupBox" name="groupBox_parameter">
+            <property name="title">
+             <string>Formatting</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="1" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBox_showShaderNameInTab">
+               <property name="text">
+                <string>Show shader name in parameter tab text</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBox_useQuotesForTexture">
+               <property name="text">
+                <string>I like quotes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_useIndentation">
+               <property name="text">
+                <string>Use indentation in the VMT</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QGroupBox" name="groupBox_parameterGrouping">
+            <property name="title">
+             <string>Parameter Grouping</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButton_groupedParameters">
+               <property name="text">
+                <string>Parameters in the VMT are grouped</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="radioButton_alphabeticallySorted">
+               <property name="text">
+                <string>Parameters in the VMT are alphabetically sorted</string>
                </property>
               </widget>
              </item>
@@ -1040,40 +1481,6 @@ padding-top: 5px;
              </item>
             </layout>
            </widget>
-          </item>
-          <item row="5" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <property name="leftMargin">
-             <number>12</number>
-            </property>
-            <property name="topMargin">
-             <number>4</number>
-            </property>
-            <property name="bottomMargin">
-             <number>4</number>
-            </property>
-            <item>
-             <widget class="QCheckBox" name="checkBox_removeAlpha">
-              <property name="text">
-               <string>Remove alpha channel when not needed in VMT</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="checkBox_removeSuffix">
-              <property name="text">
-               <string>Replace Substance suffixes when converting textures (_diffuse, _normal)</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="checkBox_changeName">
-              <property name="text">
-               <string>Name converted VTFs after VMT name</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </item>
           <item row="6" column="0">
            <widget class="QGroupBox" name="groupBox_2">
@@ -1191,69 +1598,6 @@ padding-top: 5px;
             </layout>
            </widget>
           </item>
-          <item row="7" column="0">
-           <layout class="QGridLayout" name="gridLayout_4">
-            <property name="leftMargin">
-             <number>14</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>14</number>
-            </property>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_11">
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Sharpen filter:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Mipmap filter:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="comboBox"/>
-            </item>
-            <item row="0" column="3">
-             <widget class="QComboBox" name="comboBox_2"/>
-            </item>
-           </layout>
-          </item>
           <item row="12" column="0">
            <widget class="QGroupBox" name="groupBox_fileAssociation">
             <property name="title">
@@ -1350,154 +1694,6 @@ padding-top: 5px;
              </item>
             </layout>
            </widget>
-          </item>
-          <item row="11" column="0">
-           <widget class="QGroupBox" name="groupBox_parameterGrouping">
-            <property name="title">
-             <string>Parameter Grouping</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_15">
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="radioButton_groupedParameters">
-               <property name="text">
-                <string>Parameters in the VMT are grouped</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QRadioButton" name="radioButton_alphabeticallySorted">
-               <property name="text">
-                <string>Parameters in the VMT are alphabetically sorted</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="8" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <property name="leftMargin">
-             <number>12</number>
-            </property>
-            <property name="topMargin">
-             <number>4</number>
-            </property>
-            <item>
-             <widget class="QCheckBox" name="checkBox_removeAlpha_3">
-              <property name="text">
-               <string>No mipmap sharpen filter on normal</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="checkBox_removeAlpha_4">
-              <property name="text">
-               <string>No mipmaps on glossiness</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="10" column="0">
-           <widget class="QGroupBox" name="groupBox_parameter">
-            <property name="title">
-             <string>Formatting</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_12">
-             <item row="1" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBox_showShaderNameInTab">
-               <property name="text">
-                <string>Show shader name in parameter tab text</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBox_useQuotesForTexture">
-               <property name="text">
-                <string>I like quotes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBox_useIndentation">
-               <property name="text">
-                <string>Use indentation in the VMT</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="15" column="0">
-           <layout class="QGridLayout" name="gridLayout_7">
-            <property name="leftMargin">
-             <number>12</number>
-            </property>
-            <property name="topMargin">
-             <number>4</number>
-            </property>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Cache Size:</string>
-              </property>
-              <property name="indent">
-               <number>20</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="spinBox_cacheSize">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="suffix">
-               <string> MB</string>
-              </property>
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>16384</number>
-              </property>
-              <property name="value">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_15">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="0" colspan="3">
-             <widget class="QCheckBox" name="checkBox_clearCacheAfterExit">
-              <property name="text">
-               <string>Delete entire cache after application exit</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </item>
           <item row="13" column="0">
            <widget class="QGroupBox" name="groupBox_shaderGroups">

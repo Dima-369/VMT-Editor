@@ -4932,6 +4932,8 @@ QString MainWindow::action_saveAs() {
 
 		mVMTLoaded = true;
 
+		action_Save();
+
 	} else {
 
 		// Preventing a quit
@@ -7025,13 +7027,19 @@ void MainWindow::readSettings()
 		setKey("fullPathFilenameInWindowTitle", false, mIniSettings);
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
+
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
+
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
 	mSettings->changeName = setKey("changeName", false, mIniSettings);
+
+	mSettings->noNormalSharpen = setKey("noNormalSharpen", false, mIniSettings);
+	mSettings->noGlossMip = setKey("noGlossMip", false, mIniSettings);
+
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -7070,6 +7078,9 @@ void MainWindow::readSettings()
 	mSettings->bumpSuffix = setKey("bumpSuffix", QString("_n"), mIniSettings);
 	mSettings->specSuffix = setKey("specSuffix", QString("_s"), mIniSettings);
 	mSettings->glossSuffix = setKey("glossSuffix", QString("_g"), mIniSettings);
+
+	mSettings->mipmapFilter = setKey("mipmapFilter", QString("Box"), mIniSettings);
+	mSettings->mipmapSharpenFilter = setKey("mipmapSharpenFilter", QString("Sharpen Soft"), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 	defaultShaderFile.open(QFile::ReadOnly | QFile::Text);
@@ -7484,6 +7495,8 @@ void MainWindow::changeShader()
 		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
 	} else if (objectName == "toolButton_VertexLit") {
 		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+	} else if (objectName == "toolButton_Unlit") {
+	index = ui->comboBox_shader->findText("UnlitGeneric", Qt::MatchFixedString);
 	}
 
 	int currentIndex = ui->comboBox_shader->currentIndex();
@@ -7617,7 +7630,9 @@ void MainWindow::processVtf(const QString& objectName,
 
 		if( fileType.toLower() != ".vtf" ) {
 
-			bool convert = true;
+			//Who keeps image files inside materials dir?
+			Info("Only textures outside materials dir can be converted");
+			/*bool convert = true;
 
 			QString vtfFileName = fileName;
 
@@ -7651,7 +7666,7 @@ void MainWindow::processVtf(const QString& objectName,
 				}
 
 				conversionThread->start();
-			}
+			}*/
 		}
 
 		goto updateLineEdit;
@@ -7811,19 +7826,15 @@ void MainWindow::processVtf(const QString& objectName,
 				texturesToCopy.remove(lineEdit);
 			}
 
-			bool isNormal = false;
-			QString mipmapFilter = "";
-
 			if ( lineEdit == ui->lineEdit_bumpmap ||
 				 lineEdit == ui->lineEdit_bumpmap2 ||
 				 lineEdit == ui->lineEdit_bump2 ||
 				 lineEdit == ui->lineEdit_refractNormalMap ||
 				 lineEdit == ui->lineEdit_refractNormalMap2 ||
 				 lineEdit == ui->lineEdit_waterNormalMap )
-				isNormal = true;
+				type = 2;
 
-			if (!isNormal)
-				mipmapFilter = "-msharpen SHARPENSOFT";
+			QString mipmapFilter = outputParameters(type, noAlpha);
 
 			if(mVMTLoaded) {
 
@@ -7865,10 +7876,7 @@ void MainWindow::processVtf(const QString& objectName,
 					conversionThread->objectName = objectName;
 					conversionThread->relativeFilePath = relativeFilePath;
 					conversionThread->newFileName = "";
-					if(noAlpha && mSettings->removeAlpha)
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-					else
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
 					conversionThread->moveFile = true;
 					conversionThread->newFile = newFile;
 					conversionThread->newFileDir = dir;
@@ -7896,10 +7904,7 @@ void MainWindow::processVtf(const QString& objectName,
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					if(noAlpha && mSettings->removeAlpha)
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-					else
-						conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -7932,6 +7937,7 @@ void MainWindow::processVtf(const QString& objectName,
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileName);
 	lineEdit->setText(relativeFilePath);
+	createReconvertAction(lineEdit, relativeFilePath);
 
 	previewTexture( objectName, relativeFilePath, true, false, false, false );
 }
@@ -9431,11 +9437,11 @@ void MainWindow::reconvertTexture()
 	const auto tooltip = lineEdit->toolTip();
 
 	bool noAlpha = true;
-	bool isNormal = false;
+	int type = 0;
 	QString preview;
-	QString mipmapFilter = "";
 
 	if( objectName == "lineEdit_diffuse" ) {
+		type = 1;
 		preview = "preview_basetexture1";
 		if (ui->checkBox_basealpha->isChecked() ||
 			ui->groupBox_selfIllumination->isVisible() ||
@@ -9489,11 +9495,15 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_specmap" ) {
+		type = 3;
 		if (ui->checkBox_envmapAlpha->isChecked() )
 			noAlpha = false;
 	}
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
+
+	if( objectName == "lineEdit_exponentTexture" )
+		type = 4;
 
 	if ( objectName == "lineEdit_bumpmap" ||
 		 objectName == "lineEdit_bumpmap2" ||
@@ -9501,16 +9511,16 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_refractNormalMap" ||
 		 objectName == "lineEdit_refractNormalMap2" ||
 		 objectName == "lineEdit_waterNormalMap" )
-		isNormal = true;
+		type = 2;
 
-	if (!isNormal)
-		mipmapFilter = "-msharpen SHARPENSOFT";
+	QString mipmapFilter = outputParameters(type, noAlpha);
 
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
+	QString lineEditText = lineEdit->text();
+	QString newFile = lineEditText.section("/", -1).section(".", 0, 0);
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
@@ -9533,10 +9543,7 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		if (noAlpha && mSettings->removeAlpha)
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-		else
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + mipmapFilter;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
@@ -9614,6 +9621,83 @@ QString MainWindow::removeSuffix( const QString fileName, int type)
 		}
 	}
 	return newName;
+
+}
+
+QString MainWindow::outputParameters( int type, bool noAlpha )
+{
+	QMultiMap<QString, QString> arguments;
+
+	QString tmp;
+	if (noAlpha && mSettings->removeAlpha)
+		arguments.insert("-alphaformat", "DXT1");
+	else
+		arguments.insert("-alphaformat", "DXT5");
+
+	tmp = mSettings->mipmapFilter;
+	if(tmp != "Box") {
+		if(tmp == "Point") arguments.insert("-mfilter", "POINT");
+		else if(tmp == "Triangle") arguments.insert("-mfilter", "TRIANGLE");
+		else if(tmp == "Quadratic") arguments.insert("-mfilter", "QUADRATIC");
+		else if(tmp == "Cubic") arguments.insert("-mfilter", "CUBIC");
+		else if(tmp == "Catrom") arguments.insert("-mfilter", "CATROM");
+		else if(tmp == "Mitchell") arguments.insert("-mfilter", "MITCHELL");
+		else if(tmp == "Gaussian") arguments.insert("-mfilter", "GAUSSIAN");
+		else if(tmp == "Sinc") arguments.insert("-mfilter", "SINC");
+		else if(tmp == "Bessel") arguments.insert("-mfilter", "BESSEL");
+		else if(tmp == "Hanning") arguments.insert("-mfilter", "HANNING");
+		else if(tmp == "Hamming") arguments.insert("-mfilter", "HAMMING");
+		else if(tmp == "Blackman") arguments.insert("-mfilter", "BLACKMAN");
+		else if(tmp == "Kaiser") arguments.insert("-mfilter", "KAISER");
+	}
+
+	tmp = mSettings->mipmapSharpenFilter;
+	if (!(type == 2 && mSettings->noNormalSharpen)) {
+		if(tmp != "None") {
+			if(tmp == "Negative") arguments.insert("-msharpen", "NEGATIVE");
+			else if(tmp == "Lighter") arguments.insert("-msharpen", "LIGHTER");
+			else if(tmp == "Darker") arguments.insert("-msharpen", "DARKER");
+			else if(tmp == "More Contrast") arguments.insert("-msharpen", "CONTRASTMORE");
+			else if(tmp == "Less Contrast") arguments.insert("-msharpen", "CONTRASTLESS");
+			else if(tmp == "Smoothen") arguments.insert("-msharpen", "SMOOTHEN");
+			else if(tmp == "Soft") arguments.insert("-msharpen", "GAUSSIAN");
+			else if(tmp == "Sharpen Soft") arguments.insert("-msharpen", "SHARPENSOFT");
+			else if(tmp == "Sharpen Medium") arguments.insert("-msharpen", "SHARPENMEDIUM");
+			else if(tmp == "Sharpen Strong") arguments.insert("-msharpen", "SHARPENSTRONG");
+			else if(tmp == "Find Edges") arguments.insert("-msharpen", "FINDEDGES");
+			else if(tmp == "Contour") arguments.insert("-msharpen", "CONTOUR");
+			else if(tmp == "Detect Edges") arguments.insert("-msharpen", "EDGEDETECT");
+			else if(tmp == "Detect Edges - Soft") arguments.insert("-msharpen", "EDGEDETECTSOFT");
+			else if(tmp == "Emboss") arguments.insert("-msharpen", "EMBOSS");
+			else if(tmp == "Mean Removal") arguments.insert("-msharpen", "MEANREMOVAL");
+			else if(tmp == "Unsharp") arguments.insert("-msharpen", "UNSHARP");
+			else if(tmp == "XSharpen") arguments.insert("-msharpen", "XSHARPEN");
+			else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
+		}
+	}
+	if (type == 4 && mSettings->noGlossMip)
+		arguments.insert("-nomipmaps", "");
+
+	QMap<QString, QString>::iterator it = arguments.begin();
+
+	QString argumentString("");
+
+	while(it != arguments.end()) {
+
+		if(it.value() == "") {
+
+			argumentString.append(" " + it.key());
+
+		} else {
+
+			argumentString.append(" " + it.key() + " " + it.value());
+		}
+
+		++it;
+	}
+
+	//Info(argumentString);
+	return argumentString;
 
 }
 
