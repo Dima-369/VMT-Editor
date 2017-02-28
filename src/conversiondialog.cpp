@@ -30,6 +30,14 @@
 
 		removeSuffix = iniSettings->value("removeSuffix", false).toBool();
 
+		diffuseSuffix = iniSettings->value("diffuseSuffix", false).toString();
+		bumpSuffix =iniSettings->value("bumpSuffix", false).toString();
+		specSuffix =iniSettings->value("specSuffix", false).toString();
+		glossSuffix =iniSettings->value("glossSuffix", false).toString();
+
+		mipmapFilter =iniSettings->value("mipmapFilter", false).toString();
+		mipmapSharpenFilter =iniSettings->value("mipmapSharpenFilter", false).toString();
+
 		switch( iniSettings->value("convertAskMode", 0).toInt() ) {
 
 		case 0:
@@ -52,6 +60,11 @@
 		connect( ui->radioButton_ask, SIGNAL(toggled(bool)), this, SLOT(convertAskModeChanged()));
 		connect( ui->radioButton_overwrite, SIGNAL(toggled(bool)), this, SLOT(convertAskModeChanged()));
 		connect( ui->radioButton_skip, SIGNAL(toggled(bool)), this, SLOT(convertAskModeChanged()));
+
+		int i = ui->comboBox_mipmapFilter->findText(mipmapFilter, Qt::MatchFixedString);
+		ui->comboBox_mipmapFilter->setCurrentIndex(i);
+		i = ui->comboBox_mipmapSharpenFilter->findText(mipmapSharpenFilter, Qt::MatchFixedString);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(i);
 	}
 
 	ConversionDialog::~ConversionDialog() {
@@ -459,16 +472,16 @@
 				test.chop(4);
 				if( test.endsWith("_diffuse") ){
 					test.chop(8);
-					test = test + iniSettings->value("diffuseSuffix", false).toString() + ".vtf";;
+					test = test + diffuseSuffix + ".vtf";;
 				} else if( test.endsWith("_normal") ) {
 					test.chop(7);
-					test = test + iniSettings->value("bumpSuffix", false).toString() + ".vtf";;
+					test = test + bumpSuffix + ".vtf";;
 				} else if( test.endsWith("_specular") ) {
 					test.chop(9);
-					test = test + iniSettings->value("specSuffix", false).toString(); + ".vtf";
+					test = test + specSuffix + ".vtf";
 				} else if( test.endsWith("_glossiness") ) {
 					test.chop(11);
-					test = test + iniSettings->value("glossSuffix", false).toString(); + ".vtf";
+					test = test + glossSuffix + ".vtf";
 				} else {
 					test = test + ".vtf";
 				}
@@ -708,8 +721,11 @@
 		ui->comboBox_vtfVersion->setCurrentIndex(1);
 
 		ui->checkBox_disableMipmaps->setChecked(false);
-		ui->comboBox_mipmapFilter->setCurrentIndex(0);
-		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(0);
+
+		int i = ui->comboBox_mipmapFilter->findText(mipmapFilter, Qt::MatchFixedString);
+		ui->comboBox_mipmapFilter->setCurrentIndex(i);
+		i = ui->comboBox_mipmapSharpenFilter->findText(mipmapSharpenFilter, Qt::MatchFixedString);
+		ui->comboBox_mipmapSharpenFilter->setCurrentIndex(i);
 
 		ui->checkBox_resizeToPowerOfTwo->setChecked(true);
 		ui->comboBox_resizeMethod->setCurrentIndex(0);
