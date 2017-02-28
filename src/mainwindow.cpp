@@ -7277,6 +7277,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_CheckForUpdates:
 			break;
 
+		case Settings::_ChangeName:
+			break;
+
 		case Settings::_CustomShaders:
 			// TODO: Move into own function
 
