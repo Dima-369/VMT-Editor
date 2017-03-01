@@ -66,6 +66,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	mSteamInstalled(false),
 	mOpenConvertDialog(false),
 	mIniSettings(new QSettings("settings.ini", QSettings::IniFormat, this)),
+	mIniPaths(new QSettings("paths.ini", QSettings::IniFormat, this)),
 	mSettings(new Settings),
 	initialFile(fileToOpen),
 	mSteamAppsDir(steamAppsDirectory()),
@@ -262,7 +263,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_envmapLight->setDoubleSlider(ui->horizontalSlider_envmapLight);
 	ui->doubleSpinBox_envmapAniso->setDoubleSlider(ui->horizontalSlider_envmapAniso);
 
-	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 10.0);
+	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 8);
 	ui->doubleSpinBox_fresnelRangesX->setDoubleSlider(ui->horizontalSlider_fresnelRanges);
 
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);
@@ -328,6 +329,55 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_maskTexture->setValidator(windowsFilenameValidator);
 
 	ui->lineEdit_bump2->setValidator(windowsFilenameValidator);
+
+	//--------------------------------------------------------------------//
+
+	connect(ui->lineEdit_diffuse, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse3, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuse4, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bumpmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bumpmap2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_detail, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_lightWarp, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_blendmodulate, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_envmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_specmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_exponentTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_waterNormalMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractNormalMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractNormalMap2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_flowMap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_noiseTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_toolTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_unlitTwoTextureDiffuse, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_unlitTwoTextureDiffuse2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_refractTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_maskTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bump2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -526,6 +576,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	//----------------------------------------------------------------------------------------//
 
 	hideParameterGroupboxes();
+
+	ui->label_bumpmapAlpha->setVisible(false);
+	ui->lineEdit_bumpmapAlpha->setVisible(false);
+	ui->toolButton_bumpmapAlpha->setVisible(false);
 
 	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("LightmappedGeneric"));
 		mIgnoreShaderChanged = false;
@@ -930,6 +984,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			if( !texture.isEmpty() )
 				ui->lineEdit_unlitTwoTextureDiffuse->setText(texture);
+				createReconvertAction(ui->lineEdit_unlitTwoTextureDiffuse, value);
 
 		} else {
 
@@ -937,6 +992,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				ui->lineEdit_diffuse->setText(texture);
 
 			showBaseTexture = true;
+			createReconvertAction(ui->lineEdit_diffuse, value);
 		}
 	}
 
@@ -972,6 +1028,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_unlitTwoTextureDiffuse2->setText(texture);
+			createReconvertAction(ui->lineEdit_unlitTwoTextureDiffuse2, value);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -990,6 +1047,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->lineEdit_diffuse2->setText(texture);
 
 		showBaseTexture2 = true;
+
+		createReconvertAction(ui->lineEdit_diffuse2, value);
 	}
 
 	if( !( value = vmt.parameters.take("$basetexture3") ).isEmpty() ) {
@@ -1001,6 +1060,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse3->setText(texture);
+			createReconvertAction(ui->lineEdit_diffuse3, value);
 	}
 
 	if( !( value = vmt.parameters.take("$basetexture4") ).isEmpty() ) {
@@ -1012,6 +1072,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse4->setText(texture);
+			createReconvertAction(ui->lineEdit_diffuse4, value);
 	}
 
 	if( !( value = vmt.parameters.take("$texture2_uvscale") ).isEmpty() ) {
@@ -1054,6 +1115,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				ui->lineEdit_bumpmap->setText(texture);
 
 			showBaseTexture = true;
+			createReconvertAction(ui->lineEdit_bumpmap, value);
 		}
 	}
 
@@ -1066,9 +1128,11 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if (!texture.isEmpty()) {
 			if (vmt.parameters.contains("$addbumpmaps")) {
 				ui->lineEdit_bump2->setText(texture);
+				createReconvertAction(ui->lineEdit_bump2, value);
 			} else {
 				ui->lineEdit_bumpmap2->setText(texture);
 				showBaseTexture2 = true;
+				createReconvertAction(ui->lineEdit_bumpmap2, value);
 			}
 		}
 	}
@@ -1084,6 +1148,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->lineEdit_blendmodulate, vmt);
 
 		showBaseTexture2 = true;
+		createReconvertAction(ui->lineEdit_blendmodulate, value);
 	}
 
 	if( !( value = vmt.parameters.take("$lightwarptexture") ).isEmpty() )
@@ -1379,6 +1444,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			"$detail", realGameinfoDir);
 
 		ui->lineEdit_detail->setText(texture);
+		createReconvertAction(ui->lineEdit_detail, texture);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1513,6 +1579,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		usingDecal = true;
 		showDecal = true;
+		createReconvertAction(ui->lineEdit_decal, value);
 	}
 
 	if( !( value = vmt.parameters.take("$decalblendmode") ).isEmpty() ) {
@@ -1712,6 +1779,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showShadingReflection = true;
 	}
 
+	if( !( value = vmt.parameters.take("$envmapanisotropy") ).isEmpty() )
+	{
+		if( !usingEnvmap )
+		{
+			Error("$envmapanisotropy is only supported with $envmap!")
+		}
+
+		showShadingReflection = true;
+	}
+
 
 	if( !( value = vmt.parameters.take("$envmaplightscaleminmax") ).isEmpty() )
 	{
@@ -1811,6 +1888,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingSpecmap.isEmpty() )
 		{
 			ui->lineEdit_specmap->setText(usingSpecmap);
+			createReconvertAction(ui->lineEdit_detail, usingSpecmap);
 
 			if(usingEnvmap)
 			{
@@ -1857,6 +1935,16 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
+
+	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
+	{
+		createReconvertAction(ui->lineEdit_exponentTexture, value);
+	}
+
+	if( !( value = vmt.parameters.take("$phongwarptexture") ).isEmpty() )
+	{
+		createReconvertAction(ui->lineEdit_phongWarp, value);
+	}
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4259,6 +4347,10 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_bumpmap->setEnabled(true);
 	ui->lineEdit_bumpmap2->setEnabled(true);
 
+	ui->label_bumpmapAlpha->setVisible(false);
+	ui->lineEdit_bumpmapAlpha->setVisible(false);
+	ui->toolButton_bumpmapAlpha->setVisible(false);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->label_exponent->setEnabled(true);
@@ -4273,6 +4365,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_diffuse4);
 	clearLineEditAction(ui->lineEdit_bumpmap);
 	clearLineEditAction(ui->lineEdit_bumpmap2);
+	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
 	clearLineEditAction(ui->lineEdit_bump2);
 	clearLineEditAction(ui->lineEdit_detail);
 	clearLineEditAction(ui->lineEdit_exponentTexture);
@@ -4730,9 +4823,9 @@ void MainWindow::action_Save() {
 
 		dir = directory + '/';
 
-		processTexturesToCopy(dir);
-
 		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), directory + "/" + fileName );
+
+		processTexturesToCopy(dir);
 
 		mChildWidgetChanged = false;
 
@@ -4829,15 +4922,17 @@ QString MainWindow::action_saveAs() {
 		else
 			refreshRequested();
 
-		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
-
 		setCurrentFile( fileName );
 
 		vmtParser->saveVmtFile( ui->vmtPreviewTextEdit->toPlainText(), fileName );
 
+		processTexturesToCopy( fileName.left( fileName.lastIndexOf('/') + 1 ) );
+
 		mChildWidgetChanged = false;
 
 		mVMTLoaded = true;
+
+		action_Save();
 
 	} else {
 
@@ -5588,6 +5683,128 @@ void MainWindow::clearMessageLog() {
 	mLogger->clear();
 }
 
+void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
+
+	if (mimeData->hasUrls())
+	{
+		foreach (const QUrl& url, mimeData->urls())
+		{
+			QString filePath = url.toLocalFile();
+			if (!filePath.isEmpty())
+			{
+				QString fileName = filePath.section("/", -1).section(".", 0, 0);
+				const QString shader = ui->comboBox_shader->currentText();
+
+				if (fileName.endsWith("_normal") ||
+					fileName.endsWith("_n") ||
+					fileName.endsWith("nrm") ) {
+
+					processVtf("preview_bumpmap1", filePath, ui->lineEdit_bumpmap);
+
+				} else if (fileName.endsWith("_specular") ||
+						   fileName.endsWith("_s") ||
+						   fileName.endsWith("spec") ) {
+
+					processVtf("", filePath, ui->lineEdit_specmap);
+
+				} else if (shader == "VertexLitGeneric" &&
+							(fileName.endsWith("_glossiness") ||
+							 fileName.endsWith("_g") ||
+							 fileName.endsWith("gloss")) ) {
+
+					processVtf("", filePath, ui->lineEdit_exponentTexture);
+
+				} else {
+
+					processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
+				}
+
+				//Info("got image " + fileName);
+			}
+		}
+	}
+}
+
+void MainWindow::handleTextureDrop(const QString& filePath)
+{
+	const auto name = qobject_cast<QWidget *>(sender())->objectName();
+	//Info(name + " got " + filePath);
+	
+	// TODO: Only handle when a game is selected?
+
+	if (name == "lineEdit_diffuse")
+		processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
+
+	else if (name == "lineEdit_bumpmap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_bumpmap );
+
+	else if (name == "lineEdit_diffuse2" )
+		processVtf( "preview_basetexture2", filePath, ui->lineEdit_diffuse2 );
+
+	else if (name == "lineEdit_bumpmap2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bumpmap2 );
+
+	else if (name == "lineEdit_diffuse3" )
+		processVtf( "preview_basetexture3", filePath, ui->lineEdit_diffuse3 );
+
+	else if (name == "lineEdit_diffuse4" )
+		processVtf( "preview_basetexture4", filePath, ui->lineEdit_diffuse4 );
+
+	else if (name == "lineEdit_detail" )
+		processVtf( "preview_detail", filePath, ui->lineEdit_detail );
+
+	else if (name == "lineEdit_refractNormalMap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_refractNormalMap );
+	else if (name == "lineEdit_refractNormalMap2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_refractNormalMap2 );
+	else if (name == "lineEdit_refractTexture" )
+		processVtf( "", filePath, ui->lineEdit_refractTexture );
+
+	else if (name == "lineEdit_waterNormalMap" )
+		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_waterNormalMap );
+
+	else if (name == "lineEdit_unlitTwoTextureDiffuse" )
+		processVtf( "preview_basetexture1", filePath, ui->lineEdit_unlitTwoTextureDiffuse );
+	else if (name == "lineEdit_unlitTwoTextureDiffuse2" )
+		processVtf( "preview_basetexture2", filePath, ui->lineEdit_unlitTwoTextureDiffuse2 );
+
+	else if (name == "lineEdit_blendmodulate" )
+		processVtf( "", filePath, ui->lineEdit_blendmodulate );
+	else if (name == "lineEdit_lightWarp" )
+		processVtf( "", filePath, ui->lineEdit_lightWarp );
+
+	else if (name == "lineEdit_envmap" )
+		processVtf( "", filePath, ui->lineEdit_envmap );
+	else if (name == "lineEdit_specmap" )
+		processVtf( "", filePath, ui->lineEdit_specmap );
+
+	else if (name == "lineEdit_exponentTexture" )
+		processVtf( "", filePath, ui->lineEdit_exponentTexture );
+
+	else if (name == "lineEdit_maskTexture" )
+		processVtf( "", filePath, ui->lineEdit_maskTexture );
+
+	else if (name == "lineEdit_flowMap" )
+		processVtf( "", filePath, ui->lineEdit_flowMap );
+	else if (name == "lineEdit_noiseTexture" )
+		processVtf( "", filePath, ui->lineEdit_noiseTexture );
+
+	else if (name == "lineEdit_toolTexture" )
+		processVtf( "", filePath, ui->lineEdit_toolTexture );
+
+	else if (name == "lineEdit_bump2" )
+		processVtf( "preview_bumpmap2", filePath, ui->lineEdit_bump2 );
+
+	else if (name == "lineEdit_waterReflectTexture" )
+		processVtf( "", filePath, ui->lineEdit_waterReflectTexture );
+
+	else if (name == "lineEdit_decal" )
+		processVtf( "", filePath, ui->lineEdit_decal );
+
+	else if (name == "lineEdit_phongWarp" )
+		processVtf( "", filePath, ui->lineEdit_phongWarp );
+}
+
 void MainWindow::finishedLoading()
 {
 	TextureThread* thread = reinterpret_cast<TextureThread*>(sender());
@@ -5891,8 +6108,17 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 }
 
 void MainWindow::previewTexture(const QString& object)
-{
-	const QString cacheFile = QString("Cache/%1.png").arg(object);
+{	
+	QString cacheFile = "";
+	const QString cacheFilePng = QString("Cache/%1.png").arg(object);
+	const QString cacheFileTga = QString("Cache/%1.tga").arg(object);
+	QFile png(cacheFilePng);
+	QFile tga(cacheFileTga);
+
+	if (png.exists())
+		cacheFile = cacheFilePng;
+	else if (tga.exists())
+		cacheFile = cacheFileTga;
 
 	if (object == "preview_basetexture1") {
 		glWidget_diffuse1->loadTexture(cacheFile, glWidget_diffuse1->getBumpmap());
@@ -6179,7 +6405,8 @@ void MainWindow::shaderChanged()
 
 			case BaseTexture: ui->groupBox_baseTexture->setVisible(false);ui->action_baseTexture->setChecked(false);break;
 			case NormalBlend:
-				normalblend::resetAction(ui);break;
+				normalblend::resetAction(ui);
+				break;
 			case BaseTexture2: ui->groupBox_baseTexture2->setVisible(false);ui->action_baseTexture2->setChecked(false);break;
 			case Transparency: ui->groupBox_transparency->setVisible(false);ui->action_transparency->setChecked(false);break;
 			case DetailTexture: ui->groupBox_detailTexture->setVisible(false);ui->action_detail->setChecked(false);break;
@@ -6657,26 +6884,34 @@ void MainWindow::dropEvent(QDropEvent* event)
 	// check for our needed mime type, here a file or a list of files
 	if (mimeData->hasUrls())
 	{
-		if( mChildWidgetChanged )
-		{
-			switch( _displaySaveMessage() )
+		QString str = mimeData->urls().at(0).toLocalFile();
+
+		if(QFileInfo(str).suffix() == "vmt") {
+
+			if( mChildWidgetChanged )
 			{
-			case QMessageBox::Save:
+				switch( _displaySaveMessage() )
+				{
+				case QMessageBox::Save:
 
-				action_Save();
+					action_Save();
 
-			case QMessageBox::Discard:
+				case QMessageBox::Discard:
 
-				break;
+					break;
 
-			case QMessageBox::Cancel:
-			case QMessageBox::Escape:
+				case QMessageBox::Cancel:
+				case QMessageBox::Escape:
 
-				return;
+					return;
+				}
 			}
-		}
 
-		loadVMT(mimeData->urls().at(0).toLocalFile());
+			loadVMT(mimeData->urls().at(0).toLocalFile());
+		} else {
+			sortDroppedTextures (mimeData);
+			//Info("has images");
+		}
 	}
 }
 
@@ -6689,7 +6924,10 @@ void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 			QString str = url.toLocalFile();
 			if (!str.isEmpty())
 			{
-				if (QFileInfo(str).suffix() == "vmt")
+				if (QFileInfo(str).suffix() == "vmt" ||
+					QFileInfo(str).suffix() == "vtf" ||
+					QFileInfo(str).suffix() == "png" ||
+					QFileInfo(str).suffix() == "tga")
 				{
 					event->acceptProposedAction();
 				}
@@ -6789,12 +7027,19 @@ void MainWindow::readSettings()
 		setKey("fullPathFilenameInWindowTitle", false, mIniSettings);
 	mSettings->showShaderNameInWindowTitle =
 		setKey("showShaderNameInWindowTitle", true, mIniSettings);
+
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
+
 	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
+	mSettings->changeName = setKey("changeName", false, mIniSettings);
+
+	mSettings->noNormalSharpen = setKey("noNormalSharpen", false, mIniSettings);
+	mSettings->noGlossMip = setKey("noGlossMip", false, mIniSettings);
+
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
 	mSettings->useQuotesForTexture =
@@ -6828,6 +7073,14 @@ void MainWindow::readSettings()
 	// Note that if you just pass "" for the def, because then the boolean
 	// overloaded method is used for some random reason
 	mSettings->lastGame = setKey("lastGame", QString(), mIniSettings);
+
+	mSettings->diffuseSuffix = setKey("diffuseSuffix", QString("_d"), mIniSettings);
+	mSettings->bumpSuffix = setKey("bumpSuffix", QString("_n"), mIniSettings);
+	mSettings->specSuffix = setKey("specSuffix", QString("_s"), mIniSettings);
+	mSettings->glossSuffix = setKey("glossSuffix", QString("_g"), mIniSettings);
+
+	mSettings->mipmapFilter = setKey("mipmapFilter", QString("Box"), mIniSettings);
+	mSettings->mipmapSharpenFilter = setKey("mipmapSharpenFilter", QString("Sharpen Soft"), mIniSettings);
 
 	QFile defaultShaderFile(":/files/defaultShaders");
 	defaultShaderFile.open(QFile::ReadOnly | QFile::Text);
@@ -7024,6 +7277,9 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 		case Settings::_CheckForUpdates:
 			break;
 
+		case Settings::_ChangeName:
+			break;
+
 		case Settings::_CustomShaders:
 			// TODO: Move into own function
 
@@ -7111,15 +7367,17 @@ void MainWindow::openTemplate() {
 
 	QAction* action = qobject_cast<QAction*>(sender());
 
-	if (mSettings->templateNew && mChildWidgetChanged) {
+	if (mSettings->templateNew) {
 
-		switch( _displaySaveMessage() ) {
+		if (mChildWidgetChanged) {
+			switch( _displaySaveMessage() ) {
 
-		case QMessageBox::Save:
-			action_Save();
-		case QMessageBox::Cancel:
-		case QMessageBox::Escape:
-			return;
+			case QMessageBox::Save:
+				action_Save();
+			case QMessageBox::Cancel:
+			case QMessageBox::Escape:
+				return;
+			}
 		}
 
 		resetWidgets();
@@ -7240,6 +7498,8 @@ void MainWindow::changeShader()
 		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
 	} else if (objectName == "toolButton_VertexLit") {
 		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+	} else if (objectName == "toolButton_Unlit") {
+	index = ui->comboBox_shader->findText("UnlitGeneric", Qt::MatchFixedString);
 	}
 
 	int currentIndex = ui->comboBox_shader->currentIndex();
@@ -7253,390 +7513,414 @@ void MainWindow::changeShader()
 
 void MainWindow::browseVTF()
 {
-	QWidget* caller = qobject_cast<QWidget *>( sender() );
+	const auto name = qobject_cast<QWidget *>(sender())->objectName();
 
-	if( caller->objectName() == "toolButton_diffuse" )
-		browseVTF( "preview_basetexture1", ui->lineEdit_diffuse );
-	else if( caller->objectName() == "toolButton_bumpmap" )
-		browseVTF( "preview_bumpmap1", ui->lineEdit_bumpmap );
+	if (name == "toolButton_diffuse")
+		processVtf( "preview_basetexture1", "", ui->lineEdit_diffuse );
 
-	else if( caller->objectName() == "toolButton_diffuse2" )
-		browseVTF( "preview_basetexture2", ui->lineEdit_diffuse2 );
-	else if( caller->objectName() == "toolButton_bumpmap2" )
-		browseVTF( "preview_bumpmap2", ui->lineEdit_bumpmap2 );
+	else if (name == "toolButton_bumpmap" )
+		processVtf( "preview_bumpmap1", "", ui->lineEdit_bumpmap );
 
-	else if( caller->objectName() == "toolButton_diffuse3" )
-		browseVTF( "preview_basetexture3", ui->lineEdit_diffuse3 );
+	else if (name == "toolButton_diffuse2" )
+		processVtf( "preview_basetexture2", "", ui->lineEdit_diffuse2 );
 
-	else if( caller->objectName() == "toolButton_diffuse4" )
-		browseVTF( "preview_basetexture4", ui->lineEdit_diffuse4 );
+	else if (name == "toolButton_bumpmap2" )
+		processVtf( "preview_bumpmap2", "", ui->lineEdit_bumpmap2 );
 
-	else if( caller->objectName() == "toolButton_detail" )
-		browseVTF( "preview_detail", ui->lineEdit_detail );
+	else if (name == "toolButton_diffuse3" )
+		processVtf( "preview_basetexture3", "", ui->lineEdit_diffuse3 );
 
-	else if( caller->objectName() == "toolButton_refractNormalMap" )
-		browseVTF( "preview_bumpmap1", ui->lineEdit_refractNormalMap );
-	else if( caller->objectName() == "toolButton_refractNormalMap2" )
-		browseVTF( "preview_bumpmap2", ui->lineEdit_refractNormalMap2 );
-	else if( caller->objectName() == "toolButton_refractTexture" )
-		browseVTF( "", ui->lineEdit_refractTexture );
+	else if (name == "toolButton_diffuse4" )
+		processVtf( "preview_basetexture4", "", ui->lineEdit_diffuse4 );
 
-	else if( caller->objectName() == "toolButton_waterNormalMap" )
-		browseVTF( "preview_bumpmap1", ui->lineEdit_waterNormalMap );
+	else if (name == "toolButton_detail" )
+		processVtf( "preview_detail", "", ui->lineEdit_detail );
 
-	else if( caller->objectName() == "toolButton_unlitTwoTextureDiffuse" )
-		browseVTF( "preview_basetexture1", ui->lineEdit_unlitTwoTextureDiffuse );
-	else if( caller->objectName() == "toolButton_unlitTwoTextureDiffuse2" )
-		browseVTF( "preview_basetexture2", ui->lineEdit_unlitTwoTextureDiffuse2 );
+	else if (name == "toolButton_refractNormalMap" )
+		processVtf( "preview_bumpmap1", "", ui->lineEdit_refractNormalMap );
+	else if (name == "toolButton_refractNormalMap2" )
+		processVtf( "preview_bumpmap2", "", ui->lineEdit_refractNormalMap2 );
+	else if (name == "toolButton_refractTexture" )
+		processVtf( "", "", ui->lineEdit_refractTexture );
 
-	else if( caller->objectName() == "toolButton_blendmodulate" )
-		browseVTF( "", ui->lineEdit_blendmodulate );
-	else if( caller->objectName() == "toolButton_lightWarp" )
-		browseVTF( "", ui->lineEdit_lightWarp );
+	else if (name == "toolButton_waterNormalMap" )
+		processVtf( "preview_bumpmap1", "", ui->lineEdit_waterNormalMap );
 
-	else if( caller->objectName() == "toolButton_envmap" )
-		browseVTF( "", ui->lineEdit_envmap );
-	else if( caller->objectName() == "toolButton_specmap" )
-		browseVTF( "", ui->lineEdit_specmap );
+	else if (name == "toolButton_unlitTwoTextureDiffuse" )
+		processVtf( "preview_basetexture1", "", ui->lineEdit_unlitTwoTextureDiffuse );
+	else if (name == "toolButton_unlitTwoTextureDiffuse2" )
+		processVtf( "preview_basetexture2", "", ui->lineEdit_unlitTwoTextureDiffuse2 );
 
-	else if( caller->objectName() == "toolButton_exponentTexture" )
-		browseVTF( "", ui->lineEdit_exponentTexture );
+	else if (name == "toolButton_blendmodulate" )
+		processVtf( "", "", ui->lineEdit_blendmodulate );
+	else if (name == "toolButton_lightWarp" )
+		processVtf( "", "", ui->lineEdit_lightWarp );
 
-	else if( caller->objectName() == "toolButton_maskTexture" )
-		browseVTF( "", ui->lineEdit_maskTexture );
+	else if (name == "toolButton_envmap" )
+		processVtf( "", "", ui->lineEdit_envmap );
+	else if (name == "toolButton_specmap" )
+		processVtf( "", "", ui->lineEdit_specmap );
 
-	else if( caller->objectName() == "toolButton_flowMap" )
-		browseVTF( "", ui->lineEdit_flowMap );
-	else if( caller->objectName() == "toolButton_noiseTexture" )
-		browseVTF( "", ui->lineEdit_noiseTexture );
+	else if (name == "toolButton_exponentTexture" )
+		processVtf( "", "", ui->lineEdit_exponentTexture );
 
-	else if( caller->objectName() == "toolButton_toolTexture" )
-		browseVTF( "", ui->lineEdit_toolTexture );
+	else if (name == "toolButton_maskTexture" )
+		processVtf( "", "", ui->lineEdit_maskTexture );
 
-	else if( caller->objectName() == "toolButton_bump2" )
-		browseVTF( "preview_bumpmap2", ui->lineEdit_bump2 );
+	else if (name == "toolButton_flowMap" )
+		processVtf( "", "", ui->lineEdit_flowMap );
+	else if (name == "toolButton_noiseTexture" )
+		processVtf( "", "", ui->lineEdit_noiseTexture );
 
-	else if( caller->objectName() == "toolButton_waterReflectTexture" )
-		browseVTF( "", ui->lineEdit_waterReflectTexture );
+	else if (name == "toolButton_toolTexture" )
+		processVtf( "", "", ui->lineEdit_toolTexture );
 
-	else if( caller->objectName() == "toolButton_decal" )
-		browseVTF( "", ui->lineEdit_decal );
+	else if (name == "toolButton_bump2" )
+		processVtf( "preview_bumpmap2", "", ui->lineEdit_bump2 );
 
-	else if( caller->objectName() == "toolButton_phongWarp" )
-		browseVTF( "", ui->lineEdit_phongWarp );
+	else if (name == "toolButton_waterReflectTexture" )
+		processVtf( "", "", ui->lineEdit_waterReflectTexture );
+
+	else if (name == "toolButton_decal" )
+		processVtf( "", "", ui->lineEdit_decal );
+
+	else if (name == "toolButton_phongWarp" )
+		processVtf( "", "", ui->lineEdit_phongWarp );
 }
 
-void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
-
-	QString fileName;
-
+QString MainWindow::launchBrowseVtfDialog(QLineEdit* lineEdit)
+{
 	const QString lastTextureDirectory = QDir::toNativeSeparators(
 		mIniSettings->value("lastTextureBrowseDir", "").toString());
 
-	if( lastTextureDirectory.startsWith( QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive )) {
-
-		fileName = QFileDialog::getOpenFileName( this, tr("Open Valve Texture File"), lastTextureDirectory,
-												 tr("Textures (*.vtf *.bmp *.dds *.gif *.jpg *.png *.tga)") );
-
+	QString dir;
+	if (lastTextureDirectory.startsWith(QDir::toNativeSeparators(currentGameMaterialDir()), Qt::CaseInsensitive )) {
+		dir = lastTextureDirectory;
 	} else {
+		if (QDir(currentGameMaterialDir() + "/" + lineEdit->text() + ".vtf").exists()) {
+			dir = currentGameMaterialDir() + "/" + lineEdit->text();
+		} else {
+			dir = currentGameMaterialDir();
+		}
+	}
+	const auto tex = 
+		tr("Textures (*.vtf *.bmp *.dds *.gif *.jpg *.png *.tga)");
+	return QFileDialog::getOpenFileName(
+		this, tr("Open Valve Texture File"), dir, tex);
+}
 
-		if( QDir( currentGameMaterialDir() + "/" + lineEdit->text() + ".vtf" ).exists() )
-			fileName = QFileDialog::getOpenFileName( this, tr("Open Valve Texture File"), currentGameMaterialDir() + "/" + lineEdit->text(),
-													 tr("Textures (*.vtf *.bmp *.dds *.gif *.jpg *.png *.tga)") );
-		else
-			fileName = QFileDialog::getOpenFileName( this, tr("Open Valve Texture File"), currentGameMaterialDir(),
-													 tr("Textures (*.vtf *.bmp *.dds *.gif *.jpg *.png *.tga)") );
+void MainWindow::processVtf(const QString& objectName,
+	const QString& textureFileName, QLineEdit* lineEdit)
+{
+	QString fileName;
+	if (textureFileName.isEmpty()) {
+		fileName = launchBrowseVtfDialog(lineEdit);
+		if (fileName.isEmpty())
+			return;
+	} else {
+		fileName = textureFileName;
 	}
 
+	clearLineEditAction(lineEdit);
+
 	bool updateLastTextureDirectory = true;
+	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
 
-	if (!fileName.isEmpty()) {
-		clearLineEditAction(lineEdit);
+	if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
 
-		const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
+		lineEdit->setEnabled(true);
+		texturesToCopy.remove(lineEdit);
 
-		if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
+		if( fileType.toLower() != ".vtf" ) {
 
-			lineEdit->setEnabled(true);
-			texturesToCopy.remove(lineEdit);
+			//Who keeps image files inside materials dir?
+			Info("Only textures outside materials dir can be converted");
+			/*bool convert = true;
 
-			if( fileType.toLower() != ".vtf" ) {
+			QString vtfFileName = fileName;
 
-				bool convert = true;
+			vtfFileName = vtfFileName.left( vtfFileName.lastIndexOf('.') );
+			vtfFileName.append(".vtf");
 
-				QString vtfFileName = fileName;
+			if( QDir(fileName.replace("\\", "/")).exists(vtfFileName) ) {
 
-				vtfFileName = vtfFileName.left( vtfFileName.lastIndexOf('.') );
-				vtfFileName.append(".vtf");
+				MsgBox msgBox(this);
+					msgBox.setWindowTitle("File already exists!");
+					msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
+					msgBox.setDefaultButton( QMessageBox::No );
+					msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
-				if( QDir(fileName.replace("\\", "/")).exists(vtfFileName) ) {
+				msgBox.setText( fileName.left( fileName.lastIndexOf(".") ).append(".vtf") +
+								" already exists. Do you want to overwrite it?"  );
 
-					MsgBox msgBox(this);
-						msgBox.setWindowTitle("File already exists!");
-						msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
-						msgBox.setDefaultButton( QMessageBox::No );
-						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
-
-					msgBox.setText( fileName.left( fileName.lastIndexOf(".") ).append(".vtf") +
-									" already exists. Do you want to overwrite it?"  );
-
-					if( msgBox.exec() != QMessageBox::Yes )
-						convert = false;
-				}
-
-				if(convert) {
-
-					ConversionThread* conversionThread = new ConversionThread(this);
-						conversionThread->fileName = fileName;
-
-					if(mVMTLoaded) {
-
-						conversionThread->outputParameter = vmtParser->lastVMTFile().directory + "/" +
-								vmtParser->lastVMTFile().fileName.left( vmtParser->lastVMTFile().fileName.size() - 4 ) + ".vtf";
-					}
-
-					conversionThread->start();
-				}
+				if( msgBox.exec() != QMessageBox::Yes )
+					convert = false;
 			}
 
-			goto updateLineEdit;
+			if(convert) {
 
-		} else {
-
-			lineEdit->setEnabled(true);
-			texturesToCopy.remove(lineEdit);
-
-			updateLastTextureDirectory = false;
-
-			QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
-
-			if( fileType.toLower() == ".vtf" ) {
-
-				if( mVMTLoaded ) {
-
-					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-					lineEdit->setToolTip(fileName);
-					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
-					QString fullNewName = dir + nameWithExtension;
-
-					if (QFile::exists(fullNewName)) {
-						MsgBox msgBox(this);
-						msgBox.setWindowTitle("File already exists!");
-						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
-						msgBox.addButton( QMessageBox::Cancel );
-						msgBox.setDefaultButton( overwriteButton );
-						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
-
-						msgBox.setText( QDir::toNativeSeparators(nameWithExtension) + " already exists. Do you want to overwrite it?"  );
-
-						if(  msgBox.exec() != QMessageBox::Cancel ) {
-
-							if( QFile::remove(fullNewName) ) {
-
-								if( QFile::copy(fileName, fullNewName) ) {
-
-									Info( "File \"" + fileName + "\" successfully copied");
-
-									fileName = fullNewName;
-
-									goto updateLineEdit;
-
-								} else {
-									Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
-								}
-
-							} else {
-								Error("\"" + fileName + "\" could not be deleted!")
-							}
-						}
-
-					} else {
-
-						if( QFile::copy(fileName, fullNewName) ) {
-
-							fileName = fullNewName;
-
-							Info( "File \"" + fileName + "\" successfully copied");
-
-							goto updateLineEdit;
-
-						} else {
-							Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
-						}
-					}
-
-				//VMT not saved
-				} else {
-
-					lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-					QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
-					QFile::copy(fileName, tempName);
-					texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
-					lineEdit->setDisabled(true);
-
-					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-					lineEdit->setToolTip(fileName);
-					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-					previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
-				}
-
-			} else {
-
-				// Image files, fileType != ".vtf"
-				bool noAlpha = true;
-
-				if( lineEdit == ui->lineEdit_diffuse ) {
-					if (ui->checkBox_basealpha->isChecked() ||
-						ui->groupBox_selfIllumination->isVisible() ||
-						ui->checkBox_alphaTest->isChecked() ||
-						ui->checkBox_transparent->isChecked() ||
-						ui->checkBox_blendTint->isChecked() ||
-						ui->checkBox_phongBaseAlpha->isChecked() ||
-						ui->checkBox_exponentBaseAlpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_bumpmap ) {
-					if (ui->checkBox_normalalpha->isChecked() ||
-						ui->groupBox_phong->isVisible() ||
-						ui->checkBox_phongNormalAlpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_diffuse2 ) {
-					if (ui->checkBox_basealpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_diffuse3 ) {
-					if (ui->checkBox_basealpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_diffuse4 ) {
-					if (ui->checkBox_basealpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse ) {
-					noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse2 ) {
-					noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_specmap ) {
-					if (ui->checkBox_envmapAlpha->isChecked() )
-						noAlpha = false;
-				}
-				else if( lineEdit == ui->lineEdit_decal )
-					noAlpha = false;
-
-				if( texturesToCopy.contains(lineEdit) ) {
-
-					QString toDelete = "Cache\\Move\\" + lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit);
-
-					if( !QFile::remove(toDelete) )
-						Error("Error while removing \"" + toDelete + "\"")
-
-					texturesToCopy.remove(lineEdit);
-				}
-
-				bool isNormal = false;
-				QString mipmapFilter = "";
-
-				if ( lineEdit == ui->lineEdit_bumpmap ||
-					 lineEdit == ui->lineEdit_bumpmap2 ||
-					 lineEdit == ui->lineEdit_bump2 ||
-					 lineEdit == ui->lineEdit_refractNormalMap ||
-					 lineEdit == ui->lineEdit_refractNormalMap2 ||
-					 lineEdit == ui->lineEdit_waterNormalMap )
-					isNormal = true;
-
-				if (!isNormal)
-					mipmapFilter = "-msharpen SHARPENSOFT";
+				ConversionThread* conversionThread = new ConversionThread(this);
+					conversionThread->fileName = fileName;
 
 				if(mVMTLoaded) {
 
-					QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
-					QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
-					QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+					conversionThread->outputParameter = vmtParser->lastVMTFile().directory + "/" +
+							vmtParser->lastVMTFile().fileName.left( vmtParser->lastVMTFile().fileName.size() - 4 ) + ".vtf";
+				}
 
+				conversionThread->start();
+			}*/
+		}
 
-					if( QFile::exists(dir + newFile + ".vtf") ) {
-						MsgBox msgBox(this);
-						msgBox.setWindowTitle("File already exists!");
-						QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
-						msgBox.addButton( QMessageBox::Cancel );
-						msgBox.setDefaultButton( overwriteButton );
-						msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
+		goto updateLineEdit;
 
-						msgBox.setText( QDir::toNativeSeparators(newFile + ".vtf") + " already exists. Do you want to overwrite it?"  );
+	} else {
 
-						if(  msgBox.exec() != QMessageBox::Cancel ) {
+		lineEdit->setEnabled(true);
+		texturesToCopy.remove(lineEdit);
 
-							if( !QFile::remove( dir + newFile + ".vtf" ) ) {
-								Error( "Error removing \"" + dir + newFile + ".vtf\"" );
-								return;
+		if (lineEdit == ui->lineEdit_bumpmap ) {
+			ui->label_bumpmapAlpha->setVisible(false);
+			ui->lineEdit_bumpmapAlpha->setVisible(false);
+			ui->toolButton_bumpmapAlpha->setVisible(false);
+		}
+
+		updateLastTextureDirectory = false;
+
+		QString nameWithExtension( fileName.right( fileName.size() - fileName.lastIndexOf("/") ));
+
+		if( fileType.toLower() == ".vtf" ) {
+
+			if( mVMTLoaded ) {
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString());
+				QString fullNewName = dir + nameWithExtension;
+
+				if (QFile::exists(fullNewName)) {
+					MsgBox msgBox(this);
+					msgBox.setWindowTitle("File already exists!");
+					QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
+					msgBox.addButton( QMessageBox::Cancel );
+					msgBox.setDefaultButton( overwriteButton );
+					msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
+
+					msgBox.setText( QDir::toNativeSeparators(nameWithExtension) + " already exists. Do you want to overwrite it?"  );
+
+					if(  msgBox.exec() != QMessageBox::Cancel ) {
+
+						if( QFile::remove(fullNewName) ) {
+
+							if( QFile::copy(fileName, fullNewName) ) {
+
+								Info( "File \"" + fileName + "\" successfully copied");
+
+								fileName = fullNewName;
+
+								goto updateLineEdit;
+
+							} else {
+								Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
 							}
+
 						} else {
-							return;
+							Error("\"" + fileName + "\" could not be deleted!")
 						}
 					}
 
-					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-					lineEdit->setToolTip(fileName);
-					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
-
-					ConversionThread* conversionThread = new ConversionThread(this);
-						conversionThread->fileName = fileName;
-						conversionThread->objectName = objectName;
-						conversionThread->relativeFilePath = relativeFilePath;
-						conversionThread->newFileName = "";
-						if(noAlpha && mSettings->removeAlpha)
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-						else
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
-						conversionThread->moveFile = true;
-						conversionThread->newFile = newFile;
-						conversionThread->newFileDir = dir;
-						conversionThread->start();
-
-					lineEdit->setText(relativeFilePath);
-
-
 				} else {
 
-					QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
-					outputFile = removeSuffix(outputFile.left( outputFile.indexOf('.') ));
+					if( QFile::copy(fileName, fullNewName) ) {
 
-					texturesToCopy.insert(lineEdit, outputFile);
+						fileName = fullNewName;
 
-					lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-					lineEdit->setDisabled(true);
+						Info( "File \"" + fileName + "\" successfully copied");
 
-					QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
-					lineEdit->setToolTip(fileName);
-					connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+						goto updateLineEdit;
 
-					ConversionThread* conversionThread = new ConversionThread(this);
-						conversionThread->fileName = fileName;
-						conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-						if(noAlpha && mSettings->removeAlpha)
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-						else
-							conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
-						conversionThread->start();
-
-					fileName.chop(4);
-
-					QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-					QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
-
-					if( QFile::exists(toFile) )
-						QFile::remove(toFile);
-
-					QFile::copy(fromFile, toFile);
-
-					previewTexture(objectName);
+					} else {
+						Error("\"" + fileName + "\" could not be copied to: \"" + fullNewName + "\"")
+					}
 				}
+
+			//VMT not saved
+			} else {
+
+				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+				QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
+				QFile::copy(fileName, tempName);
+				texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
+				lineEdit->setDisabled(true);
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				previewTexture( objectName, fileName.section(".", 0, -2) + ".", true, false, false, false, true );
+			}
+
+		} else {
+
+			// Image files, fileType != ".vtf"
+			bool noAlpha = true;
+			int type = 0;
+
+			if( lineEdit == ui->lineEdit_diffuse ) {
+				type = 1;
+				if (ui->checkBox_basealpha->isChecked() ||
+					ui->groupBox_selfIllumination->isVisible() ||
+					ui->checkBox_alphaTest->isChecked() ||
+					ui->checkBox_transparent->isChecked() ||
+					ui->checkBox_blendTint->isChecked() ||
+					ui->checkBox_phongBaseAlpha->isChecked() ||
+					ui->checkBox_exponentBaseAlpha->isChecked() )
+					noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_bumpmap ) {
+				type = 2;
+				if (ui->checkBox_normalalpha->isChecked() ||
+					ui->groupBox_phong->isVisible() ||
+					ui->checkBox_phongNormalAlpha->isChecked() )
+					noAlpha = false;
+
+				/*ui->label_bumpmapAlpha->setVisible(true);
+				ui->lineEdit_bumpmapAlpha->setVisible(true);
+				ui->toolButton_bumpmapAlpha->setVisible(true);*/
+			}
+			else if( lineEdit == ui->lineEdit_diffuse2 ) {
+				if (ui->checkBox_basealpha->isChecked() )
+					noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_diffuse3 ) {
+				if (ui->checkBox_basealpha->isChecked() )
+					noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_diffuse4 ) {
+				if (ui->checkBox_basealpha->isChecked() )
+					noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse ) {
+				noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_unlitTwoTextureDiffuse2 ) {
+				noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_specmap ) {
+				type = 3;
+				if (ui->checkBox_envmapAlpha->isChecked() )
+					noAlpha = false;
+			}
+			else if( lineEdit == ui->lineEdit_decal )
+				noAlpha = false;
+
+			else if( lineEdit == ui->lineEdit_exponentTexture )
+				type = 4;
+
+			if( texturesToCopy.contains(lineEdit) ) {
+
+				QString toDelete = "Cache\\Move\\" + lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit);
+
+				if( !QFile::remove(toDelete) )
+					Error("Error while removing \"" + toDelete + "\"")
+
+				texturesToCopy.remove(lineEdit);
+			}
+
+			if ( lineEdit == ui->lineEdit_bumpmap ||
+				 lineEdit == ui->lineEdit_bumpmap2 ||
+				 lineEdit == ui->lineEdit_bump2 ||
+				 lineEdit == ui->lineEdit_refractNormalMap ||
+				 lineEdit == ui->lineEdit_refractNormalMap2 ||
+				 lineEdit == ui->lineEdit_waterNormalMap )
+				type = 2;
+
+			QString mipmapFilter = outputParameters(type, noAlpha);
+
+			if(mVMTLoaded) {
+
+				QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0), type);
+				QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+				QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
+				if( QFile::exists(dir + newFile + ".vtf") ) {
+					MsgBox msgBox(this);
+					msgBox.setWindowTitle("File already exists!");
+					QPushButton* overwriteButton = msgBox.addButton( "Overwrite", QMessageBox::YesRole );
+					msgBox.addButton( QMessageBox::Cancel );
+					msgBox.setDefaultButton( overwriteButton );
+					msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));;
+
+					msgBox.setText( QDir::toNativeSeparators(newFile + ".vtf") + " already exists. Do you want to overwrite it?"  );
+
+					if(  msgBox.exec() != QMessageBox::Cancel ) {
+
+						if( !QFile::remove( dir + newFile + ".vtf" ) ) {
+							Error( "Error removing \"" + dir + newFile + ".vtf\"" );
+							return;
+						}
+					} else {
+						return;
+					}
+				}
+
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				mIniPaths->setValue(relativeFilePath, fileName);
+
+				ConversionThread* conversionThread = new ConversionThread(this);
+					conversionThread->fileName = fileName;
+					conversionThread->objectName = objectName;
+					conversionThread->relativeFilePath = relativeFilePath;
+					conversionThread->newFileName = "";
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->moveFile = true;
+					conversionThread->newFile = newFile;
+					conversionThread->newFileDir = dir;
+					conversionThread->start();
+
+				lineEdit->setText(relativeFilePath);
+
+
+			} else {
+
+				QString outputFile = fileName.right( fileName.length() - fileName.lastIndexOf('/') - 1 );
+				outputFile = outputFile.left( outputFile.indexOf('.') );
+
+				texturesToCopy.insert(lineEdit, outputFile);
+
+				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
+				lineEdit->setDisabled(true);
+
+				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+				lineEdit->setToolTip(fileName);
+				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
+
+				ConversionThread* conversionThread = new ConversionThread(this);
+					conversionThread->fileName = fileName;
+					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->start();
+
+				fileName.chop(4);
+
+				QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
+				QString toFile = QDir::currentPath() + "/Cache/" + objectName + fileType;
+
+				if( QFile::exists(toFile) )
+					QFile::remove(toFile);
+
+				QFile::copy(fromFile, toFile);
+
+				previewTexture(objectName);
 			}
 		}
 	}
@@ -7656,6 +7940,7 @@ void MainWindow::browseVTF( const QString& objectName, QLineEdit* lineEdit ) {
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(fileName);
 	lineEdit->setText(relativeFilePath);
+	createReconvertAction(lineEdit, relativeFilePath);
 
 	previewTexture( objectName, relativeFilePath, true, false, false, false );
 }
@@ -8392,17 +8677,16 @@ bool MainWindow::transformsModified( uint index )
 	return false;
 }
 
-void MainWindow::addGLWidget( const QString& textureOverlay, QVBoxLayout* layout, const QString& widgetObjectName ) {
-
-	GLWidget* glWidget = new GLWidget( textureOverlay, widgetObjectName, glWidgets.length() > 0 ? glWidgets.at(0) : NULL );
-		glWidget->setMinimumSize( QSize(192, 192) );
-		glWidget->setMaximumSize( QSize(192, 192) );
-		glWidget->setVisible(false);
-
+void MainWindow::addGLWidget(
+	const QString& textureOverlay, QVBoxLayout* layout,
+	const QString& widgetObjectName)
+{
+	GLWidget* glWidget = new GLWidget(textureOverlay, widgetObjectName,
+			glWidgets.length() > 0 ? glWidgets.at(0) : NULL);
 	glWidgets.append(glWidget);
 
 	layout->addWidget(glWidget);
-		glWidget->setVisible(false);
+	glWidget->setVisible(false);
 }
 
 void MainWindow::loadScale( const QString& value, const QString& parameter, QDoubleSpinBox* spinBox1, QDoubleSpinBox* spinBox2 )
@@ -8868,7 +9152,19 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 	QMap<QLineEdit*, QString>::iterator it = texturesToCopy.begin();
 	while( it != texturesToCopy.end() ) {
 
-		if( QFile::exists(dir + it.value() + ".vtf") ) {
+		int type = 0;
+		if( it.key() == ui->lineEdit_diffuse )
+			type = 1;
+		else if( it.key() == ui->lineEdit_bumpmap )
+			type = 2;
+		else if( it.key() == ui->lineEdit_specmap )
+			type = 3;
+		else if( it.key() == ui->lineEdit_exponentTexture )
+			type = 4;
+
+		QString fileName = removeSuffix(it.value(), type);
+
+		if( QFile::exists(dir + fileName + ".vtf") ) {
 
 			MsgBox msgBox(this);
 				msgBox.setWindowTitle("File already exists!");
@@ -8877,7 +9173,7 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 				msgBox.setDefaultButton( overwriteButton );
 				msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
 
-			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + it.value() +
+			msgBox.setText( dir.right( dir.length() - dir.lastIndexOf("/") - 1) + fileName +
 							".vtf already exists. Do you want to overwrite it?"  );
 
 			if( msgBox.exec() == QMessageBox::Cancel ) {
@@ -8886,25 +9182,30 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 				continue;
 			}
 
-			if( !QFile::remove( dir + it.value() + ".vtf" ) ) {
+			if( !QFile::remove( dir + fileName + ".vtf" ) ) {
 
-				Error( "Error removing \"" + dir + it.value() + ".vtf\"" )
+				Error( "Error removing \"" + dir + fileName + ".vtf\"" )
 				++it;
 				continue;
 			}
 		}
 
 		if( !QFile::rename( QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + it.value() + ".vtf",
-					   dir + it.value() + ".vtf" ) ) {
+					   dir + fileName + ".vtf" ) ) {
 
-			Error( "Error moving file from \"" + QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + it.value() + ".vtf\" to " +
-				dir + it.value() + ".vtf")
+			Error( "Error moving file from \"" + QDir::currentPath() + "/Cache/Move/" + it.key()->objectName() + "_" + fileName + ".vtf\" to " +
+				dir + fileName + ".vtf")
 			++it;
 			continue;
 		}
 
+		QString fileNameConvert = it.key()->toolTip();
+		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + fileName);
+
+		mIniPaths->setValue (relativeFilePath, fileNameConvert);
+
 		it.key()->setEnabled(true);
-		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + it.value() );
+		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + fileName );
 
 		it = texturesToCopy.erase(it);
 	}
@@ -9139,11 +9440,11 @@ void MainWindow::reconvertTexture()
 	const auto tooltip = lineEdit->toolTip();
 
 	bool noAlpha = true;
-	bool isNormal = false;
+	int type = 0;
 	QString preview;
-	QString mipmapFilter = "";
 
 	if( objectName == "lineEdit_diffuse" ) {
+		type = 1;
 		preview = "preview_basetexture1";
 		if (ui->checkBox_basealpha->isChecked() ||
 			ui->groupBox_selfIllumination->isVisible() ||
@@ -9197,11 +9498,15 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_specmap" ) {
+		type = 3;
 		if (ui->checkBox_envmapAlpha->isChecked() )
 			noAlpha = false;
 	}
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
+
+	if( objectName == "lineEdit_exponentTexture" )
+		type = 4;
 
 	if ( objectName == "lineEdit_bumpmap" ||
 		 objectName == "lineEdit_bumpmap2" ||
@@ -9209,16 +9514,16 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_refractNormalMap" ||
 		 objectName == "lineEdit_refractNormalMap2" ||
 		 objectName == "lineEdit_waterNormalMap" )
-		isNormal = true;
+		type = 2;
 
-	if (!isNormal)
-		mipmapFilter = "-msharpen SHARPENSOFT";
+	QString mipmapFilter = outputParameters(type, noAlpha);
 
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0));
+	QString lineEditText = lineEdit->text();
+	QString newFile = lineEditText.section("/", -1).section(".", 0, 0);
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
@@ -9231,16 +9536,17 @@ void MainWindow::reconvertTexture()
 		}
 	}
 
+	mIniPaths->setValue(relativeFilePath, fileName);
+
 	if (extension != "vtf") {
+		InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
+
 		ConversionThread* conversionThread = new ConversionThread(this);
 		conversionThread->fileName = fileName;
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		if (noAlpha && mSettings->removeAlpha)
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT1 " + mipmapFilter;
-		else
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\"" + " -alphaformat DXT5 " + mipmapFilter;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
@@ -9264,25 +9570,137 @@ void MainWindow::reconvertTexture()
 	lineEdit->setText(relativeFilePath);
 }
 
-QString MainWindow::removeSuffix( const QString fileName)
+void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
+	QString value = mIniPaths->value(fileName).toString();
+
+	if (value != "") {
+		QDir dir;
+		if (dir.exists(value)) {
+			QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
+			lineEdit->setToolTip(value);
+			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+		}
+	}
+}
+
+QString MainWindow::removeSuffix( const QString fileName, int type)
 {
 	QString newName = fileName;
-	if(mSettings->removeSuffix) {
+	QString vmtName = vmtParser->lastVMTFile().fileName;
+	vmtName.chop(4);
+
+	if (mSettings->removeSuffix) {
 
 		if( fileName.endsWith("_diffuse") ){
 			newName.chop(8);
+			newName = newName + mSettings->diffuseSuffix;
 
 		} else if(fileName.endsWith("_normal") ) {
 			newName.chop(7);
-			newName = newName + "n";
+			newName = newName + mSettings->bumpSuffix;
 
 		} else if(fileName.endsWith("_specular") ) {
 			newName.chop(9);
-			newName = newName + "s";
+			newName = newName + mSettings->specSuffix;
+
+		} else if(fileName.endsWith("_glossiness") ) {
+			newName.chop(11);
+			newName = newName + mSettings->glossSuffix;
 		}
 	}
 
+	if (mSettings->changeName) {
+		if (type == 1) {
+			newName = vmtName + mSettings->diffuseSuffix;
+		}
+		if (type == 2) {
+			newName = vmtName + mSettings->bumpSuffix;
+		}
+		if (type == 3) {
+			newName = vmtName + mSettings->specSuffix;
+		}
+		if (type == 4) {
+			newName = vmtName + mSettings->glossSuffix;
+		}
+	}
 	return newName;
+
+}
+
+QString MainWindow::outputParameters( int type, bool noAlpha )
+{
+	QMultiMap<QString, QString> arguments;
+
+	QString tmp;
+	if (noAlpha && mSettings->removeAlpha)
+		arguments.insert("-alphaformat", "DXT1");
+	else
+		arguments.insert("-alphaformat", "DXT5");
+
+	tmp = mSettings->mipmapFilter;
+	if(tmp != "Box") {
+		if(tmp == "Point") arguments.insert("-mfilter", "POINT");
+		else if(tmp == "Triangle") arguments.insert("-mfilter", "TRIANGLE");
+		else if(tmp == "Quadratic") arguments.insert("-mfilter", "QUADRATIC");
+		else if(tmp == "Cubic") arguments.insert("-mfilter", "CUBIC");
+		else if(tmp == "Catrom") arguments.insert("-mfilter", "CATROM");
+		else if(tmp == "Mitchell") arguments.insert("-mfilter", "MITCHELL");
+		else if(tmp == "Gaussian") arguments.insert("-mfilter", "GAUSSIAN");
+		else if(tmp == "Sinc") arguments.insert("-mfilter", "SINC");
+		else if(tmp == "Bessel") arguments.insert("-mfilter", "BESSEL");
+		else if(tmp == "Hanning") arguments.insert("-mfilter", "HANNING");
+		else if(tmp == "Hamming") arguments.insert("-mfilter", "HAMMING");
+		else if(tmp == "Blackman") arguments.insert("-mfilter", "BLACKMAN");
+		else if(tmp == "Kaiser") arguments.insert("-mfilter", "KAISER");
+	}
+
+	tmp = mSettings->mipmapSharpenFilter;
+	if (!(type == 2 && mSettings->noNormalSharpen)) {
+		if(tmp != "None") {
+			if(tmp == "Negative") arguments.insert("-msharpen", "NEGATIVE");
+			else if(tmp == "Lighter") arguments.insert("-msharpen", "LIGHTER");
+			else if(tmp == "Darker") arguments.insert("-msharpen", "DARKER");
+			else if(tmp == "More Contrast") arguments.insert("-msharpen", "CONTRASTMORE");
+			else if(tmp == "Less Contrast") arguments.insert("-msharpen", "CONTRASTLESS");
+			else if(tmp == "Smoothen") arguments.insert("-msharpen", "SMOOTHEN");
+			else if(tmp == "Soft") arguments.insert("-msharpen", "GAUSSIAN");
+			else if(tmp == "Sharpen Soft") arguments.insert("-msharpen", "SHARPENSOFT");
+			else if(tmp == "Sharpen Medium") arguments.insert("-msharpen", "SHARPENMEDIUM");
+			else if(tmp == "Sharpen Strong") arguments.insert("-msharpen", "SHARPENSTRONG");
+			else if(tmp == "Find Edges") arguments.insert("-msharpen", "FINDEDGES");
+			else if(tmp == "Contour") arguments.insert("-msharpen", "CONTOUR");
+			else if(tmp == "Detect Edges") arguments.insert("-msharpen", "EDGEDETECT");
+			else if(tmp == "Detect Edges - Soft") arguments.insert("-msharpen", "EDGEDETECTSOFT");
+			else if(tmp == "Emboss") arguments.insert("-msharpen", "EMBOSS");
+			else if(tmp == "Mean Removal") arguments.insert("-msharpen", "MEANREMOVAL");
+			else if(tmp == "Unsharp") arguments.insert("-msharpen", "UNSHARP");
+			else if(tmp == "XSharpen") arguments.insert("-msharpen", "XSHARPEN");
+			else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
+		}
+	}
+	if (type == 4 && mSettings->noGlossMip)
+		arguments.insert("-nomipmaps", "");
+
+	QMap<QString, QString>::iterator it = arguments.begin();
+
+	QString argumentString("");
+
+	while(it != arguments.end()) {
+
+		if(it.value() == "") {
+
+			argumentString.append(" " + it.key());
+
+		} else {
+
+			argumentString.append(" " + it.key() + " " + it.value());
+		}
+
+		++it;
+	}
+
+	qDebug() << argumentString;
+	return argumentString;
 
 }
 

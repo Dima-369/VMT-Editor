@@ -1,14 +1,6 @@
 #include "glwidget_spec.h"
 
-#include <qdebug.h>
-
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
-
-GLWidget_Spec::GLWidget_Spec(QWidget *parent) :
+GLWidget_Spec::GLWidget_Spec(QWidget* parent) :
 	QOpenGLWidget(parent),
 	texture(0),
 	textTexture(0)

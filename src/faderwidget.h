@@ -1,13 +1,12 @@
-#ifndef FADERWIDGET_H
-#define FADERWIDGET_H
+#pragma once
 
 #include <QWidget>
 #include <QGroupBox>
 #include <QPointer>
 #include <QTimer>
 
-#include "utilities.h"
 #include "mainwindow.h"
+#include "utilities.h"
 
 class FaderWidget : public QWidget
 {
@@ -27,9 +26,9 @@ private:
 
 	QTimer* timer;
 
-    QColor startColor;
-    int currentAlpha;
-    int duration;
+	QColor startColor;
+	int currentAlpha;
+	int duration;
 
 	bool fadingToWhite;
 
@@ -65,5 +64,3 @@ private:
 
 	QTimer delayTimer;
 };
-
-#endif

@@ -1,17 +1,8 @@
 #include "glwidget.h"
 
-#include "utilities.h"
-
-#include <QTimer>
-
-#ifdef Q_OS_DARWIN
-#   include "OpenGL/glu.h"
-#else
-#   include "GL/glu.h"
-#endif
-
-GLWidget::GLWidget(const QString &overlayTexture, const QString &objectName,
-		QWidget *parent) :
+GLWidget::GLWidget(
+		const QString &overlayTexture, const QString &objectName,
+		QWidget* parent) :
 	QOpenGLWidget(parent),
 	isShowing(false),
 	texture(0),
@@ -22,6 +13,10 @@ GLWidget::GLWidget(const QString &overlayTexture, const QString &objectName,
 
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
+
+	const auto size = QSize(192, 192);
+	setMinimumSize(size);
+	setMaximumSize(size);
 
 	setVisible(false);
 }

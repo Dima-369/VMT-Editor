@@ -799,94 +799,575 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-139</y>
            <width>522</width>
-           <height>825</height>
+           <height>1153</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QGroupBox" name="groupBox_general">
-            <property name="title">
-             <string>General</string>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="15" column="0">
+           <layout class="QGridLayout" name="gridLayout_7">
+            <property name="leftMargin">
+             <number>12</number>
             </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBox_fullPathFilenameInTitle">
-               <property name="text">
-                <string>Display open VMT filename as full path in window title</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBox_templateNew">
-               <property name="text">
-                <string>Create a new VMT when opening a template</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBox_autoRefresh">
-               <property name="text">
-                <string>Auto refresh VMT preview on parameter change</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBox_showShaderNameInTitle">
-               <property name="text">
-                <string>Show shader name in window title</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBox_saveLastGame">
-               <property name="text">
-                <string>Save last selected game</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBox_checkForUpdates">
-               <property name="text">
-                <string>Check for updates on startup</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBox_autoSave">
-               <property name="text">
-                <string>Auto save on parameter change</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Cache Size:</string>
+              </property>
+              <property name="indent">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="spinBox_cacheSize">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="suffix">
+               <string> MB</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>16384</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_15">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0" colspan="3">
+             <widget class="QCheckBox" name="checkBox_clearCacheAfterExit">
+              <property name="text">
+               <string>Delete entire cache after application exit</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="title">
+          <item row="5" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>14</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <property name="bottomMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="checkBox_removeAlpha">
+              <property name="toolTip">
+               <string>Uses DXT1 instead of DXT5 when there are no alpha channel related parameters in the VMT</string>
+              </property>
+              <property name="text">
+               <string>Remove alpha channel when not needed in VMT</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_removeSuffix">
+              <property name="toolTip">
+               <string>Replaces suffixes with custom ones</string>
+              </property>
+              <property name="text">
+               <string>Replace Substance suffixes when converting textures (_diffuse, _normal)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_changeName">
+              <property name="toolTip">
+               <string>Renames the converted textures after VMT filename</string>
+              </property>
+              <property name="text">
+               <string>Name converted VTFs after VMT filename</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="8" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>14</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="checkBox_noNormalSharpen">
+              <property name="text">
+               <string>No mipmap sharpen filter on normal</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_noGlossMip">
+              <property name="text">
+               <string>No mipmaps on glossiness</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="leftMargin">
+             <number>14</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="checkBox_saveLastGame">
+              <property name="text">
+               <string>Save last selected game</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_fullPathFilenameInTitle">
+              <property name="text">
+               <string>Display open VMT filename as full path in window title</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_showShaderNameInTitle">
+              <property name="text">
+               <string>Show shader name in window title</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_autoRefresh">
+              <property name="text">
+               <string>Auto refresh VMT preview on parameter change</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_autoSave">
+              <property name="text">
+               <string>Auto save on parameter change</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_checkForUpdates">
+              <property name="text">
+               <string>Check for updates on startup</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_templateNew">
+              <property name="text">
+               <string>Create a new VMT when opening a template</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 10px;
+}</string>
+            </property>
+            <property name="text">
              <string>Texture Conversion</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <item>
-              <widget class="QCheckBox" name="checkBox_removeSuffix">
-               <property name="text">
-                <string>Remove Substance suffixes when converting textures (_diffuse, _normal)</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBox_removeAlpha">
-               <property name="text">
-                <string>Remove alpha channel when not needed in VMT</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
-          <item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 10px;
+}</string>
+            </property>
+            <property name="text">
+             <string>VMT</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>14</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>14</number>
+            </property>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBox_mipmapFilter">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>180</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>Box</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Point</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Triangle</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Quadratic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Cubic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Catrom</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Mitchell</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Gaussian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sinc</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Bessel</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hanning</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Hamming</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Blackman</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Kaiser</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="comboBox_mipmapSharpenFilter">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>180</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>Sharpen Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sharpen Medium</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sharpen Strong</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Negative</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lighter</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Darker</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>More Contrast</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Less Contrast</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Smoothen</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Find Edges</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Contour</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Detect Edges</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Detect Eges - Soft</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Emboss</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Mean Removal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Unsharp</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>XSharpen</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Warpsharp</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Mipmap filter:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Sharpen filter:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="14" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+padding-top: 10px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Cache</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>14</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+font-size: 14pt;
+margin-top: 1px;
+}</string>
+            </property>
+            <property name="text">
+             <string>General</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
            <widget class="QGroupBox" name="groupBox_recentFileList">
             <property name="title">
              <string>Recent File List</string>
@@ -912,59 +1393,7 @@ QSlider::handle:vertical {
             </layout>
            </widget>
           </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_recentFileEntries">
-            <property name="title">
-             <string>Recent File Entries</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_16">
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="radioButton_recentFileEntriesFileNameOnly">
-               <property name="text">
-                <string>Display recent file entries as filenames only</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="radioButton_recentFileEntriesFullPath">
-               <property name="text">
-                <string>Display recent file entries with their full path</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_parameterGrouping">
-            <property name="title">
-             <string>Parameter Grouping</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_15">
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="radioButton_groupedParameters">
-               <property name="text">
-                <string>Parameters in the VMT are grouped</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QRadioButton" name="radioButton_alphabeticallySorted">
-               <property name="text">
-                <string>Parameters in the VMT are alphabetically sorted</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
+          <item row="10" column="0">
            <widget class="QGroupBox" name="groupBox_parameter">
             <property name="title">
              <string>Formatting</string>
@@ -994,7 +1423,175 @@ QSlider::handle:vertical {
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="11" column="0">
+           <widget class="QGroupBox" name="groupBox_parameterGrouping">
+            <property name="title">
+             <string>Parameter Grouping</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButton_groupedParameters">
+               <property name="text">
+                <string>Parameters in the VMT are grouped</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="radioButton_alphabeticallySorted">
+               <property name="text">
+                <string>Parameters in the VMT are alphabetically sorted</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QGroupBox" name="groupBox_recentFileEntries">
+            <property name="title">
+             <string>Recent File Entries</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_16">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButton_recentFileEntriesFileNameOnly">
+               <property name="text">
+                <string>Display recent file entries as filenames only</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButton_recentFileEntriesFullPath">
+               <property name="text">
+                <string>Display recent file entries with their full path</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>Custom suffixes</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="lineEdit_diffuseSuffix"/>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>60</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Bump:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>60</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Diffuse:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="lineEdit_bumpSuffix"/>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLineEdit" name="lineEdit_glossSuffix"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_7">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>60</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Gloss:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>60</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Spec:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_specSuffix"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="12" column="0">
            <widget class="QGroupBox" name="groupBox_fileAssociation">
             <property name="title">
              <string>File Association</string>
@@ -1091,7 +1688,7 @@ QSlider::handle:vertical {
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="13" column="0">
            <widget class="QGroupBox" name="groupBox_shaderGroups">
             <property name="title">
              <string>Shader Groups</string>
@@ -1166,73 +1763,6 @@ QSlider::handle:vertical {
             </layout>
            </widget>
           </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_cache">
-            <property name="title">
-             <string>Cache</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_11">
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Cache Size:</string>
-               </property>
-               <property name="indent">
-                <number>20</number>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0" colspan="3">
-              <widget class="QCheckBox" name="checkBox_clearCacheAfterExit">
-               <property name="text">
-                <string>Delete entire cache after application exit</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <spacer name="horizontalSpacer_15">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSpinBox" name="spinBox_cacheSize">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>80</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="suffix">
-                <string> MB</string>
-               </property>
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <number>16384</number>
-               </property>
-               <property name="value">
-                <number>100</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
          </layout>
         </widget>
        </widget>
@@ -1265,10 +1795,6 @@ QSlider::handle:vertical {
   </layout>
  </widget>
  <tabstops>
-  <tabstop>checkBox_saveLastGame</tabstop>
-  <tabstop>checkBox_fullPathFilenameInTitle</tabstop>
-  <tabstop>checkBox_showShaderNameInTitle</tabstop>
-  <tabstop>checkBox_autoRefresh</tabstop>
   <tabstop>radioButton_recentFileListInMenu</tabstop>
   <tabstop>radioButton_recentFileListInSubmenu</tabstop>
   <tabstop>radioButton_recentFileEntriesFileNameOnly</tabstop>
@@ -1279,8 +1805,6 @@ QSlider::handle:vertical {
   <tabstop>radioButton_groupedParameters</tabstop>
   <tabstop>radioButton_alphabeticallySorted</tabstop>
   <tabstop>pushButton_editShaders</tabstop>
-  <tabstop>checkBox_clearCacheAfterExit</tabstop>
-  <tabstop>spinBox_cacheSize</tabstop>
  </tabstops>
  <resources/>
  <connections>

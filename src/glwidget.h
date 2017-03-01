@@ -1,9 +1,18 @@
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#pragma once
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLTexture>
+#include <QTimer>
+#include <QMimeData>
+#include <QDragEnterEvent>
+#include <qdebug.h>
+
+#ifdef Q_OS_DARWIN
+#   include "OpenGL/glu.h"
+#else
+#   include "GL/glu.h"
+#endif
 
 #include "opengl/helpers.h"
 
@@ -15,7 +24,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
 	GLWidget(const QString &overlayTexture, const QString &objectName,
-		QWidget *parent);
+		QWidget* parent);
 
 	~GLWidget();
 
@@ -44,5 +53,3 @@ private:
 
 	QString overlay;
 };
-
-#endif // GLWIDGET_H

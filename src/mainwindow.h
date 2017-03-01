@@ -96,7 +96,7 @@ public:
 
 protected:
 
-	void closeEvent( QCloseEvent* event );
+	void closeEvent(QCloseEvent* event);
 
 	/**
 	 * Overridden to load the initial command line file.
@@ -177,6 +177,8 @@ private:
 	//----------------------------------------------------------------------------------------//
 
 	QSettings* mIniSettings;
+
+	QSettings* mIniPaths;
 
 	Settings* mSettings;
 
@@ -268,11 +270,20 @@ private:
 
 	void updateRecentFileActions( bool fullPath );
 
-	void browseVTF( const QString& objectName, QLineEdit* lineEdit );
+	// returns an empty string if the dialog was rejected
+	QString launchBrowseVtfDialog(QLineEdit* lineEdit);
+
+	// if textureFileName is empty, launchBrowseVtfDialog() will be called
+	// this is used for the drag/drop functionality
+	// launches the conversion thread and so on
+	void processVtf(const QString& objectName,
+		const QString& textureFileName, QLineEdit* lineEdit);
 
 	bool transformsModified( uint index );
 
-	QString removeSuffix( const QString fileName);
+	QString removeSuffix( const QString fileName, int type = 0);
+
+	QString outputParameters( int type, bool noAlpha );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -324,6 +335,8 @@ private:
 	void updateWindowTitle();
 
 public slots:
+
+	void handleTextureDrop(const QString& filePath);
 
 	void finishedLoading();
 
@@ -386,6 +399,8 @@ public slots:
 	void updateTextureOnUi(
 		const QString& objectName, const QString& relativeFilePath);
 
+	void sortDroppedTextures( const QMimeData* mimeData );
+
 private slots:
 
 	void previewTexture();
@@ -425,6 +440,8 @@ private slots:
 	void vmtPreviewParse();
 
 	void vmtPreviewChanged();
+
+	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
 
 	//----------------------------------------------------------------------------------------//
 

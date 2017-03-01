@@ -14,14 +14,12 @@ void ConversionThread::run()
 	QProcess process;
 	process.start("vtfcmd.exe -file \"" + fileName.replace("/", "\\") + "\" " + outputParameter.replace("/", "\\") + " -resize -version 7.4");
 
-	process.waitForFinished();
+	process.waitForFinished(120000);
 
 	output = process.readAllStandardOutput().simplified();
 
 	if (output.endsWith("1/1 files completed.")) {
-		InfoReconvert("Successfully converted \"" + fileName.replace("\\", "/") + "\"")
-
-
+		InfoReconvertLight("Successfully converted \"" + fileName.replace("\\", "/").section("/", -1) + "\"")
 
 		if (newFileName != "") {
 			QDir moveDir( QDir::currentPath() + "/Cache/Move/" );

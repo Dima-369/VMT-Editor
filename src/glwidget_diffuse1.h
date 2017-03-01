@@ -1,5 +1,4 @@
-#ifndef GLWIDGET_DIFFUSE1_H
-#define GLWIDGET_DIFFUSE1_H
+#pragma once
 
 #include <QGLShader>
 #include <QGLShaderProgram>
@@ -8,6 +7,13 @@
 #include <QOpenGLTexture>
 #include <QOpenGLShaderProgram>
 
+#ifdef Q_OS_DARWIN
+#   include "OpenGL/glu.h"
+#else
+#   include "GL/glu.h"
+#endif
+
+#include "utilities.h"
 #include "opengl/helpers.h"
 
 /*!
@@ -17,7 +23,7 @@
 class GLWidget_Diffuse1 : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
-	GLWidget_Diffuse1(QWidget *parent);
+	GLWidget_Diffuse1(QWidget* parent);
 
 	~GLWidget_Diffuse1();
 
@@ -89,5 +95,3 @@ private:
 
 	QOpenGLShaderProgram *shaderProgram;
 };
-
-#endif // GLWIDGET_DIFFUSE1_H

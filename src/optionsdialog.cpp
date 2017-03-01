@@ -53,6 +53,8 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_autoSave->setChecked( settings->autoSave );
 
+	ui->checkBox_changeName->setChecked( settings->changeName );
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -78,6 +80,17 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 	ui->checkBox_useQuotesForTexture->setChecked( !settings->useQuotesForTexture );
 
 	updateCustomShaderStats();
+
+	ui->lineEdit_bumpSuffix->setText( settings->bumpSuffix );
+	ui->lineEdit_diffuseSuffix->setText( settings->diffuseSuffix );
+	ui->lineEdit_specSuffix->setText( settings->specSuffix );
+	ui->lineEdit_glossSuffix->setText( settings->glossSuffix );
+
+	ui->comboBox_mipmapFilter->setCurrentIndex(ui->comboBox_mipmapFilter->findText(settings->mipmapFilter, Qt::MatchFixedString));
+	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(ui->comboBox_mipmapSharpenFilter->findText(settings->mipmapSharpenFilter, Qt::MatchFixedString));
+
+	ui->checkBox_noNormalSharpen->setChecked( settings->noNormalSharpen );
+	ui->checkBox_noGlossMip->setChecked( settings->noGlossMip );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -346,7 +359,73 @@ void OptionsDialog::saveSettings()
 	}
 
 	//----------------------------------------------------------------------------------------//
-	// Second Tab - Parameters
+	// texture conversion options
+	//----------------------------------------------------------------------------------------//
+	if (ui->lineEdit_diffuseSuffix->text() != mSettings->diffuseSuffix) {
+		mSettings->diffuseSuffix = ui->lineEdit_diffuseSuffix->text();
+		mIniSettings->setValue( "diffuseSuffix", ui->lineEdit_diffuseSuffix->text() );
+	}
+	if (ui->lineEdit_bumpSuffix->text() != mSettings->bumpSuffix) {
+		mSettings->bumpSuffix = ui->lineEdit_bumpSuffix->text();
+		mIniSettings->setValue( "bumpSuffix", ui->lineEdit_bumpSuffix->text() );
+	}
+	if (ui->lineEdit_specSuffix->text() != mSettings->diffuseSuffix) {
+		mSettings->specSuffix = ui->lineEdit_specSuffix->text();
+		mIniSettings->setValue( "specSuffix", ui->lineEdit_specSuffix->text() );
+	}
+	if (ui->lineEdit_glossSuffix->text() != mSettings->glossSuffix) {
+		mSettings->glossSuffix = ui->lineEdit_glossSuffix->text();
+		mIniSettings->setValue( "glossSuffix", ui->lineEdit_glossSuffix->text() );
+	}
+
+
+	if (ui->comboBox_mipmapFilter->currentText() != mSettings->mipmapFilter ) {
+		mSettings->mipmapFilter = ui->comboBox_mipmapFilter->currentText();
+		mIniSettings->setValue( "mipmapFilter", ui->comboBox_mipmapFilter->currentText() );
+	}
+	if (ui->comboBox_mipmapSharpenFilter->currentText() != mSettings->mipmapSharpenFilter ) {
+		mSettings->mipmapSharpenFilter = ui->comboBox_mipmapSharpenFilter->currentText();
+		mIniSettings->setValue( "mipmapSharpenFilter", ui->comboBox_mipmapSharpenFilter->currentText() );
+	}
+
+	if( ui->checkBox_changeName->isChecked() ) {
+		if( !mSettings->changeName ) {
+			mSettings->changeName = true;
+			mIniSettings->setValue( "changeName", "1" );
+		}
+	} else {
+		if(mSettings->changeName) {
+			mSettings->changeName = false;
+			mIniSettings->setValue( "changeName", "0" );
+		}
+	}
+
+	if( ui->checkBox_noNormalSharpen->isChecked() ) {
+		if( !mSettings->noNormalSharpen ) {
+			mSettings->noNormalSharpen = true;
+			mIniSettings->setValue( "noNormalSharpen", "1" );
+		}
+	} else {
+		if(mSettings->noNormalSharpen) {
+			mSettings->noNormalSharpen = false;
+			mIniSettings->setValue( "noNormalSharpen", "0" );
+		}
+	}
+
+	if( ui->checkBox_noGlossMip->isChecked() ) {
+		if( !mSettings->noGlossMip ) {
+			mSettings->noGlossMip = true;
+			mIniSettings->setValue( "noGlossMip", "1" );
+		}
+	} else {
+		if(mSettings->noGlossMip) {
+			mSettings->noGlossMip = false;
+			mIniSettings->setValue( "noGlossMip", "0" );
+		}
+	}
+
+	//----------------------------------------------------------------------------------------//
+	// Parameters
 	//----------------------------------------------------------------------------------------//
 
 	if( ui->radioButton_groupedParameters->isChecked() ) // Grouped

@@ -33,6 +33,14 @@ private:
 
 	bool removeSuffix = false;
 
+	QString diffuseSuffix;
+	QString bumpSuffix;
+	QString specSuffix;
+	QString glossSuffix;
+
+	QString mipmapFilter;
+	QString mipmapSharpenFilter;
+
 private slots:
 
 	void setTemplate();

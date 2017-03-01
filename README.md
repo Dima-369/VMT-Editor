@@ -4,7 +4,7 @@ Visual editor for the VMT filetype, used by Source Engine 1, written in C++ and 
 
 Includes texture preview, parameter validation and generally tries to help in editing VMTs.
 
-![version](https://img.shields.io/badge/version-1.3-blue.svg)
+![version](https://img.shields.io/badge/version-1.3.1-blue.svg)
 
 ## Downloads
 
@@ -30,7 +30,7 @@ We are using Qt 5.6 and MinGW 5.3.0 for compiling (but newer versions should wor
 
 Or skip the GUIs and compile through qmake directly.
 
-You can open the example VMTs in the `misc/vmt` folder to check how everything looks for you.
+You can open the example VMTs in the `misc/vmt` folder to check if everything works correctly.
 
 ## Screenshots
 
