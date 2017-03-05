@@ -359,4 +359,23 @@ QString toParameter(const QColor &color, bool toLinear)
 	return QString("[%1 %2 %3]").arg(red, green, blue);
 }
 
+QString toParameterBig(const QColor &color, const double multiplier, bool toLinear)
+{
+	double redf = color.redF() * multiplier;
+	double greenf = color.greenF() * multiplier;
+	double bluef = color.blueF() * multiplier;
+
+	if(toLinear) {
+		redf = pow(redf, 2.2);
+		greenf = pow(greenf, 2.2);
+		bluef = pow(bluef, 2.2);
+	}
+
+	const QString red = stripZeroes(QString::number(redf, 'f', 2));
+	const QString green = stripZeroes(QString::number(greenf, 'f', 2));
+	const QString blue = stripZeroes(QString::number(bluef, 'f', 2));
+
+	return QString("[%1 %2 %3]").arg(red, green, blue);
+}
+
 } // namespace utils

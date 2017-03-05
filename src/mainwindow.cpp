@@ -293,8 +293,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	//----------------------------------------------------------------------------------------//
 
+	ui->doubleSpinBox_envmapTint->setDoubleSlider(ui->horizontalSlider_envmapTint);
+
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
-	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
+	//ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
 	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
 	ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
@@ -1818,9 +1820,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingEnvmap )
 			Error("$envmaptint is only supported with $envmap!")
 
-		applyBackgroundColor("$envmaptint", value,
+		applyColor("$envmaptint", value,
 			ui->color_envmapTint,
-			ui->horizontalSlider_envmapTint, ui);
+			ui->doubleSpinBox_envmapTint, ui);
 
 		showShadingReflection = true;
 	}
@@ -4517,7 +4519,8 @@ void MainWindow::resetWidgets() {
 	ui->horizontalSlider_contrast->setDisabled(true);
 
 	ui->label_envmapTint->setDisabled(true);
-	ui->horizontalSlider_envmapTint->setValue(255);
+	ui->doubleSpinBox_envmapTint->setDisabled(true);
+	ui->doubleSpinBox_envmapTint->setValue(1.0);
 	ui->horizontalSlider_envmapTint->setDisabled(true);
 	ui->color_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->toolButton_envmapTint->setDisabled(true);
@@ -8177,7 +8180,7 @@ void MainWindow::changedColor() {
 	QWidget* caller = qobject_cast<QWidget *>( sender() );
 
 	if( caller->objectName() == "toolButton_envmapTint" )
-		changeColor(ui->color_envmapTint, ui->horizontalSlider_envmapTint);
+		changeColor(ui->color_envmapTint);
 
 	else if( caller->objectName() == "toolButton_phongTint" )
 		changeColor(ui->color_phongTint, ui->horizontalSlider_phongTint);
@@ -8269,6 +8272,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->label_envmapTint->setDisabled(true);
 			ui->horizontalSlider_envmapTint->setDisabled(true);
+			ui->doubleSpinBox_envmapTint->setDisabled(true);
 			ui->toolButton_envmapTint->setDisabled(true);
 
 			ui->label_specmap->setDisabled(true);
@@ -8307,6 +8311,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->label_envmapTint->setEnabled(true);
 			ui->horizontalSlider_envmapTint->setEnabled(true);
+			ui->doubleSpinBox_envmapTint->setEnabled(true);
 			ui->toolButton_envmapTint->setEnabled(true);
 
 			ui->label_lightinfluence->setEnabled(true);
@@ -8424,6 +8429,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 			ui->label_envmapTint->setEnabled(true);
 			ui->horizontalSlider_envmapTint->setEnabled(true);
+			ui->doubleSpinBox_envmapTint->setEnabled(true);
 
 			ui->toolButton_envmapTint->setEnabled(true);
 
@@ -8496,6 +8502,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 				ui->label_envmapTint->setDisabled(true);
 				ui->horizontalSlider_envmapTint->setDisabled(true);
+				ui->doubleSpinBox_envmapTint->setDisabled(true);
 				ui->toolButton_envmapTint->setDisabled(true);
 
 				ui->label_specmap->setDisabled(true);

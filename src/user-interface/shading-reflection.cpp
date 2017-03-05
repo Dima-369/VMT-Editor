@@ -43,7 +43,8 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 
 	if (ui->toolButton_envmapTint->isEnabled()) {
 		const QString tint = 
-			toParameter(utils::getBG(ui->color_envmapTint));
+			toParameterBig(utils::getBG(ui->color_envmapTint),
+						   ui->doubleSpinBox_envmapTint->value());
 		if (tint != "[1 1 1]")
 			vmt->parameters.insert("$envmaptint", tint);
 	}

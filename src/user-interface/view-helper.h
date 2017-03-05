@@ -67,6 +67,10 @@ void applyBackgroundColor(const QString &parameter, const QString &value,
 void applyBackgroundColor(const QString &parameter, const QString &value,
 	QPlainTextEdit *colorWidget, Ui::MainWindow *ui, bool toSrgb = false);
 
+void applyColor(const QString &parameter, const QString &value,
+	QPlainTextEdit *colorWidget, QDoubleSpinBox *spinBox, Ui::MainWindow *ui,
+	bool toSrgb = false);
+
 /*!
  * Applies a background-color stylesheet to the passed color widget.
  *
