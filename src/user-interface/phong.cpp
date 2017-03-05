@@ -213,6 +213,7 @@ void processExponent1(const QString &parameter, const QString &value,
 
 	utils::IntResult r = utils::parseIntNoDefault(value);
 	ui->spinBox_exponent->setValue(r.value);
+	ui->spinBox_spec_exponent2->setValue(r.value);
 	ui->spinBox_exponent2->setValue(r.value);
 }
 
@@ -237,6 +238,8 @@ void processMaskContrastBrightness(const QString &parameter,
 		if (first) {
 			ui->doubleSpinBox_maskContrast->setValue(mc);
 			ui->doubleSpinBox_maskBrightness->setValue(mb);
+			ui->doubleSpinBox_spec_maskContrast2->setValue(mc);
+			ui->doubleSpinBox_spec_maskBrightness2->setValue(mb);
 		} else {
 			ui->doubleSpinBox_spec_maskContrast2->setValue(mc);
 			ui->doubleSpinBox_spec_maskBrightness2->setValue(mb);
@@ -284,7 +287,7 @@ void processPhongAmount(const QString &parameter, const QString &value,
 	float blue = r.values.at(2);
 	float alpha = r.values.at(3);
 
-	if (allRegular) {
+	/*if (allRegular) {
 		if (first) {
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_phongAmount);
@@ -294,7 +297,7 @@ void processPhongAmount(const QString &parameter, const QString &value,
 				ui->color_spec_amount2);
 				ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 		}
-	} else {
+	} else {*/
 		double max = static_cast<double>(
 			qMax(red, qMax(green, blue)));
 
@@ -307,12 +310,16 @@ void processPhongAmount(const QString &parameter, const QString &value,
 				ui->color_phongAmount);
 			ui->doubleSpinBox_phongAmount->setValue(max);
 			ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
+			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
+				ui->color_spec_amount2);
+			ui->doubleSpinBox_spec_amount2->setValue(max);
+			ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 		} else {
 			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
 				ui->color_spec_amount2);
 			ui->doubleSpinBox_spec_amount2->setValue(max);
 			ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
-		}
+		//}
 	}
 }
 

@@ -269,13 +269,13 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);
 	ui->doubleSpinBox_bumpdetailscale2->setDoubleSlider(ui->horizontalSlider_bumpdetailscale2);
 
-	ui->doubleSpinBox_phongAmount->setDoubleSlider(ui->horizontalSlider_phongAmount, 8.0);
-	ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 20.0);
-	ui->doubleSpinBox_maskContrast->setDoubleSlider(ui->horizontalSlider_maskContrast, 20.0);
+	ui->doubleSpinBox_phongAmount->setDoubleSlider(ui->horizontalSlider_phongAmount, 2.0);
+	ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 10.0);
+	ui->doubleSpinBox_maskContrast->setDoubleSlider(ui->horizontalSlider_maskContrast, 10.0);
 
-	ui->doubleSpinBox_spec_amount2->setDoubleSlider(ui->horizontalSlider_spec_amount2, 8.0);
-	ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 20.0);
-	ui->doubleSpinBox_spec_maskContrast2->setDoubleSlider(ui->horizontalSlider_spec_maskContrast2, 20.0);
+	ui->doubleSpinBox_spec_amount2->setDoubleSlider(ui->horizontalSlider_spec_amount2, 2.0);
+	ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 10.0);
+	ui->doubleSpinBox_spec_maskContrast2->setDoubleSlider(ui->horizontalSlider_spec_maskContrast2, 10.0);
 
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
 
