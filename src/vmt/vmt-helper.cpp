@@ -128,7 +128,13 @@ ColorResult parseColor(const QString &parameter,
 
 		result.valid = true;
 		result.notDefault = true;
-		result.doubleValues = dp.values;
+
+		foreach(double x, dp.values) {
+			if (toSrgb)
+				x = pow(x, 0.454545);
+			result.doubleValues.append(x);
+		}
+
 		foreach(double x, dp.values) {
 			if (x < 0.0) {
 				x = 0.0;
