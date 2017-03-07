@@ -32,7 +32,14 @@ TexturePreviewDialog::TexturePreviewDialog(
 
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
-	move(mouse.x() - (w/2), mouse.y() - (h/2));
+	int x1 = mouse.x() - 96;
+	int y1 = mouse.y() - 96;
+	if (y1 < 96) {
+		y1 = 96;
+	} else if (y1 > (monitor.height() - h - 96)) {
+		y1 = monitor.height() - h - 96;
+	}
+	move(x1, y1);
 
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 
