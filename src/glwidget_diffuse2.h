@@ -3,6 +3,7 @@
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLTexture>
+#include <QMouseEvent>
 #include <qdebug.h>
 
 #ifdef Q_OS_DARWIN
@@ -12,6 +13,7 @@
 #endif
 
 #include "opengl/helpers.h"
+#include "texturepreviewdialog.h"
 
 /*!
  * Displays a diffuse and bumpmap texture in a split view if both are loaded.
@@ -52,6 +54,12 @@ public:
 	bool isPreviewing() {
 		return showDiffuse || showBumpmap;
 	}
+
+protected:
+
+	void mousePressEvent(QMouseEvent* event) override;
+
+	void mouseMoveEvent(QMouseEvent* event) override;
 
 private:
 	bool showDiffuse;
