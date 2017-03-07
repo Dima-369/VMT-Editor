@@ -3357,7 +3357,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$color2") ).isEmpty() )
 	{
 		QString col1 = "$color2";
-		utils::applyColor(col1, value, ui->color_color2, ui->doubleSpinBox_color1, ui);
+		utils::applyColor(col1, value, ui->color_color2, ui->doubleSpinBox_color2, ui);
 
 		showColor = true;
 	}
