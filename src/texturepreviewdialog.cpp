@@ -18,7 +18,7 @@ TexturePreviewDialog::TexturePreviewDialog(
 	ui->setupUi(this);
 
 	const QSize size = image.size();
-	const int imagePadding = 100;
+	const int imagePadding = 56;
 
 	int w = size.width();
 	int h = size.height();
