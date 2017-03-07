@@ -34,10 +34,11 @@ TexturePreviewDialog::TexturePreviewDialog(
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
 	int x1 = mouse.x() - 48;
 	int y1 = mouse.y() - h/2 + 96;
-	if (y1 < 96) {
-		y1 = 96;
-	} else if (y1 > (monitor.height() - h - 96)) {
-		y1 = monitor.height() - h - 96;
+	if (y1 < 16) {
+		y1 = 16;
+	//taskbar is 40px high
+	} else if (y1 > (monitor.height() - h - 40)) {
+		y1 = monitor.height() - h - 40;
 	}
 	move(x1, y1);
 
