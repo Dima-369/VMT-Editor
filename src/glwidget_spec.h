@@ -51,7 +51,8 @@ private:
 	QOpenGLTexture *texture;
 	QOpenGLTexture *textTexture;
 
-	// QOpenGLTexture does not store it and we need this for the preview
-	QString file;
-
+	// We need this for the preview
+	// the filepath is not stored because the texture is constructed in
+	// updateValues() on every load
+	QImage image;
 };

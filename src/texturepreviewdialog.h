@@ -22,7 +22,9 @@ class TexturePreviewDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit TexturePreviewDialog(const QString& file, QWidget* parent);
+	TexturePreviewDialog(const QString& file, QWidget* parent);
+
+	TexturePreviewDialog(const QImage& image, QWidget* parent);
 
 	~TexturePreviewDialog();
 
@@ -31,6 +33,8 @@ protected:
 	void mousePressEvent(QMouseEvent* event) override;
 
 private:
+
+	void setup(const QImage& image);
 
 	Ui::TexturePreviewDialog* ui;
 };

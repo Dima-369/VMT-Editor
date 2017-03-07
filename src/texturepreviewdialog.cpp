@@ -6,7 +6,7 @@ TexturePreviewDialog::TexturePreviewDialog(
 	ui(new Ui::TexturePreviewDialog)
 {
 	// dropping alpha channel for preview
-	QImage image(QImage(file).convertToFormat(QImage::Format_RGB888));
+	QImage image(QImage(file).convertToFormat(QImage::Format_RGB32));
 
 	if (image.isNull()) {
 		// trying to preview an invalid image?
@@ -16,6 +16,32 @@ TexturePreviewDialog::TexturePreviewDialog(
 		return;
 	}
 		
+	setup(image);
+}
+
+TexturePreviewDialog::TexturePreviewDialog(
+		const QImage& image, QWidget* parent) :
+	QDialog(parent),
+	ui(new Ui::TexturePreviewDialog)
+{
+	if (image.isNull()) {
+		// trying to preview an invalid image?
+		// the close() signal has to be queued because close() directly
+		// does not work in the construction
+		QMetaObject::invokeMethod(this, "close", Qt::QueuedConnection);
+		return;
+	}
+
+	setup(image);
+}
+
+TexturePreviewDialog::~TexturePreviewDialog()
+{
+	delete ui;
+}
+
+void TexturePreviewDialog::setup(const QImage& image)
+{
 	ui->setupUi(this);
 
 	const QSize size = image.size();
@@ -33,14 +59,9 @@ TexturePreviewDialog::TexturePreviewDialog(
 
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
-	int x1 = mouse.x() - 48;
-	int y1 = mouse.y() - h/2 + 96;
-	if (y1 < 16) {
-		y1 = 16;
-	//taskbar is 40px high
-	} else if (y1 > (monitor.height() - h - 40)) {
-		y1 = monitor.height() - h - 40;
-	}
+	// Windows taskbar is 40px high
+	int x1 = qBound(0, mouse.x() - 48, monitor.width() - w - 40);
+	int y1 = qBound(16, mouse.y() - h/2 + 96, monitor.height() - h - 40);
 	move(x1, y1);
 
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
@@ -48,18 +69,13 @@ TexturePreviewDialog::TexturePreviewDialog(
 	setMinimumSize(w, h);
 	setMaximumSize(w, h);
 
+	// background-images are causing images with the alpha, so a QLabel is
+	// used for the preview
 	ui->texture->setPixmap(QPixmap::fromImage(image));
-	// just a background-image will not work because it won't be stretched!
-	//setStyleSheet(QString("border-image: url(%1) 0 0 0 0 stretch stretch;")
-		//.arg(file));
-}
-
-TexturePreviewDialog::~TexturePreviewDialog()
-{
-	delete ui;
 }
 
 void TexturePreviewDialog::mousePressEvent(QMouseEvent* event)
 {
+	Q_UNUSED(event);
 	close();
 }

@@ -57,21 +57,16 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 {
 	if (filePath.isEmpty()) {
 		qDebug() << "Wants to load an empty image?";
-		file = "";
 		setVisible(false);
 		return;
 	}
-
-	QImage image;
 
 	if (!image.load(filePath)) {
 		qDebug() << "Could not load " << filePath;
-		file = "";
 		setVisible(false);
 		return;
 	}
 
-	file = filePath;
 	image = image.mirrored();
 
 	setVisible(true);
@@ -126,8 +121,6 @@ void GLWidget_Spec::mousePressEvent(QMouseEvent* event)
 {
 	Q_UNUSED(event)
 
-	if (!file.isEmpty()) {
-		TexturePreviewDialog dialog(file, this);
-		dialog.exec();
-	}
+	TexturePreviewDialog dialog(image, this);
+	dialog.exec();
 }
