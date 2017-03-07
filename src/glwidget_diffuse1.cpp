@@ -22,6 +22,8 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
 
+	setMouseTracking(true);
+
 	setVisible(false);
 }
 
