@@ -14,6 +14,8 @@ GLWidget::GLWidget(
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
 
+	setMouseTracking(true);
+
 	const auto size = QSize(192, 192);
 	setMinimumSize(size);
 	setMaximumSize(size);
@@ -102,4 +104,9 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
 		TexturePreviewDialog dialog(file, this);
 		dialog.exec();
 	}
+}
+
+void GLWidget::mouseMoveEvent(QMouseEvent* event)
+{
+	setCursor(Qt::PointingHandCursor);
 }
