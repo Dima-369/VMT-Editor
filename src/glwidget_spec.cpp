@@ -61,8 +61,6 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 		return;
 	}
 
-	QImage image;
-
 	if (!image.load(filePath)) {
 		qDebug() << "Could not load " << filePath;
 		setVisible(false);
@@ -117,4 +115,12 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 		height());
 
 	update();
+}
+
+void GLWidget_Spec::mousePressEvent(QMouseEvent* event)
+{
+	Q_UNUSED(event)
+
+	TexturePreviewDialog dialog(image.mirrored(), this);
+	dialog.exec();
 }

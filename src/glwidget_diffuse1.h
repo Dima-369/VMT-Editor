@@ -14,6 +14,7 @@
 #endif
 
 #include "utilities.h"
+#include "texturepreviewdialog.h"
 #include "opengl/helpers.h"
 
 /*!
@@ -68,6 +69,12 @@ public:
 	bool isPreviewing() {
 		return showDiffuse || showBumpmap;
 	}
+
+protected:
+
+	void mousePressEvent(QMouseEvent* event) override;
+
+	void mouseMoveEvent(QMouseEvent* event) override;
 
 private:
 	bool showDiffuse;
