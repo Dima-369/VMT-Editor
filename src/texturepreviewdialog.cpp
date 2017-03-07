@@ -5,7 +5,8 @@ TexturePreviewDialog::TexturePreviewDialog(
 	QDialog(parent),
 	ui(new Ui::TexturePreviewDialog)
 {
-	QPixmap image(file);
+	// dropping alpha channel for preview
+	QImage image(QImage(file).convertToFormat(QImage::Format_RGB888));
 
 	if (image.isNull()) {
 		// trying to preview an invalid image?
@@ -47,9 +48,10 @@ TexturePreviewDialog::TexturePreviewDialog(
 	setMinimumSize(w, h);
 	setMaximumSize(w, h);
 
+	ui->texture->setPixmap(QPixmap::fromImage(image));
 	// just a background-image will not work because it won't be stretched!
-	setStyleSheet(QString("border-image: url(%1) 0 0 0 0 stretch stretch;")
-		.arg(file));
+	//setStyleSheet(QString("border-image: url(%1) 0 0 0 0 stretch stretch;")
+		//.arg(file));
 }
 
 TexturePreviewDialog::~TexturePreviewDialog()
