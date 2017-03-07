@@ -9,7 +9,8 @@ TexturePreviewDialog::TexturePreviewDialog(
 
 	if (image.isNull()) {
 		// trying to preview an invalid image?
-		// close() does not work here directely!
+		// the close() signal has to be queued because close() directly
+		// does not work in the construction
 		QMetaObject::invokeMethod(this, "close", Qt::QueuedConnection);
 		return;
 	}
