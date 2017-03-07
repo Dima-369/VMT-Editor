@@ -118,3 +118,13 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 
 	update();
 }
+
+void GLWidget_Spec::mousePressEvent(QMouseEvent* event)
+{
+	Q_UNUSED(event)
+
+	if (!file.isEmpty()) {
+		TexturePreviewDialog dialog(file, this);
+		dialog.exec();
+	}
+}

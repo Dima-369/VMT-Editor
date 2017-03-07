@@ -274,10 +274,8 @@ void processPhongAmount(const QString &parameter, const QString &value,
 		return;
 	}
 
-	bool allRegular = true;
 	foreach (double x, r.values) {
 		if (x > 1.0) {
-			allRegular = false;
 			break;
 		}
 	}
@@ -287,39 +285,26 @@ void processPhongAmount(const QString &parameter, const QString &value,
 	float blue = r.values.at(2);
 	float alpha = r.values.at(3);
 
-	/*if (allRegular) {
-		if (first) {
-			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-				ui->color_phongAmount);
-				ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
-		} else {
-			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-				ui->color_spec_amount2);
-				ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
-		}
-	} else {*/
-		double max = static_cast<double>(
-			qMax(red, qMax(green, blue)));
+	double max = static_cast<double>(qMax(red, qMax(green, blue)));
 
-		red = red / max;
-		green = green / max;
-		blue = blue / max;
+	red = red / max;
+	green = green / max;
+	blue = blue / max;
 
-		if (first) {
-			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-				ui->color_phongAmount);
-			ui->doubleSpinBox_phongAmount->setValue(max);
-			ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
-			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-				ui->color_spec_amount2);
-			ui->doubleSpinBox_spec_amount2->setValue(max);
-			ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
-		} else {
-			utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-				ui->color_spec_amount2);
-			ui->doubleSpinBox_spec_amount2->setValue(max);
-			ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
-		//}
+	if (first) {
+		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
+			ui->color_phongAmount);
+		ui->doubleSpinBox_phongAmount->setValue(max);
+		ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
+		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
+			ui->color_spec_amount2);
+		ui->doubleSpinBox_spec_amount2->setValue(max);
+		ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
+	} else {
+		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
+			ui->color_spec_amount2);
+		ui->doubleSpinBox_spec_amount2->setValue(max);
+		ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 	}
 }
 

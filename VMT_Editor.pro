@@ -77,7 +77,8 @@ SOURCES += \
     src/utilities/version.cpp \
     src/user-interface/treesway.cpp \
     src/vmttextedit.cpp \
-    src/texturedragdroplineedit.cpp
+    src/texturedragdroplineedit.cpp \
+    src/texturepreviewdialog.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -125,7 +126,8 @@ HEADERS += \
     src/utilities/version.h \
     src/user-interface/treesway.h \
     src/vmttextedit.h \
-    src/texturedragdroplineedit.h
+    src/texturedragdroplineedit.h \
+    src/texturepreviewdialog.h
 
 FORMS += \
     ui/mainwindow.ui \
@@ -138,6 +140,7 @@ FORMS += \
     ui/conversiondialog.ui \
     ui/batchdialog.ui \
     ui/editgamedialog.ui \
-    ui/editgamesdialog.ui
+    ui/editgamesdialog.ui \
+    ui/texturepreviewdialog.ui
 
 RESOURCES += resources.qrc

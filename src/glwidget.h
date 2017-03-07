@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QMimeData>
 #include <QDragEnterEvent>
+#include <QMouseEvent>
 #include <qdebug.h>
 
 #ifdef Q_OS_DARWIN
@@ -15,6 +16,7 @@
 #endif
 
 #include "opengl/helpers.h"
+#include "texturepreviewdialog.h"
 
 /*!
  * Displays a single texture with the passed overlay texture from
@@ -43,6 +45,10 @@ public:
 		return isShowing;
 	}
 
+protected:
+
+	void mousePressEvent(QMouseEvent* event) override;
+
 private:
 	bool isShowing;
 
@@ -50,6 +56,9 @@ private:
 
 	QOpenGLTexture *texture;
 	QOpenGLTexture *textTexture;
+
+	// QOpenGLTexture does not store it and we need this for the preview
+	QString file;
 
 	QString overlay;
 };

@@ -5,8 +5,8 @@ GLWidget::GLWidget(
 		QWidget* parent) :
 	QOpenGLWidget(parent),
 	isShowing(false),
-	texture(0),
-	textTexture(0),
+	texture(NULL),
+	textTexture(NULL),
 	overlay(overlayTexture)
 {
 	setObjectName(objectName);
@@ -66,6 +66,7 @@ void GLWidget::loadTexture(const QString &filePath)
 	if (filePath.isEmpty()) {
 		qDebug() << "Wants to load an empty image?";
 		isShowing = false;
+		file = "";
 		setVisible(false);
 		return;
 	}
@@ -75,6 +76,7 @@ void GLWidget::loadTexture(const QString &filePath)
 	if (!image.load(filePath)) {
 		qDebug() << "Could not load " << filePath;
 		isShowing = false;
+		file = "";
 		setVisible(false);
 		return;
 	}
@@ -86,7 +88,18 @@ void GLWidget::loadTexture(const QString &filePath)
 		height());
 
 	delete texture;
+	file = filePath;
 	texture = new QOpenGLTexture(image.mirrored());
 
 	update();
+}
+
+void GLWidget::mousePressEvent(QMouseEvent* event)
+{
+	Q_UNUSED(event)
+
+	if (!file.isEmpty()) {
+		TexturePreviewDialog dialog(file, this);
+		dialog.exec();
+	}
 }
