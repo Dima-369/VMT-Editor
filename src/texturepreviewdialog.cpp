@@ -32,8 +32,8 @@ TexturePreviewDialog::TexturePreviewDialog(
 
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
-	int x1 = mouse.x() - 96;
-	int y1 = mouse.y() - 96;
+	int x1 = mouse.x() - 48;
+	int y1 = mouse.y() - h/2 + 96;
 	if (y1 < 96) {
 		y1 = 96;
 	} else if (y1 > (monitor.height() - h - 96)) {
