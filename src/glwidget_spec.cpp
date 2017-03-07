@@ -57,6 +57,7 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 {
 	if (filePath.isEmpty()) {
 		qDebug() << "Wants to load an empty image?";
+		file = "";
 		setVisible(false);
 		return;
 	}
@@ -65,10 +66,12 @@ void GLWidget_Spec::updateValues(Mode mode, const QString &filePath)
 
 	if (!image.load(filePath)) {
 		qDebug() << "Could not load " << filePath;
+		file = "";
 		setVisible(false);
 		return;
 	}
 
+	file = filePath;
 	image = image.mirrored();
 
 	setVisible(true);
