@@ -121,6 +121,6 @@ void GLWidget_Spec::mousePressEvent(QMouseEvent* event)
 {
 	Q_UNUSED(event)
 
-	TexturePreviewDialog dialog(image, this);
+	TexturePreviewDialog dialog(image.mirrored(), this);
 	dialog.exec();
 }
