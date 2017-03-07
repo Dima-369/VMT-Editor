@@ -60,7 +60,7 @@ void TexturePreviewDialog::setup(const QImage& image)
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
 	// Windows taskbar is 40px high
-	int x1 = qBound(0, mouse.x() - 48, monitor.width() - w - 40);
+	int x1 = qMin(mouse.x() - 48, monitor.width() - w - 40);
 	int y1 = qBound(16, mouse.y() - h/2 + 96, monitor.height() - h - 40);
 	move(x1, y1);
 
