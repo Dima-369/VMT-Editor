@@ -1318,7 +1318,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2201</y>
+             <y>-2173</y>
              <width>926</width>
              <height>5042</height>
             </rect>
@@ -18977,11 +18977,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-113</y>
+     <y>-61</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
    </hints>
   </connection>
@@ -18993,7 +18993,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-83</y>
+     <y>-35</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -19009,11 +19009,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
     <hint type="destinationlabel">
      <x>430</x>
-     <y>-113</y>
+     <y>-61</y>
     </hint>
    </hints>
   </connection>
@@ -19025,11 +19025,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
     <hint type="destinationlabel">
      <x>531</x>
-     <y>-83</y>
+     <y>-35</y>
     </hint>
    </hints>
   </connection>
@@ -19041,11 +19041,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
     <hint type="destinationlabel">
      <x>607</x>
-     <y>-83</y>
+     <y>-35</y>
     </hint>
    </hints>
   </connection>
@@ -19057,7 +19057,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-139</y>
+     <y>-91</y>
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
@@ -19073,7 +19073,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>20</y>
+     <y>79</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -19089,7 +19089,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>618</y>
+     <y>688</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -19105,7 +19105,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>618</y>
+     <y>688</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -19121,7 +19121,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-139</y>
+     <y>-91</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -19137,7 +19137,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>589</y>
+     <y>659</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
@@ -19153,7 +19153,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -19169,7 +19169,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>668</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
@@ -19185,7 +19185,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>625</x>
@@ -19201,7 +19201,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>763</x>
-     <y>698</y>
+     <y>768</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -19217,7 +19217,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -19233,7 +19233,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>679</x>
-     <y>1315</y>
+     <y>1385</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -19249,7 +19249,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -19265,7 +19265,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>399</x>
-     <y>342</y>
+     <y>412</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -19281,7 +19281,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>20</y>
+     <y>79</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -19297,7 +19297,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>498</x>
-     <y>50</y>
+     <y>120</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -19313,7 +19313,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>412</x>
-     <y>80</y>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>308</x>
@@ -19329,7 +19329,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>111</y>
+     <y>181</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -19345,7 +19345,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-113</y>
+     <y>-61</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
@@ -19361,7 +19361,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>607</x>
-     <y>-83</y>
+     <y>-35</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -19377,7 +19377,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>536</x>
-     <y>-113</y>
+     <y>-61</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -19393,7 +19393,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
     <hint type="destinationlabel">
      <x>493</x>
@@ -19409,7 +19409,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-2014</y>
+     <y>-1966</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19425,7 +19425,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-2014</y>
+     <y>-1966</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19441,7 +19441,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-2044</y>
+     <y>-1996</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -19457,7 +19457,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>491</x>
-     <y>-1872</y>
+     <y>-1824</y>
     </hint>
     <hint type="destinationlabel">
      <x>414</x>
@@ -19473,7 +19473,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-1872</y>
+     <y>-1824</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -19489,7 +19489,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-1872</y>
+     <y>-1824</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -19505,7 +19505,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1257</y>
+     <y>-1209</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19521,7 +19521,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1257</y>
+     <y>-1209</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -19537,7 +19537,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1226</y>
+     <y>-1178</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -19553,7 +19553,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1226</y>
+     <y>-1178</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19569,7 +19569,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1257</y>
+     <y>-1209</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -19585,7 +19585,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1226</y>
+     <y>-1178</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -19601,7 +19601,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>-1226</y>
+     <y>-1178</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -19617,7 +19617,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1175</y>
+     <y>-1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
@@ -19633,7 +19633,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1175</y>
+     <y>-1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -19649,7 +19649,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1144</y>
+     <y>-1096</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19665,7 +19665,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1144</y>
+     <y>-1096</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -19681,7 +19681,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1175</y>
+     <y>-1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>278</x>
@@ -19697,7 +19697,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1144</y>
+     <y>-1096</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19713,7 +19713,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>-1144</y>
+     <y>-1096</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -19729,7 +19729,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>2154</y>
+     <y>2224</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -19745,7 +19745,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1986</y>
+     <y>2056</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19761,7 +19761,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1653</y>
+     <y>-1605</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19777,7 +19777,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19793,7 +19793,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19809,7 +19809,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>2746</y>
+     <y>2816</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -19825,7 +19825,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>2717</y>
+     <y>2787</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -19841,11 +19841,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>431</x>
-     <y>-1542</y>
+     <y>-1486</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
-     <y>-1538</y>
+     <y>-1490</y>
     </hint>
    </hints>
   </connection>
@@ -19857,7 +19857,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>395</x>
@@ -19873,11 +19873,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
-     <x>294</x>
-     <y>-1624</y>
+     <x>293</x>
+     <y>-1576</y>
     </hint>
    </hints>
   </connection>
@@ -19889,7 +19889,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1768</y>
+     <y>1838</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19905,11 +19905,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>826</x>
-     <y>-1624</y>
+     <y>-1576</y>
     </hint>
    </hints>
   </connection>
@@ -19921,7 +19921,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1797</y>
+     <y>1867</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -19937,7 +19937,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1628</y>
+     <y>1698</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -19953,7 +19953,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -19969,7 +19969,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1624</y>
+     <y>-1576</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -19985,7 +19985,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>762</x>
-     <y>469</y>
+     <y>539</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -20001,7 +20001,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>762</x>
-     <y>498</y>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -20017,7 +20017,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>2717</y>
+     <y>2787</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -20032,8 +20032,8 @@ border: 1px solid #222;
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>687</x>
-     <y>1546</y>
+     <x>763</x>
+     <y>1616</y>
     </hint>
     <hint type="destinationlabel">
      <x>252</x>
@@ -20049,7 +20049,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-863</y>
+     <y>-815</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -20065,7 +20065,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-834</y>
+     <y>-786</y>
     </hint>
     <hint type="destinationlabel">
      <x>489</x>
@@ -20081,7 +20081,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-921</y>
+     <y>-873</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -20097,7 +20097,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-892</y>
+     <y>-844</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -20113,7 +20113,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-892</y>
+     <y>-844</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -20129,7 +20129,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-921</y>
+     <y>-873</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -20145,7 +20145,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-863</y>
+     <y>-815</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -20161,7 +20161,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>20</y>
+     <y>79</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -20177,7 +20177,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-56</y>
+     <y>-5</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -20193,7 +20193,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2800</y>
+     <y>2870</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -20209,7 +20209,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2826</y>
+     <y>2896</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -20225,7 +20225,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2800</y>
+     <y>2870</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -20241,7 +20241,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>1228</y>
+     <y>1298</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -20257,7 +20257,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>1343</y>
+     <y>1413</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -20273,7 +20273,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-1963</y>
+     <y>-1915</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -20289,7 +20289,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-1932</y>
+     <y>-1884</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -20305,7 +20305,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>255</y>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -20321,7 +20321,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>255</y>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -20336,8 +20336,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>510</x>
-     <y>519</y>
+     <x>529</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>123</x>
@@ -20353,7 +20353,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2774</y>
+     <y>2844</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -20369,7 +20369,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2774</y>
+     <y>2844</y>
     </hint>
     <hint type="destinationlabel">
      <x>842</x>
@@ -20385,7 +20385,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>792</x>
-     <y>2800</y>
+     <y>2870</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -20401,7 +20401,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>636</x>
-     <y>2826</y>
+     <y>2896</y>
     </hint>
     <hint type="destinationlabel">
      <x>861</x>
@@ -20417,7 +20417,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>480</x>
-     <y>2774</y>
+     <y>2844</y>
     </hint>
     <hint type="destinationlabel">
      <x>506</x>
@@ -20433,7 +20433,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1760</y>
+     <y>-1712</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -20449,7 +20449,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1760</y>
+     <y>-1712</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -20465,7 +20465,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1731</y>
+     <y>-1683</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -20481,7 +20481,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1731</y>
+     <y>-1683</y>
     </hint>
     <hint type="destinationlabel">
      <x>287</x>
@@ -20497,7 +20497,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1702</y>
+     <y>-1654</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -20513,7 +20513,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2017</y>
+     <y>2087</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -20529,7 +20529,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>2077</y>
+     <y>2147</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -20545,7 +20545,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>2073</y>
+     <y>2143</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -20561,7 +20561,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>2100</y>
+     <y>2170</y>
     </hint>
     <hint type="destinationlabel">
      <x>736</x>
@@ -20577,7 +20577,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>2235</y>
+     <y>2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -20593,7 +20593,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>2235</y>
+     <y>2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -20609,7 +20609,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>401</x>
-     <y>2264</y>
+     <y>2334</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -20625,7 +20625,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>2264</y>
+     <y>2334</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -20641,7 +20641,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2185</y>
+     <y>2255</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -20657,7 +20657,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1659</y>
+     <y>1729</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
@@ -20673,7 +20673,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>528</x>
-     <y>1659</y>
+     <y>1729</y>
     </hint>
     <hint type="destinationlabel">
      <x>734</x>
@@ -20689,7 +20689,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>1690</y>
+     <y>1760</y>
     </hint>
     <hint type="destinationlabel">
      <x>608</x>
@@ -20705,7 +20705,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>428</x>
-     <y>1715</y>
+     <y>1785</y>
     </hint>
     <hint type="destinationlabel">
      <x>540</x>
@@ -20721,7 +20721,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>525</x>
-     <y>1715</y>
+     <y>1785</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -20737,7 +20737,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>1396</y>
+     <y>1466</y>
     </hint>
     <hint type="destinationlabel">
      <x>580</x>
@@ -20753,7 +20753,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>1425</y>
+     <y>1495</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -20769,7 +20769,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>1446</y>
+     <y>1516</y>
     </hint>
     <hint type="destinationlabel">
      <x>565</x>
@@ -20785,7 +20785,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>618</y>
+     <y>688</y>
     </hint>
     <hint type="destinationlabel">
      <x>675</x>
@@ -20801,7 +20801,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>589</y>
+     <y>659</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20817,7 +20817,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>634</x>
@@ -20833,7 +20833,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -20849,7 +20849,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>668</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -20865,7 +20865,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>729</y>
+     <y>799</y>
     </hint>
     <hint type="destinationlabel">
      <x>600</x>
@@ -20881,7 +20881,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>760</y>
+     <y>830</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -20897,7 +20897,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1768</y>
+     <y>1838</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -20913,7 +20913,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>791</y>
+     <y>861</y>
     </hint>
     <hint type="destinationlabel">
      <x>601</x>
@@ -20929,7 +20929,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1797</y>
+     <y>1867</y>
     </hint>
     <hint type="destinationlabel">
      <x>720</x>
@@ -20945,7 +20945,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>411</x>
-     <y>1935</y>
+     <y>2005</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -20961,7 +20961,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1827</y>
+     <y>1897</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -20977,7 +20977,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1856</y>
+     <y>1926</y>
     </hint>
     <hint type="destinationlabel">
      <x>795</x>
@@ -20993,7 +20993,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>573</x>
-     <y>1885</y>
+     <y>1955</y>
     </hint>
     <hint type="destinationlabel">
      <x>798</x>
@@ -21009,7 +21009,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1827</y>
+     <y>1897</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -21025,7 +21025,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1856</y>
+     <y>1926</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
@@ -21041,7 +21041,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1885</y>
+     <y>1955</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -21057,7 +21057,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>1914</y>
+     <y>1984</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -21073,7 +21073,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1166</y>
+     <y>1236</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -21089,7 +21089,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>1166</y>
+     <y>1236</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -21105,7 +21105,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>1166</y>
+     <y>1236</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -21121,7 +21121,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>1343</y>
+     <y>1413</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -21137,7 +21137,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>679</x>
-     <y>1315</y>
+     <y>1385</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -21153,7 +21153,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
     <hint type="destinationlabel">
      <x>573</x>
@@ -21169,7 +21169,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
     <hint type="destinationlabel">
      <x>681</x>
@@ -21185,7 +21185,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1197</y>
+     <y>1267</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -21201,7 +21201,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>450</x>
-     <y>1315</y>
+     <y>1385</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -21217,7 +21217,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-1963</y>
+     <y>-1915</y>
     </hint>
     <hint type="destinationlabel">
      <x>307</x>
@@ -21233,7 +21233,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>596</x>
-     <y>1315</y>
+     <y>1385</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
@@ -21249,7 +21249,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>-1932</y>
+     <y>-1884</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -21265,7 +21265,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1902</y>
+     <y>-1854</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -21281,7 +21281,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1841</y>
+     <y>-1793</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -21297,7 +21297,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1810</y>
+     <y>-1762</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -21313,7 +21313,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1495</y>
+     <y>1565</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -21329,7 +21329,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>1516</y>
+     <y>1586</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -21345,7 +21345,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>612</x>
-     <y>1577</y>
+     <y>1647</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -21361,7 +21361,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>516</x>
-     <y>1577</y>
+     <y>1647</y>
     </hint>
     <hint type="destinationlabel">
      <x>250</x>
@@ -21377,7 +21377,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>420</x>
-     <y>1577</y>
+     <y>1647</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -21393,7 +21393,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
-     <y>2077</y>
+     <y>2147</y>
     </hint>
     <hint type="destinationlabel">
      <x>575</x>
@@ -21409,11 +21409,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1258</y>
+     <y>1328</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
    </hints>
   </connection>
@@ -21425,11 +21425,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1259</y>
+     <y>1329</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1258</y>
+     <y>1328</y>
     </hint>
    </hints>
   </connection>
@@ -21441,7 +21441,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1458</y>
+     <y>-1410</y>
     </hint>
     <hint type="destinationlabel">
      <x>420</x>
@@ -21457,7 +21457,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1487</y>
+     <y>-1439</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -21473,7 +21473,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1487</y>
+     <y>-1439</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -21489,7 +21489,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1458</y>
+     <y>-1410</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -21505,7 +21505,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1398</y>
+     <y>-1350</y>
     </hint>
     <hint type="destinationlabel">
      <x>486</x>
@@ -21521,7 +21521,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-30</y>
+     <y>21</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21537,7 +21537,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-603</y>
+     <y>-555</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21553,7 +21553,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-372</y>
+     <y>-324</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21569,7 +21569,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-603</y>
+     <y>-555</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21585,7 +21585,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-567</y>
+     <y>-519</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -21601,7 +21601,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-567</y>
+     <y>-519</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -21617,7 +21617,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-798</y>
+     <y>-750</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21633,7 +21633,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-798</y>
+     <y>-750</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21649,7 +21649,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>575</x>
-     <y>-1377</y>
+     <y>-1321</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21665,7 +21665,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1348</y>
+     <y>-1300</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21681,7 +21681,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-1319</y>
+     <y>-1271</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21697,7 +21697,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-768</y>
+     <y>-720</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -21713,7 +21713,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-739</y>
+     <y>-691</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21729,7 +21729,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-710</y>
+     <y>-662</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21745,7 +21745,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-681</y>
+     <y>-633</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21761,7 +21761,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-652</y>
+     <y>-604</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21777,7 +21777,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-537</y>
+     <y>-489</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21793,7 +21793,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-508</y>
+     <y>-460</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -21809,7 +21809,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-479</y>
+     <y>-431</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21825,7 +21825,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-450</y>
+     <y>-402</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21841,7 +21841,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-421</y>
+     <y>-373</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21857,7 +21857,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-372</y>
+     <y>-324</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -21873,7 +21873,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>405</x>
-     <y>-336</y>
+     <y>-288</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21889,7 +21889,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>486</x>
-     <y>-336</y>
+     <y>-288</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -21905,7 +21905,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-306</y>
+     <y>-258</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -21921,7 +21921,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-277</y>
+     <y>-229</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21937,7 +21937,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-248</y>
+     <y>-200</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -21953,7 +21953,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-219</y>
+     <y>-171</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21969,7 +21969,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>-190</y>
+     <y>-142</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -21985,7 +21985,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-113</y>
+     <y>-61</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22001,7 +22001,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-85</y>
+     <y>-33</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22017,7 +22017,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>692</x>
-     <y>1166</y>
+     <y>1236</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22033,7 +22033,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>568</x>
-     <y>2077</y>
+     <y>2147</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22049,7 +22049,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>762</x>
-     <y>284</y>
+     <y>354</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22065,7 +22065,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>283</y>
+     <y>353</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22081,7 +22081,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>499</x>
-     <y>80</y>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>929</x>
@@ -22097,7 +22097,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>78</y>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel">
      <x>928</x>
@@ -22113,11 +22113,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>935</y>
+     <y>1005</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>934</y>
+     <y>1004</y>
     </hint>
    </hints>
   </connection>
@@ -22129,11 +22129,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>934</y>
+     <y>1004</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>935</y>
+     <y>1005</y>
     </hint>
    </hints>
   </connection>
@@ -22145,11 +22145,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1057</y>
+     <y>1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>1056</y>
+     <y>1126</y>
     </hint>
    </hints>
   </connection>
@@ -22161,11 +22161,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1056</y>
+     <y>1126</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
-     <y>1057</y>
+     <y>1127</y>
     </hint>
    </hints>
   </connection>
@@ -22177,7 +22177,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>904</y>
+     <y>974</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -22193,7 +22193,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>773</x>
-     <y>1028</y>
+     <y>1098</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -22209,11 +22209,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
-     <y>962</y>
+     <y>1032</y>
     </hint>
    </hints>
   </connection>
@@ -22225,11 +22225,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>962</y>
+     <y>1032</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>647</y>
+     <y>717</y>
     </hint>
    </hints>
   </connection>
@@ -22241,11 +22241,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>429</x>
-     <y>668</y>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
      <x>755</x>
-     <y>993</y>
+     <y>1063</y>
     </hint>
    </hints>
   </connection>
@@ -22257,11 +22257,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>755</x>
-     <y>993</y>
+     <y>1063</y>
     </hint>
     <hint type="destinationlabel">
      <x>429</x>
-     <y>668</y>
+     <y>738</y>
     </hint>
    </hints>
   </connection>
@@ -22273,7 +22273,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1165</y>
+     <y>1235</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -22289,7 +22289,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>-1094</y>
+     <y>-1046</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -22305,11 +22305,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>605</x>
-     <y>1396</y>
+     <y>1466</y>
     </hint>
     <hint type="destinationlabel">
      <x>529</x>
-     <y>1395</y>
+     <y>1465</y>
     </hint>
    </hints>
   </connection>
@@ -22321,11 +22321,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>1395</y>
+     <y>1465</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
-     <y>1396</y>
+     <y>1466</y>
     </hint>
    </hints>
   </connection>
@@ -22336,8 +22336,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>510</x>
-     <y>540</y>
+     <x>529</x>
+     <y>610</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22353,7 +22353,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1094</y>
+     <y>-1046</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22369,7 +22369,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1028</y>
+     <y>1098</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22385,7 +22385,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>904</y>
+     <y>974</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22401,7 +22401,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>853</y>
+     <y>923</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22417,7 +22417,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>822</y>
+     <y>892</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22433,7 +22433,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>798</x>
-     <y>822</y>
+     <y>892</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22449,7 +22449,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>822</y>
+     <y>892</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22465,7 +22465,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-971</y>
+     <y>-923</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22481,7 +22481,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>-1002</y>
+     <y>-954</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22497,7 +22497,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>739</x>
-     <y>-1033</y>
+     <y>-985</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22513,7 +22513,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1033</y>
+     <y>-985</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22529,7 +22529,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1033</y>
+     <y>-985</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22545,7 +22545,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1033</y>
+     <y>-985</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22561,7 +22561,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>-1064</y>
+     <y>-1016</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22577,7 +22577,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>-1064</y>
+     <y>-1016</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22593,7 +22593,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>653</x>
-     <y>-1064</y>
+     <y>-1016</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22609,7 +22609,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1086</y>
+     <y>1156</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22625,7 +22625,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1115</y>
+     <y>1185</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22641,7 +22641,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>966</y>
+     <y>1036</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22657,7 +22657,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>997</y>
+     <y>1067</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22673,7 +22673,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>935</y>
+     <y>1005</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22689,7 +22689,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>697</y>
+     <y>767</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22705,7 +22705,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>611</x>
-     <y>1057</y>
+     <y>1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -22721,7 +22721,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1545</y>
+     <y>1615</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -22737,7 +22737,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>1495</y>
+     <y>1565</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -22753,7 +22753,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1227</y>
+     <y>1297</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22769,7 +22769,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1985</y>
+     <y>2055</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22785,7 +22785,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>2153</y>
+     <y>2223</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22801,7 +22801,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>1627</y>
+     <y>1697</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22817,7 +22817,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>687</x>
-     <y>1628</y>
+     <y>1698</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -22833,7 +22833,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>2047</y>
+     <y>2117</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -22849,7 +22849,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>2047</y>
+     <y>2117</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22865,7 +22865,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1653</y>
+     <y>-1605</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22881,7 +22881,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>-1624</y>
+     <y>-1576</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22897,7 +22897,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-1595</y>
+     <y>-1547</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22913,7 +22913,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>430</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22929,7 +22929,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>476</x>
-     <y>-1538</y>
+     <y>-1490</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -22945,7 +22945,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>556</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -22961,7 +22961,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>662</x>
-     <y>-1571</y>
+     <y>-1515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22977,7 +22977,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>702</x>
-     <y>2100</y>
+     <y>2170</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22993,7 +22993,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>2314</y>
+     <y>2384</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23009,7 +23009,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>748</x>
-     <y>2345</y>
+     <y>2415</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23025,7 +23025,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2314</y>
+     <y>2384</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23041,7 +23041,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2345</y>
+     <y>2415</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23057,7 +23057,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2390</y>
+     <y>2460</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23073,7 +23073,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2421</y>
+     <y>2491</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23089,7 +23089,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2452</y>
+     <y>2522</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23105,7 +23105,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2497</y>
+     <y>2567</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23121,7 +23121,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2528</y>
+     <y>2598</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23137,7 +23137,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2559</y>
+     <y>2629</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23153,7 +23153,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2590</y>
+     <y>2660</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23169,7 +23169,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2635</y>
+     <y>2705</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23185,7 +23185,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>2666</y>
+     <y>2736</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23201,7 +23201,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>542</x>
-     <y>2666</y>
+     <y>2736</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23217,7 +23217,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>255</y>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23233,7 +23233,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>826</x>
-     <y>391</y>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23249,7 +23249,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>420</y>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23265,11 +23265,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2452</y>
+     <y>2522</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>2451</y>
+     <y>2521</y>
     </hint>
    </hints>
   </connection>
@@ -23281,11 +23281,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>2451</y>
+     <y>2521</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>2452</y>
+     <y>2522</y>
     </hint>
    </hints>
   </connection>
@@ -23297,11 +23297,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>2558</y>
+     <y>2628</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>2559</y>
+     <y>2629</y>
     </hint>
    </hints>
   </connection>
@@ -23313,11 +23313,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2559</y>
+     <y>2629</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>2558</y>
+     <y>2628</y>
     </hint>
    </hints>
   </connection>
@@ -23329,11 +23329,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>530</x>
-     <y>2589</y>
+     <y>2659</y>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>2590</y>
+     <y>2660</y>
     </hint>
    </hints>
   </connection>
@@ -23345,11 +23345,11 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>2590</y>
+     <y>2660</y>
     </hint>
     <hint type="destinationlabel">
      <x>530</x>
-     <y>2589</y>
+     <y>2659</y>
     </hint>
    </hints>
   </connection>
@@ -23361,7 +23361,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>907</x>
-     <y>391</y>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23377,7 +23377,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>420</y>
+     <y>490</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23393,7 +23393,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>825</x>
-     <y>1290</y>
+     <y>1360</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -23409,7 +23409,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>1290</y>
+     <y>1360</y>
     </hint>
     <hint type="destinationlabel">
      <x>281</x>
@@ -23489,7 +23489,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>696</x>
-     <y>-2162</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -23505,7 +23505,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>762</x>
-     <y>-2162</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -23521,7 +23521,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>828</x>
-     <y>-2162</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>888</x>
@@ -23537,7 +23537,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>529</x>
-     <y>312</y>
+     <y>382</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23553,7 +23553,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>450</x>
-     <y>1343</y>
+     <y>1413</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23569,7 +23569,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>906</x>
-     <y>-1428</y>
+     <y>-1380</y>
     </hint>
     <hint type="destinationlabel">
      <x>1231</x>
@@ -23585,7 +23585,7 @@ border: 1px solid #222;
    <hints>
     <hint type="sourcelabel">
      <x>894</x>
-     <y>-2162</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>434</x>
@@ -23600,8 +23600,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>693</y>
+     <x>606</x>
+     <y>768</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23616,8 +23616,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>485</y>
+     <x>605</x>
+     <y>568</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -23632,8 +23632,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
-     <y>461</y>
+     <x>605</x>
+     <y>539</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23648,8 +23648,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>543</x>
-     <y>463</y>
+     <x>605</x>
+     <y>539</y>
     </hint>
     <hint type="destinationlabel">
      <x>92</x>
@@ -23664,8 +23664,8 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>572</x>
-     <y>275</y>
+     <x>605</x>
+     <y>354</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23680,12 +23680,44 @@ border: 1px solid #222;
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>563</x>
-     <y>301</y>
+     <x>605</x>
+     <y>383</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
      <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_color1</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>colorChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>550</x>
+     <y>530</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-2</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_color2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>colorChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>562</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-4</x>
+     <y>569</y>
     </hint>
    </hints>
   </connection>
@@ -23721,5 +23753,6 @@ border: 1px solid #222;
   <slot>vmtPreviewParse()</slot>
   <slot>vmtPreviewChanged()</slot>
   <slot>changeShader()</slot>
+  <slot>colorChanged()</slot>
  </slots>
 </ui>

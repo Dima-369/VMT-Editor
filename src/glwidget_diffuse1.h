@@ -45,6 +45,10 @@ public:
 
 	void setAlpha(float alpha);
 
+	void setColor(float r, float g, float b);
+
+	void setColorVisible(bool visible);
+
 	void setTransparencyVisible(bool visible);
 
 	void setAlphaVisible(bool visible);
@@ -89,6 +93,11 @@ private:
 
 	float mAlpha;
 	float mAlphaTestReference;
+
+	bool colorVisible;
+	float mRed;
+	float mGreen;
+	float mBlue;
 
 	opengl::Offset offset;
 

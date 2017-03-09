@@ -5054,6 +5054,7 @@ void MainWindow::toggleDetailTexture()
 
 void MainWindow::toggleColor()
 {
+	glWidget_diffuse1->setColorVisible( !ui->groupBox_color->isVisible() );
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
 }
 
@@ -8220,12 +8221,14 @@ void MainWindow::changedColor() {
 	else if( caller->objectName() == "toolButton_fogTint" )
 		changeColor(ui->color_fogTint, ui->horizontalSlider_waterFogColor);
 
-	else if( caller->objectName() == "toolButton_color1" )
+	else if( caller->objectName() == "toolButton_color1" ) {
 		changeColor(ui->color_color1);
-
-	else if( caller->objectName() == "toolButton_color2" )
+		colorChanged();
+	}
+	else if( caller->objectName() == "toolButton_color2" ) {
 		changeColor(ui->color_color2);
-
+		colorChanged();
+	}
 	else if( caller->objectName() == "toolButton_reflectivity" )
 		changeColor(ui->color_reflectivity);
 
@@ -9803,6 +9806,29 @@ void MainWindow::showEditGamesDialog()
 void MainWindow::opacityChanged( double value ) {
 
 	glWidget_diffuse1->setAlpha(value);
+}
+
+void MainWindow::colorChanged() {
+
+	QColor color1 = utils::getBG(ui->color_color1);
+	QColor color2 = utils::getBG(ui->color_color1);
+
+	double multiplier1 = ui->doubleSpinBox_color1->value();
+	double multiplier2 = ui->doubleSpinBox_color2->value();
+
+	double r1 = color1.redF() * multiplier1;
+	double g1 = color1.greenF() * multiplier1;
+	double b1 = color1.blueF() * multiplier1;
+
+	double r2 = color2.redF() * multiplier2;
+	double g2 = color2.greenF() * multiplier2;
+	double b2 = color2.blueF() * multiplier2;
+
+	double r = r1 * r2;
+	double g = g1 * g2;
+	double b = b1 * b2;
+
+	glWidget_diffuse1->setColor(r,g,b);
 }
 
 void MainWindow::fresnelSliderEdited( int a ) {

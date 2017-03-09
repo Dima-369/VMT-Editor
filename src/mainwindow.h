@@ -421,6 +421,8 @@ private slots:
 
 	void opacityChanged( double value );
 
+	void colorChanged();
+
 	void fresnelSliderEdited( int value );
 
 	void fresnelYEdited( double value );

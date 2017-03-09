@@ -11,6 +11,10 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	enableAlphaTest(false),
 	mAlpha(1.0f),
 	mAlphaTestReference(0.7f),
+	colorVisible(false),
+	mRed(1.0),
+	mGreen(1.0),
+	mBlue(1.0),
 	mDiffuseTexture(0),
 	mBumpmapTexture(0),
 	mAlphaTexture(0),
@@ -18,6 +22,7 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	bumpmapTextTexture(0),
 	textureTextTexture(0),
 	shaderProgram(0)
+
 {
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
@@ -130,14 +135,26 @@ void GLWidget_Diffuse1::paintGL()
 	if(enableAlphaTest) {
 
 		if(showDiffuse) {
+			float r = 1.0;
+			float g = 1.0;
+			float b = 1.0;
+
+			if(colorVisible) {
+				r = mRed;
+				g = mGreen;
+				b = mBlue;
+			}
+
 			shaderProgram->bind();
 			shaderProgram->setUniformValue("alphaTest",
 				mAlphaTestReference);
-			opengl::drawQuad(offset, mDiffuseTexture);
+			glColor4f(r, g, b, 1.0f);
+			opengl::drawQuad(offset, mDiffuseTexture, false);
 			shaderProgram->release();
 		}
 
 		if(showBumpmap) {
+			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			glDisable(GL_BLEND);
 			opengl::drawTopRightTriangle(offset, mBumpmapTexture);
 		}
@@ -151,11 +168,21 @@ void GLWidget_Diffuse1::paintGL()
 			} else {
 				glDisable(GL_BLEND);
 			}
+			float r = 1.0;
+			float g = 1.0;
+			float b = 1.0;
+
+			if(colorVisible) {
+				r = mRed;
+				g = mGreen;
+				b = mBlue;
+			}
+
 
 			if(transparencyGroupVisible)
-				glColor4f( 1.0f, 1.0f, 1.0f, mAlpha );
+				glColor4f(r, g, b, mAlpha );
 			else
-				glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+				glColor4f(r, g, b, 1.0f);
 
 			bool setColor = false;
 
@@ -165,6 +192,7 @@ void GLWidget_Diffuse1::paintGL()
 			glDisable(GL_BLEND);
 
 			if(showBumpmap) {
+				glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 				opengl::drawTopRightTriangle(offset,
 					mBumpmapTexture, setColor);
 			}
@@ -248,6 +276,20 @@ void GLWidget_Diffuse1::setAlphaTestReference(float testReference) {
 void GLWidget_Diffuse1::setAlpha( float alpha ) {
 
 	mAlpha = alpha;
+	update();
+}
+
+void GLWidget_Diffuse1::setColor( float r, float g, float b ) {
+
+	mRed = r;
+	mGreen = g;
+	mBlue = b;
+	update();
+}
+
+void GLWidget_Diffuse1::setColorVisible(bool visible ) {
+
+	colorVisible = visible;
 	update();
 }
 
