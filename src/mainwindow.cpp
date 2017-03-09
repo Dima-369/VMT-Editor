@@ -3426,11 +3426,15 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(vmt.state.showDetail && !ui->action_detail->isChecked())
 		ui->action_detail->trigger();
 
-	if(showTransparency && !ui->action_transparency->isChecked())
+	if(showTransparency && !ui->action_transparency->isChecked()) {
+		glWidget_diffuse1->setTransparencyVisible(true);
 		ui->action_transparency->trigger();
+	}
 
-	if(showColor && !ui->action_color->isChecked())
+	if(showColor && !ui->action_color->isChecked()) {
+		glWidget_diffuse1->setColorVisible(true);
 		ui->action_color->trigger();
+	}
 
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
@@ -9824,9 +9828,9 @@ void MainWindow::colorChanged() {
 	double g2 = color2.greenF() * multiplier2;
 	double b2 = color2.blueF() * multiplier2;
 
-	double r = r1 * r2;
-	double g = g1 * g2;
-	double b = b1 * b2;
+	double r = pow(r1 * r2, 0.454545);
+	double g = pow(g1 * g2, 0.454545);
+	double b = pow(b1 * b2, 0.454545);
 
 	glWidget_diffuse1->setColor(r,g,b);
 }

@@ -56,6 +56,10 @@ void GLWidget_Diffuse1::reset()
 	enableAlphaTest = false;
 	mAlpha = 1.0f;
 	mAlphaTestReference = 0.7f;
+	mRed = 1.0;
+	mGreen = 1.0;
+	mBlue = 1.0;
+	colorVisible = false;
 	showDiffuse = false;
 	showBumpmap = false;
 	mDiffuseTexture = NULL;
