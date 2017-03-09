@@ -30,9 +30,12 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QLabel" name="texture">
-     <property name="text">
-      <string/>
+    <widget class="QGraphicsView" name="texture">
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
    </item>

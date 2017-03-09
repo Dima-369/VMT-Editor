@@ -3,6 +3,8 @@
 #include <QPixmap>
 #include <QDesktopWidget>
 #include <QSize>
+#include <QGraphicsView>
+
 
 #include "ui_texturepreviewdialog.h"
 
@@ -35,6 +37,8 @@ protected:
 private:
 
 	void setup(const QImage& image);
+
+	QGraphicsScene *scene;
 
 	Ui::TexturePreviewDialog* ui;
 };

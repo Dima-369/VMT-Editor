@@ -44,24 +44,30 @@ void TexturePreviewDialog::setup(const QImage& image)
 {
 	ui->setupUi(this);
 
+	scene = new QGraphicsScene(this);
+	ui->texture->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
 	const QSize size = image.size();
 	const int imagePadding = 56;
 
 	int w = size.width();
 	int h = size.height();
 	const QRect monitor = QApplication::desktop()->screenGeometry();
-	while ((w + imagePadding) > monitor.width() ||
-		(h + imagePadding) > monitor.height()) {
-		
-		w = w / 2;
-		h = h / 2;
+	if ((w + imagePadding) > monitor.width()) {
+		w = monitor.width() - imagePadding;
+		ui->texture->setDragMode(QGraphicsView::ScrollHandDrag);
+
+	}
+	if ((h + imagePadding) > monitor.height()) {
+		h = monitor.height() - imagePadding;
+		ui->texture->setDragMode(QGraphicsView::ScrollHandDrag);
 	}
 
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
 	// Windows taskbar is 40px high
-	int x1 = qMin(mouse.x() - 48, monitor.width() - w - 40);
-	int y1 = qBound(16, mouse.y() - h/2 + 96, monitor.height() - h - 40);
+	int x1 = qMin(mouse.x() - 48, monitor.width() - w - 48);
+	int y1 = qBound(8, mouse.y() - h/2 + 96, monitor.height() - h - 48);
 	move(x1, y1);
 
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
@@ -69,9 +75,8 @@ void TexturePreviewDialog::setup(const QImage& image)
 	setMinimumSize(w, h);
 	setMaximumSize(w, h);
 
-	// background-images are causing images with the alpha, so a QLabel is
-	// used for the preview
-	ui->texture->setPixmap(QPixmap::fromImage(image));
+	ui->texture->setScene(scene);
+	scene->addPixmap(QPixmap::fromImage(image));
 }
 
 void TexturePreviewDialog::mousePressEvent(QMouseEvent* event)
