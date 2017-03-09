@@ -445,6 +445,8 @@ private slots:
 
 	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
 
+	void reconvertAll();
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();

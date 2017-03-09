@@ -140,4 +140,13 @@ inline void clearLineEditAction(QLineEdit* le)
 	le->setToolTip("");
 }
 
+inline void triggerLineEditAction(QLineEdit* le)
+{
+	const auto actions = le->actions();
+	if (!actions.isEmpty()) {
+		le->actions()[0]->trigger();
+	}
+}
+
+
 } // namespace utils

@@ -224,6 +224,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
 
+	connect( ui->action_reconvertAll,	 SIGNAL(triggered()), this, SLOT(reconvertAll()));
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_refractAmount->setDoubleSlider(ui->horizontalSlider_refractAmount);
@@ -9617,6 +9619,28 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 			lineEdit->setToolTip(value);
 			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 		}
+	}
+}
+
+void MainWindow::reconvertAll() {
+
+	if(mVMTLoaded) {
+		triggerLineEditAction(ui->lineEdit_diffuse);
+		triggerLineEditAction(ui->lineEdit_diffuse2);
+		triggerLineEditAction(ui->lineEdit_diffuse3);
+		triggerLineEditAction(ui->lineEdit_diffuse4);
+		triggerLineEditAction(ui->lineEdit_bumpmap);
+		triggerLineEditAction(ui->lineEdit_bumpmap2);
+		triggerLineEditAction(ui->lineEdit_bumpmapAlpha);
+		triggerLineEditAction(ui->lineEdit_bump2);
+		triggerLineEditAction(ui->lineEdit_detail);
+		triggerLineEditAction(ui->lineEdit_exponentTexture);
+		triggerLineEditAction(ui->lineEdit_specmap);
+		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
+		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
+		triggerLineEditAction(ui->lineEdit_waterNormalMap);
+		triggerLineEditAction(ui->lineEdit_decal);
+		triggerLineEditAction(ui->lineEdit_phongWarp);
 	}
 }
 

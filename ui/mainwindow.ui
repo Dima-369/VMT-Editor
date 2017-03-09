@@ -1318,7 +1318,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2173</y>
+             <y>0</y>
              <width>926</width>
              <height>5042</height>
             </rect>
@@ -17813,6 +17813,8 @@ QToolButton:pressed
     <property name="title">
      <string>&amp;Tools</string>
     </property>
+    <addaction name="action_reconvertAll"/>
+    <addaction name="separator"/>
     <addaction name="actionRefresh"/>
     <addaction name="actionParse_VMT"/>
     <addaction name="actionClear_Message_Log"/>
@@ -18831,6 +18833,18 @@ border: 1px solid #222;
    </property>
    <property name="shortcut">
     <string>F6</string>
+   </property>
+  </action>
+  <action name="action_reconvertAll">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/reconvert</normaloff>:/icons/reconvert</iconset>
+   </property>
+   <property name="text">
+    <string>Reconvert All</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
    </property>
   </action>
  </widget>
