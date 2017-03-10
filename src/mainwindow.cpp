@@ -468,7 +468,15 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		} else {
 			QString cv = getCurrentVersion();
 			QString v = mIniSettings->value("latestVersion").toString();
-			if (cv != v)
+			QStringList cv1 = cv.split(".");
+			QStringList v1 = v.split(".");
+			int cv2 = cv1[0].toInt() * 10000 +
+					  cv1[1].toInt() * 100 +
+					  cv1[2].toInt();
+			int v2 = v1[0].toInt() * 10000 +
+					 v1[1].toInt() * 100 +
+					 v1[2].toInt();
+			if (cv2 < v2)
 				Info(QString("New version available: %1").arg(v));
 		}
 	}
