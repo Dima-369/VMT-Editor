@@ -12,9 +12,9 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	mAlpha(1.0f),
 	mAlphaTestReference(0.7f),
 	colorVisible(false),
-	mRed(1.0),
-	mGreen(1.0),
-	mBlue(1.0),
+	mRed(1.0f),
+	mGreen(1.0f),
+	mBlue(1.0f),
 	mDiffuseTexture(0),
 	mBumpmapTexture(0),
 	mAlphaTexture(0),
@@ -56,9 +56,9 @@ void GLWidget_Diffuse1::reset()
 	enableAlphaTest = false;
 	mAlpha = 1.0f;
 	mAlphaTestReference = 0.7f;
-	mRed = 1.0;
-	mGreen = 1.0;
-	mBlue = 1.0;
+	mRed = 1.0f;
+	mGreen = 1.0f;
+	mBlue = 1.0f;
 	colorVisible = false;
 	showDiffuse = false;
 	showBumpmap = false;
@@ -97,6 +97,7 @@ void GLWidget_Diffuse1::initializeGL()
 	if( !shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
 		"uniform sampler2D texture;"
 		"uniform float alphaTest;"
+		"uniform vec3 color;"
 		"varying vec2 tex0;"
 		"void main(void)"
 		"{"
@@ -104,8 +105,7 @@ void GLWidget_Diffuse1::initializeGL()
 		"	if(tex.a < alphaTest) {"
 		"		discard;"
 		"	} else {"
-		"		gl_FragColor = vec4("
-		"			texture2D(texture, tex0).rgb, 1.0);"
+		"		gl_FragColor = vec4(tex.rgb * color, 1.0);"
 		"	}"
 		"}") ) {
 
@@ -139,9 +139,10 @@ void GLWidget_Diffuse1::paintGL()
 	if(enableAlphaTest) {
 
 		if(showDiffuse) {
-			float r = 1.0;
-			float g = 1.0;
-			float b = 1.0;
+
+			float r = 1.0f;
+			float g = 1.0f;
+			float b = 1.0f;
 
 			if(colorVisible) {
 				r = mRed;
@@ -152,7 +153,7 @@ void GLWidget_Diffuse1::paintGL()
 			shaderProgram->bind();
 			shaderProgram->setUniformValue("alphaTest",
 				mAlphaTestReference);
-			glColor4f(r, g, b, 1.0f);
+			shaderProgram->setUniformValue("color",	QVector3D(r, g, b) );
 			opengl::drawQuad(offset, mDiffuseTexture, false);
 			shaderProgram->release();
 		}
@@ -172,9 +173,9 @@ void GLWidget_Diffuse1::paintGL()
 			} else {
 				glDisable(GL_BLEND);
 			}
-			float r = 1.0;
-			float g = 1.0;
-			float b = 1.0;
+			float r = 1.0f;
+			float g = 1.0f;
+			float b = 1.0f;
 
 			if(colorVisible) {
 				r = mRed;
