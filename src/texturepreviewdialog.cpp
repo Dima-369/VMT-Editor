@@ -53,8 +53,8 @@ void TexturePreviewDialog::setup(const QImage& image)
 	int w = size.width();
 	int h = size.height();
 	const QRect monitor = QApplication::desktop()->screenGeometry();
-	if ((w + imagePadding) > monitor.width()) {
-		w = monitor.width() - imagePadding;
+	if ((w + 16) > monitor.width()) {
+		w = monitor.width() - 16;
 		ui->texture->setDragMode(QGraphicsView::ScrollHandDrag);
 
 	}
@@ -66,7 +66,7 @@ void TexturePreviewDialog::setup(const QImage& image)
 	// centering dialog at mouse position
 	const QPoint mouse = mapFromGlobal(QCursor::pos());
 	// Windows taskbar is 40px high
-	int x1 = qMin(mouse.x() - 48, monitor.width() - w - 48);
+	int x1 = qMin(mouse.x() - 48, monitor.width() - w - 8);
 	int y1 = qBound(8, mouse.y() - h/2 + 96, monitor.height() - h - 48);
 	move(x1, y1);
 
