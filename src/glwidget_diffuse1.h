@@ -14,6 +14,7 @@
 #endif
 
 #include "utilities.h"
+#include "texturepreviewdialog.h"
 #include "opengl/helpers.h"
 
 /*!
@@ -44,6 +45,10 @@ public:
 
 	void setAlpha(float alpha);
 
+	void setColor(float r, float g, float b);
+
+	void setColorVisible(bool visible);
+
 	void setTransparencyVisible(bool visible);
 
 	void setAlphaVisible(bool visible);
@@ -69,6 +74,12 @@ public:
 		return showDiffuse || showBumpmap;
 	}
 
+protected:
+
+	void mousePressEvent(QMouseEvent* event) override;
+
+	void mouseMoveEvent(QMouseEvent* event) override;
+
 private:
 	bool showDiffuse;
 	bool showBumpmap;
@@ -82,6 +93,11 @@ private:
 
 	float mAlpha;
 	float mAlphaTestReference;
+
+	bool colorVisible;
+	float mRed;
+	float mGreen;
+	float mBlue;
 
 	opengl::Offset offset;
 

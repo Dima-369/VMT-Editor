@@ -421,6 +421,8 @@ private slots:
 
 	void opacityChanged( double value );
 
+	void colorChanged();
+
 	void fresnelSliderEdited( int value );
 
 	void fresnelYEdited( double value );
@@ -442,6 +444,8 @@ private slots:
 	void vmtPreviewChanged();
 
 	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
+
+	void reconvertAll();
 
 	//----------------------------------------------------------------------------------------//
 

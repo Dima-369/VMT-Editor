@@ -286,4 +286,6 @@ inline QString toWaterParameter(const QColor &color)
  */
 QString toParameter(const QColor &color, bool toLinear = false);
 
+QString toParameterBig(const QColor &color, const double multiplier, bool toLinear = false);
+
 } // namespace utils

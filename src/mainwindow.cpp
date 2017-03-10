@@ -224,6 +224,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
 
+	connect( ui->action_reconvertAll,	 SIGNAL(triggered()), this, SLOT(reconvertAll()));
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_refractAmount->setDoubleSlider(ui->horizontalSlider_refractAmount);
@@ -269,13 +271,13 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);
 	ui->doubleSpinBox_bumpdetailscale2->setDoubleSlider(ui->horizontalSlider_bumpdetailscale2);
 
-	ui->doubleSpinBox_phongAmount->setDoubleSlider(ui->horizontalSlider_phongAmount, 8.0);
-	ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 20.0);
-	ui->doubleSpinBox_maskContrast->setDoubleSlider(ui->horizontalSlider_maskContrast, 20.0);
+	ui->doubleSpinBox_phongAmount->setDoubleSlider(ui->horizontalSlider_phongAmount, 2.0);
+	ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 10.0);
+	ui->doubleSpinBox_maskContrast->setDoubleSlider(ui->horizontalSlider_maskContrast, 10.0);
 
-	ui->doubleSpinBox_spec_amount2->setDoubleSlider(ui->horizontalSlider_spec_amount2, 8.0);
-	ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 20.0);
-	ui->doubleSpinBox_spec_maskContrast2->setDoubleSlider(ui->horizontalSlider_spec_maskContrast2, 20.0);
+	ui->doubleSpinBox_spec_amount2->setDoubleSlider(ui->horizontalSlider_spec_amount2, 2.0);
+	ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 10.0);
+	ui->doubleSpinBox_spec_maskContrast2->setDoubleSlider(ui->horizontalSlider_spec_maskContrast2, 10.0);
 
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
 
@@ -293,11 +295,22 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	//----------------------------------------------------------------------------------------//
 
+	ui->doubleSpinBox_envmapTint->setDoubleSlider(ui->horizontalSlider_envmapTint);
+
+	ui->doubleSpinBox_color1->setDoubleSlider(ui->horizontalSlider_color1);
+	ui->doubleSpinBox_color2->setDoubleSlider(ui->horizontalSlider_color2);
+
+
+	ui->doubleSpinBox_reflectivity->setDoubleSlider(ui->horizontalSlider_reflectivity);
+	ui->doubleSpinBox_reflectivity_2->setDoubleSlider(ui->horizontalSlider_reflectivity_2);
+
+	ui->doubleSpinBox_selfIllumTint->setDoubleSlider(ui->horizontalSlider_selfIllumTint);
+
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
-	ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
-	ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
-	ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
-	ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
+	//ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
+	//ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
+	//ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
+	//ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
 
 	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
 	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
@@ -455,7 +468,15 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		} else {
 			QString cv = getCurrentVersion();
 			QString v = mIniSettings->value("latestVersion").toString();
-			if (cv != v)
+			QStringList cv1 = cv.split(".");
+			QStringList v1 = v.split(".");
+			int cv2 = cv1[0].toInt() * 10000 +
+					  cv1[1].toInt() * 100 +
+					  cv1[2].toInt();
+			int v2 = v1[0].toInt() * 10000 +
+					 v1[1].toInt() * 100 +
+					 v1[2].toInt();
+			if (cv2 < v2)
 				Info(QString("New version available: %1").arg(v));
 		}
 	}
@@ -1160,9 +1181,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	}
 
 	if( !( value = vmt.parameters.take("$reflectivity") ).isEmpty() ) {
-		applyBackgroundColor("$reflectivity", value,
+		applyColor("$reflectivity", value,
 			ui->color_reflectivity,
-			ui->horizontalSlider_reflectivity, ui);
+			ui->doubleSpinBox_reflectivity, ui);
 
 		showOther = true;
 	}
@@ -1170,9 +1191,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$reflectivity2") ).isEmpty() ) {
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
 			Error("$reflectivity is only works with WorldVertexTransition shader!")
-		applyBackgroundColor("$reflectivity2", value,
+		applyColor("$reflectivity2", value,
 			ui->color_reflectivity_2,
-			ui->horizontalSlider_reflectivity_2, ui);
+			ui->doubleSpinBox_reflectivity_2, ui);
 
 		showOther = true;
 	}
@@ -1818,9 +1839,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingEnvmap )
 			Error("$envmaptint is only supported with $envmap!")
 
-		applyBackgroundColor("$envmaptint", value,
+		applyColor("$envmaptint", value,
 			ui->color_envmapTint,
-			ui->horizontalSlider_envmapTint, ui);
+			ui->doubleSpinBox_envmapTint, ui);
 
 		showShadingReflection = true;
 	}
@@ -1990,9 +2011,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if (!usingSelfIllum)
 			Error("$selfillumtint only works with \"$selfillum 1\"!")
 
-		applyBackgroundColor("$selfillumtint", value,
+		applyColor("$selfillumtint", value,
 			ui->color_selfIllumTint,
-			ui->horizontalSlider_selfIllumTint, ui);
+			ui->doubleSpinBox_selfIllumTint, ui);
 
 		showSelfIllumination = true;
 	}
@@ -3338,7 +3359,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$color") ).isEmpty() )
 	{
 		QString col1 = "$color";
-		utils::applyBackgroundColor(col1, value, ui->color_color1, ui, true);
+		utils::applyColor(col1, value, ui->color_color1, ui->doubleSpinBox_color1, ui, true);
 
 		showColor = true;
 	}
@@ -3346,7 +3367,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$color2") ).isEmpty() )
 	{
 		QString col1 = "$color2";
-		utils::applyBackgroundColor(col1, value, ui->color_color2, ui);
+		utils::applyColor(col1, value, ui->color_color2, ui->doubleSpinBox_color2, ui);
 
 		showColor = true;
 	}
@@ -3415,11 +3436,15 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(vmt.state.showDetail && !ui->action_detail->isChecked())
 		ui->action_detail->trigger();
 
-	if(showTransparency && !ui->action_transparency->isChecked())
+	if(showTransparency && !ui->action_transparency->isChecked()) {
+		glWidget_diffuse1->setTransparencyVisible(true);
 		ui->action_transparency->trigger();
+	}
 
-	if(showColor && !ui->action_color->isChecked())
+	if(showColor && !ui->action_color->isChecked()) {
+		glWidget_diffuse1->setColorVisible(true);
 		ui->action_color->trigger();
+	}
 
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
@@ -3734,11 +3759,13 @@ VmtFile MainWindow::makeVMT()
 		if( ui->doubleSpinBox_seamlessScale->isEnabled() && ui->doubleSpinBox_seamlessScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$seamless_scale", Str( ui->doubleSpinBox_seamlessScale->value() ));
 
-		tmp = toParameter(utils::getBG(ui->color_reflectivity));
+		tmp = toParameterBig(utils::getBG(ui->color_reflectivity),
+							 ui->doubleSpinBox_reflectivity->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
 
-		tmp = toParameter(utils::getBG(ui->color_reflectivity_2));
+		tmp = toParameterBig(utils::getBG(ui->color_reflectivity_2),
+							 ui->doubleSpinBox_reflectivity_2->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity2", tmp );
 	}
@@ -3755,7 +3782,8 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_envmapAlpha->isChecked() )
 			vmtFile.parameters.insert( "$selfillum_envmapmask_alpha", "1" );
 
-		tmp = toParameter(utils::getBG(ui->color_selfIllumTint));
+		tmp = toParameterBig(utils::getBG(ui->color_selfIllumTint),
+							 ui->doubleSpinBox_selfIllumTint->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$selfillumtint", tmp );
 
@@ -4000,11 +4028,13 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_color->isHidden() ) {
 
-		tmp = toParameter(utils::getBG(ui->color_color1), true);
+		tmp = toParameterBig(utils::getBG(ui->color_color1),
+							 ui->doubleSpinBox_color1->value(), true);
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color", tmp );
 
-		tmp = toParameter(utils::getBG(ui->color_color2));
+		tmp = toParameterBig(utils::getBG(ui->color_color2),
+							  ui->doubleSpinBox_color2->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color2", tmp );
 
@@ -4439,10 +4469,10 @@ void MainWindow::resetWidgets() {
 
 	// Other
 
-	ui->horizontalSlider_reflectivity->setValue(255);
+	ui->doubleSpinBox_reflectivity->setValue(1.0);
 	ui->color_reflectivity->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
-	ui->horizontalSlider_reflectivity_2->setValue(255);
+	ui->doubleSpinBox_reflectivity_2->setValue(1.0);
 	ui->color_reflectivity_2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 
@@ -4517,7 +4547,8 @@ void MainWindow::resetWidgets() {
 	ui->horizontalSlider_contrast->setDisabled(true);
 
 	ui->label_envmapTint->setDisabled(true);
-	ui->horizontalSlider_envmapTint->setValue(255);
+	ui->doubleSpinBox_envmapTint->setDisabled(true);
+	ui->doubleSpinBox_envmapTint->setValue(1.0);
 	ui->horizontalSlider_envmapTint->setDisabled(true);
 	ui->color_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->toolButton_envmapTint->setDisabled(true);
@@ -4655,7 +4686,7 @@ void MainWindow::resetWidgets() {
 
 	ui->lineEdit_maskTexture->setText("");
 	ui->checkBox_envmapAlpha->setChecked(false);
-	ui->horizontalSlider_selfIllumTint->setValue(255);
+	ui->doubleSpinBox_selfIllumTint->setValue(1.0);
 	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->doubleSpinBox_selfIllumFresnelMin->setValue(0.0);
 	ui->doubleSpinBox_selfIllumFresnelMax->setValue(1.0);
@@ -4694,6 +4725,8 @@ void MainWindow::resetWidgets() {
 
 	//----------------------------------------------------------------------------------------//
 
+	ui->doubleSpinBox_color1->setValue(1.0);
+	ui->doubleSpinBox_color2->setValue(1.0);
 	ui->color_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
@@ -5035,6 +5068,8 @@ void MainWindow::toggleDetailTexture()
 
 void MainWindow::toggleColor()
 {
+	glWidget_diffuse1->setColorVisible( !ui->groupBox_color->isVisible() );
+	colorChanged();
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
 }
 
@@ -5304,13 +5339,17 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 	case Color:
 
-		return (utils::getBG(ui->color_color1) != QColor(255, 255, 255) ||
+		return (ui->doubleSpinBox_color1->value() != 1.0 ||
+				ui->doubleSpinBox_color2->value() != 1.0 ||
+				utils::getBG(ui->color_color1) != QColor(255, 255, 255) ||
 				utils::getBG(ui->color_color2) != QColor(255, 255, 255));
 
 	case OtherTexture:
 
 		return (ui->lineEdit_lightWarp->text() != "" ||
 				ui->doubleSpinBox_seamlessScale->value() != 0.0 ||
+				ui->doubleSpinBox_reflectivity->value() != 1.0 ||
+				ui->doubleSpinBox_reflectivity_2->value() != 1.0 ||
 				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255) ||
 				utils::getBG(ui->color_reflectivity_2) != QColor(255, 255, 255));
 
@@ -5328,6 +5367,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->lineEdit_specmap->text() != "" ||
 				ui->checkBox_basealpha->isChecked() ||
 				ui->checkBox_normalalpha->isChecked() ||
+				ui->doubleSpinBox_envmapTint->value() != 1.0 ||
 				utils::getBG(ui->color_reflectionTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_saturation->value() != 1.0 ||
 				ui->doubleSpinBox_contrast->value() != 0.0 ||
@@ -5340,6 +5380,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 		return (ui->lineEdit_maskTexture->text() != "" ||
 				ui->checkBox_envmapAlpha->isChecked() ||
 				//ui->checkBox_baseAlpha->isChecked() ||
+				ui->doubleSpinBox_selfIllumTint->value() != 1.0 ||
 				utils::getBG(ui->color_selfIllumTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_selfIllumFresnelMin->value() != 0.0 ||
 				ui->doubleSpinBox_selfIllumFresnelMax->value() != 1.0 ||
@@ -6537,6 +6578,7 @@ void MainWindow::shaderChanged()
 			}
 
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
@@ -8177,7 +8219,7 @@ void MainWindow::changedColor() {
 	QWidget* caller = qobject_cast<QWidget *>( sender() );
 
 	if( caller->objectName() == "toolButton_envmapTint" )
-		changeColor(ui->color_envmapTint, ui->horizontalSlider_envmapTint);
+		changeColor(ui->color_envmapTint);
 
 	else if( caller->objectName() == "toolButton_phongTint" )
 		changeColor(ui->color_phongTint, ui->horizontalSlider_phongTint);
@@ -8194,20 +8236,22 @@ void MainWindow::changedColor() {
 	else if( caller->objectName() == "toolButton_fogTint" )
 		changeColor(ui->color_fogTint, ui->horizontalSlider_waterFogColor);
 
-	else if( caller->objectName() == "toolButton_color1" )
+	else if( caller->objectName() == "toolButton_color1" ) {
 		changeColor(ui->color_color1);
-
-	else if( caller->objectName() == "toolButton_color2" )
+		colorChanged();
+	}
+	else if( caller->objectName() == "toolButton_color2" ) {
 		changeColor(ui->color_color2);
-
+		colorChanged();
+	}
 	else if( caller->objectName() == "toolButton_reflectivity" )
-		changeColor(ui->color_reflectivity, ui->horizontalSlider_reflectivity);
+		changeColor(ui->color_reflectivity);
 
 	else if( caller->objectName() == "toolButton_reflectivity_2" )
-		changeColor(ui->color_reflectivity_2, ui->horizontalSlider_reflectivity_2);
+		changeColor(ui->color_reflectivity_2);
 
 	else if( caller->objectName() == "toolButton_selfIllumTint" )
-		changeColor(ui->color_selfIllumTint, ui->horizontalSlider_selfIllumTint);
+		changeColor(ui->color_selfIllumTint);
 
 	else if( caller->objectName() == "toolButton_phongAmount" )
 		changeColor(ui->color_phongAmount);
@@ -8269,6 +8313,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->label_envmapTint->setDisabled(true);
 			ui->horizontalSlider_envmapTint->setDisabled(true);
+			ui->doubleSpinBox_envmapTint->setDisabled(true);
 			ui->toolButton_envmapTint->setDisabled(true);
 
 			ui->label_specmap->setDisabled(true);
@@ -8307,6 +8352,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->label_envmapTint->setEnabled(true);
 			ui->horizontalSlider_envmapTint->setEnabled(true);
+			ui->doubleSpinBox_envmapTint->setEnabled(true);
 			ui->toolButton_envmapTint->setEnabled(true);
 
 			ui->label_lightinfluence->setEnabled(true);
@@ -8424,6 +8470,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 			ui->label_envmapTint->setEnabled(true);
 			ui->horizontalSlider_envmapTint->setEnabled(true);
+			ui->doubleSpinBox_envmapTint->setEnabled(true);
 
 			ui->toolButton_envmapTint->setEnabled(true);
 
@@ -8496,6 +8543,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 				ui->label_envmapTint->setDisabled(true);
 				ui->horizontalSlider_envmapTint->setDisabled(true);
+				ui->doubleSpinBox_envmapTint->setDisabled(true);
 				ui->toolButton_envmapTint->setDisabled(true);
 
 				ui->label_specmap->setDisabled(true);
@@ -9583,6 +9631,28 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 	}
 }
 
+void MainWindow::reconvertAll() {
+
+	if(mVMTLoaded) {
+		triggerLineEditAction(ui->lineEdit_diffuse);
+		triggerLineEditAction(ui->lineEdit_diffuse2);
+		triggerLineEditAction(ui->lineEdit_diffuse3);
+		triggerLineEditAction(ui->lineEdit_diffuse4);
+		triggerLineEditAction(ui->lineEdit_bumpmap);
+		triggerLineEditAction(ui->lineEdit_bumpmap2);
+		triggerLineEditAction(ui->lineEdit_bumpmapAlpha);
+		triggerLineEditAction(ui->lineEdit_bump2);
+		triggerLineEditAction(ui->lineEdit_detail);
+		triggerLineEditAction(ui->lineEdit_exponentTexture);
+		triggerLineEditAction(ui->lineEdit_specmap);
+		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
+		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
+		triggerLineEditAction(ui->lineEdit_waterNormalMap);
+		triggerLineEditAction(ui->lineEdit_decal);
+		triggerLineEditAction(ui->lineEdit_phongWarp);
+	}
+}
+
 QString MainWindow::removeSuffix( const QString fileName, int type)
 {
 	QString newName = fileName;
@@ -9773,6 +9843,29 @@ void MainWindow::showEditGamesDialog()
 void MainWindow::opacityChanged( double value ) {
 
 	glWidget_diffuse1->setAlpha(value);
+}
+
+void MainWindow::colorChanged() {
+
+	QColor color1 = utils::getBG(ui->color_color1);
+	QColor color2 = utils::getBG(ui->color_color2);
+
+	double multiplier1 = ui->doubleSpinBox_color1->value();
+	double multiplier2 = ui->doubleSpinBox_color2->value();
+
+	double r1 = color1.redF() * multiplier1;
+	double g1 = color1.greenF() * multiplier1;
+	double b1 = color1.blueF() * multiplier1;
+
+	double r2 = color2.redF() * multiplier2;
+	double g2 = color2.greenF() * multiplier2;
+	double b2 = color2.blueF() * multiplier2;
+
+	double r = r1 * r2;
+	double g = g1 * g2;
+	double b = b1 * b2;
+
+	glWidget_diffuse1->setColor(r,g,b);
 }
 
 void MainWindow::fresnelSliderEdited( int a ) {

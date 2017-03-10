@@ -16,6 +16,8 @@ GLWidget_Diffuse2::GLWidget_Diffuse2(QWidget* parent) :
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
 
+	setMouseTracking(true);
+
 	setVisible(false);
 }
 
@@ -155,4 +157,41 @@ void GLWidget_Diffuse2::loadTexture(const QString &diffuse1,
 	mBumpmapTexture = new QOpenGLTexture(image_bumpmap);
 
 	update();
+}
+
+void GLWidget_Diffuse2::mousePressEvent(QMouseEvent* event)
+{
+	// set exclusively
+	bool previewDiffuse = false;
+	bool previewBumpmap = false;
+
+	if (showDiffuse && showBumpmap) {
+		// (0,0) is in the top left corner from the event
+		const bool lowerLeft = (event->x() <= event->y());
+		if (lowerLeft) {
+			previewDiffuse = true;
+		} else {
+			previewBumpmap = true;
+		}
+
+	} else if (showDiffuse) {
+		previewDiffuse = true;
+	} else { // showing bumpmap
+		previewBumpmap = true;
+	}
+
+	if (previewDiffuse) {
+		TexturePreviewDialog dialog(diffuseTexture, this);
+		dialog.exec();
+	}
+	if (previewBumpmap) {
+		TexturePreviewDialog dialog(bumpmapTexture, this);
+		dialog.exec();
+	}
+}
+
+void GLWidget_Diffuse2::mouseMoveEvent(QMouseEvent* event)
+{
+	Q_UNUSED(event);
+	setCursor(Qt::PointingHandCursor);
 }

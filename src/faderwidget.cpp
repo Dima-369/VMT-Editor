@@ -8,7 +8,7 @@ FaderWidget::FaderWidget( MainWindow* mainWindow, QWidget* parent) :
 	QWidget(parent),
 	startColor(QColor(64, 64, 64)), // parent->palette().window().color();
 	currentAlpha(0),
-	duration(250),
+	duration(100),
 	fadingToWhite(true),
 	fading(false),
 	mainWindow(mainWindow)
@@ -29,7 +29,7 @@ void FaderWidget::start(bool fadeToWhite)
 		currentAlpha = (fadeToWhite) ? 0 : 255;
 	}
 
-	timer->start(33);
+	timer->start(16);
 	show();
 
 	fading = true;

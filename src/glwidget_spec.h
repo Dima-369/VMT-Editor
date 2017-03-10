@@ -12,6 +12,7 @@
 #endif
 
 #include "opengl/helpers.h"
+#include "texturepreviewdialog.h"
 
 class GLWidget_Spec : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -40,9 +41,18 @@ public:
 	 */
 	void updateValues(Mode mode, const QString& texture_);
 
+protected:
+
+	void mousePressEvent(QMouseEvent* event) override;
+
 private:
 	opengl::Offset offset;
 
 	QOpenGLTexture *texture;
 	QOpenGLTexture *textTexture;
+
+	// We need this for the preview
+	// the filepath is not stored because the texture is constructed in
+	// updateValues() on every load
+	QImage image;
 };

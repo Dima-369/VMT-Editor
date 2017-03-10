@@ -11,6 +11,10 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	enableAlphaTest(false),
 	mAlpha(1.0f),
 	mAlphaTestReference(0.7f),
+	colorVisible(false),
+	mRed(1.0f),
+	mGreen(1.0f),
+	mBlue(1.0f),
 	mDiffuseTexture(0),
 	mBumpmapTexture(0),
 	mAlphaTexture(0),
@@ -18,9 +22,12 @@ GLWidget_Diffuse1::GLWidget_Diffuse1(QWidget* parent) :
 	bumpmapTextTexture(0),
 	textureTextTexture(0),
 	shaderProgram(0)
+
 {
 	// required for Windows
 	setAttribute(Qt::WA_DontCreateNativeAncestors);
+
+	setMouseTracking(true);
 
 	setVisible(false);
 }
@@ -49,6 +56,10 @@ void GLWidget_Diffuse1::reset()
 	enableAlphaTest = false;
 	mAlpha = 1.0f;
 	mAlphaTestReference = 0.7f;
+	mRed = 1.0f;
+	mGreen = 1.0f;
+	mBlue = 1.0f;
+	colorVisible = false;
 	showDiffuse = false;
 	showBumpmap = false;
 	mDiffuseTexture = NULL;
@@ -86,15 +97,26 @@ void GLWidget_Diffuse1::initializeGL()
 	if( !shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
 		"uniform sampler2D texture;"
 		"uniform float alphaTest;"
+		"uniform bool useAlphaTest = false;"
+		"uniform float alpha;"
+		"uniform bool transparent = false;"
+		"uniform vec3 color;"
 		"varying vec2 tex0;"
 		"void main(void)"
 		"{"
 		"	vec4 tex = texture2D(texture, tex0.st);"
-		"	if(tex.a < alphaTest) {"
-		"		discard;"
+		"	if (useAlphaTest) {"
+		"		if(tex.a < alphaTest) {"
+		"			discard;"
+		"		} else {"
+		"			gl_FragColor = vec4(tex.rgb * color, 1.0);"
+		"		}"
 		"	} else {"
-		"		gl_FragColor = vec4("
-		"			texture2D(texture, tex0).rgb, 1.0);"
+		"		if (transparent) {"
+		"			gl_FragColor = vec4(tex.rgb * color, alpha * tex.a);"
+		"		} else {"
+		"			gl_FragColor = vec4(tex.rgb * color, alpha);"
+		"		}"
 		"	}"
 		"}") ) {
 
@@ -121,19 +143,39 @@ void GLWidget_Diffuse1::paintGL()
 	if (mDiffuseTexture == 0 && mBumpmapTexture == 0)
 		return;
 
-	if(alphaVisible || enableAlphaTest) {
-		opengl::drawQuad(width(), height(), mAlphaTexture);
+	if(alphaVisible || enableAlphaTest || mAlpha != 1.0) {
+		opengl::drawQuad(offset, mAlphaTexture);
 	}
 
-	if(enableAlphaTest) {
+	if(showDiffuse) {
 
-		if(showDiffuse) {
-			shaderProgram->bind();
-			shaderProgram->setUniformValue("alphaTest",
-				mAlphaTestReference);
-			opengl::drawQuad(offset, mDiffuseTexture);
-			shaderProgram->release();
+		glEnable(GL_BLEND);
+
+		float r = 1.0f;
+		float g = 1.0f;
+		float b = 1.0f;
+		float a = 1.0f;
+
+		if(colorVisible) {
+			r = mRed;
+			g = mGreen;
+			b = mBlue;
 		}
+
+		if(transparencyGroupVisible)
+			a = mAlpha;
+		else
+			a = 1.0f;
+
+		shaderProgram->bind();
+		shaderProgram->setUniformValue("alphaTest", mAlphaTestReference);
+		shaderProgram->setUniformValue("useAlphaTest", enableAlphaTest);
+		shaderProgram->setUniformValue("transparent", alphaVisible);
+		shaderProgram->setUniformValue("alpha", a);
+		shaderProgram->setUniformValue("color",	QVector3D(r, g, b) );
+		opengl::drawQuad(offset, mDiffuseTexture, false);
+		shaderProgram->release();
+
 
 		if(showBumpmap) {
 			glDisable(GL_BLEND);
@@ -142,36 +184,9 @@ void GLWidget_Diffuse1::paintGL()
 
 	} else {
 
-		if(showDiffuse) {
-
-			if(alphaVisible) {
-				glEnable(GL_BLEND);
-			} else {
-				glDisable(GL_BLEND);
-			}
-
-			if(transparencyGroupVisible)
-				glColor4f( 1.0f, 1.0f, 1.0f, mAlpha );
-			else
-				glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
-			bool setColor = false;
-
-			opengl::drawQuad(offset, mDiffuseTexture,
-				setColor);
-
+		if(showBumpmap) {
 			glDisable(GL_BLEND);
-
-			if(showBumpmap) {
-				opengl::drawTopRightTriangle(offset,
-					mBumpmapTexture, setColor);
-			}
-
-		} else {
-
-			if(showBumpmap) {
-				opengl::drawQuad(offset, mBumpmapTexture);
-			}
+			opengl::drawQuad(offset, mBumpmapTexture);
 		}
 	}
 
@@ -190,7 +205,7 @@ void GLWidget_Diffuse1::loadTexture(const QString &diffuse1,
 		const QString &bumpmap1)
 {
 	if (diffuse1.isEmpty() && bumpmap1.isEmpty()) {
-		reset();
+		//reset();
 		return;
 	}
 
@@ -201,12 +216,12 @@ void GLWidget_Diffuse1::loadTexture(const QString &diffuse1,
 	showBumpmap = !bumpmap1.isEmpty();
 
 	if (showDiffuse && !image_diffuse.load(diffuse1)) {
-		reset();
+		//reset();
 		return;
 	}
 
 	if (showBumpmap && !image_bumpmap.load(bumpmap1)) {
-		reset();
+		//reset();
 		return;
 	}
 
@@ -249,6 +264,20 @@ void GLWidget_Diffuse1::setAlpha( float alpha ) {
 	update();
 }
 
+void GLWidget_Diffuse1::setColor( float r, float g, float b ) {
+
+	mRed = r;
+	mGreen = g;
+	mBlue = b;
+	update();
+}
+
+void GLWidget_Diffuse1::setColorVisible(bool visible ) {
+
+	colorVisible = visible;
+	update();
+}
+
 void GLWidget_Diffuse1::setTransparencyVisible(bool visible) {
 
 	transparencyGroupVisible = visible;
@@ -265,4 +294,41 @@ void GLWidget_Diffuse1::setEnableAlphaTest(bool enable) {
 
 	enableAlphaTest = enable;
 	update();
+}
+
+void GLWidget_Diffuse1::mousePressEvent(QMouseEvent* event)
+{
+	// set exclusively
+	bool previewDiffuse = false;
+	bool previewBumpmap = false;
+
+	if (showDiffuse && showBumpmap) {
+		// (0,0) is in the top left corner from the event
+		const bool lowerLeft = (event->x() <= event->y());
+		if (lowerLeft) {
+			previewDiffuse = true;
+		} else {
+			previewBumpmap = true;
+		}
+
+	} else if (showDiffuse) {
+		previewDiffuse = true;
+	} else { // showing bumpmap
+		previewBumpmap = true;
+	}
+
+	if (previewDiffuse) {
+		TexturePreviewDialog dialog(diffuseTexture, this);
+		dialog.exec();
+	}
+	if (previewBumpmap) {
+		TexturePreviewDialog dialog(bumpmapTexture, this);
+		dialog.exec();
+	}
+}
+
+void GLWidget_Diffuse1::mouseMoveEvent(QMouseEvent* event)
+{
+	Q_UNUSED(event);
+	setCursor(Qt::PointingHandCursor);
 }

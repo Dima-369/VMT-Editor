@@ -74,6 +74,30 @@ void utils::applyBackgroundColor(const QString &parameter, const QString &value,
 	}
 }
 
+void utils::applyColor(const QString &parameter, const QString &value,
+	QPlainTextEdit *colorWidget, QDoubleSpinBox *spinBox, Ui::MainWindow *ui,
+	bool toSrgb)
+{
+	utils::ColorResult r = utils::parseColor(parameter, value, ui, toSrgb);
+
+	if (r.notDefault) {
+
+		float red = r.doubleValues.at(0);
+		float green = r.doubleValues.at(1);
+		float blue = r.doubleValues.at(2);
+
+		double max = static_cast<double>(qMax(red, qMax(green, blue)));
+
+		red = red / max;
+		green = green / max;
+		blue = blue / max;
+
+		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
+			colorWidget);
+		spinBox->setValue(max);
+	}
+}
+
 void utils::applyBackgroundColor(int red, int green, int blue,
 	QPlainTextEdit *colorWidget)
 {
