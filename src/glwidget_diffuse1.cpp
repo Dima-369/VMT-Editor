@@ -97,15 +97,26 @@ void GLWidget_Diffuse1::initializeGL()
 	if( !shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
 		"uniform sampler2D texture;"
 		"uniform float alphaTest;"
+		"uniform bool useAlphaTest = false;"
+		"uniform float alpha;"
+		"uniform bool transparent = false;"
 		"uniform vec3 color;"
 		"varying vec2 tex0;"
 		"void main(void)"
 		"{"
 		"	vec4 tex = texture2D(texture, tex0.st);"
-		"	if(tex.a < alphaTest) {"
-		"		discard;"
+		"	if (useAlphaTest) {"
+		"		if(tex.a < alphaTest) {"
+		"			discard;"
+		"		} else {"
+		"			gl_FragColor = vec4(tex.rgb * color, 1.0);"
+		"		}"
 		"	} else {"
-		"		gl_FragColor = vec4(tex.rgb * color, 1.0);"
+		"		if (transparent) {"
+		"			gl_FragColor = vec4(tex.rgb * color, alpha * tex.a);"
+		"		} else {"
+		"			gl_FragColor = vec4(tex.rgb * color, alpha);"
+		"		}"
 		"	}"
 		"}") ) {
 
@@ -132,81 +143,50 @@ void GLWidget_Diffuse1::paintGL()
 	if (mDiffuseTexture == 0 && mBumpmapTexture == 0)
 		return;
 
-	if(alphaVisible || enableAlphaTest) {
-		opengl::drawQuad(width(), height(), mAlphaTexture);
+	if(alphaVisible || enableAlphaTest || mAlpha != 1.0) {
+		opengl::drawQuad(offset, mAlphaTexture);
 	}
 
-	if(enableAlphaTest) {
+	if(showDiffuse) {
 
-		if(showDiffuse) {
+		glEnable(GL_BLEND);
 
-			float r = 1.0f;
-			float g = 1.0f;
-			float b = 1.0f;
+		float r = 1.0f;
+		float g = 1.0f;
+		float b = 1.0f;
+		float a = 1.0f;
 
-			if(colorVisible) {
-				r = mRed;
-				g = mGreen;
-				b = mBlue;
-			}
-
-			shaderProgram->bind();
-			shaderProgram->setUniformValue("alphaTest",
-				mAlphaTestReference);
-			shaderProgram->setUniformValue("color",	QVector3D(r, g, b) );
-			opengl::drawQuad(offset, mDiffuseTexture, false);
-			shaderProgram->release();
+		if(colorVisible) {
+			r = mRed;
+			g = mGreen;
+			b = mBlue;
 		}
 
+		if(transparencyGroupVisible)
+			a = mAlpha;
+		else
+			a = 1.0f;
+
+		shaderProgram->bind();
+		shaderProgram->setUniformValue("alphaTest", mAlphaTestReference);
+		shaderProgram->setUniformValue("useAlphaTest", enableAlphaTest);
+		shaderProgram->setUniformValue("transparent", alphaVisible);
+		shaderProgram->setUniformValue("alpha", a);
+		shaderProgram->setUniformValue("color",	QVector3D(r, g, b) );
+		opengl::drawQuad(offset, mDiffuseTexture, false);
+		shaderProgram->release();
+
+
 		if(showBumpmap) {
-			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			glDisable(GL_BLEND);
 			opengl::drawTopRightTriangle(offset, mBumpmapTexture);
 		}
 
 	} else {
 
-		if(showDiffuse) {
-
-			if(alphaVisible) {
-				glEnable(GL_BLEND);
-			} else {
-				glDisable(GL_BLEND);
-			}
-			float r = 1.0f;
-			float g = 1.0f;
-			float b = 1.0f;
-
-			if(colorVisible) {
-				r = mRed;
-				g = mGreen;
-				b = mBlue;
-			}
-
-
-			if(transparencyGroupVisible)
-				glColor4f(r, g, b, mAlpha );
-			else
-				glColor4f(r, g, b, 1.0f);
-
-			bool setColor = false;
-
-			opengl::drawQuad(offset, mDiffuseTexture,
-				setColor);
-
+		if(showBumpmap) {
 			glDisable(GL_BLEND);
-
-			if(showBumpmap) {
-				glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-				opengl::drawTopRightTriangle(offset,
-					mBumpmapTexture, setColor);
-			}
-
-		} else {
-
-			if(showBumpmap) {
-				opengl::drawQuad(offset, mBumpmapTexture);
-			}
+			opengl::drawQuad(offset, mBumpmapTexture);
 		}
 	}
 
