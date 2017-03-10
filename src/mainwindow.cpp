@@ -5061,6 +5061,7 @@ void MainWindow::toggleDetailTexture()
 void MainWindow::toggleColor()
 {
 	glWidget_diffuse1->setColorVisible( !ui->groupBox_color->isVisible() );
+	colorChanged();
 	utils::toggle(this, ui->action_color, ui->groupBox_color);
 }
 
@@ -9839,7 +9840,7 @@ void MainWindow::opacityChanged( double value ) {
 void MainWindow::colorChanged() {
 
 	QColor color1 = utils::getBG(ui->color_color1);
-	QColor color2 = utils::getBG(ui->color_color1);
+	QColor color2 = utils::getBG(ui->color_color2);
 
 	double multiplier1 = ui->doubleSpinBox_color1->value();
 	double multiplier2 = ui->doubleSpinBox_color2->value();
@@ -9852,9 +9853,9 @@ void MainWindow::colorChanged() {
 	double g2 = color2.greenF() * multiplier2;
 	double b2 = color2.blueF() * multiplier2;
 
-	double r = pow(r1 * r2, 0.454545);
-	double g = pow(g1 * g2, 0.454545);
-	double b = pow(b1 * b2, 0.454545);
+	double r = r1 * r2;
+	double g = g1 * g2;
+	double b = b1 * b2;
 
 	glWidget_diffuse1->setColor(r,g,b);
 }
