@@ -205,7 +205,7 @@ void GLWidget_Diffuse1::loadTexture(const QString &diffuse1,
 		const QString &bumpmap1)
 {
 	if (diffuse1.isEmpty() && bumpmap1.isEmpty()) {
-		reset();
+		//reset();
 		return;
 	}
 
@@ -216,12 +216,12 @@ void GLWidget_Diffuse1::loadTexture(const QString &diffuse1,
 	showBumpmap = !bumpmap1.isEmpty();
 
 	if (showDiffuse && !image_diffuse.load(diffuse1)) {
-		reset();
+		//reset();
 		return;
 	}
 
 	if (showBumpmap && !image_bumpmap.load(bumpmap1)) {
-		reset();
+		//reset();
 		return;
 	}
 
