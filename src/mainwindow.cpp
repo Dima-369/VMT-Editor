@@ -3606,7 +3606,7 @@ VmtFile MainWindow::makeVMT()
 			if( ui->doubleSpinBox_blendfactor2->value() != 1.0 )
 				vmtFile.parameters.insert( "$lumblendfactor2", Str( ui->doubleSpinBox_blendfactor2->value() ));
 
-		} else if( ui->comboBox_shader->currentText() == "WorldVertexTransition") {
+		} else if( ui->comboBox_shader->currentText() != "Lightmapped_4WayBlend") {
 
 			if( !( tmp = ui->lineEdit_blendmodulate->text().trimmed() ).isEmpty() )
 				vmtFile.parameters.insert( "$blendmodulatetexture", tmp.toLower() );
