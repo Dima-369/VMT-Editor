@@ -6633,9 +6633,9 @@ void MainWindow::shaderChanged()
 				ui->action_baseTexture2->setChecked(false);
 			}
 
-			ui->label_blendmodulate->setVisible( shader == "WorldVertexTransition" );
-			ui->toolButton_blendmodulate->setVisible( shader == "WorldVertexTransition" );
-			ui->lineEdit_blendmodulate->setVisible( shader == "WorldVertexTransition" );
+			ui->label_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
+			ui->toolButton_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
+			ui->lineEdit_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
 
 			ui->action_baseTexture2->setDisabled(true);
 
@@ -6767,6 +6767,10 @@ void MainWindow::shaderChanged()
 
 		ui->action_baseTexture->setEnabled(true);
 		ui->action_baseTexture2->setEnabled(true);
+
+		ui->action_baseTexture->setVisible(true);
+		ui->action_baseTexture2->setVisible(true);
+
 		ui->action_phong->setEnabled(true);
 		ui->action_phongBrush->setEnabled(true);
 		ui->action_rimLight->setEnabled(true);
