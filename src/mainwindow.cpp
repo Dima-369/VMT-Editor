@@ -391,6 +391,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_bump2, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_bumpmapAlpha, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5746,7 +5748,10 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 						   fileName.endsWith("_s") ||
 						   fileName.endsWith("spec") ) {
 
-					processVtf("", filePath, ui->lineEdit_specmap);
+					if (ui->lineEdit_bumpmapAlpha->isVisible())
+						processVtf("", filePath, ui->lineEdit_bumpmapAlpha);
+					else
+						processVtf("", filePath, ui->lineEdit_specmap);
 
 				} else if (shader == "VertexLitGeneric" &&
 							(fileName.endsWith("_glossiness") ||
@@ -5844,6 +5849,9 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 
 	else if (name == "lineEdit_phongWarp" )
 		processVtf( "", filePath, ui->lineEdit_phongWarp );
+
+	else if (name == "lineEdit_bumpmapAlpha" )
+		processVtf( "", filePath, ui->lineEdit_bumpmapAlpha );
 }
 
 void MainWindow::finishedLoading()
@@ -7632,6 +7640,9 @@ void MainWindow::browseVTF()
 
 	else if (name == "toolButton_phongWarp" )
 		processVtf( "", "", ui->lineEdit_phongWarp );
+
+	else if (name == "toolButton_bumpmapAlpha" )
+		processVtf( "", "", ui->lineEdit_bumpmapAlpha );
 }
 
 QString MainWindow::launchBrowseVtfDialog(QLineEdit* lineEdit)
@@ -7659,6 +7670,30 @@ void MainWindow::processVtf(const QString& objectName,
 	const QString& textureFileName, QLineEdit* lineEdit)
 {
 	QString fileName;
+
+	if (lineEdit == ui->lineEdit_bumpmapAlpha) {
+		if (textureFileName.isEmpty()) {
+
+			QString dir = QDir::toNativeSeparators(
+						mIniSettings->value("lastTextureBrowseDir", "").toString());
+			const auto tex = tr("Textures (*.bmp *.dds *.gif *.jpg *.png *.tga)");
+			fileName = QFileDialog::getOpenFileName(
+						this, tr("Open Texture File"), dir, tex);
+			if (fileName.isEmpty())
+				return;
+
+		} else if (textureFileName.section(".", -1) != "vtf") {
+			fileName = textureFileName;
+		} else {
+			return;
+		}
+
+
+		lineEdit->setText(fileName);
+		return;
+
+	}
+
 	if (textureFileName.isEmpty()) {
 		fileName = launchBrowseVtfDialog(lineEdit);
 		if (fileName.isEmpty())
@@ -7718,6 +7753,11 @@ void MainWindow::processVtf(const QString& objectName,
 			}*/
 		}
 
+		if (lineEdit == ui->lineEdit_bumpmap ) {
+			ui->label_bumpmapAlpha->setVisible(false);
+			ui->lineEdit_bumpmapAlpha->setVisible(false);
+			ui->toolButton_bumpmapAlpha->setVisible(false);
+		}
 		goto updateLineEdit;
 
 	} else {
@@ -7799,7 +7839,7 @@ void MainWindow::processVtf(const QString& objectName,
 				QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
 				QFile::copy(fileName, tempName);
 				texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
-				lineEdit->setDisabled(true);
+				//lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
@@ -7832,9 +7872,9 @@ void MainWindow::processVtf(const QString& objectName,
 					ui->checkBox_phongNormalAlpha->isChecked() )
 					noAlpha = false;
 
-				/*ui->label_bumpmapAlpha->setVisible(true);
+				ui->label_bumpmapAlpha->setVisible(true);
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
-				ui->toolButton_bumpmapAlpha->setVisible(true);*/
+				ui->toolButton_bumpmapAlpha->setVisible(true);
 			}
 			else if( lineEdit == ui->lineEdit_diffuse2 ) {
 				if (ui->checkBox_basealpha->isChecked() )
@@ -7942,7 +7982,7 @@ void MainWindow::processVtf(const QString& objectName,
 				texturesToCopy.insert(lineEdit, outputFile);
 
 				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-				lineEdit->setDisabled(true);
+				//lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
