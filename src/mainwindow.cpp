@@ -7690,6 +7690,19 @@ void MainWindow::processVtf(const QString& objectName,
 
 
 		lineEdit->setText(fileName);
+		if(mVMTLoaded)
+			ui->lineEdit_bumpmap->actions()[0]->trigger();
+		else {
+			//TODO: combine bumpmap and bumpmapalpha to a single png
+			QString convertedFile = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+
+			QString mipmapFilter = outputParameters(2, false);
+			ConversionThread* conversionThread = new ConversionThread(this);
+			conversionThread->fileName = convertedFile;
+			conversionThread->newFileName = "lineEdit_bumpmap" + "_" + texturesToCopy.value(ui->lineEdit_bumpmap) + ".vtf";
+			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+			conversionThread->start();
+		}
 		return;
 
 	}
@@ -9295,6 +9308,9 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 		QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + fileName);
 
 		mIniPaths->setValue (relativeFilePath, fileNameConvert);
+		if (it.key() == ui->lineEdit_bumpmap && !ui->lineEdit_bumpmapAlpha->text().isEmpty())
+			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
+
 
 		it.key()->setEnabled(true);
 		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + fileName );
@@ -9532,6 +9548,7 @@ void MainWindow::reconvertTexture()
 	const auto tooltip = lineEdit->toolTip();
 
 	bool noAlpha = true;
+	bool combineMaps = false;
 	int type = 0;
 	QString preview;
 
@@ -9608,6 +9625,9 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_waterNormalMap" )
 		type = 2;
 
+	if( objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible())
+		combineMaps = true;
+
 	QString mipmapFilter = outputParameters(type, noAlpha);
 
 	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
@@ -9629,6 +9649,13 @@ void MainWindow::reconvertTexture()
 	}
 
 	mIniPaths->setValue(relativeFilePath, fileName);
+
+	if (combineMaps) {
+		//TODO: combine bumpmap and bumpmapalpha to a single png
+		mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
+		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+
+	}
 
 	if (extension != "vtf") {
 		InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
@@ -9671,6 +9698,15 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 			QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 			lineEdit->setToolTip(value);
 			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+			if (lineEdit == lineEdit_bumpmap) {
+				ui->label_bumpmapAlpha->setVisible(true);
+				ui->lineEdit_bumpmapAlpha->setVisible(true);
+				ui->toolButton_bumpmapAlpha->setVisible(true);
+				value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
+				if (value_alpha != "")
+					ui->lineEdit_bumpmapAlpha->setText(value_alpha);
+			}
 		}
 	}
 }
