@@ -447,6 +447,8 @@ private slots:
 
 	void reconvertAll();
 
+	bool combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha);
+
 	//----------------------------------------------------------------------------------------//
 
 	void action_New();

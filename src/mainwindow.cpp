@@ -4397,7 +4397,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_diffuse4);
 	clearLineEditAction(ui->lineEdit_bumpmap);
 	clearLineEditAction(ui->lineEdit_bumpmap2);
-	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
+	clearLineEditAction(ui->lineEdit_blendmodulate);
 	clearLineEditAction(ui->lineEdit_bump2);
 	clearLineEditAction(ui->lineEdit_detail);
 	clearLineEditAction(ui->lineEdit_exponentTexture);
@@ -7693,15 +7693,16 @@ void MainWindow::processVtf(const QString& objectName,
 		if(mVMTLoaded)
 			ui->lineEdit_bumpmap->actions()[0]->trigger();
 		else {
-			//TODO: combine bumpmap and bumpmapalpha to a single png
-			QString convertedFile = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
-
-			QString mipmapFilter = outputParameters(2, false);
-			ConversionThread* conversionThread = new ConversionThread(this);
-			conversionThread->fileName = convertedFile;
-			conversionThread->newFileName = "lineEdit_bumpmap" + "_" + texturesToCopy.value(ui->lineEdit_bumpmap) + ".vtf";
-			conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
-			conversionThread->start();
+			if (combineMaps(ui->lineEdit_bumpmap, ui->lineEdit_bumpmapAlpha)) {
+				InfoReconvert("Converting \"bumpmap_alpha_combine.png\"...");
+				QString convertedFile = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+				QString mipmapFilter = outputParameters(2, false);
+				ConversionThread* conversionThread = new ConversionThread(this);
+				conversionThread->fileName = convertedFile;
+				conversionThread->newFileName = "lineEdit_bumpmap_" + texturesToCopy.value(ui->lineEdit_bumpmap) + ".vtf";
+				conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+				conversionThread->start();
+			}
 		}
 		return;
 
@@ -7852,7 +7853,7 @@ void MainWindow::processVtf(const QString& objectName,
 				QString tempName = QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + lineEdit->objectName() + "_" + QDir::toNativeSeparators(fileName).section("\\", -1);
 				QFile::copy(fileName, tempName);
 				texturesToCopy.insert(lineEdit, QDir::toNativeSeparators(fileName).section("\\", -1).section(".", 0, 0) );
-				//lineEdit->setDisabled(true);
+				lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
@@ -7995,7 +7996,7 @@ void MainWindow::processVtf(const QString& objectName,
 				texturesToCopy.insert(lineEdit, outputFile);
 
 				lineEdit->setText(fileName.right( fileName.length() - fileName.lastIndexOf('/', fileName.lastIndexOf('/') - 1) ));
-				//lineEdit->setDisabled(true);
+				lineEdit->setDisabled(true);
 
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
@@ -9548,7 +9549,7 @@ void MainWindow::reconvertTexture()
 	const auto tooltip = lineEdit->toolTip();
 
 	bool noAlpha = true;
-	bool combineMaps = false;
+	bool combine = false;
 	int type = 0;
 	QString preview;
 
@@ -9625,8 +9626,10 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_waterNormalMap" )
 		type = 2;
 
-	if( objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible())
-		combineMaps = true;
+	if( objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible()) {
+		combine = true;
+		noAlpha = false;
+	}
 
 	QString mipmapFilter = outputParameters(type, noAlpha);
 
@@ -9650,10 +9653,11 @@ void MainWindow::reconvertTexture()
 
 	mIniPaths->setValue(relativeFilePath, fileName);
 
-	if (combineMaps) {
-		//TODO: combine bumpmap and bumpmapalpha to a single png
-		mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
-		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+	if (combine) {
+		if (combineMaps(ui->lineEdit_bumpmap, ui->lineEdit_bumpmapAlpha)) {
+			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
+			fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+		}
 
 	}
 
@@ -9699,11 +9703,11 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 			lineEdit->setToolTip(value);
 			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
-			if (lineEdit == lineEdit_bumpmap) {
+			if (lineEdit == ui->lineEdit_bumpmap) {
 				ui->label_bumpmapAlpha->setVisible(true);
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
 				ui->toolButton_bumpmapAlpha->setVisible(true);
-				value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
+				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
 				if (value_alpha != "")
 					ui->lineEdit_bumpmapAlpha->setText(value_alpha);
 			}
@@ -9720,7 +9724,7 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_diffuse4);
 		triggerLineEditAction(ui->lineEdit_bumpmap);
 		triggerLineEditAction(ui->lineEdit_bumpmap2);
-		triggerLineEditAction(ui->lineEdit_bumpmapAlpha);
+		//triggerLineEditAction(ui->lineEdit_bumpmapAlpha);
 		triggerLineEditAction(ui->lineEdit_bump2);
 		triggerLineEditAction(ui->lineEdit_detail);
 		triggerLineEditAction(ui->lineEdit_exponentTexture);
@@ -9730,7 +9734,64 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_waterNormalMap);
 		triggerLineEditAction(ui->lineEdit_decal);
 		triggerLineEditAction(ui->lineEdit_phongWarp);
+		triggerLineEditAction(ui->lineEdit_blendmodulate);
 	}
+}
+
+bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) {
+	QString basePath = lineEditBase->toolTip();
+	QString alphaPath = lineEditAlpha->text();
+	QImage base;
+	QImage alpha;
+	if (!base.load(basePath)) {
+		qDebug() << "Could not load " << basePath;
+		return false;
+	}
+	if (!alpha.load(alphaPath)) {
+		qDebug() << "Could not load " << alphaPath;
+		return false;
+	}
+	if ((base.height() != alpha.height()) || (base.width() != alpha.width())) {
+		Error("Images must be same size for combining");
+		return false;
+	}
+	base.convertToFormat(QImage::Format_ARGB32);
+	alpha.convertToFormat(QImage::Format_ARGB32);
+
+	QColor rgb, a, pix;
+	for (int i = 0; i < base.width(); ++i) {
+
+		for (int j = 0; j < base.height(); ++j) {
+			rgb = base.pixel(i, j);
+			a = alpha.pixel(i, j);
+			pix.setRedF(   rgb.redF() );
+			pix.setGreenF( rgb.greenF() );
+			pix.setBlueF(  rgb.blueF() );
+			pix.setAlphaF( a.redF() );
+
+			base.setPixel(i, j, pix.rgba());
+		}
+	}
+	QString fileName;
+	if (lineEditBase = ui->lineEdit_bumpmap)
+		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
+	else if (lineEditBase = ui->lineEdit_diffuse)
+		fileName = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
+
+	if (QFile::exists(fileName)) {
+		if(!QFile::remove(fileName)) {
+			Error( "Error removing \"" + fileName + ".vtf\"" );
+			return false;
+		}
+	}
+
+	if (base.save(fileName, "PNG")) {
+		qDebug() << "File succesfully combined";
+		return true;
+	}
+
+	qDebug() << "Something fucked up";
+	return false;
 }
 
 QString MainWindow::removeSuffix( const QString fileName, int type)
