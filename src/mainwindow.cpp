@@ -393,6 +393,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_bumpmapAlpha, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_diffuseAlpha, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -603,6 +605,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->label_bumpmapAlpha->setVisible(false);
 	ui->lineEdit_bumpmapAlpha->setVisible(false);
 	ui->toolButton_bumpmapAlpha->setVisible(false);
+
+	ui->label_diffuseAlpha->setVisible(false);
+	ui->lineEdit_diffuseAlpha->setVisible(false);
+	ui->toolButton_diffuseAlpha->setVisible(false);
 
 	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("LightmappedGeneric"));
 		mIgnoreShaderChanged = false;
@@ -4383,6 +4389,10 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_bumpmapAlpha->setVisible(false);
 	ui->toolButton_bumpmapAlpha->setVisible(false);
 
+	ui->label_diffuseAlpha->setVisible(false);
+	ui->lineEdit_diffuseAlpha->setVisible(false);
+	ui->toolButton_diffuseAlpha->setVisible(false);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->label_exponent->setEnabled(true);
@@ -5852,6 +5862,9 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 
 	else if (name == "lineEdit_bumpmapAlpha" )
 		processVtf( "", filePath, ui->lineEdit_bumpmapAlpha );
+
+	else if (name == "lineEdit_diffuseAlpha" )
+		processVtf( "", filePath, ui->lineEdit_diffuseAlpha );
 }
 
 void MainWindow::finishedLoading()
@@ -7643,6 +7656,9 @@ void MainWindow::browseVTF()
 
 	else if (name == "toolButton_bumpmapAlpha" )
 		processVtf( "", "", ui->lineEdit_bumpmapAlpha );
+
+	else if (name == "toolButton_diffuseAlpha" )
+		processVtf( "", "", ui->lineEdit_diffuseAlpha );
 }
 
 QString MainWindow::launchBrowseVtfDialog(QLineEdit* lineEdit)
@@ -7671,7 +7687,7 @@ void MainWindow::processVtf(const QString& objectName,
 {
 	QString fileName;
 
-	if (lineEdit == ui->lineEdit_bumpmapAlpha) {
+	if (lineEdit == ui->lineEdit_bumpmapAlpha || lineEdit == ui->lineEdit_diffuseAlpha) {
 		if (textureFileName.isEmpty()) {
 
 			QString dir = QDir::toNativeSeparators(
@@ -7690,9 +7706,15 @@ void MainWindow::processVtf(const QString& objectName,
 
 
 		lineEdit->setText(fileName);
-		if(mVMTLoaded)
-			ui->lineEdit_bumpmap->actions()[0]->trigger();
-		else {
+
+		if(mVMTLoaded) {
+
+			if (lineEdit == ui->lineEdit_bumpmapAlpha)
+				ui->lineEdit_bumpmap->actions()[0]->trigger();
+			else if (lineEdit == ui->lineEdit_diffuseAlpha)
+				ui->lineEdit_diffuse->actions()[0]->trigger();
+
+		} else if (lineEdit == ui->lineEdit_bumpmapAlpha) {
 			if (combineMaps(ui->lineEdit_bumpmap, ui->lineEdit_bumpmapAlpha)) {
 				InfoReconvert("Converting \"bumpmap_alpha_combine.png\"...");
 				QString convertedFile = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
@@ -7703,7 +7725,20 @@ void MainWindow::processVtf(const QString& objectName,
 				conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
 				conversionThread->start();
 			}
+
+		} else if (lineEdit == ui->lineEdit_diffuseAlpha) {
+			if (combineMaps(ui->lineEdit_diffuse, ui->lineEdit_diffuseAlpha)) {
+				InfoReconvert("Converting \"diffuse_alpha_combine.png\"...");
+				QString convertedFile = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
+				QString mipmapFilter = outputParameters(1, false);
+				ConversionThread* conversionThread = new ConversionThread(this);
+				conversionThread->fileName = convertedFile;
+				conversionThread->newFileName = "lineEdit_diffuse_" + texturesToCopy.value(ui->lineEdit_diffuse) + ".vtf";
+				conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+				conversionThread->start();
+			}
 		}
+
 		return;
 
 	}
@@ -7720,6 +7755,16 @@ void MainWindow::processVtf(const QString& objectName,
 
 	bool updateLastTextureDirectory = true;
 	const QString fileType = fileName.right( fileName.size() - fileName.lastIndexOf(".") );
+
+	if (lineEdit == ui->lineEdit_bumpmap ) {
+		ui->label_bumpmapAlpha->setVisible(false);
+		ui->lineEdit_bumpmapAlpha->setVisible(false);
+		ui->toolButton_bumpmapAlpha->setVisible(false);
+	} else if (lineEdit == ui->lineEdit_diffuse ) {
+		ui->label_diffuseAlpha->setVisible(false);
+		ui->lineEdit_diffuseAlpha->setVisible(false);
+		ui->toolButton_diffuseAlpha->setVisible(false);
+	}
 
 	if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
 
@@ -7767,23 +7812,12 @@ void MainWindow::processVtf(const QString& objectName,
 			}*/
 		}
 
-		if (lineEdit == ui->lineEdit_bumpmap ) {
-			ui->label_bumpmapAlpha->setVisible(false);
-			ui->lineEdit_bumpmapAlpha->setVisible(false);
-			ui->toolButton_bumpmapAlpha->setVisible(false);
-		}
 		goto updateLineEdit;
 
 	} else {
 
 		lineEdit->setEnabled(true);
 		texturesToCopy.remove(lineEdit);
-
-		if (lineEdit == ui->lineEdit_bumpmap ) {
-			ui->label_bumpmapAlpha->setVisible(false);
-			ui->lineEdit_bumpmapAlpha->setVisible(false);
-			ui->toolButton_bumpmapAlpha->setVisible(false);
-		}
 
 		updateLastTextureDirectory = false;
 
@@ -7878,6 +7912,10 @@ void MainWindow::processVtf(const QString& objectName,
 					ui->checkBox_phongBaseAlpha->isChecked() ||
 					ui->checkBox_exponentBaseAlpha->isChecked() )
 					noAlpha = false;
+
+				ui->label_diffuseAlpha->setVisible(true);
+				ui->lineEdit_diffuseAlpha->setVisible(true);
+				ui->toolButton_diffuseAlpha->setVisible(true);
 			}
 			else if( lineEdit == ui->lineEdit_bumpmap ) {
 				type = 2;
@@ -9311,7 +9349,8 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 		mIniPaths->setValue (relativeFilePath, fileNameConvert);
 		if (it.key() == ui->lineEdit_bumpmap && !ui->lineEdit_bumpmapAlpha->text().isEmpty())
 			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
-
+		else if (it.key() == ui->lineEdit_diffuse && !ui->lineEdit_diffuseAlpha->text().isEmpty())
+			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_diffuseAlpha->text());
 
 		it.key()->setEnabled(true);
 		it.key()->setText( dir.right( dir.length() - dir.lastIndexOf("materials/") - QString("materials/").length() ) + fileName );
@@ -9626,7 +9665,8 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_waterNormalMap" )
 		type = 2;
 
-	if( objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible()) {
+	if( (objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible()) ||
+		(objectName == "lineEdit_diffuse" && ui->lineEdit_diffuseAlpha->isVisible()) ) {
 		combine = true;
 		noAlpha = false;
 	}
@@ -9653,12 +9693,16 @@ void MainWindow::reconvertTexture()
 
 	mIniPaths->setValue(relativeFilePath, fileName);
 
-	if (combine) {
+	if (combine && objectName == "lineEdit_bumpmap") {
 		if (combineMaps(ui->lineEdit_bumpmap, ui->lineEdit_bumpmapAlpha)) {
 			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_bumpmapAlpha->text());
 			fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
 		}
-
+	} else if (combine && objectName == "lineEdit_diffuse") {
+		if (combineMaps(ui->lineEdit_diffuse, ui->lineEdit_diffuseAlpha)) {
+			mIniPaths->setValue(relativeFilePath + "_alpha_combine", ui->lineEdit_diffuseAlpha->text());
+			fileName = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
+		}
 	}
 
 	if (extension != "vtf") {
@@ -9710,6 +9754,14 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
 				if (value_alpha != "")
 					ui->lineEdit_bumpmapAlpha->setText(value_alpha);
+
+			} else if (lineEdit == ui->lineEdit_diffuse) {
+				ui->label_diffuseAlpha->setVisible(true);
+				ui->lineEdit_diffuseAlpha->setVisible(true);
+				ui->toolButton_diffuseAlpha->setVisible(true);
+				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
+				if (value_alpha != "")
+					ui->lineEdit_diffuseAlpha->setText(value_alpha);
 			}
 		}
 	}
@@ -9724,7 +9776,6 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_diffuse4);
 		triggerLineEditAction(ui->lineEdit_bumpmap);
 		triggerLineEditAction(ui->lineEdit_bumpmap2);
-		//triggerLineEditAction(ui->lineEdit_bumpmapAlpha);
 		triggerLineEditAction(ui->lineEdit_bump2);
 		triggerLineEditAction(ui->lineEdit_detail);
 		triggerLineEditAction(ui->lineEdit_exponentTexture);
@@ -9740,7 +9791,7 @@ void MainWindow::reconvertAll() {
 
 bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) {
 	QString basePath = lineEditBase->toolTip();
-	QString alphaPath = lineEditAlpha->text();
+	QString alphaPath = lineEditAlpha->text().trimmed();
 	QImage base;
 	QImage alpha;
 	if (!base.load(basePath)) {
@@ -9755,8 +9806,8 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		Error("Images must be same size for combining");
 		return false;
 	}
-	base.convertToFormat(QImage::Format_ARGB32);
-	alpha.convertToFormat(QImage::Format_ARGB32);
+	base = base.convertToFormat(QImage::Format_ARGB32);
+	alpha = alpha.convertToFormat(QImage::Format_ARGB32);
 
 	QColor rgb, a, pix;
 	for (int i = 0; i < base.width(); ++i) {
@@ -9773,9 +9824,9 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		}
 	}
 	QString fileName;
-	if (lineEditBase = ui->lineEdit_bumpmap)
+	if (lineEditBase == ui->lineEdit_bumpmap)
 		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
-	else if (lineEditBase = ui->lineEdit_diffuse)
+	else if (lineEditBase == ui->lineEdit_diffuse)
 		fileName = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
 
 	if (QFile::exists(fileName)) {
