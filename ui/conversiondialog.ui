@@ -384,9 +384,9 @@ QToolBar::separator:vertical {
 QToolButton
 {
     color: silver;
-    background-color: #333;
+    background-color: #282828;
     border-width: 1px;
-    border-color: #333;
+    border-color: #282828;
     border-style: solid;
  	padding: 2px;
     height: 19px;
@@ -394,9 +394,9 @@ QToolButton
 
 QToolButton:disabled
 {
-    background-color:#333;
+    background-color:#282828;
     border-width: 1px;
-    border-color: #333;
+    border-color: #282828;
     border-style: solid;
   	padding: 2px;
     color: #3A3939;
@@ -416,11 +416,11 @@ QPushButton
     border-width: 0px;
     border-color: #282828;
     border-style: solid;
-    padding-top: 5px;
-
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
+	min-height: 19px;
    
 }
 
@@ -430,9 +430,8 @@ QPushButton:disabled
     border-width: 0px;
     border-color: #505050;
     border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
     color: #3A3939;
@@ -443,6 +442,7 @@ QPushButton:focus
 /*background-color: #2e3844;*/
 	border-width: 2px;
 	border-color: #151515;
+	padding: 1px;
 }
 
 QPushButton:hover
@@ -902,51 +902,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0" colspan="3">
-      <widget class="QListWidget" name="listWidget_textures">
-       <property name="styleSheet">
-        <string notr="true">QWidget {
-background-color: #222;
-border: 1px solid #222;
-}</string>
-       </property>
-       <property name="selectionMode">
-        <enum>QAbstractItemView::MultiSelection</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QPushButton" name="pushButton_browseImage">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>23</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>180</width>
-         <height>23</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Add...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
+     <item row="3" column="0" colspan="2">
       <widget class="QPushButton" name="pushButton_removeImage">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -962,7 +918,7 @@ border: 1px solid #222;
        </property>
        <property name="maximumSize">
         <size>
-         <width>180</width>
+         <width>1800</width>
          <height>23</height>
         </size>
        </property>
@@ -977,8 +933,8 @@ border: 1px solid #222;
        </property>
       </widget>
      </item>
-     <item row="3" column="0" colspan="2">
-      <widget class="QPushButton" name="pushButton_clearList">
+     <item row="2" column="0" colspan="2">
+      <widget class="QPushButton" name="pushButton_browseImage">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -993,7 +949,7 @@ border: 1px solid #222;
        </property>
        <property name="maximumSize">
         <size>
-         <width>180</width>
+         <width>1800</width>
          <height>23</height>
         </size>
        </property>
@@ -1004,11 +960,25 @@ border: 1px solid #222;
         </font>
        </property>
        <property name="text">
-        <string>Clear List</string>
+        <string>Add...</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="2">
+     <item row="0" column="0" colspan="3">
+      <widget class="QListWidget" name="listWidget_textures">
+       <property name="styleSheet">
+        <string notr="true">QWidget {
+background-color: #222;
+border: 1px solid #222;
+outline: none;
+}</string>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::MultiSelection</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
       <widget class="QPushButton" name="pushButton_convert">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1024,7 +994,7 @@ border: 1px solid #222;
        </property>
        <property name="maximumSize">
         <size>
-         <width>180</width>
+         <width>1800</width>
          <height>23</height>
         </size>
        </property>
@@ -1046,8 +1016,45 @@ border: 1px solid #222;
        </property>
       </widget>
      </item>
-     <item row="1" column="2" rowspan="4">
+     <item row="4" column="0" colspan="2">
+      <widget class="QPushButton" name="pushButton_clearList">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1800</width>
+         <height>23</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clear List</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2" rowspan="4">
       <widget class="QGroupBox" name="groupBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -1065,19 +1072,6 @@ border: 1px solid #222;
         <string>If file already exists</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_10">
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="radioButton_skip">
-          <property name="font">
-           <font>
-            <family>Segoe UI</family>
-            <pointsize>9</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Skip</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QRadioButton" name="radioButton_ask">
           <property name="font">
@@ -1107,8 +1101,60 @@ border: 1px solid #222;
           </property>
          </widget>
         </item>
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="radioButton_skip">
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Skip</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_18">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Output:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_output"/>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_output">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Browse...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -1441,9 +1487,9 @@ QToolButton:hover
     border-width: 1px;
     border-color: #282828;
     border-style: solid;
-    padding-top: 5px;
+    padding-top: 2px;
 
-    padding-bottom: 5px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
    
@@ -1455,8 +1501,8 @@ QPushButton:disabled
     border-width: 1px;
     border-color: #505050;
     border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
     color: #3A3939;
@@ -1524,6 +1570,9 @@ QPushButton:hover
               <width>16777215</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>No alpha</string>
@@ -1861,6 +1910,29 @@ QPushButton:hover
          </property>
         </spacer>
        </item>
+       <item row="10" column="3">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Textures with alpha:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="3">
         <widget class="QComboBox" name="comboBox_vtfVersion">
          <property name="minimumSize">
@@ -1909,19 +1981,6 @@ QPushButton:hover
           </property>
          </item>
         </widget>
-       </item>
-       <item row="10" column="3">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="2" column="3">
         <widget class="QComboBox" name="comboBox_noAlphaTextures">
@@ -2069,10 +2128,16 @@ QPushButton:hover
          </item>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QLabel" name="label_9">
+       <item row="2" column="2">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>119</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Textures with alpha:</string>
+          <string>Non-alpha textures:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2223,22 +2288,6 @@ QPushButton:hover
            <string>UVLX 8888</string>
           </property>
          </item>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="label">
-         <property name="minimumSize">
-          <size>
-           <width>119</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Non-alpha textures:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
         </widget>
        </item>
        <item row="6" column="4">
@@ -3801,8 +3850,25 @@ QPushButton:hover
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>toolButton_output</sender>
+   <signal>clicked()</signal>
+   <receiver>ConversionDialog</receiver>
+   <slot>browseOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-6</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setTemplate()</slot>
+  <slot>browseOutput()</slot>
  </slots>
 </ui>

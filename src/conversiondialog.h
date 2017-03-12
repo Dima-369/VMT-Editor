@@ -56,4 +56,6 @@ private slots:
 	void convertAskModeChanged();
 
 	void resetWidgets();
+
+	void browseOutput();
 };

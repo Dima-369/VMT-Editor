@@ -28,6 +28,8 @@
 
 		ui->checkBox_resizeToPowerOfTwo->setChecked(true);
 
+		ui->lineEdit_output->setText(iniSettings->value("lastTextureBrowseDir").toString());
+
 		removeSuffix = iniSettings->value("removeSuffix", false).toBool();
 
 		diffuseSuffix = iniSettings->value("diffuseSuffix", false).toString();
@@ -439,8 +441,8 @@
 
 		for( int i = 0; i < ui->listWidget_textures->count(); ++i )
 		{
-			QString fileName = ui->listWidget_textures->item(i)->toolTip();
-				fileName.chop(4);
+			//QString fileName = ui->listWidget_textures->item(i)->toolTip();
+				//fileName.chop(4);
 
 			// TODO: What is this for?
 			/*bool skipEntry = false;
@@ -465,17 +467,20 @@
 			anotherTry:
 
 			QString filePath = ui->listWidget_textures->item(i)->toolTip();
+			QString outputPath = ui->lineEdit_output->text().trimmed();
 
-			QString test = filePath;
+			QString fileName = filePath.section("/", -1);
+			QString outputFile = outputPath + "/" + fileName;
+			QString test = outputPath + "/" + fileName;
 
 			if(removeSuffix) {
 				test.chop(4);
 				if( test.endsWith("_diffuse") ){
 					test.chop(8);
-					test = test + diffuseSuffix + ".vtf";;
+					test = test + diffuseSuffix + ".vtf";
 				} else if( test.endsWith("_normal") ) {
 					test.chop(7);
-					test = test + bumpSuffix + ".vtf";;
+					test = test + bumpSuffix + ".vtf";
 				} else if( test.endsWith("_specular") ) {
 					test.chop(9);
 					test = test + specSuffix + ".vtf";
@@ -535,13 +540,13 @@
 
 					case 2:
 
-						ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
+						ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/failed"));
 
 						continue;
 				}
 			}
 
-			QString processString(argumentString + " -file \"" + filePath + "\"");
+			QString processString(argumentString + " -file \"" + filePath.replace("/", "\\") + "\"" + " -output \"" + outputPath.replace("/", "\\") + "\" ");
 
 			QProcess process;
 				process.start(processString);
@@ -549,37 +554,48 @@
 
 			QString output = process.readAllStandardOutput().simplified();
 
+			qDebug() << output;
+
 			if( output.endsWith("1/1 files completed.") ) {
 
-				for (int i = 0; i < ui->listWidget_textures->count(); ++i) {
-					const QString toolTip = ui->listWidget_textures->item(i)->toolTip();
+				ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
 
-					if (toolTip.left(toolTip.size() - 4) == fileName) {
-						ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/success"));
+				/*for (int j = 0; j < ui->listWidget_textures->count(); ++j) {
+					const QString toolTip = ui->listWidget_textures->item(j)->toolTip();
+
+					if (toolTip.left(toolTip.size() - 4) == filePath.left(filePath.size() - 4)) {
+						ui->listWidget_textures->item(j)->setIcon(QIcon(":/icons/success"));
 						break;
 					}
-				}
+				}*/
 
 				if(removeSuffix) {
-					QString oldName = filePath.left( filePath.size() - 3 ).append("vtf");
-					QString newName = filePath;
+					QString oldName = outputFile.left( outputFile.size() - 3 ).append("vtf");
+					QString newName = outputFile;
 					if( filePath.left( filePath.size() - 4 ).endsWith("_diffuse") ){
 						newName.chop(12);
-						newName = newName + ".vtf";
+						newName = newName + diffuseSuffix + ".vtf";
 						if( !QFile::remove( newName ) ) {
 
 						}
 						QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
 					} else if(filePath.left( filePath.size() - 4 ).endsWith("_normal") ) {
 						newName.chop(11);
-						newName = newName + "n.vtf";
+						newName = newName + bumpSuffix + ".vtf";
 						if( !QFile::remove( newName ) ) {
 
 						}
 						QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
 					} else if(filePath.left( filePath.size() - 4 ).endsWith("_specular") ) {
 						newName.chop(13);
-						newName = newName + "s.vtf";
+						newName = newName + specSuffix + ".vtf";
+						if( !QFile::remove( newName ) ) {
+
+						}
+						QFile::rename(QDir::toNativeSeparators(oldName), QDir::toNativeSeparators(newName));
+					} else if(filePath.left( filePath.size() - 4 ).endsWith("_glossiness") ) {
+						newName.chop(15);
+						newName = newName + glossSuffix + ".vtf";
 						if( !QFile::remove( newName ) ) {
 
 						}
@@ -676,6 +692,19 @@
 					++counter;
 				}
 			}
+		}
+	}
+
+	void ConversionDialog::browseOutput()
+	{
+		QFileDialog dialog(this);
+			dialog.setDirectory( ui->lineEdit_output->text().trimmed() );
+			dialog.setFileMode(QFileDialog::Directory);
+			dialog.setOption(QFileDialog::ShowDirsOnly);
+
+		if( dialog.exec() ) {
+
+			ui->lineEdit_output->setText( dialog.selectedFiles().at(0) );
 		}
 	}
 
