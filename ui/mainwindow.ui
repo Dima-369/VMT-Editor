@@ -1318,7 +1318,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-558</y>
+             <y>0</y>
              <width>926</width>
              <height>5595</height>
             </rect>
@@ -9996,7 +9996,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Blend tint by base alpha</string>
+                    <string>Diffuse alpha mask</string>
                    </property>
                   </widget>
                  </item>
@@ -10073,7 +10073,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Normal alpha</string>
+                    <string>Bump alpha</string>
                    </property>
                   </widget>
                  </item>
@@ -10814,7 +10814,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Base alpha</string>
+                    <string>Diffuse alpha</string>
                    </property>
                   </widget>
                  </item>
@@ -11252,7 +11252,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Normal alpha mask</string>
+                      <string>Bump alpha mask</string>
                      </property>
                     </widget>
                    </item>
@@ -11363,7 +11363,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Base alpha mask</string>
+                      <string>Diffuse alpha mask</string>
                      </property>
                     </widget>
                    </item>
@@ -12555,7 +12555,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Base alpha mask</string>
+                      <string>Diffuse alpha mask</string>
                      </property>
                     </widget>
                    </item>
@@ -12577,7 +12577,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Base luminance mask</string>
+                      <string>Diffuse luminance mask</string>
                      </property>
                     </widget>
                    </item>
