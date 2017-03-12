@@ -1318,7 +1318,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-519</y>
              <width>926</width>
              <height>5595</height>
             </rect>
@@ -3714,6 +3714,19 @@ QToolButton:pressed
                        <bold>false</bold>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit
+{
+    background-color: #404040;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #222;
+    color: silver;
+}</string>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -3816,6 +3829,19 @@ QToolButton:pressed
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit
+{
+    background-color: #404040;
+    padding: 2px;
+    border-style: solid;
+    border: 1px solid #222;
+    color: silver;
+}</string>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -17783,8 +17809,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
