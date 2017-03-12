@@ -643,6 +643,8 @@
 
 						goto anotherTry;
 				}
+			} else {
+				ui->listWidget_textures->item(i)->setIcon(QIcon(":/icons/failed"));
 			}
 		}
 
