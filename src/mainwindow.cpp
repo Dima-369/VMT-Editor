@@ -4417,6 +4417,8 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_waterNormalMap);
 	clearLineEditAction(ui->lineEdit_decal);
 	clearLineEditAction(ui->lineEdit_phongWarp);
+	clearLineEditAction(ui->lineEdit_diffuseAlpha);
+	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -7707,6 +7709,10 @@ void MainWindow::processVtf(const QString& objectName,
 
 		lineEdit->setText(fileName);
 
+		QAction *clear = lineEdit->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
+		clear->setToolTip("Clear");
+		connect (clear, SIGNAL(triggered()), SLOT(clearLineEdit()));
+
 		if(mVMTLoaded) {
 
 			if (lineEdit == ui->lineEdit_bumpmapAlpha)
@@ -9737,6 +9743,14 @@ void MainWindow::reconvertTexture()
 	lineEdit->setText(relativeFilePath);
 }
 
+void MainWindow::clearLineEdit()
+{
+	const auto lineEdit =
+		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+	lineEdit->clear();
+	clearLineEditAction(lineEdit);
+}
+
 void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 	QString value = mIniPaths->value(fileName).toString();
 
@@ -9752,16 +9766,24 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
 				ui->toolButton_bumpmapAlpha->setVisible(true);
 				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
-				if (value_alpha != "")
+				if (value_alpha != "") {
 					ui->lineEdit_bumpmapAlpha->setText(value_alpha);
+					QAction *clear = ui->lineEdit_bumpmapAlpha->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
+					clear->setToolTip("Clear");
+					connect (clear, SIGNAL(triggered()), SLOT(clearLineEdit()));
+				}
 
 			} else if (lineEdit == ui->lineEdit_diffuse) {
 				ui->label_diffuseAlpha->setVisible(true);
 				ui->lineEdit_diffuseAlpha->setVisible(true);
 				ui->toolButton_diffuseAlpha->setVisible(true);
 				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
-				if (value_alpha != "")
+				if (value_alpha != "") {
 					ui->lineEdit_diffuseAlpha->setText(value_alpha);
+					QAction *clear = ui->lineEdit_diffuseAlpha->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
+					clear->setToolTip("Clear");
+					connect (clear, SIGNAL(triggered()), SLOT(clearLineEdit()));
+				}
 			}
 		}
 	}

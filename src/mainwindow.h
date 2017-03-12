@@ -431,6 +431,8 @@ private slots:
 
 	void reconvertTexture();
 
+	void clearLineEdit();
+
 	void checkForUpdates();
 
 	void checkForUpdatesSilent();
