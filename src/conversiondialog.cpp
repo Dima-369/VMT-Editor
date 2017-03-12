@@ -703,7 +703,8 @@
 			dialog.setOption(QFileDialog::ShowDirsOnly);
 
 		if( dialog.exec() ) {
-
+			settings->setValue("lastTextureBrowseDir",
+								   QDir::toNativeSeparators(dialog.selectedFiles().at(0)) );
 			ui->lineEdit_output->setText( dialog.selectedFiles().at(0) );
 		}
 	}
