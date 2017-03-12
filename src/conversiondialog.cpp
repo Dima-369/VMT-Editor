@@ -28,7 +28,7 @@
 
 		ui->checkBox_resizeToPowerOfTwo->setChecked(true);
 
-		ui->lineEdit_output->setText(iniSettings->value("lastTextureBrowseDir").toString());
+		ui->lineEdit_output->setText(iniSettings->value("lastTextureConvertDir", "").toString());
 
 		removeSuffix = iniSettings->value("removeSuffix", false).toBool();
 
@@ -703,7 +703,7 @@
 			dialog.setOption(QFileDialog::ShowDirsOnly);
 
 		if( dialog.exec() ) {
-			settings->setValue("lastTextureBrowseDir",
+			settings->setValue("lastTextureConvertDir",
 								   QDir::toNativeSeparators(dialog.selectedFiles().at(0)) );
 			ui->lineEdit_output->setText( dialog.selectedFiles().at(0) );
 		}
