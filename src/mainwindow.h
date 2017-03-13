@@ -431,6 +431,8 @@ private slots:
 
 	void reconvertTexture();
 
+	void clearLineEdit();
+
 	void checkForUpdates();
 
 	void checkForUpdatesSilent();
@@ -446,6 +448,8 @@ private slots:
 	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
 
 	void reconvertAll();
+
+	bool combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha);
 
 	//----------------------------------------------------------------------------------------//
 
