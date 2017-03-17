@@ -20,6 +20,16 @@ public:
 	~ConversionDialog();
 
 	void addFile(const QString& fileName);
+
+protected:
+
+	void dropEvent(QDropEvent* event);
+
+	void dragEnterEvent(QDragEnterEvent* event);
+
+	void dragMoveEvent(QDragMoveEvent* event);
+
+	void dragLeaveEvent(QDragLeaveEvent* event);
 	
 private:
 
