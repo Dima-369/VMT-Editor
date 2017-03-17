@@ -16,6 +16,8 @@
 		ui(new Ui::ConversionDialog),
 		settings(iniSettings)
 	{
+		setAcceptDrops(true);
+
 		ui->setupUi(this);
 
 		connect( ui->pushButton_convert, SIGNAL(pressed()), this, SLOT(convertRequested()) );
