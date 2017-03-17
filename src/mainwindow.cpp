@@ -4783,6 +4783,7 @@ void MainWindow::action_New() {
 			case QMessageBox::Save:
 
 				action_Save();
+				break;
 
 			case QMessageBox::Cancel:
 			case QMessageBox::Escape:
