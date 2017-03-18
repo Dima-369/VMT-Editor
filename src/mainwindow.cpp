@@ -9624,8 +9624,13 @@ void MainWindow::reconvertTexture()
 		if (ui->checkBox_basealpha->isChecked() )
 			noAlpha = false;
 	}
-	else if( objectName == "lineEdit_bumpmap2" )
+	else if( objectName == "lineEdit_bumpmap2" ) {
 		preview = "preview_bumpmap2";
+		if (ui->checkBox_normalalpha->isChecked() ||
+			ui->groupBox_phong->isVisible() ||
+			ui->checkBox_phongNormalAlpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_diffuse3" ) {
 		preview = "preview_basetexture3";
 		if (ui->checkBox_basealpha->isChecked() )

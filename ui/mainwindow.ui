@@ -1319,9 +1319,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2851</y>
-             <width>925</width>
-             <height>6106</height>
+             <y>-3838</y>
+             <width>926</width>
+             <height>6114</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -13281,162 +13281,10 @@ QToolButton:pressed
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_49">
-                 <item row="11" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_78">
-                   <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_8">
-                     <property name="minimumSize">
-                      <size>
-                       <width>200</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>200</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="maximum">
-                      <number>1000</number>
-                     </property>
-                     <property name="singleStep">
-                      <number>1</number>
-                     </property>
-                     <property name="value">
-                      <number>1000</number>
-                     </property>
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_8">
-                     <property name="minimumSize">
-                      <size>
-                       <width>70</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>75</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="maximum">
-                      <double>100.000000000000000</double>
-                     </property>
-                     <property name="value">
-                      <double>1.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_87">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
-                 </item>
                  <item row="12" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_79">
-                   <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_9">
-                     <property name="minimumSize">
-                      <size>
-                       <width>200</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>200</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="maximum">
-                      <number>1000</number>
-                     </property>
-                     <property name="singleStep">
-                      <number>1</number>
-                     </property>
-                     <property name="value">
-                      <number>1000</number>
-                     </property>
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_9">
-                     <property name="minimumSize">
-                      <size>
-                       <width>70</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>75</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="maximum">
-                      <double>100.000000000000000</double>
-                     </property>
-                     <property name="value">
-                      <double>1.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_88">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="9" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_76">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_6">
+                    <widget class="QSlider" name="horizontalSlider_layerEdgeStrength">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13456,7 +13304,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>500</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13464,7 +13312,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_6">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerEdgeStrength">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13490,7 +13338,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.500000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13509,10 +13357,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="10" column="1">
+                 <item row="13" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_77">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_7">
+                    <widget class="QSlider" name="horizontalSlider_layerEdgeSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13532,7 +13380,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>500</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13540,7 +13388,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_7">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerEdgeSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13566,7 +13414,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.500000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13585,10 +13433,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="13" column="1">
+                 <item row="14" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_80">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_10">
+                    <widget class="QSlider" name="horizontalSlider_layerEdgeOffset">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13608,7 +13456,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>0</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13616,7 +13464,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_10">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerEdgeOffset">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13642,7 +13490,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.000000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13661,10 +13509,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="5" column="1">
+                 <item row="7" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_74">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_4">
+                    <widget class="QSlider" name="horizontalSlider_layerBorderSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13684,7 +13532,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>500</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13692,7 +13540,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_4">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerBorderSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13718,7 +13566,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.500000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13737,10 +13585,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="4" column="1">
+                 <item row="6" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_73">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_3">
+                    <widget class="QSlider" name="horizontalSlider_layerBorderStrength">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13760,7 +13608,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>500</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13768,7 +13616,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_3">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerBorderStrength">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13794,7 +13642,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.500000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13813,10 +13661,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="6" column="1">
+                 <item row="8" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_75">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_5">
+                    <widget class="QSlider" name="horizontalSlider_layerBorderOffset">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -13836,7 +13684,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>0</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -13844,7 +13692,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_5">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerBorderOffset">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -13870,7 +13718,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.000000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -13914,7 +13762,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1" colspan="2">
+                 <item row="5" column="1" colspan="2">
                   <spacer name="verticalSpacer_6">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -13930,7 +13778,7 @@ QToolButton:pressed
                    </property>
                   </spacer>
                  </item>
-                 <item row="6" column="0">
+                 <item row="8" column="0">
                   <widget class="QLabel" name="label_88">
                    <property name="minimumSize">
                     <size>
@@ -13955,7 +13803,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1" colspan="2">
+                 <item row="10" column="1" colspan="2">
                   <spacer name="verticalSpacer_8">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
@@ -13971,7 +13819,7 @@ QToolButton:pressed
                    </property>
                   </spacer>
                  </item>
-                 <item row="5" column="0">
+                 <item row="7" column="0">
                   <widget class="QLabel" name="label_89">
                    <property name="minimumSize">
                     <size>
@@ -13996,7 +13844,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="0">
+                 <item row="9" column="0">
                   <widget class="QLabel" name="label_90">
                    <property name="minimumSize">
                     <size>
@@ -14022,56 +13870,6 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="12" column="0">
-                  <widget class="QLabel" name="label_92">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Edge punchin:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="0">
-                  <widget class="QLabel" name="label_91">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Edge normal:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="0">
                   <widget class="QLabel" name="label_93">
                    <property name="minimumSize">
                     <size>
@@ -14096,7 +13894,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="0">
+                 <item row="13" column="0">
                   <widget class="QLabel" name="label_94">
                    <property name="minimumSize">
                     <size>
@@ -14121,7 +13919,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="13" column="0">
+                 <item row="14" column="0">
                   <widget class="QLabel" name="label_95">
                    <property name="minimumSize">
                     <size>
@@ -14149,7 +13947,7 @@ QToolButton:pressed
                  <item row="0" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_69">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_envmapTint_3">
+                    <widget class="QSlider" name="horizontalSlider_layer1tint">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -14177,7 +13975,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_3">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layer1tint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14214,7 +14012,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPlainTextEdit" name="color_envmapTint_3">
+                    <widget class="QPlainTextEdit" name="color_layer1tint">
                      <property name="enabled">
                       <bool>false</bool>
                      </property>
@@ -14248,7 +14046,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QToolButton" name="toolButton_envmapTint_3">
+                    <widget class="QToolButton" name="toolButton_layer1tint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14318,7 +14116,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_86">
                    <property name="minimumSize">
                     <size>
@@ -14343,7 +14141,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="6" column="0">
                   <widget class="QLabel" name="label_87">
                    <property name="minimumSize">
                     <size>
@@ -14368,10 +14166,40 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
+                 <item row="3" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_83">
+                   <item>
+                    <widget class="QCheckBox" name="checkBox_newLayerBlend">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Use new blend</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_92">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
                  <item row="1" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_70">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_envmapTint_4">
+                    <widget class="QSlider" name="horizontalSlider_layer2tint">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -14399,7 +14227,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_4">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layer2tint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14436,7 +14264,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPlainTextEdit" name="color_envmapTint_4">
+                    <widget class="QPlainTextEdit" name="color_layer2tint">
                      <property name="enabled">
                       <bool>false</bool>
                      </property>
@@ -14470,7 +14298,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QToolButton" name="toolButton_envmapTint_4">
+                    <widget class="QToolButton" name="toolButton_layer2tint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14515,10 +14343,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="7" column="1">
+                 <item row="9" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_71">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_envmapTint_5">
+                    <widget class="QSlider" name="horizontalSlider_layerBorderTint">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -14546,7 +14374,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_5">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerBorderTint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14583,7 +14411,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPlainTextEdit" name="color_envmapTint_5">
+                    <widget class="QPlainTextEdit" name="color_layerBorderTint">
                      <property name="enabled">
                       <bool>false</bool>
                      </property>
@@ -14617,7 +14445,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="QToolButton" name="toolButton_envmapTint_5">
+                    <widget class="QToolButton" name="toolButton_layerBorderTint">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -14662,10 +14490,10 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="2" column="1">
+                 <item row="4" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_72">
                    <item>
-                    <widget class="QSlider" name="horizontalSlider_boost_2">
+                    <widget class="QSlider" name="horizontalSlider_layerBlendSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>200</width>
@@ -14685,7 +14513,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>1000</number>
+                      <number>500</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -14693,7 +14521,7 @@ QToolButton:pressed
                     </widget>
                    </item>
                    <item>
-                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_2">
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_layerBlendSoftness">
                      <property name="minimumSize">
                       <size>
                        <width>70</width>
@@ -14719,7 +14547,7 @@ QToolButton:pressed
                       <double>100.000000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.500000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -14737,6 +14565,59 @@ QToolButton:pressed
                     </spacer>
                    </item>
                   </layout>
+                 </item>
+                 <item row="11" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_82">
+                   <item>
+                    <widget class="QCheckBox" name="checkBox_layerEdgeNormal">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Edge normal</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="checkBox_layerEdgePunchin">
+                     <property name="text">
+                      <string>Edge punchin</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_91">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="2" column="1">
+                  <spacer name="verticalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>8</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
@@ -19495,8 +19376,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>940</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
