@@ -521,7 +521,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	setCentralWidget(ui->tabWidget);
 
 	ui->tabWidget->setCurrentIndex(0);
-	ui->tabWidget->setMinimumWidth(829);
+	ui->tabWidget->setMinimumWidth(915);
 
 	setCorner( Qt::TopRightCorner, Qt::RightDockWidgetArea );
 	setCorner( Qt::BottomRightCorner, Qt::RightDockWidgetArea );

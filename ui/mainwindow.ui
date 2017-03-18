@@ -1069,7 +1069,7 @@ QGroupBox::title {
          <widget class="QScrollArea" name="scrollArea_parameter">
           <property name="minimumSize">
            <size>
-            <width>800</width>
+            <width>900</width>
             <height>0</height>
            </size>
           </property>
@@ -1318,7 +1318,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-519</y>
+             <y>0</y>
              <width>926</width>
              <height>5595</height>
             </rect>
@@ -17809,8 +17809,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
