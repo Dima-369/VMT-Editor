@@ -1318,9 +1318,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
-             <width>926</width>
-             <height>5595</height>
+             <y>-3723</y>
+             <width>925</width>
+             <height>6062</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -10072,6 +10072,37 @@ QToolButton:pressed
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_43">
+                 <item row="2" column="4">
+                  <widget class="QToolButton" name="toolButton_specmap">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="3" column="1">
                   <widget class="QCheckBox" name="checkBox_normalalpha">
                    <property name="enabled">
@@ -10100,6 +10131,118 @@ QToolButton:pressed
                    </property>
                    <property name="text">
                     <string>Bump alpha</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="4">
+                  <widget class="QToolButton" name="toolButton_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="checkBox_basealpha">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Diffuse alpha</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Mask 2:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" colspan="3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
                    </property>
                   </widget>
                  </item>
@@ -10137,79 +10280,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="4">
-                  <widget class="QToolButton" name="toolButton_specmap">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Browse...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="2" colspan="2">
-                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1" colspan="3">
-                  <widget class="TextureDragDropLineEdit" name="lineEdit_envmap">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
+                 <item row="6" column="0">
                   <widget class="QLabel" name="label_saturation">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10240,6 +10311,31 @@ QToolButton:pressed
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" colspan="3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_envmap">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
                    </property>
                   </widget>
                  </item>
@@ -10274,35 +10370,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="4">
-                  <widget class="QToolButton" name="toolButton_envmap">
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Browse...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1" colspan="4">
+                 <item row="8" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_fresnelReflection">
@@ -10339,7 +10407,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -10384,7 +10452,35 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="5" column="1" colspan="4">
+                 <item row="1" column="4">
+                  <widget class="QToolButton" name="toolButton_envmap">
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_saturation">
@@ -10421,7 +10517,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -10466,7 +10562,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="7" column="0">
+                 <item row="8" column="0">
                   <widget class="QLabel" name="label_fresnelReflection">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10494,7 +10590,41 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1" colspan="4">
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_envmapTint">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Tint:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_25">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapTint">
@@ -10531,7 +10661,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -10641,7 +10771,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="6" column="0">
+                 <item row="7" column="0">
                   <widget class="QLabel" name="label_contrast">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10675,41 +10805,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_envmapTint">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Tint:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1" colspan="4">
+                 <item row="7" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_43">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_contrast">
@@ -10740,7 +10836,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -10785,65 +10881,6 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="8" column="0">
-                  <widget class="QLabel" name="label_lightinfluence">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Light influence:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QCheckBox" name="checkBox_basealpha">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>100</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Diffuse alpha</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="0" column="1" colspan="2">
                   <widget class="QCheckBox" name="checkBox_cubemap">
                    <property name="minimumSize">
@@ -10873,6 +10910,34 @@ QToolButton:pressed
                   </widget>
                  </item>
                  <item row="9" column="0">
+                  <widget class="QLabel" name="label_lightinfluence">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Light influence:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="0">
                   <widget class="QLabel" name="label_anisotropy">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10900,7 +10965,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1" colspan="4">
+                 <item row="9" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_48">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapLight">
@@ -10937,7 +11002,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -11071,7 +11136,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="9" column="1" colspan="4">
+                 <item row="10" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_61">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapAniso">
@@ -11108,7 +11173,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>75</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -11152,6 +11217,22 @@ QToolButton:pressed
                     </spacer>
                    </item>
                   </layout>
+                 </item>
+                 <item row="2" column="2" colspan="2">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </widget>
@@ -11650,7 +11731,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="maximum">
-                      <double>8.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -11964,7 +12045,7 @@ QToolButton:pressed
                          </font>
                         </property>
                         <property name="maximum">
-                         <double>8.000000000000000</double>
+                         <double>100.000000000000000</double>
                         </property>
                         <property name="singleStep">
                          <double>0.100000000000000</double>
@@ -13039,6 +13120,1493 @@ QToolButton:pressed
                    </item>
                    <item>
                     <spacer name="horizontalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="FadeGroupBox" name="groupBox_layerblend">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>14</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="title">
+                 <string>Layer Blend</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_49">
+                 <item row="11" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_78">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_8">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_8">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_87">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="12" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_79">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_9">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_9">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_88">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="9" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_76">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_6">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_6">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_85">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="10" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_77">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_7">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_7">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_86">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="13" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_80">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_10">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_10">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_89">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="5" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_74">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_4">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_4">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_83">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="4" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_73">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_3">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_3">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_82">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="6" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_75">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_5">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_5">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_84">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_81">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Layer 1 tint:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" colspan="2">
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>8</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QLabel" name="label_88">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Border offset:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1" colspan="2">
+                  <spacer name="verticalSpacer_8">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>8</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_89">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Border softness:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0">
+                  <widget class="QLabel" name="label_90">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Border tint:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="12" column="0">
+                  <widget class="QLabel" name="label_92">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Edge punchin:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="0">
+                  <widget class="QLabel" name="label_91">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Edge normal:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QLabel" name="label_93">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Edge strength:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="0">
+                  <widget class="QLabel" name="label_94">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Edge softness:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="13" column="0">
+                  <widget class="QLabel" name="label_95">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Edge offset:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_69">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_envmapTint_3">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>100</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>100</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_3">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>16.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="color_envmapTint_3">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>21</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_envmapTint_3">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Pick color</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_79">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_85">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Layer 2 tint:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_86">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Blend softness:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_87">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Border strength:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_70">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_envmapTint_4">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>100</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>100</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_4">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>16.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="color_envmapTint_4">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>21</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_envmapTint_4">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Pick color</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_80">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="7" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_71">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_envmapTint_5">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>100</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>100</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_envmapTint_5">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>16.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="color_envmapTint_5">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>21</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_envmapTint_5">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Pick color</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_81">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="2" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_72">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_boost_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_boost_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_60">
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
                      </property>
@@ -17809,7 +19377,7 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
+             <width>940</width>
              <height>751</height>
             </rect>
            </property>
