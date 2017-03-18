@@ -4783,7 +4783,8 @@ void MainWindow::action_New() {
 			case QMessageBox::Save:
 
 				action_Save();
-				break;
+				if( !mChildWidgetChanged)
+					break;
 
 			case QMessageBox::Cancel:
 			case QMessageBox::Escape:
