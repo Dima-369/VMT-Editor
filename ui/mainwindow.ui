@@ -27,6 +27,7 @@
 QWidget
 {
 	font: 9pt &quot;Segoe UI&quot;;
+	background-color: #404040;
 }
 
 /* Progress bar */
@@ -1088,9 +1089,9 @@ QGroupBox::title {
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1115,18 +1116,18 @@ QGroupBox::title {
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1162,9 +1163,9 @@ QGroupBox::title {
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1189,18 +1190,18 @@ QGroupBox::title {
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1236,9 +1237,9 @@ QGroupBox::title {
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1263,18 +1264,18 @@ QGroupBox::title {
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -1318,7 +1319,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3723</y>
+             <y>0</y>
              <width>925</width>
              <height>6062</height>
             </rect>
@@ -19155,9 +19156,9 @@ QToolButton:pressed
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -19182,18 +19183,18 @@ QToolButton:pressed
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -19229,9 +19230,9 @@ QToolButton:pressed
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -19256,18 +19257,18 @@ QToolButton:pressed
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -19303,9 +19304,9 @@ QToolButton:pressed
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
@@ -19330,18 +19331,18 @@ QToolButton:pressed
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="255">
-                <red>51</red>
-                <green>51</green>
-                <blue>51</blue>
+                <red>64</red>
+                <green>64</green>
+                <blue>64</blue>
                </color>
               </brush>
              </colorrole>
