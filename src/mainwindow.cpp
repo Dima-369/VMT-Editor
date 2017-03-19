@@ -3417,6 +3417,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	{
 		utils::parseTexture("$tintmasktexture", value, ui,
 			ui->lineEdit_tintMask, vmt);
+		createReconvertAction(ui->lineEdit_tintMask, value);
 
 		showColor = true;
 	}

@@ -61,7 +61,7 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 		vmt->parameters.insert("$basealphaenvmapmask", "1");
 
 	if( ui->checkBox_tintSpecMask->isChecked() && ui->checkBox_tintSpecMask->isVisible())
-		vmt->parameters.insert( "$envmapmaskintintmasktextue", "1" );
+		vmt->parameters.insert( "$envmapmaskintintmasktexture", "1" );
 
 	if (isChecked(ui->checkBox_normalalpha))
 		vmt->parameters.insert("$normalmapalphaenvmapmask", "1");

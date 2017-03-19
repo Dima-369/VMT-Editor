@@ -1319,9 +1319,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2968</y>
+             <y>-2829</y>
              <width>926</width>
-             <height>6141</height>
+             <height>6112</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -11336,7 +11336,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="4" column="1">
+                 <item row="3" column="2">
                   <widget class="QCheckBox" name="checkBox_tintSpecMask">
                    <property name="enabled">
                     <bool>false</bool>
@@ -11357,7 +11357,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Mask alpha</string>
+                    <string>Color mask red channel</string>
                    </property>
                   </widget>
                  </item>

@@ -75,8 +75,6 @@ void initializeLayerblend(Ui::MainWindow *ui, VmtFile *vmt)
 		ui->groupBox_layerblend->setChecked(true);
 		vmt->state.layerBlendEnabled = true;
 		break;
-	default:
-		ERROR("Layer blend only works with the WorldVertexTransition shader");
 	}
 }
 
