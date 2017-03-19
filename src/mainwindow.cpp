@@ -3989,12 +3989,12 @@ VmtFile MainWindow::makeVMT()
 		tmp = toParameterBig(utils::getBG(ui->color_layer1tint),
 							 ui->doubleSpinBox_layer1tint->value());
 		if( tmp != "[1 1 1]" )
-			vmtFile.parameters.insert( "$layer1tint", tmp );
+			vmtFile.parameters.insert( "$layertint1", tmp );
 
 		tmp = toParameterBig(utils::getBG(ui->color_layer2tint),
 							 ui->doubleSpinBox_layer2tint->value());
 		if( tmp != "[1 1 1]" )
-			vmtFile.parameters.insert( "$layer2tint", tmp );
+			vmtFile.parameters.insert( "$layertint2", tmp );
 
 		tmp = toParameterBig(utils::getBG(ui->color_layerBorderTint),
 							 ui->doubleSpinBox_layerBorderTint->value());

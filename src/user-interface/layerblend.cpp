@@ -23,8 +23,8 @@ bool layerblend::hasChanged(Ui::MainWindow *ui)
 	CHE(ui->checkBox_newLayerBlend)
 	VAL(ui->doubleSpinBox_layerBlendSoftness, "0.5")
 	VAL(ui->doubleSpinBox_layerBorderOffset, "0.0")
-	VAL(ui->doubleSpinBox_layerBorderSoftness, "0")
-	VAL(ui->doubleSpinBox_layerBorderStrength, "0")
+	VAL(ui->doubleSpinBox_layerBorderSoftness, "0.5")
+	VAL(ui->doubleSpinBox_layerBorderStrength, "0.5")
 	VAL(ui->doubleSpinBox_layerBorderTint, "1.0")
 	COL(ui->color_layerBorderTint)
 	CHE(ui->checkBox_layerEdgeNormal)
@@ -52,9 +52,9 @@ void layerblend::resetWidgets(Ui::MainWindow *ui)
 	ui->doubleSpinBox_layerBlendSoftness->setValue(0.5);
 
 	ui->doubleSpinBox_layerBorderOffset->setValue(0);
-	ui->doubleSpinBox_layerBorderSoftness->setValue(0);
-	ui->doubleSpinBox_layerBorderStrength->setValue(0);
-	ui->doubleSpinBox_layerBorderTint->setValue(0);
+	ui->doubleSpinBox_layerBorderSoftness->setValue(0.5);
+	ui->doubleSpinBox_layerBorderStrength->setValue(0.5);
+	ui->doubleSpinBox_layerBorderTint->setValue(1.0);
 	ui->color_layerBorderTint->setStyleSheet(whiteBG);
 
 	ui->checkBox_layerEdgeNormal->setChecked(false);
@@ -115,8 +115,8 @@ void layerblend::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	}
 	initializeLayerblend(ui, vmt);
 
-	COLOR("$layer1tint", ui->color_layer1tint, ui->doubleSpinBox_layer1tint)
-	COLOR("$layer2tint", ui->color_layer2tint, ui->doubleSpinBox_layer2tint)
+	COLOR("$layertint1", ui->color_layer1tint, ui->doubleSpinBox_layer1tint)
+	COLOR("$layertint2", ui->color_layer2tint, ui->doubleSpinBox_layer2tint)
 	COLOR("$layerbordertint", ui->color_layerBorderTint, ui->doubleSpinBox_layerBorderTint)
 	BOOL("$newlayerblending", ui->checkBox_newLayerBlend)
 	BOOL("$layeredgenormal", ui->checkBox_layerEdgeNormal)
