@@ -25,7 +25,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$decaltexture;$decalblendmode" );
 	mGroups.append( "$blendmodulatetexture;$alpha;$translucent;$alphatest;$alphatestreference;$additive;$decal;$nocull" );
 
-	mGroups.append( "$envmap;$envmapmask;$normalmapalphaenvmapmask;$basealphaenvmapmask;$envmaptint;$envmapcontrast;$envmapsaturation;$envmaptint;$envmapfresnel;$envmapfresnelminmaxexp;$fresnelreflection;$envmaplightscale;$envmaplightscaleminmax;$envmapanisotropy;$envmapanisotropyscale" );
+	mGroups.append( "$envmap;$envmapmask;$envmapmask2;$normalmapalphaenvmapmask;$basealphaenvmapmask;$envmaptint;$envmapcontrast;$envmapsaturation;$envmaptint;$envmapfresnel;$envmapfresnelminmaxexp;$fresnelreflection;$envmaplightscale;$envmaplightscaleminmax;$envmapanisotropy;$envmapanisotropyscale" );
 	mGroups.append( "$phong;$phongexponenttexture;$basemapluminancephongmask;$phongfresnelranges;$phongwarptexture;$phongtint;$halflambert;$phongdisablehalflambert;$phongalbedotint;$phongexponent;$phongboost;$basemapalphaphongmask;$phongamount;$phongmaskcontrastbrightness;$phongexponent2;$phongamount2;$phongmaskcontrastbrightness2" );
 	mGroups.append( "$rimlight;$rimlightexponent;$rimlightboost;$rimlightmask");
 	mGroups.append( "$selfillum;$selfillum_envmapmask_alpha;$selfillumfresnelminmaxexp;$selfillummask;$selfillumtint" );
@@ -43,7 +43,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$addbumpmaps;$bumpdetailscale1;$bumpdetailscale2;$bumptransform2" );
 	mGroups.append( "$basetexturetransform;$bumptransform" );
 	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright;$disablecsmlookup" );
-	mGroups.append( "$color;$color2;$blendtintbybasealpha" );
+	mGroups.append( "$color;$color2;$blendtintbybasealpha;$tintmasktexture;$envmapmaskintintmasktexture" );
 	mGroups.append( "$spriteorientation;$spriteorigin" );
 	mGroups.append( "$treesway;$treeswayheight;$treeswaystartheight;$treeswayradius;$treeswaystartradius;$treeswaystrength;$treeswayspeed;$treeswayfalloffexp;$treeswayscrumblestrength;$treeswayscrumblespeed;$treeswayscrumblefrequency;$treeswayscrumblefalloffexp;$treeswayspeedhighwindmultiplier;$treeswayspeedlerpstart;$treeswayspeedlerpend" );
 

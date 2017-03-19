@@ -53,8 +53,15 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 	if (!mask.isEmpty())
 		vmt->parameters.insert("$envmapmask", mask);
 
+	const QString mask2 = getText(ui->lineEdit_specmap2);
+	if (!mask2.isEmpty())
+		vmt->parameters.insert("$envmapmask2", mask2);
+
 	if (isChecked(ui->checkBox_basealpha))
 		vmt->parameters.insert("$basealphaenvmapmask", "1");
+
+	if( ui->checkBox_tintSpecMask->isChecked() && ui->checkBox_tintSpecMask->isVisible())
+		vmt->parameters.insert( "$envmapmaskintintmasktextue", "1" );
 
 	if (isChecked(ui->checkBox_normalalpha))
 		vmt->parameters.insert("$normalmapalphaenvmapmask", "1");
