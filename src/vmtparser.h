@@ -41,6 +41,10 @@ struct VmtState
 
 	bool treeSwayEnabled = false;
 
+	bool layerBlendEnabled = false;
+
+	bool showLayerBlend = false;
+
 	/*!
 	 * Helper field to persist the directory of the game so textures can be
 	 * validated and previewed.

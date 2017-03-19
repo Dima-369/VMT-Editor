@@ -78,7 +78,8 @@ SOURCES += \
     src/user-interface/treesway.cpp \
     src/vmttextedit.cpp \
     src/texturedragdroplineedit.cpp \
-    src/texturepreviewdialog.cpp
+    src/texturepreviewdialog.cpp \
+    src/user-interface/layerblend.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -127,7 +128,8 @@ HEADERS += \
     src/user-interface/treesway.h \
     src/vmttextedit.h \
     src/texturedragdroplineedit.h \
-    src/texturepreviewdialog.h
+    src/texturepreviewdialog.h \
+    src/user-interface/layerblend.h
 
 FORMS += \
     ui/mainwindow.ui \

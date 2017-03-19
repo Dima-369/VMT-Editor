@@ -93,6 +93,7 @@
         <file>images/vmtfile.ico</file>
         <file alias="reconvert_dark">images/reconvert_dark.png</file>
         <file alias="clear">images/clear.png</file>
+        <file alias="layerblend">images/layerblend.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>

@@ -19,6 +19,7 @@
 #include "user-interface/view-helper.h"
 #include "user-interface/shading-reflection.h"
 #include "user-interface/treesway.h"
+#include "user-interface/layerblend.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -293,19 +294,25 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 10.0);
 	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 10.0);
 
+	ui->doubleSpinBox_layer1tint->setDoubleSlider(ui->horizontalSlider_layer1tint);
+	ui->doubleSpinBox_layer2tint->setDoubleSlider(ui->horizontalSlider_layer2tint);
+	ui->doubleSpinBox_layerBlendSoftness->setDoubleSlider(ui->horizontalSlider_layerBlendSoftness);
+	ui->doubleSpinBox_layerBorderOffset->setDoubleSlider(ui->horizontalSlider_layerBorderOffset);
+	ui->doubleSpinBox_layerBorderSoftness->setDoubleSlider(ui->horizontalSlider_layerBorderSoftness);
+	ui->doubleSpinBox_layerBorderStrength->setDoubleSlider(ui->horizontalSlider_layerBorderStrength);
+	ui->doubleSpinBox_layerBorderTint->setDoubleSlider(ui->horizontalSlider_layerBorderTint);
+	ui->doubleSpinBox_layerEdgeOffset->setDoubleSlider(ui->horizontalSlider_layerEdgeOffset);
+	ui->doubleSpinBox_layerEdgeSoftness->setDoubleSlider(ui->horizontalSlider_layerEdgeSoftness);
+	ui->doubleSpinBox_layerEdgeStrength->setDoubleSlider(ui->horizontalSlider_layerEdgeStrength);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_envmapTint->setDoubleSlider(ui->horizontalSlider_envmapTint);
-
 	ui->doubleSpinBox_color1->setDoubleSlider(ui->horizontalSlider_color1);
 	ui->doubleSpinBox_color2->setDoubleSlider(ui->horizontalSlider_color2);
-
-
 	ui->doubleSpinBox_reflectivity->setDoubleSlider(ui->horizontalSlider_reflectivity);
 	ui->doubleSpinBox_reflectivity_2->setDoubleSlider(ui->horizontalSlider_reflectivity_2);
-
 	ui->doubleSpinBox_selfIllumTint->setDoubleSlider(ui->horizontalSlider_selfIllumTint);
-
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
 	//ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	//ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
@@ -420,11 +427,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_unlitTwoTextureDiffuse2,	SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 	connect( ui->lineEdit_refractTexture,			SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 	connect( ui->lineEdit_maskTexture,				SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
-
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
-	connect(ui->action_checkUpdate, SIGNAL(triggered()), SLOT(checkForUpdates()));
+	connect(ui->action_checkUpdate,                 SIGNAL(triggered()),         SLOT( checkForUpdates() ));
 
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
 
@@ -549,6 +555,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layer1tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layer2tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layerBorderTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -1964,6 +1973,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
+	layerblend::parseParameters(ui, &vmt);
 
 	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
 	{
@@ -3472,6 +3482,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		ui->action_treeSway->trigger();
 	}
 
+	if(vmt.state.showLayerBlend && !ui->action_layerBlend->isChecked()) {
+		ui->action_layerBlend->trigger();
+	}
+
 	if(showDecal && !ui->action_decal->isChecked())
 		ui->action_decal->trigger();
 
@@ -3962,6 +3976,63 @@ VmtFile MainWindow::makeVMT()
 	}
 
 	//---------------------------------------------------------------------------------------//
+
+	if( !ui->groupBox_layerblend->isHidden() )
+	{
+		if( ui->checkBox_newLayerBlend->isChecked() )
+			vmtFile.parameters.insert( "$newlayerblending", "1" );
+
+		if( ui->doubleSpinBox_layerBlendSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$blendsoftness",
+									   Str( ui->doubleSpinBox_layerBlendSoftness->value() ));
+
+		tmp = toParameterBig(utils::getBG(ui->color_layer1tint),
+							 ui->doubleSpinBox_layer1tint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layer1tint", tmp );
+
+		tmp = toParameterBig(utils::getBG(ui->color_layer2tint),
+							 ui->doubleSpinBox_layer2tint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layer2tint", tmp );
+
+		tmp = toParameterBig(utils::getBG(ui->color_layerBorderTint),
+							 ui->doubleSpinBox_layerBorderTint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layerbordertint", tmp );
+
+		if( ui->doubleSpinBox_layerBorderOffset->value() != 0.0 )
+			vmtFile.parameters.insert( "$layerborderoffset",
+									   Str( ui->doubleSpinBox_layerBorderOffset->value() ));
+
+		if( ui->doubleSpinBox_layerBorderSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$layerbordersoftness",
+									   Str( ui->doubleSpinBox_layerBorderSoftness->value() ));
+
+		if( ui->doubleSpinBox_layerBorderStrength->value() != 0.5 )
+			vmtFile.parameters.insert( "$layerborderstrength",
+									   Str( ui->doubleSpinBox_layerBorderStrength->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeOffset->value() != 0.0 )
+			vmtFile.parameters.insert( "$layeredgeoffset",
+									   Str( ui->doubleSpinBox_layerEdgeOffset->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$layeredgesotfness",
+									   Str( ui->doubleSpinBox_layerEdgeSoftness->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeStrength->value() != 0.5 )
+			vmtFile.parameters.insert( "$layeredgestrength",
+									   Str( ui->doubleSpinBox_layerEdgeStrength->value() ));
+
+
+		if( ui->checkBox_layerEdgeNormal->isChecked() )
+			vmtFile.parameters.insert( "$layeredgenormal", "1" );
+
+		if( ui->checkBox_layerEdgePunchin->isChecked() )
+			vmtFile.parameters.insert( "$layeredgepunchin", "1" );
+
+	}
 
 	if( !ui->groupBox_treeSway->isHidden() )
 	{
@@ -4597,6 +4668,7 @@ void MainWindow::resetWidgets() {
 	phong::resetWidgets(ui);
 	normalblend::resetWidgets(ui);
 	treesway::resetWidgets(ui);
+	layerblend::resetWidgets(ui);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5375,6 +5447,9 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 	case TreeSway:
 		return treesway::hasChanged(ui);
+
+	case LayerBlend:
+		return layerblend::hasChanged(ui);
 
 	case Reflection:
 
@@ -6485,6 +6560,9 @@ void MainWindow::shaderChanged()
 			case TreeSway:
 				treesway::resetAction(ui);
 				break;
+			case LayerBlend:
+				layerblend::resetAction(ui);
+				break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6589,6 +6667,7 @@ void MainWindow::shaderChanged()
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 
 			ui->action_treeSway->setVisible(isVertexLitGeneric);
+
 			ui->action_decal->setVisible(isVertexLitGeneric);
 			if (!isVertexLitGeneric) {
 				ui->action_treeSway->setChecked(false);
@@ -6601,7 +6680,7 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
-
+			ui->action_layerBlend->setVisible( shader == "WorldVertexTransition");
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
@@ -6847,6 +6926,7 @@ void MainWindow::shaderChanged()
 	ui->action_normalBlend->setVisible( ui->action_normalBlend->isEnabled() );
 	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
 	ui->action_decal->setVisible( ui->action_decal->isEnabled() );
+	ui->action_layerBlend->setVisible( ui->action_layerBlend->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -8362,6 +8442,15 @@ void MainWindow::changedColor() {
 
 	else if( caller->objectName() == "toolButton_spec_amount2" )
 		changeColor(ui->color_spec_amount2);
+
+	else if( caller->objectName() == "toolButton_layer1tint" )
+		changeColor(ui->color_layer1tint);
+
+	else if( caller->objectName() == "toolButton_layer2tint" )
+		changeColor(ui->color_layer2tint);
+
+	else if( caller->objectName() == "toolButton_layerBorderTint" )
+		changeColor(ui->color_layerBorderTint);
 }
 
 void MainWindow::resetColor()
@@ -10336,6 +10425,11 @@ void MainWindow::on_action_normalBlend_triggered(bool checked)
 void MainWindow::on_action_treeSway_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_treeSway)
+}
+
+void MainWindow::on_action_layerBlend_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_layerblend)
 }
 
 void MainWindow::on_action_decal_triggered(bool checked)
