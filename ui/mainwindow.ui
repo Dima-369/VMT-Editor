@@ -1319,9 +1319,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2829</y>
+             <y>-2946</y>
              <width>926</width>
-             <height>6112</height>
+             <height>6141</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -10174,37 +10174,6 @@ QToolButton:pressed
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_43">
-                 <item row="3" column="1">
-                  <widget class="QCheckBox" name="checkBox_normalalpha">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>100</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Bump alpha</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="2" column="4">
                   <widget class="QToolButton" name="toolButton_specmap">
                    <property name="enabled">
@@ -10236,85 +10205,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="2" colspan="2">
-                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QCheckBox" name="checkBox_basealpha">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>100</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Diffuse alpha</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="4">
-                  <widget class="QToolButton" name="toolButton_specmap2">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>75</width>
-                     <height>23</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Browse...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="0">
+                 <item row="8" column="0">
                   <widget class="QLabel" name="label_saturation">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10345,56 +10236,6 @@ QToolButton:pressed
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
-                  <widget class="QLabel" name="label_specmap2">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Mask 2:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1" colspan="3">
-                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap2">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
                    </property>
                   </widget>
                  </item>
@@ -10488,7 +10329,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1" colspan="4">
+                 <item row="10" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_fresnelReflection">
@@ -10598,7 +10439,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1" colspan="4">
+                 <item row="8" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_saturation">
@@ -10680,7 +10521,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="6" column="0">
+                 <item row="7" column="0">
                   <widget class="QLabel" name="label_envmapTint">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10714,7 +10555,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="0">
+                 <item row="10" column="0">
                   <widget class="QLabel" name="label_fresnelReflection">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10742,7 +10583,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1" colspan="4">
+                 <item row="7" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_25">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapTint">
@@ -10889,7 +10730,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="8" column="0">
+                 <item row="9" column="0">
                   <widget class="QLabel" name="label_contrast">
                    <property name="enabled">
                     <bool>false</bool>
@@ -10951,7 +10792,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1" colspan="4">
+                 <item row="9" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_43">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_contrast">
@@ -11027,7 +10868,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="11" column="0">
+                 <item row="12" column="0">
                   <widget class="QLabel" name="label_anisotropy">
                    <property name="enabled">
                     <bool>false</bool>
@@ -11055,7 +10896,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="0">
+                 <item row="11" column="0">
                   <widget class="QLabel" name="label_lightinfluence">
                    <property name="enabled">
                     <bool>false</bool>
@@ -11083,7 +10924,7 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1" colspan="4">
+                 <item row="11" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_48">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapLight">
@@ -11254,7 +11095,7 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="11" column="1" colspan="4">
+                 <item row="12" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_61">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapAniso">
@@ -11336,7 +11177,104 @@ QToolButton:pressed
                    </item>
                   </layout>
                  </item>
-                 <item row="3" column="2">
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Mask 2:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="4">
+                  <widget class="QToolButton" name="toolButton_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" colspan="3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap2">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" colspan="3">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1">
                   <widget class="QCheckBox" name="checkBox_tintSpecMask">
                    <property name="enabled">
                     <bool>false</bool>
@@ -11358,6 +11296,68 @@ QToolButton:pressed
                    </property>
                    <property name="text">
                     <string>Color mask red channel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QCheckBox" name="checkBox_basealpha">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Diffuse alpha mask</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="2">
+                  <widget class="QCheckBox" name="checkBox_normalalpha">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Bump alpha mask</string>
                    </property>
                   </widget>
                  </item>

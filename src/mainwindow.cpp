@@ -8600,6 +8600,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->checkBox_basealpha->setDisabled(true);
 			ui->checkBox_normalalpha->setDisabled(true);
+			ui->checkBox_tintSpecMask->setDisabled(true);
 
 			ui->label_lightinfluence->setDisabled(true);
 			ui->horizontalSlider_envmapLight->setDisabled(true);
@@ -8656,6 +8657,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 			}
 			else if( ui->checkBox_basealpha->isChecked() ||  ui->checkBox_phongBaseAlpha->isChecked() )
 			{
@@ -8667,6 +8669,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 
 				ui->checkBox_phongNormalAlpha->setDisabled(true);
 			}
@@ -8680,6 +8683,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 
 				ui->checkBox_phongBaseAlpha->setDisabled(true);
 			}
@@ -8697,6 +8701,7 @@ void MainWindow::modifiedLineEdit( QString text )
 
 				ui->checkBox_phongBaseAlpha->setEnabled(true);
 				ui->checkBox_phongNormalAlpha->setEnabled(true);
+				ui->checkBox_tintSpecMask->setEnabled(true);
 			}
 		}
 	}
