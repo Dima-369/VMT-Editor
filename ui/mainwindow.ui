@@ -27,7 +27,7 @@
 QWidget
 {
 	font: 9pt &quot;Segoe UI&quot;;
-	background-color: #404040;
+	/*background-color: #404040;*/
 }
 
 /* Progress bar */
