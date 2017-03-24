@@ -16,6 +16,8 @@
 		ui(new Ui::ConversionDialog),
 		settings(iniSettings)
 	{
+		setAcceptDrops(true);
+
 		ui->setupUi(this);
 
 		connect( ui->pushButton_convert, SIGNAL(pressed()), this, SLOT(convertRequested()) );
@@ -86,6 +88,53 @@
 			ui->listWidget_textures->item(counter)->setToolTip(file);
 			counter++;
 		}
+	}
+
+	void ConversionDialog::dropEvent(QDropEvent* event)
+	{
+		const QMimeData* mimeData = event->mimeData();
+
+		// check for our needed mime type, here a file or a list of files
+		if (mimeData->hasUrls())
+		{
+			foreach (const QUrl& url, mimeData->urls())
+			{
+				QString filePath = url.toLocalFile();
+				addFile(filePath);
+			}
+		}
+	}
+
+	void ConversionDialog::dragEnterEvent(QDragEnterEvent* event)
+	{
+		if (event->mimeData()->hasUrls())
+		{
+			foreach (const QUrl& url, event->mimeData()->urls())
+			{
+				QString str = url.toLocalFile();
+				if (!str.isEmpty())
+				{
+					if (QFileInfo(str).suffix() == "png" ||
+						QFileInfo(str).suffix() == "tga" ||
+						QFileInfo(str).suffix() == "jpg" ||
+						QFileInfo(str).suffix() == "bmp" ||
+						QFileInfo(str).suffix() == "dds")
+					{
+						event->acceptProposedAction();
+					}
+				}
+			}
+		}
+	}
+
+	void ConversionDialog::dragMoveEvent(QDragMoveEvent* event)
+	{
+		event->acceptProposedAction();
+	}
+
+	void ConversionDialog::dragLeaveEvent(QDragLeaveEvent* event)
+	{
+		event->accept();
 	}
 
 	void ConversionDialog::convertRequested()

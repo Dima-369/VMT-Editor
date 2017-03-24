@@ -9,7 +9,8 @@
 namespace detailtexture {
 
 enum Parameter {
-	detailscale // $detailscale
+	detailscale,
+	detailscale2 // $detailscale
 };
 
 /*!
@@ -34,14 +35,14 @@ bool hasChanged(Ui::MainWindow *ui);
  * Triggered when lineEdit_detail fires a changed signal. The main window
  * calls this method in receiving slot.
  */
-void processDetailTextureChange(const QString &text, Ui::MainWindow *ui);
+void processDetailTextureChange(const QString &text, Ui::MainWindow *ui, const bool second = false);
 
 /*!
  * Enables the detail scale Y value if the checkbox is unchecked.
  *
  * Call this when the uniform scale checkbox state was changed.
  */
-void toggledUniformScale(bool checked, Ui::MainWindow *ui);
+void toggledUniformScale(bool checked, Ui::MainWindow *ui, const bool second = false);
 
 } // namespace detailtexture
 
@@ -56,7 +57,7 @@ namespace param {
  *
  * The returned texture can be empty if the parameter is not present!
  */
-QString initialize(Ui::MainWindow *ui, VmtFile *vmt);
+QString initialize(Ui::MainWindow *ui, VmtFile *vmt, bool second = false);
 
 /*!
  * Processes the passed parameter from the VmtFile and initializes the

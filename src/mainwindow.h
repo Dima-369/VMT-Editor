@@ -73,7 +73,8 @@ public:
 		Sprite,
 		UnlitTwoTexture,
 		NormalBlend,
-		TreeSway
+		TreeSway,
+		LayerBlend
 	};
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
@@ -503,6 +504,7 @@ private slots:
 	void on_action_normalBlend_triggered(bool checked);
 	void on_action_treeSway_triggered(bool checked);
 	void on_action_decal_triggered(bool checked);
+	void on_action_layerBlend_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------//

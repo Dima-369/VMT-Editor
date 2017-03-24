@@ -66,6 +66,6 @@ void shaders::handlePhongBrushRim(Ui::MainWindow *ui, const QString &shader)
 	ui->doubleSpinBox_spec_maskContrast2->setVisible(hide);
 
 	ui->label_spec_maskBrightness2->setVisible(hide);
-	ui->horizontalSlider_spec_maskBrightness2->setVisible(hide);
+	//ui->horizontalSlider_spec_maskBrightness2->setVisible(hide);
 	ui->doubleSpinBox_spec_maskBrightness2->setVisible(hide);
 }

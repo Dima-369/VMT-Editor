@@ -19,6 +19,7 @@
 #include "user-interface/view-helper.h"
 #include "user-interface/shading-reflection.h"
 #include "user-interface/treesway.h"
+#include "user-interface/layerblend.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -272,11 +273,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_bumpdetailscale2->setDoubleSlider(ui->horizontalSlider_bumpdetailscale2);
 
 	ui->doubleSpinBox_phongAmount->setDoubleSlider(ui->horizontalSlider_phongAmount, 2.0);
-	ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 10.0);
+	//ui->doubleSpinBox_maskBrightness->setDoubleSlider(ui->horizontalSlider_maskBrightness, 10.0);
 	ui->doubleSpinBox_maskContrast->setDoubleSlider(ui->horizontalSlider_maskContrast, 10.0);
 
 	ui->doubleSpinBox_spec_amount2->setDoubleSlider(ui->horizontalSlider_spec_amount2, 2.0);
-	ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 10.0);
+	//ui->doubleSpinBox_spec_maskBrightness2->setDoubleSlider(ui->horizontalSlider_spec_maskBrightness2, 10.0);
 	ui->doubleSpinBox_spec_maskContrast2->setDoubleSlider(ui->horizontalSlider_spec_maskContrast2, 10.0);
 
 	ui->doubleSpinBox_rimLightBoost->setDoubleSlider(ui->horizontalSlider_rimBoost, 10.0);
@@ -293,19 +294,25 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_treeswayScrumbleStrength->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleStrength, 10.0);
 	ui->doubleSpinBox_treeswayScrumbleSpeed->setDoubleSlider(ui->horizontalSlider_treeswayScrumbleSpeed, 10.0);
 
+	ui->doubleSpinBox_layer1tint->setDoubleSlider(ui->horizontalSlider_layer1tint);
+	ui->doubleSpinBox_layer2tint->setDoubleSlider(ui->horizontalSlider_layer2tint);
+	ui->doubleSpinBox_layerBlendSoftness->setDoubleSlider(ui->horizontalSlider_layerBlendSoftness);
+	ui->doubleSpinBox_layerBorderOffset->setDoubleSlider(ui->horizontalSlider_layerBorderOffset);
+	ui->doubleSpinBox_layerBorderSoftness->setDoubleSlider(ui->horizontalSlider_layerBorderSoftness);
+	ui->doubleSpinBox_layerBorderStrength->setDoubleSlider(ui->horizontalSlider_layerBorderStrength);
+	ui->doubleSpinBox_layerBorderTint->setDoubleSlider(ui->horizontalSlider_layerBorderTint);
+	ui->doubleSpinBox_layerEdgeOffset->setDoubleSlider(ui->horizontalSlider_layerEdgeOffset);
+	ui->doubleSpinBox_layerEdgeSoftness->setDoubleSlider(ui->horizontalSlider_layerEdgeSoftness);
+	ui->doubleSpinBox_layerEdgeStrength->setDoubleSlider(ui->horizontalSlider_layerEdgeStrength);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_envmapTint->setDoubleSlider(ui->horizontalSlider_envmapTint);
-
 	ui->doubleSpinBox_color1->setDoubleSlider(ui->horizontalSlider_color1);
 	ui->doubleSpinBox_color2->setDoubleSlider(ui->horizontalSlider_color2);
-
-
 	ui->doubleSpinBox_reflectivity->setDoubleSlider(ui->horizontalSlider_reflectivity);
 	ui->doubleSpinBox_reflectivity_2->setDoubleSlider(ui->horizontalSlider_reflectivity_2);
-
 	ui->doubleSpinBox_selfIllumTint->setDoubleSlider(ui->horizontalSlider_selfIllumTint);
-
 	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
 	//ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
 	//ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
@@ -325,10 +332,12 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_bumpmap->setValidator(windowsFilenameValidator);
 	ui->lineEdit_bumpmap2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_detail->setValidator(windowsFilenameValidator);
+	ui->lineEdit_detail2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_lightWarp->setValidator(windowsFilenameValidator);
 	ui->lineEdit_blendmodulate->setValidator(windowsFilenameValidator);
 	ui->lineEdit_envmap->setValidator(windowsFilenameValidator);
 	ui->lineEdit_specmap->setValidator(windowsFilenameValidator);
+	ui->lineEdit_specmap2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_exponentTexture->setValidator(windowsFilenameValidator);
 	ui->lineEdit_refractNormalMap->setValidator(windowsFilenameValidator);
 	ui->lineEdit_refractNormalMap2->setValidator(windowsFilenameValidator);
@@ -340,8 +349,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_unlitTwoTextureDiffuse2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_refractTexture->setValidator(windowsFilenameValidator);
 	ui->lineEdit_maskTexture->setValidator(windowsFilenameValidator);
-
 	ui->lineEdit_bump2->setValidator(windowsFilenameValidator);
+	ui->lineEdit_tintMask->setValidator(windowsFilenameValidator);
+	ui->lineEdit_phongWarp->setValidator(windowsFilenameValidator);
 
 	//--------------------------------------------------------------------//
 
@@ -359,6 +369,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_detail, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_detail2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_lightWarp, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_blendmodulate, SIGNAL(droppedTexture(QString)),
@@ -366,6 +378,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect(ui->lineEdit_envmap, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_specmap, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_specmap2, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_exponentTexture, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
@@ -390,6 +404,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect(ui->lineEdit_maskTexture, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_bump2, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_tintMask, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_phongWarp, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_bumpmapAlpha, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
@@ -420,11 +438,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_unlitTwoTextureDiffuse2,	SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 	connect( ui->lineEdit_refractTexture,			SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 	connect( ui->lineEdit_maskTexture,				SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
-
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
-	connect(ui->action_checkUpdate, SIGNAL(triggered()), SLOT(checkForUpdates()));
+	connect(ui->action_checkUpdate,                 SIGNAL(triggered()),         SLOT( checkForUpdates() ));
 
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
 
@@ -521,7 +538,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	setCentralWidget(ui->tabWidget);
 
 	ui->tabWidget->setCurrentIndex(0);
-	ui->tabWidget->setMinimumWidth(829);
+	ui->tabWidget->setMinimumWidth(920);
 
 	setCorner( Qt::TopRightCorner, Qt::RightDockWidgetArea );
 	setCorner( Qt::BottomRightCorner, Qt::RightDockWidgetArea );
@@ -549,6 +566,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->color_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layer1tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layer2tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->color_layerBorderTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -1466,7 +1486,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	//----------------------------------------------------------------------------------------//
 
-	const QString detailTex = detailtexture::param::initialize(ui, &vmt);
+	QString detailTex = detailtexture::param::initialize(ui, &vmt);
 
 	if (!detailTex.isEmpty()) {
 		QString texture = validateTexture("preview_detail", detailTex,
@@ -1474,6 +1494,15 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		ui->lineEdit_detail->setText(texture);
 		createReconvertAction(ui->lineEdit_detail, texture);
+	}
+
+	detailTex = detailtexture::param::initialize(ui, &vmt, true);
+
+	if (!detailTex.isEmpty()) {
+		utils::parseTexture("$detail2", detailTex, ui,
+			ui->lineEdit_detail2, vmt);
+
+		createReconvertAction(ui->lineEdit_detail2, detailTex);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1502,9 +1531,37 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		vmt.state.showDetail = true;
 	}
 
+	if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
+		if (!vmt.state.detailEnabled) {
+			ERROR("$detailblendmode2 is only supported with "
+				"$detail!")
+		}
+
+		bool ok;
+		int blendMode = value.toInt(&ok);
+
+		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive))
+			Error("$detailblendmode2 only works with the WorldVertexTransition shader!");
+
+		if(ok) {
+			if (blendMode == 0) {
+				Info("$detailblendmode2 has the default value of 0!")
+			} else if (blendMode >= 13) {
+				Error("$detailblendmode2 only supports int values ranging from 0 to 12!")
+			} else {
+				ui->comboBox_detailBlendMode2->setCurrentIndex(blendMode);
+			}
+		} else{
+			Error("$detailblendmode2 value: \"" + value + "\" has caused an error while parsing!")
+		}
+
+		vmt.state.showDetail = true;
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	detailtexture::param::parse(detailtexture::detailscale, ui, &vmt);
+	detailtexture::param::parse(detailtexture::detailscale2, ui, &vmt);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1544,8 +1601,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				"$detail!")
 		}
 
-		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) )
-			Error("$detailblendfactor2 only works with the Lightmapped_4WayBlend CS:GO shader!")
+		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) &&
+			vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive))
+			Error("$detailblendfactor2 only works with the Lightmapped_4WayBlend or WorldVertexTransition shaders!")
 
 		bool ok;
 		double scale = value.toDouble(&ok);
@@ -1917,7 +1975,12 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingSpecmap.isEmpty() )
 		{
 			ui->lineEdit_specmap->setText(usingSpecmap);
-			createReconvertAction(ui->lineEdit_detail, usingSpecmap);
+			createReconvertAction(ui->lineEdit_specmap, usingSpecmap);
+
+			if(!(value = vmt.parameters.take("$envmapmask2")).isEmpty()) {
+				ui->lineEdit_specmap2->setText(utils::prepareTexture(value));
+				createReconvertAction(ui->lineEdit_specmap2, value);
+			}
 
 			if(usingEnvmap)
 			{
@@ -1935,6 +1998,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			if(usingEnvmap)
 			{
 				ui->lineEdit_specmap->setDisabled(true);
+				ui->lineEdit_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_basealpha->setChecked(true);
@@ -1951,6 +2015,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			if(usingEnvmap)
 			{
 				ui->lineEdit_specmap->setDisabled(true);
+				ui->lineEdit_specmap2->setDisabled(true);
 
 				ui->checkBox_normalalpha->setEnabled(true);
 				ui->checkBox_normalalpha->setChecked(true);
@@ -1964,6 +2029,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
+	layerblend::parseParameters(ui, &vmt);
 
 	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
 	{
@@ -3388,6 +3454,23 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showColor = true;
 	}
 
+	if( !( value = vmt.parameters.take("$tintmasktexture") ).isEmpty() )
+	{
+		utils::parseTexture("$tintmasktexture", value, ui,
+			ui->lineEdit_tintMask, vmt);
+		createReconvertAction(ui->lineEdit_tintMask, value);
+
+		showColor = true;
+	}
+
+	if( !( value = vmt.parameters.take("$envmapmaskintintmasktexture") ).isEmpty() )
+	{
+		if( loadBoolParameter( value, "$envmapmaskintintmasttexture") )
+			ui->checkBox_tintSpecMask->setChecked(true);
+
+		showColor = true;
+	}
+
 	if( !( value = vmt.parameters.take("$notint") ).isEmpty() )
 	{
 		if( loadBoolParameter( value, "$notint") )
@@ -3470,6 +3553,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if(vmt.state.showTreeSway && !ui->action_treeSway->isChecked()) {
 		ui->action_treeSway->trigger();
+	}
+
+	if(vmt.state.showLayerBlend && !ui->action_layerBlend->isChecked()) {
+		ui->action_layerBlend->trigger();
 	}
 
 	if(showDecal && !ui->action_decal->isChecked())
@@ -3745,6 +3832,27 @@ VmtFile MainWindow::makeVMT()
 			if( ui->doubleSpinBox_detailAmount4->isEnabled() && ui->doubleSpinBox_detailAmount4->value() != 1.0 )
 				vmtFile.parameters.insert( "$detailblendfactor4", Str( ui->doubleSpinBox_detailAmount4->value() ));
 		}
+
+		if( ui->comboBox_shader->currentText() == "WorldVertexTransition" ) {
+
+			if( ui->doubleSpinBox_detailAmount2->isEnabled() && ui->doubleSpinBox_detailAmount2->value() != 1.0 )
+				vmtFile.parameters.insert( "$detailblendfactor2", Str( ui->doubleSpinBox_detailAmount2->value() ));
+
+			if( !ui->lineEdit_detail2->text().trimmed().isEmpty() )
+				vmtFile.parameters.insert( "$detail2", ui->lineEdit_detail2->text().trimmed() );
+
+			if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
+				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));
+
+			if( ui->checkBox_detailScaleUniform2->isChecked() ||
+					ui->doubleSpinBox_detailScale2->value() == ui->doubleSpinBox_detailScaleY2->value() )
+				utils::addOnUnequal("$detailscale2", ui->doubleSpinBox_detailScale2,
+								4.0, &vmtFile);
+			else {
+				vmtFile.parameters.insert( "$detailscale2", QString( "[" + Str( ui->doubleSpinBox_detailScale2->value()) +
+																	" " + Str( ui->doubleSpinBox_detailScaleY2->value()) + "]" ) );
+			}
+		}
 	}
 
 	//---------------------------------------------------------------------------------------//
@@ -3963,6 +4071,63 @@ VmtFile MainWindow::makeVMT()
 
 	//---------------------------------------------------------------------------------------//
 
+	if( !ui->groupBox_layerblend->isHidden() )
+	{
+		if( ui->checkBox_newLayerBlend->isChecked() )
+			vmtFile.parameters.insert( "$newlayerblending", "1" );
+
+		if( ui->doubleSpinBox_layerBlendSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$blendsoftness",
+									   Str( ui->doubleSpinBox_layerBlendSoftness->value() ));
+
+		tmp = toParameterBig(utils::getBG(ui->color_layer1tint),
+							 ui->doubleSpinBox_layer1tint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layertint1", tmp );
+
+		tmp = toParameterBig(utils::getBG(ui->color_layer2tint),
+							 ui->doubleSpinBox_layer2tint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layertint2", tmp );
+
+		tmp = toParameterBig(utils::getBG(ui->color_layerBorderTint),
+							 ui->doubleSpinBox_layerBorderTint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$layerbordertint", tmp );
+
+		if( ui->doubleSpinBox_layerBorderOffset->value() != 0.0 )
+			vmtFile.parameters.insert( "$layerborderoffset",
+									   Str( ui->doubleSpinBox_layerBorderOffset->value() ));
+
+		if( ui->doubleSpinBox_layerBorderSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$layerbordersoftness",
+									   Str( ui->doubleSpinBox_layerBorderSoftness->value() ));
+
+		if( ui->doubleSpinBox_layerBorderStrength->value() != 0.5 )
+			vmtFile.parameters.insert( "$layerborderstrength",
+									   Str( ui->doubleSpinBox_layerBorderStrength->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeOffset->value() != 0.0 )
+			vmtFile.parameters.insert( "$layeredgeoffset",
+									   Str( ui->doubleSpinBox_layerEdgeOffset->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeSoftness->value() != 0.5 )
+			vmtFile.parameters.insert( "$layeredgesotfness",
+									   Str( ui->doubleSpinBox_layerEdgeSoftness->value() ));
+
+		if( ui->doubleSpinBox_layerEdgeStrength->value() != 0.5 )
+			vmtFile.parameters.insert( "$layeredgestrength",
+									   Str( ui->doubleSpinBox_layerEdgeStrength->value() ));
+
+
+		if( ui->checkBox_layerEdgeNormal->isChecked() )
+			vmtFile.parameters.insert( "$layeredgenormal", "1" );
+
+		if( ui->checkBox_layerEdgePunchin->isChecked() )
+			vmtFile.parameters.insert( "$layeredgepunchin", "1" );
+
+	}
+
 	if( !ui->groupBox_treeSway->isHidden() )
 	{
 		vmtFile.parameters.insert( "$treesway", "1" );
@@ -4048,6 +4213,9 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->checkBox_blendTint->isChecked() )
 			vmtFile.parameters.insert( "$blendtintbybasealpha", "1" );
+
+		if( !ui->lineEdit_tintMask->text().trimmed().isEmpty() )
+			vmtFile.parameters.insert( "$tintmasktexture", ui->lineEdit_tintMask->text().trimmed() );
 
 		if( ui->checkBox_noTint->isChecked() )
 			vmtFile.parameters.insert( "$notint", "1" );
@@ -4381,6 +4549,7 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse3->setEnabled(true);
 	ui->lineEdit_diffuse4->setEnabled(true);
 	ui->lineEdit_detail->setEnabled(true);
+	ui->lineEdit_detail2->setEnabled(true);
 	ui->lineEdit_exponentTexture->setEnabled(true);
 	ui->lineEdit_bumpmap->setEnabled(true);
 	ui->lineEdit_bumpmap2->setEnabled(true);
@@ -4410,6 +4579,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_blendmodulate);
 	clearLineEditAction(ui->lineEdit_bump2);
 	clearLineEditAction(ui->lineEdit_detail);
+	clearLineEditAction(ui->lineEdit_detail2);
 	clearLineEditAction(ui->lineEdit_exponentTexture);
 	clearLineEditAction(ui->lineEdit_specmap);
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
@@ -4419,6 +4589,8 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_phongWarp);
 	clearLineEditAction(ui->lineEdit_diffuseAlpha);
 	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
+	clearLineEditAction(ui->lineEdit_specmap2);
+	clearLineEditAction(ui->lineEdit_tintMask);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4440,6 +4612,7 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse2->clear();
 	ui->lineEdit_bumpmap2->clear();
 	ui->lineEdit_detail->clear();
+	ui->lineEdit_detail2->clear();
 
 	ui->lineEdit_decal->clear();
 	ui->comboBox_decalBlendMode->setCurrentIndex(0);
@@ -4467,6 +4640,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_alphaTestRef->setDisabled(true);
 
 	ui->comboBox_detailBlendMode->setCurrentIndex(0);
+	ui->comboBox_detailBlendMode2->setCurrentIndex(0);
 
 	detailtexture::reset(ui);
 
@@ -4476,6 +4650,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_detailAmount->setDisabled(true);
 
 	ui->doubleSpinBox_detailAmount2->setValue(1.0);
+	ui->doubleSpinBox_detailAmount2->setDisabled(true);
 	ui->doubleSpinBox_detailAmount3->setValue(1.0);
 	ui->doubleSpinBox_detailAmount4->setValue(1.0);
 
@@ -4543,8 +4718,12 @@ void MainWindow::resetWidgets() {
 
 	ui->lineEdit_specmap->clear();
 	ui->lineEdit_specmap->setDisabled(true);
-
 	ui->toolButton_specmap->setDisabled(true);
+
+	ui->lineEdit_specmap2->clear();
+	ui->lineEdit_specmap2->setDisabled(true);
+	ui->toolButton_specmap2->setDisabled(true);
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4559,6 +4738,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_contrast->setValue(0.0);
 	ui->doubleSpinBox_contrast->setDisabled(true);
 	ui->horizontalSlider_contrast->setDisabled(true);
+	ui->checkBox_tintSpecMask->setChecked(false);
 
 	ui->label_envmapTint->setDisabled(true);
 	ui->doubleSpinBox_envmapTint->setDisabled(true);
@@ -4597,6 +4777,7 @@ void MainWindow::resetWidgets() {
 	phong::resetWidgets(ui);
 	normalblend::resetWidgets(ui);
 	treesway::resetWidgets(ui);
+	layerblend::resetWidgets(ui);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4743,6 +4924,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_color2->setValue(1.0);
 	ui->color_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->lineEdit_tintMask->clear();
 
 	ui->checkBox_blendTint->setChecked(false);
 
@@ -4783,6 +4965,8 @@ void MainWindow::action_New() {
 			case QMessageBox::Save:
 
 				action_Save();
+				if( !mChildWidgetChanged)
+					break;
 
 			case QMessageBox::Cancel:
 			case QMessageBox::Escape:
@@ -5355,6 +5539,9 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 		return (ui->doubleSpinBox_color1->value() != 1.0 ||
 				ui->doubleSpinBox_color2->value() != 1.0 ||
+				ui->lineEdit_tintMask->text() != "" ||
+				ui->checkBox_blendTint->text() != "" ||
+				ui->checkBox_noTint->text() != "" ||
 				utils::getBG(ui->color_color1) != QColor(255, 255, 255) ||
 				utils::getBG(ui->color_color2) != QColor(255, 255, 255));
 
@@ -5374,13 +5561,18 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 	case TreeSway:
 		return treesway::hasChanged(ui);
 
+	case LayerBlend:
+		return layerblend::hasChanged(ui);
+
 	case Reflection:
 
 		return (ui->lineEdit_envmap->text() != "" ||
 				ui->checkBox_cubemap->isChecked() ||
 				ui->lineEdit_specmap->text() != "" ||
+				ui->lineEdit_specmap2->text() != "" ||
 				ui->checkBox_basealpha->isChecked() ||
 				ui->checkBox_normalalpha->isChecked() ||
+				ui->checkBox_tintSpecMask->isChecked() ||
 				ui->doubleSpinBox_envmapTint->value() != 1.0 ||
 				utils::getBG(ui->color_reflectionTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_saturation->value() != 1.0 ||
@@ -5811,6 +6003,9 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 	else if (name == "lineEdit_detail" )
 		processVtf( "preview_detail", filePath, ui->lineEdit_detail );
 
+	else if (name == "lineEdit_detail2" )
+		processVtf( "", filePath, ui->lineEdit_detail2 );
+
 	else if (name == "lineEdit_refractNormalMap" )
 		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_refractNormalMap );
 	else if (name == "lineEdit_refractNormalMap2" )
@@ -5835,6 +6030,8 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 		processVtf( "", filePath, ui->lineEdit_envmap );
 	else if (name == "lineEdit_specmap" )
 		processVtf( "", filePath, ui->lineEdit_specmap );
+	else if (name == "lineEdit_specmap2" )
+		processVtf( "", filePath, ui->lineEdit_specmap2 );
 
 	else if (name == "lineEdit_exponentTexture" )
 		processVtf( "", filePath, ui->lineEdit_exponentTexture );
@@ -5867,6 +6064,10 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 
 	else if (name == "lineEdit_diffuseAlpha" )
 		processVtf( "", filePath, ui->lineEdit_diffuseAlpha );
+
+	else if (name == "lineEdit_tintMask" )
+		processVtf( "", filePath, ui->lineEdit_tintMask );
+
 }
 
 void MainWindow::finishedLoading()
@@ -6277,6 +6478,10 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_specmap->setDisabled(true);
 
+		ui->toolButton_specmap2->setDisabled(true);
+
+		ui->toolButton_tintMask->setDisabled(true);
+
 		ui->toolButton_exponentTexture->setDisabled(true);
 
 		ui->toolButton_refractNormalMap->setDisabled(true);
@@ -6330,6 +6535,8 @@ void MainWindow::gameChanged( const QString& game )
 
 		if( ui->lineEdit_specmap->isEnabled() )
 			ui->toolButton_specmap->setEnabled(true);
+		//	ui->lineEdit_specmap2->setEnabled(true);
+		//	ui->toolButton_specmap2->setEnabled(true);
 
 		if( !ui->checkBox_albedoTint->isChecked() )
 			ui->toolButton_exponentTexture->setEnabled(true);
@@ -6415,6 +6622,7 @@ void MainWindow::gameChanged( const QString& game )
 void MainWindow::shaderChanged()
 {
 	bool luminanceEnabled = ui->comboBox_shader->currentText() == "Lightmapped_4WayBlend" || ui->comboBox_shader->currentText() == "Patch";
+	bool isBlend = ui->comboBox_shader->currentText() == "WorldVertexTransition";
 
 	ui->frame_texture->setVisible(luminanceEnabled);
 	ui->frame_texture2->setVisible(luminanceEnabled);
@@ -6482,6 +6690,9 @@ void MainWindow::shaderChanged()
 				break;
 			case TreeSway:
 				treesway::resetAction(ui);
+				break;
+			case LayerBlend:
+				layerblend::resetAction(ui);
 				break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
@@ -6587,6 +6798,9 @@ void MainWindow::shaderChanged()
 			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
 
 			ui->action_treeSway->setVisible(isVertexLitGeneric);
+
+			ui->checkBox_tintSpecMask->setVisible(isVertexLitGeneric);
+
 			ui->action_decal->setVisible(isVertexLitGeneric);
 			if (!isVertexLitGeneric) {
 				ui->action_treeSway->setChecked(false);
@@ -6599,12 +6813,24 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
-
+			ui->action_layerBlend->setVisible( shader == "WorldVertexTransition");
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
+
+			ui->lineEdit_specmap2->setVisible( shader == "WorldVertexTransition" );
+			ui->toolButton_specmap2->setVisible( shader == "WorldVertexTransition" );
+			ui->label_specmap2->setVisible( shader == "WorldVertexTransition" );
+
+			ui->frame_detail2->setVisible(isBlend);
+			ui->comboBox_detailBlendMode2->setVisible(isBlend);
+
+			ui->label_detailAmount2->setVisible(isBlend || luminanceEnabled);
+			ui->doubleSpinBox_detailAmount2->setVisible(isBlend || luminanceEnabled);
+			ui->horizontalSlider_detailAmount2->setVisible(isBlend || luminanceEnabled);
+
 
 			//----------------------------------------------------------------------------------------//
 
@@ -6845,6 +7071,7 @@ void MainWindow::shaderChanged()
 	ui->action_normalBlend->setVisible( ui->action_normalBlend->isEnabled() );
 	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
 	ui->action_decal->setVisible( ui->action_decal->isEnabled() );
+	ui->action_layerBlend->setVisible( ui->action_layerBlend->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -7372,7 +7599,12 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 
 void MainWindow::toggledDetailUniformScale(bool checked)
 {
-	detailtexture::toggledUniformScale(checked, ui);
+	const auto object = qobject_cast<QWidget *>(sender());
+
+	if(object == ui->checkBox_detailScaleUniform)
+		detailtexture::toggledUniformScale(checked, ui);
+	else if(object == ui->checkBox_detailScaleUniform2)
+		detailtexture::toggledUniformScale(checked, ui, true);
 }
 
 
@@ -7605,6 +7837,9 @@ void MainWindow::browseVTF()
 	else if (name == "toolButton_detail" )
 		processVtf( "preview_detail", "", ui->lineEdit_detail );
 
+	else if (name == "toolButton_detail2" )
+		processVtf( "", "", ui->lineEdit_detail2 );
+
 	else if (name == "toolButton_refractNormalMap" )
 		processVtf( "preview_bumpmap1", "", ui->lineEdit_refractNormalMap );
 	else if (name == "toolButton_refractNormalMap2" )
@@ -7661,6 +7896,12 @@ void MainWindow::browseVTF()
 
 	else if (name == "toolButton_diffuseAlpha" )
 		processVtf( "", "", ui->lineEdit_diffuseAlpha );
+
+	else if (name == "toolButton_tintMask" )
+		processVtf( "", "", ui->lineEdit_tintMask );
+
+	else if (name == "toolButton_specmap2" )
+		processVtf( "", "", ui->lineEdit_specmap2 );
 }
 
 QString MainWindow::launchBrowseVtfDialog(QLineEdit* lineEdit)
@@ -7708,6 +7949,7 @@ void MainWindow::processVtf(const QString& objectName,
 
 
 		lineEdit->setText(fileName);
+		clearLineEditAction(lineEdit);
 
 		QAction *clear = lineEdit->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
 		clear->setToolTip("Clear");
@@ -7933,6 +8175,13 @@ void MainWindow::processVtf(const QString& objectName,
 				ui->label_bumpmapAlpha->setVisible(true);
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
 				ui->toolButton_bumpmapAlpha->setVisible(true);
+			}
+			else if( lineEdit == ui->lineEdit_bumpmap2 ) {
+				type = 2;
+				if (ui->checkBox_normalalpha->isChecked() ||
+					ui->groupBox_phong->isVisible() ||
+					ui->checkBox_phongNormalAlpha->isChecked() )
+					noAlpha = false;
 			}
 			else if( lineEdit == ui->lineEdit_diffuse2 ) {
 				if (ui->checkBox_basealpha->isChecked() )
@@ -8172,7 +8421,11 @@ void MainWindow::alphaTestReferenceChanged()
 
 void MainWindow::detailTextureChanged(QString text)
 {
-	detailtexture::processDetailTextureChange(text, ui);
+	const auto lineEdit = qobject_cast<QWidget *>(sender());
+	if (lineEdit == ui->lineEdit_detail)
+		detailtexture::processDetailTextureChange(text, ui);
+	else if (lineEdit == ui->lineEdit_detail2)
+		detailtexture::processDetailTextureChange(text, ui, true);
 }
 
 void MainWindow::requestedCubemap( bool enabled )
@@ -8360,6 +8613,15 @@ void MainWindow::changedColor() {
 
 	else if( caller->objectName() == "toolButton_spec_amount2" )
 		changeColor(ui->color_spec_amount2);
+
+	else if( caller->objectName() == "toolButton_layer1tint" )
+		changeColor(ui->color_layer1tint);
+
+	else if( caller->objectName() == "toolButton_layer2tint" )
+		changeColor(ui->color_layer2tint);
+
+	else if( caller->objectName() == "toolButton_layerBorderTint" )
+		changeColor(ui->color_layerBorderTint);
 }
 
 void MainWindow::resetColor()
@@ -8420,11 +8682,16 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			ui->label_specmap->setDisabled(true);
 			ui->lineEdit_specmap->setDisabled(true);
-
 			ui->toolButton_specmap->setDisabled(true);
+
+			ui->label_specmap2->setDisabled(true);
+			ui->lineEdit_specmap2->setDisabled(true);
+			ui->toolButton_specmap2->setDisabled(true);
+
 
 			ui->checkBox_basealpha->setDisabled(true);
 			ui->checkBox_normalalpha->setDisabled(true);
+			ui->checkBox_tintSpecMask->setDisabled(true);
 
 			ui->label_lightinfluence->setDisabled(true);
 			ui->horizontalSlider_envmapLight->setDisabled(true);
@@ -8468,51 +8735,64 @@ void MainWindow::modifiedLineEdit( QString text )
 			ui->doubleSpinBox_envmapAniso->setEnabled(true);
 
 			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
 
 			if( !ui->lineEdit_specmap->text().isEmpty() )
 			{
 				ui->lineEdit_specmap->setEnabled(true);
+				ui->lineEdit_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
+					ui->toolButton_specmap2->setEnabled(true);
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 			}
 			else if( ui->checkBox_basealpha->isChecked() ||  ui->checkBox_phongBaseAlpha->isChecked() )
 			{
 				ui->lineEdit_specmap->setDisabled(true);
-
 				ui->toolButton_specmap->setDisabled(true);
+
+				ui->lineEdit_specmap2->setDisabled(true);
+				ui->toolButton_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 
 				ui->checkBox_phongNormalAlpha->setDisabled(true);
 			}
 			else if( ui->checkBox_normalalpha->isChecked() || ui->checkBox_phongNormalAlpha->isChecked() )
 			{
 				ui->lineEdit_specmap->setDisabled(true);
-
 				ui->toolButton_specmap->setDisabled(true);
+
+				ui->lineEdit_specmap2->setDisabled(true);
+				ui->toolButton_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
+				ui->checkBox_tintSpecMask->setDisabled(true);
 
 				ui->checkBox_phongBaseAlpha->setDisabled(true);
 			}
 			else
 			{
 				ui->lineEdit_specmap->setEnabled(true);
+				ui->lineEdit_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
+					ui->toolButton_specmap2->setEnabled(true);
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
 
 				ui->checkBox_phongBaseAlpha->setEnabled(true);
 				ui->checkBox_phongNormalAlpha->setEnabled(true);
+				ui->checkBox_tintSpecMask->setEnabled(true);
 			}
 		}
 	}
@@ -8566,6 +8846,8 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->doubleSpinBox_contrast->setEnabled(true);
 			ui->horizontalSlider_contrast->setEnabled(true);
 
+			ui->checkBox_tintSpecMask->setEnabled(true);
+
 			ui->label_fresnelReflection->setEnabled(true);
 			ui->doubleSpinBox_fresnelReflection->setEnabled(true);
 			ui->horizontalSlider_fresnelReflection->setEnabled(true);
@@ -8577,6 +8859,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->toolButton_envmapTint->setEnabled(true);
 
 			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
 
 			ui->label_lightinfluence->setEnabled(true);
 			ui->horizontalSlider_envmapLight->setEnabled(true);
@@ -8591,9 +8874,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			if( !ui->lineEdit_specmap->text().isEmpty() )
 			{
 				ui->lineEdit_specmap->setEnabled(true);
+				ui->lineEdit_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
+					ui->toolButton_specmap2->setEnabled(true);
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
@@ -8601,8 +8886,10 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			else if( ui->checkBox_basealpha->isChecked() )
 			{
 				ui->lineEdit_specmap->setDisabled(true);
-
 				ui->toolButton_specmap->setDisabled(true);
+
+				ui->lineEdit_specmap2->setDisabled(true);
+				ui->toolButton_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
@@ -8610,8 +8897,10 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			else if( ui->checkBox_normalalpha->isChecked() )
 			{
 				ui->lineEdit_specmap->setDisabled(true);
-
 				ui->toolButton_specmap->setDisabled(true);
+
+				ui->lineEdit_specmap2->setDisabled(true);
+				ui->toolButton_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
@@ -8619,9 +8908,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			else
 			{
 				ui->lineEdit_specmap->setEnabled(true);
+				ui->lineEdit_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
+					ui->toolButton_specmap2->setEnabled(true);
 
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
@@ -8639,6 +8930,8 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				ui->doubleSpinBox_contrast->setDisabled(true);
 				ui->horizontalSlider_contrast->setDisabled(true);
 
+				ui->checkBox_tintSpecMask->setDisabled(true);
+
 				ui->label_fresnelReflection->setDisabled(true);
 				ui->doubleSpinBox_fresnelReflection->setDisabled(true);
 				ui->horizontalSlider_fresnelReflection->setDisabled(true);
@@ -8650,8 +8943,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 				ui->label_specmap->setDisabled(true);
 				ui->lineEdit_specmap->setDisabled(true);
-
 				ui->toolButton_specmap->setDisabled(true);
+
+				ui->label_specmap2->setDisabled(true);
+				ui->lineEdit_specmap2->setDisabled(true);
+				ui->toolButton_specmap2->setDisabled(true);
 
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
@@ -8675,6 +8971,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setDisabled(true);
 			ui->toolButton_specmap->setDisabled(true);
 
+			ui->lineEdit_specmap2->setDisabled(true);
+			ui->toolButton_specmap2->setDisabled(true);
+
 			ui->checkBox_normalalpha->setDisabled(true);
 
 			ui->checkBox_phongNormalAlpha->setDisabled(true);
@@ -8687,6 +8986,8 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		{
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_normalalpha->setEnabled(true);
+
+			ui->lineEdit_specmap2->setEnabled(true);
 
 			ui->checkBox_phongNormalAlpha->setEnabled(true);
 
@@ -8702,6 +9003,8 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		{
 			ui->lineEdit_specmap->setDisabled(true);
 			ui->toolButton_specmap->setDisabled(true);
+			ui->lineEdit_specmap2->setDisabled(true);
+			ui->toolButton_specmap2->setDisabled(true);
 
 			ui->checkBox_basealpha->setDisabled(true);
 
@@ -8713,10 +9016,12 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		{
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_basealpha->setEnabled(true);
+			ui->lineEdit_specmap2->setEnabled(true);
 
 			ui->checkBox_phongBaseAlpha->setEnabled(true);
 
 			ui->toolButton_specmap->setEnabled( getCurrentGame() != "" );
+			ui->toolButton_specmap2->setEnabled( getCurrentGame() != "" );
 
 			if( ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
@@ -9309,6 +9614,8 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 			type = 2;
 		else if( it.key() == ui->lineEdit_specmap )
 			type = 3;
+		else if( it.key() == ui->lineEdit_specmap2 )
+			type = 3;
 		else if( it.key() == ui->lineEdit_exponentTexture )
 			type = 4;
 
@@ -9622,8 +9929,13 @@ void MainWindow::reconvertTexture()
 		if (ui->checkBox_basealpha->isChecked() )
 			noAlpha = false;
 	}
-	else if( objectName == "lineEdit_bumpmap2" )
+	else if( objectName == "lineEdit_bumpmap2" ) {
 		preview = "preview_bumpmap2";
+		if (ui->checkBox_normalalpha->isChecked() ||
+			ui->groupBox_phong->isVisible() ||
+			ui->checkBox_phongNormalAlpha->isChecked() )
+			noAlpha = false;
+	}
 	else if( objectName == "lineEdit_diffuse3" ) {
 		preview = "preview_basetexture3";
 		if (ui->checkBox_basealpha->isChecked() )
@@ -9657,6 +9969,8 @@ void MainWindow::reconvertTexture()
 		if (ui->checkBox_envmapAlpha->isChecked() )
 			noAlpha = false;
 	}
+	else if( objectName == "lineEdit_specmap2" )
+		type = 3;
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
 
@@ -9800,14 +10114,17 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_bumpmap2);
 		triggerLineEditAction(ui->lineEdit_bump2);
 		triggerLineEditAction(ui->lineEdit_detail);
+		triggerLineEditAction(ui->lineEdit_detail2);
 		triggerLineEditAction(ui->lineEdit_exponentTexture);
 		triggerLineEditAction(ui->lineEdit_specmap);
+		triggerLineEditAction(ui->lineEdit_specmap2);
 		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
 		triggerLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse2);
 		triggerLineEditAction(ui->lineEdit_waterNormalMap);
 		triggerLineEditAction(ui->lineEdit_decal);
 		triggerLineEditAction(ui->lineEdit_phongWarp);
 		triggerLineEditAction(ui->lineEdit_blendmodulate);
+		triggerLineEditAction(ui->lineEdit_tintMask);
 	}
 }
 
@@ -10329,6 +10646,11 @@ void MainWindow::on_action_normalBlend_triggered(bool checked)
 void MainWindow::on_action_treeSway_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_treeSway)
+}
+
+void MainWindow::on_action_layerBlend_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_layerblend)
 }
 
 void MainWindow::on_action_decal_triggered(bool checked)
