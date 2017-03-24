@@ -332,6 +332,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_bumpmap->setValidator(windowsFilenameValidator);
 	ui->lineEdit_bumpmap2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_detail->setValidator(windowsFilenameValidator);
+	ui->lineEdit_detail2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_lightWarp->setValidator(windowsFilenameValidator);
 	ui->lineEdit_blendmodulate->setValidator(windowsFilenameValidator);
 	ui->lineEdit_envmap->setValidator(windowsFilenameValidator);
@@ -367,6 +368,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect(ui->lineEdit_bumpmap2, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_detail, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_detail2, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_lightWarp, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
@@ -1483,7 +1486,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	//----------------------------------------------------------------------------------------//
 
-	const QString detailTex = detailtexture::param::initialize(ui, &vmt);
+	QString detailTex = detailtexture::param::initialize(ui, &vmt);
 
 	if (!detailTex.isEmpty()) {
 		QString texture = validateTexture("preview_detail", detailTex,
@@ -1491,6 +1494,15 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		ui->lineEdit_detail->setText(texture);
 		createReconvertAction(ui->lineEdit_detail, texture);
+	}
+
+	detailTex = detailtexture::param::initialize(ui, &vmt, true);
+
+	if (!detailTex.isEmpty()) {
+		utils::parseTexture("$detail2", detailTex, ui,
+			ui->lineEdit_detail2, vmt);
+
+		createReconvertAction(ui->lineEdit_detail2, detailTex);
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -1519,9 +1531,37 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		vmt.state.showDetail = true;
 	}
 
+	if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
+		if (!vmt.state.detailEnabled) {
+			ERROR("$detailblendmode2 is only supported with "
+				"$detail!")
+		}
+
+		bool ok;
+		int blendMode = value.toInt(&ok);
+
+		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive))
+			Error("$detailblendmode2 only works with the WorldVertexTransition shader!");
+
+		if(ok) {
+			if (blendMode == 0) {
+				Info("$detailblendmode2 has the default value of 0!")
+			} else if (blendMode >= 13) {
+				Error("$detailblendmode2 only supports int values ranging from 0 to 12!")
+			} else {
+				ui->comboBox_detailBlendMode2->setCurrentIndex(blendMode);
+			}
+		} else{
+			Error("$detailblendmode2 value: \"" + value + "\" has caused an error while parsing!")
+		}
+
+		vmt.state.showDetail = true;
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	detailtexture::param::parse(detailtexture::detailscale, ui, &vmt);
+	detailtexture::param::parse(detailtexture::detailscale2, ui, &vmt);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1561,8 +1601,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 				"$detail!")
 		}
 
-		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) )
-			Error("$detailblendfactor2 only works with the Lightmapped_4WayBlend CS:GO shader!")
+		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) &&
+			vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive))
+			Error("$detailblendfactor2 only works with the Lightmapped_4WayBlend or WorldVertexTransition shaders!")
 
 		bool ok;
 		double scale = value.toDouble(&ok);
@@ -3791,6 +3832,27 @@ VmtFile MainWindow::makeVMT()
 			if( ui->doubleSpinBox_detailAmount4->isEnabled() && ui->doubleSpinBox_detailAmount4->value() != 1.0 )
 				vmtFile.parameters.insert( "$detailblendfactor4", Str( ui->doubleSpinBox_detailAmount4->value() ));
 		}
+
+		if( ui->comboBox_shader->currentText() == "WorldVertexTransition" ) {
+
+			if( ui->doubleSpinBox_detailAmount2->isEnabled() && ui->doubleSpinBox_detailAmount2->value() != 1.0 )
+				vmtFile.parameters.insert( "$detailblendfactor2", Str( ui->doubleSpinBox_detailAmount2->value() ));
+
+			if( !ui->lineEdit_detail2->text().trimmed().isEmpty() )
+				vmtFile.parameters.insert( "$detail2", ui->lineEdit_detail2->text().trimmed() );
+
+			if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
+				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));
+
+			if( ui->checkBox_detailScaleUniform2->isChecked() ||
+					ui->doubleSpinBox_detailScale2->value() == ui->doubleSpinBox_detailScaleY2->value() )
+				utils::addOnUnequal("$detailscale2", ui->doubleSpinBox_detailScale2,
+								4.0, &vmtFile);
+			else {
+				vmtFile.parameters.insert( "$detailscale2", QString( "[" + Str( ui->doubleSpinBox_detailScale2->value()) +
+																	" " + Str( ui->doubleSpinBox_detailScaleY2->value()) + "]" ) );
+			}
+		}
 	}
 
 	//---------------------------------------------------------------------------------------//
@@ -4487,6 +4549,7 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse3->setEnabled(true);
 	ui->lineEdit_diffuse4->setEnabled(true);
 	ui->lineEdit_detail->setEnabled(true);
+	ui->lineEdit_detail2->setEnabled(true);
 	ui->lineEdit_exponentTexture->setEnabled(true);
 	ui->lineEdit_bumpmap->setEnabled(true);
 	ui->lineEdit_bumpmap2->setEnabled(true);
@@ -4516,6 +4579,7 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_blendmodulate);
 	clearLineEditAction(ui->lineEdit_bump2);
 	clearLineEditAction(ui->lineEdit_detail);
+	clearLineEditAction(ui->lineEdit_detail2);
 	clearLineEditAction(ui->lineEdit_exponentTexture);
 	clearLineEditAction(ui->lineEdit_specmap);
 	clearLineEditAction(ui->lineEdit_unlitTwoTextureDiffuse);
@@ -4548,6 +4612,7 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_diffuse2->clear();
 	ui->lineEdit_bumpmap2->clear();
 	ui->lineEdit_detail->clear();
+	ui->lineEdit_detail2->clear();
 
 	ui->lineEdit_decal->clear();
 	ui->comboBox_decalBlendMode->setCurrentIndex(0);
@@ -4575,6 +4640,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_alphaTestRef->setDisabled(true);
 
 	ui->comboBox_detailBlendMode->setCurrentIndex(0);
+	ui->comboBox_detailBlendMode2->setCurrentIndex(0);
 
 	detailtexture::reset(ui);
 
@@ -4584,6 +4650,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_detailAmount->setDisabled(true);
 
 	ui->doubleSpinBox_detailAmount2->setValue(1.0);
+	ui->doubleSpinBox_detailAmount2->setDisabled(true);
 	ui->doubleSpinBox_detailAmount3->setValue(1.0);
 	ui->doubleSpinBox_detailAmount4->setValue(1.0);
 
@@ -5935,6 +6002,9 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 
 	else if (name == "lineEdit_detail" )
 		processVtf( "preview_detail", filePath, ui->lineEdit_detail );
+
+	else if (name == "lineEdit_detail2" )
+		processVtf( "", filePath, ui->lineEdit_detail2 );
 
 	else if (name == "lineEdit_refractNormalMap" )
 		processVtf( "preview_bumpmap1", filePath, ui->lineEdit_refractNormalMap );
@@ -7766,6 +7836,9 @@ void MainWindow::browseVTF()
 
 	else if (name == "toolButton_detail" )
 		processVtf( "preview_detail", "", ui->lineEdit_detail );
+
+	else if (name == "toolButton_detail2" )
+		processVtf( "", "", ui->lineEdit_detail2 );
 
 	else if (name == "toolButton_refractNormalMap" )
 		processVtf( "preview_bumpmap1", "", ui->lineEdit_refractNormalMap );
@@ -10041,6 +10114,7 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_bumpmap2);
 		triggerLineEditAction(ui->lineEdit_bump2);
 		triggerLineEditAction(ui->lineEdit_detail);
+		triggerLineEditAction(ui->lineEdit_detail2);
 		triggerLineEditAction(ui->lineEdit_exponentTexture);
 		triggerLineEditAction(ui->lineEdit_specmap);
 		triggerLineEditAction(ui->lineEdit_specmap2);

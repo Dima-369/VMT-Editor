@@ -9,7 +9,8 @@
 namespace detailtexture {
 
 enum Parameter {
-	detailscale // $detailscale
+	detailscale,
+	detailscale2 // $detailscale
 };
 
 /*!
@@ -56,7 +57,7 @@ namespace param {
  *
  * The returned texture can be empty if the parameter is not present!
  */
-QString initialize(Ui::MainWindow *ui, VmtFile *vmt);
+QString initialize(Ui::MainWindow *ui, VmtFile *vmt, bool second = false);
 
 /*!
  * Processes the passed parameter from the VmtFile and initializes the

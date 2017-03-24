@@ -10,6 +10,10 @@ void detailtexture::reset(Ui::MainWindow *ui)
 	ui->doubleSpinBox_detailScaleY->setValue(4.0);
 	ui->checkBox_detailScaleUniform->setChecked(true);
 
+	ui->doubleSpinBox_detailScale2->setValue(4.0);
+	ui->doubleSpinBox_detailScaleY2->setValue(4.0);
+	ui->checkBox_detailScaleUniform2->setChecked(true);
+
 	// we fake a change to quickly disable all widgets
 	processDetailTextureChange("", ui);
 }
@@ -23,7 +27,11 @@ bool detailtexture::hasChanged(Ui::MainWindow *ui)
 			 utils::equal(ui->doubleSpinBox_detailAmount, "1.") &&
 			 utils::equal(ui->doubleSpinBox_detailAmount2, "1.") &&
 			 utils::equal(ui->doubleSpinBox_detailAmount3, "1.") &&
-			 utils::equal(ui->doubleSpinBox_detailAmount4, "1."));
+			 utils::equal(ui->doubleSpinBox_detailAmount4, "1.") &&
+			 ui->lineEdit_detail2->text().isEmpty() &&
+			 ui->comboBox_detailBlendMode2->currentIndex() == 0 &&
+			 utils::equal(ui->doubleSpinBox_detailScale2, "4.") &&
+			 utils::equal(ui->doubleSpinBox_detailScaleY2, "4."));
 }
 
 void detailtexture::processDetailTextureChange(const QString &text,
@@ -85,9 +93,13 @@ void detailtexture::toggledUniformScale(bool checked, Ui::MainWindow *ui, bool s
 	}
 }
 
-QString detailtexture::param::initialize(Ui::MainWindow *ui, VmtFile *vmt)
+QString detailtexture::param::initialize(Ui::MainWindow *ui, VmtFile *vmt, bool second)
 {
-	const QString raw = vmt->parameters.take("$detail");
+	QString raw = "";
+	if (second)
+		raw = vmt->parameters.take("$detail2");
+	else
+		raw = vmt->parameters.take("$detail");
 
 	if (!raw.isEmpty()) {
 		if (vmt->parameters.contains("$seamless_scale")) {
@@ -103,7 +115,7 @@ QString detailtexture::param::initialize(Ui::MainWindow *ui, VmtFile *vmt)
 }
 
 void processDetailScaleAsTuple(const QString &parameter, const QString &raw,
-		Ui::MainWindow *ui)
+		Ui::MainWindow *ui, bool second)
 {
 	const utils::DoubleTuple tuple = utils::toDoubleTuple(raw, 2);
 
@@ -113,6 +125,12 @@ void processDetailScaleAsTuple(const QString &parameter, const QString &raw,
 		if (x == "4." && y == "4.") {
 			logging::error(parameter + " has default value: [4 4]",
 				ui);
+		} else if (second) {
+			double xd = tuple.values.at(0);
+			double yd = tuple.values.at(1);
+			ui->doubleSpinBox_detailScale2->setValue(xd);
+			ui->doubleSpinBox_detailScaleY2->setValue(yd);
+			ui->checkBox_detailScaleUniform2->setChecked(false);
 		} else {
 			double xd = tuple.values.at(0);
 			double yd = tuple.values.at(1);
@@ -131,15 +149,27 @@ void processDetailScaleAsTuple(const QString &parameter, const QString &raw,
  * handle both cases correctly!
  */
 void processDetailScale(const QString &parameter, const QString &value,
-		Ui::MainWindow *ui)
+		Ui::MainWindow *ui, bool second)
 {
 	bool logErrors = false;
 	const utils::DoubleResult result = utils::parseDouble(parameter, value,
 			"4", ui, logErrors);
 
 	if (result.invalid) {
-		processDetailScaleAsTuple(parameter, result.string, ui);
+		processDetailScaleAsTuple(parameter, result.string, ui, second);
 
+	} else if (second) {
+		if (result.notDefault) {
+			ui->doubleSpinBox_detailScale2->setValue(result.value);
+			ui->checkBox_detailScaleUniform2->setChecked(true);
+			if (!ui->lineEdit_detail2->text().isEmpty()) {
+				ui->doubleSpinBox_detailScaleY2->setEnabled(
+					false);
+			}
+		} else {
+			logging::error(parameter + " has default value: 4.0",
+				ui);
+		}
 	} else {
 		if (result.notDefault) {
 			ui->doubleSpinBox_detailScale->setValue(result.value);
@@ -158,19 +188,21 @@ void processDetailScale(const QString &parameter, const QString &value,
 void detailtexture::param::parse(const detailtexture::Parameter &parameter,
 	Ui::MainWindow *ui, VmtFile *vmt)
 {
-	#define CHECK(p, m) { \
+	#define CHECK(p, m, b) { \
 		if (vmt->parameters.contains(p)) { \
 			if (!vmt->state.detailEnabled) { \
 				ERROR(p " only works with $detail") \
 			} \
 			vmt->state.showDetail = true; \
-			m(p, vmt->parameters.take(p), ui); \
+			m(p, vmt->parameters.take(p), ui, b); \
 		} \
 		break; \
 	}
 
 	switch (parameter) {
 	case detailtexture::detailscale:
-		CHECK("$detailscale", processDetailScale)
+		CHECK("$detailscale", processDetailScale, false);
+	case detailtexture::detailscale2:
+		CHECK("$detailscale2", processDetailScale, true)
 	}
 }
