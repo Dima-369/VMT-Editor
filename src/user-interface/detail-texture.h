@@ -34,14 +34,14 @@ bool hasChanged(Ui::MainWindow *ui);
  * Triggered when lineEdit_detail fires a changed signal. The main window
  * calls this method in receiving slot.
  */
-void processDetailTextureChange(const QString &text, Ui::MainWindow *ui);
+void processDetailTextureChange(const QString &text, Ui::MainWindow *ui, const bool second = false);
 
 /*!
  * Enables the detail scale Y value if the checkbox is unchecked.
  *
  * Call this when the uniform scale checkbox state was changed.
  */
-void toggledUniformScale(bool checked, Ui::MainWindow *ui);
+void toggledUniformScale(bool checked, Ui::MainWindow *ui, const bool second = false);
 
 } // namespace detailtexture
 

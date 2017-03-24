@@ -1934,7 +1934,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( !usingSpecmap.isEmpty() )
 		{
 			ui->lineEdit_specmap->setText(usingSpecmap);
-			createReconvertAction(ui->lineEdit_detail, usingSpecmap);
+			createReconvertAction(ui->lineEdit_specmap, usingSpecmap);
 
 			if(!(value = vmt.parameters.take("$envmapmask2")).isEmpty()) {
 				ui->lineEdit_specmap2->setText(utils::prepareTexture(value));
@@ -6552,6 +6552,7 @@ void MainWindow::gameChanged( const QString& game )
 void MainWindow::shaderChanged()
 {
 	bool luminanceEnabled = ui->comboBox_shader->currentText() == "Lightmapped_4WayBlend" || ui->comboBox_shader->currentText() == "Patch";
+	bool isBlend = ui->comboBox_shader->currentText() == "WorldVertexTransition";
 
 	ui->frame_texture->setVisible(luminanceEnabled);
 	ui->frame_texture2->setVisible(luminanceEnabled);
@@ -6752,6 +6753,14 @@ void MainWindow::shaderChanged()
 			ui->lineEdit_specmap2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_specmap2->setVisible( shader == "WorldVertexTransition" );
 			ui->label_specmap2->setVisible( shader == "WorldVertexTransition" );
+
+			ui->frame_detail2->setVisible(isBlend);
+			ui->comboBox_detailBlendMode2->setVisible(isBlend);
+
+			ui->label_detailAmount2->setVisible(isBlend || luminanceEnabled);
+			ui->doubleSpinBox_detailAmount2->setVisible(isBlend || luminanceEnabled);
+			ui->horizontalSlider_detailAmount2->setVisible(isBlend || luminanceEnabled);
+
 
 			//----------------------------------------------------------------------------------------//
 
@@ -7520,7 +7529,12 @@ void MainWindow::changeOption( Settings::Options option, const QString& value )
 
 void MainWindow::toggledDetailUniformScale(bool checked)
 {
-	detailtexture::toggledUniformScale(checked, ui);
+	const auto object = qobject_cast<QWidget *>(sender());
+
+	if(object == ui->checkBox_detailScaleUniform)
+		detailtexture::toggledUniformScale(checked, ui);
+	else if(object == ui->checkBox_detailScaleUniform2)
+		detailtexture::toggledUniformScale(checked, ui, true);
 }
 
 
@@ -8334,7 +8348,11 @@ void MainWindow::alphaTestReferenceChanged()
 
 void MainWindow::detailTextureChanged(QString text)
 {
-	detailtexture::processDetailTextureChange(text, ui);
+	const auto lineEdit = qobject_cast<QWidget *>(sender());
+	if (lineEdit == ui->lineEdit_detail)
+		detailtexture::processDetailTextureChange(text, ui);
+	else if (lineEdit == ui->lineEdit_detail2)
+		detailtexture::processDetailTextureChange(text, ui, true);
 }
 
 void MainWindow::requestedCubemap( bool enabled )

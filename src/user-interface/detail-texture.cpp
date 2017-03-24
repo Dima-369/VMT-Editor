@@ -27,38 +27,61 @@ bool detailtexture::hasChanged(Ui::MainWindow *ui)
 }
 
 void detailtexture::processDetailTextureChange(const QString &text,
-		Ui::MainWindow *ui)
+		Ui::MainWindow *ui, bool second)
 {
 	// TODO: Are those all widgets in the groupbox or why exactly those?
 	const bool enable = !text.isEmpty();
 
-	ui->label_5->setEnabled(enable);
-	ui->comboBox_detailBlendMode->setEnabled(enable);
-	ui->label_detailScale->setEnabled(enable);
-	ui->label_detailAmount->setEnabled(enable);
-	ui->doubleSpinBox_detailAmount->setEnabled(enable);
-	ui->horizontalSlider_detailAmount->setEnabled(enable);
-	ui->doubleSpinBox_detailScale->setEnabled(enable);
-	ui->checkBox_detailScaleUniform->setEnabled(enable);
-	ui->label_detailAmount2->setEnabled(enable);
-	ui->label_detailAmount3->setEnabled(enable);
-	ui->label_detailAmount4->setEnabled(enable);
-	ui->horizontalSlider_detailAmount2->setEnabled(enable);
-	ui->horizontalSlider_detailAmount3->setEnabled(enable);
-	ui->horizontalSlider_detailAmount4->setEnabled(enable);
-	ui->doubleSpinBox_detailAmount2->setEnabled(enable);
-	ui->doubleSpinBox_detailAmount3->setEnabled(enable);
-	ui->doubleSpinBox_detailAmount4->setEnabled(enable);
+	if (!second) {
+		//ui->label_5->setEnabled(enable);
+		ui->comboBox_detailBlendMode->setEnabled(enable);
+		ui->label_detailScale->setEnabled(enable);
+		ui->label_detailAmount->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount->setEnabled(enable);
+		ui->horizontalSlider_detailAmount->setEnabled(enable);
+		ui->doubleSpinBox_detailScale->setEnabled(enable);
+		ui->checkBox_detailScaleUniform->setEnabled(enable);
+		if(ui->label_detailAmount3->isVisible()) {
+			ui->label_detailAmount2->setEnabled(enable);
+			ui->horizontalSlider_detailAmount2->setEnabled(enable);
+			ui->doubleSpinBox_detailAmount2->setEnabled(enable);
+		}
+		ui->label_detailAmount3->setEnabled(enable);
+		ui->label_detailAmount4->setEnabled(enable);
 
-	if (!ui->checkBox_detailScaleUniform->isChecked()) {
-		ui->doubleSpinBox_detailScaleY->setEnabled(enable);
+		ui->horizontalSlider_detailAmount3->setEnabled(enable);
+		ui->horizontalSlider_detailAmount4->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount2->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount3->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount4->setEnabled(enable);
+
+		if (!ui->checkBox_detailScaleUniform->isChecked()) {
+			ui->doubleSpinBox_detailScaleY->setEnabled(enable);
+		}
+	} else {
+		ui->label_detailAmount2->setEnabled(enable);
+		ui->horizontalSlider_detailAmount2->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount2->setEnabled(enable);
+
+		//ui->label_detailBlendMode2->setEnabled(enable);
+		ui->comboBox_detailBlendMode2->setEnabled(enable);
+		ui->label_detailScale2->setEnabled(enable);
+		ui->doubleSpinBox_detailScale2->setEnabled(enable);
+		ui->checkBox_detailScaleUniform2->setEnabled(enable);
 	}
+
 }
 
-void detailtexture::toggledUniformScale(bool checked, Ui::MainWindow *ui)
+void detailtexture::toggledUniformScale(bool checked, Ui::MainWindow *ui, bool second)
 {
-	if (!ui->lineEdit_detail->text().isEmpty()) {
-		ui->doubleSpinBox_detailScaleY->setEnabled(!checked);
+	if (!second) {
+		if (!ui->lineEdit_detail->text().isEmpty()) {
+			ui->doubleSpinBox_detailScaleY->setEnabled(!checked);
+		}
+	} else {
+		if (!ui->lineEdit_detail2->text().isEmpty()) {
+			ui->doubleSpinBox_detailScaleY2->setEnabled(!checked);
+		}
 	}
 }
 
