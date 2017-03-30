@@ -1531,7 +1531,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		vmt.state.showDetail = true;
 	}
 
-	if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
+	/*if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
 		if (!vmt.state.detailEnabled) {
 			ERROR("$detailblendmode2 is only supported with "
 				"$detail!")
@@ -1556,7 +1556,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		}
 
 		vmt.state.showDetail = true;
-	}
+	}*/
 
 	//----------------------------------------------------------------------------------------//
 
@@ -3841,8 +3841,8 @@ VmtFile MainWindow::makeVMT()
 			if( !ui->lineEdit_detail2->text().trimmed().isEmpty() )
 				vmtFile.parameters.insert( "$detail2", ui->lineEdit_detail2->text().trimmed() );
 
-			if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
-				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));
+			/*if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
+				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));*/
 
 			if( ui->checkBox_detailScaleUniform2->isChecked() ||
 					ui->doubleSpinBox_detailScale2->value() == ui->doubleSpinBox_detailScaleY2->value() )
@@ -6825,7 +6825,7 @@ void MainWindow::shaderChanged()
 			ui->label_specmap2->setVisible( shader == "WorldVertexTransition" );
 
 			ui->frame_detail2->setVisible(isBlend);
-			ui->comboBox_detailBlendMode2->setVisible(isBlend);
+			ui->comboBox_detailBlendMode2->setVisible(false);
 
 			ui->label_detailAmount2->setVisible(isBlend || luminanceEnabled);
 			ui->doubleSpinBox_detailAmount2->setVisible(isBlend || luminanceEnabled);

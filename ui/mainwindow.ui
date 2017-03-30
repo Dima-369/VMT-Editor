@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-1427</y>
+             <y>-2068</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -9275,6 +9275,9 @@ QToolButton:pressed
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
+                     </property>
+                     <property name="toolTip">
+                      <string>CS:GO supports blend modes 0, 7, 9, 10, 11, 12</string>
                      </property>
                      <item>
                       <property name="text">
