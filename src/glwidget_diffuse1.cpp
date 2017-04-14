@@ -95,6 +95,7 @@ void GLWidget_Diffuse1::initializeGL()
 	}
 
 	if( !shaderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
+		"#version 120 \n"
 		"uniform sampler2D texture;"
 		"uniform float alphaTest;"
 		"uniform bool useAlphaTest = false;"
