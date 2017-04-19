@@ -25,7 +25,7 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 	if (ui->doubleSpinBox_fresnelReflection->isEnabled()) {
 		const double fresnel = 
 			ui->doubleSpinBox_fresnelReflection->value();
-		if (fresnel != 1.0) {
+		if (fresnel != 0.0) {
 			if (vmt->shaderName == "VertexLitGeneric") {
 				vmt->parameters.insert(
 					"$envmapfresnel", STR(fresnel));
