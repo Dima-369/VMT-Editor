@@ -1757,7 +1757,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		double amount;
 		if( loadDoubleParameter( &amount, value, "$fresnelReflection", 1.0 ))
 		{
-			ui->doubleSpinBox_fresnelReflection->setValue(amount);
+			ui->doubleSpinBox_fresnelReflection->setValue(1.0 - amount);
 		}
 	}
 
@@ -1771,7 +1771,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		double amount;
 		if( loadDoubleParameter( &amount, value, "$envmapfresnel", 0.0 ))
 		{
-			ui->doubleSpinBox_fresnelReflection->setValue(1.0 - amount);
+			ui->doubleSpinBox_fresnelReflection->setValue(amount);
 		}
 	}
 
@@ -4755,7 +4755,7 @@ void MainWindow::resetWidgets() {
 
 	ui->label_fresnelReflection->setDisabled(true);
 	ui->horizontalSlider_fresnelReflection->setDisabled(true);
-	ui->doubleSpinBox_fresnelReflection->setValue(1.0);
+	ui->doubleSpinBox_fresnelReflection->setValue(0.0);
 	ui->doubleSpinBox_fresnelReflection->setDisabled(true);
 
 	ui->label_lightinfluence->setDisabled(true);

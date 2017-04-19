@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2068</y>
+             <y>-2628</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -10672,7 +10672,7 @@ QToolButton:pressed
                       <number>1</number>
                      </property>
                      <property name="value">
-                      <number>100</number>
+                      <number>0</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -10705,6 +10705,9 @@ QToolButton:pressed
                        <bold>false</bold>
                       </font>
                      </property>
+                     <property name="minimum">
+                      <double>-16.000000000000000</double>
+                     </property>
                      <property name="maximum">
                       <double>16.000000000000000</double>
                      </property>
@@ -10712,7 +10715,7 @@ QToolButton:pressed
                       <double>0.010000000000000</double>
                      </property>
                      <property name="value">
-                      <double>1.000000000000000</double>
+                      <double>0.000000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -19645,8 +19648,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>117</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">

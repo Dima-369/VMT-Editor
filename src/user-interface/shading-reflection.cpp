@@ -28,10 +28,10 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 		if (fresnel != 1.0) {
 			if (vmt->shaderName == "VertexLitGeneric") {
 				vmt->parameters.insert(
-					"$envmapfresnel", STR(1.0 - fresnel));
+					"$envmapfresnel", STR(fresnel));
 			} else {
 				vmt->parameters.insert(
-					"$fresnelreflection", STR(fresnel));
+					"$fresnelreflection", STR(1.0 - fresnel));
 			}
 		}
 	}
