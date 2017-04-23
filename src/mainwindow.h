@@ -450,6 +450,8 @@ private slots:
 
 	void reconvertAll();
 
+	void createBlendToolTexture();
+
 	bool combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha);
 
 	//----------------------------------------------------------------------------------------//

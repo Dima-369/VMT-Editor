@@ -202,30 +202,32 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	//----------------------------------------------------------------------------------------//
 
-	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
-	connect( ui->actionOpen,			 SIGNAL(triggered()),  this, SLOT(action_Open()));
-	connect( ui->actionSave,			 SIGNAL(triggered()),  this, SLOT(action_Save()));
-	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_saveAs()));
-	connect( ui->actionSave_As_Template, SIGNAL(triggered()), SLOT(saveAsTemplate()));
-	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
+	connect( ui->actionNew,				    SIGNAL(triggered()),  this, SLOT(action_New()));
+	connect( ui->actionOpen,			    SIGNAL(triggered()),  this, SLOT(action_Open()));
+	connect( ui->actionSave,			    SIGNAL(triggered()),  this, SLOT(action_Save()));
+	connect( ui->actionSave_As,			    SIGNAL(triggered()),  this, SLOT(action_saveAs()));
+	connect( ui->actionSave_As_Template,    SIGNAL(triggered()), SLOT(saveAsTemplate()));
+	connect( ui->actionExit,			    SIGNAL(triggered()),  this, SLOT(close()));
 
-	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
+	connect( ui->actionRefresh_List,	    SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
 
-	connect( ui->action_refreshGameList, SIGNAL(triggered()),  this, SLOT(refreshGameList()));
+	connect( ui->action_refreshGameList,    SIGNAL(triggered()),  this, SLOT(refreshGameList()));
 
-	connect( ui->actionRefresh,			 SIGNAL(triggered()),  this, SLOT(refreshRequested()));
+	connect( ui->actionRefresh,			    SIGNAL(triggered()),  this, SLOT(refreshRequested()));
 
-	connect( ui->actionClear_Message_Log,SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
+	connect( ui->actionClear_Message_Log,   SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
 
-	connect( ui->action_hideAll,		 SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
+	connect( ui->action_hideAll,		    SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
 
-	connect( ui->action_convertToVTF,    SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
+	connect( ui->action_convertToVTF,       SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
 
-	connect( ui->action_batchVMT,		 SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
+	connect( ui->action_batchVMT,		    SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
 
-	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
+	connect( ui->actionParse_VMT,		    SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
 
-	connect( ui->action_reconvertAll,	 SIGNAL(triggered()), this, SLOT(reconvertAll()));
+	connect( ui->action_reconvertAll,	    SIGNAL(triggered()), this, SLOT(reconvertAll()));
+
+	connect( ui->action_CreateBlendTexture, SIGNAL(triggered()), this, SLOT(createBlendToolTexture()));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1531,7 +1533,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		vmt.state.showDetail = true;
 	}
 
-	if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
+	/*if( !( value = vmt.parameters.take("$detailblendmode2") ).isEmpty() ) {
 		if (!vmt.state.detailEnabled) {
 			ERROR("$detailblendmode2 is only supported with "
 				"$detail!")
@@ -1556,7 +1558,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		}
 
 		vmt.state.showDetail = true;
-	}
+	}*/
 
 	//----------------------------------------------------------------------------------------//
 
@@ -1757,7 +1759,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		double amount;
 		if( loadDoubleParameter( &amount, value, "$fresnelReflection", 1.0 ))
 		{
-			ui->doubleSpinBox_fresnelReflection->setValue(amount);
+			ui->doubleSpinBox_fresnelReflection->setValue(1.0 - amount);
 		}
 	}
 
@@ -1771,7 +1773,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		double amount;
 		if( loadDoubleParameter( &amount, value, "$envmapfresnel", 0.0 ))
 		{
-			ui->doubleSpinBox_fresnelReflection->setValue(1.0 - amount);
+			ui->doubleSpinBox_fresnelReflection->setValue(amount);
 		}
 	}
 
@@ -3841,8 +3843,8 @@ VmtFile MainWindow::makeVMT()
 			if( !ui->lineEdit_detail2->text().trimmed().isEmpty() )
 				vmtFile.parameters.insert( "$detail2", ui->lineEdit_detail2->text().trimmed() );
 
-			if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
-				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));
+			/*if( ui->comboBox_detailBlendMode2->isEnabled() && ui->comboBox_detailBlendMode2->currentIndex() != 0 )
+				vmtFile.parameters.insert( "$detailblendmode2", Str( ui->comboBox_detailBlendMode2->currentIndex() ));*/
 
 			if( ui->checkBox_detailScaleUniform2->isChecked() ||
 					ui->doubleSpinBox_detailScale2->value() == ui->doubleSpinBox_detailScaleY2->value() )
@@ -4755,7 +4757,7 @@ void MainWindow::resetWidgets() {
 
 	ui->label_fresnelReflection->setDisabled(true);
 	ui->horizontalSlider_fresnelReflection->setDisabled(true);
-	ui->doubleSpinBox_fresnelReflection->setValue(1.0);
+	ui->doubleSpinBox_fresnelReflection->setValue(0.0);
 	ui->doubleSpinBox_fresnelReflection->setDisabled(true);
 
 	ui->label_lightinfluence->setDisabled(true);
@@ -6744,6 +6746,8 @@ void MainWindow::shaderChanged()
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
 
+			ui->action_CreateBlendTexture->setVisible(isBlend);
+
 			//----------------------------------------------------------------------------------------//
 
 			ui->action_patch->setEnabled(false);
@@ -6825,7 +6829,7 @@ void MainWindow::shaderChanged()
 			ui->label_specmap2->setVisible( shader == "WorldVertexTransition" );
 
 			ui->frame_detail2->setVisible(isBlend);
-			ui->comboBox_detailBlendMode2->setVisible(isBlend);
+			ui->comboBox_detailBlendMode2->setVisible(false);
 
 			ui->label_detailAmount2->setVisible(isBlend || luminanceEnabled);
 			ui->doubleSpinBox_detailAmount2->setVisible(isBlend || luminanceEnabled);
@@ -7019,6 +7023,8 @@ void MainWindow::shaderChanged()
 
 		ui->action_baseTexture->setVisible(true);
 		ui->action_baseTexture2->setVisible(true);
+
+		ui->action_CreateBlendTexture->setVisible(true);
 
 		ui->action_phong->setEnabled(true);
 		ui->action_phongBrush->setEnabled(true);
@@ -8888,6 +8894,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				ui->lineEdit_specmap->setDisabled(true);
 				ui->toolButton_specmap->setDisabled(true);
 
+				ui->label_specmap->setDisabled(true);
+				ui->label_specmap2->setDisabled(true);
+
 				ui->lineEdit_specmap2->setDisabled(true);
 				ui->toolButton_specmap2->setDisabled(true);
 
@@ -8899,6 +8908,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				ui->lineEdit_specmap->setDisabled(true);
 				ui->toolButton_specmap->setDisabled(true);
 
+				ui->label_specmap->setDisabled(true);
+				ui->label_specmap2->setDisabled(true);
+
 				ui->lineEdit_specmap2->setDisabled(true);
 				ui->toolButton_specmap2->setDisabled(true);
 
@@ -8909,6 +8921,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			{
 				ui->lineEdit_specmap->setEnabled(true);
 				ui->lineEdit_specmap2->setEnabled(true);
+
+				ui->label_specmap->setEnabled(true);
+				ui->label_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
@@ -8971,6 +8986,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setDisabled(true);
 			ui->toolButton_specmap->setDisabled(true);
 
+			ui->label_specmap->setDisabled(true);
+			ui->label_specmap2->setDisabled(true);
+
 			ui->lineEdit_specmap2->setDisabled(true);
 			ui->toolButton_specmap2->setDisabled(true);
 
@@ -8987,11 +9005,15 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_normalalpha->setEnabled(true);
 
+			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
+
 			ui->lineEdit_specmap2->setEnabled(true);
 
 			ui->checkBox_phongNormalAlpha->setEnabled(true);
 
 			ui->toolButton_specmap->setEnabled( getCurrentGame() != "" );
+			ui->toolButton_specmap2->setEnabled( getCurrentGame() != "" );
 
 			if( !ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::None, "" );
@@ -9006,6 +9028,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap2->setDisabled(true);
 			ui->toolButton_specmap2->setDisabled(true);
 
+			ui->label_specmap->setDisabled(true);
+			ui->label_specmap2->setDisabled(true);
+
 			ui->checkBox_basealpha->setDisabled(true);
 
 			ui->checkBox_phongBaseAlpha->setDisabled(true);
@@ -9017,6 +9042,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_basealpha->setEnabled(true);
 			ui->lineEdit_specmap2->setEnabled(true);
+
+			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
 
 			ui->checkBox_phongBaseAlpha->setEnabled(true);
 
@@ -10002,14 +10030,14 @@ void MainWindow::reconvertTexture()
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
-	if( QFile::exists(dir + newFile + ".vtf") ) {
+	/*if( QFile::exists(dir + newFile + ".vtf") ) {
 
 		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
 
 			Error( "Error removing \"" + dir + newFile + ".vtf\"" );
 			return;
 		}
-	}
+	}*/
 
 	mIniPaths->setValue(relativeFilePath, fileName);
 
@@ -10170,7 +10198,7 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 
 	if (QFile::exists(fileName)) {
 		if(!QFile::remove(fileName)) {
-			Error( "Error removing \"" + fileName + ".vtf\"" );
+			Error( "Error removing \"" + fileName );
 			return false;
 		}
 	}
@@ -10182,6 +10210,95 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 
 	qDebug() << "Something fucked up";
 	return false;
+}
+
+void MainWindow::createBlendToolTexture()
+{
+	if(!mVMTLoaded) {
+		Error( "VMT must be saved before creating blend tool texture");
+		return;
+	}
+
+	QString vtf1Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse->text();
+	QString vtf2Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse2->text();
+	QFile vtf1File (vtf1Path + ".vtf");
+	QFile vtf2File (vtf2Path + ".vtf");
+
+	QString texture1File = Str( qHash( QFileInfo(vtf1Path + ".vtf").fileName() +
+						   Str( vtf1File.size() )));
+	QString texture2File = Str( qHash( QFileInfo(vtf2Path + ".vtf").fileName() +
+						   Str( vtf2File.size() )));
+	QImage texture1;
+	QImage texture2;
+
+	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
+		Error( "Error loading Diffuse texture" )
+		return;
+	}
+	if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".png")) {
+		Error( "Error loading Diffuse 2 texture" )
+		return;
+	}
+
+	int size = 256;
+	QImage texture1Scaled = texture1.scaled(size, size);
+	QImage texture2Scaled = texture2.scaled(size, size);
+
+	QColor t1, t2, pix;
+	for (int i = 0; i < size; ++i) {
+
+		for (int j = 0; j < size; ++j) {
+			t1 = texture1Scaled.pixel(i, j);
+			t2 = texture2Scaled.pixel(i, j);
+
+			double distance = ((i - size + j) + 24) / 48.0;
+			double blend = qBound(0.0, 1.0, distance);
+			pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
+						t2.greenF() * blend + t1.greenF() * (1.0 - blend),
+						t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+
+			texture1Scaled.setPixel(i, j, pix.rgba());
+		}
+	}
+
+	QString fileName = QDir::currentPath() + "/Cache/blend_tooltexture.png";
+
+	if (QFile::exists(fileName)) {
+		if(!QFile::remove(fileName)) {
+			Error( "Error removing \"" + fileName + ".vtf\"" );
+			return;
+		}
+	}
+
+	if (texture1Scaled.save(fileName, "PNG")) {
+		qDebug() << "File succesfully combined";
+	} else {
+		qDebug() << "Something fucked up";
+		return;
+	}
+
+	QString newFile = vmtParser->lastVMTFile().fileName.section(".", 0, 0) + "_tooltexture";
+	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+
+	ConversionThread* conversionThread = new ConversionThread(this);
+	conversionThread->fileName = fileName;
+	conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" -format DXT1 -alphaformat DXT1";
+	conversionThread->moveFile = true;
+	conversionThread->newFile = newFile;
+	conversionThread->newFileDir = dir;
+	conversionThread->start();
+
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
+	ui->lineEdit_toolTexture->setText(relativeFilePath);
+
+	if (!ui->groupBox_misc->isVisible()) {
+		ui->groupBox_misc->setChecked(true);
+		utils::toggle(this, true, ui->groupBox_misc, mParsingVMT);
+	}
+
 }
 
 QString MainWindow::removeSuffix( const QString fileName, int type)
