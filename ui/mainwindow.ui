@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-2628</y>
+             <y>-5101</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -19648,8 +19648,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>117</width>
-             <height>70</height>
+             <width>941</width>
+             <height>751</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -19764,6 +19764,7 @@ QToolButton:pressed
      <string>&amp;Tools</string>
     </property>
     <addaction name="action_reconvertAll"/>
+    <addaction name="action_CreateBlendTexture"/>
     <addaction name="separator"/>
     <addaction name="actionRefresh"/>
     <addaction name="actionParse_VMT"/>
@@ -20809,6 +20810,11 @@ border: 1px solid #222;
    </property>
    <property name="text">
     <string>Layer Blend</string>
+   </property>
+  </action>
+  <action name="action_CreateBlendTexture">
+   <property name="text">
+    <string>Create Blend Tool Texture</string>
    </property>
   </action>
  </widget>

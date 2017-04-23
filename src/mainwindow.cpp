@@ -202,30 +202,32 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	//----------------------------------------------------------------------------------------//
 
-	connect( ui->actionNew,				 SIGNAL(triggered()),  this, SLOT(action_New()));
-	connect( ui->actionOpen,			 SIGNAL(triggered()),  this, SLOT(action_Open()));
-	connect( ui->actionSave,			 SIGNAL(triggered()),  this, SLOT(action_Save()));
-	connect( ui->actionSave_As,			 SIGNAL(triggered()),  this, SLOT(action_saveAs()));
-	connect( ui->actionSave_As_Template, SIGNAL(triggered()), SLOT(saveAsTemplate()));
-	connect( ui->actionExit,			 SIGNAL(triggered()),  this, SLOT(close()));
+	connect( ui->actionNew,				    SIGNAL(triggered()),  this, SLOT(action_New()));
+	connect( ui->actionOpen,			    SIGNAL(triggered()),  this, SLOT(action_Open()));
+	connect( ui->actionSave,			    SIGNAL(triggered()),  this, SLOT(action_Save()));
+	connect( ui->actionSave_As,			    SIGNAL(triggered()),  this, SLOT(action_saveAs()));
+	connect( ui->actionSave_As_Template,    SIGNAL(triggered()), SLOT(saveAsTemplate()));
+	connect( ui->actionExit,			    SIGNAL(triggered()),  this, SLOT(close()));
 
-	connect( ui->actionRefresh_List,	 SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
+	connect( ui->actionRefresh_List,	    SIGNAL(triggered()),  this, SLOT(action_RefreshTemplateList()));
 
-	connect( ui->action_refreshGameList, SIGNAL(triggered()),  this, SLOT(refreshGameList()));
+	connect( ui->action_refreshGameList,    SIGNAL(triggered()),  this, SLOT(refreshGameList()));
 
-	connect( ui->actionRefresh,			 SIGNAL(triggered()),  this, SLOT(refreshRequested()));
+	connect( ui->actionRefresh,			    SIGNAL(triggered()),  this, SLOT(refreshRequested()));
 
-	connect( ui->actionClear_Message_Log,SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
+	connect( ui->actionClear_Message_Log,   SIGNAL(triggered()),  this, SLOT(clearMessageLog()));
 
-	connect( ui->action_hideAll,		 SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
+	connect( ui->action_hideAll,		    SIGNAL(triggered()), this, SLOT(hideParameterGroupboxes()));
 
-	connect( ui->action_convertToVTF,    SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
+	connect( ui->action_convertToVTF,       SIGNAL(triggered()), this, SLOT(displayConversionDialog()));
 
-	connect( ui->action_batchVMT,		 SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
+	connect( ui->action_batchVMT,		    SIGNAL(triggered()), this, SLOT(displayBatchDialog()));
 
-	connect( ui->actionParse_VMT,		 SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
+	connect( ui->actionParse_VMT,		    SIGNAL(triggered()), this, SLOT(vmtPreviewParse()));
 
-	connect( ui->action_reconvertAll,	 SIGNAL(triggered()), this, SLOT(reconvertAll()));
+	connect( ui->action_reconvertAll,	    SIGNAL(triggered()), this, SLOT(reconvertAll()));
+
+	connect( ui->action_CreateBlendTexture, SIGNAL(triggered()), this, SLOT(createBlendToolTexture()));
 
 	//----------------------------------------------------------------------------------------//
 
@@ -6744,6 +6746,8 @@ void MainWindow::shaderChanged()
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
 
+			ui->action_CreateBlendTexture->setVisible(isBlend);
+
 			//----------------------------------------------------------------------------------------//
 
 			ui->action_patch->setEnabled(false);
@@ -7019,6 +7023,8 @@ void MainWindow::shaderChanged()
 
 		ui->action_baseTexture->setVisible(true);
 		ui->action_baseTexture2->setVisible(true);
+
+		ui->action_CreateBlendTexture->setVisible(true);
 
 		ui->action_phong->setEnabled(true);
 		ui->action_phongBrush->setEnabled(true);
@@ -10002,14 +10008,14 @@ void MainWindow::reconvertTexture()
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
 
-	if( QFile::exists(dir + newFile + ".vtf") ) {
+	/*if( QFile::exists(dir + newFile + ".vtf") ) {
 
 		if( !QFile::remove( dir + newFile + ".vtf" ) ) {
 
 			Error( "Error removing \"" + dir + newFile + ".vtf\"" );
 			return;
 		}
-	}
+	}*/
 
 	mIniPaths->setValue(relativeFilePath, fileName);
 
@@ -10170,7 +10176,7 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 
 	if (QFile::exists(fileName)) {
 		if(!QFile::remove(fileName)) {
-			Error( "Error removing \"" + fileName + ".vtf\"" );
+			Error( "Error removing \"" + fileName );
 			return false;
 		}
 	}
@@ -10182,6 +10188,93 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 
 	qDebug() << "Something fucked up";
 	return false;
+}
+
+void MainWindow::createBlendToolTexture()
+{
+	if(!mVMTLoaded) {
+		Error( "VMT must be saved before creating blend tool texture");
+		return;
+	}
+
+	QString vtf1Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse->text();
+	QString vtf2Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse2->text();
+	QFile vtf1File (vtf1Path + ".vtf");
+	QFile vtf2File (vtf2Path + ".vtf");
+
+	QString texture1File = Str( qHash( QFileInfo(vtf1Path + ".vtf").fileName() +
+						   Str( vtf1File.size() )));
+	QString texture2File = Str( qHash( QFileInfo(vtf2Path + ".vtf").fileName() +
+						   Str( vtf2File.size() )));
+	QImage texture1;
+	QImage texture2;
+
+	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
+		Error( "Error loading Diffuse texture" )
+		return;
+	}
+	if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".png")) {
+		Error( "Error loading Diffuse 2 texture" )
+		return;
+	}
+
+	int size = 256;
+	QImage texture1Scaled = texture1.scaled(size, size);
+	QImage texture2Scaled = texture2.scaled(size, size);
+
+	QColor t1, t2, pix;
+	for (int i = 0; i < size; ++i) {
+
+		for (int j = 0; j < size; ++j) {
+			t1 = texture1Scaled.pixel(i, j);
+			t2 = texture2Scaled.pixel(i, j);
+			if (i < size - j)
+				pix.setRgb(t1.rgb());
+			else
+				pix.setRgb(t2.rgb());
+
+			texture1Scaled.setPixel(i, j, pix.rgba());
+		}
+	}
+
+	QString fileName = QDir::currentPath() + "/Cache/blend_tooltexture.png";
+
+	if (QFile::exists(fileName)) {
+		if(!QFile::remove(fileName)) {
+			Error( "Error removing \"" + fileName + ".vtf\"" );
+			return;
+		}
+	}
+
+	if (texture1Scaled.save(fileName, "PNG")) {
+		qDebug() << "File succesfully combined";
+	} else {
+		qDebug() << "Something fucked up";
+		return;
+	}
+
+	QString newFile = vmtParser->lastVMTFile().fileName.section(".", 0, 0) + "_tooltexture";
+	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+
+	ConversionThread* conversionThread = new ConversionThread(this);
+	conversionThread->fileName = fileName;
+	conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" -format DXT1 -alphaformat DXT1";
+	conversionThread->moveFile = true;
+	conversionThread->newFile = newFile;
+	conversionThread->newFileDir = dir;
+	conversionThread->start();
+
+	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
+
+	ui->lineEdit_toolTexture->setText(relativeFilePath);
+
+	if (!ui->groupBox_misc->isVisible()) {
+		ui->groupBox_misc->setChecked(true);
+		utils::toggle(this, true, ui->groupBox_misc, mParsingVMT);
+	}
+
 }
 
 QString MainWindow::removeSuffix( const QString fileName, int type)

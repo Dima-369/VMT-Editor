@@ -41,6 +41,15 @@ void ConversionThread::run()
 			QString toRename = fileName.section("/", -1).section(".", 0, 0);
 			toRename += ".vtf";
 
+			if( QFile::exists(newFileDir + newFile + ".vtf") ) {
+
+				if( !QFile::remove(newFileDir + newFile + ".vtf") ) {
+
+					Error( "Error removing \"" + newFileDir + newFile + ".vtf\"" );
+					return;
+				}
+			}
+
 			if( !QFile::rename(QDir::currentPath() + "\\Cache\\Move\\" + toRename,
 							   newFileDir + newFile + ".vtf") ) {
 
