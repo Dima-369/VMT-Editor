@@ -8894,6 +8894,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				ui->lineEdit_specmap->setDisabled(true);
 				ui->toolButton_specmap->setDisabled(true);
 
+				ui->label_specmap->setDisabled(true);
+				ui->label_specmap2->setDisabled(true);
+
 				ui->lineEdit_specmap2->setDisabled(true);
 				ui->toolButton_specmap2->setDisabled(true);
 
@@ -8905,6 +8908,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				ui->lineEdit_specmap->setDisabled(true);
 				ui->toolButton_specmap->setDisabled(true);
 
+				ui->label_specmap->setDisabled(true);
+				ui->label_specmap2->setDisabled(true);
+
 				ui->lineEdit_specmap2->setDisabled(true);
 				ui->toolButton_specmap2->setDisabled(true);
 
@@ -8915,6 +8921,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			{
 				ui->lineEdit_specmap->setEnabled(true);
 				ui->lineEdit_specmap2->setEnabled(true);
+
+				ui->label_specmap->setEnabled(true);
+				ui->label_specmap2->setEnabled(true);
 
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
@@ -8977,6 +8986,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setDisabled(true);
 			ui->toolButton_specmap->setDisabled(true);
 
+			ui->label_specmap->setDisabled(true);
+			ui->label_specmap2->setDisabled(true);
+
 			ui->lineEdit_specmap2->setDisabled(true);
 			ui->toolButton_specmap2->setDisabled(true);
 
@@ -8993,11 +9005,15 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_normalalpha->setEnabled(true);
 
+			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
+
 			ui->lineEdit_specmap2->setEnabled(true);
 
 			ui->checkBox_phongNormalAlpha->setEnabled(true);
 
 			ui->toolButton_specmap->setEnabled( getCurrentGame() != "" );
+			ui->toolButton_specmap2->setEnabled( getCurrentGame() != "" );
 
 			if( !ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::None, "" );
@@ -9012,6 +9028,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap2->setDisabled(true);
 			ui->toolButton_specmap2->setDisabled(true);
 
+			ui->label_specmap->setDisabled(true);
+			ui->label_specmap2->setDisabled(true);
+
 			ui->checkBox_basealpha->setDisabled(true);
 
 			ui->checkBox_phongBaseAlpha->setDisabled(true);
@@ -9023,6 +9042,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->lineEdit_specmap->setEnabled(true);
 			ui->checkBox_basealpha->setEnabled(true);
 			ui->lineEdit_specmap2->setEnabled(true);
+
+			ui->label_specmap->setEnabled(true);
+			ui->label_specmap2->setEnabled(true);
 
 			ui->checkBox_phongBaseAlpha->setEnabled(true);
 
