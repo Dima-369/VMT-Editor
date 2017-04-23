@@ -10230,10 +10230,12 @@ void MainWindow::createBlendToolTexture()
 		for (int j = 0; j < size; ++j) {
 			t1 = texture1Scaled.pixel(i, j);
 			t2 = texture2Scaled.pixel(i, j);
-			if (i < size - j)
-				pix.setRgb(t1.rgb());
-			else
-				pix.setRgb(t2.rgb());
+
+			double distance = ((i - size + j) + 24) / 48.0;
+			double blend = qBound(0.0, 1.0, distance);
+			pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
+						t2.greenF() * blend + t1.greenF() * (1.0 - blend),
+						t2.blueF() * blend + t1.blueF() * (1.0 - blend));
 
 			texture1Scaled.setPixel(i, j, pix.rgba());
 		}
