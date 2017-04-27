@@ -6746,7 +6746,7 @@ void MainWindow::shaderChanged()
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
 
-			ui->action_CreateBlendTexture->setVisible(isBlend);
+			ui->action_CreateBlendTexture->setVisible(isBlend || luminanceEnabled);
 
 			//----------------------------------------------------------------------------------------//
 
@@ -10214,6 +10214,8 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 
 void MainWindow::createBlendToolTexture()
 {
+	bool is4Way =  ui->comboBox_shader->currentText() == "Lightmapped_4WayBlend";
+
 	if(!mVMTLoaded) {
 		Error( "VMT must be saved before creating blend tool texture");
 		return;
@@ -10223,15 +10225,36 @@ void MainWindow::createBlendToolTexture()
 					   ui->lineEdit_diffuse->text();
 	QString vtf2Path = currentGameMaterialDir() + "/" +
 					   ui->lineEdit_diffuse2->text();
+
 	QFile vtf1File (vtf1Path + ".vtf");
 	QFile vtf2File (vtf2Path + ".vtf");
+
+	//4way
+	QString vtf3Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse3->text();
+	QString vtf4Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse4->text();
+
+	QFile vtf3File (vtf3Path + ".vtf");
+	QFile vtf4File (vtf4Path + ".vtf");
+
+
 
 	QString texture1File = Str( qHash( QFileInfo(vtf1Path + ".vtf").fileName() +
 						   Str( vtf1File.size() )));
 	QString texture2File = Str( qHash( QFileInfo(vtf2Path + ".vtf").fileName() +
 						   Str( vtf2File.size() )));
+
+	QString texture3File = Str( qHash( QFileInfo(vtf3Path + ".vtf").fileName() +
+						   Str( vtf3File.size() )));
+	QString texture4File = Str( qHash( QFileInfo(vtf4Path + ".vtf").fileName() +
+						   Str( vtf4File.size() )));
+
 	QImage texture1;
 	QImage texture2;
+
+	QImage texture3;
+	QImage texture4;
 
 	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
 		Error( "Error loading Diffuse texture" )
@@ -10242,24 +10265,77 @@ void MainWindow::createBlendToolTexture()
 		return;
 	}
 
+	if (is4Way) {
+		if (!texture3.load(QDir::currentPath() + "/Cache/" + texture3File + ".png")) {
+			Error( "Error loading Diffuse 3 texture" )
+			return;
+		}
+		if (!texture4.load(QDir::currentPath() + "/Cache/" + texture4File + ".png")) {
+			Error( "Error loading Diffuse 4 texture" )
+			return;
+		}
+	}
+
 	int size = 256;
 	QImage texture1Scaled = texture1.scaled(size, size);
 	QImage texture2Scaled = texture2.scaled(size, size);
 
-	QColor t1, t2, pix;
-	for (int i = 0; i < size; ++i) {
+	if (is4Way) {
+		QImage texture3Scaled = texture3.scaled(size, size);
+		QImage texture4Scaled = texture4.scaled(size, size);
 
-		for (int j = 0; j < size; ++j) {
-			t1 = texture1Scaled.pixel(i, j);
-			t2 = texture2Scaled.pixel(i, j);
+		QColor t1, t2, t3, t4, pix;
+		for (int i = 0; i < size; ++i) {
 
-			double distance = ((i - size + j) + 24) / 48.0;
-			double blend = qBound(0.0, 1.0, distance);
-			pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
-						t2.greenF() * blend + t1.greenF() * (1.0 - blend),
-						t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+			for (int j = 0; j < size; ++j) {
+				t1 = texture1Scaled.pixel(i, j);
+				t2 = texture2Scaled.pixel(i, j);
+				t3 = texture3Scaled.pixel(i, j);
+				t4 = texture4Scaled.pixel(i, j);
 
-			texture1Scaled.setPixel(i, j, pix.rgba());
+				double distance; //= ((i - size + j) + 24) / 48.0;
+				double blend;
+				if (i < 96) {
+					distance = (i - 64 + 18) / 24.0;
+					blend = qBound(0.0, 1.0, distance);
+					pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
+								t2.greenF() * blend + t1.greenF() * (1.0 - blend),
+								t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+				} else if (i < 160) {
+					distance = (i - 128 + 12) / 24.0;
+					blend = qBound(0.0, 1.0, distance);
+					pix.setRgbF(t3.redF() * blend + t2.redF() * (1.0 - blend),
+								t3.greenF() * blend + t2.greenF() * (1.0 - blend),
+								t3.blueF() * blend + t2.blueF() * (1.0 - blend));
+				} else {
+					distance = (i - 192 + 6) / 24.0;
+					blend = qBound(0.0, 1.0, distance);
+					pix.setRgbF(t4.redF() * blend + t3.redF() * (1.0 - blend),
+								t4.greenF() * blend + t3.greenF() * (1.0 - blend),
+								t4.blueF() * blend + t3.blueF() * (1.0 - blend));
+				}
+
+				texture1Scaled.setPixel(i, j, pix.rgba());
+			}
+		}
+
+	} else {
+
+		QColor t1, t2, pix;
+		for (int i = 0; i < size; ++i) {
+
+			for (int j = 0; j < size; ++j) {
+				t1 = texture1Scaled.pixel(i, j);
+				t2 = texture2Scaled.pixel(i, j);
+
+				double distance = ((i - size + j) + 24) / 48.0;
+				double blend = qBound(0.0, 1.0, distance);
+				pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
+							t2.greenF() * blend + t1.greenF() * (1.0 - blend),
+							t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+
+				texture1Scaled.setPixel(i, j, pix.rgba());
+			}
 		}
 	}
 
