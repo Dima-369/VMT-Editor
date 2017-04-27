@@ -5966,6 +5966,14 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 
 					processVtf("", filePath, ui->lineEdit_exponentTexture);
 
+				} else if (shader == "VertexLitGeneric" &&
+							(fileName.endsWith("tintmask") ||
+							 fileName.endsWith("colormask") ||
+							 fileName.endsWith("_cm") ||
+							 fileName.endsWith("_tm")) ) {
+
+					processVtf("", filePath, ui->lineEdit_tintMask);
+
 				} else {
 
 					processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
@@ -7380,6 +7388,7 @@ void MainWindow::readSettings()
 	mSettings->bumpSuffix = setKey("bumpSuffix", QString("_n"), mIniSettings);
 	mSettings->specSuffix = setKey("specSuffix", QString("_s"), mIniSettings);
 	mSettings->glossSuffix = setKey("glossSuffix", QString("_g"), mIniSettings);
+	mSettings->tintmaskSuffix = setKey("tintmaskSuffix", QString("_tintmask"), mIniSettings);
 
 	mSettings->mipmapFilter = setKey("mipmapFilter", QString("Box"), mIniSettings);
 	mSettings->mipmapSharpenFilter = setKey("mipmapSharpenFilter", QString("Sharpen Soft"), mIniSettings);
@@ -8217,6 +8226,9 @@ void MainWindow::processVtf(const QString& objectName,
 
 			else if( lineEdit == ui->lineEdit_exponentTexture )
 				type = 4;
+
+			else if( lineEdit == ui->lineEdit_tintMask )
+				type = 8;
 
 			if( texturesToCopy.contains(lineEdit) ) {
 
@@ -9646,6 +9658,8 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 			type = 3;
 		else if( it.key() == ui->lineEdit_exponentTexture )
 			type = 4;
+		else if( it.key() == ui->lineEdit_tintMask )
+			type = 8;
 
 		QString fileName = removeSuffix(it.value(), type);
 
@@ -10415,6 +10429,9 @@ QString MainWindow::removeSuffix( const QString fileName, int type)
 		}
 		if (type == 4) {
 			newName = vmtName + mSettings->glossSuffix;
+		}
+		if (type == 8) {
+			newName = vmtName + mSettings->tintmaskSuffix;
 		}
 	}
 	return newName;
