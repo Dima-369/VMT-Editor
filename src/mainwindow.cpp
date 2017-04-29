@@ -10252,6 +10252,7 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 void MainWindow::createBlendToolTexture()
 {
 	bool is4Way =  ui->comboBox_shader->currentText() == "Lightmapped_4WayBlend";
+	bool blendmod = true;
 
 	if(!mVMTLoaded) {
 		Error( "VMT must be saved before creating blend tool texture");
@@ -10262,9 +10263,13 @@ void MainWindow::createBlendToolTexture()
 					   ui->lineEdit_diffuse->text();
 	QString vtf2Path = currentGameMaterialDir() + "/" +
 					   ui->lineEdit_diffuse2->text();
+	QString blendmodPath = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_blendmodulate->text();
+
 
 	QFile vtf1File (vtf1Path + ".vtf");
 	QFile vtf2File (vtf2Path + ".vtf");
+	QFile blendmodFile (blendmodPath + ".vtf");
 
 	//4way
 	QString vtf3Path = currentGameMaterialDir() + "/" +
@@ -10282,6 +10287,9 @@ void MainWindow::createBlendToolTexture()
 	QString texture2File = Str( qHash( QFileInfo(vtf2Path + ".vtf").fileName() +
 						   Str( vtf2File.size() )));
 
+	QString modulateFile = Str( qHash( QFileInfo(blendmodPath + ".vtf").fileName() +
+						   Str( blendmodFile.size() )));
+
 	QString texture3File = Str( qHash( QFileInfo(vtf3Path + ".vtf").fileName() +
 						   Str( vtf3File.size() )));
 	QString texture4File = Str( qHash( QFileInfo(vtf4Path + ".vtf").fileName() +
@@ -10290,8 +10298,12 @@ void MainWindow::createBlendToolTexture()
 	QImage texture1;
 	QImage texture2;
 
+	QImage modulate;
+
 	QImage texture3;
 	QImage texture4;
+
+	int size = 256;
 
 	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
 		Error( "Error loading Diffuse texture" )
@@ -10311,48 +10323,54 @@ void MainWindow::createBlendToolTexture()
 			Error( "Error loading Diffuse 4 texture" )
 			return;
 		}
+	} else {
+		if (!modulate.load(QDir::currentPath() + "/Cache/" + modulateFile + ".png")) {
+			qDebug() << "No blend modulate texture";
+			blendmod = false;
+		} else {
+		modulate = modulate.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		}
 	}
 
-	int size = 256;
-	QImage texture1Scaled = texture1.scaled(size, size);
-	QImage texture2Scaled = texture2.scaled(size, size);
+	texture1 = texture1.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	texture2 = texture2.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 	if (is4Way) {
-		QImage texture3Scaled = texture3.scaled(size, size);
-		QImage texture4Scaled = texture4.scaled(size, size);
+		texture3 = texture3.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		texture4 = texture4.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 		QColor t1, t2, t3, t4, pix;
 		for (int i = 0; i < size; ++i) {
 
 			for (int j = 0; j < size; ++j) {
-				t1 = texture1Scaled.pixel(i, j);
-				t2 = texture2Scaled.pixel(i, j);
-				t3 = texture3Scaled.pixel(i, j);
-				t4 = texture4Scaled.pixel(i, j);
+				t1 = texture1.pixel(i, j);
+				t2 = texture2.pixel(i, j);
+				t3 = texture3.pixel(i, j);
+				t4 = texture4.pixel(i, j);
 
 				double distance; //= ((i - size + j) + 24) / 48.0;
 				double blend;
 				if (i < 96) {
 					distance = (i - 64 + 18) / 24.0;
-					blend = qBound(0.0, 1.0, distance);
+					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
 								t2.greenF() * blend + t1.greenF() * (1.0 - blend),
 								t2.blueF() * blend + t1.blueF() * (1.0 - blend));
 				} else if (i < 160) {
 					distance = (i - 128 + 12) / 24.0;
-					blend = qBound(0.0, 1.0, distance);
+					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t3.redF() * blend + t2.redF() * (1.0 - blend),
 								t3.greenF() * blend + t2.greenF() * (1.0 - blend),
 								t3.blueF() * blend + t2.blueF() * (1.0 - blend));
 				} else {
 					distance = (i - 192 + 6) / 24.0;
-					blend = qBound(0.0, 1.0, distance);
+					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t4.redF() * blend + t3.redF() * (1.0 - blend),
 								t4.greenF() * blend + t3.greenF() * (1.0 - blend),
 								t4.blueF() * blend + t3.blueF() * (1.0 - blend));
 				}
 
-				texture1Scaled.setPixel(i, j, pix.rgba());
+				texture1.setPixel(i, j, pix.rgba());
 			}
 		}
 
@@ -10375,20 +10393,28 @@ void MainWindow::createBlendToolTexture()
 			b2 = tint2.blueF() * mult2;
 		}
 
-		QColor t1, t2, pix;
+		QColor t1, t2, mod, pix;
 		for (int i = 0; i < size; ++i) {
 
 			for (int j = 0; j < size; ++j) {
-				t1 = texture1Scaled.pixel(i, j);
-				t2 = texture2Scaled.pixel(i, j);
+				t1 = texture1.pixel(i, j);
+				t2 = texture2.pixel(i, j);
 
-				double distance = ((i - size + j) + 24) / 48.0;
-				double blend = qBound(0.0, 1.0, distance);
-				pix.setRgbF(qBound(0.0, 1.0, t2.redF() * blend * r2 + t1.redF() * (1.0 - blend) * r1),
-							qBound(0.0, 1.0, t2.greenF() * blend * g2 + t1.greenF() * (1.0 - blend) * g1),
-							qBound(0.0, 1.0, t2.blueF() * blend * b2+ t1.blueF() * (1.0 - blend)) * b1);
+				double distance = ((i - size + j) + 32) / 64.0;
+				double blend = qBound(0.0, distance, 1.0);
 
-				texture1Scaled.setPixel(i, j, pix.rgba());
+				if (blendmod) {
+					mod = modulate.pixel(i, j);
+					double minb = qMax(0.0, mod.greenF() - mod.redF());
+					double maxb = qMin(1.0, mod.greenF() + mod.redF());
+					blend = smoothstep(minb, maxb, blend);
+				}
+
+				pix.setRgbF(qBound(0.0, t2.redF() * blend * r2 + t1.redF() * (1.0 - blend) * r1, 1.0),
+							qBound(0.0, t2.greenF() * blend * g2 + t1.greenF() * (1.0 - blend) * g1, 1.0),
+							qBound(0.0, t2.blueF() * blend * b2 + t1.blueF() * (1.0 - blend) * b1, 1.0));
+
+				texture1.setPixel(i, j, pix.rgba());
 			}
 		}
 	}
@@ -10402,7 +10428,7 @@ void MainWindow::createBlendToolTexture()
 		}
 	}
 
-	if (texture1Scaled.save(fileName, "PNG")) {
+	if (texture1.save(fileName, "PNG")) {
 		qDebug() << "File succesfully combined";
 	} else {
 		qDebug() << "Something fucked up";
