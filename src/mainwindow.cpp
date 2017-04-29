@@ -10332,11 +10332,15 @@ void MainWindow::createBlendToolTexture()
 		}
 	}
 
+	texture1 = texture1.convertToFormat(QImage::Format_RGB32);
 	texture1 = texture1.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	texture2 = texture2.convertToFormat(QImage::Format_RGB32);
 	texture2 = texture2.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 	if (is4Way) {
+		texture3 = texture3.convertToFormat(QImage::Format_RGB32);
 		texture3 = texture3.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		texture4 = texture4.convertToFormat(QImage::Format_RGB32);
 		texture4 = texture4.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 		QColor t1, t2, t3, t4, pix;
@@ -10369,6 +10373,7 @@ void MainWindow::createBlendToolTexture()
 								t4.greenF() * blend + t3.greenF() * (1.0 - blend),
 								t4.blueF() * blend + t3.blueF() * (1.0 - blend));
 				}
+				pix.setAlphaF(1.0);
 
 				texture1.setPixel(i, j, pix.rgba());
 			}
@@ -10400,10 +10405,12 @@ void MainWindow::createBlendToolTexture()
 				t1 = texture1.pixel(i, j);
 				t2 = texture2.pixel(i, j);
 
-				double distance = ((i - size + j) + 32) / 64.0;
+				double distance = ((i - size + 22 + j / 1.2) + 16) / 32.0;
 				double blend = qBound(0.0, distance, 1.0);
 
 				if (blendmod) {
+					distance = ((i - size + 22 + j / 1.2) + 48) / 96.0;
+					blend = qBound(0.0, distance, 1.0);
 					mod = modulate.pixel(i, j);
 					double minb = qMax(0.0, mod.greenF() - mod.redF());
 					double maxb = qMin(1.0, mod.greenF() + mod.redF());
@@ -10413,6 +10420,7 @@ void MainWindow::createBlendToolTexture()
 				pix.setRgbF(qBound(0.0, t2.redF() * blend * r2 + t1.redF() * (1.0 - blend) * r1, 1.0),
 							qBound(0.0, t2.greenF() * blend * g2 + t1.greenF() * (1.0 - blend) * g1, 1.0),
 							qBound(0.0, t2.blueF() * blend * b2 + t1.blueF() * (1.0 - blend) * b1, 1.0));
+				pix.setAlphaF(1.0);
 
 				texture1.setPixel(i, j, pix.rgba());
 			}
