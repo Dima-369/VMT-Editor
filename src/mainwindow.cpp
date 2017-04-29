@@ -583,8 +583,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	addGLWidget( ":/overlays/diffuse4", ui->verticalLayout_preview_basetexture4, "preview_basetexture4" );
 
 	addGLWidget( ":/overlays/detail", ui->verticalLayout_preview_detail, "preview_detail" );
+	addGLWidget( ":/overlays/detail2", ui->verticalLayout_preview_detail2, "preview_detail2" );
 
-	addGLWidget( ":/overlays/exponent1", ui->verticalLayout_preview_exponent1, "preview_exponent1" );
+	addGLWidget( ":/overlays/blendmod", ui->verticalLayout_preview_blendmod, "preview_blendmod" );
+
+	addGLWidget( ":/overlays/exponent1", ui->verticalLayout_preview_exponent1, "preview_exponent" );
 
 
 	glWidget_diffuse1 = new GLWidget_Diffuse1(this);
@@ -1193,11 +1196,13 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$blendmodulatetexture") ).isEmpty() ) {
 
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
-			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!")
+			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!");
 
-		utils::parseTexture("$blendmodulatetexture", value, ui,
-			ui->lineEdit_blendmodulate, vmt);
+		const QString texture = validateTexture("preview_blendmod", value,
+			"$blendmodulatetexture", realGameinfoDir);
 
+		//utils::parseTexture("$blendmodulatetexture", value, ui, ui->lineEdit_blendmodulate, vmt);
+		ui->lineEdit_blendmodulate->setText(texture);
 		showBaseTexture2 = true;
 		createReconvertAction(ui->lineEdit_blendmodulate, value);
 	}
@@ -2033,13 +2038,18 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	treesway::parseParameters(ui, &vmt);
 	layerblend::parseParameters(ui, &vmt);
 
-	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
+	if( !( value = vmt.parameters.take("$phongexponenttexture") ).isEmpty() )
 	{
+		const QString texture = validateTexture("preview_exponent", value,
+			"$phongexponenttexture", realGameinfoDir);
+		ui->lineEdit_exponentTexture->setText(texture);
 		createReconvertAction(ui->lineEdit_exponentTexture, value);
 	}
 
 	if( !( value = vmt.parameters.take("$phongwarptexture") ).isEmpty() )
 	{
+		utils::parseTexture("$phongwarptexture", value, ui,
+							ui->lineEdit_phongWarp, vmt);
 		createReconvertAction(ui->lineEdit_phongWarp, value);
 	}
 
@@ -6032,7 +6042,7 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 		processVtf( "preview_basetexture2", filePath, ui->lineEdit_unlitTwoTextureDiffuse2 );
 
 	else if (name == "lineEdit_blendmodulate" )
-		processVtf( "", filePath, ui->lineEdit_blendmodulate );
+		processVtf( "preview_blendmod", filePath, ui->lineEdit_blendmodulate );
 	else if (name == "lineEdit_lightWarp" )
 		processVtf( "", filePath, ui->lineEdit_lightWarp );
 
@@ -6044,7 +6054,7 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 		processVtf( "", filePath, ui->lineEdit_specmap2 );
 
 	else if (name == "lineEdit_exponentTexture" )
-		processVtf( "", filePath, ui->lineEdit_exponentTexture );
+		processVtf( "preview_exponent", filePath, ui->lineEdit_exponentTexture );
 
 	else if (name == "lineEdit_maskTexture" )
 		processVtf( "", filePath, ui->lineEdit_maskTexture );
@@ -6180,6 +6190,12 @@ void MainWindow::previewTexture()
 
 	else if( caller->objectName() == "lineEdit_bump2" )
 		previewTexture( "preview_bumpmap2", ui->lineEdit_bump2->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_blendmodulate" )
+		previewTexture( "preview_blendmod", ui->lineEdit_blendmodulate->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_exponentTexture" )
+		previewTexture( "preview_exponent", ui->lineEdit_exponentTexture->text(), false, false, false, false );
 
 	repaint();
 }
@@ -7871,7 +7887,7 @@ void MainWindow::browseVTF()
 		processVtf( "preview_basetexture2", "", ui->lineEdit_unlitTwoTextureDiffuse2 );
 
 	else if (name == "toolButton_blendmodulate" )
-		processVtf( "", "", ui->lineEdit_blendmodulate );
+		processVtf( "preview_blendmod", "", ui->lineEdit_blendmodulate );
 	else if (name == "toolButton_lightWarp" )
 		processVtf( "", "", ui->lineEdit_lightWarp );
 
@@ -7881,7 +7897,7 @@ void MainWindow::browseVTF()
 		processVtf( "", "", ui->lineEdit_specmap );
 
 	else if (name == "toolButton_exponentTexture" )
-		processVtf( "", "", ui->lineEdit_exponentTexture );
+		processVtf( "preview_exponent", "", ui->lineEdit_exponentTexture );
 
 	else if (name == "toolButton_maskTexture" )
 		processVtf( "", "", ui->lineEdit_maskTexture );
@@ -8324,12 +8340,14 @@ void MainWindow::processVtf(const QString& objectName,
 				fileName.chop(4);
 
 				QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-				QString toFile = QDir::currentPath() + "/Cache/" + objectName + fileType;
+				QString toFile = QDir::currentPath() + "/Cache/" + objectName;
 
-				if( QFile::exists(toFile) )
-					QFile::remove(toFile);
+				if( QFile::exists(toFile + ".png") )
+					QFile::remove(toFile + ".png");
+				if( QFile::exists(toFile + ".tga") )
+					QFile::remove(toFile + ".tga");
 
-				QFile::copy(fromFile, toFile);
+				QFile::copy(fromFile, toFile + fileType);
 
 				previewTexture(objectName);
 			}
@@ -10016,8 +10034,13 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
 
-	if( objectName == "lineEdit_exponentTexture" )
+	if( objectName == "lineEdit_exponentTexture" ) {
+		preview = "preview_exponent";
 		type = 4;
+	}
+
+	else if( objectName == "lineEdit_detail" )
+		preview = "preview_blendmod";
 
 	if ( objectName == "lineEdit_bumpmap" ||
 		 objectName == "lineEdit_bumpmap2" ||

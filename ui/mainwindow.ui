@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-5101</y>
+             <y>0</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -1353,6 +1353,9 @@ QGroupBox::title {
                <layout class="QVBoxLayout" name="verticalLayout_preview_bumpmap2"/>
               </item>
               <item>
+               <layout class="QVBoxLayout" name="verticalLayout_preview_blendmod"/>
+              </item>
+              <item>
                <layout class="QVBoxLayout" name="verticalLayout_preview_basetexture3"/>
               </item>
               <item>
@@ -1365,7 +1368,13 @@ QGroupBox::title {
                <layout class="QVBoxLayout" name="verticalLayout_preview_exponent1"/>
               </item>
               <item>
+               <layout class="QVBoxLayout" name="verticalLayout_preview_detail2"/>
+              </item>
+              <item>
                <layout class="QVBoxLayout" name="verticalLayout_preview_spec1"/>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_preview_spec2"/>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_30">
@@ -19648,8 +19657,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>115</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">

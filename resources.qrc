@@ -129,5 +129,8 @@
         <file alias="texture2">misc/texture_overlays/02texture.png</file>
         <file alias="texture3">misc/texture_overlays/03texture.png</file>
         <file alias="texture4">misc/texture_overlays/04texture.png</file>
+        <file alias="blendmod">misc/texture_overlays/01blendmod.png</file>
+        <file alias="detail2">misc/texture_overlays/02detail.png</file>
+        <file alias="spec2">misc/texture_overlays/02spec.png</file>
     </qresource>
 </RCC>
