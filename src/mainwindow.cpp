@@ -10351,19 +10351,19 @@ void MainWindow::createBlendToolTexture()
 				double distance; //= ((i - size + j) + 24) / 48.0;
 				double blend;
 				if (i < 96) {
-					distance = (i - 64 + 18) / 24.0;
+					distance = i - 88 + j / 4;
 					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
 								t2.greenF() * blend + t1.greenF() * (1.0 - blend),
 								t2.blueF() * blend + t1.blueF() * (1.0 - blend));
 				} else if (i < 160) {
-					distance = (i - 128 + 12) / 24.0;
+					distance = i - 160 + j / 4;
 					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t3.redF() * blend + t2.redF() * (1.0 - blend),
 								t3.greenF() * blend + t2.greenF() * (1.0 - blend),
 								t3.blueF() * blend + t2.blueF() * (1.0 - blend));
 				} else {
-					distance = (i - 192 + 6) / 24.0;
+					distance = i - 232 + j / 4;
 					blend = qBound(0.0, distance, 1.0);
 					pix.setRgbF(t4.redF() * blend + t3.redF() * (1.0 - blend),
 								t4.greenF() * blend + t3.greenF() * (1.0 - blend),
