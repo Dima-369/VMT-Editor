@@ -10335,6 +10335,23 @@ void MainWindow::createBlendToolTexture()
 
 	} else {
 
+		QColor tint1 = utils::getBG(ui->color_layer1tint);
+		QColor tint2 = utils::getBG(ui->color_layer2tint);
+
+		const double mult1 = ui->doubleSpinBox_layer1tint->value();
+		const double mult2 = ui->doubleSpinBox_layer2tint->value();
+
+		double r1 = 1.0, r2 = 1.0, g1 = 1.0, g2 = 1.0, b1 = 1.0, b2 = 1.0;
+
+		if (ui->groupBox_layerblend->isVisible()) {
+			r1 = tint1.redF() * mult1;
+			r2 = tint2.redF() * mult2;
+			g1 = tint1.greenF() * mult1;
+			g2 = tint2.greenF() * mult2;
+			b1 = tint1.blueF() * mult1;
+			b2 = tint2.blueF() * mult2;
+		}
+
 		QColor t1, t2, pix;
 		for (int i = 0; i < size; ++i) {
 
@@ -10344,9 +10361,9 @@ void MainWindow::createBlendToolTexture()
 
 				double distance = ((i - size + j) + 24) / 48.0;
 				double blend = qBound(0.0, 1.0, distance);
-				pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
-							t2.greenF() * blend + t1.greenF() * (1.0 - blend),
-							t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+				pix.setRgbF(qBound(0.0, 1.0, t2.redF() * blend * r2 + t1.redF() * (1.0 - blend) * r1),
+							qBound(0.0, 1.0, t2.greenF() * blend * g2 + t1.greenF() * (1.0 - blend) * g1),
+							qBound(0.0, 1.0, t2.blueF() * blend * b2+ t1.blueF() * (1.0 - blend)) * b1);
 
 				texture1Scaled.setPixel(i, j, pix.rgba());
 			}
