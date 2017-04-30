@@ -20,6 +20,7 @@
 #include "user-interface/shading-reflection.h"
 #include "user-interface/treesway.h"
 #include "user-interface/layerblend.h"
+#include "user-interface/errors.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -3696,7 +3697,7 @@ VmtFile MainWindow::makeVMT()
 
 			if( ui->doubleSpinBox_uvscalex2->value() != 1.0 || ui->doubleSpinBox_uvscaley2->value() != 1.0 )
 				vmtFile.parameters.insert( "$texture2_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex2->value())
-										   + " " + Str(ui->doubleSpinBox_uvscalex2->value()) + "]");
+										   + " " + Str(ui->doubleSpinBox_uvscaley2->value()) + "]");
 
 			if( ui->doubleSpinBox_lumstart2->value() != 0.0 )
 				vmtFile.parameters.insert( "$texture2_lumstart", Str( ui->doubleSpinBox_lumstart2->value() ));
@@ -3729,7 +3730,7 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->doubleSpinBox_uvscalex3->value() != 1.0 || ui->doubleSpinBox_uvscaley3->value() != 1.0 )
 			vmtFile.parameters.insert( "$texture3_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex3->value())
-									   + " " + Str(ui->doubleSpinBox_uvscalex3->value()) + "]");
+									   + " " + Str(ui->doubleSpinBox_uvscaley3->value()) + "]");
 
 		if( ui->doubleSpinBox_lumstart3->value() != 0.0 )
 			vmtFile.parameters.insert( "$texture3_lumstart", Str( ui->doubleSpinBox_lumstart3->value() ));
@@ -3756,7 +3757,7 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->doubleSpinBox_uvscalex4->value() != 1.0 || ui->doubleSpinBox_uvscaley4->value() != 1.0 )
 			vmtFile.parameters.insert( "$texture4_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex4->value())
-									   + " " + Str(ui->doubleSpinBox_uvscalex4->value()) + "]");
+									   + " " + Str(ui->doubleSpinBox_uvscaley4->value()) + "]");
 
 		if( ui->doubleSpinBox_lumstart4->value() != 0.0 )
 			vmtFile.parameters.insert( "$texture4_lumstart", Str( ui->doubleSpinBox_lumstart4->value() ));
@@ -9202,69 +9203,27 @@ void MainWindow::addGLWidget(
 	glWidget->setVisible(false);
 }
 
-void MainWindow::loadScale( const QString& value, const QString& parameter, QDoubleSpinBox* spinBox1, QDoubleSpinBox* spinBox2 )
+void MainWindow::loadScale( const QString& value, const QString& parameter,
+							QDoubleSpinBox* spinBox1, QDoubleSpinBox* spinBox2 )
 {
-	QString scale(value.simplified());
+	utils::DoubleTuple r = utils::toDoubleTuple(value, 2);
 
-	if( scale.startsWith('[') && scale.endsWith(']')) {
-
-		scale.chop(1);
-		scale = scale.remove(0, 1);
-
-		scale = scale.simplified();
-
-		int spaceIndex = scale.indexOf(' ');
-
-		if( spaceIndex != -1 ) {
-
-			bool ok;
-
-			float value1 = scale.left(spaceIndex).toFloat(&ok);
-
-			if(ok) {
-
-				scale = scale.remove(0, spaceIndex + 1);
-
-				scale = scale.simplified();
-
-				float value2 = scale.toFloat(&ok);
-
-				if(ok) {
-
-					// Finally done, now validating
-
-					if( value1 < 0.0f || value1 > 256.0f )
-						Error("The X scale value of " + parameter + "(" + Str(value1) + " is not in the valid range of 0 to 256!")
-					if( value2 < 0.0f || value2 > 256.0f )
-						Error("The X scale value of " + parameter + "(" + Str(value2) + " is not in the valid range of 0 to 256!")
-
-					if( value1 == 1.0f && value2 == 1.0f )
-						Info(parameter + " has the default value of [1 1]")
-
-					spinBox1->setValue(value1);
-					spinBox2->setValue(value2);
-
-					return;
-
-				} else {
-
-					goto scaleError;
-				}
-
-			} else {
-
-				goto scaleError;
-			}
-
-		} else {
-
-			goto scaleError;
-		}
+	if (!r.valid) {
+		ERROR(doubleTupleBadFormat(parameter, value))
+		return;
 	}
 
-	scaleError:
-
-	Error("The value of " + parameter + ": " + value + " is not in the correct format of [1 1]!")
+	bool valid = utils::isTupleBetween(r, 0.0, 100.0);
+	if (valid) {
+		double mc = r.values.at(0);
+		double mb = r.values.at(1);
+		spinBox1->setValue(mc);
+		spinBox2->setValue(mb);
+	} else {
+		const QString error = doubleTupleBadBetween(parameter, value,
+			0.0, 100.0);
+		ERROR(error)
+	}
 }
 
 void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWidget) {
