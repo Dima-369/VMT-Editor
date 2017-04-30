@@ -10166,8 +10166,8 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		return false;
 	}
 	if ((base.height() != alpha.height()) || (base.width() != alpha.width())) {
-		Error("Images must be same size for combining");
-		return false;
+		alpha = alpha.scaled( base.width(), base.height(),
+							  Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	}
 	base = base.convertToFormat(QImage::Format_ARGB32);
 	alpha = alpha.convertToFormat(QImage::Format_ARGB32);
@@ -10364,11 +10364,11 @@ void MainWindow::createBlendToolTexture()
 				t1 = texture1.pixel(i, j);
 				t2 = texture2.pixel(i, j);
 
-				double distance = ((i - size + 22 + j / 1.2) + 16) / 32.0;
+				double distance = ((i - size + j) + 8) / 16.0;
 				double blend = qBound(0.0, distance, 1.0);
 
 				if (blendmod) {
-					distance = ((i - size + 22 + j / 1.2) + 48) / 96.0;
+					distance = ((i - size + j) + 48) / 96.0;
 					blend = qBound(0.0, distance, 1.0);
 					mod = modulate.pixel(i, j);
 					double minb = qMax(0.0, mod.greenF() - mod.redF());
