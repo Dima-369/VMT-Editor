@@ -4,7 +4,7 @@ Visual editor for the VMT filetype, used by Source Engine 1, written in C++ and 
 
 Includes texture preview, parameter validation and generally tries to help in editing VMTs.
 
-![version](https://img.shields.io/badge/version-1.3.5-blue.svg)
+![version](https://img.shields.io/badge/version-1.3.6-blue.svg)
 
 ## Downloads
 
