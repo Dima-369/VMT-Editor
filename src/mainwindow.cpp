@@ -10163,7 +10163,6 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 	}
 	if (!alpha.load(alphaPath)) {
 		Error("Could not load alpha texture \"" + alphaPath + "\"");
-		qDebug() << "Could not load " << alphaPath;
 		return false;
 	}
 	if ((base.height() != alpha.height()) || (base.width() != alpha.width())) {
@@ -10187,15 +10186,17 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 			base.setPixel(i, j, pix.rgba());
 		}
 	}
+	
 	QString fileName;
-	if (lineEditBase == ui->lineEdit_bumpmap)
+	if (lineEditBase == ui->lineEdit_bumpmap) {
 		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
-	else if (lineEditBase == ui->lineEdit_diffuse)
+	} else if (lineEditBase == ui->lineEdit_diffuse) {
 		fileName = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
-
+	}
+	
 	if (QFile::exists(fileName)) {
-		if(!QFile::remove(fileName)) {
-			Error( "Error removing \"" + fileName );
+		if (!QFile::remove(fileName)) {
+			Error("Error removing \"" + fileName + "\"");
 			return false;
 		}
 	}
@@ -10206,7 +10207,6 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 	}
 
 	Error("Combining failed!");
-	qDebug() << "Something fucked up";
 	return false;
 }
 
