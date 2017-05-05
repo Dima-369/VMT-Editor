@@ -10162,6 +10162,7 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		return false;
 	}
 	if (!alpha.load(alphaPath)) {
+		Error("Could not load alpha texture \"" + alphaPath + "\"");
 		qDebug() << "Could not load " << alphaPath;
 		return false;
 	}
@@ -10204,6 +10205,7 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		return true;
 	}
 
+	Error("Combining failed!");
 	qDebug() << "Something fucked up";
 	return false;
 }
