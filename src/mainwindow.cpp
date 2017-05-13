@@ -6842,7 +6842,8 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
-			ui->action_layerBlend->setVisible( shader == "WorldVertexTransition");
+			ui->action_layerBlend->setVisible(isBlend);
+
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
@@ -6909,6 +6910,7 @@ void MainWindow::shaderChanged()
 			} else { // Base Texture 2 not allowed
 
 				ui->action_baseTexture2->setChecked(false);
+				ui->groupBox_layerblend->setVisible(false);
 			}
 
 			ui->label_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );

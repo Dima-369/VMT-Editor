@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-3293</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -13434,7 +13434,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="prefix">
-                      <string>X:  </string>
+                      <string>F0:  </string>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -13468,7 +13468,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="prefix">
-                      <string>Y:  </string>
+                      <string>45:  </string>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -13502,7 +13502,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="prefix">
-                      <string>Z:  </string>
+                      <string>90:  </string>
                      </property>
                      <property name="singleStep">
                       <double>0.100000000000000</double>
@@ -19657,7 +19657,7 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>115</width>
+             <width>117</width>
              <height>70</height>
             </rect>
            </property>
