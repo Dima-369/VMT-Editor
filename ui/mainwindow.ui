@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3293</y>
+             <y>0</y>
              <width>926</width>
              <height>5852</height>
             </rect>
@@ -24793,22 +24793,6 @@ border: 1px solid #222;
     <hint type="destinationlabel">
      <x>-7</x>
      <y>238</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_fogTint</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>changedColor()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>687</x>
-     <y>2566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>-7</x>
-     <y>664</y>
     </hint>
    </hints>
   </connection>
