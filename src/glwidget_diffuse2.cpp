@@ -154,7 +154,7 @@ void GLWidget_Diffuse2::loadTexture(const QString &diffuse1,
 	}
 
 	delete mBumpmapTexture;
-	mBumpmapTexture = new QOpenGLTexture(image_bumpmap);
+	mBumpmapTexture = new QOpenGLTexture(image_bumpmap.mirrored());
 
 	update();
 }

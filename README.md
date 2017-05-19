@@ -4,7 +4,20 @@ Visual editor for the VMT filetype, used by Source Engine 1, written in C++ and 
 
 Includes texture preview, parameter validation and generally tries to help in editing VMTs.
 
-![version](https://img.shields.io/badge/version-1.3.5-blue.svg)
+![version](https://img.shields.io/badge/version-1.3.6-blue.svg)
+
+## Features
+
+- Simple and fast VMT creation with parameters separated in groups
+- Parameter and texture validation for existing VMT files
+- Support for VMT templates
+- Automatic conversion of bitmaps to VTF, including smart alpha channel removal and renaming
+- Automatic sorting of dropped bitmaps
+- One click reconversion of all bitmaps used in the VMT
+- Support for combining diffuse or normal map with a custom alpha channel - used for specular or reflection masks
+- Batch VTF and VMT creation
+- Blend tool texture generation, including support for 4 way blend and blend modulate
+- Support for latest CS:GO parameters such as layer blend
 
 ## Downloads
 

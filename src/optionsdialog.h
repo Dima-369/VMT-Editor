@@ -58,6 +58,7 @@ struct Settings
 	QString bumpSuffix;
 	QString specSuffix;
 	QString glossSuffix;
+	QString tintmaskSuffix;
 
 	bool fullPathFilenameInWindowTitle;
 

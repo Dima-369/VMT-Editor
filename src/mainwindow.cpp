@@ -20,6 +20,7 @@
 #include "user-interface/shading-reflection.h"
 #include "user-interface/treesway.h"
 #include "user-interface/layerblend.h"
+#include "user-interface/errors.h"
 #include "vmt/vmt-helper.h"
 #include "utilities/window.h"
 
@@ -583,8 +584,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	addGLWidget( ":/overlays/diffuse4", ui->verticalLayout_preview_basetexture4, "preview_basetexture4" );
 
 	addGLWidget( ":/overlays/detail", ui->verticalLayout_preview_detail, "preview_detail" );
+	addGLWidget( ":/overlays/detail2", ui->verticalLayout_preview_detail2, "preview_detail2" );
 
-	addGLWidget( ":/overlays/exponent1", ui->verticalLayout_preview_exponent1, "preview_exponent1" );
+	addGLWidget( ":/overlays/blendmod", ui->verticalLayout_preview_blendmod, "preview_blendmod" );
+
+	addGLWidget( ":/overlays/exponent1", ui->verticalLayout_preview_exponent1, "preview_exponent" );
 
 
 	glWidget_diffuse1 = new GLWidget_Diffuse1(this);
@@ -1193,11 +1197,13 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$blendmodulatetexture") ).isEmpty() ) {
 
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
-			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!")
+			Error("$blendmodulatetexture is only works with WorldVertexTransition shader!");
 
-		utils::parseTexture("$blendmodulatetexture", value, ui,
-			ui->lineEdit_blendmodulate, vmt);
+		const QString texture = validateTexture("preview_blendmod", value,
+			"$blendmodulatetexture", realGameinfoDir);
 
+		//utils::parseTexture("$blendmodulatetexture", value, ui, ui->lineEdit_blendmodulate, vmt);
+		ui->lineEdit_blendmodulate->setText(texture);
 		showBaseTexture2 = true;
 		createReconvertAction(ui->lineEdit_blendmodulate, value);
 	}
@@ -2033,13 +2039,18 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	treesway::parseParameters(ui, &vmt);
 	layerblend::parseParameters(ui, &vmt);
 
-	if( !( value = vmt.parameters.take("$phongexponenettexture") ).isEmpty() )
+	if( !( value = vmt.parameters.take("$phongexponenttexture") ).isEmpty() )
 	{
+		const QString texture = validateTexture("preview_exponent", value,
+			"$phongexponenttexture", realGameinfoDir);
+		ui->lineEdit_exponentTexture->setText(texture);
 		createReconvertAction(ui->lineEdit_exponentTexture, value);
 	}
 
 	if( !( value = vmt.parameters.take("$phongwarptexture") ).isEmpty() )
 	{
+		utils::parseTexture("$phongwarptexture", value, ui,
+							ui->lineEdit_phongWarp, vmt);
 		createReconvertAction(ui->lineEdit_phongWarp, value);
 	}
 
@@ -3686,7 +3697,7 @@ VmtFile MainWindow::makeVMT()
 
 			if( ui->doubleSpinBox_uvscalex2->value() != 1.0 || ui->doubleSpinBox_uvscaley2->value() != 1.0 )
 				vmtFile.parameters.insert( "$texture2_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex2->value())
-										   + " " + Str(ui->doubleSpinBox_uvscalex2->value()) + "]");
+										   + " " + Str(ui->doubleSpinBox_uvscaley2->value()) + "]");
 
 			if( ui->doubleSpinBox_lumstart2->value() != 0.0 )
 				vmtFile.parameters.insert( "$texture2_lumstart", Str( ui->doubleSpinBox_lumstart2->value() ));
@@ -3719,7 +3730,7 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->doubleSpinBox_uvscalex3->value() != 1.0 || ui->doubleSpinBox_uvscaley3->value() != 1.0 )
 			vmtFile.parameters.insert( "$texture3_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex3->value())
-									   + " " + Str(ui->doubleSpinBox_uvscalex3->value()) + "]");
+									   + " " + Str(ui->doubleSpinBox_uvscaley3->value()) + "]");
 
 		if( ui->doubleSpinBox_lumstart3->value() != 0.0 )
 			vmtFile.parameters.insert( "$texture3_lumstart", Str( ui->doubleSpinBox_lumstart3->value() ));
@@ -3746,7 +3757,7 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->doubleSpinBox_uvscalex4->value() != 1.0 || ui->doubleSpinBox_uvscaley4->value() != 1.0 )
 			vmtFile.parameters.insert( "$texture4_uvscale", "[" + Str(ui->doubleSpinBox_uvscalex4->value())
-									   + " " + Str(ui->doubleSpinBox_uvscalex4->value()) + "]");
+									   + " " + Str(ui->doubleSpinBox_uvscaley4->value()) + "]");
 
 		if( ui->doubleSpinBox_lumstart4->value() != 0.0 )
 			vmtFile.parameters.insert( "$texture4_lumstart", Str( ui->doubleSpinBox_lumstart4->value() ));
@@ -4400,7 +4411,7 @@ VmtFile MainWindow::makeVMT()
 			vmtFile.parameters.insert( "$flow_bumpstrength", Str( ui->doubleSpinBox_bumpStrength->value() ));
 
 		if( ui->doubleSpinBox_noiseScale->value() != 0.0 )
-			vmtFile.parameters.insert( "$flow_noise_scale", Str( ui->doubleSpinBox_noiseScale->value() ));
+			vmtFile.parameters.insert( "$flow_noise_scale", QString::number( ui->doubleSpinBox_noiseScale->value(), 'f', 5));
 
 		if( ui->doubleSpinBox_timeScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$flow_timescale", Str( ui->doubleSpinBox_timeScale->value() ));
@@ -5966,6 +5977,14 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 
 					processVtf("", filePath, ui->lineEdit_exponentTexture);
 
+				} else if (shader == "VertexLitGeneric" &&
+							(fileName.endsWith("tintmask") ||
+							 fileName.endsWith("colormask") ||
+							 fileName.endsWith("_cm") ||
+							 fileName.endsWith("_tm")) ) {
+
+					processVtf("", filePath, ui->lineEdit_tintMask);
+
 				} else {
 
 					processVtf("preview_basetexture1", filePath, ui->lineEdit_diffuse);
@@ -6024,7 +6043,7 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 		processVtf( "preview_basetexture2", filePath, ui->lineEdit_unlitTwoTextureDiffuse2 );
 
 	else if (name == "lineEdit_blendmodulate" )
-		processVtf( "", filePath, ui->lineEdit_blendmodulate );
+		processVtf( "preview_blendmod", filePath, ui->lineEdit_blendmodulate );
 	else if (name == "lineEdit_lightWarp" )
 		processVtf( "", filePath, ui->lineEdit_lightWarp );
 
@@ -6036,7 +6055,7 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 		processVtf( "", filePath, ui->lineEdit_specmap2 );
 
 	else if (name == "lineEdit_exponentTexture" )
-		processVtf( "", filePath, ui->lineEdit_exponentTexture );
+		processVtf( "preview_exponent", filePath, ui->lineEdit_exponentTexture );
 
 	else if (name == "lineEdit_maskTexture" )
 		processVtf( "", filePath, ui->lineEdit_maskTexture );
@@ -6172,6 +6191,12 @@ void MainWindow::previewTexture()
 
 	else if( caller->objectName() == "lineEdit_bump2" )
 		previewTexture( "preview_bumpmap2", ui->lineEdit_bump2->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_blendmodulate" )
+		previewTexture( "preview_blendmod", ui->lineEdit_blendmodulate->text(), false, false, false, false );
+
+	else if( caller->objectName() == "lineEdit_exponentTexture" )
+		previewTexture( "preview_exponent", ui->lineEdit_exponentTexture->text(), false, false, false, false );
 
 	repaint();
 }
@@ -6746,7 +6771,7 @@ void MainWindow::shaderChanged()
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
 
-			ui->action_CreateBlendTexture->setVisible(isBlend);
+			ui->action_CreateBlendTexture->setVisible(isBlend || luminanceEnabled);
 
 			//----------------------------------------------------------------------------------------//
 
@@ -6817,7 +6842,8 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
-			ui->action_layerBlend->setVisible( shader == "WorldVertexTransition");
+			ui->action_layerBlend->setVisible(isBlend);
+
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
@@ -6884,6 +6910,7 @@ void MainWindow::shaderChanged()
 			} else { // Base Texture 2 not allowed
 
 				ui->action_baseTexture2->setChecked(false);
+				ui->groupBox_layerblend->setVisible(false);
 			}
 
 			ui->label_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
@@ -7380,6 +7407,7 @@ void MainWindow::readSettings()
 	mSettings->bumpSuffix = setKey("bumpSuffix", QString("_n"), mIniSettings);
 	mSettings->specSuffix = setKey("specSuffix", QString("_s"), mIniSettings);
 	mSettings->glossSuffix = setKey("glossSuffix", QString("_g"), mIniSettings);
+	mSettings->tintmaskSuffix = setKey("tintmaskSuffix", QString("_tintmask"), mIniSettings);
 
 	mSettings->mipmapFilter = setKey("mipmapFilter", QString("Box"), mIniSettings);
 	mSettings->mipmapSharpenFilter = setKey("mipmapSharpenFilter", QString("Sharpen Soft"), mIniSettings);
@@ -7862,7 +7890,7 @@ void MainWindow::browseVTF()
 		processVtf( "preview_basetexture2", "", ui->lineEdit_unlitTwoTextureDiffuse2 );
 
 	else if (name == "toolButton_blendmodulate" )
-		processVtf( "", "", ui->lineEdit_blendmodulate );
+		processVtf( "preview_blendmod", "", ui->lineEdit_blendmodulate );
 	else if (name == "toolButton_lightWarp" )
 		processVtf( "", "", ui->lineEdit_lightWarp );
 
@@ -7872,7 +7900,7 @@ void MainWindow::browseVTF()
 		processVtf( "", "", ui->lineEdit_specmap );
 
 	else if (name == "toolButton_exponentTexture" )
-		processVtf( "", "", ui->lineEdit_exponentTexture );
+		processVtf( "preview_exponent", "", ui->lineEdit_exponentTexture );
 
 	else if (name == "toolButton_maskTexture" )
 		processVtf( "", "", ui->lineEdit_maskTexture );
@@ -8218,6 +8246,9 @@ void MainWindow::processVtf(const QString& objectName,
 			else if( lineEdit == ui->lineEdit_exponentTexture )
 				type = 4;
 
+			else if( lineEdit == ui->lineEdit_tintMask )
+				type = 8;
+
 			if( texturesToCopy.contains(lineEdit) ) {
 
 				QString toDelete = "Cache\\Move\\" + lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit);
@@ -8312,12 +8343,14 @@ void MainWindow::processVtf(const QString& objectName,
 				fileName.chop(4);
 
 				QString fromFile = fileName.left( fileName.lastIndexOf("/") ) + nameWithExtension;
-				QString toFile = QDir::currentPath() + "/Cache/" + objectName + fileType;
+				QString toFile = QDir::currentPath() + "/Cache/" + objectName;
 
-				if( QFile::exists(toFile) )
-					QFile::remove(toFile);
+				if( QFile::exists(toFile + ".png") )
+					QFile::remove(toFile + ".png");
+				if( QFile::exists(toFile + ".tga") )
+					QFile::remove(toFile + ".tga");
 
-				QFile::copy(fromFile, toFile);
+				QFile::copy(fromFile, toFile + fileType);
 
 				previewTexture(objectName);
 			}
@@ -9172,69 +9205,27 @@ void MainWindow::addGLWidget(
 	glWidget->setVisible(false);
 }
 
-void MainWindow::loadScale( const QString& value, const QString& parameter, QDoubleSpinBox* spinBox1, QDoubleSpinBox* spinBox2 )
+void MainWindow::loadScale( const QString& value, const QString& parameter,
+							QDoubleSpinBox* spinBox1, QDoubleSpinBox* spinBox2 )
 {
-	QString scale(value.simplified());
+	utils::DoubleTuple r = utils::toDoubleTuple(value, 2);
 
-	if( scale.startsWith('[') && scale.endsWith(']')) {
-
-		scale.chop(1);
-		scale = scale.remove(0, 1);
-
-		scale = scale.simplified();
-
-		int spaceIndex = scale.indexOf(' ');
-
-		if( spaceIndex != -1 ) {
-
-			bool ok;
-
-			float value1 = scale.left(spaceIndex).toFloat(&ok);
-
-			if(ok) {
-
-				scale = scale.remove(0, spaceIndex + 1);
-
-				scale = scale.simplified();
-
-				float value2 = scale.toFloat(&ok);
-
-				if(ok) {
-
-					// Finally done, now validating
-
-					if( value1 < 0.0f || value1 > 256.0f )
-						Error("The X scale value of " + parameter + "(" + Str(value1) + " is not in the valid range of 0 to 256!")
-					if( value2 < 0.0f || value2 > 256.0f )
-						Error("The X scale value of " + parameter + "(" + Str(value2) + " is not in the valid range of 0 to 256!")
-
-					if( value1 == 1.0f && value2 == 1.0f )
-						Info(parameter + " has the default value of [1 1]")
-
-					spinBox1->setValue(value1);
-					spinBox2->setValue(value2);
-
-					return;
-
-				} else {
-
-					goto scaleError;
-				}
-
-			} else {
-
-				goto scaleError;
-			}
-
-		} else {
-
-			goto scaleError;
-		}
+	if (!r.valid) {
+		ERROR(doubleTupleBadFormat(parameter, value))
+		return;
 	}
 
-	scaleError:
-
-	Error("The value of " + parameter + ": " + value + " is not in the correct format of [1 1]!")
+	bool valid = utils::isTupleBetween(r, 0.0, 100.0);
+	if (valid) {
+		double mc = r.values.at(0);
+		double mb = r.values.at(1);
+		spinBox1->setValue(mc);
+		spinBox2->setValue(mb);
+	} else {
+		const QString error = doubleTupleBadBetween(parameter, value,
+			0.0, 100.0);
+		ERROR(error)
+	}
 }
 
 void MainWindow::setBackgroundColor(const QColor& color, QPlainTextEdit* colorWidget) {
@@ -9646,6 +9637,8 @@ void MainWindow::processTexturesToCopy( const QString& dir ) {
 			type = 3;
 		else if( it.key() == ui->lineEdit_exponentTexture )
 			type = 4;
+		else if( it.key() == ui->lineEdit_tintMask )
+			type = 8;
 
 		QString fileName = removeSuffix(it.value(), type);
 
@@ -10002,8 +9995,13 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_decal" )
 		noAlpha = false;
 
-	if( objectName == "lineEdit_exponentTexture" )
+	if( objectName == "lineEdit_exponentTexture" ) {
+		preview = "preview_exponent";
 		type = 4;
+	}
+
+	else if( objectName == "lineEdit_detail" )
+		preview = "preview_blendmod";
 
 	if ( objectName == "lineEdit_bumpmap" ||
 		 objectName == "lineEdit_bumpmap2" ||
@@ -10166,12 +10164,12 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		return false;
 	}
 	if (!alpha.load(alphaPath)) {
-		qDebug() << "Could not load " << alphaPath;
+		Error("Could not load alpha texture \"" + alphaPath + "\"");
 		return false;
 	}
 	if ((base.height() != alpha.height()) || (base.width() != alpha.width())) {
-		Error("Images must be same size for combining");
-		return false;
+		alpha = alpha.scaled( base.width(), base.height(),
+							  Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	}
 	base = base.convertToFormat(QImage::Format_ARGB32);
 	alpha = alpha.convertToFormat(QImage::Format_ARGB32);
@@ -10190,15 +10188,17 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 			base.setPixel(i, j, pix.rgba());
 		}
 	}
+	
 	QString fileName;
-	if (lineEditBase == ui->lineEdit_bumpmap)
+	if (lineEditBase == ui->lineEdit_bumpmap) {
 		fileName = QDir::currentPath() + "/Cache/bumpmap_alpha_combine.png";
-	else if (lineEditBase == ui->lineEdit_diffuse)
+	} else if (lineEditBase == ui->lineEdit_diffuse) {
 		fileName = QDir::currentPath() + "/Cache/diffuse_alpha_combine.png";
-
+	}
+	
 	if (QFile::exists(fileName)) {
-		if(!QFile::remove(fileName)) {
-			Error( "Error removing \"" + fileName );
+		if (!QFile::remove(fileName)) {
+			Error("Error removing \"" + fileName + "\"");
 			return false;
 		}
 	}
@@ -10208,12 +10208,15 @@ bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) 
 		return true;
 	}
 
-	qDebug() << "Something fucked up";
+	Error("Combining failed!");
 	return false;
 }
 
 void MainWindow::createBlendToolTexture()
 {
+	bool is4Way =  ui->comboBox_shader->currentText() == "Lightmapped_4WayBlend";
+	bool blendmod = true;
+
 	if(!mVMTLoaded) {
 		Error( "VMT must be saved before creating blend tool texture");
 		return;
@@ -10223,15 +10226,47 @@ void MainWindow::createBlendToolTexture()
 					   ui->lineEdit_diffuse->text();
 	QString vtf2Path = currentGameMaterialDir() + "/" +
 					   ui->lineEdit_diffuse2->text();
+	QString blendmodPath = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_blendmodulate->text();
+
+
 	QFile vtf1File (vtf1Path + ".vtf");
 	QFile vtf2File (vtf2Path + ".vtf");
+	QFile blendmodFile (blendmodPath + ".vtf");
+
+	//4way
+	QString vtf3Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse3->text();
+	QString vtf4Path = currentGameMaterialDir() + "/" +
+					   ui->lineEdit_diffuse4->text();
+
+	QFile vtf3File (vtf3Path + ".vtf");
+	QFile vtf4File (vtf4Path + ".vtf");
+
+
 
 	QString texture1File = Str( qHash( QFileInfo(vtf1Path + ".vtf").fileName() +
 						   Str( vtf1File.size() )));
 	QString texture2File = Str( qHash( QFileInfo(vtf2Path + ".vtf").fileName() +
 						   Str( vtf2File.size() )));
+
+	QString modulateFile = Str( qHash( QFileInfo(blendmodPath + ".vtf").fileName() +
+						   Str( blendmodFile.size() )));
+
+	QString texture3File = Str( qHash( QFileInfo(vtf3Path + ".vtf").fileName() +
+						   Str( vtf3File.size() )));
+	QString texture4File = Str( qHash( QFileInfo(vtf4Path + ".vtf").fileName() +
+						   Str( vtf4File.size() )));
+
 	QImage texture1;
 	QImage texture2;
+
+	QImage modulate;
+
+	QImage texture3;
+	QImage texture4;
+
+	int size = 256;
 
 	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
 		Error( "Error loading Diffuse texture" )
@@ -10242,24 +10277,116 @@ void MainWindow::createBlendToolTexture()
 		return;
 	}
 
-	int size = 256;
-	QImage texture1Scaled = texture1.scaled(size, size);
-	QImage texture2Scaled = texture2.scaled(size, size);
+	if (is4Way) {
+		if (!texture3.load(QDir::currentPath() + "/Cache/" + texture3File + ".png")) {
+			Error( "Error loading Diffuse 3 texture" )
+			return;
+		}
+		if (!texture4.load(QDir::currentPath() + "/Cache/" + texture4File + ".png")) {
+			Error( "Error loading Diffuse 4 texture" )
+			return;
+		}
+	} else {
+		if (!modulate.load(QDir::currentPath() + "/Cache/" + modulateFile + ".png")) {
+			qDebug() << "No blend modulate texture";
+			blendmod = false;
+		} else {
+		modulate = modulate.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		}
+	}
 
-	QColor t1, t2, pix;
-	for (int i = 0; i < size; ++i) {
+	texture1 = texture1.convertToFormat(QImage::Format_RGB32);
+	texture1 = texture1.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	texture2 = texture2.convertToFormat(QImage::Format_RGB32);
+	texture2 = texture2.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-		for (int j = 0; j < size; ++j) {
-			t1 = texture1Scaled.pixel(i, j);
-			t2 = texture2Scaled.pixel(i, j);
+	if (is4Way) {
+		texture3 = texture3.convertToFormat(QImage::Format_RGB32);
+		texture3 = texture3.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		texture4 = texture4.convertToFormat(QImage::Format_RGB32);
+		texture4 = texture4.scaled(size, size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-			double distance = ((i - size + j) + 24) / 48.0;
-			double blend = qBound(0.0, 1.0, distance);
-			pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
-						t2.greenF() * blend + t1.greenF() * (1.0 - blend),
-						t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+		QColor t1, t2, t3, t4, pix;
+		for (int i = 0; i < size; ++i) {
 
-			texture1Scaled.setPixel(i, j, pix.rgba());
+			for (int j = 0; j < size; ++j) {
+				t1 = texture1.pixel(i, j);
+				t2 = texture2.pixel(i, j);
+				t3 = texture3.pixel(i, j);
+				t4 = texture4.pixel(i, j);
+
+				double distance; //= ((i - size + j) + 24) / 48.0;
+				double blend;
+				if (i < 96) {
+					distance = i - 88 + j / 4;
+					blend = qBound(0.0, distance, 1.0);
+					pix.setRgbF(t2.redF() * blend + t1.redF() * (1.0 - blend),
+								t2.greenF() * blend + t1.greenF() * (1.0 - blend),
+								t2.blueF() * blend + t1.blueF() * (1.0 - blend));
+				} else if (i < 160) {
+					distance = i - 160 + j / 4;
+					blend = qBound(0.0, distance, 1.0);
+					pix.setRgbF(t3.redF() * blend + t2.redF() * (1.0 - blend),
+								t3.greenF() * blend + t2.greenF() * (1.0 - blend),
+								t3.blueF() * blend + t2.blueF() * (1.0 - blend));
+				} else {
+					distance = i - 232 + j / 4;
+					blend = qBound(0.0, distance, 1.0);
+					pix.setRgbF(t4.redF() * blend + t3.redF() * (1.0 - blend),
+								t4.greenF() * blend + t3.greenF() * (1.0 - blend),
+								t4.blueF() * blend + t3.blueF() * (1.0 - blend));
+				}
+				pix.setAlphaF(1.0);
+
+				texture1.setPixel(i, j, pix.rgba());
+			}
+		}
+
+	} else {
+
+		QColor tint1 = utils::getBG(ui->color_layer1tint);
+		QColor tint2 = utils::getBG(ui->color_layer2tint);
+
+		const double mult1 = ui->doubleSpinBox_layer1tint->value();
+		const double mult2 = ui->doubleSpinBox_layer2tint->value();
+
+		double r1 = 1.0, r2 = 1.0, g1 = 1.0, g2 = 1.0, b1 = 1.0, b2 = 1.0;
+
+		if (ui->groupBox_layerblend->isVisible()) {
+			r1 = tint1.redF() * mult1;
+			r2 = tint2.redF() * mult2;
+			g1 = tint1.greenF() * mult1;
+			g2 = tint2.greenF() * mult2;
+			b1 = tint1.blueF() * mult1;
+			b2 = tint2.blueF() * mult2;
+		}
+
+		QColor t1, t2, mod, pix;
+		for (int i = 0; i < size; ++i) {
+
+			for (int j = 0; j < size; ++j) {
+				t1 = texture1.pixel(i, j);
+				t2 = texture2.pixel(i, j);
+
+				double distance = ((i - size + j) + 8) / 16.0;
+				double blend = qBound(0.0, distance, 1.0);
+
+				if (blendmod) {
+					distance = ((i - size + j) + 48) / 96.0;
+					blend = qBound(0.0, distance, 1.0);
+					mod = modulate.pixel(i, j);
+					double minb = qMax(0.0, mod.greenF() - mod.redF());
+					double maxb = qMin(1.0, mod.greenF() + mod.redF());
+					blend = smoothstep(minb, maxb, blend);
+				}
+
+				pix.setRgbF(qBound(0.0, t2.redF() * blend * r2 + t1.redF() * (1.0 - blend) * r1, 1.0),
+							qBound(0.0, t2.greenF() * blend * g2 + t1.greenF() * (1.0 - blend) * g1, 1.0),
+							qBound(0.0, t2.blueF() * blend * b2 + t1.blueF() * (1.0 - blend) * b1, 1.0));
+				pix.setAlphaF(1.0);
+
+				texture1.setPixel(i, j, pix.rgba());
+			}
 		}
 	}
 
@@ -10272,7 +10399,7 @@ void MainWindow::createBlendToolTexture()
 		}
 	}
 
-	if (texture1Scaled.save(fileName, "PNG")) {
+	if (texture1.save(fileName, "PNG")) {
 		qDebug() << "File succesfully combined";
 	} else {
 		qDebug() << "Something fucked up";
@@ -10339,6 +10466,9 @@ QString MainWindow::removeSuffix( const QString fileName, int type)
 		}
 		if (type == 4) {
 			newName = vmtName + mSettings->glossSuffix;
+		}
+		if (type == 8) {
+			newName = vmtName + mSettings->tintmaskSuffix;
 		}
 	}
 	return newName;

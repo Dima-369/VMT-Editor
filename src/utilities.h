@@ -72,3 +72,5 @@ bool setKey(const QString &name, bool def, QSettings *settings);
 QString addTabs(int amount);
 
 void removeSingleLineComment( QString& string );
+
+double smoothstep(double edge0, double edge1, double x);

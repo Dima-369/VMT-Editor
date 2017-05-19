@@ -66,6 +66,15 @@ void detailtexture::processDetailTextureChange(const QString &text,
 		if (!ui->checkBox_detailScaleUniform->isChecked()) {
 			ui->doubleSpinBox_detailScaleY->setEnabled(enable);
 		}
+		ui->label_detailAmount2->setEnabled(enable);
+		ui->horizontalSlider_detailAmount2->setEnabled(enable);
+		ui->doubleSpinBox_detailAmount2->setEnabled(enable);
+
+		//ui->label_detailBlendMode2->setEnabled(enable);
+		ui->comboBox_detailBlendMode2->setEnabled(enable);
+		ui->label_detailScale2->setEnabled(enable);
+		ui->doubleSpinBox_detailScale2->setEnabled(enable);
+		ui->checkBox_detailScaleUniform2->setEnabled(enable);
 	} else {
 		ui->label_detailAmount2->setEnabled(enable);
 		ui->horizontalSlider_detailAmount2->setEnabled(enable);

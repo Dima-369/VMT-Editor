@@ -799,9 +799,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-139</y>
+           <y>-218</y>
            <width>522</width>
-           <height>1153</height>
+           <height>1182</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
@@ -1533,12 +1533,6 @@ margin-top: 1px;
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3">
-                <widget class="QLineEdit" name="lineEdit_bumpSuffix"/>
-               </item>
-               <item row="1" column="3">
-                <widget class="QLineEdit" name="lineEdit_glossSuffix"/>
-               </item>
                <item row="1" column="2">
                 <widget class="QLabel" name="label_7">
                  <property name="minimumSize">
@@ -1560,6 +1554,15 @@ margin-top: 1px;
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="lineEdit_bumpSuffix"/>
+               </item>
+               <item row="1" column="3">
+                <widget class="QLineEdit" name="lineEdit_glossSuffix"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_specSuffix"/>
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_5">
@@ -1583,8 +1586,30 @@ margin-top: 1px;
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_specSuffix"/>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_14">
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>60</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Tintmask:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_tintmaskSuffix"/>
                </item>
               </layout>
              </item>

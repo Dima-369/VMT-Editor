@@ -85,6 +85,7 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 	ui->lineEdit_diffuseSuffix->setText( settings->diffuseSuffix );
 	ui->lineEdit_specSuffix->setText( settings->specSuffix );
 	ui->lineEdit_glossSuffix->setText( settings->glossSuffix );
+	ui->lineEdit_tintmaskSuffix->setText( settings->tintmaskSuffix );
 
 	ui->comboBox_mipmapFilter->setCurrentIndex(ui->comboBox_mipmapFilter->findText(settings->mipmapFilter, Qt::MatchFixedString));
 	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(ui->comboBox_mipmapSharpenFilter->findText(settings->mipmapSharpenFilter, Qt::MatchFixedString));
@@ -376,6 +377,10 @@ void OptionsDialog::saveSettings()
 	if (ui->lineEdit_glossSuffix->text() != mSettings->glossSuffix) {
 		mSettings->glossSuffix = ui->lineEdit_glossSuffix->text();
 		mIniSettings->setValue( "glossSuffix", ui->lineEdit_glossSuffix->text() );
+	}
+	if (ui->lineEdit_tintmaskSuffix->text() != mSettings->tintmaskSuffix) {
+		mSettings->tintmaskSuffix = ui->lineEdit_tintmaskSuffix->text();
+		mIniSettings->setValue( "tintmaskSuffix", ui->lineEdit_tintmaskSuffix->text() );
 	}
 
 
