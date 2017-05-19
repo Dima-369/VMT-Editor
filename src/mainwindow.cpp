@@ -4411,7 +4411,7 @@ VmtFile MainWindow::makeVMT()
 			vmtFile.parameters.insert( "$flow_bumpstrength", Str( ui->doubleSpinBox_bumpStrength->value() ));
 
 		if( ui->doubleSpinBox_noiseScale->value() != 0.0 )
-			vmtFile.parameters.insert( "$flow_noise_scale", Str( ui->doubleSpinBox_noiseScale->value() ));
+			vmtFile.parameters.insert( "$flow_noise_scale", QString::number( ui->doubleSpinBox_noiseScale->value(), 'f', 5));
 
 		if( ui->doubleSpinBox_timeScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$flow_timescale", Str( ui->doubleSpinBox_timeScale->value() ));
