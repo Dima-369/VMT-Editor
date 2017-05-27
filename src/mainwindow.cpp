@@ -10011,8 +10011,12 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_waterNormalMap" )
 		type = 2;
 
-	if( (objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible()) ||
-		(objectName == "lineEdit_diffuse" && ui->lineEdit_diffuseAlpha->isVisible()) ) {
+	if( (objectName == "lineEdit_bumpmap" &&
+		 ui->lineEdit_bumpmapAlpha->isVisible() &&
+		 !ui->lineEdit_bumpmapAlpha->text().isEmpty()) ||
+		(objectName == "lineEdit_diffuse" &&
+		 ui->lineEdit_diffuseAlpha->isVisible() &&
+		 !ui->lineEdit_diffuseAlpha->text().isEmpty()) ) {
 		combine = true;
 		noAlpha = false;
 	}
