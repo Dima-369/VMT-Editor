@@ -10000,7 +10000,7 @@ void MainWindow::reconvertTexture()
 		type = 4;
 	}
 
-	else if( objectName == "lineEdit_detail" )
+	else if( objectName == "lineEdit_blendmodulate" )
 		preview = "preview_blendmod";
 
 	if ( objectName == "lineEdit_bumpmap" ||
