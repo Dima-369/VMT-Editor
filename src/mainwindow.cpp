@@ -7897,7 +7897,7 @@ void MainWindow::browseVTF()
 	else if (name == "toolButton_envmap" )
 		processVtf( "", "", ui->lineEdit_envmap );
 	else if (name == "toolButton_specmap" )
-		processVtf( "", "", ui->lineEdit_specmap );
+		processVtf( "preview_spec1", "", ui->lineEdit_specmap );
 
 	else if (name == "toolButton_exponentTexture" )
 		processVtf( "preview_exponent", "", ui->lineEdit_exponentTexture );
@@ -9986,6 +9986,7 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_specmap" ) {
+		preview = "preview_spec1";
 		type = 3;
 		if (ui->checkBox_envmapAlpha->isChecked() )
 			noAlpha = false;
