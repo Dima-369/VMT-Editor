@@ -7897,7 +7897,7 @@ void MainWindow::browseVTF()
 	else if (name == "toolButton_envmap" )
 		processVtf( "", "", ui->lineEdit_envmap );
 	else if (name == "toolButton_specmap" )
-		processVtf( "", "", ui->lineEdit_specmap );
+		processVtf( "preview_spec1", "", ui->lineEdit_specmap );
 
 	else if (name == "toolButton_exponentTexture" )
 		processVtf( "preview_exponent", "", ui->lineEdit_exponentTexture );
@@ -9986,6 +9986,7 @@ void MainWindow::reconvertTexture()
 	else if( objectName == "lineEdit_bump2" )
 		preview = "preview_bumpmap2";
 	else if( objectName == "lineEdit_specmap" ) {
+		preview = "preview_spec1";
 		type = 3;
 		if (ui->checkBox_envmapAlpha->isChecked() )
 			noAlpha = false;
@@ -10000,7 +10001,7 @@ void MainWindow::reconvertTexture()
 		type = 4;
 	}
 
-	else if( objectName == "lineEdit_detail" )
+	else if( objectName == "lineEdit_blendmodulate" )
 		preview = "preview_blendmod";
 
 	if ( objectName == "lineEdit_bumpmap" ||
@@ -10011,8 +10012,12 @@ void MainWindow::reconvertTexture()
 		 objectName == "lineEdit_waterNormalMap" )
 		type = 2;
 
-	if( (objectName == "lineEdit_bumpmap" && ui->lineEdit_bumpmapAlpha->isVisible()) ||
-		(objectName == "lineEdit_diffuse" && ui->lineEdit_diffuseAlpha->isVisible()) ) {
+	if( (objectName == "lineEdit_bumpmap" &&
+		 ui->lineEdit_bumpmapAlpha->isVisible() &&
+		 !ui->lineEdit_bumpmapAlpha->text().isEmpty()) ||
+		(objectName == "lineEdit_diffuse" &&
+		 ui->lineEdit_diffuseAlpha->isVisible() &&
+		 !ui->lineEdit_diffuseAlpha->text().isEmpty()) ) {
 		combine = true;
 		noAlpha = false;
 	}
