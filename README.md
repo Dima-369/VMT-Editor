@@ -6,6 +6,8 @@ Includes texture preview, parameter validation and generally tries to help in ed
 
 ![version](https://img.shields.io/badge/version-1.3.7-blue.svg)
 
+## [Website](https://gira-x.github.io/VMT-Editor/)
+
 ## Features
 
 - Simple and fast VMT creation with parameters separated in groups
@@ -21,7 +23,7 @@ Includes texture preview, parameter validation and generally tries to help in ed
 
 ## Downloads
 
-Windows binary releases are provided on [GitHub's release page](https://github.com/Gira-X/VMT-Editor/releases).
+Windows releases are provided on [GitHub's release page](https://github.com/Gira-X/VMT-Editor/releases).
 It includes all dependencies, just launch the editor; no installation required!
 
 We dropped the InnoSetup binary, as it only adds the Windows Explorer integration to open VMT files and Start menu shortcuts, and most seem to dislike the installation process.
