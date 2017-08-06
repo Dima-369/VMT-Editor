@@ -432,6 +432,10 @@ private slots:
 
 	void reconvertTexture();
 
+	void reconvertTextureHalf();
+
+	void reconvertTexture(QLineEdit* lineEdit, const QString& objectName, const QString& tooltip, const QString& resize);
+
 	void clearLineEdit();
 
 	void checkForUpdates();
