@@ -1700,6 +1700,21 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	bool usingEnvmap = false;
 
+	phong::parseParameters(ui, &vmt);
+
+	//Need to show phong earlier since basealpha checkbox checks if it's
+	//visible
+
+	if(vmt.state.showPhong) {
+		// showPhong is only true on specific shaders so we can safely
+		// branch with the else
+		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
+			ui->action_phong->trigger();
+		} else if (!ui->action_phongBrush->isChecked()) {
+			ui->action_phongBrush->trigger();
+		}
+	}
+
 	if( !( value = vmt.parameters.take("$envmap") ).isEmpty() )
 	{
 		if( value == "env_cubemap" )
@@ -2034,7 +2049,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	//----------------------------------------------------------------------------------------//
 
-	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
 	layerblend::parseParameters(ui, &vmt);
@@ -2895,7 +2909,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if (!bumpmap.isEmpty())
 			Error("$bumpmap should not be used with Water or Refract. Use $normalmap instead!")
 
-		QString texture = validateTexture( "preview_normalmap1", value, "$normalmap", realGameinfoDir );
+		QString texture = validateTexture( "preview_bumpmap1", value, "$normalmap", realGameinfoDir );
 
 		if( !texture.isEmpty() ) {
 
@@ -2911,7 +2925,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			Error("$bumpmap should not be used with Water or Refract. Setting $normalmap to the existing $bumpmap value!")
 
-			QString texture = validateTexture( "preview_normalmap1", bumpmap, "$normalmap", realGameinfoDir );
+			QString texture = validateTexture( "preview_bumpmap1", bumpmap, "$normalmap", realGameinfoDir );
 
 			if( !texture.isEmpty() )
 			{
@@ -2928,7 +2942,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( vmt.shaderName != "Refract" )
 			Error("$normalmap2 only works with the Refract shader!")
 
-		QString texture = validateTexture( "preview_normalmap2", value, "$normalmap2", realGameinfoDir );
+		QString texture = validateTexture( "preview_bumpmap2", value, "$normalmap2", realGameinfoDir );
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_refractNormalMap2->setText(texture);
@@ -3548,16 +3562,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(showColor && !ui->action_color->isChecked()) {
 		glWidget_diffuse1->setColorVisible(true);
 		ui->action_color->trigger();
-	}
-
-	if(vmt.state.showPhong) {
-		// showPhong is only true on specific shaders so we can safely
-		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
-			ui->action_phong->trigger();
-		} else if (!ui->action_phongBrush->isChecked()) {
-			ui->action_phongBrush->trigger();
-		}
 	}
 
 	if(vmt.state.showNormalBlend && !ui->action_normalBlend->isChecked()) {
@@ -5333,7 +5337,7 @@ void MainWindow::toggleReflection() {
 		if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && ui->action_phong->isEnabled() )
 			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
 
-		else if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() )
+		else if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && !ui->action_phong->isEnabled())
 			previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
 
 		else if( ui->checkBox_normalalpha->isChecked() && ui->checkBox_normalalpha->isEnabled() )
@@ -6103,13 +6107,16 @@ void MainWindow::finishedLoading()
 
 			if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
-			else if ( ui->checkBox_basealpha->isChecked() )
+			else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
 				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-		}
 
-		if( ui->groupBox_phong->isVisible() ) {
+		} else if( ui->groupBox_phong->isVisible() ) {
 
-			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+			if( ui->checkBox_phongBaseAlpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			else
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
 		}
 
 	} else if( thread->object == "preview_bumpmap1" ) {
@@ -6119,6 +6126,13 @@ void MainWindow::finishedLoading()
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
 			if( ui->checkBox_normalalpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+		} else if( ui->groupBox_phong->isVisible() ) {
+
+			if( ui->checkBox_phongBaseAlpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			else
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
 		}
 
@@ -6300,14 +6314,40 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 
 				glWidget_diffuse1->loadTexture( "Cache/" + textureThread->output, glWidget_diffuse1->getBumpmap() );
 
-				if( ui->groupBox_phong->isVisible() )
-					previewTexture( GLWidget_Spec::Bumpmap, "Cache/" + textureThread->output );
-				if( ui->groupBox_shadingReflection->isVisible() && ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
-					previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-			}
+				if( ui->groupBox_shadingReflection->isVisible() ) {
 
-			else if( object == "preview_bumpmap1" )
+					if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
+						previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+
+
+				} else if( ui->groupBox_phong->isVisible() ) {
+
+					if( ui->checkBox_phongBaseAlpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+				}
+
+			} else if( object == "preview_bumpmap1" ) {
+
 				glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + textureThread->output );
+
+				if( ui->groupBox_shadingReflection->isVisible() ) {
+
+					if( ui->checkBox_normalalpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+				} else if( ui->groupBox_phong->isVisible() ) {
+
+					if( ui->checkBox_phongBaseAlpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				}
+			}
 
 			else if( object == "preview_basetexture2" )
 				glWidget_diffuse2->loadTexture( "Cache/" + textureThread->output, glWidget_diffuse2->getBumpmap() );
@@ -8695,7 +8735,9 @@ void MainWindow::modifiedLineEdit( QString text )
 
 	if( caller->objectName() == "lineEdit_diffuse" ) {
 
-		if( ui->checkBox_basealpha->isChecked() )
+		if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
+			previewTexture( GLWidget_Spec::Bumpmap, text );
+		else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
 			previewTexture( GLWidget_Spec::Diffuse, text );
 
 	} else if( caller->objectName() == "lineEdit_bumpmap" ) {
@@ -9038,7 +9080,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 			if ( ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
-			else previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+			else if  ( !ui->groupBox_phong->isVisible() ) {
+				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+				Error("ASDASD");
+			}
+
 		}
 		else
 		{
