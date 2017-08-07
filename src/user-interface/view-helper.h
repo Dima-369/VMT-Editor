@@ -136,6 +136,7 @@ inline void clearLineEditAction(QLineEdit* le)
 	const auto actions = le->actions();
 	if (!actions.isEmpty()) {
 		le->removeAction(actions[0]);
+		clearLineEditAction(le);
 	}
 	le->setToolTip("");
 }

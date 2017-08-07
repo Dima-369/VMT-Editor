@@ -1,10 +1,19 @@
-# VMT Editor
+# VMT Editor ![version](https://img.shields.io/badge/version-1.3.8-blue.svg)
 
-Visual editor for the VMT filetype, used by Source Engine 1, written in C++ and Qt.
+[Official website](https://gira-x.github.io/VMT-Editor/)
 
-Includes texture preview, parameter validation and generally tries to help in editing VMTs.
+Visual editor for .vmt files, used by Source Engine 1, written in C++ and Qt.
 
-![version](https://img.shields.io/badge/version-1.3.7-blue.svg)
+Includes texture preview, texture conversion, parameter validation and generally tries to help in editing VMTs.
+
+## Download
+
+- [Latest release](https://github.com/Gira-X/VMT-Editor/releases/latest)
+- [All releases](https://github.com/Gira-X/VMT-Editor/releases)
+
+Windows releases are provided on [GitHub's release page](https://github.com/Gira-X/VMT-Editor/releases).
+It includes all dependencies, just extract the zip and launch the editor; no installation required!
+
 
 ## Features
 
@@ -19,12 +28,6 @@ Includes texture preview, parameter validation and generally tries to help in ed
 - Blend tool texture generation, including support for 4 way blend and blend modulate
 - Support for latest CS:GO parameters such as layer blend
 
-## Downloads
-
-Windows binary releases are provided on [GitHub's release page](https://github.com/Gira-X/VMT-Editor/releases).
-It includes all dependencies, just launch the editor; no installation required!
-
-We dropped the InnoSetup binary, as it only adds the Windows Explorer integration to open VMT files and Start menu shortcuts, and most seem to dislike the installation process.
 
 ## OS Support
 

@@ -1700,6 +1700,21 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	bool usingEnvmap = false;
 
+	phong::parseParameters(ui, &vmt);
+
+	//Need to show phong earlier since basealpha checkbox checks if it's
+	//visible
+
+	if(vmt.state.showPhong) {
+		// showPhong is only true on specific shaders so we can safely
+		// branch with the else
+		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
+			ui->action_phong->trigger();
+		} else if (!ui->action_phongBrush->isChecked()) {
+			ui->action_phongBrush->trigger();
+		}
+	}
+
 	if( !( value = vmt.parameters.take("$envmap") ).isEmpty() )
 	{
 		if( value == "env_cubemap" )
@@ -2034,7 +2049,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	//----------------------------------------------------------------------------------------//
 
-	phong::parseParameters(ui, &vmt);
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
 	layerblend::parseParameters(ui, &vmt);
@@ -2895,7 +2909,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if (!bumpmap.isEmpty())
 			Error("$bumpmap should not be used with Water or Refract. Use $normalmap instead!")
 
-		QString texture = validateTexture( "preview_normalmap1", value, "$normalmap", realGameinfoDir );
+		QString texture = validateTexture( "preview_bumpmap1", value, "$normalmap", realGameinfoDir );
 
 		if( !texture.isEmpty() ) {
 
@@ -2911,7 +2925,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			Error("$bumpmap should not be used with Water or Refract. Setting $normalmap to the existing $bumpmap value!")
 
-			QString texture = validateTexture( "preview_normalmap1", bumpmap, "$normalmap", realGameinfoDir );
+			QString texture = validateTexture( "preview_bumpmap1", bumpmap, "$normalmap", realGameinfoDir );
 
 			if( !texture.isEmpty() )
 			{
@@ -2928,7 +2942,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( vmt.shaderName != "Refract" )
 			Error("$normalmap2 only works with the Refract shader!")
 
-		QString texture = validateTexture( "preview_normalmap2", value, "$normalmap2", realGameinfoDir );
+		QString texture = validateTexture( "preview_bumpmap2", value, "$normalmap2", realGameinfoDir );
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_refractNormalMap2->setText(texture);
@@ -3548,16 +3562,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(showColor && !ui->action_color->isChecked()) {
 		glWidget_diffuse1->setColorVisible(true);
 		ui->action_color->trigger();
-	}
-
-	if(vmt.state.showPhong) {
-		// showPhong is only true on specific shaders so we can safely
-		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
-			ui->action_phong->trigger();
-		} else if (!ui->action_phongBrush->isChecked()) {
-			ui->action_phongBrush->trigger();
-		}
 	}
 
 	if(vmt.state.showNormalBlend && !ui->action_normalBlend->isChecked()) {
@@ -5333,7 +5337,7 @@ void MainWindow::toggleReflection() {
 		if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && ui->action_phong->isEnabled() )
 			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
 
-		else if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() )
+		else if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && !ui->action_phong->isEnabled())
 			previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
 
 		else if( ui->checkBox_normalalpha->isChecked() && ui->checkBox_normalalpha->isEnabled() )
@@ -6103,13 +6107,16 @@ void MainWindow::finishedLoading()
 
 			if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
-			else if ( ui->checkBox_basealpha->isChecked() )
+			else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
 				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-		}
 
-		if( ui->groupBox_phong->isVisible() ) {
+		} else if( ui->groupBox_phong->isVisible() ) {
 
-			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+			if( ui->checkBox_phongBaseAlpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			else
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
 		}
 
 	} else if( thread->object == "preview_bumpmap1" ) {
@@ -6119,6 +6126,13 @@ void MainWindow::finishedLoading()
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
 			if( ui->checkBox_normalalpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+		} else if( ui->groupBox_phong->isVisible() ) {
+
+			if( ui->checkBox_phongBaseAlpha->isChecked() )
+				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			else
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
 		}
 
@@ -6300,14 +6314,40 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 
 				glWidget_diffuse1->loadTexture( "Cache/" + textureThread->output, glWidget_diffuse1->getBumpmap() );
 
-				if( ui->groupBox_phong->isVisible() )
-					previewTexture( GLWidget_Spec::Bumpmap, "Cache/" + textureThread->output );
-				if( ui->groupBox_shadingReflection->isVisible() && ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
-					previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-			}
+				if( ui->groupBox_shadingReflection->isVisible() ) {
 
-			else if( object == "preview_bumpmap1" )
+					if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
+						previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+
+
+				} else if( ui->groupBox_phong->isVisible() ) {
+
+					if( ui->checkBox_phongBaseAlpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+				}
+
+			} else if( object == "preview_bumpmap1" ) {
+
 				glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + textureThread->output );
+
+				if( ui->groupBox_shadingReflection->isVisible() ) {
+
+					if( ui->checkBox_normalalpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+				} else if( ui->groupBox_phong->isVisible() ) {
+
+					if( ui->checkBox_phongBaseAlpha->isChecked() )
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					else
+						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				}
+			}
 
 			else if( object == "preview_basetexture2" )
 				glWidget_diffuse2->loadTexture( "Cache/" + textureThread->output, glWidget_diffuse2->getBumpmap() );
@@ -7360,7 +7400,7 @@ void MainWindow::readSettings()
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
 
-	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
+	mSettings->templateNew = setKey("templateNew", false, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
@@ -8302,6 +8342,10 @@ void MainWindow::processVtf(const QString& objectName,
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
+				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
+				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+
 				mIniPaths->setValue(relativeFilePath, fileName);
 
 				ConversionThread* conversionThread = new ConversionThread(this);
@@ -8331,6 +8375,9 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvert = lineEdit->addAction(QIcon(":/icons/reconvert"), QLineEdit::TrailingPosition);
 				lineEdit->setToolTip(fileName);
 				connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
+
+				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
+				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
 
 				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
 
@@ -8688,7 +8735,9 @@ void MainWindow::modifiedLineEdit( QString text )
 
 	if( caller->objectName() == "lineEdit_diffuse" ) {
 
-		if( ui->checkBox_basealpha->isChecked() )
+		if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
+			previewTexture( GLWidget_Spec::Bumpmap, text );
+		else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
 			previewTexture( GLWidget_Spec::Diffuse, text );
 
 	} else if( caller->objectName() == "lineEdit_bumpmap" ) {
@@ -9031,7 +9080,11 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 			if ( ui->groupBox_phong->isVisible() )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
-			else previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+			else if  ( !ui->groupBox_phong->isVisible() ) {
+				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+				Error("ASDASD");
+			}
+
 		}
 		else
 		{
@@ -9914,13 +9967,39 @@ void MainWindow::gameTriggered( bool triggered )
 	}
 }
 
-void MainWindow::reconvertTexture()
-{
+void MainWindow::reconvertTextureHalf() {
 	const auto lineEdit =
 		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+	QImage texture;
+	if (!texture.load(tooltip)) {
+		Error("Texture size could not be determined");
+		return;
+	}
+
+	QString resize = "-rwidth " + Str(texture.width() / 2) +
+			" -rheight " + Str(texture.height() / 2) +
+			" -rfilter BOX";
+
+	reconvertTexture(lineEdit, objectName, tooltip, resize);
+}
+
+void MainWindow::reconvertTexture() {
+	const auto lineEdit =
+		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+	const auto objectName = lineEdit->objectName();
+	const auto tooltip = lineEdit->toolTip();
+
+	reconvertTexture(lineEdit, objectName, tooltip, "");
+}
+
+void MainWindow::reconvertTexture(QLineEdit* lineEdit,
+								  const QString& objectName,
+								  const QString& tooltip,
+								  const QString& resize)
+{
 	bool noAlpha = true;
 	bool combine = false;
 	int type = 0;
@@ -10064,7 +10143,7 @@ void MainWindow::reconvertTexture()
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " " + resize;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
@@ -10106,12 +10185,16 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 			lineEdit->setToolTip(value);
 			connect(reconvert, SIGNAL(triggered()), SLOT(reconvertTexture()));
 
+			QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
+			connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
 			if (lineEdit == ui->lineEdit_bumpmap) {
 				ui->label_bumpmapAlpha->setVisible(true);
 				ui->lineEdit_bumpmapAlpha->setVisible(true);
 				ui->toolButton_bumpmapAlpha->setVisible(true);
 				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
 				if (value_alpha != "") {
+					clearLineEditAction(ui->lineEdit_bumpmapAlpha);
 					ui->lineEdit_bumpmapAlpha->setText(value_alpha);
 					QAction *clear = ui->lineEdit_bumpmapAlpha->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
 					clear->setToolTip("Clear");
@@ -10124,6 +10207,7 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 				ui->toolButton_diffuseAlpha->setVisible(true);
 				QString value_alpha = mIniPaths->value(fileName + "_alpha_combine").toString();
 				if (value_alpha != "") {
+					clearLineEditAction(ui->lineEdit_diffuseAlpha);
 					ui->lineEdit_diffuseAlpha->setText(value_alpha);
 					QAction *clear = ui->lineEdit_diffuseAlpha->addAction(QIcon(":/icons/clear"), QLineEdit::TrailingPosition);
 					clear->setToolTip("Clear");
