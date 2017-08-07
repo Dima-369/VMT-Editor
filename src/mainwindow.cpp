@@ -7360,7 +7360,7 @@ void MainWindow::readSettings()
 	mSettings->autoRefresh = setKey("autoRefresh", true, mIniSettings);
 	mSettings->autoSave = setKey("autoSave", false, mIniSettings);
 
-	mSettings->templateNew = setKey("templateNew", true, mIniSettings);
+	mSettings->templateNew = setKey("templateNew", false, mIniSettings);
 	mSettings->checkForUpdates = setKey("checkForUpdates", true, mIniSettings);
 	mSettings->removeSuffix = setKey("removeSuffix", false, mIniSettings);
 	mSettings->removeAlpha = setKey("removeAlpha", false, mIniSettings);
