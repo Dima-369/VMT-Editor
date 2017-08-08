@@ -9082,7 +9082,6 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
 			else if  ( !ui->groupBox_phong->isVisible() ) {
 				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-				Error("ASDASD");
 			}
 
 		}
@@ -9141,6 +9140,17 @@ void MainWindow::modifiedCheckBox( bool enabled )
 				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
 			else
 				previewTexture( GLWidget_Spec::None, "" );
+		}
+	}
+	else if( caller->objectName() == "checkBox_exponentBaseAlpha" )
+	{
+		if(enabled)
+		{
+			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+		}
+		else
+		{
+			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
 		}
 	}
 	else if( caller->objectName() == "checkBox_expensive" )
@@ -11012,6 +11022,20 @@ void MainWindow::on_action_reflection_triggered(bool checked)
 void MainWindow::on_action_phong_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_phong)
+
+	if(ui->groupBox_phong->isVisible()) {
+
+		if( ui->checkBox_exponentBaseAlpha->isChecked() )
+			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+		else
+			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+
+	} else {
+
+		if( !ui->groupBox_shadingReflection->isVisible() )
+			previewTexture( GLWidget_Spec::None, "" );
+	}
+
 }
 
 void MainWindow::on_action_phongBrush_triggered(bool checked)
