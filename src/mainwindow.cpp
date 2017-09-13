@@ -270,6 +270,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_envmapAniso->setDoubleSlider(ui->horizontalSlider_envmapAniso);
 
 	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 8);
+	ui->doubleSpinBox_albedoBoost->setDoubleSlider(ui->horizontalSlider_albedoBoost, 8);
 	ui->doubleSpinBox_fresnelRangesX->setDoubleSlider(ui->horizontalSlider_fresnelRanges);
 
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);
@@ -3938,6 +3939,9 @@ VmtFile MainWindow::makeVMT()
 
 		if( ui->doubleSpinBox_boost->value() != 1.0 )
 			vmtFile.parameters.insert( "$phongboost", Str( ui->doubleSpinBox_boost->value() ));
+
+		if( ui->doubleSpinBox_albedoBoost->value() != 1.0 )
+			vmtFile.parameters.insert( "$phongalbedoboost", Str( ui->doubleSpinBox_albedoBoost->value() ));
 
 		/*if( ui->doubleSpinBox_fresnelRangesX->value() != 0.0 ||
 			ui->doubleSpinBox_fresnelRangesY->value() != 0.5 ||
