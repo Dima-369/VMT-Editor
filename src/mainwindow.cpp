@@ -501,8 +501,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 			int v2 = v1[0].toInt() * 10000 +
 					 v1[1].toInt() * 100 +
 					 v1[2].toInt();
-			if (cv2 < v2)
+			if (cv2 < v2) {
+				ui->menuHelp->setTitle("New version avaiable");
 				Info(QString("New version available: %1").arg(v));
+			}
 		}
 	}
 
@@ -10671,6 +10673,7 @@ void MainWindow::checkForUpdates()
 		mIniSettings->setValue("latestVersion", getCurrentVersion());
 		Info(QString("You have the latest version: %1")
 			.arg(removeTrailingVersionZero(getCurrentVersion())));
+		ui->menuHelp->setTitle("Help");
 
 	} else {
 		const auto vs = versionToString(v);
