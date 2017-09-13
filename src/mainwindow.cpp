@@ -7744,6 +7744,8 @@ void MainWindow::openRecentFile()
 
 void MainWindow::openTemplate() {
 
+	mLoading = true;
+
 	QAction* action = qobject_cast<QAction*>(sender());
 
 	if (mSettings->templateNew) {
@@ -7789,6 +7791,10 @@ void MainWindow::openTemplate() {
 	}
 
 	parseVMT(vmt, true);
+
+	mVMTLoaded = true;
+	mLoading = false;
+
 	refreshRequested();
 }
 
