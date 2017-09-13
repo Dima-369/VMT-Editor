@@ -7794,7 +7794,6 @@ void MainWindow::openTemplate() {
 
 	parseVMT(vmt, true);
 
-	mVMTLoaded = true;
 	mLoading = false;
 
 	refreshRequested();
