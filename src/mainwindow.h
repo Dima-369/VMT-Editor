@@ -402,6 +402,8 @@ public slots:
 
 	void sortDroppedTextures( const QMimeData* mimeData );
 
+	void paste();
+
 private slots:
 
 	void previewTexture();

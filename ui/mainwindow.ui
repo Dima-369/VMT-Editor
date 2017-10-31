@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3288</y>
+             <y>0</y>
              <width>926</width>
              <height>5883</height>
             </rect>
@@ -19967,6 +19967,9 @@ QToolButton:pressed
     <addaction name="menu_custom"/>
     <addaction name="separator"/>
     <addaction name="action_hideAll"/>
+    <addaction name="action_Paste"/>
+    <addaction name="action_Undo"/>
+    <addaction name="action_Redo"/>
    </widget>
    <widget class="QMenu" name="action_games">
     <property name="title">
@@ -20931,6 +20934,30 @@ border: 1px solid #222;
   <action name="action_CreateBlendTexture">
    <property name="text">
     <string>Create Blend Tool Texture</string>
+   </property>
+  </action>
+  <action name="action_Paste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="action_Undo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_Redo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
  </widget>

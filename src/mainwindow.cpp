@@ -230,6 +230,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->action_CreateBlendTexture, SIGNAL(triggered()), this, SLOT(createBlendToolTexture()));
 
+	connect( ui->action_Paste,              SIGNAL(triggered()), this, SLOT(paste()));
+
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_refractAmount->setDoubleSlider(ui->horizontalSlider_refractAmount);
@@ -5951,6 +5954,16 @@ void MainWindow::refreshRequested() {
 
 void MainWindow::clearMessageLog() {
 	mLogger->clear();
+}
+
+void MainWindow::paste() {
+
+	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::End,
+									   QTextCursor::MoveAnchor);
+	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::Left,
+									   QTextCursor::MoveAnchor);
+	ui->vmtPreviewTextEdit->paste();
+	vmtPreviewParse();
 }
 
 void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
