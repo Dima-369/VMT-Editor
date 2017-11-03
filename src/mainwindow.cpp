@@ -230,6 +230,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->action_CreateBlendTexture, SIGNAL(triggered()), this, SLOT(createBlendToolTexture()));
 
+	connect( ui->action_Paste,              SIGNAL(triggered()), this, SLOT(paste()));
+
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_refractAmount->setDoubleSlider(ui->horizontalSlider_refractAmount);
@@ -270,6 +273,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_envmapAniso->setDoubleSlider(ui->horizontalSlider_envmapAniso);
 
 	ui->doubleSpinBox_boost->setDoubleSlider(ui->horizontalSlider_boost, 8);
+	ui->doubleSpinBox_albedoBoost->setDoubleSlider(ui->horizontalSlider_albedoBoost, 8);
 	ui->doubleSpinBox_fresnelRangesX->setDoubleSlider(ui->horizontalSlider_fresnelRanges);
 
 	ui->doubleSpinBox_bumpdetailscale->setDoubleSlider(ui->horizontalSlider_bumpdetailscale);
@@ -500,8 +504,10 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 			int v2 = v1[0].toInt() * 10000 +
 					 v1[1].toInt() * 100 +
 					 v1[2].toInt();
-			if (cv2 < v2)
+			if (cv2 < v2) {
+				ui->menuHelp->setTitle("New version avaiable");
 				Info(QString("New version available: %1").arg(v));
+			}
 		}
 	}
 
@@ -603,7 +609,13 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	ui->verticalLayout_preview_basetexture2->addWidget(glWidget_diffuse2);
 
-	glWidget_spec = new GLWidget_Spec(this);
+	glWidget_envmap = new GLWidget_Spec(this, 0);
+		glWidget_envmap->setMinimumSize( QSize(192, 192) );
+		glWidget_envmap->setMaximumSize( QSize(192, 192) );
+
+	ui->verticalLayout_preview_envmap1->addWidget(glWidget_envmap);
+
+	glWidget_spec = new GLWidget_Spec(this, 1);
 		glWidget_spec->setMinimumSize( QSize(192, 192) );
 		glWidget_spec->setMaximumSize( QSize(192, 192) );
 
@@ -3939,6 +3951,9 @@ VmtFile MainWindow::makeVMT()
 		if( ui->doubleSpinBox_boost->value() != 1.0 )
 			vmtFile.parameters.insert( "$phongboost", Str( ui->doubleSpinBox_boost->value() ));
 
+		if( ui->doubleSpinBox_albedoBoost->value() != 1.0 )
+			vmtFile.parameters.insert( "$phongalbedoboost", Str( ui->doubleSpinBox_albedoBoost->value() ));
+
 		/*if( ui->doubleSpinBox_fresnelRangesX->value() != 0.0 ||
 			ui->doubleSpinBox_fresnelRangesY->value() != 0.5 ||
 			ui->doubleSpinBox_fresnelRangesZ->value() != 1.0 )*/
@@ -4557,6 +4572,7 @@ void MainWindow::resetWidgets() {
 	}
 	glWidget_diffuse1->reset();
 	glWidget_diffuse2->reset();
+	glWidget_envmap->setVisible(false);
 	glWidget_spec->setVisible(false);
 
 	//----------------------------------------------------------------------------------------//
@@ -5304,15 +5320,19 @@ void MainWindow::togglePhong() {
 
 		if(!ui->groupBox_phong->isVisible()) {
 
-			if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			if( ui->checkBox_exponentBaseAlpha->isChecked() &&
+				ui->checkBox_exponentBaseAlpha->isEnabled() )
+				previewTexture( 4, ui->lineEdit_diffuse->text() );
 			else
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				previewTexture( 4, ui->lineEdit_bumpmap->text() );
+
+			if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() )
+				previewTexture( 1, ui->lineEdit_diffuse->text() );
 
 		} else {
-
-			if( !ui->groupBox_shadingReflection->isVisible() )
-				previewTexture( GLWidget_Spec::None, "" );
+			previewTexture( 4, "" );
+			if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() )
+				previewTexture( 0, ui->lineEdit_diffuse->text() );
 		}
 	}
 
@@ -5329,19 +5349,19 @@ void MainWindow::togglePhongBrush() {
 
 void MainWindow::toggleReflection() {
 
-	if( ui->groupBox_shadingReflection->isVisible() && !ui->groupBox_phong->isVisible() )
-		previewTexture( GLWidget_Spec::None, "" );
+	if( ui->groupBox_shadingReflection->isVisible() )
+		previewTexture( 0, "" );
 
 	else {
 
 		if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && ui->action_phong->isEnabled() )
-			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			previewTexture( 1, ui->lineEdit_diffuse->text() );
 
 		else if( ui->checkBox_basealpha->isChecked() && ui->checkBox_basealpha->isEnabled() && !ui->action_phong->isEnabled())
-			previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+			previewTexture( 0, ui->lineEdit_diffuse->text() );
 
 		else if( ui->checkBox_normalalpha->isChecked() && ui->checkBox_normalalpha->isEnabled() )
-			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+			previewTexture( 1, ui->lineEdit_bumpmap->text() );
 	}
 
 	utils::toggle(this, ui->action_reflection, ui->groupBox_shadingReflection);
@@ -5947,6 +5967,16 @@ void MainWindow::clearMessageLog() {
 	mLogger->clear();
 }
 
+void MainWindow::paste() {
+
+	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::End,
+									   QTextCursor::MoveAnchor);
+	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::Left,
+									   QTextCursor::MoveAnchor);
+	ui->vmtPreviewTextEdit->paste();
+	vmtPreviewParse();
+}
+
 void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 
 	if (mimeData->hasUrls())
@@ -6106,16 +6136,18 @@ void MainWindow::finishedLoading()
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
 			if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+				previewTexture( 1, ui->lineEdit_diffuse->text() );
 			else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
-				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+				previewTexture( 0, ui->lineEdit_diffuse->text() );
 
-		} else if( ui->groupBox_phong->isVisible() ) {
+		}
 
-			if( ui->checkBox_phongBaseAlpha->isChecked() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+		if( ui->groupBox_phong->isVisible() ) {
+
+			if( ui->checkBox_exponentBaseAlpha->isChecked() )
+				previewTexture( 4, ui->lineEdit_diffuse->text() );
 			else
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				previewTexture( 4, ui->lineEdit_bumpmap->text() );
 
 		}
 
@@ -6126,14 +6158,15 @@ void MainWindow::finishedLoading()
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
 			if( ui->checkBox_normalalpha->isChecked() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				previewTexture( 1, ui->lineEdit_bumpmap->text() );
 
-		} else if( ui->groupBox_phong->isVisible() ) {
+		}
+		if( ui->groupBox_phong->isVisible() ) {
 
-			if( ui->checkBox_phongBaseAlpha->isChecked() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+			if( ui->checkBox_exponentBaseAlpha->isChecked() )
+				previewTexture( 4, ui->lineEdit_diffuse->text() );
 			else
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+				previewTexture( 4, ui->lineEdit_bumpmap->text() );
 		}
 
 	} else if( thread->object == "preview_basetexture2" ) {
@@ -6143,6 +6176,10 @@ void MainWindow::finishedLoading()
 	} else if( thread->object == "preview_bumpmap2" )  {
 
 		glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + thread->output + ".png" );
+
+	} else if( thread->object == "preview_envmap1" ) {
+
+		glWidget_envmap->updateValues(thread->mode, "Cache/" + thread->output + ".png" );
 
 	} else if( thread->object == "preview_spec1" ) {
 
@@ -6241,10 +6278,20 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 				glWidget_diffuse1->loadTexture("", glWidget_diffuse1->getBumpmap());
 
 				if( ui->groupBox_shadingReflection->isVisible() && ui->checkBox_basealpha->isChecked() )
-					previewTexture( GLWidget_Spec::None, "" );
+					previewTexture( 0, "" );
+				if( ui->groupBox_phong->isVisible() && ui->checkBox_exponentBaseAlpha->isChecked() )
+					previewTexture( 4, "" );
 
-			} else if( object == "preview_bumpmap1" )
+			} else if( object == "preview_bumpmap1" ) {
+
 				glWidget_diffuse1->loadTexture(glWidget_diffuse1->getDiffuse(), "");
+
+				if( ui->groupBox_shadingReflection->isVisible() && ui->checkBox_normalalpha->isChecked() )
+					previewTexture( 0, "" );
+				if( ui->groupBox_phong->isVisible() && !ui->checkBox_exponentBaseAlpha->isChecked() )
+					previewTexture( 4, "" );
+
+			}
 
 			else if( object == "preview_basetexture2" )
 				glWidget_diffuse2->loadTexture("", glWidget_diffuse2->getBumpmap());
@@ -6317,17 +6364,18 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 				if( ui->groupBox_shadingReflection->isVisible() ) {
 
 					if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+						previewTexture( 1, ui->lineEdit_diffuse->text() );
 					else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
-						previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
+						previewTexture( 0, ui->lineEdit_diffuse->text() );
 
+				}
 
-				} else if( ui->groupBox_phong->isVisible() ) {
+				if( ui->groupBox_phong->isVisible() ) {
 
-					if( ui->checkBox_phongBaseAlpha->isChecked() )
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+					if( ui->checkBox_exponentBaseAlpha->isChecked() )
+						previewTexture( 4, ui->lineEdit_diffuse->text() );
 					else
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+						previewTexture( 4, ui->lineEdit_bumpmap->text() );
 
 				}
 
@@ -6338,14 +6386,16 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 				if( ui->groupBox_shadingReflection->isVisible() ) {
 
 					if( ui->checkBox_normalalpha->isChecked() )
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+						previewTexture( 1, ui->lineEdit_bumpmap->text() );
 
-				} else if( ui->groupBox_phong->isVisible() ) {
+				}
 
-					if( ui->checkBox_phongBaseAlpha->isChecked() )
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+				if( ui->groupBox_phong->isVisible() ) {
+
+					if( ui->checkBox_exponentBaseAlpha->isChecked() )
+						previewTexture( 4, ui->lineEdit_diffuse->text() );
 					else
-						previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+						previewTexture( 4, ui->lineEdit_bumpmap->text() );
 				}
 			}
 
@@ -6383,9 +6433,39 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 	return false;
 }
 
-bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& texture ) {
+bool MainWindow::previewTexture( const int type, const QString& texture ) {
+
+	/* types:
+	 * 0 = ENVMAP inverted
+	 * 1 = ENVMAP normal
+	 *
+	 * 3 = ENVMAP lineedit
+	 * 4 = PHONG
+	 *
+	 */
 
 	checkCacheSize();
+
+	GLWidget_Spec* widget;
+	QString preview;
+
+	if (type <= 3) {
+		widget = glWidget_envmap;
+		preview = "preview_envmap1";
+	} else {
+		widget = glWidget_spec;
+		preview = "preview_spec1";
+	}
+
+	GLWidget_Spec::Mode mode;
+
+	if (type == 0) {
+		mode = GLWidget_Spec::Diffuse;
+	} else if (type == 3) {
+		mode = GLWidget_Spec::Mask;
+	} else {
+		mode = GLWidget_Spec::Bumpmap;
+	}
 
 	if( getCurrentGame().isEmpty() ) {
 
@@ -6400,19 +6480,19 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 		QFile vtfFile( texturePath + ".vtf" );
 		if( !vtfFile.exists() ) {
 
-			glWidget_spec->updateValues(mode, texture);
+			widget->updateValues(mode, texture);
 
 			return false;
 
 		} else {
 
-			glWidget_spec->updateValues(mode, texture);
+			widget->updateValues(mode, texture);
 		}
 
 		TextureThread* textureThread = new TextureThread(this);
 		connect(textureThread, SIGNAL(finished()), this, SLOT(finishedLoading()));
 
-		textureThread->object = "preview_spec1";
+		textureThread->object = preview;
 		textureThread->mode = mode;
 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
@@ -6420,7 +6500,7 @@ bool MainWindow::previewTexture( GLWidget_Spec::Mode mode, const QString& textur
 		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
 		if( cacheFile.exists() ) {
 
-			glWidget_spec->updateValues(mode, "Cache/" + textureThread->output);
+			widget->updateValues(mode, "Cache/" + textureThread->output);
 
 		} else {
 
@@ -7407,6 +7487,7 @@ void MainWindow::readSettings()
 	mSettings->changeName = setKey("changeName", false, mIniSettings);
 
 	mSettings->noNormalSharpen = setKey("noNormalSharpen", false, mIniSettings);
+	mSettings->uncompressedNormal = setKey("uncompressedNormal", false, mIniSettings);
 	mSettings->noGlossMip = setKey("noGlossMip", false, mIniSettings);
 
 	mSettings->useIndentation =
@@ -7740,6 +7821,8 @@ void MainWindow::openRecentFile()
 
 void MainWindow::openTemplate() {
 
+	mLoading = true;
+
 	QAction* action = qobject_cast<QAction*>(sender());
 
 	if (mSettings->templateNew) {
@@ -7785,6 +7868,9 @@ void MainWindow::openTemplate() {
 	}
 
 	parseVMT(vmt, true);
+
+	mLoading = false;
+
 	refreshRequested();
 }
 
@@ -7937,7 +8023,7 @@ void MainWindow::browseVTF()
 	else if (name == "toolButton_envmap" )
 		processVtf( "", "", ui->lineEdit_envmap );
 	else if (name == "toolButton_specmap" )
-		processVtf( "preview_spec1", "", ui->lineEdit_specmap );
+		processVtf( "preview_envmap1", "", ui->lineEdit_specmap );
 
 	else if (name == "toolButton_exponentTexture" )
 		processVtf( "preview_exponent", "", ui->lineEdit_exponentTexture );
@@ -8736,14 +8822,18 @@ void MainWindow::modifiedLineEdit( QString text )
 	if( caller->objectName() == "lineEdit_diffuse" ) {
 
 		if( ui->checkBox_basealpha->isChecked() && ui->groupBox_phong->isVisible() )
-			previewTexture( GLWidget_Spec::Bumpmap, text );
+			previewTexture( 1, text );
 		else if ( ui->checkBox_basealpha->isChecked() && !ui->groupBox_phong->isVisible())
-			previewTexture( GLWidget_Spec::Diffuse, text );
+			previewTexture( 0, text );
+		if( ui->checkBox_exponentBaseAlpha->isChecked() && ui->groupBox_phong->isVisible() )
+			previewTexture( 4, text );
 
 	} else if( caller->objectName() == "lineEdit_bumpmap" ) {
 
 		if( ui->checkBox_normalalpha->isChecked() )
-			previewTexture( GLWidget_Spec::Bumpmap, text );
+			previewTexture( 1, text );
+		if( ui->groupBox_phong->isVisible() )
+			previewTexture( 4, text );
 
 	} else if( caller->objectName() == "lineEdit_envmap" ) {
 
@@ -8891,14 +8981,14 @@ void MainWindow::modifiedLineEdit( QString text )
 			ui->checkBox_basealpha->setEnabled(true);
 			ui->checkBox_normalalpha->setEnabled(true);
 
-			previewTexture(GLWidget_Spec::Mask, "");
+			previewTexture(3, "");
 		}
 		else
 		{
 			ui->checkBox_basealpha->setDisabled(true);
 			ui->checkBox_normalalpha->setDisabled(true);
 
-			previewTexture(GLWidget_Spec::None, text);
+			previewTexture(3, text);
 		}
 	}
 	else if( caller->objectName() == "lineEdit_exponentTexture" ) {
@@ -9079,10 +9169,9 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->checkBox_phongNormalAlpha->setDisabled(true);
 
 			if ( ui->groupBox_phong->isVisible() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_diffuse->text() );
+				previewTexture( 1, ui->lineEdit_diffuse->text() );
 			else if  ( !ui->groupBox_phong->isVisible() ) {
-				previewTexture( GLWidget_Spec::Diffuse, ui->lineEdit_diffuse->text() );
-				Error("ASDASD");
+				previewTexture( 0, ui->lineEdit_diffuse->text() );
 			}
 
 		}
@@ -9101,8 +9190,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->toolButton_specmap->setEnabled( getCurrentGame() != "" );
 			ui->toolButton_specmap2->setEnabled( getCurrentGame() != "" );
 
-			if( !ui->groupBox_phong->isVisible() )
-				previewTexture( GLWidget_Spec::None, "" );
+			previewTexture( 0, "" );
 		}
 	}
 	else if( caller->objectName() == "checkBox_normalalpha" )
@@ -9121,7 +9209,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 
 			ui->checkBox_phongBaseAlpha->setDisabled(true);
 
-			previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
+			previewTexture( 1, ui->lineEdit_bumpmap->text() );
 		}
 		else
 		{
@@ -9137,10 +9225,18 @@ void MainWindow::modifiedCheckBox( bool enabled )
 			ui->toolButton_specmap->setEnabled( getCurrentGame() != "" );
 			ui->toolButton_specmap2->setEnabled( getCurrentGame() != "" );
 
-			if( ui->groupBox_phong->isVisible() )
-				previewTexture( GLWidget_Spec::Bumpmap, ui->lineEdit_bumpmap->text() );
-			else
-				previewTexture( GLWidget_Spec::None, "" );
+			previewTexture( 0, "" );
+		}
+	}
+	else if( caller->objectName() == "checkBox_exponentBaseAlpha" )
+	{
+		if(enabled)
+		{
+			previewTexture( 4, ui->lineEdit_diffuse->text() );
+		}
+		else
+		{
+			previewTexture( 4, ui->lineEdit_bumpmap->text() );
 		}
 	}
 	else if( caller->objectName() == "checkBox_expensive" )
@@ -10569,10 +10665,20 @@ QString MainWindow::outputParameters( int type, bool noAlpha )
 	QMultiMap<QString, QString> arguments;
 
 	QString tmp;
-	if (noAlpha && mSettings->removeAlpha)
-		arguments.insert("-alphaformat", "DXT1");
-	else
-		arguments.insert("-alphaformat", "DXT5");
+	if (type == 2 && mSettings->uncompressedNormal) {
+		if (noAlpha && mSettings->removeAlpha) {
+			arguments.insert("-format", "BGR888");
+			arguments.insert("-alphaformat", "BGR888");
+		} else {
+			arguments.insert("-format", "BGR888");
+			arguments.insert("-alphaformat", "BGRA8888");
+		}
+	} else {
+		if (noAlpha && mSettings->removeAlpha)
+			arguments.insert("-alphaformat", "DXT1");
+		else
+			arguments.insert("-alphaformat", "DXT5");
+	}
 
 	tmp = mSettings->mipmapFilter;
 	if(tmp != "Box") {
@@ -10615,6 +10721,7 @@ QString MainWindow::outputParameters( int type, bool noAlpha )
 			else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
 		}
 	}
+
 	if (type == 4 && mSettings->noGlossMip)
 		arguments.insert("-nomipmaps", "");
 
@@ -10651,6 +10758,7 @@ void MainWindow::checkForUpdates()
 		mIniSettings->setValue("latestVersion", getCurrentVersion());
 		Info(QString("You have the latest version: %1")
 			.arg(removeTrailingVersionZero(getCurrentVersion())));
+		ui->menuHelp->setTitle("Help");
 
 	} else {
 		const auto vs = versionToString(v);
@@ -11007,11 +11115,27 @@ void MainWindow::on_action_other_triggered(bool checked)
 void MainWindow::on_action_reflection_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_shadingReflection)
+
+	if(!ui->groupBox_shadingReflection->isVisible()) {
+		previewTexture( 0, "" );
+	}
 }
 
 void MainWindow::on_action_phong_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_phong)
+
+	if(ui->groupBox_phong->isVisible()) {
+
+		if( ui->checkBox_exponentBaseAlpha->isChecked() )
+			previewTexture( 4, ui->lineEdit_diffuse->text() );
+		else
+			previewTexture( 4, ui->lineEdit_bumpmap->text() );
+
+	} else {
+		previewTexture( 4, "" );
+	}
+
 }
 
 void MainWindow::on_action_phongBrush_triggered(bool checked)

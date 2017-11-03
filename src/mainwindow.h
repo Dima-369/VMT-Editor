@@ -123,6 +123,7 @@ private:
 
 	GLWidget_Diffuse1* glWidget_diffuse1;
 	GLWidget_Diffuse2* glWidget_diffuse2;
+	GLWidget_Spec* glWidget_envmap;
 	GLWidget_Spec* glWidget_spec;
 
 	QString loadedVmtFile;
@@ -261,7 +262,7 @@ private:
 
 	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
 
-	bool previewTexture( GLWidget_Spec::Mode mode, const QString& texture );
+	bool previewTexture( const int type, const QString& texture );
 
 	void saveSettings();
 
@@ -401,6 +402,8 @@ public slots:
 		const QString& objectName, const QString& relativeFilePath);
 
 	void sortDroppedTextures( const QMimeData* mimeData );
+
+	void paste();
 
 private slots:
 

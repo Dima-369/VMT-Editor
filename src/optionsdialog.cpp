@@ -91,6 +91,7 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 	ui->comboBox_mipmapSharpenFilter->setCurrentIndex(ui->comboBox_mipmapSharpenFilter->findText(settings->mipmapSharpenFilter, Qt::MatchFixedString));
 
 	ui->checkBox_noNormalSharpen->setChecked( settings->noNormalSharpen );
+	ui->checkBox_uncompressedNormal->setChecked( settings->uncompressedNormal );
 	ui->checkBox_noGlossMip->setChecked( settings->noGlossMip );
 
 	//----------------------------------------------------------------------------------------//
@@ -414,6 +415,18 @@ void OptionsDialog::saveSettings()
 		if(mSettings->noNormalSharpen) {
 			mSettings->noNormalSharpen = false;
 			mIniSettings->setValue( "noNormalSharpen", "0" );
+		}
+	}
+
+	if( ui->checkBox_uncompressedNormal->isChecked() ) {
+		if( !mSettings->uncompressedNormal ) {
+			mSettings->uncompressedNormal = true;
+			mIniSettings->setValue( "uncompressedNormal", "1" );
+		}
+	} else {
+		if(mSettings->uncompressedNormal) {
+			mSettings->uncompressedNormal = false;
+			mIniSettings->setValue( "uncompressedNormal", "0" );
 		}
 	}
 

@@ -58,6 +58,7 @@ bool phong::hasChanged(MainWindow::GroupBoxes groupBox, Ui::MainWindow *ui)
 		TEX(ui->lineEdit_exponentTexture)
 		TEX(ui->lineEdit_phongWarp)
 		VAL(ui->doubleSpinBox_boost, "1")
+		VAL(ui->doubleSpinBox_albedoBoost, "1")
 		CHE(ui->checkBox_exponentBaseAlpha)
 		CHE(ui->checkBox_baseLuminanceMask)
 		CHE(ui->checkBox_halfLambert)
@@ -108,6 +109,7 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 	ui->lineEdit_phongWarp->clear();
 
 	ui->doubleSpinBox_boost->setValue(1.0);
+	ui->doubleSpinBox_albedoBoost->setValue(1.0);
 
 	ui->checkBox_exponentBaseAlpha->setChecked(false);
 	ui->checkBox_baseLuminanceMask->setChecked(false);
@@ -388,6 +390,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	//TEXTURE("$phongexponenttexture", ui->lineEdit_exponentTexture)
 	//TEXTURE("$phongwarptexture", ui->lineEdit_phongWarp)
 	DOUBLE("$phongboost", "1", ui->doubleSpinBox_boost)
+	DOUBLE("$phongalbedoboost", "1", ui->doubleSpinBox_albedoBoost)
 	BOOL("$basemapalphaphongmask", ui->checkBox_exponentBaseAlpha)
 	BOOL("$basemapluminancephongmask", ui->checkBox_baseLuminanceMask)
 	BOOL("$halflambert", ui->checkBox_halfLambert)

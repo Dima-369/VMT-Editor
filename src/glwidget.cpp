@@ -59,7 +59,12 @@ void GLWidget::paintGL()
 	if (texture == 0)
 		return;
 
+	glDisable(GL_BLEND);
+
 	opengl::drawQuad(offset, texture);
+
+	glEnable(GL_BLEND);
+
 	opengl::drawQuad(width(), height(), textTexture);
 }
 

@@ -133,5 +133,6 @@
         <file alias="blendmod">misc/texture_overlays/01blendmod.png</file>
         <file alias="detail2">misc/texture_overlays/02detail.png</file>
         <file alias="spec2">misc/texture_overlays/02spec.png</file>
+        <file alias="envmap1">misc/texture_overlays/01envmap.png</file>
     </qresource>
 </RCC>
