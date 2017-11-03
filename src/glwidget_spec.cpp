@@ -1,9 +1,10 @@
 #include "glwidget_spec.h"
 
-GLWidget_Spec::GLWidget_Spec(QWidget* parent) :
+GLWidget_Spec::GLWidget_Spec(QWidget* parent, const int &envmap) :
 	QOpenGLWidget(parent),
 	texture(0),
-	textTexture(0)
+	textTexture(0),
+	type(envmap)
 {
 	setObjectName("preview_spec1");
 
@@ -29,7 +30,11 @@ void GLWidget_Spec::initializeGL()
 
 	opengl::initialize(this);
 
-	textTexture = opengl::load(":/overlays/spec1");
+	if (type == 0) {
+		textTexture = opengl::load(":/overlays/envmap1");
+	} else {
+		textTexture = opengl::load(":/overlays/spec1");
+	}
 }
 
 void GLWidget_Spec::resizeGL(int w, int h)
@@ -49,7 +54,12 @@ void GLWidget_Spec::paintGL()
 	if (texture == 0)
 		return;
 
+	glDisable(GL_BLEND);
+
 	opengl::drawQuad(offset, texture);
+
+	glEnable(GL_BLEND);
+
 	opengl::drawQuad(width(), height(), textTexture);
 }
 

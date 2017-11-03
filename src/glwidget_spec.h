@@ -25,7 +25,7 @@ public:
 		None
 	};
 
-	GLWidget_Spec(QWidget* parent);
+	GLWidget_Spec(QWidget* parent, const int &envmap);
 
 	~GLWidget_Spec();
 
@@ -50,6 +50,8 @@ private:
 
 	QOpenGLTexture *texture;
 	QOpenGLTexture *textTexture;
+
+	int type;
 
 	// We need this for the preview
 	// the filepath is not stored because the texture is constructed in

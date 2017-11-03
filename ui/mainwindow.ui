@@ -1320,7 +1320,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-3639</y>
+             <y>0</y>
              <width>926</width>
              <height>5907</height>
             </rect>
@@ -1371,10 +1371,10 @@ QGroupBox::title {
                <layout class="QVBoxLayout" name="verticalLayout_preview_detail2"/>
               </item>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_preview_spec1"/>
+               <layout class="QVBoxLayout" name="verticalLayout_preview_envmap1"/>
               </item>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_preview_spec2"/>
+               <layout class="QVBoxLayout" name="verticalLayout_preview_spec1"/>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_30">
