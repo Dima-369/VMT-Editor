@@ -1,4 +1,4 @@
-# VMT Editor ![version](https://img.shields.io/badge/version-1.3.8-blue.svg)
+# VMT Editor ![version](https://img.shields.io/badge/version-1.3.9-blue.svg)
 
 [Official website](https://gira-x.github.io/VMT-Editor/)
 
