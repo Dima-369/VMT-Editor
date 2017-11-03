@@ -7426,6 +7426,7 @@ void MainWindow::readSettings()
 	mSettings->changeName = setKey("changeName", false, mIniSettings);
 
 	mSettings->noNormalSharpen = setKey("noNormalSharpen", false, mIniSettings);
+	mSettings->uncompressedNormal = setKey("uncompressedNormal", false, mIniSettings);
 	mSettings->noGlossMip = setKey("noGlossMip", false, mIniSettings);
 
 	mSettings->useIndentation =
@@ -10603,10 +10604,20 @@ QString MainWindow::outputParameters( int type, bool noAlpha )
 	QMultiMap<QString, QString> arguments;
 
 	QString tmp;
-	if (noAlpha && mSettings->removeAlpha)
-		arguments.insert("-alphaformat", "DXT1");
-	else
-		arguments.insert("-alphaformat", "DXT5");
+	if (type == 2 && mSettings->uncompressedNormal) {
+		if (noAlpha && mSettings->removeAlpha) {
+			arguments.insert("-format", "BGR888");
+			arguments.insert("-alphaformat", "BGR888");
+		} else {
+			arguments.insert("-format", "BGR888");
+			arguments.insert("-alphaformat", "BGRA8888");
+		}
+	} else {
+		if (noAlpha && mSettings->removeAlpha)
+			arguments.insert("-alphaformat", "DXT1");
+		else
+			arguments.insert("-alphaformat", "DXT5");
+	}
 
 	tmp = mSettings->mipmapFilter;
 	if(tmp != "Box") {
@@ -10649,6 +10660,7 @@ QString MainWindow::outputParameters( int type, bool noAlpha )
 			else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
 		}
 	}
+
 	if (type == 4 && mSettings->noGlossMip)
 		arguments.insert("-nomipmaps", "");
 

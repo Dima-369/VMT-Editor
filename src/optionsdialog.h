@@ -80,6 +80,8 @@ struct Settings
 
 	bool noNormalSharpen;
 
+	bool uncompressedNormal;
+
 	bool noGlossMip;
 
 	QString mipmapFilter;

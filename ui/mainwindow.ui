@@ -19764,8 +19764,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>117</width>
+             <height>70</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -19968,8 +19968,6 @@ QToolButton:pressed
     <addaction name="separator"/>
     <addaction name="action_hideAll"/>
     <addaction name="action_Paste"/>
-    <addaction name="action_Undo"/>
-    <addaction name="action_Redo"/>
    </widget>
    <widget class="QMenu" name="action_games">
     <property name="title">

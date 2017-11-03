@@ -799,9 +799,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-218</y>
+           <y>-278</y>
            <width>522</width>
-           <height>1182</height>
+           <height>1203</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
@@ -927,7 +927,14 @@ QSlider::handle:vertical {
             <item>
              <widget class="QCheckBox" name="checkBox_noNormalSharpen">
               <property name="text">
-               <string>No mipmap sharpen filter on normal</string>
+               <string>No mipmap sharpen filter on normal maps</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_uncompressedNormal">
+              <property name="text">
+               <string>Uncompressed normal maps</string>
               </property>
              </widget>
             </item>
