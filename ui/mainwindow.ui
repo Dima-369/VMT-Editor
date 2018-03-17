@@ -839,8 +839,8 @@ QSlider:selected, QTabBar:tab:selected {
 }
 
 QSlider::handle:horizontal {
-    background: #666;
-    border: 0px solid #666;
+    background: #777;
+    border: 0px solid #777;
 	border-radius: 6px;
     width: 13px;
     margin: -4px 0px;
@@ -848,7 +848,7 @@ QSlider::handle:horizontal {
 }
 
 QSlider::handle:horizontal::hover {
-    background: #777;
+    background: #888;
  
 }
 
@@ -1325,7 +1325,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-1850</y>
+             <y>-2799</y>
              <width>926</width>
              <height>5907</height>
             </rect>
@@ -7841,6 +7841,34 @@ QToolButton:pressed
                 <layout class="QGridLayout" name="gridLayout_2">
                  <item row="0" column="0">
                   <layout class="QGridLayout" name="gridLayout_27">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_20">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Opacity:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="0" column="1" colspan="3">
                     <layout class="QHBoxLayout" name="horizontalLayout_39">
                      <item>
@@ -7923,34 +7951,6 @@ QToolButton:pressed
                      </item>
                     </layout>
                    </item>
-                   <item row="0" column="0">
-                    <widget class="QLabel" name="label_20">
-                     <property name="enabled">
-                      <bool>true</bool>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>100</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Opacity:</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                    </widget>
-                   </item>
                    <item row="3" column="2">
                     <widget class="QCheckBox" name="checkBox_decal">
                      <property name="minimumSize">
@@ -7970,34 +7970,6 @@ QToolButton:pressed
                      </property>
                      <property name="text">
                       <string>Decal</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QCheckBox" name="checkBox_noCull">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>120</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Two-sided</string>
                      </property>
                     </widget>
                    </item>
@@ -8029,6 +8001,34 @@ QToolButton:pressed
                      </property>
                     </widget>
                    </item>
+                   <item row="3" column="1">
+                    <widget class="QCheckBox" name="checkBox_noCull">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Two-sided</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="2" column="1">
                     <widget class="QCheckBox" name="checkBox_transparent">
                      <property name="sizePolicy">
@@ -8057,6 +8057,34 @@ QToolButton:pressed
                      </property>
                     </widget>
                    </item>
+                   <item row="2" column="2">
+                    <widget class="QCheckBox" name="checkBox_additive">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Additive</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="1" column="2" colspan="2">
                     <layout class="QHBoxLayout" name="horizontalLayout_12">
                      <item>
@@ -8072,7 +8100,7 @@ QToolButton:pressed
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>74</width>
+                         <width>0</width>
                          <height>0</height>
                         </size>
                        </property>
@@ -8147,34 +8175,6 @@ QToolButton:pressed
                       </spacer>
                      </item>
                     </layout>
-                   </item>
-                   <item row="2" column="2">
-                    <widget class="QCheckBox" name="checkBox_additive">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>100</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Additive</string>
-                     </property>
-                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -10667,6 +10667,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_fresnelReflection">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
@@ -10780,6 +10783,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_saturation">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
@@ -10924,6 +10930,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_25">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapTint">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
@@ -11133,6 +11142,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_43">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_contrast">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
@@ -11265,6 +11277,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_48">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapLight">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
@@ -11436,6 +11451,9 @@ QToolButton:pressed
                   <layout class="QHBoxLayout" name="horizontalLayout_61">
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapAniso">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="minimumSize">
                       <size>
                        <width>250</width>
