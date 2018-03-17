@@ -39,6 +39,7 @@
 
 #ifdef Q_OS_WIN
 #   include <Windows.h>
+#	pragma comment(lib,"user32.lib")
 #endif
 
 // Used for Parameter- and Valuelineedits as they need to modify the layout often
@@ -547,7 +548,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	setCentralWidget(ui->tabWidget);
 
 	ui->tabWidget->setCurrentIndex(0);
-	ui->tabWidget->setMinimumWidth(920);
+	ui->tabWidget->setMinimumWidth(740);
 
 	setCorner( Qt::TopRightCorner, Qt::RightDockWidgetArea );
 	setCorner( Qt::BottomRightCorner, Qt::RightDockWidgetArea );

@@ -668,33 +668,33 @@ QAbstractSpinBox {
 
 QAbstractSpinBox:up-button
 {
-    background-color: #333;
-	 border: 0px solid #333;  
+   /* background-color: #222;*/
+	 border: 0px solid #222;  
 	width: 20px;
 	subcontrol-position: top right;
 }
 
 QAbstractSpinBox:down-button
 {
-    background-color: #333;
+  /*  background-color: #222;*/
     width: 20px;
-	 border: 0px solid #333;
+	 border: 0px solid #222;
     subcontrol-position: bottom right;
 }
 
 QAbstractSpinBox:up-button:disabled
 {
-    background-color: #333;
-	 border: 0px solid #333;  
+   /* background-color: #222;*/
+	border: 0px solid #222;  
 	width: 20px;
 	subcontrol-position: top right;
 }
 
 QAbstractSpinBox:down-button:disabled
 {
-    background-color: #333;
+   /* background-color: #222;*/
     width: 20px;
-	 border: 0px solid #333;
+	 border: 0px solid #222;
     subcontrol-position: bottom right;
 }
 
@@ -706,7 +706,7 @@ QAbstractSpinBox::up-arrow,QAbstractSpinBox::up-arrow:disabled,QAbstractSpinBox:
 
 QAbstractSpinBox::up-arrow:hover
 {
-    background-color: #282828;
+    background-color: #222;
 }
 
 
@@ -718,7 +718,7 @@ QAbstractSpinBox::down-arrow,QAbstractSpinBox::down-arrow:disabled,QAbstractSpin
 }
 QAbstractSpinBox::down-arrow:hover
 {
-    background-color: #282828;
+    background-color: #222;
 }
 
 
@@ -822,7 +822,7 @@ QTreeView::branch:open:has-children:has-siblings:hover {
 
 QSlider::groove:horizontal {
     border: 0px solid #222;
-    height: 9px;
+    height: 5px;
     background: #222;
     margin: 0px 0px;
     
@@ -841,10 +841,15 @@ QSlider:selected, QTabBar:tab:selected {
 QSlider::handle:horizontal {
     background: #666;
     border: 0px solid #666;
-	border-radius: 0px;
-    width: 10px;
-    margin: -2px 0px;
+	border-radius: 6px;
+    width: 13px;
+    margin: -4px 0px;
   
+}
+
+QSlider::handle:horizontal::hover {
+    background: #777;
+ 
 }
 
 QSlider::handle:horizontal:disabled {
@@ -1071,7 +1076,7 @@ QGroupBox::title {
          <widget class="QScrollArea" name="scrollArea_parameter">
           <property name="minimumSize">
            <size>
-            <width>900</width>
+            <width>0</width>
             <height>0</height>
            </size>
           </property>
@@ -1320,7 +1325,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-1850</y>
              <width>926</width>
              <height>5907</height>
             </rect>
@@ -2172,7 +2177,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_refractBlur">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -2499,7 +2504,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_refractAmount">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4902,7 +4907,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_bumpdetailscale">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4984,7 +4989,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_bumpdetailscale2">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -7842,7 +7847,7 @@ QToolButton:pressed
                       <widget class="QSlider" name="horizontalSlider_opacity">
                        <property name="minimumSize">
                         <size>
-                         <width>200</width>
+                         <width>250</width>
                          <height>0</height>
                         </size>
                        </property>
@@ -8741,7 +8746,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -9058,7 +9063,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -9121,7 +9126,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -9197,7 +9202,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -9476,7 +9481,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_reflectivity_2">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -9605,7 +9610,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_reflectivity">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -10193,7 +10198,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_color2">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -10255,7 +10260,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_color1">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -10664,7 +10669,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_fresnelReflection">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -10777,7 +10782,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_saturation">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -10921,7 +10926,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_envmapTint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -11130,7 +11135,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_contrast">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -11262,7 +11267,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_envmapLight">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -11433,7 +11438,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_envmapAniso">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -11787,7 +11792,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_maskContrast">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -11987,7 +11992,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_exponent2">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -12091,7 +12096,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_phongAmount">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -12433,7 +12438,7 @@ QToolButton:pressed
                        <widget class="QSlider" name="horizontalSlider_spec_exponent2">
                         <property name="minimumSize">
                          <size>
-                          <width>200</width>
+                          <width>250</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -12523,7 +12528,7 @@ QToolButton:pressed
                        <widget class="QSlider" name="horizontalSlider_spec_maskContrast2">
                         <property name="minimumSize">
                          <size>
-                          <width>200</width>
+                          <width>250</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -12585,7 +12590,7 @@ QToolButton:pressed
                        <widget class="QSlider" name="horizontalSlider_spec_amount2">
                         <property name="minimumSize">
                          <size>
-                          <width>200</width>
+                          <width>250</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -12804,7 +12809,7 @@ QToolButton:pressed
                     <widget class="TintSlider" name="horizontalSlider_phongTint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -13103,13 +13108,13 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_exponent">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>150</width>
                        <height>0</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>200</width>
+                       <width>169</width>
                        <height>16777215</height>
                       </size>
                      </property>
@@ -13272,7 +13277,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_boost">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -13373,7 +13378,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_fresnelRanges">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -13548,7 +13553,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_albedoBoost">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -13670,7 +13675,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layer1tint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -13922,7 +13927,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layer2tint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14069,7 +14074,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerBorderTint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14216,7 +14221,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerBlendSoftness">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14295,7 +14300,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerBorderSoftness">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14374,7 +14379,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerBorderStrength">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14494,7 +14499,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerBorderOffset">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14732,7 +14737,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerEdgeOffset">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14848,7 +14853,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerEdgeStrength">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -14927,7 +14932,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_layerEdgeSoftness">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -15174,7 +15179,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_rimBoost">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -15218,7 +15223,7 @@ QToolButton:pressed
                   <widget class="QSlider" name="horizontalSlider_rimExponent">
                    <property name="minimumSize">
                     <size>
-                     <width>200</width>
+                     <width>250</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -15391,7 +15396,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_selfIllumTint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -16333,7 +16338,7 @@ QToolButton:pressed
                     <widget class="TintSlider" name="horizontalSlider_waterFogColor">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -16554,7 +16559,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_flashlightTint">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -16822,7 +16827,7 @@ QToolButton:pressed
                     <widget class="TintSlider" name="horizontalSlider_waterReflectColor">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -17041,7 +17046,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_waterReflectAmount">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -17172,7 +17177,7 @@ QToolButton:pressed
                     <widget class="TintSlider" name="horizontalSlider_waterRefractColor">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -17304,7 +17309,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_waterRefractAmount">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -17664,7 +17669,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayStartRadius">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -17802,7 +17807,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayStartHeight">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18039,7 +18044,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayStrength">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18115,7 +18120,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayScrumbleStrength">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18191,7 +18196,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayScrumbleSpeed">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18267,7 +18272,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayScrumbleFreq">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18331,7 +18336,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayScrumbleFalloff">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18395,7 +18400,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayFalloff">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18561,7 +18566,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswayspeedHighWind">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -18637,7 +18642,7 @@ QToolButton:pressed
                     <widget class="QSlider" name="horizontalSlider_treeswaySpeed">
                      <property name="minimumSize">
                       <size>
-                       <width>200</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
