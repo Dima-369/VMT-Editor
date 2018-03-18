@@ -95,6 +95,7 @@
         <file alias="clear">images/clear.png</file>
         <file alias="layerblend">images/layerblend.png</file>
         <file alias="reconvert_half">images/reconvert_half.png</file>
+        <file alias="reconvert_dialog">images/reconvert_dialog.png</file>
     </qresource>
     <qresource prefix="/files">
         <file alias="subGroups">misc/completions.txt</file>

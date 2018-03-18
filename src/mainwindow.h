@@ -258,9 +258,9 @@ private:
 
 	//----------------------------------------------------------------------------------------//
 
-	void changeColor( QPlainTextEdit* colorField );
+	void changeColor( QToolButton* colorField );
 
-	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
+	void changeColor( QToolButton *colorField, TintSlider* slider );
 
 	bool previewTexture( const int type, const QString& texture );
 
@@ -415,6 +415,8 @@ private slots:
 
 	void displayOptionsDialog();
 
+	void displayConversionDialogTexture(QString file);
+
 	void displayConversionDialog();
 
 	void displayBatchDialog();
@@ -432,6 +434,8 @@ private slots:
 	void fresnelYEdited( double value );
 
 	void addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox);
+
+	void openReconvertDialogAction();
 
 	void reconvertTexture();
 

@@ -7,8 +7,8 @@
 
 void phong::initialize(Ui::MainWindow *ui)
 {
-	ui->color_phongAmount->setStyleSheet(whiteBG);
-	ui->color_spec_amount2->setStyleSheet(whiteBG);
+	ui->toolButton_phongAmount->setStyleSheet(whiteBG);
+	ui->toolButton_spec_amount2->setStyleSheet(whiteBG);
 }
 
 utils::Preview phong::toggle(Ui::MainWindow *ui)
@@ -52,7 +52,7 @@ bool phong::hasChanged(MainWindow::GroupBoxes groupBox, Ui::MainWindow *ui)
 		VAL(ui->doubleSpinBox_fresnelRangesX, "0.5")
 		VAL(ui->doubleSpinBox_fresnelRangesY, "0.75")
 		VAL(ui->doubleSpinBox_fresnelRangesZ, "1")
-		COL(ui->color_phongTint)
+		COL(ui->toolButton_phongTint)
 		CHE(ui->checkBox_albedoTint)
 		VAL(ui->spinBox_exponent, "5")
 		TEX(ui->lineEdit_exponentTexture)
@@ -70,14 +70,14 @@ bool phong::hasChanged(MainWindow::GroupBoxes groupBox, Ui::MainWindow *ui)
 		START
 		// LightmappedGeneric shader
 		VAL(ui->doubleSpinBox_phongAmount, "1")
-		COL(ui->color_phongAmount)
+		COL(ui->toolButton_phongAmount)
 		VAL(ui->doubleSpinBox_phongAmountAlpha, "1")
 		VAL(ui->spinBox_spec_exponent2, "5")
 		VAL(ui->doubleSpinBox_maskContrast, "1")
 		VAL(ui->doubleSpinBox_maskBrightness, "1")
 		// WorldVertexTransition shader
 		VAL(ui->doubleSpinBox_spec_amount2, "1")
-		COL(ui->color_spec_amount2)
+		COL(ui->toolButton_spec_amount2)
 		VAL(ui->doubleSpinBox_spec_amountAlpha2, "1")
 		VAL(ui->spinBox_spec_exponent2, "5")
 		VAL(ui->doubleSpinBox_spec_maskContrast2, "1")
@@ -99,7 +99,7 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 	ui->doubleSpinBox_fresnelRangesY->setValue(0.75);
 	ui->doubleSpinBox_fresnelRangesZ->setValue(1.0);
 
-	ui->color_phongTint->setStyleSheet(whiteBG);
+	ui->toolButton_phongTint->setStyleSheet(whiteBG);
 
 	ui->checkBox_albedoTint->setChecked(false);
 
@@ -118,7 +118,7 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 
 	// LightmappedGeneric shader (WorldVertexTransition also has those!)
 	ui->doubleSpinBox_phongAmount->setValue(1.0);
-	ui->color_phongAmount->setStyleSheet(whiteBG);
+	ui->toolButton_phongAmount->setStyleSheet(whiteBG);
 	ui->doubleSpinBox_phongAmountAlpha->setValue(1.0);
 
 	ui->spinBox_exponent2->setValue(5);
@@ -132,7 +132,7 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 
 	// WorldVertexTransition shader
 	ui->doubleSpinBox_spec_amount2->setValue(1.0);
-	ui->color_spec_amount2->setStyleSheet(whiteBG);
+	ui->toolButton_spec_amount2->setStyleSheet(whiteBG);
 	ui->doubleSpinBox_spec_amountAlpha2->setValue(1.0);
 
 	ui->spinBox_spec_exponent2->setValue(5);
@@ -295,16 +295,16 @@ void processPhongAmount(const QString &parameter, const QString &value,
 
 	if (first) {
 		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-			ui->color_phongAmount);
+			ui->toolButton_phongAmount);
 		ui->doubleSpinBox_phongAmount->setValue(max);
 		ui->doubleSpinBox_phongAmountAlpha->setValue(alpha);
 		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-			ui->color_spec_amount2);
+			ui->toolButton_spec_amount2);
 		ui->doubleSpinBox_spec_amount2->setValue(max);
 		ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 	} else {
 		utils::applyBackgroundColor(red * 255, green * 255, blue * 255,
-			ui->color_spec_amount2);
+			ui->toolButton_spec_amount2);
 		ui->doubleSpinBox_spec_amount2->setValue(max);
 		ui->doubleSpinBox_spec_amountAlpha2->setValue(alpha);
 	}
@@ -383,7 +383,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 
 	// VertexLitGeneric shader
 	DO_WITH_VMT("$phongfresnelranges", processFresnelRanges)
-	COLOR("$phongtint", ui->color_phongTint,
+	COLOR("$phongtint", ui->toolButton_phongTint,
 		ui->horizontalSlider_phongTint);
 	BOOL("$phongalbedotint", ui->checkBox_albedoTint)
 	DO_WITH_VMT("$phongexponent", processExponent1)
