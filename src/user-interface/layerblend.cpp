@@ -17,16 +17,16 @@ bool layerblend::hasChanged(Ui::MainWindow *ui)
 
 	START
 	VAL(ui->doubleSpinBox_layer1tint, "1.0")
-	COL(ui->color_layer1tint)
+	COL(ui->toolButton_layer1tint)
 	VAL(ui->doubleSpinBox_layer2tint, "1.0")
-	COL(ui->color_layer2tint)
+	COL(ui->toolButton_layer2tint)
 	CHE(ui->checkBox_newLayerBlend)
 	VAL(ui->doubleSpinBox_layerBlendSoftness, "0.5")
 	VAL(ui->doubleSpinBox_layerBorderOffset, "0.0")
 	VAL(ui->doubleSpinBox_layerBorderSoftness, "0.5")
 	VAL(ui->doubleSpinBox_layerBorderStrength, "0.5")
 	VAL(ui->doubleSpinBox_layerBorderTint, "1.0")
-	COL(ui->color_layerBorderTint)
+	COL(ui->toolButton_layerBorderTint)
 	CHE(ui->checkBox_layerEdgeNormal)
 	CHE(ui->checkBox_layerEdgePunchin)
 	VAL(ui->doubleSpinBox_layerEdgeSoftness, "0.5")
@@ -45,8 +45,8 @@ void layerblend::resetWidgets(Ui::MainWindow *ui)
 {
 	ui->doubleSpinBox_layer1tint->setValue(1.0);
 	ui->doubleSpinBox_layer2tint->setValue(1.0);
-	ui->color_layer1tint->setStyleSheet(whiteBG);
-	ui->color_layer2tint->setStyleSheet(whiteBG);
+	ui->toolButton_layer1tint->setStyleSheet(whiteBG);
+	ui->toolButton_layer2tint->setStyleSheet(whiteBG);
 
 	ui->checkBox_newLayerBlend->setChecked(false);
 	ui->doubleSpinBox_layerBlendSoftness->setValue(0.5);
@@ -55,7 +55,7 @@ void layerblend::resetWidgets(Ui::MainWindow *ui)
 	ui->doubleSpinBox_layerBorderSoftness->setValue(0.5);
 	ui->doubleSpinBox_layerBorderStrength->setValue(0.5);
 	ui->doubleSpinBox_layerBorderTint->setValue(1.0);
-	ui->color_layerBorderTint->setStyleSheet(whiteBG);
+	ui->toolButton_layerBorderTint->setStyleSheet(whiteBG);
 
 	ui->checkBox_layerEdgeNormal->setChecked(false);
 	ui->checkBox_layerEdgePunchin->setChecked(false);
@@ -115,9 +115,9 @@ void layerblend::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	}
 	initializeLayerblend(ui, vmt);
 
-	COLOR("$layertint1", ui->color_layer1tint, ui->doubleSpinBox_layer1tint)
-	COLOR("$layertint2", ui->color_layer2tint, ui->doubleSpinBox_layer2tint)
-	COLOR("$layerbordertint", ui->color_layerBorderTint, ui->doubleSpinBox_layerBorderTint)
+	COLOR("$layertint1", ui->toolButton_layer1tint, ui->doubleSpinBox_layer1tint)
+	COLOR("$layertint2", ui->toolButton_layer2tint, ui->doubleSpinBox_layer2tint)
+	COLOR("$layerbordertint", ui->toolButton_layerBorderTint, ui->doubleSpinBox_layerBorderTint)
 	BOOL("$newlayerblending", ui->checkBox_newLayerBlend)
 	//BOOL("$layeredgenormal", ui->checkBox_layerEdgeNormal)
 	//BOOL("$layeredgepunchin", ui->checkBox_layerEdgePunchin)

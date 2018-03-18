@@ -321,15 +321,15 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_reflectivity->setDoubleSlider(ui->horizontalSlider_reflectivity);
 	ui->doubleSpinBox_reflectivity_2->setDoubleSlider(ui->horizontalSlider_reflectivity_2);
 	ui->doubleSpinBox_selfIllumTint->setDoubleSlider(ui->horizontalSlider_selfIllumTint);
-	ui->horizontalSlider_phongTint->initialize(ui->color_phongTint);
-	//ui->horizontalSlider_envmapTint->initialize(ui->color_envmapTint);
-	//ui->horizontalSlider_selfIllumTint->initialize(ui->color_selfIllumTint);
-	//ui->horizontalSlider_reflectivity->initialize(ui->color_reflectivity);
-	//ui->horizontalSlider_reflectivity_2->initialize(ui->color_reflectivity_2);
+	ui->horizontalSlider_phongTint->initialize(ui->toolButton_phongTint);
+	//ui->horizontalSlider_envmapTint->initialize(ui->toolButton_envmapTint);
+	//ui->horizontalSlider_selfIllumTint->initialize(ui->toolButton_selfIllumTint);
+	//ui->horizontalSlider_reflectivity->initialize(ui->toolButton_reflectivity);
+	//ui->horizontalSlider_reflectivity_2->initialize(ui->toolButton_reflectivity_2);
 
-	ui->horizontalSlider_waterReflectColor->initialize(ui->color_reflectionTint);
-	ui->horizontalSlider_waterRefractColor->initialize(ui->color_refractionTint);
-	ui->horizontalSlider_waterFogColor->initialize(ui->color_fogTint);
+	ui->horizontalSlider_waterReflectColor->initialize(ui->toolButton_reflectionTint);
+	ui->horizontalSlider_waterRefractColor->initialize(ui->toolButton_refractionTint);
+	ui->horizontalSlider_waterFogColor->initialize(ui->toolButton_fogTint);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -565,20 +565,20 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	//----------------------------------------------------------------------------------------//
 
-	ui->color_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_phongTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_reflectionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_refractionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_fogTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_refractTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
-	ui->color_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
-	ui->color_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
-	ui->color_layer1tint->setStyleSheet("background-color: rgb(255, 255, 255)");
-	ui->color_layer2tint->setStyleSheet("background-color: rgb(255, 255, 255)");
-	ui->color_layerBorderTint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_phongTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_reflectionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_refractionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_fogTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_refractTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_reflectivity->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_reflectivity_2->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_layer1tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_layer2tint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_layerBorderTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -1231,7 +1231,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$reflectivity") ).isEmpty() ) {
 		applyColor("$reflectivity", value,
-			ui->color_reflectivity,
+			ui->toolButton_reflectivity,
 			ui->doubleSpinBox_reflectivity, ui);
 
 		showOther = true;
@@ -1241,7 +1241,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) )
 			Error("$reflectivity is only works with WorldVertexTransition shader!")
 		applyColor("$reflectivity2", value,
-			ui->color_reflectivity_2,
+			ui->toolButton_reflectivity_2,
 			ui->doubleSpinBox_reflectivity_2, ui);
 
 		showOther = true;
@@ -1942,7 +1942,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			Error("$envmaptint is only supported with $envmap!")
 
 		applyColor("$envmaptint", value,
-			ui->color_envmapTint,
+			ui->toolButton_envmapTint,
 			ui->doubleSpinBox_envmapTint, ui);
 
 		showShadingReflection = true;
@@ -2126,7 +2126,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			Error("$selfillumtint only works with \"$selfillum 1\"!")
 
 		applyColor("$selfillumtint", value,
-			ui->color_selfIllumTint,
+			ui->toolButton_selfIllumTint,
 			ui->doubleSpinBox_selfIllumTint, ui);
 
 		showSelfIllumination = true;
@@ -2737,9 +2737,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		if( (vmt.shaderName != "Refract") && (vmt.shaderName != "Water") )
 			Error("$refracttint only works with the Refract or Water shaders!")
 
-		QPlainTextEdit* colorWidget = (vmt.shader == Shader::S_Water) 
-			? ui->color_refractionTint
-			: ui->color_refractTint;
+		QToolButton* colorWidget = (vmt.shader == Shader::S_Water)
+			? ui->toolButton_refractionTint
+			: ui->toolButton_refractTint;
 
 		applyBackgroundColor("$refracttint", value, colorWidget,
 			ui->horizontalSlider_waterRefractColor, ui);
@@ -2825,7 +2825,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			Error("$fogcolor only works with the Water shader!")
 
 		applyBackgroundColor("$fogcolor", value,
-			ui->color_fogTint,
+			ui->toolButton_fogTint,
 			ui->horizontalSlider_waterFogColor, ui);
 
 		showWaterFog = true;
@@ -3188,7 +3188,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	 		Error("$reflecttint only works with \"$abovewater 1\"!")
 
 		applyBackgroundColor("$reflecttint", value,
-			ui->color_reflectionTint,
+			ui->toolButton_reflectionTint,
 			ui->horizontalSlider_waterReflectColor, ui);
 
 		showWaterReflection = true;
@@ -3473,7 +3473,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$color") ).isEmpty() )
 	{
 		QString col1 = "$color";
-		utils::applyColor(col1, value, ui->color_color1, ui->doubleSpinBox_color1, ui, true);
+		utils::applyColor(col1, value, ui->toolButton_color1, ui->doubleSpinBox_color1, ui, true);
 
 		showColor = true;
 	}
@@ -3481,7 +3481,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$color2") ).isEmpty() )
 	{
 		QString col1 = "$color2";
-		utils::applyColor(col1, value, ui->color_color2, ui->doubleSpinBox_color2, ui);
+		utils::applyColor(col1, value, ui->toolButton_color2, ui->doubleSpinBox_color2, ui);
 
 		showColor = true;
 	}
@@ -3905,12 +3905,12 @@ VmtFile MainWindow::makeVMT()
 		if( ui->doubleSpinBox_seamlessScale->isEnabled() && ui->doubleSpinBox_seamlessScale->value() != 0.0 )
 			vmtFile.parameters.insert( "$seamless_scale", Str( ui->doubleSpinBox_seamlessScale->value() ));
 
-		tmp = toParameterBig(utils::getBG(ui->color_reflectivity),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_reflectivity),
 							 ui->doubleSpinBox_reflectivity->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity", tmp );
 
-		tmp = toParameterBig(utils::getBG(ui->color_reflectivity_2),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_reflectivity_2),
 							 ui->doubleSpinBox_reflectivity_2->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$reflectivity2", tmp );
@@ -3928,7 +3928,7 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_envmapAlpha->isChecked() )
 			vmtFile.parameters.insert( "$selfillum_envmapmask_alpha", "1" );
 
-		tmp = toParameterBig(utils::getBG(ui->color_selfIllumTint),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_selfIllumTint),
 							 ui->doubleSpinBox_selfIllumTint->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$selfillumtint", tmp );
@@ -3969,7 +3969,7 @@ VmtFile MainWindow::makeVMT()
 				Str(ui->spinBox_exponent->value()));
 		}
 
-		tmp = toParameter(utils::getBG(ui->color_phongTint));
+		tmp = toParameter(utils::getBG(ui->toolButton_phongTint));
 		if( ui->toolButton_phongTint->isEnabled() && tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$phongtint", tmp );
 
@@ -4003,7 +4003,7 @@ VmtFile MainWindow::makeVMT()
 		vmtFile.parameters.insert( "$phongexponent", Str( ui->spinBox_exponent2->value() ) );
 
 		float multiplier = ui->doubleSpinBox_phongAmount->value();
-		const QColor &color = (utils::getBG(ui->color_phongAmount));
+		const QColor &color = (utils::getBG(ui->toolButton_phongAmount));
 		QString red = QString::number(color.redF() * multiplier, 'f', 2);
 		QString green = QString::number(color.greenF() * multiplier, 'f', 2);
 		QString blue = QString::number(color.blueF() * multiplier, 'f', 2);
@@ -4047,9 +4047,9 @@ VmtFile MainWindow::makeVMT()
 			}
 
 			float multiplier2 = ui->doubleSpinBox_spec_amount2->value();
-			if ( multiplier2 != multiplier || utils::getBG(ui->color_phongAmount) != utils::getBG(ui->color_spec_amount2) ) {
+			if ( multiplier2 != multiplier || utils::getBG(ui->toolButton_phongAmount) != utils::getBG(ui->toolButton_spec_amount2) ) {
 
-				const QColor color2 = (utils::getBG(ui->color_spec_amount2));
+				const QColor color2 = (utils::getBG(ui->toolButton_spec_amount2));
 				QString red2 = QString::number(color2.redF() * multiplier2, 'f', 2);
 				QString green2 = QString::number(color2.greenF() * multiplier2, 'f', 2);
 				QString blue2 = QString::number(color2.blueF() * multiplier2, 'f', 2);
@@ -4113,17 +4113,17 @@ VmtFile MainWindow::makeVMT()
 			vmtFile.parameters.insert( "$blendsoftness",
 									   Str( ui->doubleSpinBox_layerBlendSoftness->value() ));
 
-		tmp = toParameterBig(utils::getBG(ui->color_layer1tint),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_layer1tint),
 							 ui->doubleSpinBox_layer1tint->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$layertint1", tmp );
 
-		tmp = toParameterBig(utils::getBG(ui->color_layer2tint),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_layer2tint),
 							 ui->doubleSpinBox_layer2tint->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$layertint2", tmp );
 
-		tmp = toParameterBig(utils::getBG(ui->color_layerBorderTint),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_layerBorderTint),
 							 ui->doubleSpinBox_layerBorderTint->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$layerbordertint", tmp );
@@ -4234,12 +4234,12 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_color->isHidden() ) {
 
-		tmp = toParameterBig(utils::getBG(ui->color_color1),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_color1),
 							 ui->doubleSpinBox_color1->value(), true);
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color", tmp );
 
-		tmp = toParameterBig(utils::getBG(ui->color_color2),
+		tmp = toParameterBig(utils::getBG(ui->toolButton_color2),
 							  ui->doubleSpinBox_color2->value());
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$color2", tmp );
@@ -4329,7 +4329,7 @@ VmtFile MainWindow::makeVMT()
 		if( !( tmp = ui->lineEdit_refractTexture->text().trimmed() ).isEmpty() )
 			vmtFile.parameters.insert( "$refracttinttexture", tmp );
 
-		tmp = toParameter(utils::getBG(ui->color_refractTint));
+		tmp = toParameter(utils::getBG(ui->toolButton_refractTint));
 		if( tmp != "[1 1 1]" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -4447,7 +4447,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterReflection->isHidden() ) {
 
-		tmp = toWaterParameter(utils::getBG(ui->color_reflectionTint));
+		tmp = toWaterParameter(utils::getBG(ui->toolButton_reflectionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$reflecttint", tmp );
 
@@ -4485,7 +4485,7 @@ VmtFile MainWindow::makeVMT()
 
 		vmtFile.parameters.insert("$refracttexture", "_rt_waterrefraction");
 
-		tmp = toWaterParameter(utils::getBG(ui->color_refractionTint));
+		tmp = toWaterParameter(utils::getBG(ui->toolButton_refractionTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$refracttint", tmp );
 
@@ -4497,7 +4497,7 @@ VmtFile MainWindow::makeVMT()
 
 	if( !ui->groupBox_waterFog->isHidden() ) {
 
-		tmp = toWaterParameter(utils::getBG(ui->color_fogTint));
+		tmp = toWaterParameter(utils::getBG(ui->toolButton_fogTint));
 		if( tmp != "{255 255 255}" )
 			vmtFile.parameters.insert( "$fogcolor", tmp );
 
@@ -4693,10 +4693,10 @@ void MainWindow::resetWidgets() {
 	// Other
 
 	ui->doubleSpinBox_reflectivity->setValue(1.0);
-	ui->color_reflectivity->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_reflectivity->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 	ui->doubleSpinBox_reflectivity_2->setValue(1.0);
-	ui->color_reflectivity_2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_reflectivity_2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 
 	//----------------------------------------------------------------------------------------//
@@ -4778,7 +4778,7 @@ void MainWindow::resetWidgets() {
 	ui->doubleSpinBox_envmapTint->setDisabled(true);
 	ui->doubleSpinBox_envmapTint->setValue(1.0);
 	ui->horizontalSlider_envmapTint->setDisabled(true);
-	ui->color_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->toolButton_envmapTint->setDisabled(true);
 
 	ui->checkBox_basealpha->setDisabled(true);
@@ -4901,7 +4901,7 @@ void MainWindow::resetWidgets() {
 
 	//----------------------------------------------------------------------------------------//
 
-	ui->color_reflectionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_reflectionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 	ui->doubleSpinBox_reflectionAmount->setValue(0.0);
 
@@ -4916,7 +4916,7 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_maskTexture->setText("");
 	ui->checkBox_envmapAlpha->setChecked(false);
 	ui->doubleSpinBox_selfIllumTint->setValue(1.0);
-	ui->color_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_selfIllumTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->doubleSpinBox_selfIllumFresnelMin->setValue(0.0);
 	ui->doubleSpinBox_selfIllumFresnelMax->setValue(1.0);
 	ui->doubleSpinBox_selfIllumFresnelExp->setValue(1.0);
@@ -4928,13 +4928,13 @@ void MainWindow::resetWidgets() {
 	ui->lineEdit_refractNormalMap->clear();
 	ui->lineEdit_refractNormalMap2->clear();
 
-	ui->color_refractionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_refractionTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 	ui->doubleSpinBox_refractionAmount->setValue(0.0);
 
 	//----------------------------------------------------------------------------------------//
 
-	ui->color_fogTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_fogTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 	ui->spinBox_fogStart->setValue(0.0);
 	ui->spinBox_fogEnd->setValue(0.0);
@@ -4947,7 +4947,7 @@ void MainWindow::resetWidgets() {
 
 	ui->lineEdit_refractTexture->clear();
 
-	ui->color_refractTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_refractTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 
 	ui->doubleSpinBox_refractAmount->setValue(0.0);
 	ui->doubleSpinBox_refractBlur->setValue(0.0);
@@ -4956,8 +4956,8 @@ void MainWindow::resetWidgets() {
 
 	ui->doubleSpinBox_color1->setValue(1.0);
 	ui->doubleSpinBox_color2->setValue(1.0);
-	ui->color_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
-	ui->color_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_color1->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+	ui->toolButton_color2->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	ui->lineEdit_tintMask->clear();
 
 	ui->checkBox_blendTint->setChecked(false);
@@ -5580,8 +5580,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->lineEdit_tintMask->text() != "" ||
 				ui->checkBox_blendTint->text() != "" ||
 				ui->checkBox_noTint->text() != "" ||
-				utils::getBG(ui->color_color1) != QColor(255, 255, 255) ||
-				utils::getBG(ui->color_color2) != QColor(255, 255, 255));
+				utils::getBG(ui->toolButton_color1) != QColor(255, 255, 255) ||
+				utils::getBG(ui->toolButton_color2) != QColor(255, 255, 255));
 
 	case OtherTexture:
 
@@ -5589,8 +5589,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->doubleSpinBox_seamlessScale->value() != 0.0 ||
 				ui->doubleSpinBox_reflectivity->value() != 1.0 ||
 				ui->doubleSpinBox_reflectivity_2->value() != 1.0 ||
-				utils::getBG(ui->color_reflectivity) != QColor(255, 255, 255) ||
-				utils::getBG(ui->color_reflectivity_2) != QColor(255, 255, 255));
+				utils::getBG(ui->toolButton_reflectivity) != QColor(255, 255, 255) ||
+				utils::getBG(ui->toolButton_reflectivity_2) != QColor(255, 255, 255));
 
 	case Phong:
 	case PhongBrush:
@@ -5612,7 +5612,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->checkBox_normalalpha->isChecked() ||
 				ui->checkBox_tintSpecMask->isChecked() ||
 				ui->doubleSpinBox_envmapTint->value() != 1.0 ||
-				utils::getBG(ui->color_reflectionTint) != QColor(255, 255, 255) ||
+				utils::getBG(ui->toolButton_reflectionTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_saturation->value() != 1.0 ||
 				ui->doubleSpinBox_contrast->value() != 0.0 ||
 				ui->doubleSpinBox_fresnelReflection->value() != 1.0) ||
@@ -5625,7 +5625,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->checkBox_envmapAlpha->isChecked() ||
 				//ui->checkBox_baseAlpha->isChecked() ||
 				ui->doubleSpinBox_selfIllumTint->value() != 1.0 ||
-				utils::getBG(ui->color_selfIllumTint) != QColor(255, 255, 255) ||
+				utils::getBG(ui->toolButton_selfIllumTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_selfIllumFresnelMin->value() != 0.0 ||
 				ui->doubleSpinBox_selfIllumFresnelMax->value() != 1.0 ||
 				ui->doubleSpinBox_selfIllumFresnelExp->value() != 1.0);
@@ -5661,7 +5661,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 	case WaterReflection:
 
-		return (utils::getBG(ui->color_reflectionTint) != QColor(255, 255, 255) ||
+		return (utils::getBG(ui->toolButton_reflectionTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_reflectionAmount->value() != 0.0 ||
 				ui->checkBox_skybox->isChecked() ||
 				ui->checkBox_reflectEntities->isChecked() ||
@@ -5669,12 +5669,12 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 	case WaterRefraction:
 
-		return (utils::getBG(ui->color_refractionTint) != QColor(255, 255, 255) ||
+		return (utils::getBG(ui->toolButton_refractionTint) != QColor(255, 255, 255) ||
 				ui->doubleSpinBox_refractionAmount->value() != 0.0);
 
 	case Fog:
 
-		return (utils::getBG(ui->color_fogTint) != QColor(255, 255, 255) ||
+		return (utils::getBG(ui->toolButton_fogTint) != QColor(255, 255, 255) ||
 				ui->spinBox_fogStart->value() != 0 ||
 				ui->spinBox_fogEnd->value() != 0 ||
 				ui->doubleSpinBox_flashlightTint->value() != 0.0 ||
@@ -6967,7 +6967,7 @@ void MainWindow::shaderChanged()
 
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
-			ui->color_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
+			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
 
@@ -8432,6 +8432,8 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
 
+				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
+				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
 
 				mIniPaths->setValue(relativeFilePath, fileName);
 
@@ -8465,6 +8467,9 @@ void MainWindow::processVtf(const QString& objectName,
 
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
+				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
 
 				InfoReconvert("Converting \"" + fileName.replace("\\", "/").section("/", -1) + "\"...");
 
@@ -8607,7 +8612,7 @@ void MainWindow::requestedCubemap( bool enabled )
 	ui->toolButton_envmap->setEnabled( !(enabled) && (getCurrentGame() != "") );
 }
 
-void MainWindow::changeColor(QPlainTextEdit* colorField , TintSlider *slider) {
+void MainWindow::changeColor(QToolButton* colorField , TintSlider *slider) {
 
 #ifdef Q_OS_WIN
 	QString bytes = mIniSettings->value( "customColors" ).toByteArray();
@@ -8676,7 +8681,7 @@ void MainWindow::changeColor(QPlainTextEdit* colorField , TintSlider *slider) {
 #endif
 }
 
-void MainWindow::changeColor(QPlainTextEdit* colorField)
+void MainWindow::changeColor(QToolButton* colorField)
 {
 #ifdef Q_OS_WIN
 	QString bytes = mIniSettings->value( "customColors" ).toByteArray();
@@ -8747,54 +8752,54 @@ void MainWindow::changedColor() {
 	QWidget* caller = qobject_cast<QWidget *>( sender() );
 
 	if( caller->objectName() == "toolButton_envmapTint" )
-		changeColor(ui->color_envmapTint);
+		changeColor(ui->toolButton_envmapTint);
 
 	else if( caller->objectName() == "toolButton_phongTint" )
-		changeColor(ui->color_phongTint, ui->horizontalSlider_phongTint);
+		changeColor(ui->toolButton_phongTint, ui->horizontalSlider_phongTint);
 
 	else if( caller->objectName() == "toolButton_refractTint" )
-		changeColor(ui->color_refractTint);
+		changeColor(ui->toolButton_refractTint);
 
 	else if( caller->objectName() == "toolButton_refractionTint" )
-		changeColor(ui->color_refractionTint, ui->horizontalSlider_waterRefractColor);
+		changeColor(ui->toolButton_refractionTint, ui->horizontalSlider_waterRefractColor);
 
 	else if( caller->objectName() == "toolButton_reflectionTint" )
-		changeColor(ui->color_reflectionTint, ui->horizontalSlider_waterReflectColor);
+		changeColor(ui->toolButton_reflectionTint, ui->horizontalSlider_waterReflectColor);
 
 	else if( caller->objectName() == "toolButton_fogTint" )
-		changeColor(ui->color_fogTint, ui->horizontalSlider_waterFogColor);
+		changeColor(ui->toolButton_fogTint, ui->horizontalSlider_waterFogColor);
 
 	else if( caller->objectName() == "toolButton_color1" ) {
-		changeColor(ui->color_color1);
+		changeColor(ui->toolButton_color1);
 		colorChanged();
 	}
 	else if( caller->objectName() == "toolButton_color2" ) {
-		changeColor(ui->color_color2);
+		changeColor(ui->toolButton_color2);
 		colorChanged();
 	}
 	else if( caller->objectName() == "toolButton_reflectivity" )
-		changeColor(ui->color_reflectivity);
+		changeColor(ui->toolButton_reflectivity);
 
 	else if( caller->objectName() == "toolButton_reflectivity_2" )
-		changeColor(ui->color_reflectivity_2);
+		changeColor(ui->toolButton_reflectivity_2);
 
 	else if( caller->objectName() == "toolButton_selfIllumTint" )
-		changeColor(ui->color_selfIllumTint);
+		changeColor(ui->toolButton_selfIllumTint);
 
 	else if( caller->objectName() == "toolButton_phongAmount" )
-		changeColor(ui->color_phongAmount);
+		changeColor(ui->toolButton_phongAmount);
 
 	else if( caller->objectName() == "toolButton_spec_amount2" )
-		changeColor(ui->color_spec_amount2);
+		changeColor(ui->toolButton_spec_amount2);
 
 	else if( caller->objectName() == "toolButton_layer1tint" )
-		changeColor(ui->color_layer1tint);
+		changeColor(ui->toolButton_layer1tint);
 
 	else if( caller->objectName() == "toolButton_layer2tint" )
-		changeColor(ui->color_layer2tint);
+		changeColor(ui->toolButton_layer2tint);
 
 	else if( caller->objectName() == "toolButton_layerBorderTint" )
-		changeColor(ui->color_layerBorderTint);
+		changeColor(ui->toolButton_layerBorderTint);
 }
 
 void MainWindow::resetColor()
@@ -8805,11 +8810,11 @@ void MainWindow::resetColor()
 
 	if( caller->objectName() == "pushButton_envmapTint" )
 	{
-		ui->color_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+		ui->toolButton_envmapTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	}
 	else if( caller->objectName() == "pushButton_phongTint" )
 	{
-		ui->color_phongTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
+		ui->toolButton_phongTint->setStyleSheet( "background-color: rgb(255, 255, 255)" );
 	}
 }
 
@@ -10023,6 +10028,34 @@ void MainWindow::displayConversionDialog()
 	dialog.exec();
 #endif
 }
+
+void MainWindow::displayConversionDialogTexture(QString file)
+{
+#ifdef Q_OS_WIN
+	if( QDir().exists("vtfcmd.exe") ) {
+
+		QString dir = mIniSettings->value("lastSaveAsDir").toString();
+
+		mIniSettings->setValue("lastTextureConvertDir", dir);
+		ConversionDialog dialog( mIniSettings, this );
+
+		if (file != "") {
+			dialog.addFile( file );
+		}
+		dialog.show();
+		dialog.exec();
+
+	} else {
+
+		MsgBox::warning(this, "VMT Editor - Application Missing", "vtfcmd.exe is needed for the batch process and was not found in the working directory!");
+	}
+#else
+	ConversionDialog dialog(mIniSettings, this);
+	dialog.show();
+	dialog.exec();
+#endif
+}
+
 void MainWindow::displayBatchDialog() {
 
 	BatchDialog dialog( mAvailableGames, makeVMT(), mIniSettings, this );
@@ -10063,6 +10096,15 @@ void MainWindow::gameTriggered( bool triggered )
 		gameChanged("");
 	}
 }
+
+void MainWindow::openReconvertDialogAction() {
+	const auto lineEdit =
+		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+	const auto tooltip = lineEdit->toolTip();
+
+	displayConversionDialogTexture(tooltip);
+}
+
 
 void MainWindow::reconvertTextureHalf() {
 	const auto lineEdit =
@@ -10284,6 +10326,10 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 
 			QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 			connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+			QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
+			connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
+
 
 			if (lineEdit == ui->lineEdit_bumpmap) {
 				ui->label_bumpmapAlpha->setVisible(true);
@@ -10530,8 +10576,8 @@ void MainWindow::createBlendToolTexture()
 
 	} else {
 
-		QColor tint1 = utils::getBG(ui->color_layer1tint);
-		QColor tint2 = utils::getBG(ui->color_layer2tint);
+		QColor tint1 = utils::getBG(ui->toolButton_layer1tint);
+		QColor tint2 = utils::getBG(ui->toolButton_layer2tint);
 
 		const double mult1 = ui->doubleSpinBox_layer1tint->value();
 		const double mult2 = ui->doubleSpinBox_layer2tint->value();
@@ -10823,8 +10869,8 @@ void MainWindow::opacityChanged( double value ) {
 
 void MainWindow::colorChanged() {
 
-	QColor color1 = utils::getBG(ui->color_color1);
-	QColor color2 = utils::getBG(ui->color_color2);
+	QColor color1 = utils::getBG(ui->toolButton_color1);
+	QColor color2 = utils::getBG(ui->toolButton_color2);
 
 	double multiplier1 = ui->doubleSpinBox_color1->value();
 	double multiplier2 = ui->doubleSpinBox_color2->value();

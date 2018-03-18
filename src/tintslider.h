@@ -3,6 +3,7 @@
 
 #include <QSlider>
 #include <QPlainTextEdit>
+#include <QToolButton>
 
 
 class TintSlider : public QSlider {
@@ -15,11 +16,11 @@ public:
 
 	void wheelEvent(QWheelEvent* event);
 
-	void initialize( QPlainTextEdit* colorWidget, const QColor& color = QColor(255, 255, 255) );
+	void initialize(QToolButton *colorWidget, const QColor& color = QColor(255, 255, 255) );
 
 private:
 
-	QPlainTextEdit* colorWidget;
+	QToolButton* colorWidget;
 
 	QColor color;
 
