@@ -234,6 +234,8 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 
 	connect( ui->action_Paste,              SIGNAL(triggered()), this, SLOT(paste()));
 
+	connect( ui->action_refreshInGame,	    SIGNAL(triggered()), this, SLOT(refreshInGame()));
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -10478,6 +10480,43 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_emissiveBlendFlowTexture);
 
 	}
+}
+
+void MainWindow::refreshInGame() {
+	QProcess process;
+	QString game = getCurrentGame();
+
+	if (game.isEmpty()) {
+		Error("No game selected!");
+		return;
+	}
+
+	if (!mVMTLoaded) {
+		Error("No file opened!");
+		return;
+	}
+
+	QDir dir(mAvailableGames.value(game));
+	dir.cdUp();
+
+	QStringList nameFilter("*.exe");
+	QStringList exes = dir.entryList(nameFilter);
+
+	qDebug() << exes;
+
+	QString exe = QDir::toNativeSeparators(dir.absoluteFilePath(exes[0]));
+
+	QString relativeFilePath = QDir(currentGameMaterialDir())
+				.relativeFilePath(vmtParser->lastVMTFile().directory + "/"
+								  + vmtParser->lastVMTFile().fileName)
+				.section(".", 0, -2);
+
+	QString arg = "\"" + exe + "\" -hijack +mat_reloadmaterial \"" + relativeFilePath + "\"";
+	qDebug() << arg;
+
+	process.startDetached(arg);
+	Info("Reloading material \"" + relativeFilePath + "\"");
+
 }
 
 bool MainWindow::combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha) {
