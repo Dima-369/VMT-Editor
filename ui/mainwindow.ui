@@ -27,7 +27,6 @@
 QWidget
 {
 	font: 9pt &quot;Segoe UI&quot;;
-	/*background-color: #404040;*/
 }
 
 /* Progress bar */
@@ -42,31 +41,16 @@ QProgressBar::chunk:horizontal {
     background-color: qlineargradient(spread:reflect, x1:1, y1:0.545, x2:1, y2:0, stop:0 rgba(28, 66, 111, 255), stop:1 rgba(37, 87, 146, 255));
 }
 
- /* Tool tip (with fancy animation, how to turn that off?) */
-
-/*
-QToolTip
-{
-    border: 1px solid #ddd;
-    background-color: #eee;
-    color: black;
-    padding: 1px;
-    opacity: 200;
-}
-*/
-
 QWidget#centralwidget
 {
     color: silver;
     background-color: #333;
-   
 }
 
 QMainWindow
 {
     color: silver;
     background-color: #333;
-   
 }
 
 /* Make everything black */
@@ -78,14 +62,13 @@ QWidget
 
 QWidget:disabled
 {
-    color: #505050;
-    
+    color: #505050;   
 }
 
 QMenuBar
 {
 	background-color: #333;
-  color: silver;
+  	color: silver;
 }
 
 QMenuBar::item
@@ -97,8 +80,6 @@ QMenuBar::item:selected
 {
     border: 1px solid #151515;
 	background-color: #151515;
-	
-
 }
 
 QMenuBar::item:pressed
@@ -106,8 +87,7 @@ QMenuBar::item:pressed
     border: 1px solid #151515;
     background-color: #151515;
 
-    margin-bottom: 0px;
-    
+    margin-bottom: 0px;  
 }
 
 QMenu
@@ -148,34 +128,6 @@ QMenu::right-arrow
  right: 3px;
 }
 
-
-/* No idea what this is */
-
-/* QAbstractItemView
-{
-    alternate-background-color: #fff;
-    color: silver;
-    border: 1px solid 3A3939;
-    border-radius: 0px;
-    padding: 1px;
-}
-
-/* this seems unnecessary */
- 
-
-/*
-QWidget:focus, QMenuBar:focus
-{
-    border: 0px solid #666;
-}
-
-QTabWidget:focus, QCheckBox:focus
-{
-    border: none;
-}
-
-/* yes */
-
 QLineEdit
 {
     background-color: #222;
@@ -194,162 +146,68 @@ QLineEdit:disabled
     color: silver;
 }
 
-/* Groupbox and titles */
+/* SCROLL BARS */
 
-/* No idea 
-
-QAbstractScrollArea
+QScrollBar
 {
-    border-radius: 0px;
-    border: 1px solid #3A3939;
+	background-color: #404040;
 }
-
-/* Horizontal scroll bar, still old */
-
 
 QScrollBar:horizontal
 {
-    height: 15px;
-    margin: 0px 15px 0px 15px;
-    border: 0px ;
-    background-color: #222;
+    height: 10px;
+	margin: 0;
+	border: 0;
 }
-
-QScrollBar::handle:horizontal
-{
-    background-color: #333;
-    min-width: 5px;
-   }
-
-QScrollBar::handle:horizontal:hover
-{
-    background-color: #303030;
-    min-width: 5px;
-   }
-
-
-QScrollBar::sub-line:horizontal
-{
-    border-image: url(:/images/qss/scrollrt.png);
-    width: 15px;
-    height: 15px;
-	background-color:  #222;
-    subcontrol-position: right;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::add-line:horizontal
-{
-    border-image: url(:/images/qss/scrolllf.png);
-    height: 15px;
-    width: 15px;
-	background-color:  #222;
-    subcontrol-position: left;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
-{
-    background-color:  #151515;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: right;
-    subcontrol-origin: margin;
-}
-
-
-QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
-{
-    background-color:  #151515;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: left;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
-{
-    background: none;
-}
-
-
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
-{
-    background: none;
-}
-
-/* Vertical scroll bar, works fine */
-
 
 QScrollBar:vertical
 {
-    background-color:  #222;
-    width: 15px;
-    margin: 15px 0 15px 0;
-    border: 0px solid #222;
-    
+    width: 10px;
+	margin: 0;
+	border: 0;
+	background-color: #404040;
 }
 
-QScrollBar::handle:vertical
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
 {
-    background-color: #333;
-    min-height: 5px;
+    background-color: #282828;
+    min-width: 5px;
+ 	min-height: 5px;
+	border: 1px solid #404040;
 }
 
-QScrollBar::handle:vertical:hover
+QScrollBar::handle:hover
 {
     background-color: #303030;
-    min-height: 5px;
-}
+ }
 
-QScrollBar::sub-line:vertical
+QScrollBar::sub-line
 {
-    border-image: url(:/images/qss/scrollup.png);
-	background-color:  #222;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: top;
-    subcontrol-origin: margin;
+    width: 0px;
+    height: 0px;
+	background: none;
 }
 
-QScrollBar::add-line:vertical
+QScrollBar::add-line
 {
-   
-    border-image: url(:/images/qss/scrolldn.png);
-	background-color:  #222;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: bottom;
-    subcontrol-origin: margin;
+    height: 0px;
+    width: 0px;
+	background: none;
 }
 
-QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
-{
-
-    background-color:  #151515;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: top;
-    subcontrol-origin: margin;
-}
-
-
-QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
-{
-    background-color:  #151515;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: bottom;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+QScrollBar::up-arrow:vertical, 
+QScrollBar::down-arrow:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical
 {
     background: none;
 }
 
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+QScrollBar::up-arrow:horizontal, 
+QScrollBar::down-arrow:horizontal,
+QScrollBar::add-page:horizontal,
+ QScrollBar::sub-page:horizontal
 {
     background: none;
 }
@@ -370,19 +228,6 @@ QPlainTextEdit
     border: 0px solid #555;
 	border-radius: 0px;
 }
-
-/* Suspicious stuff 
-
-QHeaderView::section
-{
-    background-color: #3A3939;
-    color: silver;
-    padding-left: 4px;
-    border: 1px solid #6c6c6c;
-}
-
-/* */
-
 
 QCheckBox:disabled
 {
@@ -414,15 +259,14 @@ QMainWindow::separator:hover
 
 /* Radio buttons */
 
-
-QRadioButton::indicator:checked, QRadioButton::indicator:unchecked{
+QRadioButton::indicator:checked, 
+QRadioButton::indicator:unchecked
+{
     color: #b1b1b1;
     background-color: #333;
     border: 1px solid silver;
     border-radius: 5px;
 }
-
-
 
 QRadioButton::indicator:checked
 {
@@ -443,7 +287,8 @@ QRadioButton::indicator
 }
 
 
-QRadioButton::indicator:hover, QCheckBox::indicator:hover
+QRadioButton::indicator:hover, 
+QCheckBox::indicator:hover
 {
 	background-color: #151515;
     border: 1px solid #151515;
@@ -462,7 +307,8 @@ QCheckBox::indicator:checked
     image:url(:/images/qss/checkbox.png);
 }
 
-QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
+QCheckBox::indicator:disabled, 
+QRadioButton::indicator:disabled
 {
     border: 1px solid #222;
 }
@@ -471,15 +317,6 @@ QFrame
 {
     border-radius: 0px;
 }
-
-/* what is this 
-
-QStackedWidget
-{
-    border: none;
-}
-
-/* toolbar, do we use toolbar? */
 
 QToolBar {
     border: 0px solid #393838;
@@ -501,7 +338,6 @@ QToolBar::separator:vertical {
 }
 
 /* Buttons, both are the same */
-
 
 QToolButton
 {
@@ -529,7 +365,6 @@ QToolButton:hover
     background-color:#303030;
 	border-color: #303030;
 }
-
 
 QPushButton
 {
@@ -594,19 +429,16 @@ QComboBox
 
 /* Make stuff light up on hover */
 
-
-QComboBox:hover,QAbstractSpinBox:hover,QLineEdit:hover,QAbstractView:hover,QTreeView:hover
+QComboBox:hover,
+QAbstractSpinBox:hover,
+QLineEdit:hover,
+QAbstractView:hover,
+QTreeView:hover
 {
 	background-color: #151515;
 	border-color: #151515;
     color: silver;
 }
-
-/*QTextEdit:hover
-{	
-	border-color: #151515;
-	background-color: #151515;
-}*/
 
 QComboBox:on
 {
@@ -616,9 +448,6 @@ QComboBox:on
     selection-background-color: #4a4a4a;
 }
 
-/* No idea */
-
-
 QComboBox QAbstractItemView
 {
     background-color: #222;
@@ -626,7 +455,6 @@ QComboBox QAbstractItemView
     border: 1px solid #222;
     selection-background-color: #151515;
 	outline: 0;
-	
 }
 
 QComboBox::drop-down
@@ -647,17 +475,17 @@ QComboBox::down-arrow
     image: url(:/images/qss/gopen.png);
 }
 
-QComboBox::down-arrow:on, QComboBox::down-arrow:hover,
+QComboBox::down-arrow:on, 
+QComboBox::down-arrow:hover,
 QComboBox::down-arrow:focus
 {
     image: url(:/images/qss/gopen.png);
 }
 
-
-
 /* Spinboxes */
 
-QAbstractSpinBox {
+QAbstractSpinBox 
+{
     padding-top: 0px;
     padding-bottom: 0px;
 	min-height:  21px;
@@ -696,19 +524,18 @@ QAbstractSpinBox:down-button:disabled
     subcontrol-position: bottom right;
 }
 
-QAbstractSpinBox::up-arrow,QAbstractSpinBox::up-arrow:disabled,QAbstractSpinBox::up-arrow:off {
+QAbstractSpinBox::up-arrow,
+QAbstractSpinBox::up-arrow:disabled,
+QAbstractSpinBox::up-arrow:off 
+{
     image: url(:/images/qss/up_arrow_disabled.png);
     width: 15px;
     height: 10px;
 }
 
-/*QAbstractSpinBox::up-arrow:hover
-{
-    background-color: #222;
-}*/
-
-
-QAbstractSpinBox::down-arrow,QAbstractSpinBox::down-arrow:disabled,QAbstractSpinBox::down-arrow:off
+QAbstractSpinBox::down-arrow,
+QAbstractSpinBox::down-arrow:disabled,
+QAbstractSpinBox::down-arrow:off
 {
     image: url(:/images/qss/down_arrow_disabled.png);
     width: 20px;
@@ -718,7 +545,6 @@ QAbstractSpinBox::down-arrow:hover
 {
     background-color: #222;
 }
-
 
 QLabel
 {
@@ -748,7 +574,6 @@ QDockWidget::title
     padding-left: 10px;
 }
 
-
 QDockWidget {
     border: 0px solid lightgray;
     titlebar-close-icon: url(:/images/qss/close.png);
@@ -762,68 +587,23 @@ QDockWidget::close-button, QDockWidget::float-button {
     icon-size: 10px;
 }
 
-QDockWidget::close-button:hover, QDockWidget::float-button:hover {
+QDockWidget::close-button:hover, 
+QDockWidget::float-button:hover 
+{
     background: #3A3939;
 }
 
-QDockWidget::close-button:pressed, QDockWidget::float-button:pressed {
+QDockWidget::close-button:pressed, 
+QDockWidget::float-button:pressed 
+{
     padding: 1px -1px -1px 1px;
 }
-
-/* We don't grow trees here 
-
-QTreeView, QListView, QTableView
-{
-    border: 1px solid #3A3939;
-    background-color: #201F1F;
-}
-
-QTreeView:branch:selected, QTreeView:branch:hover
-{
-    background: url(:/images/qss/transparent.png);
-}
-
-QTreeView::branch:has-siblings:!adjoins-item {
-    border-image: url(:/images/qss/transparent.png);
-}
-
-QTreeView::branch:has-siblings:adjoins-item {
-    border-image: url(:/images/qss/transparent.png);
-}
-
-QTreeView::branch:!has-children:!has-siblings:adjoins-item {
-    border-image: url(:/images/qss/transparent.png);
-}
-
-QTreeView::branch:has-children:!has-siblings:closed,
-QTreeView::branch:closed:has-children:has-siblings {
-    image: url(:/images/qss/branch_closed.png);
-}
-
-QTreeView::branch:open:has-children:!has-siblings,
-QTreeView::branch:open:has-children:has-siblings {
-    image: url(:/images/qss/branch_open.png);
-}
-
-QTreeView::branch:has-children:!has-siblings:closed:hover,
-QTreeView::branch:closed:has-children:has-siblings:hover {
-    image: url(:/images/qss/branch_closed-on.png);
-    }
-
-QTreeView::branch:open:has-children:!has-siblings:hover,
-QTreeView::branch:open:has-children:has-siblings:hover {
-    image: url(:/images/qss/branch_open-on.png);
-    }
-
-/* slider horizontal, works */
-
 
 QSlider::groove:horizontal {
     border: 0px solid #222;
     height: 5px;
     background: #222;
-    margin: 0px 0px;
-    
+    margin: 0px 0px;  
 }
 
 QSlider::groove:horizontal::hover {
@@ -832,8 +612,7 @@ QSlider::groove:horizontal::hover {
 }
 
 QSlider:selected, QTabBar:tab:selected {
-    border: 0px;
-     
+    border: 0px;  
 }
 
 QSlider::handle:horizontal {
@@ -842,7 +621,6 @@ QSlider::handle:horizontal {
 	border-radius: 6px;
     width: 13px;
     margin: -4px 0px;
-  
 }
 
 QSlider::handle:horizontal::hover {
@@ -852,27 +630,6 @@ QSlider::handle:horizontal::hover {
 
 QSlider::handle:horizontal:disabled {
     background: #444;
-}
-
-
-/* Slider vertical, doesn't work */
-
-QSlider::groove:vertical {
-    border: 1px solid #3A3939;
-    width: 8px;
-    background: #201F1F;
-    margin: 0 0px;
-    border-radius: 0px;
-}
-
-QSlider::handle:vertical {
-    background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0.0 silver,
-      stop: 0.2 #a8a8a8, stop: 1 #727272);
-    border: 1px solid #3A3939;
-    width: 14px;
-    height: 14px;
-    margin: 0 -4px;
-    border-radius: 0px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -936,7 +693,7 @@ QTabBar::tab {
  }
 
 QTabWidget::pane {
-    border: 1px solid #404040;
+    border: 0px solid #404040;
 	background-color: #404040;
     top: -1 px;	
 }
@@ -1324,7 +1081,7 @@ QGroupBox::title {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>926</width>
+             <width>933</width>
              <height>5903</height>
             </rect>
            </property>
@@ -19212,8 +18969,8 @@ QToolButton:pressed
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>751</height>
+             <width>943</width>
+             <height>753</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -19437,6 +19194,37 @@ QToolButton:pressed
      <pointsize>9</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar:horizontal
+{
+	background-color: #222;
+}
+
+QScrollBar:vertical
+{
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+    background-color: #404040;
+	border: 1px solid #222;
+}
+QScrollBar::up-arrow:vertical, 
+QScrollBar::down-arrow:vertical,
+QScrollBar::add-page:vertical,
+ QScrollBar::sub-page:vertical
+{
+    background: none;
+}
+</string>
+   </property>
    <property name="features">
     <set>QDockWidget::NoDockWidgetFeatures</set>
    </property>
@@ -19481,7 +19269,16 @@ QToolButton:pressed
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+	border: 1px solid #222;
+}</string>
        </property>
        <property name="lineWrapMode">
         <enum>QTextEdit::NoWrap</enum>
@@ -19570,7 +19367,37 @@ QToolButton:pressed
    <property name="styleSheet">
     <string notr="true">QWidget {	
 	background-color: #333;
-}</string>
+}
+
+QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar:horizontal
+{
+    height: 10px;
+	margin: 0;
+	border: 0;
+}
+
+QScrollBar:vertical
+{
+    width: 10px;
+	margin: 0;
+	border: 0;
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+    background-color: #404040;
+    min-width: 5px;
+ 	min-height: 5px;
+	border: 1px solid #222;
+}
+</string>
    </property>
    <property name="floating">
     <bool>false</bool>
@@ -19604,9 +19431,21 @@ QToolButton:pressed
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="styleSheet">
-        <string notr="true">QWidget {
+        <string notr="true">QWidget 
+{
 background-color: #222;
-border: 1px solid #222;
+border: 0px solid #222;
+}
+
+QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+	border: 1px solid #222;
 }
 </string>
        </property>
