@@ -150,7 +150,7 @@ QLineEdit:disabled
 
 QScrollBar
 {
-	background-color: #404040;
+	background-color: #222;
 }
 
 QScrollBar:horizontal
@@ -165,21 +165,21 @@ QScrollBar:vertical
     width: 10px;
 	margin: 0;
 	border: 0;
-	background-color: #404040;
+	background-color: #222;
 }
 
 QScrollBar::handle:vertical,
 QScrollBar::handle:horizontal
 {
-    background-color: #282828;
+    background-color: #333;
     min-width: 5px;
  	min-height: 5px;
-	border: 1px solid #404040;
+	border: 1px solid #222;
 }
 
 QScrollBar::handle:hover
 {
-    background-color: #303030;
+    background-color: #444;
  }
 
 QScrollBar::sub-line
@@ -1080,9 +1080,9 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-1811</y>
+             <y>-4280</y>
              <width>933</width>
-             <height>5903</height>
+             <height>6121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -14943,6 +14943,595 @@ QToolButton:pressed
                </widget>
               </item>
               <item>
+               <widget class="FadeGroupBox" name="groupBox_emissiveBlend">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>14</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="title">
+                 <string>Emissive Blend</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>false</bool>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_51">
+                 <item row="2" column="2">
+                  <widget class="QToolButton" name="toolButton_emissiveBlendFlowTexture">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_phongTint_5">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Strength:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_5">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Texture</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_emissiveBlendTexture">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QToolButton" name="toolButton_emissiveBlendTexture">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_phongTint_4">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Tint:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" colspan="2">
+                  <layout class="QHBoxLayout" name="horizontalLayout_23">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_emissiveBlendTint">
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>100</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>100</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_emissiveBlendTint">
+                     <property name="minimumSize">
+                      <size>
+                       <width>60</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="toolButton_emissiveBlendTint">
+                     <property name="minimumSize">
+                      <size>
+                       <width>150</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>150</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_94">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_91">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Scroll:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="2">
+                  <layout class="QHBoxLayout" name="horizontalLayout_12">
+                   <item>
+                    <widget class="QDoubleSpinBox" name="doubleSpinBox_emissiveBlendScrollX">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>90</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="prefix">
+                      <string>X: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>0.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="doubleSpinBox_emissiveBlendScrollY">
+                     <property name="minimumSize">
+                      <size>
+                       <width>70</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>90</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="prefix">
+                      <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>0.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_98">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QToolButton" name="toolButton_emissiveBlendBaseTexture">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_emissiveBlendBaseTexture">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_92">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Base texture:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_96">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>UV texture:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="TextureDragDropLineEdit" name="lineEdit_emissiveBlendFlowTexture">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" colspan="2">
+                  <layout class="QHBoxLayout" name="horizontalLayout_84">
+                   <item>
+                    <widget class="QSlider" name="horizontalSlider_emissiveBlendStrength">
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>1000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1000</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="DoubleSliderSpinBox" name="doubleSpinBox_emissiveBlendStrength">
+                     <property name="minimumSize">
+                      <size>
+                       <width>60</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>75</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="maximum">
+                      <double>100.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_99">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
                <widget class="FadeGroupBox" name="groupBox_waterFlow">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
@@ -19097,6 +19686,7 @@ QScrollBar::handle:horizontal
     <addaction name="action_reconvertAll"/>
     <addaction name="action_CreateBlendTexture"/>
     <addaction name="separator"/>
+    <addaction name="actionRefresh_Material_In_Game"/>
     <addaction name="actionRefresh"/>
     <addaction name="actionParse_VMT"/>
     <addaction name="actionClear_Message_Log"/>
@@ -19150,6 +19740,7 @@ QScrollBar::handle:horizontal
      <addaction name="action_normalBlend"/>
      <addaction name="action_reflection"/>
      <addaction name="action_selfIllumination"/>
+     <addaction name="action_emissiveBlend"/>
      <addaction name="action_rimLight"/>
      <addaction name="action_treeSway"/>
      <addaction name="action_layerBlend"/>
@@ -20255,6 +20846,27 @@ QScrollBar::handle:horizontal
     <string>Ctrl+Shift+Z</string>
    </property>
   </action>
+  <action name="action_emissiveBlend">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/illu</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Emissive Blend</string>
+   </property>
+  </action>
+  <action name="actionRefresh_Material_In_Game">
+   <property name="text">
+    <string>Refresh Material In-Game</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -20385,12 +20997,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-944</y>
+     <x>429</x>
+     <y>-2078</y>
     </hint>
     <hint type="destinationlabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
    </hints>
   </connection>
@@ -20401,8 +21013,8 @@ QScrollBar::handle:horizontal
    <slot>alphaTestReferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>607</x>
-     <y>-974</y>
+     <x>549</x>
+     <y>-2107</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -20417,12 +21029,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
     <hint type="destinationlabel">
-     <x>450</x>
-     <y>-944</y>
+     <x>429</x>
+     <y>-2078</y>
     </hint>
    </hints>
   </connection>
@@ -20433,12 +21045,12 @@ QScrollBar::handle:horizontal
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
     <hint type="destinationlabel">
-     <x>531</x>
-     <y>-974</y>
+     <x>483</x>
+     <y>-2107</y>
     </hint>
    </hints>
   </connection>
@@ -20449,12 +21061,12 @@ QScrollBar::handle:horizontal
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
     <hint type="destinationlabel">
-     <x>607</x>
-     <y>-974</y>
+     <x>549</x>
+     <y>-2107</y>
     </hint>
    </hints>
   </connection>
@@ -20465,8 +21077,8 @@ QScrollBar::handle:horizontal
    <slot>opacityChanged(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>607</x>
-     <y>-1005</y>
+     <x>646</x>
+     <y>-2137</y>
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
@@ -20481,8 +21093,8 @@ QScrollBar::handle:horizontal
    <slot>detailTextureChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-847</y>
+     <x>838</x>
+     <y>-1981</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -20497,8 +21109,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-112</y>
+     <x>919</x>
+     <y>-1246</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -20513,8 +21125,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedLineEdit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-112</y>
+     <x>838</x>
+     <y>-1246</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -20529,8 +21141,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>607</x>
-     <y>-1005</y>
+     <x>646</x>
+     <y>-2137</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -20545,8 +21157,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-141</y>
+     <x>428</x>
+     <y>-1275</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
@@ -20561,8 +21173,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>469</x>
-     <y>-25</y>
+     <x>468</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -20577,8 +21189,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
-     <y>-25</y>
+     <x>614</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
@@ -20593,8 +21205,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-83</y>
+     <x>919</x>
+     <y>-1217</y>
     </hint>
     <hint type="destinationlabel">
      <x>625</x>
@@ -20609,8 +21221,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>768</x>
-     <y>5</y>
+     <x>801</x>
+     <y>-1129</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -20625,8 +21237,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>572</y>
+     <x>918</x>
+     <y>-511</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -20641,8 +21253,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>705</x>
-     <y>628</y>
+     <x>862</x>
+     <y>-577</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -20657,8 +21269,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedLineEdit(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>572</y>
+     <x>837</x>
+     <y>-511</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -20673,8 +21285,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-460</y>
+     <x>388</x>
+     <y>-1594</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -20689,8 +21301,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-847</y>
+     <x>838</x>
+     <y>-1981</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -20705,8 +21317,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>774</x>
-     <y>-786</y>
+     <x>801</x>
+     <y>-1920</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -20721,8 +21333,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-817</y>
+     <x>404</x>
+     <y>-1951</y>
     </hint>
     <hint type="destinationlabel">
      <x>308</x>
@@ -20737,8 +21349,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-786</y>
+     <x>645</x>
+     <y>-1920</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -20753,8 +21365,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-944</y>
+     <x>429</x>
+     <y>-2078</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
@@ -20769,8 +21381,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>607</x>
-     <y>-974</y>
+     <x>549</x>
+     <y>-2107</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -20785,8 +21397,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-915</y>
+     <x>429</x>
+     <y>-2049</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -20801,8 +21413,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
     <hint type="destinationlabel">
      <x>493</x>
@@ -20817,8 +21429,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>405</x>
-     <y>-2928</y>
+     <x>400</x>
+     <y>-4038</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -20833,8 +21445,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>486</x>
-     <y>-2928</y>
+     <x>478</x>
+     <y>-4038</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -20849,8 +21461,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-2958</y>
+     <x>478</x>
+     <y>-4068</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -20865,8 +21477,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>491</x>
-     <y>-2768</y>
+     <x>479</x>
+     <y>-3878</y>
     </hint>
     <hint type="destinationlabel">
      <x>414</x>
@@ -20881,8 +21493,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>-2768</y>
+     <x>918</x>
+     <y>-3878</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -20897,8 +21509,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>-2768</y>
+     <x>837</x>
+     <y>-3878</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -20913,8 +21525,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-2079</y>
+     <x>399</x>
+     <y>-3189</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -20929,8 +21541,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-2079</y>
+     <x>475</x>
+     <y>-3189</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -20945,8 +21557,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-2048</y>
+     <x>399</x>
+     <y>-3158</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -20961,8 +21573,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-2048</y>
+     <x>475</x>
+     <y>-3158</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -20977,8 +21589,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-2079</y>
+     <x>645</x>
+     <y>-3189</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -20993,8 +21605,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-2048</y>
+     <x>645</x>
+     <y>-3158</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21009,8 +21621,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>739</x>
-     <y>-2048</y>
+     <x>721</x>
+     <y>-3158</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -21025,8 +21637,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-1979</y>
+     <x>399</x>
+     <y>-3089</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
@@ -21041,8 +21653,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-1979</y>
+     <x>475</x>
+     <y>-3089</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -21057,8 +21669,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-1948</y>
+     <x>399</x>
+     <y>-3058</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21073,8 +21685,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-1948</y>
+     <x>475</x>
+     <y>-3058</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -21089,8 +21701,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-1979</y>
+     <x>645</x>
+     <y>-3089</y>
     </hint>
     <hint type="destinationlabel">
      <x>278</x>
@@ -21105,8 +21717,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-1948</y>
+     <x>645</x>
+     <y>-3058</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21121,8 +21733,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>739</x>
-     <y>-1948</y>
+     <x>721</x>
+     <y>-3058</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21137,8 +21749,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>687</x>
-     <y>1982</y>
+     <x>735</x>
+     <y>1141</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -21153,8 +21765,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>687</x>
-     <y>1796</y>
+     <x>735</x>
+     <y>955</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -21169,8 +21781,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2513</y>
+     <x>919</x>
+     <y>-3623</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21185,8 +21797,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>-2423</y>
+     <x>469</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21201,8 +21813,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>-2423</y>
+     <x>615</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21217,8 +21829,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>2628</y>
+     <x>918</x>
+     <y>1787</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -21233,8 +21845,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>2599</y>
+     <x>918</x>
+     <y>1758</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -21249,12 +21861,12 @@ QScrollBar::handle:horizontal
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>431</x>
-     <y>-2394</y>
+     <x>425</x>
+     <y>-3504</y>
     </hint>
     <hint type="destinationlabel">
-     <x>476</x>
-     <y>-2398</y>
+     <x>471</x>
+     <y>-3508</y>
     </hint>
    </hints>
   </connection>
@@ -21265,12 +21877,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-2423</y>
+     <x>761</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
-     <x>405</x>
-     <y>1923</y>
+     <x>406</x>
+     <y>1082</y>
     </hint>
    </hints>
   </connection>
@@ -21281,12 +21893,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-2423</y>
+     <x>761</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
-     <x>287</x>
-     <y>-2484</y>
+     <x>285</x>
+     <y>-3594</y>
     </hint>
    </hints>
   </connection>
@@ -21297,8 +21909,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>1430</y>
+     <x>919</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21313,12 +21925,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-2423</y>
+     <x>761</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
-     <x>832</x>
-     <y>-2484</y>
+     <x>838</x>
+     <y>-3594</y>
     </hint>
    </hints>
   </connection>
@@ -21329,8 +21941,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>1459</y>
+     <x>919</x>
+     <y>618</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21345,8 +21957,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>687</x>
-     <y>1637</y>
+     <x>735</x>
+     <y>796</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -21361,8 +21973,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-2423</y>
+     <x>761</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21377,8 +21989,8 @@ QScrollBar::handle:horizontal
    <slot>browseVMT()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2484</y>
+     <x>919</x>
+     <y>-3594</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -21393,8 +22005,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>762</x>
-     <y>-297</y>
+     <x>800</x>
+     <y>-1431</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -21409,8 +22021,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>762</x>
-     <y>-268</y>
+     <x>800</x>
+     <y>-1402</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -21425,8 +22037,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>2599</y>
+     <x>837</x>
+     <y>1758</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21441,8 +22053,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>1331</y>
+     <x>801</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
      <x>252</x>
@@ -21457,8 +22069,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1631</y>
+     <x>838</x>
+     <y>-2741</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -21473,8 +22085,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-1602</y>
+     <x>478</x>
+     <y>-2712</y>
     </hint>
     <hint type="destinationlabel">
      <x>489</x>
@@ -21489,8 +22101,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1689</y>
+     <x>838</x>
+     <y>-2799</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -21505,8 +22117,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1660</y>
+     <x>838</x>
+     <y>-2770</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -21521,8 +22133,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1660</y>
+     <x>919</x>
+     <y>-2770</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -21537,8 +22149,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1689</y>
+     <x>919</x>
+     <y>-2799</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -21553,8 +22165,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1631</y>
+     <x>919</x>
+     <y>-2741</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -21569,8 +22181,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-847</y>
+     <x>919</x>
+     <y>-1981</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -21585,8 +22197,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>-944</y>
+     <x>589</x>
+     <y>-2078</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -21601,8 +22213,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
-     <y>2682</y>
+     <x>635</x>
+     <y>1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -21617,8 +22229,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
-     <y>2708</y>
+     <x>479</x>
+     <y>1867</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -21633,8 +22245,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
-     <y>2682</y>
+     <x>479</x>
+     <y>1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -21649,8 +22261,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>541</y>
+     <x>735</x>
+     <y>-542</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -21665,8 +22277,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>600</x>
-     <y>656</y>
+     <x>599</x>
+     <y>-427</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -21681,8 +22293,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>-2859</y>
+     <x>918</x>
+     <y>-3969</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -21697,8 +22309,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>-2828</y>
+     <x>918</x>
+     <y>-3938</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -21713,8 +22325,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-547</y>
+     <x>919</x>
+     <y>-1681</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -21729,8 +22341,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-547</y>
+     <x>838</x>
+     <y>-1681</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -21745,8 +22357,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>460</x>
-     <y>-213</y>
+     <x>469</x>
+     <y>-1339</y>
     </hint>
     <hint type="destinationlabel">
      <x>123</x>
@@ -21761,8 +22373,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
-     <y>2656</y>
+     <x>635</x>
+     <y>1815</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -21777,8 +22389,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>792</x>
-     <y>2656</y>
+     <x>791</x>
+     <y>1815</y>
     </hint>
     <hint type="destinationlabel">
      <x>842</x>
@@ -21793,8 +22405,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>792</x>
-     <y>2682</y>
+     <x>791</x>
+     <y>1841</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -21809,8 +22421,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
-     <y>2708</y>
+     <x>635</x>
+     <y>1867</y>
     </hint>
     <hint type="destinationlabel">
      <x>861</x>
@@ -21825,8 +22437,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>480</x>
-     <y>2656</y>
+     <x>479</x>
+     <y>1815</y>
     </hint>
     <hint type="destinationlabel">
      <x>506</x>
@@ -21841,8 +22453,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2638</y>
+     <x>919</x>
+     <y>-3748</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -21857,8 +22469,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2638</y>
+     <x>838</x>
+     <y>-3748</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -21873,8 +22485,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2609</y>
+     <x>919</x>
+     <y>-3719</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -21889,8 +22501,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2609</y>
+     <x>838</x>
+     <y>-3719</y>
     </hint>
     <hint type="destinationlabel">
      <x>287</x>
@@ -21905,8 +22517,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-2580</y>
+     <x>478</x>
+     <y>-3690</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -21921,8 +22533,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>1827</y>
+     <x>645</x>
+     <y>986</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -21937,8 +22549,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>451</x>
-     <y>1887</y>
+     <x>469</x>
+     <y>1046</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -21953,8 +22565,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>702</x>
-     <y>1883</y>
+     <x>761</x>
+     <y>1042</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -21969,8 +22581,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>568</x>
-     <y>1910</y>
+     <x>615</x>
+     <y>1069</y>
     </hint>
     <hint type="destinationlabel">
      <x>736</x>
@@ -21985,8 +22597,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>2081</y>
+     <x>474</x>
+     <y>1240</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -22001,8 +22613,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>401</x>
-     <y>2081</y>
+     <x>398</x>
+     <y>1240</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -22017,8 +22629,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>401</x>
-     <y>2110</y>
+     <x>398</x>
+     <y>1269</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -22033,8 +22645,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>2110</y>
+     <x>474</x>
+     <y>1269</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -22049,8 +22661,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2013</y>
+     <x>645</x>
+     <y>1172</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22065,8 +22677,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>1668</y>
+     <x>389</x>
+     <y>827</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
@@ -22081,8 +22693,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>528</x>
-     <y>1668</y>
+     <x>541</x>
+     <y>827</y>
     </hint>
     <hint type="destinationlabel">
      <x>734</x>
@@ -22097,8 +22709,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>1699</y>
+     <x>645</x>
+     <y>858</y>
     </hint>
     <hint type="destinationlabel">
      <x>608</x>
@@ -22113,8 +22725,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>428</x>
-     <y>1724</y>
+     <x>469</x>
+     <y>883</y>
     </hint>
     <hint type="destinationlabel">
      <x>540</x>
@@ -22129,8 +22741,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>525</x>
-     <y>1724</y>
+     <x>615</x>
+     <y>883</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -22145,8 +22757,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>1163</y>
+     <x>644</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
      <x>580</x>
@@ -22161,8 +22773,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>1192</y>
+     <x>644</x>
+     <y>133</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -22177,8 +22789,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>529</x>
-     <y>1213</y>
+     <x>578</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
      <x>565</x>
@@ -22193,8 +22805,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-112</y>
+     <x>838</x>
+     <y>-1246</y>
     </hint>
     <hint type="destinationlabel">
      <x>675</x>
@@ -22209,8 +22821,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-141</y>
+     <x>428</x>
+     <y>-1275</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -22225,8 +22837,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-83</y>
+     <x>838</x>
+     <y>-1217</y>
     </hint>
     <hint type="destinationlabel">
      <x>634</x>
@@ -22241,8 +22853,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>469</x>
-     <y>-25</y>
+     <x>468</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -22257,8 +22869,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
-     <y>-25</y>
+     <x>614</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -22273,8 +22885,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>36</y>
+     <x>645</x>
+     <y>-1076</y>
     </hint>
     <hint type="destinationlabel">
      <x>600</x>
@@ -22289,8 +22901,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>67</y>
+     <x>645</x>
+     <y>-1045</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -22305,8 +22917,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>1430</y>
+     <x>838</x>
+     <y>589</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -22321,8 +22933,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>98</y>
+     <x>645</x>
+     <y>-1014</y>
     </hint>
     <hint type="destinationlabel">
      <x>601</x>
@@ -22337,8 +22949,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>1459</y>
+     <x>838</x>
+     <y>618</y>
     </hint>
     <hint type="destinationlabel">
      <x>720</x>
@@ -22353,8 +22965,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>411</x>
-     <y>1568</y>
+     <x>496</x>
+     <y>727</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -22369,8 +22981,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>593</x>
-     <y>1547</y>
+     <x>563</x>
+     <y>706</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -22385,8 +22997,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>1518</y>
+     <x>390</x>
+     <y>677</y>
     </hint>
     <hint type="destinationlabel">
      <x>795</x>
@@ -22401,8 +23013,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>593</x>
-     <y>1518</y>
+     <x>563</x>
+     <y>677</y>
     </hint>
     <hint type="destinationlabel">
      <x>798</x>
@@ -22417,8 +23029,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>1489</y>
+     <x>390</x>
+     <y>648</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -22433,8 +23045,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>593</x>
-     <y>1489</y>
+     <x>563</x>
+     <y>648</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
@@ -22449,8 +23061,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>775</x>
-     <y>1489</y>
+     <x>735</x>
+     <y>648</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -22465,8 +23077,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>1547</y>
+     <x>390</x>
+     <y>706</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -22481,8 +23093,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>479</y>
+     <x>660</x>
+     <y>-635</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -22497,8 +23109,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>479</y>
+     <x>822</x>
+     <y>-635</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -22513,8 +23125,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>479</y>
+     <x>741</x>
+     <y>-635</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -22529,8 +23141,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>600</x>
-     <y>656</y>
+     <x>599</x>
+     <y>-427</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -22545,8 +23157,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>705</x>
-     <y>628</y>
+     <x>862</x>
+     <y>-577</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -22561,8 +23173,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>572</y>
+     <x>579</x>
+     <y>-511</y>
     </hint>
     <hint type="destinationlabel">
      <x>573</x>
@@ -22577,8 +23189,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>572</y>
+     <x>837</x>
+     <y>-511</y>
     </hint>
     <hint type="destinationlabel">
      <x>681</x>
@@ -22593,8 +23205,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>510</y>
+     <x>645</x>
+     <y>-604</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -22609,8 +23221,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>470</x>
-     <y>628</y>
+     <x>469</x>
+     <y>-455</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -22625,8 +23237,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>-2859</y>
+     <x>837</x>
+     <y>-3969</y>
     </hint>
     <hint type="destinationlabel">
      <x>307</x>
@@ -22641,8 +23253,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>622</x>
-     <y>628</y>
+     <x>621</x>
+     <y>-455</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
@@ -22657,8 +23269,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>-2828</y>
+     <x>837</x>
+     <y>-3938</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -22673,8 +23285,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-2798</y>
+     <x>478</x>
+     <y>-3908</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -22689,8 +23301,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-2737</y>
+     <x>645</x>
+     <y>-3847</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -22705,8 +23317,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-2706</y>
+     <x>645</x>
+     <y>-3816</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -22721,8 +23333,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>1280</y>
+     <x>838</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -22737,8 +23349,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>1301</y>
+     <x>838</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -22753,8 +23365,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>612</x>
-     <y>1362</y>
+     <x>584</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -22769,8 +23381,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>516</x>
-     <y>1362</y>
+     <x>497</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>250</x>
@@ -22785,8 +23397,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>420</x>
-     <y>1362</y>
+     <x>410</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -22801,8 +23413,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>451</x>
-     <y>1887</y>
+     <x>469</x>
+     <y>1046</y>
     </hint>
     <hint type="destinationlabel">
      <x>575</x>
@@ -22817,12 +23429,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>571</y>
+     <x>513</x>
+     <y>-512</y>
     </hint>
     <hint type="destinationlabel">
-     <x>611</x>
-     <y>572</y>
+     <x>579</x>
+     <y>-511</y>
     </hint>
    </hints>
   </connection>
@@ -22833,12 +23445,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>572</y>
+     <x>579</x>
+     <y>-511</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>571</y>
+     <x>513</x>
+     <y>-512</y>
     </hint>
    </hints>
   </connection>
@@ -22849,8 +23461,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2269</y>
+     <x>919</x>
+     <y>-3379</y>
     </hint>
     <hint type="destinationlabel">
      <x>420</x>
@@ -22865,8 +23477,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-2329</y>
+     <x>919</x>
+     <y>-3439</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -22881,8 +23493,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2329</y>
+     <x>838</x>
+     <y>-3439</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -22897,8 +23509,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2269</y>
+     <x>838</x>
+     <y>-3379</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -22913,8 +23525,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-2209</y>
+     <x>478</x>
+     <y>-3319</y>
     </hint>
     <hint type="destinationlabel">
      <x>486</x>
@@ -22929,8 +23541,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>-915</y>
+     <x>589</x>
+     <y>-2049</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -22945,8 +23557,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1411</y>
+     <x>919</x>
+     <y>-2521</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -22961,8 +23573,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1220</y>
+     <x>919</x>
+     <y>-2330</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -22977,8 +23589,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1411</y>
+     <x>838</x>
+     <y>-2521</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -22993,8 +23605,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>405</x>
-     <y>-1375</y>
+     <x>400</x>
+     <y>-2485</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -23009,8 +23621,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>486</x>
-     <y>-1375</y>
+     <x>478</x>
+     <y>-2485</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -23025,8 +23637,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>405</x>
-     <y>-1566</y>
+     <x>400</x>
+     <y>-2676</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23041,8 +23653,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>486</x>
-     <y>-1566</y>
+     <x>478</x>
+     <y>-2676</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23057,8 +23669,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>578</x>
-     <y>-2180</y>
+     <x>580</x>
+     <y>-3290</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23073,8 +23685,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-2159</y>
+     <x>594</x>
+     <y>-3269</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23089,8 +23701,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-2159</y>
+     <x>877</x>
+     <y>-3269</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23105,8 +23717,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1536</y>
+     <x>594</x>
+     <y>-2646</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -23121,8 +23733,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1536</y>
+     <x>877</x>
+     <y>-2646</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23137,8 +23749,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1507</y>
+     <x>594</x>
+     <y>-2617</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23153,8 +23765,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1507</y>
+     <x>877</x>
+     <y>-2617</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23169,8 +23781,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1478</y>
+     <x>594</x>
+     <y>-2588</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23185,8 +23797,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1345</y>
+     <x>594</x>
+     <y>-2455</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23201,8 +23813,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1345</y>
+     <x>877</x>
+     <y>-2455</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23217,8 +23829,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1316</y>
+     <x>594</x>
+     <y>-2426</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23233,8 +23845,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1316</y>
+     <x>877</x>
+     <y>-2426</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23249,8 +23861,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1287</y>
+     <x>594</x>
+     <y>-2397</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23265,8 +23877,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1220</y>
+     <x>838</x>
+     <y>-2330</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23281,8 +23893,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>405</x>
-     <y>-1184</y>
+     <x>400</x>
+     <y>-2294</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23297,8 +23909,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>486</x>
-     <y>-1184</y>
+     <x>478</x>
+     <y>-2294</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23313,8 +23925,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1154</y>
+     <x>594</x>
+     <y>-2264</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23329,8 +23941,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1154</y>
+     <x>877</x>
+     <y>-2264</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23345,8 +23957,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1124</y>
+     <x>594</x>
+     <y>-2235</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23361,8 +23973,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>898</x>
-     <y>-1124</y>
+     <x>877</x>
+     <y>-2235</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23377,8 +23989,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-1074</y>
+     <x>594</x>
+     <y>-2206</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23393,8 +24005,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-944</y>
+     <x>429</x>
+     <y>-2078</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23409,8 +24021,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>-976</y>
+     <x>429</x>
+     <y>-2105</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23425,8 +24037,8 @@ QScrollBar::handle:horizontal
    <slot>fresnelYEdited(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>479</y>
+     <x>741</x>
+     <y>-635</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23441,8 +24053,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>568</x>
-     <y>1887</y>
+     <x>615</x>
+     <y>1046</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23457,8 +24069,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>762</x>
-     <y>-518</y>
+     <x>800</x>
+     <y>-1652</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23473,8 +24085,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>529</x>
-     <y>-519</y>
+     <x>578</x>
+     <y>-1652</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -23489,8 +24101,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-817</y>
+     <x>485</x>
+     <y>-1951</y>
     </hint>
     <hint type="destinationlabel">
      <x>929</x>
@@ -23505,8 +24117,8 @@ QScrollBar::handle:horizontal
    <slot>toggledDetailUniformScale(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>602</x>
-     <y>-819</y>
+     <x>591</x>
+     <y>-1949</y>
     </hint>
     <hint type="destinationlabel">
      <x>928</x>
@@ -23521,12 +24133,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>260</y>
+     <x>645</x>
+     <y>-852</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>259</y>
+     <x>579</x>
+     <y>-853</y>
     </hint>
    </hints>
   </connection>
@@ -23537,12 +24149,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>259</y>
+     <x>579</x>
+     <y>-853</y>
     </hint>
     <hint type="destinationlabel">
-     <x>611</x>
-     <y>260</y>
+     <x>645</x>
+     <y>-852</y>
     </hint>
    </hints>
   </connection>
@@ -23553,12 +24165,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>379</y>
+     <x>645</x>
+     <y>-733</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>378</y>
+     <x>579</x>
+     <y>-734</y>
     </hint>
    </hints>
   </connection>
@@ -23569,12 +24181,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>378</y>
+     <x>579</x>
+     <y>-734</y>
     </hint>
     <hint type="destinationlabel">
-     <x>611</x>
-     <y>379</y>
+     <x>645</x>
+     <y>-733</y>
     </hint>
    </hints>
   </connection>
@@ -23585,8 +24197,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>229</y>
+     <x>801</x>
+     <y>-883</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -23601,8 +24213,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>350</y>
+     <x>801</x>
+     <y>-762</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -23617,12 +24229,12 @@ QScrollBar::handle:horizontal
    <slot>toggle()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>469</x>
-     <y>-25</y>
+     <x>468</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>470</x>
-     <y>316</y>
+     <x>469</x>
+     <y>-796</y>
     </hint>
    </hints>
   </connection>
@@ -23633,12 +24245,12 @@ QScrollBar::handle:horizontal
    <slot>toggle()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>470</x>
-     <y>316</y>
+     <x>469</x>
+     <y>-796</y>
     </hint>
     <hint type="destinationlabel">
-     <x>469</x>
-     <y>-25</y>
+     <x>468</x>
+     <y>-1159</y>
     </hint>
    </hints>
   </connection>
@@ -23649,12 +24261,12 @@ QScrollBar::handle:horizontal
    <slot>toggle()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
-     <y>-25</y>
+     <x>614</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>590</x>
-     <y>316</y>
+     <x>589</x>
+     <y>-796</y>
     </hint>
    </hints>
   </connection>
@@ -23665,12 +24277,12 @@ QScrollBar::handle:horizontal
    <slot>toggle()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>316</y>
+     <x>589</x>
+     <y>-796</y>
     </hint>
     <hint type="destinationlabel">
-     <x>615</x>
-     <y>-25</y>
+     <x>614</x>
+     <y>-1159</y>
     </hint>
    </hints>
   </connection>
@@ -23681,8 +24293,8 @@ QScrollBar::handle:horizontal
    <slot>fresnelSliderEdited(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>478</y>
+     <x>579</x>
+     <y>-636</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -23697,8 +24309,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-1880</y>
+     <x>919</x>
+     <y>-2990</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -23713,12 +24325,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>1163</y>
+     <x>644</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
-     <x>529</x>
-     <y>1162</y>
+     <x>578</x>
+     <y>103</y>
     </hint>
    </hints>
   </connection>
@@ -23729,12 +24341,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>529</x>
-     <y>1162</y>
+     <x>578</x>
+     <y>103</y>
     </hint>
     <hint type="destinationlabel">
-     <x>605</x>
-     <y>1163</y>
+     <x>644</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>
@@ -23745,8 +24357,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>522</x>
-     <y>-209</y>
+     <x>531</x>
+     <y>-1343</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23761,8 +24373,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-1880</y>
+     <x>838</x>
+     <y>-2990</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23777,8 +24389,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>350</y>
+     <x>645</x>
+     <y>-762</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23793,8 +24405,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>229</y>
+     <x>645</x>
+     <y>-883</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23809,8 +24421,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>160</y>
+     <x>645</x>
+     <y>-952</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23825,8 +24437,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>707</x>
-     <y>129</y>
+     <x>722</x>
+     <y>-983</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23841,8 +24453,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>803</x>
-     <y>129</y>
+     <x>800</x>
+     <y>-983</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23857,8 +24469,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>129</y>
+     <x>645</x>
+     <y>-983</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23873,8 +24485,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-1757</y>
+     <x>645</x>
+     <y>-2867</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23889,8 +24501,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-1788</y>
+     <x>645</x>
+     <y>-2898</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23905,8 +24517,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>739</x>
-     <y>-1819</y>
+     <x>721</x>
+     <y>-2929</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23921,8 +24533,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-1819</y>
+     <x>645</x>
+     <y>-2929</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23937,8 +24549,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-1819</y>
+     <x>475</x>
+     <y>-2929</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23953,8 +24565,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-1819</y>
+     <x>399</x>
+     <y>-2929</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23969,8 +24581,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-1850</y>
+     <x>475</x>
+     <y>-2960</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -23985,8 +24597,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-1850</y>
+     <x>399</x>
+     <y>-2960</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24001,8 +24613,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>653</x>
-     <y>-1850</y>
+     <x>645</x>
+     <y>-2960</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24017,8 +24629,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>409</y>
+     <x>645</x>
+     <y>-704</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24033,8 +24645,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>809</x>
-     <y>409</y>
+     <x>867</x>
+     <y>-704</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24049,8 +24661,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>291</y>
+     <x>645</x>
+     <y>-821</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24065,8 +24677,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>808</x>
-     <y>291</y>
+     <x>867</x>
+     <y>-821</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24081,8 +24693,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>260</y>
+     <x>645</x>
+     <y>-852</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24097,8 +24709,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>4</y>
+     <x>579</x>
+     <y>-1129</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24113,8 +24725,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>379</y>
+     <x>645</x>
+     <y>-733</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -24129,8 +24741,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>1330</y>
+     <x>579</x>
+     <y>271</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -24145,8 +24757,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>1280</y>
+     <x>919</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -24161,8 +24773,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>540</y>
+     <x>579</x>
+     <y>-543</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24177,8 +24789,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>1795</y>
+     <x>579</x>
+     <y>954</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24193,8 +24805,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>1981</y>
+     <x>579</x>
+     <y>1140</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24209,8 +24821,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>1636</y>
+     <x>579</x>
+     <y>795</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24225,8 +24837,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>1857</y>
+     <x>919</x>
+     <y>1016</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -24241,8 +24853,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>1857</y>
+     <x>838</x>
+     <y>1016</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24257,8 +24869,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2513</y>
+     <x>838</x>
+     <y>-3623</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24273,8 +24885,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-2484</y>
+     <x>838</x>
+     <y>-3594</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24289,8 +24901,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
-     <y>-2455</y>
+     <x>478</x>
+     <y>-3565</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24305,8 +24917,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>-2423</y>
+     <x>469</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24321,8 +24933,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>476</x>
-     <y>-2398</y>
+     <x>471</x>
+     <y>-3508</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24337,8 +24949,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>-2423</y>
+     <x>615</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24353,8 +24965,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-2423</y>
+     <x>761</x>
+     <y>-3533</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24369,8 +24981,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>702</x>
-     <y>1910</y>
+     <x>761</x>
+     <y>1069</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24385,8 +24997,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>748</x>
-     <y>2178</y>
+     <x>777</x>
+     <y>1337</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -24401,8 +25013,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>748</x>
-     <y>2209</y>
+     <x>777</x>
+     <y>1368</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24417,8 +25029,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2178</y>
+     <x>645</x>
+     <y>1337</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24433,8 +25045,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2209</y>
+     <x>645</x>
+     <y>1368</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24449,8 +25061,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2254</y>
+     <x>645</x>
+     <y>1413</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24465,8 +25077,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2285</y>
+     <x>645</x>
+     <y>1444</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -24481,8 +25093,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2316</y>
+     <x>645</x>
+     <y>1475</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24497,8 +25109,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2361</y>
+     <x>645</x>
+     <y>1520</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24513,8 +25125,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2392</y>
+     <x>645</x>
+     <y>1551</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24529,8 +25141,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2423</y>
+     <x>645</x>
+     <y>1582</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24545,8 +25157,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2454</y>
+     <x>645</x>
+     <y>1613</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24561,8 +25173,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2499</y>
+     <x>645</x>
+     <y>1658</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24577,8 +25189,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>2530</y>
+     <x>389</x>
+     <y>1689</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24593,8 +25205,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>2530</y>
+     <x>521</x>
+     <y>1689</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24609,8 +25221,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-547</y>
+     <x>838</x>
+     <y>-1681</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24625,8 +25237,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-393</y>
+     <x>838</x>
+     <y>-1527</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24641,8 +25253,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>497</x>
-     <y>-364</y>
+     <x>494</x>
+     <y>-1498</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24657,12 +25269,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2316</y>
+     <x>645</x>
+     <y>1475</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>2315</y>
+     <x>579</x>
+     <y>1474</y>
     </hint>
    </hints>
   </connection>
@@ -24673,12 +25285,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>2315</y>
+     <x>579</x>
+     <y>1474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>606</x>
-     <y>2316</y>
+     <x>645</x>
+     <y>1475</y>
     </hint>
    </hints>
   </connection>
@@ -24689,12 +25301,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>2422</y>
+     <x>579</x>
+     <y>1581</y>
     </hint>
     <hint type="destinationlabel">
-     <x>606</x>
-     <y>2423</y>
+     <x>645</x>
+     <y>1582</y>
     </hint>
    </hints>
   </connection>
@@ -24705,12 +25317,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2423</y>
+     <x>645</x>
+     <y>1582</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>2422</y>
+     <x>579</x>
+     <y>1581</y>
     </hint>
    </hints>
   </connection>
@@ -24721,12 +25333,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
-     <y>2453</y>
+     <x>579</x>
+     <y>1612</y>
     </hint>
     <hint type="destinationlabel">
-     <x>606</x>
-     <y>2454</y>
+     <x>645</x>
+     <y>1613</y>
     </hint>
    </hints>
   </connection>
@@ -24737,12 +25349,12 @@ QScrollBar::handle:horizontal
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>2454</y>
+     <x>645</x>
+     <y>1613</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>2453</y>
+     <x>579</x>
+     <y>1612</y>
     </hint>
    </hints>
   </connection>
@@ -24753,8 +25365,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-393</y>
+     <x>919</x>
+     <y>-1527</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24769,8 +25381,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>497</x>
-     <y>-364</y>
+     <x>494</x>
+     <y>-1498</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24785,8 +25397,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>831</x>
-     <y>603</y>
+     <x>837</x>
+     <y>-480</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -24801,8 +25413,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>603</y>
+     <x>918</x>
+     <y>-480</y>
     </hint>
     <hint type="destinationlabel">
      <x>281</x>
@@ -24881,8 +25493,8 @@ QScrollBar::handle:horizontal
    <slot>changeShader()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>696</x>
-     <y>-3112</y>
+     <x>615</x>
+     <y>-4222</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -24897,8 +25509,8 @@ QScrollBar::handle:horizontal
    <slot>changeShader()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>762</x>
-     <y>-3112</y>
+     <x>681</x>
+     <y>-4222</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -24913,8 +25525,8 @@ QScrollBar::handle:horizontal
    <slot>changeShader()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>828</x>
-     <y>-3112</y>
+     <x>747</x>
+     <y>-4222</y>
     </hint>
     <hint type="destinationlabel">
      <x>888</x>
@@ -24929,8 +25541,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>529</x>
-     <y>-490</y>
+     <x>578</x>
+     <y>-1623</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24945,8 +25557,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>470</x>
-     <y>656</y>
+     <x>469</x>
+     <y>-427</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24961,8 +25573,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>-2239</y>
+     <x>918</x>
+     <y>-3349</y>
     </hint>
     <hint type="destinationlabel">
      <x>1231</x>
@@ -24977,8 +25589,8 @@ QScrollBar::handle:horizontal
    <slot>changeShader()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>894</x>
-     <y>-3112</y>
+     <x>813</x>
+     <y>-4222</y>
     </hint>
     <hint type="destinationlabel">
      <x>434</x>
@@ -24993,8 +25605,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>611</x>
-     <y>5</y>
+     <x>645</x>
+     <y>-1129</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25009,8 +25621,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-268</y>
+     <x>644</x>
+     <y>-1402</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25025,8 +25637,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-297</y>
+     <x>644</x>
+     <y>-1431</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25041,8 +25653,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-297</y>
+     <x>644</x>
+     <y>-1431</y>
     </hint>
     <hint type="destinationlabel">
      <x>92</x>
@@ -25057,8 +25669,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-518</y>
+     <x>644</x>
+     <y>-1652</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25073,8 +25685,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-489</y>
+     <x>644</x>
+     <y>-1623</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25089,8 +25701,8 @@ QScrollBar::handle:horizontal
    <slot>colorChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-297</y>
+     <x>644</x>
+     <y>-1431</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25105,8 +25717,8 @@ QScrollBar::handle:horizontal
    <slot>colorChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>605</x>
-     <y>-268</y>
+     <x>644</x>
+     <y>-1402</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25121,8 +25733,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>912</x>
-     <y>-2299</y>
+     <x>918</x>
+     <y>-3409</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25137,8 +25749,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>728</y>
+     <x>645</x>
+     <y>-355</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -25153,8 +25765,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>759</y>
+     <x>645</x>
+     <y>-324</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25169,8 +25781,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>818</y>
+     <x>645</x>
+     <y>-265</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25185,8 +25797,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>867</y>
+     <x>645</x>
+     <y>-216</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25201,8 +25813,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>898</y>
+     <x>645</x>
+     <y>-185</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25217,8 +25829,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>929</y>
+     <x>645</x>
+     <y>-154</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25233,8 +25845,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>960</y>
+     <x>645</x>
+     <y>-123</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25249,8 +25861,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>999</y>
+     <x>469</x>
+     <y>-60</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25265,8 +25877,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>531</x>
-     <y>999</y>
+     <x>615</x>
+     <y>-60</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25281,8 +25893,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>1033</y>
+     <x>645</x>
+     <y>-26</y>
     </hint>
     <hint type="destinationlabel">
      <x>-10</x>
@@ -25297,8 +25909,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>1064</y>
+     <x>645</x>
+     <y>5</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25313,8 +25925,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>1095</y>
+     <x>645</x>
+     <y>36</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25329,8 +25941,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>442</x>
-     <y>784</y>
+     <x>441</x>
+     <y>-299</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25345,8 +25957,8 @@ QScrollBar::handle:horizontal
    <slot>colorChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>728</y>
+     <x>801</x>
+     <y>-355</y>
     </hint>
     <hint type="destinationlabel">
      <x>39</x>
@@ -25361,8 +25973,8 @@ QScrollBar::handle:horizontal
    <slot>colorChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>759</y>
+     <x>801</x>
+     <y>-324</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -25377,8 +25989,8 @@ QScrollBar::handle:horizontal
    <slot>colorChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>960</y>
+     <x>801</x>
+     <y>-123</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25393,8 +26005,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>728</y>
+     <x>801</x>
+     <y>-355</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25409,8 +26021,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>759</y>
+     <x>801</x>
+     <y>-324</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25425,8 +26037,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>763</x>
-     <y>960</y>
+     <x>801</x>
+     <y>-123</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25441,8 +26053,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>854</x>
-     <y>350</y>
+     <x>867</x>
+     <y>-762</y>
     </hint>
     <hint type="destinationlabel">
      <x>-10</x>
@@ -25457,8 +26069,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>854</x>
-     <y>229</y>
+     <x>867</x>
+     <y>-883</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25473,8 +26085,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-54</y>
+     <x>919</x>
+     <y>-1188</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25489,8 +26101,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-54</y>
+     <x>838</x>
+     <y>-1188</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25505,8 +26117,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-25</y>
+     <x>838</x>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25521,8 +26133,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>-239</y>
+     <x>766</x>
+     <y>-1373</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25537,8 +26149,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-239</y>
+     <x>919</x>
+     <y>-1373</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25553,8 +26165,8 @@ QScrollBar::handle:horizontal
    <slot>detailTextureChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
-     <y>-738</y>
+     <x>688</x>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25569,8 +26181,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>832</x>
-     <y>-738</y>
+     <x>838</x>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25585,8 +26197,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>774</x>
-     <y>-677</y>
+     <x>801</x>
+     <y>-1811</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25601,8 +26213,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>410</x>
-     <y>-708</y>
+     <x>404</x>
+     <y>-1842</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25617,8 +26229,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>-708</y>
+     <x>485</x>
+     <y>-1842</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25633,8 +26245,8 @@ QScrollBar::handle:horizontal
    <slot>toggledDetailUniformScale(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>602</x>
-     <y>-710</y>
+     <x>591</x>
+     <y>-1840</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25649,8 +26261,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>913</x>
-     <y>-738</y>
+     <x>919</x>
+     <y>-1872</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25665,8 +26277,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-677</y>
+     <x>645</x>
+     <y>-1811</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25681,8 +26293,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-646</y>
+     <x>645</x>
+     <y>-1780</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25697,8 +26309,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>-615</y>
+     <x>645</x>
+     <y>-1749</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25713,12 +26325,188 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>621</y>
+     <x>469</x>
+     <y>-455</y>
     </hint>
     <hint type="destinationlabel">
      <x>-12</x>
      <y>667</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_emissiveBlendFlowTexture</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseVTF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>892</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-9</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_emissiveBlendBaseTexture</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseVTF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>903</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_emissiveBlendTexture</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>browseVTF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>903</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-3</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_emissiveBlendTint</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>452</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>497</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_emissiveBlendStrength</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>625</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-7</x>
+     <y>536</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_emissiveBlendScrollX</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>513</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-7</x>
+     <y>485</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_emissiveBlendScrollY</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>504</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_emissiveBlendTint</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>changedColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-8</x>
+     <y>464</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_emissiveBlendTexture</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>359</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-4</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_emissiveBlendBaseTexture</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>445</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-4</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_emissiveBlendFlowTexture</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>348</x>
+     <y>415</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>283</y>
     </hint>
    </hints>
   </connection>

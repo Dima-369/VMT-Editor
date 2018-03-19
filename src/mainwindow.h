@@ -74,7 +74,8 @@ public:
 		UnlitTwoTexture,
 		NormalBlend,
 		TreeSway,
-		LayerBlend
+		LayerBlend,
+		EmissiveBlend
 	};
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
@@ -405,6 +406,8 @@ public slots:
 
 	void paste();
 
+	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
+
 private slots:
 
 	void previewTexture();
@@ -456,8 +459,6 @@ private slots:
 	void vmtPreviewParse();
 
 	void vmtPreviewChanged();
-
-	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
 
 	void reconvertAll();
 
@@ -518,6 +519,7 @@ private slots:
 	void on_action_treeSway_triggered(bool checked);
 	void on_action_decal_triggered(bool checked);
 	void on_action_layerBlend_triggered(bool checked);
+	void on_action_emissiveBlend_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------//

@@ -45,6 +45,10 @@ struct VmtState
 
 	bool showLayerBlend = false;
 
+	bool showEmissiveBlend = false;
+
+	bool emissiveBlendEnabled = false;
+
 	/*!
 	 * Helper field to persist the directory of the game so textures can be
 	 * validated and previewed.
