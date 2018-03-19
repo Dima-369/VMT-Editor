@@ -29,7 +29,6 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$phong;$phongexponenttexture;$basemapluminancephongmask;$phongfresnelranges;$phongwarptexture;$phongtint;$halflambert;$phongdisablehalflambert;$phongalbedotint;$phongexponent;$phongboost;$phongalbedoboost;$basemapalphaphongmask;$phongamount;$phongmaskcontrastbrightness;$phongexponent2;$phongamount2;$phongmaskcontrastbrightness2" );
 	mGroups.append( "$rimlight;$rimlightexponent;$rimlightboost;$rimlightmask");
 	mGroups.append( "$selfillum;$selfillum_envmapmask_alpha;$selfillumfresnelminmaxexp;$selfillummask;$selfillumtint" );
-
 	// Needed to allow a proper grouping of $normalmap in the Water and Refract Shaders
 	mGroups.append( "");
 
@@ -40,6 +39,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	mGroups.append( "$refracttexture;$refract;$refracttinttexture;$refracttint;$refractamount;$bluramount;$refractblur" );
 	mGroups.append( "$fogenable;$fogcolor;$fogstart;$fogend;$flashlighttint;$lightmapwaterfog" );
 
+	mGroups.append( "$emissiveblendenabled;$emissiveblendtexture;$emissiveblendbasetexture;$emissiveblendflowtexture;$emissiveblendtint;$emissiveblendstrength;$emissiveblendscrollvector");
 	mGroups.append( "$addbumpmaps;$bumpdetailscale1;$bumpdetailscale2;$bumptransform2" );
 	mGroups.append( "$basetexturetransform;$bumptransform" );
 	mGroups.append( "$vertexcolor;$vertexalpha;$nodecal;$ignorez;$nofog;$nolod;$no_fullbright;$disablecsmlookup" );

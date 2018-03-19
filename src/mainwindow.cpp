@@ -14,6 +14,7 @@
 
 #include "user-interface/phong.h"
 #include "user-interface/normal-blend.h"
+#include "user-interface/emissive-blend.h"
 #include "user-interface/detail-texture.h"
 #include "user-interface/shaders.h"
 #include "user-interface/view-helper.h"
@@ -313,6 +314,9 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->doubleSpinBox_layerEdgeSoftness->setDoubleSlider(ui->horizontalSlider_layerEdgeSoftness);
 	ui->doubleSpinBox_layerEdgeStrength->setDoubleSlider(ui->horizontalSlider_layerEdgeStrength);
 
+	ui->doubleSpinBox_emissiveBlendStrength->setDoubleSlider(ui->horizontalSlider_emissiveBlendStrength);
+	ui->doubleSpinBox_emissiveBlendTint->setDoubleSlider(ui->horizontalSlider_emissiveBlendTint);
+
 	//----------------------------------------------------------------------------------------//
 
 	ui->doubleSpinBox_envmapTint->setDoubleSlider(ui->horizontalSlider_envmapTint);
@@ -360,6 +364,11 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_bump2->setValidator(windowsFilenameValidator);
 	ui->lineEdit_tintMask->setValidator(windowsFilenameValidator);
 	ui->lineEdit_phongWarp->setValidator(windowsFilenameValidator);
+	ui->lineEdit_emissiveBlendTexture->setValidator(windowsFilenameValidator);
+	ui->lineEdit_emissiveBlendBaseTexture->setValidator(windowsFilenameValidator);
+	ui->lineEdit_emissiveBlendFlowTexture->setValidator(windowsFilenameValidator);
+
+
 
 	//--------------------------------------------------------------------//
 
@@ -421,6 +430,13 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 		SLOT(handleTextureDrop(QString)));
 	connect(ui->lineEdit_diffuseAlpha, SIGNAL(droppedTexture(QString)),
 		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_emissiveBlendTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_emissiveBlendBaseTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+	connect(ui->lineEdit_emissiveBlendFlowTexture, SIGNAL(droppedTexture(QString)),
+		SLOT(handleTextureDrop(QString)));
+
 
 	//----------------------------------------------------------------------------------------//
 
@@ -579,6 +595,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->toolButton_layer1tint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->toolButton_layer2tint->setStyleSheet("background-color: rgb(255, 255, 255)");
 	ui->toolButton_layerBorderTint->setStyleSheet("background-color: rgb(255, 255, 255)");
+	ui->toolButton_emissiveBlendTint->setStyleSheet("background-color: rgb(255, 255, 255)");
 
 	phong::initialize(ui);
 
@@ -2065,6 +2082,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	normalblend::parseParameters(ui, &vmt);
 	treesway::parseParameters(ui, &vmt);
 	layerblend::parseParameters(ui, &vmt);
+	emissiveblend::parseParameters(ui, &vmt, this);
 
 	if( !( value = vmt.parameters.take("$phongexponenttexture") ).isEmpty() )
 	{
@@ -3589,6 +3607,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		ui->action_layerBlend->trigger();
 	}
 
+	if(vmt.state.showEmissiveBlend && !ui->action_emissiveBlend->isChecked()) {
+		ui->action_emissiveBlend->trigger();
+	}
+
 	if(showDecal && !ui->action_decal->isChecked())
 		ui->action_decal->trigger();
 
@@ -4161,6 +4183,32 @@ VmtFile MainWindow::makeVMT()
 
 	}
 
+	if( !ui->groupBox_emissiveBlend->isHidden() )
+	{
+		vmtFile.parameters.insert( "$emissiveblendenabled", "1" );
+
+		if( !ui->lineEdit_emissiveBlendTexture->text().trimmed().isEmpty() )
+			vmtFile.parameters.insert( "$emissiveblendtexture", ui->lineEdit_emissiveBlendTexture->text().trimmed() );
+
+		if( !ui->lineEdit_emissiveBlendBaseTexture->text().trimmed().isEmpty() )
+			vmtFile.parameters.insert( "$emissiveblendbasetexture", ui->lineEdit_emissiveBlendBaseTexture->text().trimmed() );
+
+		if( !ui->lineEdit_emissiveBlendFlowTexture->text().trimmed().isEmpty() )
+			vmtFile.parameters.insert( "$emissiveblendflowtexture", ui->lineEdit_emissiveBlendFlowTexture->text().trimmed() );
+
+		tmp = toParameterBig(utils::getBG(ui->toolButton_emissiveBlendTint),
+							 ui->doubleSpinBox_emissiveBlendTint->value());
+		if( tmp != "[1 1 1]" )
+			vmtFile.parameters.insert( "$emissiveblendtint", tmp );
+
+		if( ui->doubleSpinBox_emissiveBlendStrength->value() != 1.0 )
+			vmtFile.parameters.insert( "$emissiveblendstrength",
+									   Str( ui->doubleSpinBox_emissiveBlendStrength->value() ));
+
+		vmtFile.parameters.insert( "$emissiveblendscrollvector", QString( "[" + Str(ui->doubleSpinBox_emissiveBlendScrollX->value()) +
+																		  " " + Str(ui->doubleSpinBox_emissiveBlendScrollY->value()) + "]" ) );
+	}
+
 	if( !ui->groupBox_treeSway->isHidden() )
 	{
 		vmtFile.parameters.insert( "$treesway", "1" );
@@ -4625,6 +4673,9 @@ void MainWindow::resetWidgets() {
 	clearLineEditAction(ui->lineEdit_bumpmapAlpha);
 	clearLineEditAction(ui->lineEdit_specmap2);
 	clearLineEditAction(ui->lineEdit_tintMask);
+	clearLineEditAction(ui->lineEdit_emissiveBlendTexture);
+	clearLineEditAction(ui->lineEdit_emissiveBlendBaseTexture);
+	clearLineEditAction(ui->lineEdit_emissiveBlendFlowTexture);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -4812,6 +4863,7 @@ void MainWindow::resetWidgets() {
 	normalblend::resetWidgets(ui);
 	treesway::resetWidgets(ui);
 	layerblend::resetWidgets(ui);
+	emissiveblend::resetWidgets(ui);
 
 	//----------------------------------------------------------------------------------------//
 
@@ -5602,6 +5654,9 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 	case LayerBlend:
 		return layerblend::hasChanged(ui);
 
+	case EmissiveBlend:
+		return emissiveblend::hasChanged(ui);
+
 	case Reflection:
 
 		return (ui->lineEdit_envmap->text() != "" ||
@@ -6123,6 +6178,15 @@ void MainWindow::handleTextureDrop(const QString& filePath)
 
 	else if (name == "lineEdit_tintMask" )
 		processVtf( "", filePath, ui->lineEdit_tintMask );
+
+	else if (name == "lineEdit_emissiveBlendTexture" )
+		processVtf( "", filePath, ui->lineEdit_emissiveBlendTexture );
+
+	else if (name == "lineEdit_emissiveBlendBaseTexture" )
+		processVtf( "", filePath, ui->lineEdit_emissiveBlendBaseTexture );
+
+	else if (name == "lineEdit_emissiveBlendFlowTexture" )
+		processVtf( "", filePath, ui->lineEdit_emissiveBlendFlowTexture );
 
 }
 
@@ -6652,6 +6716,10 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_maskTexture->setDisabled(true);
 
+		ui->toolButton_emissiveBlendTexture->setDisabled(true);
+		ui->toolButton_emissiveBlendBaseTexture->setDisabled(true);
+		ui->toolButton_emissiveBlendFlowTexture->setDisabled(true);
+
 		QStringList defaultSurfaces = extractLines(":/surfaces/default");
 		ui->comboBox_surface->insertItems(1, defaultSurfaces);
 		ui->comboBox_surface2->insertItems(1, defaultSurfaces);
@@ -6708,6 +6776,10 @@ void MainWindow::gameChanged( const QString& game )
 
 		ui->toolButton_unlitTwoTextureDiffuse->setEnabled(true);
 		ui->toolButton_unlitTwoTextureDiffuse2->setEnabled(true);
+
+		ui->toolButton_emissiveBlendTexture->setEnabled(true);
+		ui->toolButton_emissiveBlendBaseTexture->setEnabled(true);
+		ui->toolButton_emissiveBlendFlowTexture->setEnabled(true);
 
 		QStringList tmp(extractLines(":/surfaces/default"));
 
@@ -6842,6 +6914,9 @@ void MainWindow::shaderChanged()
 			case LayerBlend:
 				layerblend::resetAction(ui);
 				break;
+			case EmissiveBlend:
+				emissiveblend::resetAction(ui);
+				break;
 			case Reflection: ui->groupBox_shadingReflection->setVisible(false);ui->action_reflection->setChecked(false);break;
 			case SelfIllumination: ui->groupBox_selfIllumination->setVisible(false);ui->action_selfIllumination->setChecked(false);break;
 			case RimLight: ui->groupBox_rimLight->setVisible(false);ui->action_rimLight->setChecked(false);break;
@@ -6964,6 +7039,8 @@ void MainWindow::shaderChanged()
 				ui->action_normalBlend->setChecked(false);
 			}
 			ui->action_layerBlend->setVisible(isBlend);
+
+			ui->action_emissiveBlend->setVisible(isVertexLitGeneric);
 
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
@@ -7226,6 +7303,7 @@ void MainWindow::shaderChanged()
 	ui->action_treeSway->setVisible( ui->action_treeSway->isEnabled() );
 	ui->action_decal->setVisible( ui->action_decal->isEnabled() );
 	ui->action_layerBlend->setVisible( ui->action_layerBlend->isEnabled() );
+	ui->action_emissiveBlend->setVisible( ui->action_emissiveBlend->isEnabled() );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -8063,6 +8141,15 @@ void MainWindow::browseVTF()
 
 	else if (name == "toolButton_specmap2" )
 		processVtf( "", "", ui->lineEdit_specmap2 );
+
+	else if (name == "toolButton_emissiveBlendTexture" )
+		processVtf( "", "", ui->lineEdit_emissiveBlendTexture );
+
+	else if (name == "toolButton_emissiveBlendBaseTexture" )
+		processVtf( "", "", ui->lineEdit_emissiveBlendBaseTexture );
+
+	else if (name == "toolButton_emissiveBlendFlowTexture" )
+		processVtf( "", "", ui->lineEdit_emissiveBlendFlowTexture );
 }
 
 QString MainWindow::launchBrowseVtfDialog(QLineEdit* lineEdit)
@@ -8800,6 +8887,9 @@ void MainWindow::changedColor() {
 
 	else if( caller->objectName() == "toolButton_layerBorderTint" )
 		changeColor(ui->toolButton_layerBorderTint);
+
+	else if( caller->objectName() == "toolButton_emissiveBlendTint" )
+		changeColor(ui->toolButton_emissiveBlendTint);
 }
 
 void MainWindow::resetColor()
@@ -10383,6 +10473,10 @@ void MainWindow::reconvertAll() {
 		triggerLineEditAction(ui->lineEdit_phongWarp);
 		triggerLineEditAction(ui->lineEdit_blendmodulate);
 		triggerLineEditAction(ui->lineEdit_tintMask);
+		triggerLineEditAction(ui->lineEdit_emissiveBlendTexture);
+		triggerLineEditAction(ui->lineEdit_emissiveBlendBaseTexture);
+		triggerLineEditAction(ui->lineEdit_emissiveBlendFlowTexture);
+
 	}
 }
 
@@ -11142,6 +11236,11 @@ void MainWindow::on_action_treeSway_triggered(bool checked)
 void MainWindow::on_action_layerBlend_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_layerblend)
+}
+
+void MainWindow::on_action_emissiveBlend_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_emissiveBlend)
 }
 
 void MainWindow::on_action_decal_triggered(bool checked)

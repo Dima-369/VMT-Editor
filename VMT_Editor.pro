@@ -79,7 +79,8 @@ SOURCES += \
     src/vmttextedit.cpp \
     src/texturedragdroplineedit.cpp \
     src/texturepreviewdialog.cpp \
-    src/user-interface/layerblend.cpp
+    src/user-interface/layerblend.cpp \
+    src/user-interface/emissive-blend.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -129,7 +130,8 @@ HEADERS += \
     src/vmttextedit.h \
     src/texturedragdroplineedit.h \
     src/texturepreviewdialog.h \
-    src/user-interface/layerblend.h
+    src/user-interface/layerblend.h \
+    src/user-interface/emissive-blend.h
 
 FORMS += \
     ui/mainwindow.ui \
