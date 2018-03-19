@@ -1080,7 +1080,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-1811</y>
              <width>933</width>
              <height>5903</height>
             </rect>
@@ -7789,7 +7789,7 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="decimals">
-                      <number>1</number>
+                      <number>2</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -18704,6 +18704,16 @@ QToolButton:pressed
            <string notr="true">QWidget
 {
 	font: 9pt &quot;Consolas&quot;;
+}
+QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+	border: 1px solid #222;
 }</string>
           </property>
           <property name="lineWrapMode">
