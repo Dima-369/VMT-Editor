@@ -1080,7 +1080,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-4280</y>
+             <y>-4199</y>
              <width>933</width>
              <height>6121</height>
             </rect>
@@ -15046,7 +15046,7 @@ QToolButton:pressed
                     </font>
                    </property>
                    <property name="text">
-                    <string>Texture</string>
+                    <string>Texture:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -19686,9 +19686,9 @@ QScrollBar::handle:horizontal
     <addaction name="action_reconvertAll"/>
     <addaction name="action_CreateBlendTexture"/>
     <addaction name="separator"/>
-    <addaction name="actionRefresh_Material_In_Game"/>
     <addaction name="actionRefresh"/>
     <addaction name="actionParse_VMT"/>
+    <addaction name="action_refreshInGame"/>
     <addaction name="actionClear_Message_Log"/>
     <addaction name="separator"/>
     <addaction name="action_refreshGameList"/>
@@ -20859,12 +20859,12 @@ QScrollBar::handle:horizontal
     <string>Emissive Blend</string>
    </property>
   </action>
-  <action name="actionRefresh_Material_In_Game">
+  <action name="action_refreshInGame">
    <property name="text">
     <string>Refresh Material In-Game</string>
    </property>
    <property name="shortcut">
-    <string>F5</string>
+    <string>F8</string>
    </property>
   </action>
  </widget>

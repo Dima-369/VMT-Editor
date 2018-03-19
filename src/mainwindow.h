@@ -12,6 +12,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QDesktopServices>
+#include <QProcess>
+
 
 #ifdef Q_OS_WIN
 #   include <QWinJumpList>
@@ -465,6 +467,8 @@ private slots:
 	void createBlendToolTexture();
 
 	bool combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha);
+
+	void refreshInGame();
 
 	//----------------------------------------------------------------------------------------//
 
