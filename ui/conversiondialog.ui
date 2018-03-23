@@ -519,10 +519,6 @@ QAbstractSpinBox::down-arrow:off
     width: 20px;
     height: 10px;
 }
-QAbstractSpinBox::down-arrow:hover
-{
-    background-color: #222;
-}
 
 QLabel
 {

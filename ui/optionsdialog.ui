@@ -533,10 +533,6 @@ QAbstractSpinBox::down-arrow:off
     width: 20px;
     height: 10px;
 }
-QAbstractSpinBox::down-arrow:hover
-{
-    background-color: #222;
-}
 
 QLabel
 {
@@ -725,7 +721,7 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-651</y>
+           <y>0</y>
            <width>527</width>
            <height>1203</height>
           </rect>
