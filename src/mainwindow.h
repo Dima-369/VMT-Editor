@@ -12,6 +12,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QDesktopServices>
+#include <QProcess>
+
 
 #ifdef Q_OS_WIN
 #   include <QWinJumpList>
@@ -74,7 +76,8 @@ public:
 		UnlitTwoTexture,
 		NormalBlend,
 		TreeSway,
-		LayerBlend
+		LayerBlend,
+		EmissiveBlend
 	};
 
 	MainWindow( QString fileToOpen = "", QWidget* parent = NULL );
@@ -258,9 +261,9 @@ private:
 
 	//----------------------------------------------------------------------------------------//
 
-	void changeColor( QPlainTextEdit* colorField );
+	void changeColor( QToolButton* colorField );
 
-	void changeColor( QPlainTextEdit* colorField, TintSlider* slider );
+	void changeColor( QToolButton *colorField, TintSlider* slider );
 
 	bool previewTexture( const int type, const QString& texture );
 
@@ -405,6 +408,8 @@ public slots:
 
 	void paste();
 
+	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
+
 private slots:
 
 	void previewTexture();
@@ -414,6 +419,8 @@ private slots:
 	void hideParameterGroupboxes();
 
 	void displayOptionsDialog();
+
+	void displayConversionDialogTexture(QString file);
 
 	void displayConversionDialog();
 
@@ -432,6 +439,8 @@ private slots:
 	void fresnelYEdited( double value );
 
 	void addCSGOParameter(QString value, VmtFile& vmt, QString string, QDoubleSpinBox* doubleSpinBox);
+
+	void openReconvertDialogAction();
 
 	void reconvertTexture();
 
@@ -453,13 +462,13 @@ private slots:
 
 	void vmtPreviewChanged();
 
-	void createReconvertAction(QLineEdit* lineEdit, QString fileName);
-
 	void reconvertAll();
 
 	void createBlendToolTexture();
 
 	bool combineMaps(QLineEdit *lineEditBase, QLineEdit *lineEditAlpha);
+
+	void refreshInGame();
 
 	//----------------------------------------------------------------------------------------//
 
@@ -514,6 +523,7 @@ private slots:
 	void on_action_treeSway_triggered(bool checked);
 	void on_action_decal_triggered(bool checked);
 	void on_action_layerBlend_triggered(bool checked);
+	void on_action_emissiveBlend_triggered(bool checked);
 };
 
 //----------------------------------------------------------------------------//

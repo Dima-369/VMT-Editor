@@ -53,7 +53,7 @@ void shaders::handlePhongBrushRim(Ui::MainWindow *ui, const QString &shader)
 	ui->label_spec_amount2->setVisible(hide);
 	ui->horizontalSlider_spec_amount2->setVisible(hide);
 	ui->doubleSpinBox_spec_amount2->setVisible(hide);
-	ui->color_spec_amount2->setVisible(hide);
+	ui->toolButton_spec_amount2->setVisible(hide);
 	ui->toolButton_spec_amount2->setVisible(hide);
 	ui->doubleSpinBox_spec_amountAlpha2->setVisible(hide);
 

@@ -27,7 +27,7 @@ void TintSlider::valueChangedSlot(int value) {
 							   .arg( hsl.blue() ));
 }
 
-void TintSlider::initialize(QPlainTextEdit* colorWidget, const QColor& color) {
+void TintSlider::initialize(QToolButton *colorWidget, const QColor& color) {
 
 	this->colorWidget = colorWidget;
 	this->color = color;

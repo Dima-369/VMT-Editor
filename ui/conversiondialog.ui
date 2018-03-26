@@ -86,137 +86,66 @@ QLineEdit:disabled
     color: silver;
 }
 
+QScrollBar
+{
+	background-color: #404040;
+}
+
 QScrollBar:horizontal
 {
-    height: 15px;
-    margin: 0px 15px 0px 15px;
-    border: 0px ;
-    background-color: #222;
+    height: 10px;
+	margin: 0;
+	border: 0;
 }
-
-QScrollBar::handle:horizontal
-{
-    background-color: #333;
-    min-width: 5px;
-   }
-
-QScrollBar::sub-line:horizontal
-{
-    border-image: url(:/images/qss/scrollrt.png);
-    width: 15px;
-    height: 15px;
-	background-color:  #222;
-    subcontrol-position: right;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::add-line:horizontal
-{
-    border-image: url(:/images/qss/scrolllf.png);
-    height: 15px;
-    width: 15px;
-	background-color:  #222;
-    subcontrol-position: left;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::sub-line:horizontal:hover,QScrollBar::sub-line:horizontal:on
-{
-    background-color:  #333;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: right;
-    subcontrol-origin: margin;
-}
-
-
-QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on
-{
-    background-color:  #333;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: left;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
-{
-    background: none;
-}
-
-
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
-{
-    background: none;
-}
-
-/* Vertical scroll bar, works fine */
-
 
 QScrollBar:vertical
 {
-    background-color:  #222;
-    width: 15px;
-    margin: 15px 0 15px 0;
-    border: 0px solid #222;
-    
+    width: 10px;
+	margin: 0;
+	border: 0;
+	background-color: #404040;
 }
 
-QScrollBar::handle:vertical
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
 {
-    background-color: #333;
-    min-height: 5px;
-   
+    background-color: #282828;
+    min-width: 5px;
+ 	min-height: 5px;
+	border: 1px solid #404040;
 }
 
-QScrollBar::sub-line:vertical
+QScrollBar::handle:hover
 {
-    border-image: url(:/images/qss/scrollup.png);
-	background-color:  #222;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: top;
-    subcontrol-origin: margin;
-}
+    background-color: #303030;
+ }
 
-QScrollBar::add-line:vertical
+QScrollBar::sub-line
 {
-   
-    border-image: url(:/images/qss/scrolldn.png);
-	background-color:  #222;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: bottom;
-    subcontrol-origin: margin;
+    width: 0px;
+    height: 0px;
+	background: none;
 }
 
-QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+QScrollBar::add-line
 {
-
-    background-color:  #333;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: top;
-    subcontrol-origin: margin;
+    height: 0px;
+    width: 0px;
+	background: none;
 }
 
-
-QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
-{
-    background-color:  #333;
-    height: 15px;
-    width: 15px;
-    subcontrol-position: bottom;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+QScrollBar::up-arrow:vertical, 
+QScrollBar::down-arrow:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical
 {
     background: none;
 }
 
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+QScrollBar::up-arrow:horizontal, 
+QScrollBar::down-arrow:horizontal,
+QScrollBar::add-page:horizontal,
+ QScrollBar::sub-page:horizontal
 {
     background: none;
 }
@@ -533,7 +462,8 @@ QComboBox::down-arrow:focus
 
 /* Spinboxes */
 
-QAbstractSpinBox {
+QAbstractSpinBox 
+{
     padding-top: 0px;
     padding-bottom: 0px;
 	min-height:  21px;
@@ -544,59 +474,51 @@ QAbstractSpinBox {
 
 QAbstractSpinBox:up-button
 {
-    background-color: #333;
-	 border: 0px solid #333;  
-	width: 20px;
+   /* background-color: #222;*/
+	 border: 0px solid #222;  
+	width: 15px;
 	subcontrol-position: top right;
 }
 
 QAbstractSpinBox:down-button
 {
-    background-color: #333;
-    width: 20px;
-	 border: 0px solid #333;
+  /*  background-color: #222;*/
+    width: 15px;
+	 border: 0px solid #222;
     subcontrol-position: bottom right;
 }
 
 QAbstractSpinBox:up-button:disabled
 {
-    background-color: #333;
-	 border: 0px solid #333;  
-	width: 20px;
+   /* background-color: #222;*/
+	border: 0px solid #222;  
 	subcontrol-position: top right;
 }
 
 QAbstractSpinBox:down-button:disabled
 {
-    background-color: #333;
-    width: 20px;
-	 border: 0px solid #333;
+   /* background-color: #222;*/
+	 border: 0px solid #222;
     subcontrol-position: bottom right;
 }
 
-QAbstractSpinBox::up-arrow,QAbstractSpinBox::up-arrow:disabled,QAbstractSpinBox::up-arrow:off {
+QAbstractSpinBox::up-arrow,
+QAbstractSpinBox::up-arrow:disabled,
+QAbstractSpinBox::up-arrow:off 
+{
     image: url(:/images/qss/up_arrow_disabled.png);
-    width: 20px;
+    width: 15px;
     height: 10px;
 }
 
-QAbstractSpinBox::up-arrow:hover
-{
-    background-color: #444;
-}
-
-
-QAbstractSpinBox::down-arrow,QAbstractSpinBox::down-arrow:disabled,QAbstractSpinBox::down-arrow:off
+QAbstractSpinBox::down-arrow,
+QAbstractSpinBox::down-arrow:disabled,
+QAbstractSpinBox::down-arrow:off
 {
     image: url(:/images/qss/down_arrow_disabled.png);
     width: 20px;
     height: 10px;
 }
-QAbstractSpinBox::down-arrow:hover
-{
-    background-color: #444;
-}
-
 
 QLabel
 {
@@ -971,6 +893,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
 background-color: #222;
 border: 1px solid #222;
 outline: none;
+}
+QScrollBar
+{
+	background-color: #222;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+	border: 1px solid #222;
 }</string>
        </property>
        <property name="selectionMode">

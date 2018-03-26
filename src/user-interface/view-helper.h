@@ -61,14 +61,14 @@ void toggle(MainWindow *mainWindow, bool checked, FadeGroupBox *groupBox,
  * Make sure that no passed strings are empty!
  */
 void applyBackgroundColor(const QString &parameter, const QString &value,
-	QPlainTextEdit *colorWidget, TintSlider *sliderWidget,
+	QToolButton *colorWidget, TintSlider *sliderWidget,
 	Ui::MainWindow *ui);
 
 void applyBackgroundColor(const QString &parameter, const QString &value,
-	QPlainTextEdit *colorWidget, Ui::MainWindow *ui, bool toSrgb = false);
+	QToolButton *colorWidget, Ui::MainWindow *ui, bool toSrgb = false);
 
 void applyColor(const QString &parameter, const QString &value,
-	QPlainTextEdit *colorWidget, QDoubleSpinBox *spinBox, Ui::MainWindow *ui,
+	QToolButton *colorWidget, QDoubleSpinBox *spinBox, Ui::MainWindow *ui,
 	bool toSrgb = false);
 
 /*!
@@ -77,7 +77,7 @@ void applyColor(const QString &parameter, const QString &value,
  * The color values should be between 0 and 255.
  */
 void applyBackgroundColor(int red, int green, int blue,
-	QPlainTextEdit *colorWidget);
+	QToolButton *colorWidget);
 
 /*!
  * Parses the stylesheet of the passed widget to cast the background-color
@@ -86,7 +86,7 @@ void applyBackgroundColor(int red, int green, int blue,
  * Make sure that only background-color is defined as the only CSS property
  * of the passed widget.
  */
-QColor getBG(QPlainTextEdit *widget);
+QColor getBG(QToolButton *widget);
 
 /*!
  * Returns the spin box value if the view is enabled and different to the
