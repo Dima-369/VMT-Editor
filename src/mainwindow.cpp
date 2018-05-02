@@ -8264,52 +8264,11 @@ void MainWindow::processVtf(const QString& objectName,
 		ui->toolButton_diffuseAlpha->setVisible(false);
 	}
 
-	if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
+	if( fileName.startsWith(currentGameMaterialDir(), Qt::CaseInsensitive) &&
+			fileType.toLower() == ".vtf" ) {
 
 		lineEdit->setEnabled(true);
 		texturesToCopy.remove(lineEdit);
-
-		if( fileType.toLower() != ".vtf" ) {
-
-			//Who keeps image files inside materials dir?
-			Info("Only textures outside materials dir can be converted");
-			/*bool convert = true;
-
-			QString vtfFileName = fileName;
-
-			vtfFileName = vtfFileName.left( vtfFileName.lastIndexOf('.') );
-			vtfFileName.append(".vtf");
-
-			if( QDir(fileName.replace("\\", "/")).exists(vtfFileName) ) {
-
-				MsgBox msgBox(this);
-					msgBox.setWindowTitle("File already exists!");
-					msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
-					msgBox.setDefaultButton( QMessageBox::No );
-					msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
-
-				msgBox.setText( fileName.left( fileName.lastIndexOf(".") ).append(".vtf") +
-								" already exists. Do you want to overwrite it?"  );
-
-				if( msgBox.exec() != QMessageBox::Yes )
-					convert = false;
-			}
-
-			if(convert) {
-
-				ConversionThread* conversionThread = new ConversionThread(this);
-					conversionThread->fileName = fileName;
-
-				if(mVMTLoaded) {
-
-					conversionThread->outputParameter = vmtParser->lastVMTFile().directory + "/" +
-							vmtParser->lastVMTFile().fileName.left( vmtParser->lastVMTFile().fileName.size() - 4 ) + ".vtf";
-				}
-
-				conversionThread->start();
-			}*/
-		}
-
 		goto updateLineEdit;
 
 	} else {
