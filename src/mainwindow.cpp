@@ -1328,6 +1328,22 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showTransparency = true;
 	}
 
+	if( !( value = vmt.parameters.take("$allowalphatocoverage") ).isEmpty() )
+	{
+		if( !( ui->checkBox_alphaTest->isChecked() && ui->checkBox_alphaTest->isEnabled() ))
+		{
+			Error("$allowalphatocoverage only works in combination with $alphatest!")
+		}
+
+		if( loadBoolParameter( value, "$allowalphatocoverage") )
+		{
+			ui->checkBox_alphaToCoverage->setEnabled(true);
+			ui->checkBox_alphaToCoverage->setChecked(true);
+		}
+
+		showTransparency = true;
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	if( !( value = vmt.parameters.take("$alphatestreference") ).isEmpty() )
@@ -1384,6 +1400,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->checkBox_transparent->setChecked(true);
 
 			ui->checkBox_alphaTest->setDisabled(true);
+			ui->checkBox_alphaToCoverage->setDisabled(true);
 		}
 
 		showTransparency = true;
@@ -3846,6 +3863,9 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_additive->isChecked() )
 			vmtFile.parameters.insert( "$additive", "1" );
 
+		if( ui->checkBox_alphaToCoverage->isChecked() )
+			vmtFile.parameters.insert( "$allowalphatocoverage", "1" );
+
 		if( ui->checkBox_noCull->isChecked() )
 			vmtFile.parameters.insert( "$nocull", "1" );
 
@@ -4725,6 +4745,8 @@ void MainWindow::resetWidgets() {
 
 	ui->label_23->setDisabled(true);
 	ui->doubleSpinBox_alphaTestRef->setDisabled(true);
+	ui->checkBox_alphaToCoverage->setChecked(false);
+	ui->checkBox_alphaToCoverage->setDisabled(true);
 
 	ui->comboBox_detailBlendMode->setCurrentIndex(0);
 	ui->comboBox_detailBlendMode2->setCurrentIndex(0);
@@ -5620,6 +5642,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 		return (ui->doubleSpinBox_opacity->value() != 1.0 ||
 				ui->checkBox_transparent->isChecked() ||
 				ui->checkBox_alphaTest->isChecked() ||
+				ui->checkBox_alphaToCoverage->isChecked() ||
 				ui->doubleSpinBox_alphaTestRef->value() != 0.7 ||
 				ui->checkBox_additive->isChecked() ||
 				ui->checkBox_noCull->isChecked());
