@@ -6053,9 +6053,12 @@ void MainWindow::paste() {
 	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::End,
 									   QTextCursor::MoveAnchor);
 	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::Left,
-									   QTextCursor::MoveAnchor);
+									   QTextCursor::MoveAnchor);	
 	ui->vmtPreviewTextEdit->paste();
-	vmtPreviewParse();
+
+	ui->vmtPreviewTextEdit->textCursor().insertText("\n");
+
+	//vmtPreviewParse();
 }
 
 void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
@@ -10477,6 +10480,8 @@ void MainWindow::refreshInGame() {
 		Error("No file opened!");
 		return;
 	}
+
+	action_Save();
 
 	QDir dir(mAvailableGames.value(game));
 	dir.cdUp();
