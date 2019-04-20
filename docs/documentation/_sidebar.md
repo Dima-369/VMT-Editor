@@ -1,0 +1,17 @@
+- Getting started
+  - [Setup](setup.md)
+  - [Quick Guide](quickguide.md)
+- Reference
+  - [The Interface](interface.md)
+  - [Material Creation](material.md)
+  - [Parameter Groups](groups.md)
+  - [Converting Textures](converting.md)
+  - [Options](options.md)
+  - [Templates](templates.md)
+- Workflow
+  - [Workflow Examples](workflow.md)
+  - [Batch Materials](batch.md)
+- Substance shaders
+  - [Installation](substance.md)
+  - [Designer Reference](designer.md)
+  - [Painter Reference](painter.md)
