@@ -12,7 +12,7 @@ Copy the contents of the `shaders` folder to `...\<Substance Designer>\resources
 
 Copy the shader to your Painter shelf.
 
-?> Drag the `source.glsl` file onto your Painter window. In the dialog that appears select type _shader_ and import into your shelf.
+?> Drag the `source.glsl` file onto your Painter shelf. In the dialog that appears select type _shader_ and import into your shelf'shelf'.
 
 To install the templates copy both `templates` and `export-presets` to your shelf folder.
 

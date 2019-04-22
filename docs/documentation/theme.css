@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,600|Montserrat:400,600|Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,600|Montserrat:400,600|Source+Code+Pro");
 * {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
@@ -58,7 +58,7 @@ body {
   -webkit-font-smoothing: antialiased;
   color: #333;
   font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 0;
   margin: 0;
   overflow-x: hidden;
@@ -215,7 +215,7 @@ main.hidden {
   color: #383838 !important;
 }
 .sidebar {
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
   text-transform: none;
   border-right: 1px solid rgba(0,0,0,0.07);
   overflow-y: auto;
@@ -742,7 +742,7 @@ ul .app-sub-sidebar li a{
   background-color: #f8f8f8;
   border-radius: 2px;
   color: #e96900;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'Source Code Pro', Monaco, courier, monospace;
   font-size: 0.9rem;
   margin: 0 2px;
   padding: 3px 5px;
@@ -752,7 +752,7 @@ ul .app-sub-sidebar li a{
   -moz-osx-font-smoothing: initial;
   -webkit-font-smoothing: initial;
   background-color: #f8f8f8;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'Source Code Pro', Monaco, courier, monospace;
   line-height: 1.5rem;
   margin: 1.2em 0;
   overflow: auto;
@@ -844,7 +844,7 @@ ul .app-sub-sidebar li a{
   border-radius: 2px;
   color: #525252;
   display: block;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-family: 'Source Code Pro', Monaco, courier, monospace;
   font-size: 0.8rem;
   line-height: inherit;
   margin: 0 2px;
