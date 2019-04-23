@@ -79,6 +79,14 @@ a[disabled] {
   cursor: not-allowed;
   opacity: 0.6;
 }
+a {
+  text-decoration: none;
+  transition: color .3s ease;
+}
+.markdown-section a:hover {
+  color: #000;
+  transition: color .2s ease;
+}
 kbd {
   border: solid 1px #ccc;
   border-radius: 3px;

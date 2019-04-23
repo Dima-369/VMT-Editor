@@ -10,7 +10,7 @@ The interface of VMT Editor is split into three basic parts:
 
 The _Parameters_ tab is where the most of the main functionality of the VMT Editor lies. 
 
-?> How to use it is covered in [Material Creation](mmaterial.md).
+?> How to use it is covered in [Material Creation](material.md).
 
 ### Shader
 
@@ -22,7 +22,7 @@ On the left side of the parameter groups are the previews of the textures curren
 
 There's also a preview of masks that are used for reflection or specular, even if they're located in alpha channels of other textures.
 
-You can enlarge the preview by clikcing on it and close it by right clicking.
+You can enlarge the preview by clicking on it and close it by right clicking.
 
 !> VMT Editor does not support previewing textures inside game package files.
 
