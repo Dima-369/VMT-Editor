@@ -3013,6 +3013,17 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showWaterReflection = true;
 	}
 
+	if( !( value = vmt.parameters.take("$reflect3dskybox") ).isEmpty() ) {
+
+		if( vmt.shaderName != "Water" )
+			Error("$reflect3dskybox only works with the Water shader!")
+
+		if( loadBoolParameter( value, "$reflect3dskybox" ))
+			ui->checkBox_reflect3dskybox->setChecked(true);
+
+		showWaterReflection = true;
+	}
+
 	if( !( value = vmt.parameters.take("$bottommaterial") ).isEmpty() ) {
 
 		if( vmt.shaderName != "Water" )
@@ -4527,6 +4538,9 @@ VmtFile MainWindow::makeVMT()
 		if (ui->checkBox_reflect2dskybox->isVisible() && ui->checkBox_reflect2dskybox->isChecked())
 			vmtFile.parameters.insert( "$reflect2dskybox", "1" );
 
+		if (ui->checkBox_reflect3dskybox->isVisible() && ui->checkBox_reflect2dskybox->isChecked())
+			vmtFile.parameters.insert( "$reflect3dskybox", "1" );
+
 		if( ui->checkBox_realTimeReflection->isChecked() ) {
 
 			vmtFile.parameters.insert( "$reflecttexture", "_rt_waterreflection" );
@@ -4947,6 +4961,7 @@ void MainWindow::resetWidgets() {
 
 	ui->checkBox_flowDebug->setChecked(false);
 	ui->checkBox_reflect2dskybox->setChecked(false);
+	ui->checkBox_reflect3dskybox->setChecked(false);
 
 	ui->doubleSpinBox_scrollX1->setValue(0.0);
 	ui->doubleSpinBox_scrollX2->setValue(0.0);
