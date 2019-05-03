@@ -10963,7 +10963,7 @@ void MainWindow::checkForUpdates()
 
 		if (msgBox.exec() != QMessageBox::Cancel) {
 			QDesktopServices::openUrl(QString(
-				"https://github.com/Gira-X/VMT-Editor/releases"));
+				"https://github.com/Gira-X/VMT-Editor/releases/latest"));
 		}
 	}
 }
