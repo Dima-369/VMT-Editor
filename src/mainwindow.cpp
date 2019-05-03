@@ -467,6 +467,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
+	connect( ui->action_userGuide,					SIGNAL( triggered() ), this, SLOT( openUserGuide() ));
 	connect(ui->action_checkUpdate,                 SIGNAL(triggered()),         SLOT( checkForUpdates() ));
 
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
@@ -4538,7 +4539,7 @@ VmtFile MainWindow::makeVMT()
 		if (ui->checkBox_reflect2dskybox->isVisible() && ui->checkBox_reflect2dskybox->isChecked())
 			vmtFile.parameters.insert( "$reflect2dskybox", "1" );
 
-		if (ui->checkBox_reflect3dskybox->isVisible() && ui->checkBox_reflect2dskybox->isChecked())
+		if (ui->checkBox_reflect3dskybox->isVisible() && ui->checkBox_reflect3dskybox->isChecked())
 			vmtFile.parameters.insert( "$reflect3dskybox", "1" );
 
 		if( ui->checkBox_realTimeReflection->isChecked() ) {
@@ -5760,7 +5761,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->doubleSpinBox_reflectionAmount->value() != 0.0 ||
 				ui->checkBox_skybox->isChecked() ||
 				ui->checkBox_reflectEntities->isChecked() ||
-				ui->checkBox_reflect2dskybox->isChecked());
+				ui->checkBox_reflect2dskybox->isChecked() ||
+				ui->checkBox_reflect3dskybox->isChecked());
 
 	case WaterRefraction:
 
@@ -9389,6 +9391,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		ui->checkBox_reflectEntities->setEnabled(enabled);
 		ui->checkBox_skybox->setEnabled(enabled);
 		ui->checkBox_reflect2dskybox->setEnabled(enabled);
+		ui->checkBox_reflect3dskybox->setEnabled(enabled);
 		ui->checkBox_reflectMarkedEntities->setEnabled(enabled);
 
 		ui->lineEdit_waterReflectTexture->setDisabled(enabled);
@@ -11061,6 +11064,12 @@ void MainWindow::displayAboutDialog()
 	dialog.show();
 	dialog.exec();
 }
+
+void MainWindow::openUserGuide()
+{
+	QDesktopServices::openUrl(QUrl("https://gira-x.github.io/VMT-Editor/documentation/#/"));
+}
+
 
 //----------------------------------------------------------------------------------------//
 
