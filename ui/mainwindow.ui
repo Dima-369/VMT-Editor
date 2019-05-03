@@ -798,7 +798,27 @@ QGroupBox::title {
     subcontrol-position: top left;
     padding-left: 100px;
     padding-right: 10px;
-}</string>
+}
+
+QScrollBar
+{
+	background-color: #404040;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+    background-color: #282828;
+    min-width: 5px;
+ 	min-height: 5px;
+	border: 1px solid #404040;
+}
+
+QScrollBar::handle:hover
+{
+    background-color: #303030;
+ }
+</string>
       </property>
       <property name="currentIndex">
        <number>0</number>
