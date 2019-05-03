@@ -32,7 +32,7 @@ VmtParser::VmtParser( QListWidget* logger ) :
 	// Needed to allow a proper grouping of $normalmap in the Water and Refract Shaders
 	mGroups.append( "");
 
-	mGroups.append( "$abovewater;$forceexpensive;$forcecheap;$reflect2dskybox" );
+	mGroups.append( "$abovewater;$forceexpensive;$forcecheap;$reflect2dskybox;$reflect3dskybox" );
 	mGroups.append( "$scroll1;$scroll2");
 	mGroups.append( "$flow_debug;$flowmap;$flow_noise_texture;$flow_normaluvscale;$flow_worlduvscale;$flow_uvscrolldistance;$flow_bumpstrength;$flow_noise_scale;$flow_timescale;$flow_timeintervalinseconds" );
 	mGroups.append( "$reflecttexture;$reflecttint;$reflectamount;$reflectentities;$reflectskyboxonly;$reflectonlymarkedentities" );
@@ -776,6 +776,11 @@ QString VmtParser::formatSubGroups( const QString& subGroups, int intendStart )
 			}
 			else
 			{
+				if( line.contains(QRegExp(R"([\$\\\/\[]+)")) ) {
+					line.remove("\"");
+					line = line.section(" ", 0, 0) + " \"" + line.section(" ", 1, -1) + "\"";
+				};
+
 				output.append(line);
 
 				lastIntended = false;

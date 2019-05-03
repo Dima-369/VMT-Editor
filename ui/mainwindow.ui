@@ -798,7 +798,27 @@ QGroupBox::title {
     subcontrol-position: top left;
     padding-left: 100px;
     padding-right: 10px;
-}</string>
+}
+
+QScrollBar
+{
+	background-color: #404040;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+    background-color: #282828;
+    min-width: 5px;
+ 	min-height: 5px;
+	border: 1px solid #404040;
+}
+
+QScrollBar::handle:hover
+{
+    background-color: #303030;
+ }
+</string>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -1076,7 +1096,7 @@ QGroupBox::title {
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-4735</y>
              <width>933</width>
              <height>6121</height>
             </rect>
@@ -3718,7 +3738,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_centerX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -3743,6 +3763,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -3758,7 +3781,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_centerY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -3779,6 +3802,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -3801,7 +3827,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -3832,7 +3858,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_angle">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -3886,7 +3912,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_scaleX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -3911,6 +3937,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
                      </property>
@@ -3926,7 +3955,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_scaleY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -3947,6 +3976,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
@@ -3969,7 +4001,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4000,7 +4032,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_translateX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4025,6 +4057,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>4</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -4037,7 +4072,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bt_translateY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4058,6 +4093,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>4</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -4149,7 +4187,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_scaleX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4174,6 +4212,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
                      </property>
@@ -4189,7 +4230,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_scaleY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4210,6 +4251,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
@@ -4232,7 +4276,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4263,7 +4307,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_translateX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4288,6 +4332,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>4</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -4300,7 +4347,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_translateY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4321,6 +4368,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>4</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -4382,7 +4432,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_centerX">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4407,6 +4457,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -4422,7 +4475,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_centerY">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4443,6 +4496,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -4465,7 +4521,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4496,7 +4552,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_angle">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4825,7 +4881,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_centerX_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4850,6 +4906,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -4865,7 +4924,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_centerY_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4886,6 +4945,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -4908,7 +4970,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -4939,7 +5001,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_angle_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -4993,7 +5055,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_scaleX_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -5018,6 +5080,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>3</number>
+                     </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
                      </property>
@@ -5033,7 +5098,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_scaleY_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -5054,6 +5119,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>3</number>
                      </property>
                      <property name="maximum">
                       <double>256.000000000000000</double>
@@ -5076,7 +5144,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>88</width>
+                       <width>86</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -5107,7 +5175,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_translateX_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -5132,6 +5200,9 @@ QToolButton:pressed
                      <property name="prefix">
                       <string>X: </string>
                      </property>
+                     <property name="decimals">
+                      <number>4</number>
+                     </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
                      </property>
@@ -5144,7 +5215,7 @@ QToolButton:pressed
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_bm_translateY_2">
                      <property name="minimumSize">
                       <size>
-                       <width>70</width>
+                       <width>76</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -5165,6 +5236,9 @@ QToolButton:pressed
                      </property>
                      <property name="prefix">
                       <string>Y: </string>
+                     </property>
+                     <property name="decimals">
+                      <number>4</number>
                      </property>
                      <property name="maximum">
                       <double>1.000000000000000</double>
@@ -5849,7 +5923,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscalex2">
                         <property name="minimumSize">
                          <size>
-                          <width>71</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -5871,6 +5945,9 @@ QToolButton:pressed
                         <property name="prefix">
                          <string>X: </string>
                         </property>
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
                         </property>
@@ -5886,7 +5963,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscaley2">
                         <property name="minimumSize">
                          <size>
-                          <width>72</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -5910,6 +5987,9 @@ QToolButton:pressed
                         </property>
                         <property name="prefix">
                          <string>Y: </string>
+                        </property>
+                        <property name="decimals">
+                         <number>3</number>
                         </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
@@ -6608,7 +6688,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscalex3">
                         <property name="minimumSize">
                          <size>
-                          <width>71</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -6630,6 +6710,9 @@ QToolButton:pressed
                         <property name="prefix">
                          <string>X: </string>
                         </property>
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
                         </property>
@@ -6645,7 +6728,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscaley3">
                         <property name="minimumSize">
                          <size>
-                          <width>72</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -6669,6 +6752,9 @@ QToolButton:pressed
                         </property>
                         <property name="prefix">
                          <string>Y: </string>
+                        </property>
+                        <property name="decimals">
+                         <number>3</number>
                         </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
@@ -7295,7 +7381,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscalex4">
                         <property name="minimumSize">
                          <size>
-                          <width>71</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -7317,6 +7403,9 @@ QToolButton:pressed
                         <property name="prefix">
                          <string>X: </string>
                         </property>
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
                         </property>
@@ -7332,7 +7421,7 @@ QToolButton:pressed
                        <widget class="QDoubleSpinBox" name="doubleSpinBox_uvscaley4">
                         <property name="minimumSize">
                          <size>
-                          <width>72</width>
+                          <width>76</width>
                           <height>23</height>
                          </size>
                         </property>
@@ -7356,6 +7445,9 @@ QToolButton:pressed
                         </property>
                         <property name="prefix">
                          <string>Y: </string>
+                        </property>
+                        <property name="decimals">
+                         <number>3</number>
                         </property>
                         <property name="maximum">
                          <double>256.000000000000000</double>
@@ -7564,6 +7656,56 @@ QToolButton:pressed
                 <layout class="QGridLayout" name="gridLayout_2">
                  <item row="0" column="0">
                   <layout class="QGridLayout" name="gridLayout_27">
+                   <item row="2" column="3" colspan="3">
+                    <widget class="QCheckBox" name="checkBox_additive">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>149</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Additive</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="3" colspan="3">
+                    <widget class="QCheckBox" name="checkBox_decal">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Decal</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_20">
                      <property name="enabled">
@@ -7592,7 +7734,7 @@ QToolButton:pressed
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1" colspan="4">
+                   <item row="0" column="1" colspan="5">
                     <layout class="QHBoxLayout" name="horizontalLayout_39">
                      <item>
                       <widget class="QSlider" name="horizontalSlider_opacity">
@@ -7684,7 +7826,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
+                       <width>90</width>
                        <height>19</height>
                       </size>
                      </property>
@@ -7699,62 +7841,6 @@ QToolButton:pressed
                      </property>
                      <property name="text">
                       <string>Alpha test</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="1">
-                    <widget class="QCheckBox" name="checkBox_transparent">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>100</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Translucent</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QCheckBox" name="checkBox_noCull">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>100</width>
-                       <height>23</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Two-sided</string>
                      </property>
                     </widget>
                    </item>
@@ -7825,37 +7911,18 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Treshold:</string>
+                      <string>Cutoff:</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="3">
-                    <widget class="QCheckBox" name="checkBox_decal">
-                     <property name="minimumSize">
-                      <size>
-                       <width>100</width>
-                       <height>23</height>
-                      </size>
+                   <item row="1" column="5">
+                    <widget class="QCheckBox" name="checkBox_alphaToCoverage">
+                     <property name="enabled">
+                      <bool>false</bool>
                      </property>
-                     <property name="font">
-                      <font>
-                       <family>Segoe UI</family>
-                       <pointsize>9</pointsize>
-                       <weight>50</weight>
-                       <italic>false</italic>
-                       <bold>false</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Decal</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="3">
-                    <widget class="QCheckBox" name="checkBox_additive">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -7864,7 +7931,7 @@ QToolButton:pressed
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
+                       <width>140</width>
                        <height>23</height>
                       </size>
                      </property>
@@ -7878,9 +7945,78 @@ QToolButton:pressed
                       </font>
                      </property>
                      <property name="text">
-                      <string>Additive</string>
+                      <string>Alpha to Coverage</string>
                      </property>
                     </widget>
+                   </item>
+                   <item row="3" column="1" colspan="2">
+                    <widget class="QCheckBox" name="checkBox_noCull">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>140</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Two-sided</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1" colspan="2">
+                    <widget class="QCheckBox" name="checkBox_transparent">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>140</width>
+                       <height>23</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Translucent</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="4">
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>38</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </item>
@@ -16801,6 +16937,19 @@ QToolButton:pressed
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="3">
+                    <spacer name="horizontalSpacer_21">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                    <item row="0" column="2">
                     <widget class="QCheckBox" name="checkBox_reflectEntities">
                      <property name="enabled">
@@ -16826,20 +16975,7 @@ QToolButton:pressed
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="3">
-                    <spacer name="horizontalSpacer_21">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="1" column="1">
+                   <item row="0" column="3">
                     <widget class="QCheckBox" name="checkBox_skybox">
                      <property name="enabled">
                       <bool>false</bool>
@@ -16861,6 +16997,31 @@ QToolButton:pressed
                      </property>
                      <property name="text">
                       <string>Only skybox</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QCheckBox" name="checkBox_reflect3dskybox">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>140</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>9</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Reflect 3D skybox</string>
                      </property>
                     </widget>
                    </item>
@@ -19699,6 +19860,7 @@ QScrollBar::handle:horizontal
      <string>&amp;Help</string>
     </property>
     <addaction name="action_checkUpdate"/>
+    <addaction name="action_userGuide"/>
     <addaction name="action_about"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -20863,6 +21025,11 @@ QScrollBar::handle:horizontal
     <string>F8</string>
    </property>
   </action>
+  <action name="action_userGuide">
+   <property name="text">
+    <string>User Guide...</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -20993,12 +21160,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2078</y>
+     <x>469</x>
+     <y>-2511</y>
     </hint>
     <hint type="destinationlabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
    </hints>
   </connection>
@@ -21009,8 +21176,8 @@ QScrollBar::handle:horizontal
    <slot>alphaTestReferenceChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>549</x>
-     <y>-2107</y>
+     <x>535</x>
+     <y>-2540</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -21025,12 +21192,12 @@ QScrollBar::handle:horizontal
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
     <hint type="destinationlabel">
-     <x>429</x>
-     <y>-2078</y>
+     <x>469</x>
+     <y>-2511</y>
     </hint>
    </hints>
   </connection>
@@ -21041,12 +21208,12 @@ QScrollBar::handle:horizontal
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
     <hint type="destinationlabel">
-     <x>483</x>
-     <y>-2107</y>
+     <x>466</x>
+     <y>-2540</y>
     </hint>
    </hints>
   </connection>
@@ -21057,12 +21224,12 @@ QScrollBar::handle:horizontal
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
     <hint type="destinationlabel">
-     <x>549</x>
-     <y>-2107</y>
+     <x>535</x>
+     <y>-2540</y>
     </hint>
    </hints>
   </connection>
@@ -21074,7 +21241,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>646</x>
-     <y>-2137</y>
+     <y>-2570</y>
     </hint>
     <hint type="destinationlabel">
      <x>344</x>
@@ -21090,7 +21257,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1981</y>
+     <y>-2414</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -21106,7 +21273,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1246</y>
+     <y>-1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -21122,7 +21289,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1246</y>
+     <y>-1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -21138,7 +21305,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>646</x>
-     <y>-2137</y>
+     <y>-2570</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -21154,7 +21321,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>428</x>
-     <y>-1275</y>
+     <y>-1708</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
@@ -21170,7 +21337,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>468</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -21186,7 +21353,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>614</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
@@ -21202,7 +21369,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1217</y>
+     <y>-1650</y>
     </hint>
     <hint type="destinationlabel">
      <x>625</x>
@@ -21218,7 +21385,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-1129</y>
+     <y>-1562</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -21234,7 +21401,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -21250,7 +21417,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>862</x>
-     <y>-577</y>
+     <y>-1032</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -21266,7 +21433,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
     <hint type="destinationlabel">
      <x>492</x>
@@ -21282,7 +21449,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>388</x>
-     <y>-1594</y>
+     <y>-2027</y>
     </hint>
     <hint type="destinationlabel">
      <x>311</x>
@@ -21298,7 +21465,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1981</y>
+     <y>-2414</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -21314,7 +21481,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-1920</y>
+     <y>-2353</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -21330,7 +21497,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>404</x>
-     <y>-1951</y>
+     <y>-2384</y>
     </hint>
     <hint type="destinationlabel">
      <x>308</x>
@@ -21346,7 +21513,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1920</y>
+     <y>-2353</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -21361,8 +21528,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2078</y>
+     <x>469</x>
+     <y>-2511</y>
     </hint>
     <hint type="destinationlabel">
      <x>491</x>
@@ -21377,8 +21544,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>549</x>
-     <y>-2107</y>
+     <x>535</x>
+     <y>-2540</y>
     </hint>
     <hint type="destinationlabel">
      <x>577</x>
@@ -21393,8 +21560,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2049</y>
+     <x>469</x>
+     <y>-2482</y>
     </hint>
     <hint type="destinationlabel">
      <x>490</x>
@@ -21409,8 +21576,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
     <hint type="destinationlabel">
      <x>493</x>
@@ -21426,7 +21593,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>400</x>
-     <y>-4038</y>
+     <y>-4493</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21442,7 +21609,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-4038</y>
+     <y>-4493</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21458,7 +21625,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-4068</y>
+     <y>-4523</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -21474,7 +21641,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>-3878</y>
+     <y>-4333</y>
     </hint>
     <hint type="destinationlabel">
      <x>414</x>
@@ -21490,7 +21657,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-3878</y>
+     <y>-4333</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -21506,7 +21673,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-3878</y>
+     <y>-4333</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -21521,8 +21688,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-3189</y>
+     <x>405</x>
+     <y>-3644</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -21537,8 +21704,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-3189</y>
+     <x>487</x>
+     <y>-3644</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -21553,8 +21720,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-3158</y>
+     <x>405</x>
+     <y>-3613</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -21569,8 +21736,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-3158</y>
+     <x>487</x>
+     <y>-3613</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21585,8 +21752,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-3189</y>
+     <x>661</x>
+     <y>-3644</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -21601,8 +21768,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-3158</y>
+     <x>661</x>
+     <y>-3613</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -21617,8 +21784,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>-3158</y>
+     <x>743</x>
+     <y>-3613</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -21633,8 +21800,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-3089</y>
+     <x>405</x>
+     <y>-3544</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
@@ -21649,8 +21816,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-3089</y>
+     <x>487</x>
+     <y>-3544</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -21665,8 +21832,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-3058</y>
+     <x>405</x>
+     <y>-3513</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21681,8 +21848,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-3058</y>
+     <x>487</x>
+     <y>-3513</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
@@ -21697,8 +21864,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-3089</y>
+     <x>661</x>
+     <y>-3544</y>
     </hint>
     <hint type="destinationlabel">
      <x>278</x>
@@ -21713,8 +21880,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-3058</y>
+     <x>661</x>
+     <y>-3513</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21729,8 +21896,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>-3058</y>
+     <x>743</x>
+     <y>-3513</y>
     </hint>
     <hint type="destinationlabel">
      <x>277</x>
@@ -21746,7 +21913,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>735</x>
-     <y>1141</y>
+     <y>686</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -21762,7 +21929,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>735</x>
-     <y>955</y>
+     <y>500</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -21778,7 +21945,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3623</y>
+     <y>-4078</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21794,7 +21961,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21810,7 +21977,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21826,7 +21993,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>1787</y>
+     <y>1332</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
@@ -21842,7 +22009,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>1758</y>
+     <y>1303</y>
     </hint>
     <hint type="destinationlabel">
      <x>586</x>
@@ -21858,11 +22025,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>425</x>
-     <y>-3504</y>
+     <y>-3959</y>
     </hint>
     <hint type="destinationlabel">
      <x>471</x>
-     <y>-3508</y>
+     <y>-3963</y>
     </hint>
    </hints>
   </connection>
@@ -21874,11 +22041,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
-     <x>406</x>
-     <y>1082</y>
+     <x>408</x>
+     <y>538</y>
     </hint>
    </hints>
   </connection>
@@ -21890,11 +22057,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
-     <x>285</x>
-     <y>-3594</y>
+     <x>281</x>
+     <y>-4049</y>
     </hint>
    </hints>
   </connection>
@@ -21906,7 +22073,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>589</y>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21922,11 +22089,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>838</x>
-     <y>-3594</y>
+     <y>-4049</y>
     </hint>
    </hints>
   </connection>
@@ -21938,7 +22105,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>618</y>
+     <y>163</y>
     </hint>
     <hint type="destinationlabel">
      <x>406</x>
@@ -21954,7 +22121,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>735</x>
-     <y>796</y>
+     <y>341</y>
     </hint>
     <hint type="destinationlabel">
      <x>733</x>
@@ -21970,7 +22137,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>219</x>
@@ -21986,7 +22153,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3594</y>
+     <y>-4049</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
@@ -22002,7 +22169,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>800</x>
-     <y>-1431</y>
+     <y>-1864</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -22018,7 +22185,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>800</x>
-     <y>-1402</y>
+     <y>-1835</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -22034,7 +22201,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>1758</y>
+     <y>1303</y>
     </hint>
     <hint type="destinationlabel">
      <x>187</x>
@@ -22050,7 +22217,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>272</y>
+     <y>-183</y>
     </hint>
     <hint type="destinationlabel">
      <x>252</x>
@@ -22066,7 +22233,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2741</y>
+     <y>-3196</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
@@ -22082,7 +22249,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-2712</y>
+     <y>-3167</y>
     </hint>
     <hint type="destinationlabel">
      <x>489</x>
@@ -22098,7 +22265,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2799</y>
+     <y>-3254</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -22114,7 +22281,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2770</y>
+     <y>-3225</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -22130,7 +22297,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2770</y>
+     <y>-3225</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -22146,7 +22313,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2799</y>
+     <y>-3254</y>
     </hint>
     <hint type="destinationlabel">
      <x>118</x>
@@ -22162,7 +22329,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2741</y>
+     <y>-3196</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -22178,7 +22345,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1981</y>
+     <y>-2414</y>
     </hint>
     <hint type="destinationlabel">
      <x>120</x>
@@ -22193,8 +22360,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>589</x>
-     <y>-2078</y>
+     <x>624</x>
+     <y>-2511</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -22210,7 +22377,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>635</x>
-     <y>1841</y>
+     <y>1386</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -22226,7 +22393,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1867</y>
+     <y>1412</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -22242,7 +22409,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1841</y>
+     <y>1386</y>
     </hint>
     <hint type="destinationlabel">
      <x>99</x>
@@ -22258,7 +22425,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>735</x>
-     <y>-542</y>
+     <y>-997</y>
     </hint>
     <hint type="destinationlabel">
      <x>251</x>
@@ -22274,7 +22441,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>599</x>
-     <y>-427</y>
+     <y>-882</y>
     </hint>
     <hint type="destinationlabel">
      <x>627</x>
@@ -22290,7 +22457,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-3969</y>
+     <y>-4424</y>
     </hint>
     <hint type="destinationlabel">
      <x>436</x>
@@ -22306,7 +22473,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-3938</y>
+     <y>-4393</y>
     </hint>
     <hint type="destinationlabel">
      <x>417</x>
@@ -22322,7 +22489,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1681</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -22338,7 +22505,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1681</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>309</x>
@@ -22354,7 +22521,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-1339</y>
+     <y>-1780</y>
     </hint>
     <hint type="destinationlabel">
      <x>123</x>
@@ -22370,7 +22537,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>635</x>
-     <y>1815</y>
+     <y>1360</y>
     </hint>
     <hint type="destinationlabel">
      <x>651</x>
@@ -22386,7 +22553,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>791</x>
-     <y>1815</y>
+     <y>1360</y>
     </hint>
     <hint type="destinationlabel">
      <x>842</x>
@@ -22402,7 +22569,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>791</x>
-     <y>1841</y>
+     <y>1386</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -22418,7 +22585,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>635</x>
-     <y>1867</y>
+     <y>1412</y>
     </hint>
     <hint type="destinationlabel">
      <x>861</x>
@@ -22434,7 +22601,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>479</x>
-     <y>1815</y>
+     <y>1360</y>
     </hint>
     <hint type="destinationlabel">
      <x>506</x>
@@ -22450,7 +22617,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3748</y>
+     <y>-4203</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -22466,7 +22633,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3748</y>
+     <y>-4203</y>
     </hint>
     <hint type="destinationlabel">
      <x>288</x>
@@ -22482,7 +22649,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3719</y>
+     <y>-4174</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -22498,7 +22665,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3719</y>
+     <y>-4174</y>
     </hint>
     <hint type="destinationlabel">
      <x>287</x>
@@ -22514,7 +22681,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-3690</y>
+     <y>-4145</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -22530,7 +22697,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>986</y>
+     <y>531</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -22546,7 +22713,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>1046</y>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
@@ -22562,7 +22729,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>1042</y>
+     <y>587</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -22577,8 +22744,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
-     <y>1069</y>
+     <x>918</x>
+     <y>587</y>
     </hint>
     <hint type="destinationlabel">
      <x>736</x>
@@ -22594,7 +22761,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>474</x>
-     <y>1240</y>
+     <y>785</y>
     </hint>
     <hint type="destinationlabel">
      <x>204</x>
@@ -22610,7 +22777,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>398</x>
-     <y>1240</y>
+     <y>785</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -22626,7 +22793,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>398</x>
-     <y>1269</y>
+     <y>814</y>
     </hint>
     <hint type="destinationlabel">
      <x>97</x>
@@ -22642,7 +22809,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>474</x>
-     <y>1269</y>
+     <y>814</y>
     </hint>
     <hint type="destinationlabel">
      <x>195</x>
@@ -22658,7 +22825,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1172</y>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -22674,7 +22841,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>389</x>
-     <y>827</y>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
      <x>605</x>
@@ -22690,7 +22857,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>541</x>
-     <y>827</y>
+     <y>372</y>
     </hint>
     <hint type="destinationlabel">
      <x>734</x>
@@ -22706,7 +22873,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>858</y>
+     <y>403</y>
     </hint>
     <hint type="destinationlabel">
      <x>608</x>
@@ -22722,7 +22889,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>883</y>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
      <x>540</x>
@@ -22738,7 +22905,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>883</y>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
      <x>663</x>
@@ -22754,7 +22921,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>104</y>
+     <y>-351</y>
     </hint>
     <hint type="destinationlabel">
      <x>580</x>
@@ -22770,7 +22937,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>133</y>
+     <y>-322</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -22786,7 +22953,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>578</x>
-     <y>154</y>
+     <y>-301</y>
     </hint>
     <hint type="destinationlabel">
      <x>565</x>
@@ -22802,7 +22969,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1246</y>
+     <y>-1679</y>
     </hint>
     <hint type="destinationlabel">
      <x>675</x>
@@ -22818,7 +22985,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>428</x>
-     <y>-1275</y>
+     <y>-1708</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -22834,7 +23001,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1217</y>
+     <y>-1650</y>
     </hint>
     <hint type="destinationlabel">
      <x>634</x>
@@ -22850,7 +23017,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>468</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>620</x>
@@ -22866,7 +23033,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>614</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -22882,7 +23049,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1076</y>
+     <y>-1531</y>
     </hint>
     <hint type="destinationlabel">
      <x>600</x>
@@ -22898,7 +23065,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1045</y>
+     <y>-1500</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -22914,7 +23081,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>589</y>
+     <y>134</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -22930,7 +23097,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1014</y>
+     <y>-1469</y>
     </hint>
     <hint type="destinationlabel">
      <x>601</x>
@@ -22946,7 +23113,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>618</y>
+     <y>163</y>
     </hint>
     <hint type="destinationlabel">
      <x>720</x>
@@ -22962,7 +23129,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>496</x>
-     <y>727</y>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -22978,7 +23145,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>706</y>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -22994,7 +23161,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>390</x>
-     <y>677</y>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
      <x>795</x>
@@ -23010,7 +23177,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>677</y>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
      <x>798</x>
@@ -23026,7 +23193,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>390</x>
-     <y>648</y>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
@@ -23042,7 +23209,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>648</y>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>659</x>
@@ -23058,7 +23225,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>735</x>
-     <y>648</y>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>642</x>
@@ -23074,7 +23241,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>390</x>
-     <y>706</y>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
      <x>640</x>
@@ -23090,7 +23257,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>660</x>
-     <y>-635</y>
+     <y>-1090</y>
     </hint>
     <hint type="destinationlabel">
      <x>569</x>
@@ -23106,7 +23273,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>822</x>
-     <y>-635</y>
+     <y>-1090</y>
     </hint>
     <hint type="destinationlabel">
      <x>746</x>
@@ -23122,7 +23289,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>741</x>
-     <y>-635</y>
+     <y>-1090</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -23138,7 +23305,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>599</x>
-     <y>-427</y>
+     <y>-882</y>
     </hint>
     <hint type="destinationlabel">
      <x>593</x>
@@ -23154,7 +23321,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>862</x>
-     <y>-577</y>
+     <y>-1032</y>
     </hint>
     <hint type="destinationlabel">
      <x>581</x>
@@ -23170,7 +23337,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
     <hint type="destinationlabel">
      <x>573</x>
@@ -23186,7 +23353,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
     <hint type="destinationlabel">
      <x>681</x>
@@ -23202,7 +23369,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-604</y>
+     <y>-1059</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -23218,7 +23385,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-455</y>
+     <y>-910</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -23234,7 +23401,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-3969</y>
+     <y>-4424</y>
     </hint>
     <hint type="destinationlabel">
      <x>307</x>
@@ -23250,7 +23417,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>621</x>
-     <y>-455</y>
+     <y>-910</y>
     </hint>
     <hint type="destinationlabel">
      <x>707</x>
@@ -23266,7 +23433,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-3938</y>
+     <y>-4393</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -23282,7 +23449,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-3908</y>
+     <y>-4363</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -23298,7 +23465,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-3847</y>
+     <y>-4302</y>
     </hint>
     <hint type="destinationlabel">
      <x>148</x>
@@ -23314,7 +23481,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-3816</y>
+     <y>-4271</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -23330,7 +23497,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>221</y>
+     <y>-234</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -23346,7 +23513,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>242</y>
+     <y>-213</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -23362,7 +23529,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>584</x>
-     <y>303</y>
+     <y>-152</y>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
@@ -23378,7 +23545,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>497</x>
-     <y>303</y>
+     <y>-152</y>
     </hint>
     <hint type="destinationlabel">
      <x>250</x>
@@ -23394,7 +23561,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>410</x>
-     <y>303</y>
+     <y>-152</y>
     </hint>
     <hint type="destinationlabel">
      <x>153</x>
@@ -23410,7 +23577,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>1046</y>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>575</x>
@@ -23426,11 +23593,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>513</x>
-     <y>-512</y>
+     <y>-967</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
    </hints>
   </connection>
@@ -23442,11 +23609,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-511</y>
+     <y>-966</y>
     </hint>
     <hint type="destinationlabel">
      <x>513</x>
-     <y>-512</y>
+     <y>-967</y>
     </hint>
    </hints>
   </connection>
@@ -23458,7 +23625,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3379</y>
+     <y>-3834</y>
     </hint>
     <hint type="destinationlabel">
      <x>420</x>
@@ -23474,7 +23641,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-3439</y>
+     <y>-3894</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -23490,7 +23657,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3439</y>
+     <y>-3894</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -23506,7 +23673,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3379</y>
+     <y>-3834</y>
     </hint>
     <hint type="destinationlabel">
      <x>487</x>
@@ -23522,7 +23689,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-3319</y>
+     <y>-3774</y>
     </hint>
     <hint type="destinationlabel">
      <x>486</x>
@@ -23537,8 +23704,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>589</x>
-     <y>-2049</y>
+     <x>725</x>
+     <y>-2482</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23554,7 +23721,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2521</y>
+     <y>-2976</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23570,7 +23737,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2330</y>
+     <y>-2763</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23586,7 +23753,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2521</y>
+     <y>-2976</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23601,8 +23768,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>-2485</y>
+     <x>405</x>
+     <y>-2918</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -23617,8 +23784,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>478</x>
-     <y>-2485</y>
+     <x>487</x>
+     <y>-2918</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -23633,8 +23800,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>-2676</y>
+     <x>405</x>
+     <y>-3131</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23649,8 +23816,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>478</x>
-     <y>-2676</y>
+     <x>487</x>
+     <y>-3131</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23666,7 +23833,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>580</x>
-     <y>-3290</y>
+     <y>-3745</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23682,7 +23849,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-3269</y>
+     <y>-3724</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23698,7 +23865,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-3269</y>
+     <y>-3724</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23714,7 +23881,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2646</y>
+     <y>-3101</y>
     </hint>
     <hint type="destinationlabel">
      <x>623</x>
@@ -23730,7 +23897,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2646</y>
+     <y>-3101</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23746,7 +23913,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2617</y>
+     <y>-3072</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23762,7 +23929,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2617</y>
+     <y>-3072</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23778,7 +23945,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2588</y>
+     <y>-3043</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23794,7 +23961,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2455</y>
+     <y>-2888</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23810,7 +23977,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2455</y>
+     <y>-2888</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -23826,7 +23993,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2426</y>
+     <y>-2859</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23842,7 +24009,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2426</y>
+     <y>-2859</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23858,7 +24025,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2397</y>
+     <y>-2830</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23874,7 +24041,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2330</y>
+     <y>-2763</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -23889,8 +24056,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>-2294</y>
+     <x>405</x>
+     <y>-2727</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23905,8 +24072,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>478</x>
-     <y>-2294</y>
+     <x>487</x>
+     <y>-2727</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -23922,7 +24089,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2264</y>
+     <y>-2697</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -23938,7 +24105,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2264</y>
+     <y>-2697</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23954,7 +24121,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2235</y>
+     <y>-2668</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -23970,7 +24137,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>877</x>
-     <y>-2235</y>
+     <y>-2668</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -23986,7 +24153,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>594</x>
-     <y>-2206</y>
+     <y>-2639</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24001,8 +24168,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2078</y>
+     <x>469</x>
+     <y>-2511</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24017,8 +24184,8 @@ QScrollBar::handle:horizontal
    <slot>modifiedCheckBox(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>429</x>
-     <y>-2105</y>
+     <x>419</x>
+     <y>-2542</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -24034,7 +24201,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>741</x>
-     <y>-635</y>
+     <y>-1090</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24050,7 +24217,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>1046</y>
+     <y>591</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -24066,7 +24233,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>800</x>
-     <y>-1652</y>
+     <y>-2085</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24082,7 +24249,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>578</x>
-     <y>-1652</y>
+     <y>-2086</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24098,7 +24265,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>485</x>
-     <y>-1951</y>
+     <y>-2384</y>
     </hint>
     <hint type="destinationlabel">
      <x>929</x>
@@ -24114,7 +24281,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>591</x>
-     <y>-1949</y>
+     <y>-2386</y>
     </hint>
     <hint type="destinationlabel">
      <x>928</x>
@@ -24130,11 +24297,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-852</y>
+     <y>-1307</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>-853</y>
+     <y>-1308</y>
     </hint>
    </hints>
   </connection>
@@ -24146,11 +24313,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-853</y>
+     <y>-1308</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>-852</y>
+     <y>-1307</y>
     </hint>
    </hints>
   </connection>
@@ -24162,11 +24329,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-733</y>
+     <y>-1188</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>-734</y>
+     <y>-1189</y>
     </hint>
    </hints>
   </connection>
@@ -24178,11 +24345,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-734</y>
+     <y>-1189</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>-733</y>
+     <y>-1188</y>
     </hint>
    </hints>
   </connection>
@@ -24194,7 +24361,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-883</y>
+     <y>-1338</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -24210,7 +24377,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-762</y>
+     <y>-1217</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -24226,11 +24393,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>468</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>469</x>
-     <y>-796</y>
+     <y>-1251</y>
     </hint>
    </hints>
   </connection>
@@ -24242,11 +24409,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-796</y>
+     <y>-1251</y>
     </hint>
     <hint type="destinationlabel">
      <x>468</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
    </hints>
   </connection>
@@ -24258,11 +24425,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>614</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>589</x>
-     <y>-796</y>
+     <y>-1251</y>
     </hint>
    </hints>
   </connection>
@@ -24274,11 +24441,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>589</x>
-     <y>-796</y>
+     <y>-1251</y>
     </hint>
     <hint type="destinationlabel">
      <x>614</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
    </hints>
   </connection>
@@ -24290,7 +24457,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-636</y>
+     <y>-1091</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -24306,7 +24473,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-2990</y>
+     <y>-3445</y>
     </hint>
     <hint type="destinationlabel">
      <x>592</x>
@@ -24322,11 +24489,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>104</y>
+     <y>-351</y>
     </hint>
     <hint type="destinationlabel">
      <x>578</x>
-     <y>103</y>
+     <y>-352</y>
     </hint>
    </hints>
   </connection>
@@ -24338,11 +24505,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>578</x>
-     <y>103</y>
+     <y>-352</y>
     </hint>
     <hint type="destinationlabel">
      <x>644</x>
-     <y>104</y>
+     <y>-351</y>
     </hint>
    </hints>
   </connection>
@@ -24354,7 +24521,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>531</x>
-     <y>-1343</y>
+     <y>-1776</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24370,7 +24537,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-2990</y>
+     <y>-3445</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24386,7 +24553,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-762</y>
+     <y>-1217</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24402,7 +24569,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-883</y>
+     <y>-1338</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24418,7 +24585,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-952</y>
+     <y>-1407</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24434,7 +24601,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>-983</y>
+     <y>-1438</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24450,7 +24617,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>800</x>
-     <y>-983</y>
+     <y>-1438</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24466,7 +24633,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-983</y>
+     <y>-1438</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24482,7 +24649,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-2867</y>
+     <y>-3322</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24498,7 +24665,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-2898</y>
+     <y>-3353</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24513,8 +24680,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>721</x>
-     <y>-2929</y>
+     <x>743</x>
+     <y>-3384</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24529,8 +24696,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-2929</y>
+     <x>661</x>
+     <y>-3384</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24545,8 +24712,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-2929</y>
+     <x>487</x>
+     <y>-3384</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24561,8 +24728,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-2929</y>
+     <x>405</x>
+     <y>-3384</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24577,8 +24744,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>-2960</y>
+     <x>487</x>
+     <y>-3415</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24593,8 +24760,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>-2960</y>
+     <x>405</x>
+     <y>-3415</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24609,8 +24776,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>645</x>
-     <y>-2960</y>
+     <x>661</x>
+     <y>-3415</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24626,7 +24793,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-704</y>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24642,7 +24809,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>867</x>
-     <y>-704</y>
+     <y>-1159</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24658,7 +24825,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-821</y>
+     <y>-1276</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24674,7 +24841,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>867</x>
-     <y>-821</y>
+     <y>-1276</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24690,7 +24857,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-852</y>
+     <y>-1307</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -24706,7 +24873,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-1129</y>
+     <y>-1563</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24722,7 +24889,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-733</y>
+     <y>-1188</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -24738,7 +24905,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>271</y>
+     <y>-184</y>
     </hint>
     <hint type="destinationlabel">
      <x>896</x>
@@ -24754,7 +24921,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>221</y>
+     <y>-234</y>
     </hint>
     <hint type="destinationlabel">
      <x>887</x>
@@ -24770,7 +24937,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>-543</y>
+     <y>-998</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24786,7 +24953,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>954</y>
+     <y>499</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24802,7 +24969,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>1140</y>
+     <y>685</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24818,7 +24985,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>795</y>
+     <y>340</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -24834,7 +25001,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>1016</y>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -24850,7 +25017,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>1016</y>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24866,7 +25033,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3623</y>
+     <y>-4078</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -24882,7 +25049,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-3594</y>
+     <y>-4049</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24898,7 +25065,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>478</x>
-     <y>-3565</y>
+     <y>-4020</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24914,7 +25081,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24930,7 +25097,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>471</x>
-     <y>-3508</y>
+     <y>-3963</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -24946,7 +25113,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -24962,7 +25129,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>-3533</y>
+     <y>-3988</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24978,7 +25145,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>761</x>
-     <y>1069</y>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -24994,7 +25161,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>777</x>
-     <y>1337</y>
+     <y>882</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25010,7 +25177,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>777</x>
-     <y>1368</y>
+     <y>913</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25026,7 +25193,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1337</y>
+     <y>882</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25042,7 +25209,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1368</y>
+     <y>913</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25058,7 +25225,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1413</y>
+     <y>958</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25074,7 +25241,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1444</y>
+     <y>989</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25090,7 +25257,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1475</y>
+     <y>1020</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25106,7 +25273,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1520</y>
+     <y>1065</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25122,7 +25289,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1551</y>
+     <y>1096</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25138,7 +25305,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1582</y>
+     <y>1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25154,7 +25321,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1613</y>
+     <y>1158</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25170,7 +25337,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1658</y>
+     <y>1203</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25186,7 +25353,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>389</x>
-     <y>1689</y>
+     <y>1234</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25202,7 +25369,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>521</x>
-     <y>1689</y>
+     <y>1234</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25218,7 +25385,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1681</y>
+     <y>-2114</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25234,7 +25401,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1527</y>
+     <y>-1960</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25250,7 +25417,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>494</x>
-     <y>-1498</y>
+     <y>-1931</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25266,11 +25433,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1475</y>
+     <y>1020</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>1474</y>
+     <y>1019</y>
     </hint>
    </hints>
   </connection>
@@ -25282,11 +25449,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>1474</y>
+     <y>1019</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>1475</y>
+     <y>1020</y>
     </hint>
    </hints>
   </connection>
@@ -25298,11 +25465,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>1581</y>
+     <y>1126</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>1582</y>
+     <y>1127</y>
     </hint>
    </hints>
   </connection>
@@ -25314,11 +25481,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1582</y>
+     <y>1127</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>1581</y>
+     <y>1126</y>
     </hint>
    </hints>
   </connection>
@@ -25330,11 +25497,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>579</x>
-     <y>1612</y>
+     <y>1157</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>1613</y>
+     <y>1158</y>
     </hint>
    </hints>
   </connection>
@@ -25346,11 +25513,11 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>1613</y>
+     <y>1158</y>
     </hint>
     <hint type="destinationlabel">
      <x>579</x>
-     <y>1612</y>
+     <y>1157</y>
     </hint>
    </hints>
   </connection>
@@ -25362,7 +25529,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1527</y>
+     <y>-1960</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25378,7 +25545,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>494</x>
-     <y>-1498</y>
+     <y>-1931</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25394,7 +25561,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>837</x>
-     <y>-480</y>
+     <y>-935</y>
     </hint>
     <hint type="destinationlabel">
      <x>255</x>
@@ -25410,7 +25577,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-480</y>
+     <y>-935</y>
     </hint>
     <hint type="destinationlabel">
      <x>281</x>
@@ -25441,8 +25608,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>91</x>
-     <y>68</y>
+     <x>90</x>
+     <y>67</y>
     </hint>
     <hint type="destinationlabel">
      <x>944</x>
@@ -25490,7 +25657,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>-4222</y>
+     <y>-4677</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -25506,7 +25673,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>681</x>
-     <y>-4222</y>
+     <y>-4677</y>
     </hint>
     <hint type="destinationlabel">
      <x>1208</x>
@@ -25522,7 +25689,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>747</x>
-     <y>-4222</y>
+     <y>-4677</y>
     </hint>
     <hint type="destinationlabel">
      <x>888</x>
@@ -25538,7 +25705,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>578</x>
-     <y>-1623</y>
+     <y>-2057</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25554,7 +25721,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-427</y>
+     <y>-882</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25570,7 +25737,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-3349</y>
+     <y>-3804</y>
     </hint>
     <hint type="destinationlabel">
      <x>1231</x>
@@ -25586,7 +25753,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>813</x>
-     <y>-4222</y>
+     <y>-4677</y>
     </hint>
     <hint type="destinationlabel">
      <x>434</x>
@@ -25602,7 +25769,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1129</y>
+     <y>-1562</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25618,7 +25785,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1402</y>
+     <y>-1835</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25634,7 +25801,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1431</y>
+     <y>-1864</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25650,7 +25817,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1431</y>
+     <y>-1864</y>
     </hint>
     <hint type="destinationlabel">
      <x>92</x>
@@ -25666,7 +25833,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1652</y>
+     <y>-2085</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25682,7 +25849,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1623</y>
+     <y>-2056</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25698,7 +25865,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1431</y>
+     <y>-1864</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -25714,7 +25881,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>644</x>
-     <y>-1402</y>
+     <y>-1835</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25730,7 +25897,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>918</x>
-     <y>-3409</y>
+     <y>-3864</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25746,7 +25913,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-355</y>
+     <y>-810</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
@@ -25762,7 +25929,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-324</y>
+     <y>-779</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25778,7 +25945,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-265</y>
+     <y>-720</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25794,7 +25961,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-216</y>
+     <y>-671</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25810,7 +25977,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-185</y>
+     <y>-640</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -25826,7 +25993,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-154</y>
+     <y>-609</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -25842,7 +26009,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-123</y>
+     <y>-578</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25858,7 +26025,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-60</y>
+     <y>-515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -25874,7 +26041,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>615</x>
-     <y>-60</y>
+     <y>-515</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25890,7 +26057,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-26</y>
+     <y>-481</y>
     </hint>
     <hint type="destinationlabel">
      <x>-10</x>
@@ -25906,7 +26073,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>5</y>
+     <y>-450</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -25922,7 +26089,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>36</y>
+     <y>-419</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -25938,7 +26105,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>441</x>
-     <y>-299</y>
+     <y>-754</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -25954,7 +26121,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-355</y>
+     <y>-810</y>
     </hint>
     <hint type="destinationlabel">
      <x>39</x>
@@ -25970,7 +26137,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-324</y>
+     <y>-779</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -25986,7 +26153,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-123</y>
+     <y>-578</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -26002,7 +26169,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-355</y>
+     <y>-810</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -26018,7 +26185,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-324</y>
+     <y>-779</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26034,7 +26201,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-123</y>
+     <y>-578</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26050,7 +26217,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>867</x>
-     <y>-762</y>
+     <y>-1217</y>
     </hint>
     <hint type="destinationlabel">
      <x>-10</x>
@@ -26066,7 +26233,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>867</x>
-     <y>-883</y>
+     <y>-1338</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26082,7 +26249,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1188</y>
+     <y>-1621</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26098,7 +26265,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1188</y>
+     <y>-1621</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26114,7 +26281,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1159</y>
+     <y>-1592</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -26129,8 +26296,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>766</x>
-     <y>-1373</y>
+     <x>838</x>
+     <y>-1806</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26146,7 +26313,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1373</y>
+     <y>-1806</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26161,8 +26328,8 @@ QScrollBar::handle:horizontal
    <slot>detailTextureChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>688</x>
-     <y>-1872</y>
+     <x>838</x>
+     <y>-2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26178,7 +26345,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>838</x>
-     <y>-1872</y>
+     <y>-2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -26194,7 +26361,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>-1811</y>
+     <y>-2244</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26210,7 +26377,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>404</x>
-     <y>-1842</y>
+     <y>-2275</y>
     </hint>
     <hint type="destinationlabel">
      <x>-6</x>
@@ -26226,7 +26393,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>485</x>
-     <y>-1842</y>
+     <y>-2275</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -26242,7 +26409,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>591</x>
-     <y>-1840</y>
+     <y>-2277</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26258,7 +26425,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>919</x>
-     <y>-1872</y>
+     <y>-2305</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26274,7 +26441,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1811</y>
+     <y>-2244</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26290,7 +26457,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1780</y>
+     <y>-2213</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26306,7 +26473,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>645</x>
-     <y>-1749</y>
+     <y>-2182</y>
     </hint>
     <hint type="destinationlabel">
      <x>-2</x>
@@ -26322,7 +26489,7 @@ QScrollBar::handle:horizontal
    <hints>
     <hint type="sourcelabel">
      <x>469</x>
-     <y>-455</y>
+     <y>-910</y>
     </hint>
     <hint type="destinationlabel">
      <x>-12</x>
@@ -26337,8 +26504,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>892</x>
-     <y>419</y>
+     <x>919</x>
+     <y>-26</y>
     </hint>
     <hint type="destinationlabel">
      <x>-9</x>
@@ -26353,8 +26520,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>903</x>
-     <y>393</y>
+     <x>919</x>
+     <y>-55</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26369,8 +26536,8 @@ QScrollBar::handle:horizontal
    <slot>browseVTF()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>903</x>
-     <y>358</y>
+     <x>919</x>
+     <y>-84</y>
     </hint>
     <hint type="destinationlabel">
      <x>-3</x>
@@ -26385,8 +26552,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>608</x>
-     <y>452</y>
+     <x>645</x>
+     <y>4</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26401,8 +26568,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>625</x>
-     <y>481</y>
+     <x>645</x>
+     <y>35</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -26417,8 +26584,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>367</x>
-     <y>513</y>
+     <x>399</x>
+     <y>66</y>
     </hint>
     <hint type="destinationlabel">
      <x>-7</x>
@@ -26433,8 +26600,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>417</x>
-     <y>504</y>
+     <x>475</x>
+     <y>66</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
@@ -26449,8 +26616,8 @@ QScrollBar::handle:horizontal
    <slot>changedColor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>748</x>
-     <y>448</y>
+     <x>801</x>
+     <y>4</y>
     </hint>
     <hint type="destinationlabel">
      <x>-8</x>
@@ -26465,8 +26632,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>359</y>
+     <x>578</x>
+     <y>-84</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26481,8 +26648,8 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>445</x>
-     <y>389</y>
+     <x>653</x>
+     <y>-55</y>
     </hint>
     <hint type="destinationlabel">
      <x>-4</x>
@@ -26497,12 +26664,92 @@ QScrollBar::handle:horizontal
    <slot>widgetChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>348</x>
-     <y>415</y>
+     <x>556</x>
+     <y>-26</y>
     </hint>
     <hint type="destinationlabel">
      <x>-5</x>
      <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_albedoBoost</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>645</x>
+     <y>-1028</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>622</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_alphaTest</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>checkBox_alphaToCoverage</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>419</x>
+     <y>-2542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>725</x>
+     <y>-2540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_alphaToCoverage</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>725</x>
+     <y>-2540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1222</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_reflect3dskybox</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>widgetChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>497</x>
+     <y>613</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-11</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_realTimeReflection</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_reflect3dskybox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>581</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>529</x>
+     <y>610</y>
     </hint>
    </hints>
   </connection>

@@ -1,6 +1,8 @@
-# VMT Editor ![version](https://img.shields.io/badge/version-1.3.10-blue.svg)
+# VMT Editor ![version](https://img.shields.io/badge/version-1.3.11-blue.svg)
 
 [Official website](https://gira-x.github.io/VMT-Editor/)
+
+[User Guide](https://gira-x.github.io/VMT-Editor/documentation/#/)
 
 Visual editor for .vmt files, written in C++ and Qt.
 

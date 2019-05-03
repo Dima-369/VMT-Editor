@@ -67,18 +67,15 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 		vmt->parameters.insert("$normalmapalphaenvmapmask", "1");
 
 	const QString light = getNonDef(ui->doubleSpinBox_envmapLight, "0");
-	if (!light.isEmpty())
+	if (!light.isEmpty()) {
 		vmt->parameters.insert("$envmaplightscale", light);
 
-	if (ui->doubleSpinBox_envmapLightMin->isEnabled()) {
-		const QString lMin = 
+		const QString lMin =
 			stripZeroes(ui->doubleSpinBox_envmapLightMin);
-		const QString lMax = 
+		const QString lMax =
 			stripZeroes(ui->doubleSpinBox_envmapLightMax);
-		if (lMin != "0" || lMax != "1") {
-			vmt->parameters.insert("$envmaplightscaleminmax", 
+			vmt->parameters.insert("$envmaplightscaleminmax",
 				QString("[%1 %2]").arg(lMin, lMax));
-		}
 	}
 
 	const QString aniso = getNonDef(ui->doubleSpinBox_envmapAniso, "0");

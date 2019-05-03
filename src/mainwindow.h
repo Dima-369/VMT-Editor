@@ -396,6 +396,8 @@ public slots:
 
 	void displayAboutDialog();
 
+	void openUserGuide();
+
 	void changeOption( Settings::Options option, const QString& value );
 
 	void toggledDetailUniformScale(bool checked);

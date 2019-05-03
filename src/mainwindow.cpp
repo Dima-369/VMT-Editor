@@ -467,6 +467,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	connect( ui->lineEdit_bump2,					SIGNAL( returnPressed() ), this, SLOT( previewTexture() ));
 
 	connect( ui->action_about,						SIGNAL( triggered() ), this, SLOT( displayAboutDialog() ));
+	connect( ui->action_userGuide,					SIGNAL( triggered() ), this, SLOT( openUserGuide() ));
 	connect(ui->action_checkUpdate,                 SIGNAL(triggered()),         SLOT( checkForUpdates() ));
 
 	connect( ui->action_options,					SIGNAL( triggered() ), this, SLOT( displayOptionsDialog() ));
@@ -1328,6 +1329,22 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showTransparency = true;
 	}
 
+	if( !( value = vmt.parameters.take("$allowalphatocoverage") ).isEmpty() )
+	{
+		if( !( ui->checkBox_alphaTest->isChecked() && ui->checkBox_alphaTest->isEnabled() ))
+		{
+			Error("$allowalphatocoverage only works in combination with $alphatest!")
+		}
+
+		if( loadBoolParameter( value, "$allowalphatocoverage") )
+		{
+			ui->checkBox_alphaToCoverage->setEnabled(true);
+			ui->checkBox_alphaToCoverage->setChecked(true);
+		}
+
+		showTransparency = true;
+	}
+
 	//----------------------------------------------------------------------------------------//
 
 	if( !( value = vmt.parameters.take("$alphatestreference") ).isEmpty() )
@@ -1384,6 +1401,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->checkBox_transparent->setChecked(true);
 
 			ui->checkBox_alphaTest->setDisabled(true);
+			ui->checkBox_alphaToCoverage->setDisabled(true);
 		}
 
 		showTransparency = true;
@@ -2996,6 +3014,17 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		showWaterReflection = true;
 	}
 
+	if( !( value = vmt.parameters.take("$reflect3dskybox") ).isEmpty() ) {
+
+		if( vmt.shaderName != "Water" )
+			Error("$reflect3dskybox only works with the Water shader!")
+
+		if( loadBoolParameter( value, "$reflect3dskybox" ))
+			ui->checkBox_reflect3dskybox->setChecked(true);
+
+		showWaterReflection = true;
+	}
+
 	if( !( value = vmt.parameters.take("$bottommaterial") ).isEmpty() ) {
 
 		if( vmt.shaderName != "Water" )
@@ -3846,6 +3875,9 @@ VmtFile MainWindow::makeVMT()
 		if( ui->checkBox_additive->isChecked() )
 			vmtFile.parameters.insert( "$additive", "1" );
 
+		if( ui->checkBox_alphaToCoverage->isChecked() )
+			vmtFile.parameters.insert( "$allowalphatocoverage", "1" );
+
 		if( ui->checkBox_noCull->isChecked() )
 			vmtFile.parameters.insert( "$nocull", "1" );
 
@@ -4507,6 +4539,9 @@ VmtFile MainWindow::makeVMT()
 		if (ui->checkBox_reflect2dskybox->isVisible() && ui->checkBox_reflect2dskybox->isChecked())
 			vmtFile.parameters.insert( "$reflect2dskybox", "1" );
 
+		if (ui->checkBox_reflect3dskybox->isVisible() && ui->checkBox_reflect3dskybox->isChecked())
+			vmtFile.parameters.insert( "$reflect3dskybox", "1" );
+
 		if( ui->checkBox_realTimeReflection->isChecked() ) {
 
 			vmtFile.parameters.insert( "$reflecttexture", "_rt_waterreflection" );
@@ -4725,6 +4760,8 @@ void MainWindow::resetWidgets() {
 
 	ui->label_23->setDisabled(true);
 	ui->doubleSpinBox_alphaTestRef->setDisabled(true);
+	ui->checkBox_alphaToCoverage->setChecked(false);
+	ui->checkBox_alphaToCoverage->setDisabled(true);
 
 	ui->comboBox_detailBlendMode->setCurrentIndex(0);
 	ui->comboBox_detailBlendMode2->setCurrentIndex(0);
@@ -4925,6 +4962,7 @@ void MainWindow::resetWidgets() {
 
 	ui->checkBox_flowDebug->setChecked(false);
 	ui->checkBox_reflect2dskybox->setChecked(false);
+	ui->checkBox_reflect3dskybox->setChecked(false);
 
 	ui->doubleSpinBox_scrollX1->setValue(0.0);
 	ui->doubleSpinBox_scrollX2->setValue(0.0);
@@ -5620,6 +5658,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 		return (ui->doubleSpinBox_opacity->value() != 1.0 ||
 				ui->checkBox_transparent->isChecked() ||
 				ui->checkBox_alphaTest->isChecked() ||
+				ui->checkBox_alphaToCoverage->isChecked() ||
 				ui->doubleSpinBox_alphaTestRef->value() != 0.7 ||
 				ui->checkBox_additive->isChecked() ||
 				ui->checkBox_noCull->isChecked());
@@ -5722,7 +5761,8 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->doubleSpinBox_reflectionAmount->value() != 0.0 ||
 				ui->checkBox_skybox->isChecked() ||
 				ui->checkBox_reflectEntities->isChecked() ||
-				ui->checkBox_reflect2dskybox->isChecked());
+				ui->checkBox_reflect2dskybox->isChecked() ||
+				ui->checkBox_reflect3dskybox->isChecked());
 
 	case WaterRefraction:
 
@@ -6030,9 +6070,12 @@ void MainWindow::paste() {
 	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::End,
 									   QTextCursor::MoveAnchor);
 	ui->vmtPreviewTextEdit->moveCursor(QTextCursor::Left,
-									   QTextCursor::MoveAnchor);
+									   QTextCursor::MoveAnchor);	
 	ui->vmtPreviewTextEdit->paste();
-	vmtPreviewParse();
+
+	ui->vmtPreviewTextEdit->textCursor().insertText("\n");
+
+	//vmtPreviewParse();
 }
 
 void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
@@ -8264,52 +8307,11 @@ void MainWindow::processVtf(const QString& objectName,
 		ui->toolButton_diffuseAlpha->setVisible(false);
 	}
 
-	if( fileName.startsWith( currentGameMaterialDir(), Qt::CaseInsensitive) ) {
+	if( fileName.startsWith(currentGameMaterialDir(), Qt::CaseInsensitive) &&
+			fileType.toLower() == ".vtf" ) {
 
 		lineEdit->setEnabled(true);
 		texturesToCopy.remove(lineEdit);
-
-		if( fileType.toLower() != ".vtf" ) {
-
-			//Who keeps image files inside materials dir?
-			Info("Only textures outside materials dir can be converted");
-			/*bool convert = true;
-
-			QString vtfFileName = fileName;
-
-			vtfFileName = vtfFileName.left( vtfFileName.lastIndexOf('.') );
-			vtfFileName.append(".vtf");
-
-			if( QDir(fileName.replace("\\", "/")).exists(vtfFileName) ) {
-
-				MsgBox msgBox(this);
-					msgBox.setWindowTitle("File already exists!");
-					msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
-					msgBox.setDefaultButton( QMessageBox::No );
-					msgBox.setIconPixmap(QPixmap(":/icons/info_warning"));
-
-				msgBox.setText( fileName.left( fileName.lastIndexOf(".") ).append(".vtf") +
-								" already exists. Do you want to overwrite it?"  );
-
-				if( msgBox.exec() != QMessageBox::Yes )
-					convert = false;
-			}
-
-			if(convert) {
-
-				ConversionThread* conversionThread = new ConversionThread(this);
-					conversionThread->fileName = fileName;
-
-				if(mVMTLoaded) {
-
-					conversionThread->outputParameter = vmtParser->lastVMTFile().directory + "/" +
-							vmtParser->lastVMTFile().fileName.left( vmtParser->lastVMTFile().fileName.size() - 4 ) + ".vtf";
-				}
-
-				conversionThread->start();
-			}*/
-		}
-
 		goto updateLineEdit;
 
 	} else {
@@ -9389,6 +9391,7 @@ void MainWindow::modifiedCheckBox( bool enabled )
 		ui->checkBox_reflectEntities->setEnabled(enabled);
 		ui->checkBox_skybox->setEnabled(enabled);
 		ui->checkBox_reflect2dskybox->setEnabled(enabled);
+		ui->checkBox_reflect3dskybox->setEnabled(enabled);
 		ui->checkBox_reflectMarkedEntities->setEnabled(enabled);
 
 		ui->lineEdit_waterReflectTexture->setDisabled(enabled);
@@ -10496,6 +10499,8 @@ void MainWindow::refreshInGame() {
 		return;
 	}
 
+	action_Save();
+
 	QDir dir(mAvailableGames.value(game));
 	dir.cdUp();
 
@@ -10958,7 +10963,7 @@ void MainWindow::checkForUpdates()
 
 		if (msgBox.exec() != QMessageBox::Cancel) {
 			QDesktopServices::openUrl(QString(
-				"https://github.com/Gira-X/VMT-Editor/releases"));
+				"https://github.com/Gira-X/VMT-Editor/releases/latest"));
 		}
 	}
 }
@@ -11059,6 +11064,12 @@ void MainWindow::displayAboutDialog()
 	dialog.show();
 	dialog.exec();
 }
+
+void MainWindow::openUserGuide()
+{
+	QDesktopServices::openUrl(QUrl("https://gira-x.github.io/VMT-Editor/documentation/#/"));
+}
+
 
 //----------------------------------------------------------------------------------------//
 
