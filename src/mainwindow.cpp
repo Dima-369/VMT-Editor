@@ -1758,7 +1758,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
 		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
+		if ((vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) ||
+			(vmt.shader == Shader::S_Custom && !ui->action_phong->isChecked())	) {
 			ui->action_phong->trigger();
 		} else if (!ui->action_phongBrush->isChecked()) {
 			ui->action_phongBrush->trigger();
@@ -2782,7 +2783,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		applyBackgroundColor("$refracttint", value, colorWidget,
 			ui->horizontalSlider_waterRefractColor, ui);
 
-		showWaterRefraction = true;
+		if( vmt.shaderName == "Water" )
+			showWaterRefraction = true;
 	}
 
 	if( !( value = vmt.parameters.take("$refractamount") ).isEmpty() )
@@ -7228,13 +7230,23 @@ void MainWindow::shaderChanged()
 			//----------------------------------------------------------------------------------------//
 
 			// Reflection, Self Illumination not allowed
-			if (shader == "UnlitGeneric" || shader == "Water" || shader == "UnlitTwoTexture" ) {
+			if (shader == "Water" || shader == "UnlitTwoTexture" ) {
 
 				ui->menu_shading->setDisabled(true);
 
 				ui->action_reflection->setEnabled(false);
 				ui->action_reflection->setChecked(false);
 				ui->groupBox_shadingReflection->setVisible(false);
+
+				ui->action_selfIllumination->setEnabled(false);
+				ui->action_selfIllumination->setChecked(false);
+				ui->groupBox_selfIllumination->setVisible(false);
+
+			} else if (shader == "UnlitGeneric" ) {
+
+				ui->menu_shading->setDisabled(false);
+
+				ui->action_reflection->setEnabled(true);
 
 				ui->action_selfIllumination->setEnabled(false);
 				ui->action_selfIllumination->setChecked(false);
@@ -7296,8 +7308,11 @@ void MainWindow::shaderChanged()
 
 		ui->action_CreateBlendTexture->setVisible(true);
 
+		ui->action_phongBrush->setEnabled(false);
+
+		ui->action_phong->setVisible(true);
 		ui->action_phong->setEnabled(true);
-		ui->action_phongBrush->setEnabled(true);
+
 		ui->action_rimLight->setEnabled(true);
 		ui->action_waterReflection->setEnabled(true);
 		ui->action_reflection->setEnabled(true);
@@ -10104,14 +10119,15 @@ void MainWindow::displayConversionDialog()
 #ifdef Q_OS_WIN
 	if( QDir().exists("vtfcmd.exe") ) {
 
-		ConversionDialog dialog( mIniSettings, this );
+		ConversionDialog* dialog = new ConversionDialog( mIniSettings );
 
 		if (fileToConvert != "") {
-			dialog.addFile( fileToConvert );
+			dialog->addFile( fileToConvert );
 			fileToConvert = "";
 		}
-		dialog.show();
-		dialog.exec();
+		dialog->setModal(false);
+		dialog->show();
+		//dialog.exec();
 
 	} else {
 
@@ -10132,13 +10148,14 @@ void MainWindow::displayConversionDialogTexture(QString file)
 		QString dir = mIniSettings->value("lastSaveAsDir").toString();
 
 		mIniSettings->setValue("lastTextureConvertDir", dir);
-		ConversionDialog dialog( mIniSettings, this );
+		ConversionDialog* dialog = new ConversionDialog( mIniSettings );
 
 		if (file != "") {
-			dialog.addFile( file );
+			dialog->addFile( file );
 		}
-		dialog.show();
-		dialog.exec();
+		dialog->setModal(false);
+		dialog->show();
+		//dialog.exec();
 
 	} else {
 

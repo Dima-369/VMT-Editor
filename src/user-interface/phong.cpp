@@ -155,6 +155,7 @@ void initializePhong(Ui::MainWindow *ui, VmtFile *vmt)
 	switch (vmt->shader)
 	{
 	case Shader::S_VertexLitGeneric:
+	case Shader::S_Custom:
 		ui->groupBox_phong->setEnabled(true);
 		ui->groupBox_phong->setChecked(true);
 		vmt->state.phongEnabled = true;
@@ -184,7 +185,8 @@ void setupPhongFresnelRangesUI(Ui::MainWindow *ui,
 void processFresnelRanges(const QString &parameter, const QString &value,
 		Ui::MainWindow *ui, VmtFile vmt)
 {
-	if (vmt.shader != Shader::S_VertexLitGeneric) {
+	if (vmt.shader != Shader::S_VertexLitGeneric &&
+		vmt.shader != Shader::S_Custom) {
 		logging::error(parameter + " only works with the " +
 			"VertexLitGeneric shader", ui);
 	}
