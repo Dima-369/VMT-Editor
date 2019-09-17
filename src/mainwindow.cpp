@@ -2966,10 +2966,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() ) {
 
-			if( vmt.shaderName == "Refract" )
+			if( vmt.shaderName == "Refract" ) {
 				ui->lineEdit_refractNormalMap->setText(texture);
-			else
+				createReconvertAction(ui->lineEdit_refractNormalMap, texture);
+			}
+			else {
 				ui->lineEdit_waterNormalMap->setText(texture);
+				createReconvertAction(ui->lineEdit_waterNormalMap, texture);
+			}
 		}
 
 	} else {
@@ -2982,10 +2986,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			if( !texture.isEmpty() )
 			{
-				if( vmt.shaderName == "Refract" )
+				if( vmt.shaderName == "Refract" ) {
 					ui->lineEdit_refractNormalMap->setText(texture);
-				else
+					createReconvertAction(ui->lineEdit_refractNormalMap, texture);
+				}
+				else {
 					ui->lineEdit_waterNormalMap->setText(texture);
+					createReconvertAction(ui->lineEdit_waterNormalMap, texture);
+				}
 			}
 		}
 	}
@@ -2997,8 +3005,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		QString texture = validateTexture( "preview_bumpmap2", value, "$normalmap2", realGameinfoDir );
 
-		if( !texture.isEmpty() )
+		if( !texture.isEmpty() ) {
 			ui->lineEdit_refractNormalMap2->setText(texture);
+			createReconvertAction(ui->lineEdit_refractNormalMap2, texture);
+		}
 	}
 
 	if( !( value = vmt.parameters.take("$reflect2dskybox") ).isEmpty() ) {
@@ -3351,6 +3361,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		utils::parseTexture("$flowmap", value, ui,
 			ui->lineEdit_flowMap, vmt);
+		createReconvertAction(ui->lineEdit_flowMap, value);
 
 		showFlowmap = true;
 	}
@@ -10354,11 +10365,14 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 
 	QString mipmapFilter = outputParameters(type, noAlpha);
 
-	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+	QString lineEditText = lineEdit->text();
+
+	//QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+	QString dir = QDir::toNativeSeparators(currentGameMaterialDir() + "/" +
+										   lineEditText.section("/", 0, -2) + "/");
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString lineEditText = lineEdit->text();
 	QString newFile = lineEditText.section("/", -1).section(".", 0, 0);
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
@@ -10659,6 +10673,9 @@ void MainWindow::createBlendToolTexture()
 		Error( "Error loading Diffuse texture" )
 		return;
 	}
+
+	size = texture1.width();
+
 	if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".png")) {
 		Error( "Error loading Diffuse 2 texture" )
 		return;
