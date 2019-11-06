@@ -2,7 +2,7 @@
 
 void handleGroupBoxAndActions(Ui::MainWindow *ui, const QString &shader)
 {
-	if (shader == "infected" || shader == "vertexlitgeneric") {
+	if (shader == "infected" || shader == "Deferred_Model") {
 		ui->action_phong->setVisible(true);
 		ui->action_phong->setEnabled(true);
 
@@ -13,7 +13,7 @@ void handleGroupBoxAndActions(Ui::MainWindow *ui, const QString &shader)
 		ui->action_rimLight->setEnabled(true);
 		ui->action_rimLight->setEnabled(true);
 
-	}  else if (shader == "lightmappedgeneric" ||
+	}  else if (shader == "Deferred_Brush" ||
 			shader == "worldvertextransition") {
 		ui->action_phong->setEnabled(false);
 		ui->action_phong->setChecked(false);
@@ -48,8 +48,8 @@ void shaders::handlePhongBrushRim(Ui::MainWindow *ui, const QString &shader)
 	handleGroupBoxAndActions(ui, shader);
 
 	// we hide all amount 2 / glossiness 2 / ... UI widgets on
-	// the LightmappedGeneric shader and unhide otherwise
-	bool hide = shader != "lightmappedgeneric";
+	// the Deferred_Brush shader and unhide otherwise
+	bool hide = shader != "Deferred_Brush";
 	ui->label_spec_amount2->setVisible(hide);
 	ui->horizontalSlider_spec_amount2->setVisible(hide);
 	ui->doubleSpinBox_spec_amount2->setVisible(hide);

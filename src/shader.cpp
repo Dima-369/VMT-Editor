@@ -93,7 +93,7 @@ QString Shader::convert( Shaders index ) {
 
 	case 3: return "Infected";
 
-	case 4: return "LightmappedGeneric";
+	case 4: return "Deferred_Brush";
 
 	case 5: return "Modulate";
 
@@ -115,7 +115,7 @@ QString Shader::convert( Shaders index ) {
 
 	case 14: return "UnlitTwoTexture";
 
-	case 15: return "VertexLitGeneric";
+	case 15: return "Deferred_Model";
 
 	case 16: return "Water";
 
@@ -144,7 +144,7 @@ Shader::Shaders Shader::convert(const QString &text)
 	CHECK("decal", S_Decal)
 	CHECK("decalmodulate", S_DecalModulate)
 	CHECK("infected", S_Infected)
-	CHECK("lightmappedgeneric", S_LightmappedGeneric)
+	CHECK("Deferred_Brush", S_Deferred_Brush)
 	CHECK("modulate", S_Modulate)
 	CHECK("monitorscreen", S_MonitorScreen)
 	CHECK("patch", S_Patch)
@@ -155,7 +155,7 @@ Shader::Shaders Shader::convert(const QString &text)
 	CHECK("spritecard", S_SpriteCard)
 	CHECK("unlitgeneric", S_UnlitGeneric)
 	CHECK("unlittwotexture", S_UnlitTwoTexture)
-	CHECK("vertexlitgeneric", S_VertexLitGeneric)
+	CHECK("Deferred_Model", S_Deferred_Model)
 	CHECK("water", S_Water)
 	CHECK("worldvertextransition", S_WorldVertexTransition)
 	CHECK("lightmapped_4wayblend", S_Lightmapped_4WayBlend)

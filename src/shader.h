@@ -12,7 +12,7 @@ struct Shader {
 		S_Decal, // 1
 		S_DecalModulate, // 2
 		S_Infected, // 3
-		S_LightmappedGeneric, // 4
+		S_Deferred_Brush, // 4
 		S_Modulate, // 5
 		S_MonitorScreen, // 6
 		S_Patch, // 7
@@ -23,7 +23,7 @@ struct Shader {
 		S_SpriteCard, // 12
 		S_UnlitGeneric, // 13
 		S_UnlitTwoTexture, // 14
-		S_VertexLitGeneric, // 15
+		S_Deferred_Model, // 15
 		S_Water, // 16
 		S_WorldVertexTransition, // 17
 		S_Custom, // 18

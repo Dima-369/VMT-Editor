@@ -1,6 +1,6 @@
-LightmappedGeneric?1?0
+Deferred_Brush?1?0
 UnlitGeneric?1?0
-VertexLitGeneric?1?0
+Deferred_Model?1?0
 WorldVertexTransition?1?0?1
 Decal?1
 DecalModulate?1

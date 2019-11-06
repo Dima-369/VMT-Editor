@@ -68,7 +68,7 @@ bool phong::hasChanged(MainWindow::GroupBoxes groupBox, Ui::MainWindow *ui)
 		// MainWindow::PhongBrush
 
 		START
-		// LightmappedGeneric shader
+		// Deferred_Brush shader
 		VAL(ui->doubleSpinBox_phongAmount, "1")
 		COL(ui->toolButton_phongAmount)
 		VAL(ui->doubleSpinBox_phongAmountAlpha, "1")
@@ -94,7 +94,7 @@ void phong::resetAction(Ui::MainWindow *ui)
 
 void phong::resetWidgets(Ui::MainWindow *ui)
 {
-	// VertexLitGeneric shader
+	// Deferred_Model shader
 	ui->doubleSpinBox_fresnelRangesX->setValue(0.5);
 	ui->doubleSpinBox_fresnelRangesY->setValue(0.75);
 	ui->doubleSpinBox_fresnelRangesZ->setValue(1.0);
@@ -116,7 +116,7 @@ void phong::resetWidgets(Ui::MainWindow *ui)
 	ui->checkBox_halfLambert->setChecked(false);
 	ui->checkBox_disableHalfLambert->setChecked(false);
 
-	// LightmappedGeneric shader (WorldVertexTransition also has those!)
+	// Deferred_Brush shader (WorldVertexTransition also has those!)
 	ui->doubleSpinBox_phongAmount->setValue(1.0);
 	ui->toolButton_phongAmount->setStyleSheet(whiteBG);
 	ui->doubleSpinBox_phongAmountAlpha->setValue(1.0);
@@ -154,13 +154,13 @@ void initializePhong(Ui::MainWindow *ui, VmtFile *vmt)
 
 	switch (vmt->shader)
 	{
-	case Shader::S_VertexLitGeneric:
+	case Shader::S_Deferred_Model:
 	case Shader::S_Custom:
 		ui->groupBox_phong->setEnabled(true);
 		ui->groupBox_phong->setChecked(true);
 		vmt->state.phongEnabled = true;
 		break;
-	case Shader::S_LightmappedGeneric:
+	case Shader::S_Deferred_Brush:
 	case Shader::S_WorldVertexTransition:
 		ui->groupBox_phongBrush->setEnabled(true);
 		ui->groupBox_phongBrush->setChecked(true);
@@ -168,7 +168,7 @@ void initializePhong(Ui::MainWindow *ui, VmtFile *vmt)
 		break;
 	default:
 		logging::error(parameter + " only works with the " +
-			"VertexLitGeneric, LightmappedGeneric and " +
+			"Deferred_Model, Deferred_Brush and " +
 			"WorldVertexTransition shaders", ui);
 	}
 }
@@ -185,10 +185,10 @@ void setupPhongFresnelRangesUI(Ui::MainWindow *ui,
 void processFresnelRanges(const QString &parameter, const QString &value,
 		Ui::MainWindow *ui, VmtFile vmt)
 {
-	if (vmt.shader != Shader::S_VertexLitGeneric &&
+	if (vmt.shader != Shader::S_Deferred_Model &&
 		vmt.shader != Shader::S_Custom) {
 		logging::error(parameter + " only works with the " +
-			"VertexLitGeneric shader", ui);
+			"Deferred_Model shader", ui);
 	}
 
 	utils::DoubleTuple parsed = utils::toDoubleTuple(value, 3);
@@ -383,7 +383,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 
 	initializePhong(ui, vmt);
 
-	// VertexLitGeneric shader
+	// Deferred_Model shader
 	DO_WITH_VMT("$phongfresnelranges", processFresnelRanges)
 	COLOR("$phongtint", ui->toolButton_phongTint,
 		ui->horizontalSlider_phongTint);
@@ -398,7 +398,7 @@ void phong::parseParameters(Ui::MainWindow *ui, VmtFile *vmt)
 	BOOL("$halflambert", ui->checkBox_halfLambert)
 	BOOL("$phongdisablehalflambert", ui->checkBox_disableHalfLambert)
 
-	// LightmappedGeneric shader (WorldVertexTransition also has those!)
+	// Deferred_Brush shader (WorldVertexTransition also has those!)
 	DO_CHOICE("$phongamount", processPhongAmount, true)
 	DO_CHOICE("$phongmaskcontrastbrightness",
 		processMaskContrastBrightness, true)

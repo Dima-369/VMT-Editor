@@ -72,13 +72,13 @@ void initializeTreesway(Ui::MainWindow *ui, VmtFile *vmt)
 
 	switch (vmt->shader)
 	{
-	case Shader::S_VertexLitGeneric:
+	case Shader::S_Deferred_Model:
 		ui->groupBox_treeSway->setEnabled(true);
 		ui->groupBox_treeSway->setChecked(true);
 		vmt->state.treeSwayEnabled = true;
 		break;
 	default:
-		ERROR("$treesway only works with the VertexLitGeneric shader");
+		ERROR("$treesway only works with the Deferred_Model shader");
 	}
 }
 

@@ -24,7 +24,7 @@ struct VmtState
 	 * True if the phong or phongbrush group box should be shown.
 	 *
 	 * You need to check the shader to determine which group box needs to be
-	 * shown. Show the phong group box on the VertexLitGeneric shader and
+	 * shown. Show the phong group box on the Deferred_Model shader and
 	 * the phongbrush otherwise.
 	 */
 	bool showPhong = false;

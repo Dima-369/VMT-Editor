@@ -1096,7 +1096,7 @@ QScrollBar::handle:hover
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-679</y>
+             <y>-574</y>
              <width>933</width>
              <height>6100</height>
             </rect>
@@ -3630,7 +3630,7 @@ QToolButton:pressed
                  <item row="7" column="0">
                   <widget class="QLabel" name="label_specmap">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -3664,7 +3664,7 @@ QToolButton:pressed
                  <item row="7" column="3">
                   <widget class="QToolButton" name="toolButton_specmap">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="minimumSize">
                     <size>
@@ -3695,7 +3695,7 @@ QToolButton:pressed
                  <item row="7" column="1" colspan="2">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_specmap">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="font">
                     <font>
@@ -4345,43 +4345,6 @@ QToolButton:pressed
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
-                  <widget class="QLabel" name="label_blendmodulate">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>90</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>90</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>9</pointsize>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Blend modulate:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="3" column="5">
                   <widget class="QToolButton" name="toolButton_blendmodulate">
                    <property name="minimumSize">
@@ -4589,7 +4552,7 @@ QToolButton:pressed
                  <item row="4" column="1">
                   <widget class="QLabel" name="label_specmap2">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -4623,7 +4586,7 @@ QToolButton:pressed
                  <item row="4" column="2" colspan="3">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_specmap2">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="font">
                     <font>
@@ -4639,7 +4602,7 @@ QToolButton:pressed
                  <item row="4" column="5">
                   <widget class="QToolButton" name="toolButton_specmap2">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="minimumSize">
                     <size>
@@ -4664,6 +4627,43 @@ QToolButton:pressed
                    </property>
                    <property name="text">
                     <string>Browse...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLabel" name="label_blendmodulate">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>90</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Blend modulate:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -19728,8 +19728,8 @@ QScrollBar::handle:horizontal
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>117</width>
-             <height>70</height>
+             <width>943</width>
+             <height>753</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">

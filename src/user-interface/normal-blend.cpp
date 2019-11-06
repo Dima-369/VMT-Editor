@@ -66,13 +66,13 @@ void initializeNormalBlend(Ui::MainWindow *ui, VmtFile *vmt)
 
 	switch (vmt->shader)
 	{
-	case Shader::S_LightmappedGeneric:
+	case Shader::S_Deferred_Brush:
 		ui->groupBox_normalBlend->setEnabled(true);
 		ui->groupBox_normalBlend->setChecked(true);
 		vmt->state.normalBlendEnabled = true;
 		break;
 	default:
-		ERROR("addbumpmaps only works with the LightmappedGeneric shader");
+		ERROR("addbumpmaps only works with the Deferred_Brush shader");
 	}
 }
 

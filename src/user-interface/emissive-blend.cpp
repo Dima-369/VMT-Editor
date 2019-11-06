@@ -53,13 +53,13 @@ void initializeEmissiveBlend(Ui::MainWindow *ui, VmtFile *vmt)
 
 	switch (vmt->shader)
 	{
-	case Shader::S_VertexLitGeneric:
+	case Shader::S_Deferred_Model:
 		ui->groupBox_emissiveBlend->setEnabled(true);
 		ui->groupBox_emissiveBlend->setChecked(true);
 		vmt->state.emissiveBlendEnabled = true;
 		break;
 	default:
-		ERROR("Emissive blend only works with the VertexLitGeneric shader");
+		ERROR("Emissive blend only works with the Deferred_Model shader");
 	}
 }
 

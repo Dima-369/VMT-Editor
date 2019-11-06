@@ -26,7 +26,7 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 		const double fresnel = 
 			ui->doubleSpinBox_fresnelReflection->value();
 		if (fresnel != 0.0) {
-			if (vmt->shaderName == "VertexLitGeneric") {
+			if (vmt->shaderName == "Deferred_Model") {
 				vmt->parameters.insert(
 					"$envmapfresnel", STR(fresnel));
 			} else {
@@ -48,14 +48,6 @@ void insertParametersFromViews(VmtFile *vmt, Ui::MainWindow *ui)
 		if (tint != "[1 1 1]")
 			vmt->parameters.insert("$envmaptint", tint);
 	}
-
-	const QString mask = getText(ui->lineEdit_specmap);
-	if (!mask.isEmpty())
-		vmt->parameters.insert("$envmapmask", mask);
-
-	const QString mask2 = getText(ui->lineEdit_specmap2);
-	if (!mask2.isEmpty())
-		vmt->parameters.insert("$envmapmask2", mask2);
 
 	if (isChecked(ui->checkBox_basealpha))
 		vmt->parameters.insert("$basealphaenvmapmask", "1");

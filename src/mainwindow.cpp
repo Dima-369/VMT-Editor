@@ -669,7 +669,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 	ui->lineEdit_diffuseAlpha->setVisible(false);
 	ui->toolButton_diffuseAlpha->setVisible(false);
 
-	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("LightmappedGeneric"));
+	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("Deferred_Brush"));
 		mIgnoreShaderChanged = false;
 	shaderChanged();
 
@@ -1125,12 +1125,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	{
 		QString texture = validateTexture( "preview_basetexture2", value, "$basetexture2", realGameinfoDir );
 
-		if( vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) &&
-			vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) ) {
-
-			Error("$basetexture2 only works with the WorldVertexTransition or the Lightmapped_4WayBlend shader!")
-		}
-
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse2->setText(texture);
 
@@ -1271,9 +1265,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$ssbump") ).isEmpty() )
 	{
-		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition") )
+		if( !(vmt.shaderName == "Deferred_Brush" || vmt.shaderName == "WorldVertexTransition") )
 		{
-			Error("$ssbump only works with the LightmappedGeneric and WorldVertexTransition shaders!")
+			Error("$ssbump only works with the Deferred_Brush and WorldVertexTransition shaders!")
 		}
 		else
 		{
@@ -1516,9 +1510,9 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		bool ok;
 		double doubleScale = value.toDouble(&ok);
 
-		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition") )
+		if( !(vmt.shaderName == "Deferred_Brush" || vmt.shaderName == "WorldVertexTransition") )
 		{
-			Error("$seamless_scale only works with the LightmappedGeneric and WorldVertexTransition shaders!")
+			Error("$seamless_scale only works with the Deferred_Brush and WorldVertexTransition shaders!")
 		}
 		else
 		{
@@ -1758,7 +1752,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
 		// branch with the else
-		if ((vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) ||
+		if ((vmt.shader == Shader::S_Deferred_Model && !ui->action_phong->isChecked()) ||
 			(vmt.shader == Shader::S_Custom && !ui->action_phong->isChecked())	) {
 			ui->action_phong->trigger();
 		} else if (!ui->action_phongBrush->isChecked()) {
@@ -1992,7 +1986,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	bool usingBaseAlphaSpecmap = false;
 	bool usingBumpmapAlphaSpecmap = false;
 
-	if(!(value = vmt.parameters.take("$envmapmask")).isEmpty()) {
+	if(!(value = vmt.parameters.take("$rmamap")).isEmpty()) {
 		usingSpecmap = utils::prepareTexture(value);
 		showShadingReflection = true;
 	}
@@ -2051,7 +2045,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->lineEdit_specmap->setText(usingSpecmap);
 			createReconvertAction(ui->lineEdit_specmap, usingSpecmap);
 
-			if(!(value = vmt.parameters.take("$envmapmask2")).isEmpty()) {
+			if(!(value = vmt.parameters.take("$rmamap2")).isEmpty()) {
 				ui->lineEdit_specmap2->setText(utils::prepareTexture(value));
 				createReconvertAction(ui->lineEdit_specmap2, value);
 			}
@@ -2284,12 +2278,12 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$model") ).isEmpty() )
 	{
-		if (!(vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) ||
-			  vmt.shaderName.compare("LightmappedGeneric", Qt::CaseInsensitive) ||
+		if (!(vmt.shaderName.compare("Deferred_Model", Qt::CaseInsensitive) ||
+			  vmt.shaderName.compare("Deferred_Brush", Qt::CaseInsensitive) ||
 			  vmt.shaderName.compare("WorldVertexTransition", Qt::CaseInsensitive) ||
 			  vmt.shaderName.compare("Refract", Qt::CaseInsensitive)))
 		{
-			Error("$model only works with the LightmappedGeneric, VertexLitGeneric, Refract or WorldVertexTransition shaders!")
+			Error("$model only works with the Deferred_Brush, Deferred_Model, Refract or WorldVertexTransition shaders!")
 		}
 
 		if( loadBoolParameter( value, "$model") )
@@ -3483,7 +3477,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !(value = vmt.parameters.value("$rimlight")).isEmpty() ) {
 
-		if( vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) )
+		if( vmt.shaderName.compare("Deferred_Model", Qt::CaseInsensitive) )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
@@ -3491,7 +3485,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$rimlightexponent") ).isEmpty() ) {
 
-		if( vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) )
+		if( vmt.shaderName.compare("Deferred_Model", Qt::CaseInsensitive) )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
@@ -3503,7 +3497,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$rimlightboost") ).isEmpty() )  {
 
-		if( vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) )
+		if( vmt.shaderName.compare("Deferred_Model", Qt::CaseInsensitive) )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
@@ -3515,7 +3509,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if( !( value = vmt.parameters.take("$rimlightmask") ).isEmpty() ) {
 
-		if( vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) )
+		if( vmt.shaderName.compare("Deferred_Model", Qt::CaseInsensitive) )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
@@ -3528,7 +3522,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		Error("Parameters regarding rimlight require \"$rimlight 1\"!")
 
 	if(rimLightWrongShader)
-		Error("Parameters regarding rimlight only work with the VertexLitGeneric shader!")
+		Error("Parameters regarding rimlight only work with the Deferred_Model shader!")
 
 	//----------------------------------------------------------------------------------------//
 
@@ -3726,6 +3720,9 @@ VmtFile MainWindow::makeVMT()
 		if( !( tmp = ui->lineEdit_bumpmap->text().trimmed() ).isEmpty() )
 			vmtFile.parameters.insert( "$bumpmap", tmp );
 
+		if( !( tmp = ui->lineEdit_specmap->text().trimmed() ).isEmpty() )
+			vmtFile.parameters.insert( "$rmamap", tmp );
+
 		if( ui->checkBox_ssbump->isEnabled() && ui->checkBox_ssbump->isChecked() )
 			vmtFile.parameters.insert( "$ssbump", "1" );
 
@@ -3772,6 +3769,9 @@ VmtFile MainWindow::makeVMT()
 
 		if( !( tmp = ui->lineEdit_bumpmap2->text().trimmed() ).isEmpty() )
 			vmtFile.parameters.insert( "$bumpmap2", tmp );
+
+		if( !( tmp = ui->lineEdit_specmap2->text().trimmed() ).isEmpty() )
+			vmtFile.parameters.insert( "$rmamap2", tmp );
 
 		if( ui->comboBox_surface2->isEnabled() && !( tmp = ui->comboBox_surface2->currentText() ).isEmpty() )
 			vmtFile.parameters.insert( "$surfaceprop2", tmp );
@@ -4738,7 +4738,7 @@ void MainWindow::resetWidgets() {
 	ui->action_refract->setDisabled(true);
 
 	ui->comboBox_surface->setCurrentIndex(0);
-	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("LightmappedGeneric"));
+	ui->comboBox_shader->setCurrentIndex(ui->comboBox_shader->findText("Deferred_Brush"));
 		this->shaderChanged();
 	ui->comboBox_surface2->setCurrentIndex(0);
 
@@ -4854,12 +4854,7 @@ void MainWindow::resetWidgets() {
 	//----------------------------------------------------------------------------------------//
 
 	ui->lineEdit_specmap->clear();
-	ui->lineEdit_specmap->setDisabled(true);
-	ui->toolButton_specmap->setDisabled(true);
-
 	ui->lineEdit_specmap2->clear();
-	ui->lineEdit_specmap2->setDisabled(true);
-	ui->toolButton_specmap2->setDisabled(true);
 
 
 	//----------------------------------------------------------------------------------------//
@@ -5625,6 +5620,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->comboBox_surface->currentIndex() > 0 ||
 				ui->checkBox_ssbump->isChecked() ||
 				ui->doubleSpinBox_lumstart1->value() != 0.0 ||
+				ui->lineEdit_specmap->text() != "" ||
 				ui->doubleSpinBox_lumend1->value() != 1.0);
 
 	case NormalBlend:
@@ -5636,6 +5632,7 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 				ui->lineEdit_bumpmap2->text() != "" ||
 				ui->lineEdit_blendmodulate->text() != "" ||
 				ui->comboBox_surface2->currentIndex() > 0 ||
+				ui->lineEdit_specmap2->text() != "" ||
 				ui->doubleSpinBox_uvscalex2->value() != 1.0 ||
 				ui->doubleSpinBox_uvscaley2->value() != 1.0 ||
 				ui->doubleSpinBox_lumstart2->value() != 0.0 ||
@@ -5715,8 +5712,6 @@ bool MainWindow::isGroupboxChanged(MainWindow::GroupBoxes groupBox)
 
 		return (ui->lineEdit_envmap->text() != "" ||
 				ui->checkBox_cubemap->isChecked() ||
-				ui->lineEdit_specmap->text() != "" ||
-				ui->lineEdit_specmap2->text() != "" ||
 				ui->checkBox_basealpha->isChecked() ||
 				ui->checkBox_normalalpha->isChecked() ||
 				ui->checkBox_tintSpecMask->isChecked() ||
@@ -6111,21 +6106,22 @@ void MainWindow::sortDroppedTextures(const QMimeData* mimeData ) {
 
 				} else if (fileName.endsWith("_specular") ||
 						   fileName.endsWith("_s") ||
+						   fileName.endsWith("_rma") ||
 						   fileName.endsWith("spec") ) {
 
 					if (ui->lineEdit_bumpmapAlpha->isVisible())
-						processVtf("", filePath, ui->lineEdit_bumpmapAlpha);
+						processVtf("", filePath, ui->lineEdit_specmap);
 					else
 						processVtf("", filePath, ui->lineEdit_specmap);
 
-				} else if (shader == "VertexLitGeneric" &&
+				} else if (shader == "Deferred_Model" &&
 							(fileName.endsWith("_glossiness") ||
 							 fileName.endsWith("_g") ||
 							 fileName.endsWith("gloss")) ) {
 
 					processVtf("", filePath, ui->lineEdit_exponentTexture);
 
-				} else if (shader == "VertexLitGeneric" &&
+				} else if (shader == "Deferred_Model" &&
 							(fileName.endsWith("tintmask") ||
 							 fileName.endsWith("colormask") ||
 							 fileName.endsWith("_cm") ||
@@ -7019,8 +7015,8 @@ void MainWindow::shaderChanged()
 
 		} else {
 
-			const auto isVertexLitGeneric =
-				(shader == "VertexLitGeneric");
+			const auto isDeferred_Model =
+				(shader == "Deferred_Model");
 
 			ui->action_baseTexture3->setVisible(luminanceEnabled);
 			ui->action_baseTexture4->setVisible(luminanceEnabled);
@@ -7070,45 +7066,43 @@ void MainWindow::shaderChanged()
 
 			//----------------------------------------------------------------------------------------//
 
-			ui->checkBox_model->setEnabled( shader == "VertexLitGeneric"   ||
-											shader == "LightmappedGeneric" ||
+			ui->checkBox_model->setEnabled( shader == "Deferred_Model"   ||
+											shader == "Deferred_Brush" ||
 											shader == "WorldVertexTransition" ||
 											shader == "Refract" );
 
-			ui->action_normalBlend->setEnabled( shader == "LightmappedGeneric" );
-			ui->action_normalBlend->setVisible( shader == "LightmappedGeneric" );
-			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
-			ui->action_rimLight->setVisible( shader == "VertexLitGeneric" );
+			ui->action_normalBlend->setEnabled( shader == "Deferred_Brush" );
+			ui->action_normalBlend->setVisible( shader == "Deferred_Brush" );
+			ui->action_rimLight->setVisible( shader == "Deferred_Model" );
+			ui->action_rimLight->setVisible( shader == "Deferred_Model" );
 
-			ui->action_treeSway->setVisible(isVertexLitGeneric);
+			ui->action_treeSway->setVisible(isDeferred_Model);
 
-			ui->checkBox_tintSpecMask->setVisible(isVertexLitGeneric);
+			ui->checkBox_tintSpecMask->setVisible(isDeferred_Model);
 
-			ui->action_decal->setVisible(isVertexLitGeneric);
-			if (!isVertexLitGeneric) {
+			ui->action_baseTexture2->setEnabled(true);
+
+			ui->action_decal->setVisible(isDeferred_Model);
+			if (!isDeferred_Model) {
 				ui->action_treeSway->setChecked(false);
 				ui->action_decal->setChecked(false);
 				ui->groupBox_treeSway->setVisible(false);
 				ui->groupBox_textureDecal->setVisible(false);
 			}
 
-			if(shader != "LightmappedGeneric") {
+			if(shader != "Deferred_Brush") {
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
 			ui->action_layerBlend->setVisible(isBlend);
 
-			ui->action_emissiveBlend->setVisible(isVertexLitGeneric);
+			ui->action_emissiveBlend->setVisible(isDeferred_Model);
 
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->toolButton_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->label_reflectivity2->setVisible( shader == "WorldVertexTransition" );
-
-			ui->lineEdit_specmap2->setVisible( shader == "WorldVertexTransition" );
-			ui->toolButton_specmap2->setVisible( shader == "WorldVertexTransition" );
-			ui->label_specmap2->setVisible( shader == "WorldVertexTransition" );
 
 			ui->frame_detail2->setVisible(isBlend);
 			ui->comboBox_detailBlendMode2->setVisible(false);
@@ -7122,9 +7116,6 @@ void MainWindow::shaderChanged()
 
 			ui->action_baseTexture->setChecked(shader == "Lightmapped_4WayBlend");
 			ui->action_baseTexture2->setChecked(shader == "Lightmapped_4WayBlend");
-
-			ui->action_baseTexture->setEnabled(shader != "Lightmapped_4WayBlend");
-			ui->action_baseTexture2->setEnabled(shader != "Lightmapped_4WayBlend");
 
 			ui->groupBox_baseTexture->setVisible(shader == "Lightmapped_4WayBlend");
 			ui->groupBox_baseTexture2->setVisible(shader == "Lightmapped_4WayBlend");
@@ -7165,15 +7156,12 @@ void MainWindow::shaderChanged()
 
 			} else { // Base Texture 2 not allowed
 
-				ui->action_baseTexture2->setChecked(false);
 				ui->groupBox_layerblend->setVisible(false);
 			}
 
 			ui->label_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
 			ui->toolButton_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
 			ui->lineEdit_blendmodulate->setVisible( shader != "Lightmapped_4WayBlend" );
-
-			ui->action_baseTexture2->setDisabled(true);
 
 			//----------------------------------------------------------------------------------------//
 
@@ -7745,9 +7733,9 @@ void MainWindow::readSettings()
 
 	QString addToIniSettings;
 
-	addToIniSettings.append( addDefaultShader("LightmappedGeneric",	   true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture ) );
+	addToIniSettings.append( addDefaultShader("Deferred_Brush",	   true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture ) );
 	addToIniSettings.append( addDefaultShader("UnlitGeneric",		   true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture ) );
-	addToIniSettings.append( addDefaultShader("VertexLitGeneric",	   true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture ) );
+	addToIniSettings.append( addDefaultShader("Deferred_Model",	   true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture ) );
 	addToIniSettings.append( addDefaultShader("WorldVertexTransition", true, mSettings, QVector< Shader::Groups >() << Shader::G_Base_Texture << Shader::G_Base_Texture2 ) );
 	addToIniSettings.append( addDefaultShader("UnlitTwoTexture",	   true, mSettings, QVector< Shader::Groups >() ) );
 	addToIniSettings.append( addDefaultShader("Lightmapped_4WayBlend", true, mSettings,
@@ -8104,11 +8092,11 @@ void MainWindow::changeShader()
 	int index = 0;
 
 	if (objectName == "toolButton_Lightmapped") {
-		index = ui->comboBox_shader->findText("LightmappedGeneric", Qt::MatchFixedString);
+		index = ui->comboBox_shader->findText("Deferred_Brush", Qt::MatchFixedString);
 	} else if (objectName == "toolButton_WorldVertex") {
 		index = ui->comboBox_shader->findText("WorldVertexTransition", Qt::MatchFixedString);
 	} else if (objectName == "toolButton_VertexLit") {
-		index = ui->comboBox_shader->findText("VertexLitGeneric", Qt::MatchFixedString);
+		index = ui->comboBox_shader->findText("Deferred_Model", Qt::MatchFixedString);
 	} else if (objectName == "toolButton_Unlit") {
 	index = ui->comboBox_shader->findText("UnlitGeneric", Qt::MatchFixedString);
 	}
@@ -8984,15 +8972,6 @@ void MainWindow::modifiedLineEdit( QString text )
 			ui->doubleSpinBox_envmapTint->setDisabled(true);
 			ui->toolButton_envmapTint->setDisabled(true);
 
-			ui->label_specmap->setDisabled(true);
-			ui->lineEdit_specmap->setDisabled(true);
-			ui->toolButton_specmap->setDisabled(true);
-
-			ui->label_specmap2->setDisabled(true);
-			ui->lineEdit_specmap2->setDisabled(true);
-			ui->toolButton_specmap2->setDisabled(true);
-
-
 			ui->checkBox_basealpha->setDisabled(true);
 			ui->checkBox_normalalpha->setDisabled(true);
 			ui->checkBox_tintSpecMask->setDisabled(true);
@@ -9043,9 +9022,6 @@ void MainWindow::modifiedLineEdit( QString text )
 
 			if( !ui->lineEdit_specmap->text().isEmpty() )
 			{
-				ui->lineEdit_specmap->setEnabled(true);
-				ui->lineEdit_specmap2->setEnabled(true);
-
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
 					ui->toolButton_specmap2->setEnabled(true);
@@ -9056,12 +9032,6 @@ void MainWindow::modifiedLineEdit( QString text )
 			}
 			else if( ui->checkBox_basealpha->isChecked() ||  ui->checkBox_phongBaseAlpha->isChecked() )
 			{
-				ui->lineEdit_specmap->setDisabled(true);
-				ui->toolButton_specmap->setDisabled(true);
-
-				ui->lineEdit_specmap2->setDisabled(true);
-				ui->toolButton_specmap2->setDisabled(true);
-
 				ui->checkBox_basealpha->setEnabled(true);
 				ui->checkBox_normalalpha->setDisabled(true);
 				ui->checkBox_tintSpecMask->setDisabled(true);
@@ -9070,12 +9040,6 @@ void MainWindow::modifiedLineEdit( QString text )
 			}
 			else if( ui->checkBox_normalalpha->isChecked() || ui->checkBox_phongNormalAlpha->isChecked() )
 			{
-				ui->lineEdit_specmap->setDisabled(true);
-				ui->toolButton_specmap->setDisabled(true);
-
-				ui->lineEdit_specmap2->setDisabled(true);
-				ui->toolButton_specmap2->setDisabled(true);
-
 				ui->checkBox_basealpha->setDisabled(true);
 				ui->checkBox_normalalpha->setEnabled(true);
 				ui->checkBox_tintSpecMask->setDisabled(true);
@@ -9084,9 +9048,6 @@ void MainWindow::modifiedLineEdit( QString text )
 			}
 			else
 			{
-				ui->lineEdit_specmap->setEnabled(true);
-				ui->lineEdit_specmap2->setEnabled(true);
-
 				if( getCurrentGame() != "" )
 					ui->toolButton_specmap->setEnabled(true);
 					ui->toolButton_specmap2->setEnabled(true);
@@ -9648,7 +9609,7 @@ void MainWindow::hideParameterGroupboxes()
 
 	ui->groupBox_patch->setVisible( shader == "Patch" );
 	ui->groupBox_sprite->setVisible( shader == "Sprite" );
-	ui->groupBox_baseTexture->setVisible( shader == "Lightmapped_4WayBlend" || shader == "VertexLitGeneric" || shader == "WorldVertexTransition" || shader == "UnlitGeneric" || shader == "LightmappedGeneric" );
+	ui->groupBox_baseTexture->setVisible( shader == "Lightmapped_4WayBlend" || shader == "Deferred_Model" || shader == "WorldVertexTransition" || shader == "UnlitGeneric" || shader == "Deferred_Brush" );
 	ui->groupBox_refract->setVisible( shader == "Refract" );
 	ui->groupBox_unlitTwoTexture->setVisible( shader == "UnlitTwoTexture" );
 
