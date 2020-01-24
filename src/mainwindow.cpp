@@ -1033,6 +1033,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	bool showBaseTexture = false;
 	bool showBaseTexture2 = false;
+	bool showBaseTexture3 = false;
+	bool showBaseTexture4 = false;
 	bool showColor = false;
 	bool showOther = false;
 	bool showTransparency = false;
@@ -1137,9 +1139,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		QString texture = validateTexture( "preview_basetexture3", value, "$basetexture3", realGameinfoDir );
 
-		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) ) \
-			Error("$basetexture3 only works with the Lightmapped_4WayBlend CS:GO shader!") \
-
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse3->setText(texture);
 			createReconvertAction(ui->lineEdit_diffuse3, value);
@@ -1148,9 +1147,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if( !( value = vmt.parameters.take("$basetexture4") ).isEmpty() ) {
 
 		QString texture = validateTexture( "preview_basetexture4", value, "$basetexture4", realGameinfoDir );
-
-		if( vmt.shaderName.compare("Lightmapped_4WayBlend", Qt::CaseInsensitive) ) \
-			Error("$basetexture4 only works with the Lightmapped_4WayBlend CS:GO shader!") \
 
 		if( !texture.isEmpty() )
 			ui->lineEdit_diffuse4->setText(texture);
@@ -1988,7 +1984,6 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if(!(value = vmt.parameters.take("$rmamap")).isEmpty()) {
 		usingSpecmap = utils::prepareTexture(value);
-		showShadingReflection = true;
 	}
 
 	//----------------------------------------------------------------------------------------//
@@ -3619,6 +3614,12 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 	if(showBaseTexture2 && !ui->action_baseTexture2->isChecked())
 		ui->action_baseTexture2->trigger();
+
+	if(showBaseTexture3 && !ui->action_baseTexture3->isChecked())
+		ui->action_baseTexture3->trigger();
+
+	if(showBaseTexture4 && !ui->action_baseTexture4->isChecked())
+		ui->action_baseTexture4->trigger();
 
 	if(vmt.state.showDetail && !ui->action_detail->isChecked())
 		ui->action_detail->trigger();
@@ -7018,8 +7019,8 @@ void MainWindow::shaderChanged()
 			const auto isDeferred_Model =
 				(shader == "Deferred_Model");
 
-			ui->action_baseTexture3->setVisible(luminanceEnabled);
-			ui->action_baseTexture4->setVisible(luminanceEnabled);
+			ui->action_baseTexture3->setVisible(true);
+			ui->action_baseTexture4->setVisible(true);
 
 			ui->action_CreateBlendTexture->setVisible(isBlend || luminanceEnabled);
 
@@ -7071,8 +7072,8 @@ void MainWindow::shaderChanged()
 											shader == "WorldVertexTransition" ||
 											shader == "Refract" );
 
-			ui->action_normalBlend->setEnabled( shader == "Deferred_Brush" );
-			ui->action_normalBlend->setVisible( shader == "Deferred_Brush" );
+			ui->action_normalBlend->setEnabled( false );
+			ui->action_normalBlend->setVisible( false );
 			ui->action_rimLight->setVisible( shader == "Deferred_Model" );
 			ui->action_rimLight->setVisible( shader == "Deferred_Model" );
 
@@ -7094,9 +7095,9 @@ void MainWindow::shaderChanged()
 				ui->groupBox_normalBlend->setVisible(false);
 				ui->action_normalBlend->setChecked(false);
 			}
-			ui->action_layerBlend->setVisible(isBlend);
+			ui->action_layerBlend->setVisible(false);
 
-			ui->action_emissiveBlend->setVisible(isDeferred_Model);
+			ui->action_emissiveBlend->setVisible(false);
 
 			ui->horizontalSlider_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
 			ui->doubleSpinBox_reflectivity_2->setVisible( shader == "WorldVertexTransition" );
@@ -7127,9 +7128,6 @@ void MainWindow::shaderChanged()
 				ui->action_baseTexture3->setChecked(true);
 				ui->action_baseTexture4->setChecked(true);
 			}
-
-			ui->groupBox_baseTexture3->setVisible(shader == "Lightmapped_4WayBlend");
-			ui->groupBox_baseTexture4->setVisible(shader == "Lightmapped_4WayBlend");
 
 			//----------------------------------------------------------------------------------------//
 
@@ -7347,6 +7345,8 @@ void MainWindow::shaderChanged()
 
 	ui->action_baseTexture->setVisible( ui->action_baseTexture->isEnabled() );
 	ui->action_baseTexture2->setVisible( ui->action_baseTexture2->isEnabled() );
+	ui->action_baseTexture3->setVisible( ui->action_baseTexture3->isEnabled() );
+	ui->action_baseTexture4->setVisible( ui->action_baseTexture4->isEnabled() );
 	ui->action_transparency->setVisible( ui->action_transparency->isEnabled() );
 	ui->action_detail->setVisible( ui->action_detail->isEnabled() );
 	ui->action_color->setVisible( ui->action_color->isEnabled() );
@@ -8547,7 +8547,7 @@ void MainWindow::processVtf(const QString& objectName,
 					conversionThread->objectName = objectName;
 					conversionThread->relativeFilePath = relativeFilePath;
 					conversionThread->newFileName = "";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
 					conversionThread->moveFile = true;
 					conversionThread->newFile = newFile;
 					conversionThread->newFileDir = dir;
@@ -8581,7 +8581,7 @@ void MainWindow::processVtf(const QString& objectName,
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";;
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -10204,7 +10204,7 @@ void MainWindow::reconvertTextureHalf() {
 
 	QString resize = "-rwidth " + Str(texture.width() / 2) +
 			" -rheight " + Str(texture.height() / 2) +
-			" -rfilter BOX";
+			" -rfilter HAMMING";
 
 	reconvertTexture(lineEdit, objectName, tooltip, resize);
 }
@@ -11261,6 +11261,16 @@ void ValueLineEdit::_editingFinished()
 void MainWindow::on_action_baseTexture2_triggered(bool checked)
 {
 	HANDLE_ACTION(ui->groupBox_baseTexture2)
+}
+
+void MainWindow::on_action_baseTexture3_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_baseTexture3)
+}
+
+void MainWindow::on_action_baseTexture4_triggered(bool checked)
+{
+	HANDLE_ACTION(ui->groupBox_baseTexture4)
 }
 
 void MainWindow::on_action_transparency_triggered(bool checked)

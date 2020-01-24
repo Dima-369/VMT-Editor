@@ -498,6 +498,8 @@ private slots:
 	void toggleWaterFog();
 
 	void on_action_baseTexture2_triggered(bool checked);
+	void on_action_baseTexture3_triggered(bool checked);
+	void on_action_baseTexture4_triggered(bool checked);
 	void on_action_transparency_triggered(bool checked);
 	void on_action_detail_triggered(bool checked);
 	void on_action_other_triggered(bool checked);
