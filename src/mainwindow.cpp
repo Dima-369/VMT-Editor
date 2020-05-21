@@ -1516,7 +1516,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		bool ok;
 		double doubleScale = value.toDouble(&ok);
 
-		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition") )
+		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition" || vmt.shaderName == "VertexLitGeneric") )
 		{
 			Error("$seamless_scale only works with the LightmappedGeneric and WorldVertexTransition shaders!")
 		}
