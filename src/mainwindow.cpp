@@ -8513,6 +8513,15 @@ void MainWindow::processVtf(const QString& objectName,
 
 			QString mipmapFilter = outputParameters(type, noAlpha);
 
+			QString resize = "";
+
+			if (ui->pushButton_size512->isChecked())
+				resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+			else if (ui->pushButton_size1024->isChecked())
+				resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+			else if (ui->pushButton_size2048->isChecked())
+				resize = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+
 			if(mVMTLoaded) {
 
 				QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0), type);
@@ -8559,7 +8568,7 @@ void MainWindow::processVtf(const QString& objectName,
 					conversionThread->objectName = objectName;
 					conversionThread->relativeFilePath = relativeFilePath;
 					conversionThread->newFileName = "";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + resize;
 					conversionThread->moveFile = true;
 					conversionThread->newFile = newFile;
 					conversionThread->newFileDir = dir;
@@ -8593,7 +8602,7 @@ void MainWindow::processVtf(const QString& objectName,
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + resize;
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -10243,7 +10252,14 @@ void MainWindow::reconvertTextureHalf() {
 
 	QString resize = "-rwidth " + Str(texture.width() / 2) +
 			" -rheight " + Str(texture.height() / 2) +
-			" -rfilter BOX";
+			" -rfilter HAMMING";
+
+	if (ui->pushButton_size512->isChecked() && texture.width() > 512)
+		resize = " -rclampwidth 256 -rclampheight 256 -rfilter HAMMING";
+	else if (ui->pushButton_size1024->isChecked() && texture.width() > 1024)
+		resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+	else if (ui->pushButton_size2048->isChecked() && texture.width() > 2048)
+		resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
 
 	reconvertTexture(lineEdit, objectName, tooltip, resize);
 }
@@ -10266,6 +10282,18 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 	bool combine = false;
 	int type = 0;
 	QString preview;
+	QString sizeOptions;
+
+	if(resize == "") {
+		if (ui->pushButton_size512->isChecked())
+			sizeOptions = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+		else if (ui->pushButton_size1024->isChecked())
+			sizeOptions = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+		else if (ui->pushButton_size2048->isChecked())
+			sizeOptions = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+	} else {
+		sizeOptions = resize;
+	}
 
 	if( objectName == "lineEdit_diffuse" ) {
 		type = 1;
@@ -10408,7 +10436,7 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " " + resize;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " " + sizeOptions;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
