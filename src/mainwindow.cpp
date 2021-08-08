@@ -8515,12 +8515,40 @@ void MainWindow::processVtf(const QString& objectName,
 
 			QString resize = "";
 
-			if (ui->pushButton_size512->isChecked())
-				resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
-			else if (ui->pushButton_size1024->isChecked())
-				resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
-			else if (ui->pushButton_size2048->isChecked())
-				resize = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+            const auto tooltip = lineEdit->toolTip();
+
+            int currentSize = 4096;
+
+            if (ui->pushButton_size512->isChecked()) {
+                currentSize = 512;
+                resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+            }
+            else if (ui->pushButton_size1024->isChecked()) {
+                currentSize = 1024;
+                resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+            }
+            else if (ui->pushButton_size2048->isChecked()) {
+                currentSize = 2048;
+                resize = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+            }
+
+            QImage texture;
+            if (!texture.load(tooltip)) {
+                Error("Texture size could not be determined");
+            } else {
+
+                int texWidth = texture.width();
+                int texHeight = texture.height();
+                int ratio = qMax(texWidth, texHeight)/currentSize;
+
+                if (ratio > 1)
+                    resize =  "-rclampwidth " + Str(texture.width() / ratio) +
+                              " -rclampheight " + Str(texture.height() / ratio) +
+                              " -rfilter HAMMING";
+
+            }
+
+
 
 			if(mVMTLoaded) {
 
@@ -10244,22 +10272,31 @@ void MainWindow::reconvertTextureHalf() {
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+    int currentSize = 4096;
+
+    if (ui->pushButton_size512->isChecked()) {
+        currentSize = 512;
+    }
+    else if (ui->pushButton_size1024->isChecked()) {
+        currentSize = 1024;
+    }
+    else if (ui->pushButton_size2048->isChecked()) {
+        currentSize = 2048;
+    }
+
 	QImage texture;
 	if (!texture.load(tooltip)) {
 		Error("Texture size could not be determined");
 		return;
 	}
 
-	QString resize = "-rwidth " + Str(texture.width() / 2) +
-			" -rheight " + Str(texture.height() / 2) +
-			" -rfilter HAMMING";
+    int texWidth = texture.width();
+    int texHeight = texture.height();
+    int ratio = qMax((qMax(texWidth, texHeight) / currentSize) * 2, 2);
 
-	if (ui->pushButton_size512->isChecked() && texture.width() > 512)
-		resize = " -rclampwidth 256 -rclampheight 256 -rfilter HAMMING";
-	else if (ui->pushButton_size1024->isChecked() && texture.width() > 1024)
-		resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
-	else if (ui->pushButton_size2048->isChecked() && texture.width() > 2048)
-		resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+    QString resize = "-rwidth " + Str(texture.width() / ratio) +
+                     " -rheight " + Str(texture.height() / ratio) +
+                     " -rfilter HAMMING";
 
 	reconvertTexture(lineEdit, objectName, tooltip, resize);
 }

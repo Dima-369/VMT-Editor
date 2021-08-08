@@ -14,6 +14,9 @@
    <font>
     <family>Segoe UI</family>
     <pointsize>9</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -27,6 +30,11 @@
 QWidget
 {
 	font: 9pt &quot;Segoe UI&quot;;
+	border-radius: 3px;
+}
+
+QDockWidget:title {
+	border-radius: 4px;
 }
 
 /* Progress bar */
@@ -69,33 +77,40 @@ QMenuBar
 {
 	background-color: #333;
   	color: silver;
+	padding-top: 2px;
+	padding-bottom: 1px;
 }
 
 QMenuBar::item
 {
-  background: transparent;
+ 	background: transparent;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 QMenuBar::item:selected
 {
-    border: 1px solid #151515;
-	background-color: #151515;
+    border: 1px solid #444;
+	background-color: #444;
+	border-radius: 4px;
 }
 
 QMenuBar::item:pressed
 {
-    border: 1px solid #151515;
-    background-color: #151515;
-
+    border: 1px solid #444;
+    background-color: #444;
     margin-bottom: 0px;  
 }
 
 QMenu
 {
-	border: 1px solid #aaa;
+	border: 0px solid #aaa;
+	border-radius: 4px;
 	padding: 1px;
     color: black;
-	background-color: #eee;
+	background-color: #ddd;
 }
 
 QMenu::item
@@ -108,6 +123,7 @@ QMenu::item
 QMenu::item:selected
 {
 	background-color: #fff;
+	border-radius: 4px;
 }
 
 QMenu::separator
@@ -175,6 +191,7 @@ QScrollBar::handle:horizontal
     min-width: 5px;
  	min-height: 5px;
 	border: 1px solid #222;
+	border-radius: 4px;
 }
 
 QScrollBar::handle:hover
@@ -298,6 +315,7 @@ QCheckBox::indicator{
     color: #b1b1b1;
     background-color: #222;
     border: 1px solid #222;
+	border-radius: 3px;
     width: 11px;
     height: 11px;
 }
@@ -421,7 +439,6 @@ QComboBox
     background-color: #222;
     border-style: solid;
     border: 1px solid #222;
-    border-radius: 0px;
     padding: 2px;
 	padding-left: 4px;
 	outline: 0;
@@ -457,6 +474,10 @@ QComboBox QAbstractItemView
 	outline: 0;
 }
 
+QComboBox::item {
+	min-height: 20px;
+}
+
 QComboBox::drop-down
 {
     subcontrol-origin: padding;
@@ -466,8 +487,6 @@ QComboBox::drop-down
     border-left-width: 0px;
     border-left-color: darkgray;
     border-left-style: solid;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
 }
 
 QComboBox::down-arrow
@@ -600,6 +619,7 @@ QSlider::groove:horizontal {
     height: 5px;
     background: #222;
     margin: 0px 0px;  
+	border-radius: 2px;
 }
 
 QSlider::groove:horizontal::hover {
@@ -663,11 +683,15 @@ QSlider::handle:horizontal:disabled {
        <font>
         <family>Segoe UI</family>
         <pointsize>9</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QScrollArea .QWidget {
     background-color: #404040;
+	border-radius: 3px;
 }
 
 QTabBar::tab {
@@ -680,6 +704,7 @@ QTabBar::tab {
     padding-top: 4px;
 	left: -1px;
     padding-bottom: 4px;
+	border-radius: 4px;
     
 }
 
@@ -692,10 +717,12 @@ QTabWidget::pane {
     border: 0px solid #404040;
 	background-color: #404040;
     top: -1 px;	
+	
 }
 
 QTabWidget {
    	background-color: #333;
+    border-radius: 4px;
 }
 
 
@@ -787,8 +814,10 @@ QGroupBox {
     border: 0px;
     margin-top: 0px;
 	padding-top: 20px;
-	margin-left: -12px;
-	margin-right: -6px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: -120px;
+	margin-right: 0px;
 	font-family: &quot;Segoe UI&quot;;
 	font-size: 14pt;
 }
@@ -926,6 +955,15 @@ QScrollBar::handle:hover
                </color>
               </brush>
              </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
+               </color>
+              </brush>
+             </colorrole>
             </active>
             <inactive>
              <colorrole role="WindowText">
@@ -997,6 +1035,15 @@ QScrollBar::handle:hover
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
                </color>
               </brush>
              </colorrole>
@@ -1074,6 +1121,15 @@ QScrollBar::handle:hover
                </color>
               </brush>
              </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
+               </color>
+              </brush>
+             </colorrole>
             </disabled>
            </palette>
           </property>
@@ -1081,6 +1137,9 @@ QScrollBar::handle:hover
            <font>
             <family>Segoe UI</family>
             <pointsize>9</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -1252,6 +1311,9 @@ QScrollBar::handle:hover
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="maxVisibleItems">
@@ -1847,6 +1909,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_7">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_11">
                    <property name="minimumSize">
@@ -1943,6 +2014,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_22">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_47">
                    <property name="sizePolicy">
@@ -2176,6 +2256,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_3">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="6" column="0">
                   <widget class="QLabel" name="label_22">
                    <property name="minimumSize">
@@ -2720,6 +2809,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_23">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_15">
                    <property name="minimumSize">
@@ -2932,6 +3030,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_28">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_31">
                    <property name="minimumSize">
@@ -3310,6 +3417,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_10">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="11" column="1" colspan="3">
                   <widget class="QFrame" name="frame_lumend1">
                    <layout class="QHBoxLayout" name="horizontalLayout_lumend1">
@@ -3371,6 +3487,9 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="text">
@@ -4008,6 +4127,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_24">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_29">
                    <property name="sizePolicy">
@@ -4488,6 +4616,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_41">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_35">
                    <property name="sizePolicy">
@@ -4956,6 +5093,15 @@ QPushButton:checked:hover
                  <string>Normal Blend</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_14">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="4" column="0">
                   <widget class="QLabel" name="label_61">
                    <property name="sizePolicy">
@@ -5746,6 +5892,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_13">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="3" column="2" colspan="3">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_blendmodulate">
                    <property name="font">
@@ -6618,6 +6773,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_25">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="3">
                   <widget class="QToolButton" name="toolButton_diffuse3">
                    <property name="minimumSize">
@@ -7311,6 +7475,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_33">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="1" colspan="2">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse4">
                    <property name="font">
@@ -7992,6 +8165,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_2">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <layout class="QGridLayout" name="gridLayout_27">
                    <item row="2" column="3" colspan="3">
@@ -8404,6 +8586,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_12">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="4" column="0" colspan="4">
                   <widget class="QFrame" name="frame_detail2">
                    <property name="frameShape">
@@ -9540,6 +9731,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_6">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="3" column="0">
                   <widget class="QLabel" name="label_reflectivity2">
                    <property name="font">
@@ -9932,6 +10132,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_45">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_lightWarp_2">
                    <property name="sizePolicy">
@@ -10101,6 +10310,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_9">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="2" column="1" colspan="4">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_tintMask">
                    <property name="font">
@@ -10513,6 +10731,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_43">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="2" column="4">
                   <widget class="QToolButton" name="toolButton_specmap">
                    <property name="enabled">
@@ -11720,6 +11947,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_47">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="6" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_68">
                    <item>
@@ -12682,6 +12918,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="13" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_11">
                    <item>
@@ -13539,6 +13784,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_49">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_69">
                    <item>
@@ -14812,6 +15066,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_18">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_exponent_2">
                    <property name="sizePolicy">
@@ -15054,6 +15317,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_8">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_maskTexture">
                    <property name="font">
@@ -15442,6 +15714,15 @@ QPushButton:checked:hover
                  <bool>false</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_51">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="2" column="2">
                   <widget class="QToolButton" name="toolButton_emissiveBlendFlowTexture">
                    <property name="enabled">
@@ -16028,6 +16309,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_30">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_flowMap">
                    <property name="font">
@@ -16630,6 +16920,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_38">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_52">
                    <property name="sizePolicy">
@@ -17046,6 +17345,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_35">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="3" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_waterReflectTexture">
                    <property name="font">
@@ -17496,6 +17804,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_34">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="1">
                   <layout class="QGridLayout" name="gridLayout_39">
                    <item row="0" column="1">
@@ -17725,6 +18042,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_15">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_2">
                    <property name="minimumSize">
@@ -17954,6 +18280,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_46">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="1" column="1" colspan="2">
                   <layout class="QHBoxLayout" name="horizontalLayout_29">
                    <item>
@@ -19358,6 +19693,15 @@ QPushButton:checked:hover
                  <bool>true</bool>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_19">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>4</number>
+                 </property>
                  <item row="3" column="1">
                   <layout class="QGridLayout" name="gridLayout">
                    <item row="0" column="3">
@@ -19901,6 +20245,15 @@ QScrollBar::handle:horizontal
                </color>
               </brush>
              </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
+               </color>
+              </brush>
+             </colorrole>
             </active>
             <inactive>
              <colorrole role="WindowText">
@@ -19972,6 +20325,15 @@ QScrollBar::handle:horizontal
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
                </color>
               </brush>
              </colorrole>
@@ -20049,6 +20411,15 @@ QScrollBar::handle:horizontal
                </color>
               </brush>
              </colorrole>
+             <colorrole role="PlaceholderText">
+              <brush brushstyle="NoBrush">
+               <color alpha="128">
+                <red>192</red>
+                <green>192</green>
+                <blue>192</blue>
+               </color>
+              </brush>
+             </colorrole>
             </disabled>
            </palette>
           </property>
@@ -20064,7 +20435,7 @@ QScrollBar::handle:horizontal
              <x>0</x>
              <y>0</y>
              <width>943</width>
-             <height>753</height>
+             <height>749</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -20077,6 +20448,9 @@ QScrollBar::handle:horizontal
                <font>
                 <family>Segoe UI</family>
                 <pointsize>9</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -20090,6 +20464,9 @@ QScrollBar::handle:horizontal
                <font>
                 <family>Segoe UI</family>
                 <pointsize>9</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -20108,6 +20485,9 @@ QScrollBar::handle:horizontal
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                </widget>
@@ -20122,6 +20502,9 @@ QScrollBar::handle:horizontal
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                </widget>
@@ -20144,7 +20527,7 @@ QScrollBar::handle:horizontal
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -20289,6 +20672,9 @@ QScrollBar::handle:horizontal
     <font>
      <family>Segoe UI</family>
      <pointsize>9</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -20411,6 +20797,9 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -20436,6 +20825,9 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
@@ -20459,6 +20851,9 @@ QScrollBar::handle:horizontal
     <font>
      <family>Segoe UI</family>
      <pointsize>9</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -20598,6 +20993,9 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
