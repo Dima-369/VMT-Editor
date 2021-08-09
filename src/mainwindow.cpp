@@ -6863,6 +6863,9 @@ void MainWindow::gameChanged( const QString& game )
 		else if( getCurrentGame() == "Counter-Strike: Global Offensive" )
 			tmp.append( extractLines(":/surfaces/csgo") );
 
+        else if( getCurrentGame() != "Counter-Strike: Global Offensive" )
+            tmp.append( extractLines(":/surfaces/csgo") );
+
 		tmp.sort();
 
 		ui->comboBox_surface->insertItems(1, tmp);
@@ -8586,6 +8589,11 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
 
+                if (lineEdit == ui->lineEdit_bumpmap) {
+                    QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                    connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+                }
+
 				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
 
@@ -8621,6 +8629,11 @@ void MainWindow::processVtf(const QString& objectName,
 
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+                if (lineEdit == ui->lineEdit_bumpmap) {
+                    QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                    connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+                }
 
 				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
@@ -10301,6 +10314,41 @@ void MainWindow::reconvertTextureHalf() {
 	reconvertTexture(lineEdit, objectName, tooltip, resize);
 }
 
+void MainWindow::reconvertTextureHalfUncompressed() {
+    const auto lineEdit =
+        qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+    const auto objectName = lineEdit->objectName();
+    const auto tooltip = lineEdit->toolTip();
+
+    int currentSize = 4096;
+
+    if (ui->pushButton_size512->isChecked()) {
+        currentSize = 512;
+    }
+    else if (ui->pushButton_size1024->isChecked()) {
+        currentSize = 1024;
+    }
+    else if (ui->pushButton_size2048->isChecked()) {
+        currentSize = 2048;
+    }
+
+    QImage texture;
+    if (!texture.load(tooltip)) {
+        Error("Texture size could not be determined");
+        return;
+    }
+
+    int texWidth = texture.width();
+    int texHeight = texture.height();
+    int ratio = qMax((qMax(texWidth, texHeight) / currentSize) * 2, 2);
+
+    QString resize = "-rwidth " + Str(texture.width() / ratio) +
+                     " -rheight " + Str(texture.height() / ratio) +
+                     " -rfilter HAMMING";
+
+    reconvertTexture(lineEdit, objectName, tooltip, resize, true);
+}
+
 void MainWindow::reconvertTexture() {
 	const auto lineEdit =
 		qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
@@ -10313,7 +10361,8 @@ void MainWindow::reconvertTexture() {
 void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 								  const QString& objectName,
 								  const QString& tooltip,
-								  const QString& resize)
+                                  const QString& resize,
+                                  bool uncompressed)
 {
 	bool noAlpha = true;
 	bool combine = false;
@@ -10428,7 +10477,7 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 		noAlpha = false;
 	}
 
-	QString mipmapFilter = outputParameters(type, noAlpha);
+    QString mipmapFilter = outputParameters(type, noAlpha, uncompressed);
 
 	QString lineEditText = lineEdit->text();
 
@@ -10517,6 +10566,11 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 
 			QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 			connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+            if (lineEdit == ui->lineEdit_bumpmap) {
+                QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+            }
 
 			QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 			connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
@@ -10944,12 +10998,12 @@ QString MainWindow::removeSuffix( const QString fileName, int type)
 
 }
 
-QString MainWindow::outputParameters( int type, bool noAlpha )
+QString MainWindow::outputParameters( int type, bool noAlpha, bool uncompressed )
 {
 	QMultiMap<QString, QString> arguments;
 
 	QString tmp;
-	if (type == 2 && mSettings->uncompressedNormal) {
+    if (type == 2 && (mSettings->uncompressedNormal || uncompressed)) {
 		if (noAlpha && mSettings->removeAlpha) {
 			arguments.insert("-format", "BGR888");
 			arguments.insert("-alphaformat", "BGR888");

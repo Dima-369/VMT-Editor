@@ -814,10 +814,6 @@ QGroupBox {
     border: 0px;
     margin-top: 0px;
 	padding-top: 20px;
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: -120px;
-	margin-right: 0px;
 	font-family: &quot;Segoe UI&quot;;
 	font-size: 14pt;
 }
@@ -1156,7 +1152,7 @@ QScrollBar::handle:hover
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>933</width>
+             <width>931</width>
              <height>6152</height>
             </rect>
            </property>
@@ -1266,7 +1262,7 @@ QScrollBar::handle:hover
                  <widget class="QLabel" name="label_60">
                   <property name="minimumSize">
                    <size>
-                    <width>97</width>
+                    <width>98</width>
                     <height>0</height>
                    </size>
                   </property>
@@ -1530,7 +1526,7 @@ QToolButton:pressed
                  <widget class="QLabel" name="label_97">
                   <property name="minimumSize">
                    <size>
-                    <width>97</width>
+                    <width>98</width>
                     <height>0</height>
                    </size>
                   </property>
@@ -2020,9 +2016,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_47">
                    <property name="sizePolicy">
@@ -2134,6 +2127,9 @@ QPushButton:checked:hover
                  </item>
                  <item row="1" column="1" colspan="3">
                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <property name="spacing">
+                    <number>6</number>
+                   </property>
                    <item>
                     <widget class="QDoubleSpinBox" name="doubleSpinBox_spriteX">
                      <property name="sizePolicy">
@@ -2261,9 +2257,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="6" column="0">
                   <widget class="QLabel" name="label_22">
@@ -3036,9 +3029,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_31">
                    <property name="minimumSize">
@@ -3422,9 +3412,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="11" column="1" colspan="3">
                   <widget class="QFrame" name="frame_lumend1">
@@ -4133,9 +4120,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_29">
                    <property name="sizePolicy">
@@ -4622,9 +4606,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_35">
                    <property name="sizePolicy">
@@ -5098,9 +5079,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="4" column="0">
                   <widget class="QLabel" name="label_61">
@@ -5897,9 +5875,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="3" column="2" colspan="3">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_blendmodulate">
@@ -6779,9 +6754,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="3">
                   <widget class="QToolButton" name="toolButton_diffuse3">
                    <property name="minimumSize">
@@ -7481,9 +7453,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="1" colspan="2">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_diffuse4">
                    <property name="font">
@@ -8171,9 +8140,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <layout class="QGridLayout" name="gridLayout_27">
                    <item row="2" column="3" colspan="3">
@@ -8591,9 +8557,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="4" column="0" colspan="4">
                   <widget class="QFrame" name="frame_detail2">
@@ -9737,9 +9700,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="3" column="0">
                   <widget class="QLabel" name="label_reflectivity2">
                    <property name="font">
@@ -10138,9 +10098,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_lightWarp_2">
                    <property name="sizePolicy">
@@ -10315,9 +10272,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="2" column="1" colspan="4">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_tintMask">
@@ -10736,9 +10690,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="2" column="4">
                   <widget class="QToolButton" name="toolButton_specmap">
@@ -11160,6 +11111,9 @@ QPushButton:checked:hover
                  </item>
                  <item row="7" column="1" colspan="4">
                   <layout class="QHBoxLayout" name="horizontalLayout_25">
+                   <property name="spacing">
+                    <number>6</number>
+                   </property>
                    <item>
                     <widget class="QSlider" name="horizontalSlider_envmapTint">
                      <property name="enabled">
@@ -11952,9 +11906,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="6" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_68">
@@ -12924,9 +12875,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="13" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_11">
                    <item>
@@ -13789,9 +13737,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="0" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_69">
@@ -15072,9 +15017,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_exponent_2">
                    <property name="sizePolicy">
@@ -15322,9 +15264,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="0" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_maskTexture">
@@ -15719,9 +15658,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="2" column="2">
                   <widget class="QToolButton" name="toolButton_emissiveBlendFlowTexture">
@@ -16314,9 +16250,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="0" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_flowMap">
@@ -16926,9 +16859,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_52">
                    <property name="sizePolicy">
@@ -17350,9 +17280,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="3" column="1">
                   <widget class="TextureDragDropLineEdit" name="lineEdit_waterReflectTexture">
@@ -17810,9 +17737,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="1">
                   <layout class="QGridLayout" name="gridLayout_39">
                    <item row="0" column="1">
@@ -18048,9 +17972,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_2">
                    <property name="minimumSize">
@@ -18285,9 +18206,6 @@ QPushButton:checked:hover
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
                  </property>
                  <item row="1" column="1" colspan="2">
                   <layout class="QHBoxLayout" name="horizontalLayout_29">
@@ -19699,9 +19617,6 @@ QPushButton:checked:hover
                  <property name="rightMargin">
                   <number>0</number>
                  </property>
-                 <property name="horizontalSpacing">
-                  <number>4</number>
-                 </property>
                  <item row="3" column="1">
                   <layout class="QGridLayout" name="gridLayout">
                    <item row="0" column="3">
@@ -20434,7 +20349,7 @@ QScrollBar::handle:horizontal
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>943</width>
+             <width>941</width>
              <height>749</height>
             </rect>
            </property>
