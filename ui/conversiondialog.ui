@@ -14,6 +14,9 @@
    <font>
     <family>Segoe UI</family>
     <pointsize>9</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
     <kerning>true</kerning>
    </font>
   </property>
@@ -33,6 +36,7 @@ QWidget
 {
 	font: 9pt &quot;Segoe UI&quot;;
     color: silver;
+	border-radius: 3px;
 }
 
 QGroupBox {
@@ -113,6 +117,7 @@ QScrollBar::handle:horizontal
     min-width: 5px;
  	min-height: 5px;
 	border: 1px solid #404040;
+    border-radius: 3px;
 }
 
 QScrollBar::handle:hover
@@ -164,7 +169,7 @@ QPlainTextEdit
     background-color: #222;
     color: silver;
     border: 0px solid #555;
-	border-radius: 0px;
+	border-radius: 3px;
 }
 
 /* Suspicious stuff 
@@ -251,6 +256,7 @@ QCheckBox::indicator{
     border: 1px solid #222;
     width: 11px;
     height: 11px;
+   border-radius: 2px;
 }
 
 QRadioButton::indicator:checked:hover
@@ -393,7 +399,6 @@ QComboBox
     background-color: #222;
     border-style: solid;
     border: 1px solid #222;
-    border-radius: 0px;
     padding: 2px;
 	padding-left: 4px;
 	outline: 0;
@@ -848,6 +853,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
         <font>
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -879,6 +887,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
         <font>
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -972,6 +983,9 @@ QScrollBar::handle:horizontal
         <font>
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -1010,6 +1024,9 @@ QScrollBar::handle:horizontal
            <font>
             <family>Segoe UI</family>
             <pointsize>9</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="text">
@@ -1026,6 +1043,9 @@ QScrollBar::handle:horizontal
            <font>
             <family>Segoe UI</family>
             <pointsize>9</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="text">
@@ -1039,6 +1059,9 @@ QScrollBar::handle:horizontal
            <font>
             <family>Segoe UI</family>
             <pointsize>9</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="text">
@@ -1161,6 +1184,15 @@ QScrollBar::handle:horizontal
           </color>
          </brush>
         </colorrole>
+        <colorrole role="PlaceholderText">
+         <brush brushstyle="NoBrush">
+          <color alpha="128">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
        </active>
        <inactive>
         <colorrole role="WindowText">
@@ -1214,6 +1246,15 @@ QScrollBar::handle:horizontal
            <red>51</red>
            <green>51</green>
            <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+        <colorrole role="PlaceholderText">
+         <brush brushstyle="NoBrush">
+          <color alpha="128">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
           </color>
          </brush>
         </colorrole>
@@ -1273,6 +1314,15 @@ QScrollBar::handle:horizontal
           </color>
          </brush>
         </colorrole>
+        <colorrole role="PlaceholderText">
+         <brush brushstyle="NoBrush">
+          <color alpha="128">
+           <red>192</red>
+           <green>192</green>
+           <blue>192</blue>
+          </color>
+         </brush>
+        </colorrole>
        </disabled>
       </palette>
      </property>
@@ -1280,6 +1330,9 @@ QScrollBar::handle:horizontal
       <font>
        <family>Segoe UI</family>
        <pointsize>9</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -1297,7 +1350,7 @@ QTabBar::tab {
     padding-top: 4px;
 	left: -1px;
     padding-bottom: 4px;
-    
+    border-radius: 3px;
 }
 
  QTabWidget::tab-bar {

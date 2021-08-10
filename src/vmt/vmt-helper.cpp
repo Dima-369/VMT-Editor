@@ -179,6 +179,11 @@ ColorResult parseColor(const QString &parameter,
 		} else if (x > 255) {
 			x = 255;
 		}
+		if (toSrgb) {
+			x = x / 255;
+			x = pow(x, 0.454545);
+			x = x * 255;
+		}
 		result.doubleValues.append(x / 255.0);
 		result.intValues.append(static_cast<int>(x));
 	}

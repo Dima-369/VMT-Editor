@@ -1516,7 +1516,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		bool ok;
 		double doubleScale = value.toDouble(&ok);
 
-		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition") )
+		if( !(vmt.shaderName == "LightmappedGeneric" || vmt.shaderName == "WorldVertexTransition" || vmt.shaderName == "VertexLitGeneric") )
 		{
 			Error("$seamless_scale only works with the LightmappedGeneric and WorldVertexTransition shaders!")
 		}
@@ -1758,7 +1758,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 	if(vmt.state.showPhong) {
 		// showPhong is only true on specific shaders so we can safely
 		// branch with the else
-		if (vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) {
+		if ((vmt.shader == Shader::S_VertexLitGeneric && !ui->action_phong->isChecked()) ||
+			(vmt.shader == Shader::S_Custom && !ui->action_phong->isChecked())	) {
 			ui->action_phong->trigger();
 		} else if (!ui->action_phongBrush->isChecked()) {
 			ui->action_phongBrush->trigger();
@@ -2782,7 +2783,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		applyBackgroundColor("$refracttint", value, colorWidget,
 			ui->horizontalSlider_waterRefractColor, ui);
 
-		showWaterRefraction = true;
+		if( vmt.shaderName == "Water" )
+			showWaterRefraction = true;
 	}
 
 	if( !( value = vmt.parameters.take("$refractamount") ).isEmpty() )
@@ -2964,10 +2966,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		if( !texture.isEmpty() ) {
 
-			if( vmt.shaderName == "Refract" )
+			if( vmt.shaderName == "Refract" ) {
 				ui->lineEdit_refractNormalMap->setText(texture);
-			else
+				createReconvertAction(ui->lineEdit_refractNormalMap, texture);
+			}
+			else {
 				ui->lineEdit_waterNormalMap->setText(texture);
+				createReconvertAction(ui->lineEdit_waterNormalMap, texture);
+			}
 		}
 
 	} else {
@@ -2980,10 +2986,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 			if( !texture.isEmpty() )
 			{
-				if( vmt.shaderName == "Refract" )
+				if( vmt.shaderName == "Refract" ) {
 					ui->lineEdit_refractNormalMap->setText(texture);
-				else
+					createReconvertAction(ui->lineEdit_refractNormalMap, texture);
+				}
+				else {
 					ui->lineEdit_waterNormalMap->setText(texture);
+					createReconvertAction(ui->lineEdit_waterNormalMap, texture);
+				}
 			}
 		}
 	}
@@ -2995,8 +3005,10 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		QString texture = validateTexture( "preview_bumpmap2", value, "$normalmap2", realGameinfoDir );
 
-		if( !texture.isEmpty() )
+		if( !texture.isEmpty() ) {
 			ui->lineEdit_refractNormalMap2->setText(texture);
+			createReconvertAction(ui->lineEdit_refractNormalMap2, texture);
+		}
 	}
 
 	if( !( value = vmt.parameters.take("$reflect2dskybox") ).isEmpty() ) {
@@ -3349,6 +3361,7 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 
 		utils::parseTexture("$flowmap", value, ui,
 			ui->lineEdit_flowMap, vmt);
+		createReconvertAction(ui->lineEdit_flowMap, value);
 
 		showFlowmap = true;
 	}
@@ -6850,6 +6863,9 @@ void MainWindow::gameChanged( const QString& game )
 		else if( getCurrentGame() == "Counter-Strike: Global Offensive" )
 			tmp.append( extractLines(":/surfaces/csgo") );
 
+        else if( getCurrentGame() != "Counter-Strike: Global Offensive" )
+            tmp.append( extractLines(":/surfaces/csgo") );
+
 		tmp.sort();
 
 		ui->comboBox_surface->insertItems(1, tmp);
@@ -7228,13 +7244,23 @@ void MainWindow::shaderChanged()
 			//----------------------------------------------------------------------------------------//
 
 			// Reflection, Self Illumination not allowed
-			if (shader == "UnlitGeneric" || shader == "Water" || shader == "UnlitTwoTexture" ) {
+			if (shader == "Water" || shader == "UnlitTwoTexture" ) {
 
 				ui->menu_shading->setDisabled(true);
 
 				ui->action_reflection->setEnabled(false);
 				ui->action_reflection->setChecked(false);
 				ui->groupBox_shadingReflection->setVisible(false);
+
+				ui->action_selfIllumination->setEnabled(false);
+				ui->action_selfIllumination->setChecked(false);
+				ui->groupBox_selfIllumination->setVisible(false);
+
+			} else if (shader == "UnlitGeneric" ) {
+
+				ui->menu_shading->setDisabled(false);
+
+				ui->action_reflection->setEnabled(true);
 
 				ui->action_selfIllumination->setEnabled(false);
 				ui->action_selfIllumination->setChecked(false);
@@ -7296,8 +7322,11 @@ void MainWindow::shaderChanged()
 
 		ui->action_CreateBlendTexture->setVisible(true);
 
+		ui->action_phongBrush->setEnabled(false);
+
+		ui->action_phong->setVisible(true);
 		ui->action_phong->setEnabled(true);
-		ui->action_phongBrush->setEnabled(true);
+
 		ui->action_rimLight->setEnabled(true);
 		ui->action_waterReflection->setEnabled(true);
 		ui->action_reflection->setEnabled(true);
@@ -8487,6 +8516,43 @@ void MainWindow::processVtf(const QString& objectName,
 
 			QString mipmapFilter = outputParameters(type, noAlpha);
 
+			QString resize = "";
+
+            const auto tooltip = lineEdit->toolTip();
+
+            int currentSize = 4096;
+
+            if (ui->pushButton_size512->isChecked()) {
+                currentSize = 512;
+                resize = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+            }
+            else if (ui->pushButton_size1024->isChecked()) {
+                currentSize = 1024;
+                resize = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+            }
+            else if (ui->pushButton_size2048->isChecked()) {
+                currentSize = 2048;
+                resize = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+            }
+
+            QImage texture;
+            if (!texture.load(tooltip)) {
+                Error("Texture size could not be determined");
+            } else {
+
+                int texWidth = texture.width();
+                int texHeight = texture.height();
+                int ratio = qMax(texWidth, texHeight)/currentSize;
+
+                if (ratio > 1)
+                    resize =  "-rclampwidth " + Str(texture.width() / ratio) +
+                              " -rclampheight " + Str(texture.height() / ratio) +
+                              " -rfilter HAMMING";
+
+            }
+
+
+
 			if(mVMTLoaded) {
 
 				QString newFile = removeSuffix(fileName.section("/", -1).section(".", 0, 0), type);
@@ -8523,6 +8589,11 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
 
+                if (lineEdit == ui->lineEdit_bumpmap) {
+                    QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                    connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+                }
+
 				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
 
@@ -8533,7 +8604,7 @@ void MainWindow::processVtf(const QString& objectName,
 					conversionThread->objectName = objectName;
 					conversionThread->relativeFilePath = relativeFilePath;
 					conversionThread->newFileName = "";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + resize;
 					conversionThread->moveFile = true;
 					conversionThread->newFile = newFile;
 					conversionThread->newFileDir = dir;
@@ -8559,6 +8630,11 @@ void MainWindow::processVtf(const QString& objectName,
 				QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 				connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
 
+                if (lineEdit == ui->lineEdit_bumpmap) {
+                    QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                    connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+                }
+
 				QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 				connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
 
@@ -8567,7 +8643,7 @@ void MainWindow::processVtf(const QString& objectName,
 				ConversionThread* conversionThread = new ConversionThread(this);
 					conversionThread->fileName = fileName;
 					conversionThread->newFileName = lineEdit->objectName() + "_" + texturesToCopy.value(lineEdit) + ".vtf";
-					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter;
+					conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + resize;
 					conversionThread->start();
 
 				fileName.chop(4);
@@ -10104,14 +10180,15 @@ void MainWindow::displayConversionDialog()
 #ifdef Q_OS_WIN
 	if( QDir().exists("vtfcmd.exe") ) {
 
-		ConversionDialog dialog( mIniSettings, this );
+		ConversionDialog* dialog = new ConversionDialog( mIniSettings );
 
 		if (fileToConvert != "") {
-			dialog.addFile( fileToConvert );
+			dialog->addFile( fileToConvert );
 			fileToConvert = "";
 		}
-		dialog.show();
-		dialog.exec();
+		dialog->setModal(false);
+		dialog->show();
+		//dialog.exec();
 
 	} else {
 
@@ -10132,13 +10209,14 @@ void MainWindow::displayConversionDialogTexture(QString file)
 		QString dir = mIniSettings->value("lastSaveAsDir").toString();
 
 		mIniSettings->setValue("lastTextureConvertDir", dir);
-		ConversionDialog dialog( mIniSettings, this );
+		ConversionDialog* dialog = new ConversionDialog( mIniSettings );
 
 		if (file != "") {
-			dialog.addFile( file );
+			dialog->addFile( file );
 		}
-		dialog.show();
-		dialog.exec();
+		dialog->setModal(false);
+		dialog->show();
+		//dialog.exec();
 
 	} else {
 
@@ -10207,17 +10285,68 @@ void MainWindow::reconvertTextureHalf() {
 	const auto objectName = lineEdit->objectName();
 	const auto tooltip = lineEdit->toolTip();
 
+    int currentSize = 4096;
+
+    if (ui->pushButton_size512->isChecked()) {
+        currentSize = 512;
+    }
+    else if (ui->pushButton_size1024->isChecked()) {
+        currentSize = 1024;
+    }
+    else if (ui->pushButton_size2048->isChecked()) {
+        currentSize = 2048;
+    }
+
 	QImage texture;
 	if (!texture.load(tooltip)) {
 		Error("Texture size could not be determined");
 		return;
 	}
 
-	QString resize = "-rwidth " + Str(texture.width() / 2) +
-			" -rheight " + Str(texture.height() / 2) +
-			" -rfilter BOX";
+    int texWidth = texture.width();
+    int texHeight = texture.height();
+    int ratio = qMax((qMax(texWidth, texHeight) / currentSize) * 2, 2);
+
+    QString resize = "-rwidth " + Str(texture.width() / ratio) +
+                     " -rheight " + Str(texture.height() / ratio) +
+                     " -rfilter HAMMING";
 
 	reconvertTexture(lineEdit, objectName, tooltip, resize);
+}
+
+void MainWindow::reconvertTextureHalfUncompressed() {
+    const auto lineEdit =
+        qobject_cast<QLineEdit*>(qobject_cast<QObject*>(sender())->parent());
+    const auto objectName = lineEdit->objectName();
+    const auto tooltip = lineEdit->toolTip();
+
+    int currentSize = 4096;
+
+    if (ui->pushButton_size512->isChecked()) {
+        currentSize = 512;
+    }
+    else if (ui->pushButton_size1024->isChecked()) {
+        currentSize = 1024;
+    }
+    else if (ui->pushButton_size2048->isChecked()) {
+        currentSize = 2048;
+    }
+
+    QImage texture;
+    if (!texture.load(tooltip)) {
+        Error("Texture size could not be determined");
+        return;
+    }
+
+    int texWidth = texture.width();
+    int texHeight = texture.height();
+    int ratio = qMax((qMax(texWidth, texHeight) / currentSize) * 2, 2);
+
+    QString resize = "-rwidth " + Str(texture.width() / ratio) +
+                     " -rheight " + Str(texture.height() / ratio) +
+                     " -rfilter HAMMING";
+
+    reconvertTexture(lineEdit, objectName, tooltip, resize, true);
 }
 
 void MainWindow::reconvertTexture() {
@@ -10232,12 +10361,25 @@ void MainWindow::reconvertTexture() {
 void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 								  const QString& objectName,
 								  const QString& tooltip,
-								  const QString& resize)
+                                  const QString& resize,
+                                  bool uncompressed)
 {
 	bool noAlpha = true;
 	bool combine = false;
 	int type = 0;
 	QString preview;
+	QString sizeOptions;
+
+	if(resize == "") {
+		if (ui->pushButton_size512->isChecked())
+			sizeOptions = " -rclampwidth 512 -rclampheight 512 -rfilter HAMMING";
+		else if (ui->pushButton_size1024->isChecked())
+			sizeOptions = " -rclampwidth 1024 -rclampheight 1024 -rfilter HAMMING";
+		else if (ui->pushButton_size2048->isChecked())
+			sizeOptions = " -rclampwidth 2048 -rclampheight 2048 -rfilter HAMMING";
+	} else {
+		sizeOptions = resize;
+	}
 
 	if( objectName == "lineEdit_diffuse" ) {
 		type = 1;
@@ -10335,13 +10477,16 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 		noAlpha = false;
 	}
 
-	QString mipmapFilter = outputParameters(type, noAlpha);
+    QString mipmapFilter = outputParameters(type, noAlpha, uncompressed);
 
-	QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+	QString lineEditText = lineEdit->text();
+
+	//QString dir = QDir::toNativeSeparators(mIniSettings->value("lastSaveAsDir").toString() + "/");
+	QString dir = QDir::toNativeSeparators(currentGameMaterialDir() + "/" +
+										   lineEditText.section("/", 0, -2) + "/");
 
 	QString fileName = tooltip;
 	QString extension = fileName.section(".", -1);
-	QString lineEditText = lineEdit->text();
 	QString newFile = lineEditText.section("/", -1).section(".", 0, 0);
 
 	QString relativeFilePath = QDir( currentGameMaterialDir() ).relativeFilePath(dir + newFile);
@@ -10377,7 +10522,7 @@ void MainWindow::reconvertTexture(QLineEdit* lineEdit,
 		conversionThread->objectName = preview;
 		conversionThread->relativeFilePath = relativeFilePath;
 		conversionThread->newFileName = "";
-		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " " + resize;
+		conversionThread->outputParameter = "-output \"" + QDir::currentPath().replace("\\", "\\\\") + "\\Cache\\Move\\" + "\" " + mipmapFilter + " " + sizeOptions;
 		conversionThread->moveFile = true;
 		conversionThread->newFile = newFile;
 		conversionThread->newFileDir = dir;
@@ -10421,6 +10566,11 @@ void MainWindow::createReconvertAction(QLineEdit* lineEdit, QString fileName) {
 
 			QAction *reconvertHalf = lineEdit->addAction(QIcon(":/icons/reconvert_half"), QLineEdit::TrailingPosition);
 			connect(reconvertHalf, SIGNAL(triggered()), SLOT(reconvertTextureHalf()));
+
+            if (lineEdit == ui->lineEdit_bumpmap) {
+                QAction *reconvertHalfUncompressed = lineEdit->addAction(QIcon(":/icons/reconvert_half_u"), QLineEdit::TrailingPosition);
+                connect(reconvertHalfUncompressed, SIGNAL(triggered()), SLOT(reconvertTextureHalfUncompressed()));
+            }
 
 			QAction *openConvertDialog = lineEdit->addAction(QIcon(":/icons/reconvert_dialog"), QLineEdit::TrailingPosition);
 			connect(openConvertDialog, SIGNAL(triggered()), SLOT(openReconvertDialogAction()));
@@ -10642,6 +10792,9 @@ void MainWindow::createBlendToolTexture()
 		Error( "Error loading Diffuse texture" )
 		return;
 	}
+
+	size = texture1.width();
+
 	if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".png")) {
 		Error( "Error loading Diffuse 2 texture" )
 		return;
@@ -10845,12 +10998,12 @@ QString MainWindow::removeSuffix( const QString fileName, int type)
 
 }
 
-QString MainWindow::outputParameters( int type, bool noAlpha )
+QString MainWindow::outputParameters( int type, bool noAlpha, bool uncompressed )
 {
 	QMultiMap<QString, QString> arguments;
 
 	QString tmp;
-	if (type == 2 && mSettings->uncompressedNormal) {
+    if (type == 2 && (mSettings->uncompressedNormal || uncompressed)) {
 		if (noAlpha && mSettings->removeAlpha) {
 			arguments.insert("-format", "BGR888");
 			arguments.insert("-alphaformat", "BGR888");

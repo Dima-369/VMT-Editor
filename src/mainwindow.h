@@ -288,7 +288,7 @@ private:
 
 	QString removeSuffix( const QString fileName, int type = 0);
 
-	QString outputParameters( int type, bool noAlpha );
+    QString outputParameters( int type, bool noAlpha, bool uncompressed = false );
 
 	//----------------------------------------------------------------------------------------//
 
@@ -448,7 +448,9 @@ private slots:
 
 	void reconvertTextureHalf();
 
-	void reconvertTexture(QLineEdit* lineEdit, const QString& objectName, const QString& tooltip, const QString& resize);
+    void reconvertTextureHalfUncompressed();
+
+    void reconvertTexture(QLineEdit* lineEdit, const QString& objectName, const QString& tooltip, const QString& resize, bool uncompressed = false);
 
 	void clearLineEdit();
 
