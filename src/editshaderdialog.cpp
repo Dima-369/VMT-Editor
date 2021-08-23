@@ -60,7 +60,7 @@ void EditShaderDialog::parseSettings( const QVector< Shader >& settingShaders, c
 		item->setText( mSettingShaders.at(i).name );
 
 
-		if( !mSettingShaders.at(i).enabled )
+        if( !mSettingShaders.at(i).enabled )
 			item->setTextColor( Qt::darkGray );
 
 
@@ -72,7 +72,7 @@ void EditShaderDialog::parseSettings( const QVector< Shader >& settingShaders, c
 		{
 			item->setFlags( item->flags() | Qt::ItemIsEditable );
 */
-			ui->listWidget_shader->addItem( item );
+        ui->listWidget_shader->addItem( item );
 		//}
 	}
 
@@ -379,7 +379,7 @@ void EditShaderDialog::toggleShader()
 	{
 		if( mChangedShaders.at(i).name == ui->listWidget_shader->currentItem()->text() )
 		{
-			mChangedShaders[i].enabled = ui->listWidget_shader->currentItem()->textColor() == Qt::black;
+            mChangedShaders[i].enabled = ui->listWidget_shader->currentItem()->textColor() == Qt::white;
 		}
 	}
 }
