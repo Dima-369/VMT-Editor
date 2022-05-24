@@ -11116,7 +11116,7 @@ void MainWindow::checkForUpdates()
 
 		if (msgBox.exec() != QMessageBox::Cancel) {
 			QDesktopServices::openUrl(QString(
-				"https://github.com/Gira-X/VMT-Editor/releases/latest"));
+				"https://github.com/Dima-369/VMT-Editor/releases/latest"));
 		}
 	}
 }
@@ -11220,7 +11220,7 @@ void MainWindow::displayAboutDialog()
 
 void MainWindow::openUserGuide()
 {
-	QDesktopServices::openUrl(QUrl("https://gira-x.github.io/VMT-Editor/documentation/#/"));
+	QDesktopServices::openUrl(QUrl("https://dima-369.github.io/VMT-Editor/documentation/#/"));
 }
 
 
