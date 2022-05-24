@@ -1,15 +1,15 @@
 # VMT Editor ![version](https://img.shields.io/badge/version-1.3.11-blue.svg)
 
-[Official website](https://gira-x.github.io/VMT-Editor/)
+[Official website](https://dima-369.github.io/VMT-Editor/)
 
-[User Guide](https://gira-x.github.io/VMT-Editor/documentation/#/)
+[User Guide](https://dima-369.github.io/VMT-Editor/documentation/#/)
 
 Visual editor for .vmt files, written in C++ and Qt.
 
 ## Download
 
-- [Latest release](https://github.com/Gira-X/VMT-Editor/releases/latest)
-- [All releases](https://github.com/Gira-X/VMT-Editor/releases)
+- [Latest release](https://github.com/Dima-369/VMT-Editor/releases/latest)
+- [All releases](https://github.com/Dima-369/VMT-Editor/releases)
 
 The Windows releases include all dependencies, just extract the zip and launch the editor!
 
@@ -47,7 +47,7 @@ You can open the example VMTs in the `misc/vmt` folder to check if everything wo
 
 ## Screenshots
 
-![](https://github.com/Gira-X/VMT-Editor/raw/master/screenshots/1.png)
-![](https://github.com/Gira-X/VMT-Editor/raw/master/screenshots/2.png)
-![](https://github.com/Gira-X/VMT-Editor/raw/master/screenshots/3.png)
-![](https://github.com/Gira-X/VMT-Editor/raw/master/screenshots/4.png)
+![](https://github.com/Dima-369/VMT-Editor/raw/master/screenshots/1.png)
+![](https://github.com/Dima-369/VMT-Editor/raw/master/screenshots/2.png)
+![](https://github.com/Dima-369/VMT-Editor/raw/master/screenshots/3.png)
+![](https://github.com/Dima-369/VMT-Editor/raw/master/screenshots/4.png)
