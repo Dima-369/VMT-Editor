@@ -363,7 +363,8 @@ VmtFile VmtParser::loadVmtFile( const QString& relativeFileName, bool isTemplate
 				// Removing comments which start with //
 				removeSingleLineComment(line);
 
-				line.remove("\""); // Removing double quote characters for easier parsing
+                line.replace("\"", " "); //Replace quotes with spaces
+                line.remove("\""); // Removing double quote characters for easier parsing
 
 				line = line.simplified(); // Removing whitespace characters... again
 
