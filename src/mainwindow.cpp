@@ -3513,14 +3513,14 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 			ui->doubleSpinBox_rimLightBoost->setValue(amount);
 	}
 
-	if( !( value = vmt.parameters.take("$rimlightmask") ).isEmpty() ) {
+    if( !( value = vmt.parameters.take("$rimmask") ).isEmpty() ) {
 
 		if( vmt.shaderName.compare("VertexLitGeneric", Qt::CaseInsensitive) )
 			rimLightWrongShader = true;
 		else
 			showRimLight = true;
 
-		if( loadBoolParameter( value, "$rimlightmask") )
+        if( loadBoolParameter( value, "$rimmask") )
 			ui->checkBox_rimLightAlphaMask->setChecked(true);
 	}
 
@@ -4168,7 +4168,7 @@ VmtFile MainWindow::makeVMT()
 		vmtFile.parameters.insert( "$rimlightboost", Str(ui->doubleSpinBox_rimLightBoost->value()) );
 
 		if( ui->checkBox_rimLightAlphaMask->isChecked() )
-			vmtFile.parameters.insert( "$rimlightmask", "1" );
+            vmtFile.parameters.insert( "$rimmask", "1" );
 	}
 
 	//---------------------------------------------------------------------------------------//
