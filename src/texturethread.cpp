@@ -16,6 +16,6 @@ void TextureThread::run()
 	process.waitForFinished();
 
 	QFile cacheFile( "Cache/" + vtfFile );
-	cacheFile.rename( "Cache/" + output + ".png" );
+    cacheFile.rename( "Cache/" + output + ".tga" );
 }
 

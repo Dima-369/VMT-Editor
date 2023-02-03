@@ -851,7 +851,7 @@ MainWindow::MainWindow(QString fileToOpen, QWidget* parent) :
 				fileToOpen.chop(4);
 
 				QString fromFile = fileToOpen.left( fileToOpen.lastIndexOf("/") ) + nameWithExtension;
-				QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".png";
+                QString toFile = QDir::currentPath() + "/Cache/" + objectName + ".tga";
 
 				if( QFile::exists(toFile) )
 					QFile::remove(toFile);
@@ -5606,7 +5606,7 @@ void MainWindow::checkCacheSize()
 
 	for (int i = 0; i < files.size(); ++i) {
 
-		if(files.at(i).completeSuffix().toLower() == "png")
+        if(files.at(i).completeSuffix().toLower() == "tga")
 			directorySize += files.at(i).size();
 	}
 
@@ -6254,7 +6254,7 @@ void MainWindow::finishedLoading()
 
 	if( thread->object == "preview_basetexture1" ) {
 
-		glWidget_diffuse1->loadTexture( "Cache/" + thread->output + ".png", glWidget_diffuse1->getBumpmap() );
+        glWidget_diffuse1->loadTexture( "Cache/" + thread->output + ".tga", glWidget_diffuse1->getBumpmap() );
 
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
@@ -6276,7 +6276,7 @@ void MainWindow::finishedLoading()
 
 	} else if( thread->object == "preview_bumpmap1" ) {
 
-		glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + thread->output + ".png" );
+        glWidget_diffuse1->loadTexture( glWidget_diffuse1->getDiffuse(), "Cache/" + thread->output + ".tga" );
 
 		if( ui->groupBox_shadingReflection->isVisible() ) {
 
@@ -6294,19 +6294,19 @@ void MainWindow::finishedLoading()
 
 	} else if( thread->object == "preview_basetexture2" ) {
 
-		glWidget_diffuse2->loadTexture( "Cache/" + thread->output + ".png", glWidget_diffuse2->getBumpmap()  );
+        glWidget_diffuse2->loadTexture( "Cache/" + thread->output + ".tga", glWidget_diffuse2->getBumpmap()  );
 
 	} else if( thread->object == "preview_bumpmap2" )  {
 
-		glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + thread->output + ".png" );
+        glWidget_diffuse2->loadTexture( glWidget_diffuse2->getDiffuse(), "Cache/" + thread->output + ".tga" );
 
 	} else if( thread->object == "preview_envmap1" ) {
 
-		glWidget_envmap->updateValues(thread->mode, "Cache/" + thread->output + ".png" );
+        glWidget_envmap->updateValues(thread->mode, "Cache/" + thread->output + ".tga" );
 
 	} else if( thread->object == "preview_spec1" ) {
 
-		glWidget_spec->updateValues(thread->mode, "Cache/" + thread->output + ".png" );
+        glWidget_spec->updateValues(thread->mode, "Cache/" + thread->output + ".tga" );
 
 	} else {
 
@@ -6314,7 +6314,7 @@ void MainWindow::finishedLoading()
 
 			if( glWidget->objectName() == thread->object ) {
 
-				glWidget->loadTexture( "Cache/" + thread->output + ".png");
+                glWidget->loadTexture( "Cache/" + thread->output + ".tga");
 				break;
 			}
 		}
@@ -6472,7 +6472,7 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
 
-		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
+        QFile cacheFile( "Cache/" + textureThread->output + ".tga" );
 		if( ignoreCache ) {
 			if( cacheFile.exists() )
 				cacheFile.remove();
@@ -6543,9 +6543,9 @@ bool MainWindow::previewTexture( const QString& object, const QString& texture, 
 
 			QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
 
-			textureThread->vtfFile = QFileInfo(texturePath + ".png").fileName();
+            textureThread->vtfFile = QFileInfo(texturePath + ".tga").fileName();
 			textureThread->input = "vtfcmd.exe -file \"" + texturePath.replace("/", "\\") + ".vtf\" -output \"" +
-					QDir::currentPath().replace("/", "\\") + "\\Cache\" " + "-exportformat \"png\"";
+                    QDir::currentPath().replace("/", "\\") + "\\Cache\" " + "-exportformat \"tga\"";
 
 			textureThread->start();
 		}
@@ -6620,7 +6620,7 @@ bool MainWindow::previewTexture( const int type, const QString& texture ) {
 
 		textureThread->output = Str( qHash( QFileInfo(texturePath + ".vtf").fileName() + Str( vtfFile.size() )));
 
-		QFile cacheFile( "Cache/" + textureThread->output + ".png" );
+        QFile cacheFile( "Cache/" + textureThread->output + ".tga" );
 		if( cacheFile.exists() ) {
 
 			widget->updateValues(mode, "Cache/" + textureThread->output);
@@ -6629,9 +6629,9 @@ bool MainWindow::previewTexture( const int type, const QString& texture ) {
 
 			QApplication::setOverrideCursor( QCursor(Qt::WaitCursor) );
 
-			textureThread->vtfFile = QFileInfo(texturePath + ".png").fileName();
+            textureThread->vtfFile = QFileInfo(texturePath + ".tga").fileName();
 			textureThread->input = "vtfcmd.exe -file \"" + texturePath.replace("/", "\\") + ".vtf\" -output \"" +
-					QDir::currentPath().replace("/", "\\") + "\\Cache\" " + "-exportformat \"png\"";
+                    QDir::currentPath().replace("/", "\\") + "\\Cache\" " + "-exportformat \"tga\"";
 
 			textureThread->start();
 		}
@@ -6650,9 +6650,7 @@ void MainWindow::previewTexture(const QString& object)
 	QFile png(cacheFilePng);
 	QFile tga(cacheFileTga);
 
-	if (png.exists())
-		cacheFile = cacheFilePng;
-	else if (tga.exists())
+    if (tga.exists())
 		cacheFile = cacheFileTga;
 
 	if (object == "preview_basetexture1") {
@@ -9923,8 +9921,11 @@ void MainWindow::clearCacheFolder()
 
 		for (int i = 0; i < files.size(); ++i) {
 
-			if (files.at(i).completeSuffix().toLower() == "png")
+            if (files.at(i).completeSuffix().toLower() == "tga")
 				cacheFolder.remove( files.at(i).fileName() );
+
+            if (files.at(i).completeSuffix().toLower() == "png")
+                cacheFolder.remove( files.at(i).fileName() );
 		}
 
 		cacheFolder.cdUp();
@@ -10788,29 +10789,29 @@ void MainWindow::createBlendToolTexture()
 
 	int size = 256;
 
-	if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".png")) {
+    if (!texture1.load(QDir::currentPath() + "/Cache/" + texture1File + ".tga")) {
 		Error( "Error loading Diffuse texture" )
 		return;
 	}
 
 	size = texture1.width();
 
-	if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".png")) {
+    if (!texture2.load(QDir::currentPath() + "/Cache/" + texture2File + ".tga")) {
 		Error( "Error loading Diffuse 2 texture" )
 		return;
 	}
 
 	if (is4Way) {
-		if (!texture3.load(QDir::currentPath() + "/Cache/" + texture3File + ".png")) {
+        if (!texture3.load(QDir::currentPath() + "/Cache/" + texture3File + ".tga")) {
 			Error( "Error loading Diffuse 3 texture" )
 			return;
 		}
-		if (!texture4.load(QDir::currentPath() + "/Cache/" + texture4File + ".png")) {
+        if (!texture4.load(QDir::currentPath() + "/Cache/" + texture4File + ".tga")) {
 			Error( "Error loading Diffuse 4 texture" )
 			return;
 		}
 	} else {
-		if (!modulate.load(QDir::currentPath() + "/Cache/" + modulateFile + ".png")) {
+        if (!modulate.load(QDir::currentPath() + "/Cache/" + modulateFile + ".tga")) {
 			qDebug() << "No blend modulate texture";
 			blendmod = false;
 		} else {

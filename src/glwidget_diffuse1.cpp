@@ -229,6 +229,9 @@ void GLWidget_Diffuse1::loadTexture(const QString &diffuse1,
 	diffuseTexture = diffuse1;
 	bumpmapTexture = bumpmap1;
 
+    qDebug() << "Image mode " << image_diffuse.format();
+    qDebug() << "Bumpmap mode " << image_bumpmap.format();
+
 	QImage t;
 
 	if (!diffuse1.isEmpty()) {

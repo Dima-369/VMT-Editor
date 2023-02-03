@@ -148,3 +148,4 @@ FORMS += \
     ui/texturepreviewdialog.ui
 
 RESOURCES += resources.qrc
+

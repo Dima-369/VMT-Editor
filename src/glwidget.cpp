@@ -88,6 +88,8 @@ void GLWidget::loadTexture(const QString &filePath)
 		return;
 	}
 
+    qDebug() << "Image mode " << image.format();
+
 	isShowing = true;
 	setVisible(true);
 
