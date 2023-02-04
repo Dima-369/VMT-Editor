@@ -5,18 +5,18 @@ IDI_ICON3 ICON DISCARDABLE "vtffile.ico"
 #include <windows.h>
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION     1,3,11
-PRODUCTVERSION  1,3,11
+FILEVERSION     1,3,13
+PRODUCTVERSION  1,3,13
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
         BLOCK "040904E4"
         BEGIN
             VALUE "FileDescription",    "VMT Editor"
-            VALUE "FileVersion",        "1.3.11"
-            VALUE "ProductVersion",     "1.3.11"
+            VALUE "FileVersion",        "1.3.13"
+            VALUE "ProductVersion",     "1.3.13"
             VALUE "ProductName",        "VMT Editor"
-            VALUE "LegalCopyright",     "Copyright © 2016-2018"
+            VALUE "LegalCopyright",     "Copyright © 2016-2023"
         END
     END
 

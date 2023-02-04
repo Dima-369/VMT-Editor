@@ -14,7 +14,6 @@
    <font>
     <family>Segoe UI</family>
     <pointsize>9</pointsize>
-    <weight>50</weight>
     <italic>false</italic>
     <bold>false</bold>
    </font>
@@ -113,11 +112,16 @@ QMenu
 	background-color: #ddd;
 }
 
+QMenu::icon
+{
+    padding-left: 4px;
+}
+
 QMenu::item
 {
 	background: transparent;
 	margin: 1px;
-    padding: 4px 30px 4px 24px;
+    padding: 4px 30px 4px 4px;
 }
 
 QMenu::item:selected
@@ -683,7 +687,6 @@ QSlider::handle:horizontal:disabled {
        <font>
         <family>Segoe UI</family>
         <pointsize>9</pointsize>
-        <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
        </font>
@@ -952,8 +955,8 @@ QScrollBar::handle:hover
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
                 <red>192</red>
                 <green>192</green>
                 <blue>192</blue>
@@ -1035,8 +1038,8 @@ QScrollBar::handle:hover
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
                 <red>192</red>
                 <green>192</green>
                 <blue>192</blue>
@@ -1118,11 +1121,11 @@ QScrollBar::handle:hover
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
-                <red>192</red>
-                <green>192</green>
-                <blue>192</blue>
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>80</red>
+                <green>80</green>
+                <blue>80</blue>
                </color>
               </brush>
              </colorrole>
@@ -1133,7 +1136,6 @@ QScrollBar::handle:hover
            <font>
             <family>Segoe UI</family>
             <pointsize>9</pointsize>
-            <weight>50</weight>
             <italic>false</italic>
             <bold>false</bold>
            </font>
@@ -1151,9 +1153,9 @@ QScrollBar::handle:hover
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
-             <width>931</width>
-             <height>6152</height>
+             <y>-2512</y>
+             <width>933</width>
+             <height>6203</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_16">
@@ -1276,7 +1278,6 @@ QScrollBar::handle:hover
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1307,7 +1308,6 @@ QScrollBar::handle:hover
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1335,7 +1335,6 @@ QScrollBar::handle:hover
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1382,7 +1381,6 @@ QToolButton:pressed
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1429,7 +1427,6 @@ QToolButton:pressed
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1476,7 +1473,6 @@ QToolButton:pressed
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1540,7 +1536,6 @@ QToolButton:pressed
                    <font>
                     <family>Segoe UI</family>
                     <pointsize>9</pointsize>
-                    <weight>50</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -1890,7 +1885,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -1926,7 +1920,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -1945,7 +1938,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -1970,7 +1962,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -1995,7 +1986,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -2034,7 +2024,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2065,7 +2054,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2112,7 +2100,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2148,7 +2135,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2188,7 +2174,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2237,7 +2222,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -2270,7 +2254,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2291,7 +2274,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2325,7 +2307,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2349,7 +2330,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2404,7 +2384,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2458,7 +2437,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2474,7 +2452,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2508,7 +2485,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2544,7 +2520,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2563,7 +2538,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2588,7 +2562,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2609,7 +2582,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2643,7 +2615,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2700,7 +2671,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -2740,7 +2710,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2765,7 +2734,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2787,7 +2755,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -2823,7 +2790,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2848,7 +2814,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2867,7 +2832,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2880,7 +2844,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2905,7 +2868,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2927,7 +2889,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2958,7 +2919,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -2986,7 +2946,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3008,7 +2967,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -3041,7 +2999,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3060,7 +3017,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3085,7 +3041,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3107,7 +3062,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3126,7 +3080,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3151,7 +3104,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3179,7 +3131,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3210,7 +3161,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3244,7 +3194,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3266,7 +3215,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3303,7 +3251,6 @@ QPushButton:checked:hover
                         <font>
                          <family>Segoe UI</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
                          <italic>false</italic>
                          <bold>false</bold>
                         </font>
@@ -3328,7 +3275,6 @@ QPushButton:checked:hover
                         <font>
                          <family>Segoe UI</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
                          <italic>false</italic>
                          <bold>false</bold>
                         </font>
@@ -3365,7 +3311,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3392,7 +3337,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -3458,7 +3402,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3474,7 +3417,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3496,7 +3438,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3533,7 +3474,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3558,7 +3498,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3583,7 +3522,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3629,7 +3567,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3645,7 +3582,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3658,7 +3594,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -3685,7 +3620,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3704,7 +3638,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3751,7 +3684,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3801,7 +3733,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3820,7 +3751,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3867,7 +3797,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -3934,7 +3863,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -3968,7 +3896,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -4046,7 +3973,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -4099,7 +4025,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -4138,7 +4063,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -4169,7 +4093,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -4202,7 +4125,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4245,7 +4167,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4291,7 +4212,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4322,7 +4242,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4376,7 +4295,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4419,7 +4337,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4465,7 +4382,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4496,7 +4412,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4536,7 +4451,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4585,7 +4499,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -4624,7 +4537,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -4657,7 +4569,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4700,7 +4611,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4746,7 +4656,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4777,7 +4686,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4817,7 +4725,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4869,7 +4776,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -4902,7 +4808,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4945,7 +4850,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -4991,7 +4895,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5022,7 +4925,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5065,7 +4967,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -5098,7 +4999,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5129,7 +5029,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5190,7 +5089,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5272,7 +5170,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5324,7 +5221,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5357,7 +5253,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5400,7 +5295,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5446,7 +5340,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5477,7 +5370,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5531,7 +5423,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5574,7 +5465,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5620,7 +5510,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5651,7 +5540,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5691,7 +5579,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -5731,7 +5618,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5765,7 +5651,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5793,7 +5678,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5824,7 +5708,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5855,7 +5738,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -5882,7 +5764,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5913,7 +5794,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5938,7 +5818,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -5969,7 +5848,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6003,7 +5881,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6028,7 +5905,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6056,7 +5932,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6078,7 +5953,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6097,7 +5971,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6123,7 +5996,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6142,7 +6014,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6204,7 +6075,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6229,7 +6099,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6276,7 +6145,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6316,7 +6184,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6347,7 +6214,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6405,7 +6271,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -6445,7 +6310,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -6531,7 +6395,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6578,7 +6441,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6634,7 +6496,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6699,7 +6560,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6730,7 +6590,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -6772,7 +6631,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6788,7 +6646,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6807,7 +6664,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -6866,7 +6722,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6891,7 +6746,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -6925,7 +6779,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7009,7 +6862,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7040,7 +6892,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7099,7 +6950,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7130,7 +6980,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7176,7 +7025,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -7216,7 +7064,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -7277,7 +7124,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7367,7 +7213,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7429,7 +7274,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -7459,7 +7303,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -7484,7 +7327,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -7506,7 +7348,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -7599,7 +7440,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7652,7 +7492,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7708,7 +7547,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7748,7 +7586,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7779,7 +7616,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7804,7 +7640,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7842,7 +7677,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -7875,7 +7709,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -7915,7 +7748,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -8042,7 +7874,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8082,7 +7913,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8119,7 +7949,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -8160,7 +7989,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8182,7 +8010,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8207,7 +8034,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8268,7 +8094,6 @@ QPushButton:checked:hover
                         <font>
                          <family>Segoe UI</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
                          <italic>false</italic>
                          <bold>false</bold>
                         </font>
@@ -8320,7 +8145,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8351,7 +8175,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8391,7 +8214,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8425,7 +8247,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8453,7 +8274,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8481,7 +8301,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8537,7 +8356,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -8591,7 +8409,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8610,7 +8427,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8651,7 +8467,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8676,7 +8491,6 @@ QPushButton:checked:hover
                        <font>
                         <family>Segoe UI</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
@@ -8718,7 +8532,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -8767,7 +8580,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -8810,7 +8622,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -8870,7 +8681,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8919,7 +8729,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -8962,7 +8771,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9002,7 +8810,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9030,7 +8837,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9058,7 +8864,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9116,7 +8921,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9147,7 +8951,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9240,7 +9043,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9265,7 +9067,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9290,7 +9091,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9318,7 +9118,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9346,7 +9145,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9404,7 +9202,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9467,7 +9264,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9543,7 +9339,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9574,7 +9369,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -9679,7 +9473,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -9706,7 +9499,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9731,7 +9523,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9750,7 +9541,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9800,7 +9590,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9829,7 +9618,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9885,7 +9673,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9913,7 +9700,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9944,7 +9730,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -9978,7 +9763,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10009,7 +9793,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10046,7 +9829,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10077,7 +9859,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -10116,7 +9897,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10135,7 +9915,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10166,7 +9945,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10182,7 +9960,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10204,7 +9981,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10220,6 +9996,16 @@ QPushButton:checked:hover
                    <item>
                     <property name="text">
                      <string>1 - Multiply</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>2 - Modulate</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>3 - Add</string>
                     </property>
                    </item>
                   </widget>
@@ -10252,7 +10038,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -10279,7 +10064,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10298,7 +10082,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10323,7 +10106,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10354,7 +10136,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10382,7 +10163,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10454,7 +10234,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10488,7 +10267,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10547,7 +10325,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10578,7 +10355,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10608,7 +10384,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -10630,7 +10405,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -10670,7 +10444,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -10712,7 +10485,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10743,7 +10515,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10777,7 +10548,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10808,7 +10578,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10833,7 +10602,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -10900,7 +10668,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -10952,7 +10719,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11016,7 +10782,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11068,7 +10833,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11096,7 +10860,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11166,7 +10929,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11203,7 +10965,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11249,7 +11010,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11280,7 +11040,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11338,7 +11097,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11384,7 +11142,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11412,7 +11169,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11479,7 +11235,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11516,7 +11271,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11562,7 +11316,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11653,7 +11406,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11705,7 +11457,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11739,7 +11490,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11758,7 +11508,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11774,7 +11523,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11802,7 +11550,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11833,7 +11580,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11858,7 +11604,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -11883,7 +11628,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -11921,7 +11665,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -11937,7 +11680,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12010,7 +11752,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12044,7 +11785,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12075,7 +11815,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12124,7 +11863,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -12149,7 +11887,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -12210,7 +11947,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12253,7 +11989,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -12311,7 +12046,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12345,7 +12079,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12373,7 +12106,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12445,7 +12177,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12473,7 +12204,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12507,7 +12237,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12538,7 +12267,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12566,7 +12294,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12597,7 +12324,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12622,7 +12348,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12653,7 +12378,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12768,7 +12492,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12802,7 +12525,6 @@ QPushButton:checked:hover
                          <font>
                           <family>Segoe UI</family>
                           <pointsize>9</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -12851,7 +12573,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -12889,7 +12610,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12905,7 +12625,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12942,7 +12661,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -12969,7 +12687,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -12994,7 +12711,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13020,7 +12736,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13042,7 +12757,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13079,7 +12793,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13140,7 +12853,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13168,7 +12880,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13193,7 +12904,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13223,7 +12933,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13248,7 +12957,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13309,7 +13017,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13382,7 +13089,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13416,7 +13122,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13450,7 +13155,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13499,7 +13203,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13560,7 +13263,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13579,7 +13281,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13616,7 +13317,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13677,7 +13377,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13717,7 +13416,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -13789,7 +13487,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13826,7 +13523,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -13863,7 +13559,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13888,7 +13583,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -13913,7 +13607,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14007,7 +13700,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14044,7 +13736,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14120,7 +13811,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14157,7 +13847,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14230,7 +13919,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14309,7 +13997,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14388,7 +14075,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14447,7 +14133,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14508,7 +14193,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14551,7 +14235,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14576,7 +14259,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14601,7 +14283,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14635,7 +14316,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14660,7 +14340,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14685,7 +14364,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -14746,7 +14424,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14868,7 +14545,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14947,7 +14623,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -14993,7 +14668,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -15035,7 +14709,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15079,7 +14752,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15110,7 +14782,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15141,7 +14812,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15188,7 +14858,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15241,7 +14910,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -15271,7 +14939,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15290,7 +14957,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15324,7 +14990,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15340,7 +15005,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15362,7 +15026,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15423,7 +15086,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15451,7 +15113,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15488,7 +15149,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15521,7 +15181,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15555,7 +15214,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15589,7 +15247,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15635,7 +15292,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -15680,7 +15336,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15702,7 +15357,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15727,7 +15381,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15746,7 +15399,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15774,7 +15426,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15796,7 +15447,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15857,7 +15507,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15888,7 +15537,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15925,7 +15573,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -15958,7 +15605,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -15995,7 +15641,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16050,7 +15695,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16066,7 +15710,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16085,7 +15728,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16110,7 +15752,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16129,7 +15770,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16184,7 +15824,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16230,7 +15869,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -16257,7 +15895,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16276,7 +15913,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16307,7 +15943,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16331,7 +15966,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16362,7 +15996,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16390,7 +16023,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16421,7 +16053,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16468,7 +16099,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16493,7 +16123,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16524,7 +16153,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16549,7 +16177,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16574,7 +16201,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16605,7 +16231,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16633,7 +16258,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16664,7 +16288,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16692,7 +16315,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16723,7 +16345,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16745,7 +16366,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16775,7 +16395,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16791,7 +16410,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16810,7 +16428,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16838,7 +16455,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -16877,7 +16493,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -16938,7 +16553,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -16981,7 +16595,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17008,7 +16621,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17036,7 +16648,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17061,7 +16672,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17134,7 +16744,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17171,7 +16780,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17198,7 +16806,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17220,7 +16827,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17260,7 +16866,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -17287,7 +16892,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17306,7 +16910,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17331,7 +16934,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17362,7 +16964,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17420,7 +17021,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17459,7 +17059,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17500,7 +17099,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17538,7 +17136,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17563,7 +17160,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17588,7 +17184,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17648,7 +17243,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17688,7 +17282,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17716,7 +17309,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -17757,7 +17349,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17822,7 +17413,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17883,7 +17473,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -17923,7 +17512,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -17951,7 +17539,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -17984,7 +17571,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18009,7 +17595,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18043,7 +17628,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18077,7 +17661,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18102,7 +17685,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18136,7 +17718,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18186,7 +17767,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -18255,7 +17835,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18295,7 +17874,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18393,7 +17971,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18430,7 +18007,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18498,7 +18074,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18532,7 +18107,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18566,7 +18140,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -18630,7 +18203,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18706,7 +18278,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -18782,7 +18353,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19020,7 +18590,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19054,7 +18623,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19088,7 +18656,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19152,7 +18719,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19228,7 +18794,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19274,7 +18839,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19335,7 +18899,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19435,7 +18998,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19469,7 +19031,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19509,7 +19070,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19549,7 +19109,6 @@ QPushButton:checked:hover
                     <font>
                      <family>Segoe UI</family>
                      <pointsize>9</pointsize>
-                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -19596,7 +19155,6 @@ QPushButton:checked:hover
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>14</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -19653,7 +19211,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19681,7 +19238,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19709,7 +19265,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19737,7 +19292,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19765,7 +19319,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19793,7 +19346,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19821,7 +19373,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19849,7 +19400,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19877,7 +19427,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19919,7 +19468,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19938,7 +19486,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19957,7 +19504,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -19976,7 +19522,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -20004,7 +19549,6 @@ QPushButton:checked:hover
                       <font>
                        <family>Segoe UI</family>
                        <pointsize>9</pointsize>
-                       <weight>50</weight>
                        <italic>false</italic>
                        <bold>false</bold>
                       </font>
@@ -20038,7 +19582,6 @@ QPushButton:checked:hover
            <font>
             <family>Consolas</family>
             <pointsize>9</pointsize>
-            <weight>50</weight>
             <italic>false</italic>
             <bold>false</bold>
            </font>
@@ -20161,8 +19704,8 @@ QScrollBar::handle:horizontal
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
                 <red>192</red>
                 <green>192</green>
                 <blue>192</blue>
@@ -20244,8 +19787,8 @@ QScrollBar::handle:horizontal
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
                 <red>192</red>
                 <green>192</green>
                 <blue>192</blue>
@@ -20327,11 +19870,11 @@ QScrollBar::handle:horizontal
               </brush>
              </colorrole>
              <colorrole role="PlaceholderText">
-              <brush brushstyle="NoBrush">
-               <color alpha="128">
-                <red>192</red>
-                <green>192</green>
-                <blue>192</blue>
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>80</red>
+                <green>80</green>
+                <blue>80</blue>
                </color>
               </brush>
              </colorrole>
@@ -20349,8 +19892,8 @@ QScrollBar::handle:horizontal
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>941</width>
-             <height>749</height>
+             <width>943</width>
+             <height>747</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout">
@@ -20363,7 +19906,6 @@ QScrollBar::handle:horizontal
                <font>
                 <family>Segoe UI</family>
                 <pointsize>9</pointsize>
-                <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
                </font>
@@ -20379,7 +19921,6 @@ QScrollBar::handle:horizontal
                <font>
                 <family>Segoe UI</family>
                 <pointsize>9</pointsize>
-                <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
                </font>
@@ -20400,7 +19941,6 @@ QScrollBar::handle:horizontal
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>9</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -20417,7 +19957,6 @@ QScrollBar::handle:horizontal
                  <font>
                   <family>Segoe UI</family>
                   <pointsize>9</pointsize>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -20442,7 +19981,7 @@ QScrollBar::handle:horizontal
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -20587,7 +20126,6 @@ QScrollBar::handle:horizontal
     <font>
      <family>Segoe UI</family>
      <pointsize>9</pointsize>
-     <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
@@ -20661,7 +20199,6 @@ QScrollBar::add-page:vertical,
         <font>
          <family>Segoe UI</family>
          <pointsize>9</pointsize>
-         <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
         </font>
@@ -20712,7 +20249,6 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -20740,7 +20276,6 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -20766,7 +20301,6 @@ QScrollBar::handle:horizontal
     <font>
      <family>Segoe UI</family>
      <pointsize>9</pointsize>
-     <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
@@ -20908,7 +20442,6 @@ QScrollBar::handle:horizontal
           <font>
            <family>Segoe UI</family>
            <pointsize>9</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -21196,6 +20729,11 @@ QScrollBar::handle:horizontal
    </property>
   </action>
   <action name="action_hideAll">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/clear</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Hide all</string>
    </property>

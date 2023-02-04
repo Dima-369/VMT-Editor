@@ -1736,8 +1736,8 @@ void MainWindow::parseVMT( VmtFile vmt, bool isTemplate )
 		int blendMode = value.toInt(&ok);
 
 		if(ok) {
-			if (blendMode >= 2) {
-				Error("$decalblendmode only supports values 0 and 1!")
+            if (blendMode > 3) {
+                Error("$decalblendmode only supports values 0 - 3!")
 			} else {
 				ui->comboBox_decalBlendMode->setCurrentIndex(blendMode);
 			}
