@@ -84,12 +84,14 @@ struct Settings
 
 	bool noGlossMip;
 
+    bool newVtflib;
+
 	QString mipmapFilter;
 	QString mipmapSharpenFilter;
 
 	RecentFileListStyle recentFileListStyle;
 
-	RecentFileEntryStyle recentFileEntryStyle;
+    RecentFileEntryStyle recentFileEntryStyle = Settings::FileName;
 
 	//----------------------------------------------------------------------------------------//
 

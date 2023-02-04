@@ -32,6 +32,8 @@
    <font>
     <family>Segoe UI</family>
     <pointsize>9</pointsize>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -282,7 +284,8 @@ QCheckBox::indicator:checked
 
 QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 {
-    border: 1px solid #222;
+    border: 1px solid #333;
+	background-color: #333;
 }
 
 QFrame
@@ -407,7 +410,6 @@ QComboBox
     background-color: #222;
     border-style: solid;
     border: 1px solid #222;
-    border-radius: 0px;
     padding: 2px;
 	padding-left: 4px;
 	outline: 0;
@@ -721,9 +723,9 @@ QSlider::handle:vertical {
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-298</y>
            <width>527</width>
-           <height>1203</height>
+           <height>1258</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
@@ -833,6 +835,16 @@ QSlider::handle:vertical {
               </property>
               <property name="text">
                <string>Name converted VTFs after VMT filename</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_newVtflib">
+              <property name="toolTip">
+               <string>Renames the converted textures after VMT filename</string>
+              </property>
+              <property name="text">
+               <string>New VTFLib (requires new VTFCmd.exe and VTFLib.dll)</string>
               </property>
              </widget>
             </item>
@@ -972,7 +984,6 @@ QSlider::handle:vertical {
              <font>
               <family>Segoe UI</family>
               <pointsize>14</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -994,7 +1005,6 @@ padding-top: 10px;
              <font>
               <family>Segoe UI</family>
               <pointsize>14</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -1258,7 +1268,6 @@ padding-top: 10px;
              <font>
               <family>Segoe UI</family>
               <pointsize>14</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -1280,7 +1289,6 @@ padding-top: 10px;
              <font>
               <family>Segoe UI</family>
               <pointsize>14</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -1801,8 +1809,8 @@ margin-top: 1px;
    <slot>associate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>106</x>
-     <y>413</y>
+     <x>129</x>
+     <y>740</y>
     </hint>
     <hint type="destinationlabel">
      <x>119</x>
@@ -1817,8 +1825,8 @@ margin-top: 1px;
    <slot>associate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>417</y>
+     <x>295</x>
+     <y>740</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -1833,12 +1841,92 @@ margin-top: 1px;
    <slot>associate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>384</x>
-     <y>421</y>
+     <x>400</x>
+     <y>740</y>
     </hint>
     <hint type="destinationlabel">
      <x>340</x>
      <y>604</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_newVtflib</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_mipmapFilter</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_newVtflib</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_mipmapSharpenFilter</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>418</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_newVtflib</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_10</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>375</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_newVtflib</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_11</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_newVtflib</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBox_noNormalSharpen</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>90</x>
+     <y>448</y>
     </hint>
    </hints>
   </connection>

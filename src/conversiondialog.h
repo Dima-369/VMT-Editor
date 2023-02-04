@@ -43,6 +43,8 @@ private:
 
 	bool removeSuffix = false;
 
+    bool newVtflib = false;
+
 	QString diffuseSuffix;
 	QString bumpSuffix;
 	QString specSuffix;

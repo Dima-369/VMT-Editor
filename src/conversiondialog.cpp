@@ -35,12 +35,14 @@
 		removeSuffix = iniSettings->value("removeSuffix", false).toBool();
 
 		diffuseSuffix = iniSettings->value("diffuseSuffix", false).toString();
-		bumpSuffix =iniSettings->value("bumpSuffix", false).toString();
-		specSuffix =iniSettings->value("specSuffix", false).toString();
-		glossSuffix =iniSettings->value("glossSuffix", false).toString();
+        bumpSuffix = iniSettings->value("bumpSuffix", false).toString();
+        specSuffix = iniSettings->value("specSuffix", false).toString();
+        glossSuffix = iniSettings->value("glossSuffix", false).toString();
 
-		mipmapFilter =iniSettings->value("mipmapFilter", false).toString();
-		mipmapSharpenFilter =iniSettings->value("mipmapSharpenFilter", false).toString();
+        mipmapFilter = iniSettings->value("mipmapFilter", false).toString();
+        mipmapSharpenFilter = iniSettings->value("mipmapSharpenFilter", false).toString();
+
+        newVtflib = iniSettings->value("newVtflib", false).toBool();
 
 		switch( iniSettings->value("convertAskMode", 0).toInt() ) {
 
@@ -257,7 +259,7 @@
 		//----------------------------------------------------------------------------------------//
 
 		tmp = ui->comboBox_resizeSharpenFilter->currentText();
-		if(tmp != "None") {
+        if(tmp != "None" && !newVtflib) {
 
 			if(tmp == "Negative") arguments.insert("-rsharpen", "NEGATIVE");
 			else if(tmp == "Lighter") arguments.insert("-rsharpen", "LIGHTER");
@@ -365,7 +367,7 @@
 		} else {
 
 			tmp = ui->comboBox_mipmapFilter->currentText();
-			if(tmp != "Box") {
+            if(tmp != "Box" && !newVtflib) {
 
 				if(tmp == "Point") arguments.insert("-mfilter", "POINT");
 				else if(tmp == "Triangle") arguments.insert("-mfilter", "TRIANGLE");
@@ -385,7 +387,7 @@
 			//----------------------------------------------------------------------------------------//
 
 			tmp = ui->comboBox_mipmapSharpenFilter->currentText();
-			if(tmp != "None") {
+            if(tmp != "None" && !newVtflib) {
 
 				if(tmp == "Negative") arguments.insert("-msharpen", "NEGATIVE");
 				else if(tmp == "Lighter") arguments.insert("-msharpen", "LIGHTER");

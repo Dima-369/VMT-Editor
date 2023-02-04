@@ -7640,6 +7640,7 @@ void MainWindow::readSettings()
 	mSettings->noNormalSharpen = setKey("noNormalSharpen", false, mIniSettings);
 	mSettings->uncompressedNormal = setKey("uncompressedNormal", false, mIniSettings);
 	mSettings->noGlossMip = setKey("noGlossMip", false, mIniSettings);
+    mSettings->newVtflib = setKey("newVtflib", false, mIniSettings);
 
 	mSettings->useIndentation =
 		setKey("useIndentation", true, mIniSettings);
@@ -7652,6 +7653,10 @@ void MainWindow::readSettings()
 	mSettings->recentFileListStyle =
 		setKey("recentFileListStyle", false, mIniSettings)
 			? Settings::RecentFileMenu : Settings::FileMenu;
+
+    mSettings->recentFileEntryStyle =
+        setKey("recentFileEntryStyle", false, mIniSettings)
+            ? Settings::FullPath : Settings::FileName;
 
 	if (mSettings->recentFileListStyle == Settings::FileMenu)
 		ui->menuRecentFiles->menuAction()->setVisible(false);
@@ -11019,47 +11024,49 @@ QString MainWindow::outputParameters( int type, bool noAlpha, bool uncompressed 
 			arguments.insert("-alphaformat", "DXT5");
 	}
 
-	tmp = mSettings->mipmapFilter;
-	if(tmp != "Box") {
-		if(tmp == "Point") arguments.insert("-mfilter", "POINT");
-		else if(tmp == "Triangle") arguments.insert("-mfilter", "TRIANGLE");
-		else if(tmp == "Quadratic") arguments.insert("-mfilter", "QUADRATIC");
-		else if(tmp == "Cubic") arguments.insert("-mfilter", "CUBIC");
-		else if(tmp == "Catrom") arguments.insert("-mfilter", "CATROM");
-		else if(tmp == "Mitchell") arguments.insert("-mfilter", "MITCHELL");
-		else if(tmp == "Gaussian") arguments.insert("-mfilter", "GAUSSIAN");
-		else if(tmp == "Sinc") arguments.insert("-mfilter", "SINC");
-		else if(tmp == "Bessel") arguments.insert("-mfilter", "BESSEL");
-		else if(tmp == "Hanning") arguments.insert("-mfilter", "HANNING");
-		else if(tmp == "Hamming") arguments.insert("-mfilter", "HAMMING");
-		else if(tmp == "Blackman") arguments.insert("-mfilter", "BLACKMAN");
-		else if(tmp == "Kaiser") arguments.insert("-mfilter", "KAISER");
-	}
+    if(!mSettings->newVtflib) {
+        tmp = mSettings->mipmapFilter;
+        if(tmp != "Box") {
+            if(tmp == "Point") arguments.insert("-mfilter", "POINT");
+            else if(tmp == "Triangle") arguments.insert("-mfilter", "TRIANGLE");
+            else if(tmp == "Quadratic") arguments.insert("-mfilter", "QUADRATIC");
+            else if(tmp == "Cubic") arguments.insert("-mfilter", "CUBIC");
+            else if(tmp == "Catrom") arguments.insert("-mfilter", "CATROM");
+            else if(tmp == "Mitchell") arguments.insert("-mfilter", "MITCHELL");
+            else if(tmp == "Gaussian") arguments.insert("-mfilter", "GAUSSIAN");
+            else if(tmp == "Sinc") arguments.insert("-mfilter", "SINC");
+            else if(tmp == "Bessel") arguments.insert("-mfilter", "BESSEL");
+            else if(tmp == "Hanning") arguments.insert("-mfilter", "HANNING");
+            else if(tmp == "Hamming") arguments.insert("-mfilter", "HAMMING");
+            else if(tmp == "Blackman") arguments.insert("-mfilter", "BLACKMAN");
+            else if(tmp == "Kaiser") arguments.insert("-mfilter", "KAISER");
+        }
 
-	tmp = mSettings->mipmapSharpenFilter;
-	if (!(type == 2 && mSettings->noNormalSharpen)) {
-		if(tmp != "None") {
-			if(tmp == "Negative") arguments.insert("-msharpen", "NEGATIVE");
-			else if(tmp == "Lighter") arguments.insert("-msharpen", "LIGHTER");
-			else if(tmp == "Darker") arguments.insert("-msharpen", "DARKER");
-			else if(tmp == "More Contrast") arguments.insert("-msharpen", "CONTRASTMORE");
-			else if(tmp == "Less Contrast") arguments.insert("-msharpen", "CONTRASTLESS");
-			else if(tmp == "Smoothen") arguments.insert("-msharpen", "SMOOTHEN");
-			else if(tmp == "Soft") arguments.insert("-msharpen", "GAUSSIAN");
-			else if(tmp == "Sharpen Soft") arguments.insert("-msharpen", "SHARPENSOFT");
-			else if(tmp == "Sharpen Medium") arguments.insert("-msharpen", "SHARPENMEDIUM");
-			else if(tmp == "Sharpen Strong") arguments.insert("-msharpen", "SHARPENSTRONG");
-			else if(tmp == "Find Edges") arguments.insert("-msharpen", "FINDEDGES");
-			else if(tmp == "Contour") arguments.insert("-msharpen", "CONTOUR");
-			else if(tmp == "Detect Edges") arguments.insert("-msharpen", "EDGEDETECT");
-			else if(tmp == "Detect Edges - Soft") arguments.insert("-msharpen", "EDGEDETECTSOFT");
-			else if(tmp == "Emboss") arguments.insert("-msharpen", "EMBOSS");
-			else if(tmp == "Mean Removal") arguments.insert("-msharpen", "MEANREMOVAL");
-			else if(tmp == "Unsharp") arguments.insert("-msharpen", "UNSHARP");
-			else if(tmp == "XSharpen") arguments.insert("-msharpen", "XSHARPEN");
-			else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
-		}
-	}
+        tmp = mSettings->mipmapSharpenFilter;
+        if (!(type == 2 && mSettings->noNormalSharpen)) {
+            if(tmp != "None") {
+                if(tmp == "Negative") arguments.insert("-msharpen", "NEGATIVE");
+                else if(tmp == "Lighter") arguments.insert("-msharpen", "LIGHTER");
+                else if(tmp == "Darker") arguments.insert("-msharpen", "DARKER");
+                else if(tmp == "More Contrast") arguments.insert("-msharpen", "CONTRASTMORE");
+                else if(tmp == "Less Contrast") arguments.insert("-msharpen", "CONTRASTLESS");
+                else if(tmp == "Smoothen") arguments.insert("-msharpen", "SMOOTHEN");
+                else if(tmp == "Soft") arguments.insert("-msharpen", "GAUSSIAN");
+                else if(tmp == "Sharpen Soft") arguments.insert("-msharpen", "SHARPENSOFT");
+                else if(tmp == "Sharpen Medium") arguments.insert("-msharpen", "SHARPENMEDIUM");
+                else if(tmp == "Sharpen Strong") arguments.insert("-msharpen", "SHARPENSTRONG");
+                else if(tmp == "Find Edges") arguments.insert("-msharpen", "FINDEDGES");
+                else if(tmp == "Contour") arguments.insert("-msharpen", "CONTOUR");
+                else if(tmp == "Detect Edges") arguments.insert("-msharpen", "EDGEDETECT");
+                else if(tmp == "Detect Edges - Soft") arguments.insert("-msharpen", "EDGEDETECTSOFT");
+                else if(tmp == "Emboss") arguments.insert("-msharpen", "EMBOSS");
+                else if(tmp == "Mean Removal") arguments.insert("-msharpen", "MEANREMOVAL");
+                else if(tmp == "Unsharp") arguments.insert("-msharpen", "UNSHARP");
+                else if(tmp == "XSharpen") arguments.insert("-msharpen", "XSHARPEN");
+                else if(tmp == "Warpsharp") arguments.insert("-msharpen", "WARPSHARP");
+            }
+        }
+    }
 
 	if (type == 4 && mSettings->noGlossMip)
 		arguments.insert("-nomipmaps", "");

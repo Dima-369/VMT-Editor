@@ -55,6 +55,20 @@ void OptionsDialog::parseSettings( QSettings* iniSettings, Settings* settings )
 
 	ui->checkBox_changeName->setChecked( settings->changeName );
 
+    ui->checkBox_newVtflib->setChecked( settings->newVtflib );
+
+    if( settings->newVtflib ) {
+        ui->checkBox_noNormalSharpen->setDisabled(true);
+        ui->comboBox_mipmapFilter->setDisabled(true);
+        ui->comboBox_mipmapSharpenFilter->setDisabled(true);
+        ui->label_10->setDisabled(true);
+        ui->label_11->setDisabled(true);
+    } else {
+        ui->checkBox_noNormalSharpen->setDisabled(false);
+        ui->comboBox_mipmapFilter->setDisabled(false);
+        ui->comboBox_mipmapSharpenFilter->setDisabled(false);
+    }
+
 	if( settings->recentFileListStyle == Settings::FileMenu )
 		ui->radioButton_recentFileListInMenu->setChecked(true);
 	else
@@ -441,6 +455,18 @@ void OptionsDialog::saveSettings()
 			mIniSettings->setValue( "noGlossMip", "0" );
 		}
 	}
+
+    if( ui->checkBox_newVtflib->isChecked() ) {
+        if( !mSettings->newVtflib ) {
+            mSettings->newVtflib = true;
+            mIniSettings->setValue( "newVtflib", "1" );
+        }
+    } else {
+        if(mSettings->newVtflib) {
+            mSettings->newVtflib = false;
+            mIniSettings->setValue( "newVtflib", "0" );
+        }
+    }
 
 	//----------------------------------------------------------------------------------------//
 	// Parameters
